@@ -3,3 +3,7 @@
 
 # Ignore all log files.
 **.log*
+
+# Ignore generated dependencies
+node_modules
+app/govuk_modules

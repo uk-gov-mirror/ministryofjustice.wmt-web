@@ -1,0 +1,45 @@
+{
+  "name": "wmt-web",
+  "version": "0.1.0",
+  "description": "The frontend of the workload management tool",
+  "main": "app/app.js",
+  "scripts": {
+    "start": "gulp",
+    "test": "gulp test"
+  },
+  "standard": {
+    "ignore": [
+      "node_modules/*",
+      "app/assets/javascripts/*.js",
+      "app/public/javascripts/*.js"
+    ],
+    "globals": [
+      "describe",
+      "before",
+      "beforeEach",
+      "afterEach",
+      "after",
+      "it"
+    ]
+  },
+  "devDependencies": {
+    "gulp-standard": "^9.0.0",
+    "standard": "^9.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.0",
+    "chai": "^3.5.0",
+    "express": "^4.15.2",
+    "express-nunjucks": "^2.0.1",
+    "govuk-elements-sass": "^2.0.0",
+    "govuk_frontend_toolkit": "^4.18.1",
+    "govuk_template_jinja": "^0.18.2",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^4.0.1",
+    "gulp-sass": "^2.3.2",
+    "mocha": "^3.0.2",
+    "nunjucks": "^2.0.1",
+    "serve-favicon": "~2.3.0",
+    "supertest": "^2.0.0"
+  }
+}
