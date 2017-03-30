@@ -2,20 +2,15 @@
 trace1 = {
     x: utilisationTable.headings,
     y: utilisationTable.values,
-    hoverinfo: 'x+y',
     line: {width: 3.5},
     marker: {
         line: {width: -0.5},
         size: 9
     },
-    mode: 'lines+markers',
     name: 'Utilisation %',
-    type: 'scatter',
 };
 data = [trace1];
 layout = {
-    autosize: true,
-    dragmode: 'pan',
     hovermode: 'closest',
     legend: {
         x: 0.436873550022,
@@ -49,7 +44,6 @@ layout = {
     }
     ],
     showlegend: true,
-    title: 'Caseload Utilisation',
     xaxis: {
         autorange: true,
         fixedrange: true,
