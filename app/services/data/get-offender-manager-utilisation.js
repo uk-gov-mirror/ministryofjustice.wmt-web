@@ -1,6 +1,3 @@
-// const config = require('../../../knexfile').development
-// const knex = require('knex')(config)
-
 module.exports = function (userId, year) {
   return [
         { utilisation_percentage: 90, month: 'January' },
