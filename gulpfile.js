@@ -1,5 +1,6 @@
 var gulp = require('gulp')
 var mocha = require('gulp-mocha')
+var gulpNSP = require('gulp-nsp')
 var sass = require('gulp-sass')
 var standard = require('gulp-standard')
 var spawn = require('child_process').spawn
@@ -65,5 +66,9 @@ gulp.task('generate-assets', ['assets', 'templates', 'sync', 'sass'])
 gulp.task('generate-assets-and-start', ['generate-assets'], function () {
   spawn('node', ['app/bin/www'], { stdio: 'inherit' })
 })
+
+gulp.task('nsp', function (cb) {
+  gulpNSP({package: __dirname + '/package.json'}, cb);
+});
 
 gulp.task('default', ['generate-assets-and-start'])
