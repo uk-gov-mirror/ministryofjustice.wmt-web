@@ -4,6 +4,7 @@ var gulpNSP = require('gulp-nsp')
 var sass = require('gulp-sass')
 var standard = require('gulp-standard')
 var spawn = require('child_process').spawn
+var node
 
 gulp.task('assets', function () {
   gulp.src('node_modules/govuk_frontend_toolkit/javascripts/**/*')
@@ -63,12 +64,27 @@ gulp.task('sass', function () {
 
 gulp.task('generate-assets', ['assets', 'templates', 'sync', 'sass'])
 
-gulp.task('generate-assets-and-start', ['generate-assets'], function () {
-  spawn('node', ['app/bin/www'], { stdio: 'inherit' })
+gulp.task('generate-assets-and-start', ['generate-assets', 'server'], function () {
+
 })
 
 gulp.task('nsp', function (cb) {
   gulpNSP({package: __dirname + '/package.json'}, cb);
-});
+})
 
-gulp.task('default', ['generate-assets-and-start'])
+gulp.task('watch', function() {
+  gulp.watch(['app/app.js', 'app/services/**/*'], ['generate-assets-and-start']);
+})
+
+gulp.task('server', function() {
+  if (node) node.kill()
+  node = spawn('node', ['app/bin/www'], { stdio: 'inherit' })
+  node.on('close', function (code) {
+    if (code === 8) {
+      gulp.log('Error detected, waiting for changes...');
+    }
+  })
+})
+
+
+gulp.task('default', ['generate-assets-and-start', 'watch'])
