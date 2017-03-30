@@ -8,6 +8,19 @@
     View your caseload utilisation
 </h2>
 
+<table class="non-javascript">
+    <tr>
+    {% for heading in utilisation.headings %}
+        <th scope="col">{{ heading }}</th>
+    {% endfor %}
+    </tr>
+    <tr>
+    {% for value in utilisation.values %}
+        <td> {{value}}% </td>
+    {% endfor %}
+    </tr>
+</table>
+
 <div id="plotly-div-line"></div>
 
 </main>
