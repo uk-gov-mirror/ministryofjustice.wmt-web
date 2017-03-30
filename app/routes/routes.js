@@ -3,7 +3,8 @@
  */
 
 var routes = [
-  require('./index')
+  require('./index'),
+  require('./my-utilisation')
 ]
 
 module.exports = function (router) {
