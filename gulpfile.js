@@ -73,7 +73,7 @@ gulp.task('nsp', function (cb) {
 })
 
 gulp.task('watch', function() {
-  gulp.watch(['app/app.js', 'app/services/**/*'], ['generate-assets-and-start']);
+  gulp.watch(['app/app.js', 'app/services/**/*', 'app/assets/**/*'], ['generate-assets-and-start']);
 })
 
 gulp.task('server', function() {
