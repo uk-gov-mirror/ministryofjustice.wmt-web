@@ -4,7 +4,7 @@
 
 var routes = [
   require('./index'),
-  require('./my-utilisation')
+  require('./offender-manager-utilisation')
 ]
 
 module.exports = function (router) {
