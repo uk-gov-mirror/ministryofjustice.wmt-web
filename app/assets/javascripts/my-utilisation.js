@@ -1,7 +1,7 @@
 
 trace1 = {
     x: utilisationTable.headings,
-    y: utilisationTable.values,
+    y: utilisationTable.rows[0].values,
     line: {width: 3.5},
     marker: {
         line: {width: -0.5},
