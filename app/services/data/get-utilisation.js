@@ -1,4 +1,4 @@
-module.exports = function (userId, year) {
+module.exports = function (orgUnitType, id, year) {
   return [
         { utilisation_percentage: 90, month: 'January' },
         { utilisation_percentage: 100, month: 'February' },

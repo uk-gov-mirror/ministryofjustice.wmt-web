@@ -27,11 +27,11 @@ describe('services/domain/display-table', function () {
 
   it('should construct a table given valid headers and values', function () {
 
-    offenderManagerUtilisationTable = new DisplayTable(
+    utilisationTable = new DisplayTable(
       UTILISATION_RESULTS.headings, UTILISATION_RESULTS.rows)
 
-    expect(offenderManagerUtilisationTable.headings[3]).to.equal(TEST_MONTH_HEADING)
-    expect(offenderManagerUtilisationTable.rows[0].values[5]).to.equal(TEST_ROW_VALUE)
+    expect(utilisationTable.headings[3]).to.equal(TEST_MONTH_HEADING)
+    expect(utilisationTable.rows[0].values[5]).to.equal(TEST_ROW_VALUE)
   })
 
   // test if headers are greater than values

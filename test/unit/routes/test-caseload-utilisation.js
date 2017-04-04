@@ -1,16 +1,16 @@
 const proxyquire = require('proxyquire')
-const OFFENDER_MANAGER_UTILISATION_URI = '/offender-manager-utilisation'
-const route = require('../../../app/routes' + OFFENDER_MANAGER_UTILISATION_URI)
+const route = require('../../../app/routes/offender-manager-utilisation')
 const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const sinon = require('sinon')
 const expect = require('chai').expect
 
 // test data
+const OFFENDER_MANAGER_UTILISATION_URI = '/caseload-utilisation/offendermanager'
 const USER_ID = 1
 const YEAR = 2016
 
-describe(`${OFFENDER_MANAGER_UTILISATION_URI}`, function () {
+describe('/caseload-utilisation', function () {
 
   var app
 
