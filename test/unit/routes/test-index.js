@@ -1,10 +1,10 @@
 const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
+const INDEX_URI = '/'
 const route = require('../../../app/routes/index')
 const expect = require('chai').expect
 
-describe('routes/index', function () {
-  const ROUTE = '/'
+describe(`${INDEX_URI}`, function () {
 
   var app
 
@@ -12,10 +12,10 @@ describe('routes/index', function () {
     app = routeHelper.buildApp(route)
   })
 
-  describe(`GET ${ROUTE}`, function () {
+  describe(`GET ${INDEX_URI}`, function () {
     it('should respond with a 200', function () {
       return supertest(app)
-        .get(ROUTE)
+        .get(INDEX_URI)
         .expect(200)
     })
   })

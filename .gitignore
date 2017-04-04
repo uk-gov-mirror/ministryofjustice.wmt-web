@@ -4,6 +4,9 @@
 # Ignore all log files.
 **.log*
 
+# Ignore public assets
+app/public/*
+
 # Ignore generated dependencies
 node_modules
 app/govuk_modules
