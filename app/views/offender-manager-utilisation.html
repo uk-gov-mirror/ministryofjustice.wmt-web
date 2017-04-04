@@ -15,7 +15,7 @@
     {% endfor %}
     </tr>
     <tr>
-    {% for value in utilisation.values %}
+    {% for value in utilisation.rows[0].values %}
         <td> {{value}}% </td>
     {% endfor %}
     </tr>
