@@ -45,6 +45,7 @@
     "proxyquire": "1.7.x",
     "serve-favicon": "2.4.x",
     "sinon": "2.1.x",
-    "supertest": "3.0.x"
+    "supertest": "3.0.x",
+    "util": "^0.10.3"
   }
 }
