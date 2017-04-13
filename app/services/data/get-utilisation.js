@@ -1,84 +1,98 @@
-const util2013 = [
-  { utilisation_percentage: 30, month: 'January' },
-  { utilisation_percentage: 80, month: 'February' },
-  { utilisation_percentage: 120, month: 'March' },
-  { utilisation_percentage: 100, month: 'April' },
-  { utilisation_percentage: 90, month: 'May' },
-  { utilisation_percentage: 118, month: 'June' },
-  { utilisation_percentage: 130, month: 'July' },
-  { utilisation_percentage: 93, month: 'August' },
-  { utilisation_percentage: 97, month: 'September' },
-  { utilisation_percentage: 101, month: 'October' },
-  { utilisation_percentage: 110, month: 'November' },
-  { utilisation_percentage: 99, month: 'December' }
-]
-const util2014 = [
-  { utilisation_percentage: 90, month: 'January' },
-  { utilisation_percentage: 100, month: 'February' },
-  { utilisation_percentage: 115, month: 'March' },
-  { utilisation_percentage: 100, month: 'April' },
-  { utilisation_percentage: 110, month: 'May' },
-  { utilisation_percentage: 118, month: 'June' },
-  { utilisation_percentage: 100, month: 'July' },
-  { utilisation_percentage: 93, month: 'August' },
-  { utilisation_percentage: 97, month: 'September' },
-  { utilisation_percentage: 101, month: 'October' },
-  { utilisation_percentage: 110, month: 'November' },
-  { utilisation_percentage: 99, month: 'December' }
-]
-const util2015 = [
-  { utilisation_percentage: 50, month: 'January' },
-  { utilisation_percentage: 80, month: 'February' },
-  { utilisation_percentage: 40, month: 'March' },
-  { utilisation_percentage: 100, month: 'April' },
-  { utilisation_percentage: 110, month: 'May' },
-  { utilisation_percentage: 78, month: 'June' },
-  { utilisation_percentage: 50, month: 'July' },
-  { utilisation_percentage: 120, month: 'August' },
-  { utilisation_percentage: 150, month: 'September' },
-  { utilisation_percentage: 20, month: 'October' },
-  { utilisation_percentage: 30, month: 'November' },
-  { utilisation_percentage: 66, month: 'December' }
-]
-const util2016 = [
-  { utilisation_percentage: 120, month: 'January' },
-  { utilisation_percentage: 120, month: 'February' },
-  { utilisation_percentage: 110, month: 'March' },
-  { utilisation_percentage: 100, month: 'April' },
-  { utilisation_percentage: 90, month: 'May' },
-  { utilisation_percentage: 70, month: 'June' },
-  { utilisation_percentage: 30, month: 'July' },
-  { utilisation_percentage: 15, month: 'August' },
-  { utilisation_percentage: 15, month: 'September' },
-  { utilisation_percentage: 100, month: 'October' },
-  { utilisation_percentage: 100, month: 'November' },
-  { utilisation_percentage: 80, month: 'December' }
-]
-const util2017 = [
-  { utilisation_percentage: 115, month: 'January' },
-  { utilisation_percentage: 59, month: 'February' },
-  { utilisation_percentage: 98, month: 'March' }
+const caseloadCapacity = [
+  { workload_report_date: '2017-01-01', capacity_percentage: 100},
+  { workload_report_date: '2017-01-02', capacity_percentage: 90},
+  { workload_report_date: '2017-01-03', capacity_percentage: 87},
+  { workload_report_date: '2017-01-04', capacity_percentage: 120},
+  { workload_report_date: '2017-01-05', capacity_percentage: 90},
+  { workload_report_date: '2017-01-06', capacity_percentage: 80},
+  { workload_report_date: '2017-01-07', capacity_percentage: 90},
+  { workload_report_date: '2017-01-08', capacity_percentage: 110},
+  { workload_report_date: '2017-01-09', capacity_percentage: 80},
+  { workload_report_date: '2017-01-10', capacity_percentage: 90},
+  { workload_report_date: '2017-01-11', capacity_percentage: 70},
+  { workload_report_date: '2017-01-12', capacity_percentage: 80},
+  { workload_report_date: '2017-01-13', capacity_percentage: 78},
+  { workload_report_date: '2017-01-14', capacity_percentage: 82},
+  { workload_report_date: '2017-01-15', capacity_percentage: 80},
+  { workload_report_date: '2017-01-16', capacity_percentage: 90},
+  { workload_report_date: '2017-01-17', capacity_percentage: 90},
+  { workload_report_date: '2017-01-18', capacity_percentage: 80},
+  { workload_report_date: '2017-01-19', capacity_percentage: 78},
+  { workload_report_date: '2017-01-20', capacity_percentage: 100},
+  { workload_report_date: '2017-01-21', capacity_percentage: 85},
+  { workload_report_date: '2017-01-22', capacity_percentage: 90},
+  { workload_report_date: '2017-01-23', capacity_percentage: 80},
+  { workload_report_date: '2017-01-24', capacity_percentage: 70},
+  { workload_report_date: '2017-01-25', capacity_percentage: 75},
+  { workload_report_date: '2017-01-26', capacity_percentage: 95},
+  { workload_report_date: '2017-01-27', capacity_percentage: 99},
+  { workload_report_date: '2017-01-28', capacity_percentage: 70},
+  { workload_report_date: '2017-01-29', capacity_percentage: 68},
+  { workload_report_date: '2017-01-30', capacity_percentage: 72},
+  { workload_report_date: '2017-01-31', capacity_percentage: 110},
+  { workload_report_date: '2017-02-01', capacity_percentage: 30},
+  { workload_report_date: '2017-02-02', capacity_percentage: 90},
+  { workload_report_date: '2017-02-03', capacity_percentage: 60},
+  { workload_report_date: '2017-02-04', capacity_percentage: 120},
+  { workload_report_date: '2017-02-05', capacity_percentage: 30},
+  { workload_report_date: '2017-02-06', capacity_percentage: 50},
+  { workload_report_date: '2017-02-07', capacity_percentage: 70},
+  { workload_report_date: '2017-02-08', capacity_percentage: 110},
+  { workload_report_date: '2017-02-09', capacity_percentage: 40},
+  { workload_report_date: '2017-02-10', capacity_percentage: 90},
+  { workload_report_date: '2017-02-11', capacity_percentage: 70},
+  { workload_report_date: '2017-02-12', capacity_percentage: 80},
+  { workload_report_date: '2017-02-13', capacity_percentage: 78},
+  { workload_report_date: '2017-02-14', capacity_percentage: 82},
+  { workload_report_date: '2017-02-15', capacity_percentage: 60},
+  { workload_report_date: '2017-02-16', capacity_percentage: 60},
+  { workload_report_date: '2017-02-17', capacity_percentage: 90},
+  { workload_report_date: '2017-02-18', capacity_percentage: 30},
+  { workload_report_date: '2017-02-19', capacity_percentage: 50},
+  { workload_report_date: '2017-02-20', capacity_percentage: 100},
+  { workload_report_date: '2017-02-21', capacity_percentage: 85},
+  { workload_report_date: '2017-02-22', capacity_percentage: 90},
+  { workload_report_date: '2017-02-23', capacity_percentage: 50},
+  { workload_report_date: '2017-02-24', capacity_percentage: 50},
+  { workload_report_date: '2017-02-25', capacity_percentage: 55},
+  { workload_report_date: '2017-02-26', capacity_percentage: 45},
+  { workload_report_date: '2017-02-27', capacity_percentage: 59},
+  { workload_report_date: '2017-02-28', capacity_percentage: 70},
+  { workload_report_date: '2017-03-01', capacity_percentage: 30},
+  { workload_report_date: '2017-03-02', capacity_percentage: 90},
+  { workload_report_date: '2017-03-03', capacity_percentage: 60},
+  { workload_report_date: '2017-03-04', capacity_percentage: 120},
+  { workload_report_date: '2017-03-05', capacity_percentage: 30},
+  { workload_report_date: '2017-03-06', capacity_percentage: 50},
+  { workload_report_date: '2017-03-07', capacity_percentage: 70},
+  { workload_report_date: '2017-03-08', capacity_percentage: 110},
+  { workload_report_date: '2017-03-09', capacity_percentage: 40},
+  { workload_report_date: '2017-03-10', capacity_percentage: 90},
+  { workload_report_date: '2017-03-11', capacity_percentage: 70},
+  { workload_report_date: '2017-03-12', capacity_percentage: 80},
+  { workload_report_date: '2017-03-13', capacity_percentage: 78},
+  { workload_report_date: '2017-03-14', capacity_percentage: 82},
+  { workload_report_date: '2017-03-15', capacity_percentage: 60},
+  { workload_report_date: '2017-03-16', capacity_percentage: 60},
+  { workload_report_date: '2017-03-17', capacity_percentage: 90},
+  { workload_report_date: '2017-03-18', capacity_percentage: 30},
+  { workload_report_date: '2017-03-19', capacity_percentage: 50},
+  { workload_report_date: '2017-03-20', capacity_percentage: 100},
+  { workload_report_date: '2017-03-21', capacity_percentage: 85},
+  { workload_report_date: '2017-03-22', capacity_percentage: 90},
+  { workload_report_date: '2017-03-23', capacity_percentage: 50},
+  { workload_report_date: '2017-03-24', capacity_percentage: 50},
+  { workload_report_date: '2017-03-25', capacity_percentage: 55},
+  { workload_report_date: '2017-03-26', capacity_percentage: 45},
+  { workload_report_date: '2017-03-27', capacity_percentage: 59},
+  { workload_report_date: '2017-03-28', capacity_percentage: 70},
+  { workload_report_date: '2017-03-29', capacity_percentage: 68},
+  { workload_report_date: '2017-03-30', capacity_percentage: 72},
+  { workload_report_date: '2017-03-31', capacity_percentage: 110}
 ]
 
-module.exports = function (orgUnitType, id, date) {
+module.exports = function (orgUnitType, id, fromDate, toDate) {
 
-  // Only needed until DB implemented, then switch/case can be scrapped.
-  year = date.split('-', 3)
-  yearInt = parseInt(year)
-  switch(yearInt) {
-    case 2014:
-      return util2014
-      break
-    case 2015:
-      return util2015
-      break
-    case 2016:
-      return util2016
-      break
-    case 2017:
-      return util2017
-      break
-    default:
-      console.log(` provided (${year}).  2014-2017 supported only.`)
-  }
+  // for mocking now, return ALL the data.
+  return caseloadCapacity
 }
