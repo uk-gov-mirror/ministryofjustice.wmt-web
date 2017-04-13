@@ -22,6 +22,7 @@ class UtilisationDate {
     FieldsetValidator(this.fields, 'utilisationDate', errors)
       .isRequired(ERROR_MESSAGES.getEnterYourDateOfBirth)
       .isOlderThanMaxHistory(this.utilisationDate)
+      .isPastDate(this.utilisationDate)
       .isValidDate(this.utilisationDate)
     var validationErrors = errors.get()
 

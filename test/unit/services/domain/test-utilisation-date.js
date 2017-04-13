@@ -50,13 +50,43 @@ describe('services/domain/utilisation-date', function () {
     }).to.throw(ValidationError)
   })
 
-  // it('should throw ValidationError if given invalid day, month, or year', function () {
-  //   expect(function () {
-  //     new DateOfBirth(
-  //       INVALID_DAY,
-  //       INVALID_MONTH,
-  //       INVALID_YEAR
-  //     )
-  //   }).to.throw(ValidationError)
-  // })
+  it('should throw ValidationError if given invalid day', function () {
+    expect(function () {
+      new UtilisationDate(
+        INVALID_DAY,
+        VALID_MONTH,
+        VALID_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if given invalid month', function () {
+    expect(function () {
+      new UtilisationDate(
+        VALID_DAY,
+        INVALID_MONTH,
+        VALID_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if given invalid year', function () {
+    expect(function () {
+      new UtilisationDate(
+        VALID_DAY,
+        VALID_MONTH,
+        INVALID_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if given invalid day, month, and year', function () {
+    expect(function () {
+      new UtilisationDate(
+        INVALID_DAY,
+        INVALID_MONTH,
+        INVALID_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
 })
