@@ -2,7 +2,6 @@ const moment = require('moment')
 const DATE_FORMAT = 'YYYY-MM-DD'
 const DATE_ENCODE_FORMAT = 'YYYYMMDD'
 const INVALID_DATE_ERROR = 'Invalid date'
-const bases = require('bases')
 
 exports.now = function () {
   var now = moment()

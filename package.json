@@ -27,7 +27,6 @@
     "standard": "9.0.x"
   },
   "dependencies": {
-    "bases": "^0.2.1",
     "body-parser": "1.17.x",
     "chai": "3.5.x",
     "express": "4.15.x",

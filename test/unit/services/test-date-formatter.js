@@ -1,7 +1,6 @@
 const expect = require('chai').expect
 const dateFormatter = require('../../../app/services/date-formatter')
 const moment = require('moment')
-const bases = require('bases')
 const DATE_FORMAT = 'YYYY-MM-DD'
 const INVALID_DATE_ERROR = 'Invalid date'
 
@@ -10,7 +9,6 @@ describe('services/date-formatter', function () {
   const VALID_MONTH = '01'
   const VALID_YEAR = '2000'
   const EXPECTED_DATE = moment([VALID_YEAR, VALID_MONTH, VALID_DAY], DATE_FORMAT)
-  const ENCODED_DATE = bases.toBase8(EXPECTED_DATE.format('YYYYMMDD'))
 
   const INVALID_DAY = '55'
   const INVALID_MONTH = '55'
