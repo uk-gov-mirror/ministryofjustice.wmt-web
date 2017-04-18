@@ -45,9 +45,7 @@ module.exports = function (router) {
     } catch (error) {
       if (error instanceof ValidationError) {
         return res.status(400).render('utilisation', {
-          errors: error.validationErrors,
-          // claimType: req.params.claimType,
-          // claimant: req.body
+          errors: error.validationErrors
         })
       } else {
         throw error
