@@ -45,7 +45,7 @@ describe('services/domain/utilisation-date', function () {
       new UtilisationDate(
         dateFormatter.now().date(),
         dateFormatter.now().month() + 1,
-        dateFormatter.now().year() - 6
+        dateFormatter.now().year() - 7
       )
     }).to.throw(ValidationError)
   })
