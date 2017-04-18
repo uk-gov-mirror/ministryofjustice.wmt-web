@@ -20,10 +20,10 @@ class UtilisationDate {
     var errors = ErrorHandler()
 
     FieldsetValidator(this.fields, 'utilisationDate', errors)
-      .isRequired(ERROR_MESSAGES.getEnterYourDateOfBirth)
-      .isOlderThanMaxHistory(this.utilisationDate)
-      .isPastDate(this.utilisationDate)
+      .isRequired(ERROR_MESSAGES.isRequired)
       .isValidDate(this.utilisationDate)
+      .isPastDate(this.utilisationDate)
+      .isOlderThanMaxHistory(this.utilisationDate)
     var validationErrors = errors.get()
 
     if (validationErrors) {
