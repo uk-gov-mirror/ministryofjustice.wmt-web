@@ -129,16 +129,31 @@ describe('services/validators/fieldset-validator', function () {
 
   describe('isOlderThanMaxHistory', function () {
     const MAX_HISTORY = 6
-    const GREATER_THAN_MAX_HISTORY = dateFormatter.now().subtract(MAX_HISTORY, 'years')
+    const GREATER_THAN_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(MAX_HISTORY + 1, 'years')
+    const EXACTLY_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(MAX_HISTORY, 'years')
+    const LESS_THAN_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(MAX_HISTORY, 'years').add(1, 'days')
 
-    it(`should return error object if the date is more than ${MAX_HISTORY} years ago`, function () {
-      this.fieldsetValidator.isOlderThanMaxHistory(GREATER_THAN_MAX_HISTORY)
+    it(`should return error object if the date is more than ${MAX_HISTORY} years ago.`, function () {
+      this.fieldsetValidator.isOlderThanMaxHistory(GREATER_THAN_MAX_HISTORY_LIMIT)
       var errors = this.error.get()
       expect(errors).to.have.property(FIELD_NAME)
     })
 
+
+    it(`should return false if the date given is less than ${MAX_HISTORY} years ago.`, function () {
+      this.fieldsetValidator.isOlderThanMaxHistory(LESS_THAN_MAX_HISTORY_LIMIT)
+      var errors = this.error.get()
+      expect(errors).to.equal(false)
+    })
+
+    it(`should return false if the date given is exactly ${MAX_HISTORY} years ago.`, function () {
+      this.fieldsetValidator.isOlderThanMaxHistory(EXACTLY_MAX_HISTORY_LIMIT)
+      var errors = this.error.get()
+      expect(errors).to.equal(false)
+    })
+
     it('should return the fieldsetValidator after being called to allow function chaining.', function () {
-      var result = this.fieldsetValidator.isOlderThanMaxHistory(GREATER_THAN_MAX_HISTORY)
+      var result = this.fieldsetValidator.isOlderThanMaxHistory(LESS_THAN_MAX_HISTORY_LIMIT)
       expect(result).to.be.equal(this.fieldsetValidator)
     })
   })
