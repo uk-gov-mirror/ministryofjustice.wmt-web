@@ -1,5 +1,7 @@
 const validator = require('./common-validator')
 const ERROR_MESSAGES = require('./validation-error-messages')
+const CASELOAD_CAPACITY = require('../../constants/caseload-capacity-enum')
+
 
 class FieldsetValidator {
 
@@ -44,8 +46,7 @@ class FieldsetValidator {
 
   isOlderThanMaxHistory (date) {
     if (validator.isDateOlderThanMaxHistory(date)) {
-      //TODO: make constant for MAX_HISTORY
-      this.errors.add(this.fieldName, ERROR_MESSAGES.getIsOlderThanMaxHistory, { years: 6 })
+      this.errors.add(this.fieldName, ERROR_MESSAGES.getIsOlderThanMaxHistory, { years: CASELOAD_CAPACITY.MAX_HISTORY })
     }
     return this
   }

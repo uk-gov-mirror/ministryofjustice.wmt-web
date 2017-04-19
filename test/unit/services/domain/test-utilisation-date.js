@@ -2,6 +2,8 @@ const expect = require('chai').expect
 const ValidationError = require('../../../../app/services/errors/validation-error')
 const dateFormatter = require('../../../../app/services/date-formatter')
 const UtilisationDate = require('../../../../app/services/domain/utilisation-date')
+const CASELOAD_CAPACITY = require('../../../../app/constants/caseload-capacity-enum')
+
 
 var utilisationDate
 
@@ -45,7 +47,7 @@ describe('services/domain/utilisation-date', function () {
       new UtilisationDate(
         dateFormatter.now().date(),
         dateFormatter.now().month() + 1,
-        dateFormatter.now().year() - 7
+        dateFormatter.now().year() - (CASELOAD_CAPACITY.MAX_HISTORY + 1)
       )
     }).to.throw(ValidationError)
   })
