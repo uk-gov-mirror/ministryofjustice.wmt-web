@@ -1,4 +1,4 @@
-const CASELOAD_CAPACITY = require('../../constants/caseload-capacity-enum')
+const CASELOAD_CAPACITY = require('../../constants/caseload-capacity')
 
 /**
  * This file defines all generic validation tests used in the application. This file can and should be used by the

@@ -1,10 +1,9 @@
 const getUtilisation = require('./data/get-utilisation')
 const DisplayTable = require('./domain/display-table')
-const UtilisationDate = require('./domain/utilisation-date')
 const dateFormatter = require('./date-formatter')
 
 
-module.exports = function (orgUnitType, id, fromUtilisationDate, toUtilisationDate) {
+module.exports = function (orgUnitType, id, capacityDateRange) {
 
     var headings = []
     var rows = []
@@ -14,8 +13,8 @@ module.exports = function (orgUnitType, id, fromUtilisationDate, toUtilisationDa
     utilisationResults = getUtilisation(
         orgUnitType,
         id,
-        fromUtilisationDate.utilisationDate.toISOString(),
-        toUtilisationDate.utilisationDate.toISOString()
+        capacityDateRange.capacityFromDate.toISOString(),
+        capacityDateRange.capacityToDate.toISOString()
     )
 
     utilisationResults.forEach(function (utilisation) {

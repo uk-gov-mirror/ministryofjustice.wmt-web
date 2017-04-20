@@ -1,6 +1,6 @@
 const validator = require('./common-validator')
 const ERROR_MESSAGES = require('./validation-error-messages')
-const CASELOAD_CAPACITY = require('../../constants/caseload-capacity-enum')
+const CASELOAD_CAPACITY = require('../../constants/caseload-capacity')
 
 
 class FieldsetValidator {

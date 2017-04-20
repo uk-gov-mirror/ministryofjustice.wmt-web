@@ -1,3 +1,4 @@
 module.exports = {
-  'utilisationDate': 'Utilisation date',
+  'capacityFromDate': 'Show capacity from',
+  'capacityToDate': 'Show capacity to',
 }

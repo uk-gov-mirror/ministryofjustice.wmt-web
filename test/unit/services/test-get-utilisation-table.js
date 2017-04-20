@@ -2,7 +2,7 @@ const expect = require('chai').expect
 const sinon = require('sinon')
 const proxyquire = require('proxyquire')
 const DisplayTable = require('../../../app/services/domain/display-table')
-const UtilisationDate = require('../../../app/services/domain/utilisation-date')
+const CapacityDateRange = require('../../../app/services/domain/capacity-date-range')
 
 
 const HEADINGS_MONTH = '2017-01-06'
@@ -39,10 +39,9 @@ describe('services/get-utilisation-table', function () {
     var getUtilisationTable
       = proxyquire('../../../app/services/get-utilisation-table', {'./data/get-utilisation': getUtilisation})
 
-    var fromUtilisationDate = new UtilisationDate(01,01,2017)
-    var toUtilisationDate = new UtilisationDate(31,03,2017)
+    var capacityDateRange = new CapacityDateRange(01,01,2017,31,03,2017)
 
-    var results  = getUtilisationTable('offendermanager', 5, fromUtilisationDate, toUtilisationDate)
+    var results  = getUtilisationTable('offendermanager', 5, capacityDateRange)
     expect(results.headings[5]).to.equal(HEADINGS_MONTH)
     expect(results.rows[0].values[5]).to.equal(VALUES_UTILISATION)
     expect(results instanceof DisplayTable)
