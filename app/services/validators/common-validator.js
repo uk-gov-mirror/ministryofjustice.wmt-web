@@ -9,21 +9,16 @@ const moment = require('moment')
 const dateFormatter = require('../date-formatter')
 
 exports.isNullOrUndefined = function (value) {
-  return !value
+  return typeof value === "undefined" || value === null
 }
 
 exports.isValidDate = function (date) {
-  if (this.isNullOrUndefined(date)) {
-    return false
-  }
 
-  return date instanceof moment &&
-    date.isValid()
-  }
+  return date instanceof moment && date.isValid()
+}
 
 exports.isDateInThePast = function (date) {
-  return this.isValidDate(date) &&
-    date < dateFormatter.now()
+  return this.isValidDate(date) && date < dateFormatter.now()
 }
 
 exports.isDateOlderThanMaxHistory = function (date) {

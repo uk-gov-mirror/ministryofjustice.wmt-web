@@ -17,11 +17,6 @@ describe('services/validators/common-validator', function () {
       expect(result).to.equal(true)
     })
 
-    it('should return true if passed an empty string', function () {
-      var result = validator.isNullOrUndefined('')
-      expect(result).to.equal(true)
-    })
-
     it('should return false if passed an object', function () {
       var result = validator.isNullOrUndefined({})
       expect(result).to.equal(false)
@@ -51,6 +46,11 @@ describe('services/validators/common-validator', function () {
 
     it('should return false if passed an object', function () {
       var result = validator.isValidDate({})
+      expect(result).to.equal(false)
+    })
+
+    it('should return false if passed a blank string', function () {
+      var result = validator.isValidDate('')
       expect(result).to.equal(false)
     })
 
