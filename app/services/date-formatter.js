@@ -5,16 +5,16 @@ const INVALID_DATE_ERROR = 'Invalid date'
 
 exports.now = function () {
   var now = moment()
-  return applyDST(now)
+  return applyDaylightSavingTime(now)
 }
 
 exports.build = function (day, month, year) {
   month = month - 1
   var date = moment([year, month, day])
-  return applyDST(date)
+  return applyDaylightSavingTime(date)
 }
 
-function applyDST (date) {
+function applyDaylightSavingTime (date) {
   if (date.isDST()) {
     date = date.add(1, 'hour')
   }
