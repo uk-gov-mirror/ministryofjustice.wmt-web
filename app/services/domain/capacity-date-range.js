@@ -21,10 +21,10 @@ class CapacityDateRange {
 
     this.capacityFromDate = dateFormatter.build(fromDay, fromMonth, fromYear)
     this.capacityToDate = dateFormatter.build(toDay, toMonth, toYear)
-    this.IsValid()
+    this.isValid()
   }
 
-  IsValid () {
+  isValid () {
     var errors = ErrorHandler()
 
     FieldsetValidator(this.fromFields, 'capacityFromDate', errors)
