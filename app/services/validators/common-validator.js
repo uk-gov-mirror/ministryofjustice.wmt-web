@@ -4,7 +4,6 @@ const CASELOAD_CAPACITY = require('../../constants/caseload-capacity')
  * This file defines all generic validation tests used in the application. This file can and should be used by the
  * three higher level validators: FieldValidator, FieldSetValidator, and UrlPathValidator.
  */
-const validator = require('validator')
 const moment = require('moment')
 
 const dateFormatter = require('../date-formatter')
