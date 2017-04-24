@@ -1,6 +1,8 @@
 const expect = require('chai').expect
 const validator = require('../../../../app/services/validators/common-validator')
 const dateFormatter = require('../../../../app/services/date-formatter')
+const CASELOAD_CAPACITY = require('../../../../app/constants/caseload-capacity')
+
 
 describe('services/validators/common-validator', function () {
 
@@ -90,10 +92,9 @@ describe('services/validators/common-validator', function () {
   })
 
   describe('isDateOlderThanMaxHistory', function () {
-    const MAX_HISTORY = 6
-    const GREATER_THAN_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(MAX_HISTORY + 1, 'years')
-    const EXACTLY_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(MAX_HISTORY, 'years')
-    const LESS_THAN_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(MAX_HISTORY, 'years').add(1, 'days')
+    const GREATER_THAN_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(CASELOAD_CAPACITY.MAX_HISTORY + 1, 'years')
+    const EXACTLY_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(CASELOAD_CAPACITY.MAX_HISTORY, 'years')
+    const LESS_THAN_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(CASELOAD_CAPACITY.MAX_HISTORY, 'years').add(1, 'days')
 
     it('should return false if passed null', function () {
       var result = validator.isDateOlderThanMaxHistory(null)
@@ -110,17 +111,17 @@ describe('services/validators/common-validator', function () {
       expect(result).to.equal(false)
     })
 
-    it(`should return false if passed a date that is less than ${MAX_HISTORY} years ago.`, function () {
+    it(`should return false if passed a date that is less than ${CASELOAD_CAPACITY.MAX_HISTORY} years ago.`, function () {
       var result = validator.isDateOlderThanMaxHistory(LESS_THAN_MAX_HISTORY_LIMIT)
       expect(result).to.equal(false)
     })
 
-    it(`should return false if passed a date that is exactly ${MAX_HISTORY} years ago.`, function () {
+    it(`should return false if passed a date that is exactly ${CASELOAD_CAPACITY.MAX_HISTORY} years ago.`, function () {
       var result = validator.isDateOlderThanMaxHistory(EXACTLY_MAX_HISTORY_LIMIT)
       expect(result).to.equal(false)
     })
 
-    it(`should return true if passed a date that is greater than ${MAX_HISTORY} years ago.`, function () {
+    it(`should return true if passed a date that is greater than ${CASELOAD_CAPACITY.MAX_HISTORY} years ago.`, function () {
       var result = validator.isDateOlderThanMaxHistory(GREATER_THAN_MAX_HISTORY_LIMIT)
       expect(result).to.equal(true)
     })
