@@ -3,6 +3,7 @@ const FieldsetValidator = require('../../../../app/services/validators/fieldset-
 const ErrorHandler = require('../../../../app/services/validators/error-handler')
 const ERROR_MESSAGES = require('../../../../app/services/validators/validation-error-messages')
 const dateFormatter = require('../../../../app/services/date-formatter')
+const CASELOAD_CAPACITY = require('../../../../app/constants/caseload-capacity')
 
 describe('services/validators/fieldset-validator', function () {
   const VALID_DATA_ITEM_1 = 'data 1'
@@ -128,25 +129,24 @@ describe('services/validators/fieldset-validator', function () {
   })
 
   describe('isOlderThanMaxHistory', function () {
-    const MAX_HISTORY = 6
-    const GREATER_THAN_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(MAX_HISTORY + 1, 'years')
-    const EXACTLY_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(MAX_HISTORY, 'years')
-    const LESS_THAN_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(MAX_HISTORY, 'years').add(1, 'days')
+    const GREATER_THAN_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(CASELOAD_CAPACITY.MAX_HISTORY + 1, 'years')
+    const EXACTLY_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(CASELOAD_CAPACITY.MAX_HISTORY, 'years')
+    const LESS_THAN_MAX_HISTORY_LIMIT = dateFormatter.now().subtract(CASELOAD_CAPACITY.MAX_HISTORY, 'years').add(1, 'days')
 
-    it(`should return error object if the date is more than ${MAX_HISTORY} years ago.`, function () {
+    it(`should return error object if the date is more than ${CASELOAD_CAPACITY.MAX_HISTORY} years ago.`, function () {
       this.fieldsetValidator.isOlderThanMaxHistory(GREATER_THAN_MAX_HISTORY_LIMIT)
       var errors = this.error.get()
       expect(errors).to.have.property(FIELD_NAME)
     })
 
 
-    it(`should return false if the date given is less than ${MAX_HISTORY} years ago.`, function () {
+    it(`should return false if the date given is less than ${CASELOAD_CAPACITY.MAX_HISTORY} years ago.`, function () {
       this.fieldsetValidator.isOlderThanMaxHistory(LESS_THAN_MAX_HISTORY_LIMIT)
       var errors = this.error.get()
       expect(errors).to.equal(false)
     })
 
-    it(`should return false if the date given is exactly ${MAX_HISTORY} years ago.`, function () {
+    it(`should return false if the date given is exactly ${CASELOAD_CAPACITY.MAX_HISTORY} years ago.`, function () {
       this.fieldsetValidator.isOlderThanMaxHistory(EXACTLY_MAX_HISTORY_LIMIT)
       var errors = this.error.get()
       expect(errors).to.equal(false)
