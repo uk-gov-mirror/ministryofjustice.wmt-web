@@ -5,7 +5,7 @@ const moment = require('moment')
 const dateFormatter = require('../date-formatter')
 
 exports.isNullOrUndefined = function (data) {
-  return typeof data === "undefined" || data === null
+  return typeof data === 'undefined' || data === null
 }
 
 exports.isRequired = function (data) {
@@ -18,7 +18,7 @@ exports.isRequired = function (data) {
         isRequired = true
       }
     })
-  } else if (self.isNullOrUndefined(data) ) {
+  } else if (self.isNullOrUndefined(data)) {
     isRequired = true
   }
 

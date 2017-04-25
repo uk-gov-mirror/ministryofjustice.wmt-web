@@ -7,7 +7,6 @@ const CASELOAD_CAPACITY = require('../../constants/caseload-capacity')
 
 class CapacityDateRange {
   constructor (fromDay, fromMonth, fromYear, toDay, toMonth, toYear) {
-
     this.fromFields = [
       fromDay,
       fromMonth,
@@ -28,35 +27,35 @@ class CapacityDateRange {
   isValid () {
     var errors = ErrorHandler()
 
-    if(validator.isRequired(this.fromFields)) {
+    if (validator.isRequired(this.fromFields)) {
       errors.add('capacityFromDate', ERROR_MESSAGES.getIsRequired)
     }
 
-    if(!validator.isValidDate(this.capacityFromDate)) {
+    if (!validator.isValidDate(this.capacityFromDate)) {
       errors.add('capacityFromDate', ERROR_MESSAGES.getInvalidDateFormatMessage)
     }
 
-    if(!validator.isDateInThePast(this.capacityFromDate)) {
+    if (!validator.isDateInThePast(this.capacityFromDate)) {
       errors.add('capacityFromDate', ERROR_MESSAGES.getPastDateMessage)
     }
 
-    if(validator.isDateOlderThanMaxHistory(this.capacityFromDate)) {
+    if (validator.isDateOlderThanMaxHistory(this.capacityFromDate)) {
       errors.add('capacityFromDate', ERROR_MESSAGES.getIsOlderThanMaxHistory, { years: CASELOAD_CAPACITY.MAX_HISTORY })
     }
 
-    if(validator.isRequired(this.toFields)) {
+    if (validator.isRequired(this.toFields)) {
       errors.add('capacityToDate', ERROR_MESSAGES.getIsRequired)
     }
 
-    if(!validator.isValidDate(this.capacityToDate)) {
+    if (!validator.isValidDate(this.capacityToDate)) {
       errors.add('capacityToDate', ERROR_MESSAGES.getInvalidDateFormatMessage)
     }
 
-    if(!validator.isDateInThePast(this.capacityToDate)) {
+    if (!validator.isDateInThePast(this.capacityToDate)) {
       errors.add('capacityToDate', ERROR_MESSAGES.getPastDateMessage)
     }
 
-    if(validator.isDateOlderThanMaxHistory(this.capacityToDate)) {
+    if (validator.isDateOlderThanMaxHistory(this.capacityToDate)) {
       errors.add('capacityToDate', ERROR_MESSAGES.getIsOlderThanMaxHistory, { years: CASELOAD_CAPACITY.MAX_HISTORY })
     }
 

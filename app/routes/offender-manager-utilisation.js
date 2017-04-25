@@ -6,20 +6,19 @@ const ValidationError = require('../services/errors/validation-error')
 
 module.exports = function (router) {
   router.get(`/caseload-utilisation/${ORG_UNIT_TYPE.OFFENDER_MANAGER}/:id/`, function (req, res, next) {
-
     try {
       var capacityDateRange
 
-      if(Object.keys(req.query).length === 0) {
-        var fromDate = dateFormatter.now().subtract(1, "years")
+      if (Object.keys(req.query).length === 0) {
+        var fromDate = dateFormatter.now().subtract(1, 'years')
         var toDate = dateFormatter.now()
 
         capacityDateRange = new CapacityDateRange(
           fromDate.date(),
-          fromDate.month() +1,
+          fromDate.month() + 1,
           fromDate.year(),
           toDate.date(),
-          toDate.month() +1,
+          toDate.month() + 1,
           toDate.year()
         )
       } else {
@@ -36,7 +35,6 @@ module.exports = function (router) {
       return res.render('utilisation', {
         utilisation: getUtilisationTable(ORG_UNIT_TYPE.OFFENDER_MANAGER, req.params.id, capacityDateRange)
       })
-
     } catch (error) {
       if (error instanceof ValidationError) {
         return res.status(400).render('utilisation', {

@@ -3,9 +3,7 @@ const validator = require('../../../../app/services/validators/common-validator'
 const dateFormatter = require('../../../../app/services/date-formatter')
 const CASELOAD_CAPACITY = require('../../../../app/constants/caseload-capacity')
 
-
 describe('services/validators/common-validator', function () {
-
   describe('isNullOrUndefined', function () {
     it('should return true if passed null', function () {
       var result = validator.isNullOrUndefined(null)
@@ -58,7 +56,6 @@ describe('services/validators/common-validator', function () {
       var result = validator.isValidDate(dateFormatter.now())
       expect(result).to.equal(true)
     })
-
   })
 
   describe('isDateInThePast', function () {
@@ -126,5 +123,4 @@ describe('services/validators/common-validator', function () {
       expect(result).to.equal(true)
     })
   })
-
 })

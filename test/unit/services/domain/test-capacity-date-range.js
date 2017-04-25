@@ -4,7 +4,6 @@ const dateFormatter = require('../../../../app/services/date-formatter')
 const CapacityDateRange = require('../../../../app/services/domain/capacity-date-range')
 const CASELOAD_CAPACITY = require('../../../../app/constants/caseload-capacity')
 
-
 var capacityDateRange
 
 describe('services/domain/capacity-date-range', function () {
@@ -44,7 +43,6 @@ describe('services/domain/capacity-date-range', function () {
     expect(capacityDateRange.toFields[0]).to.equal(VALID_TO_DAY)
     expect(capacityDateRange.toFields[1]).to.equal(VALID_TO_MONTH)
     expect(capacityDateRange.toFields[2]).to.equal(VALID_TO_YEAR)
-
   })
 
   it('should throw ValidationError if a future date was given for capacity from date', function () {
@@ -197,7 +195,7 @@ describe('services/domain/capacity-date-range', function () {
     }).to.throw(ValidationError)
   })
 
-    it('should throw ValidationError if given a capacity from date that is greater than the capacity to date', function () {
+  it('should throw ValidationError if given a capacity from date that is greater than the capacity to date', function () {
     expect(function () {
       new CapacityDateRange(
         INVALID_DAY,
@@ -209,5 +207,4 @@ describe('services/domain/capacity-date-range', function () {
 
   // error if dates are same
   // error if from date is before to date ??
-
 })

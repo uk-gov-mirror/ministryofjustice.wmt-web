@@ -18,7 +18,13 @@ gulp.task('assets', function () {
 })
 
 gulp.task('standard', function () {
-   return gulp.src(['app/app.js'])
+  return gulp.src([
+    '!node_modules/*',
+    '!app/govuk_modules/**/*.js',
+    '!app/assets/javascripts/**/*.js',
+    '!app/public/javascripts/**/*.js',
+    'app/**/*.js'
+  ])
     .pipe(standard())
     .pipe(standard.reporter('default', {
       breakOnError: true,
@@ -27,11 +33,11 @@ gulp.task('standard', function () {
 })
 
 gulp.task('mocha', function () {
-    return gulp.src(['test/**/*.js'], { read: false })
+  return gulp.src(['test/**/*.js'], { read: false })
       .pipe(mocha({ reporter: 'spec' }))
 })
 
-gulp.task('test', ['standard', 'mocha']);
+gulp.task('test', ['standard', 'mocha'])
 
 gulp.task('templates', function () {
   gulp.src('node_modules/govuk_template_jinja/views/layouts/govuk_template.html')
@@ -69,22 +75,21 @@ gulp.task('generate-assets-and-start', ['generate-assets', 'server'], function (
 })
 
 gulp.task('nsp', function (cb) {
-  gulpNSP({package: __dirname + '/package.json'}, cb);
+  gulpNSP({package: __dirname + '/package.json'}, cb)
 })
 
-gulp.task('watch', function() {
-  gulp.watch(['app/app.js', 'app/services/**/*', 'app/assets/**/*'], ['generate-assets-and-start']);
+gulp.task('watch', function () {
+  gulp.watch(['app/app.js', 'app/services/**/*', 'app/assets/**/*'], ['generate-assets-and-start'])
 })
 
-gulp.task('server', function() {
+gulp.task('server', function () {
   if (node) node.kill()
   node = spawn('node', ['app/bin/www'], { stdio: 'inherit' })
   node.on('close', function (code) {
     if (code === 8) {
-      gulp.log('Error detected, waiting for changes...');
+      gulp.log('Error detected, waiting for changes...')
     }
   })
 })
-
 
 gulp.task('default', ['generate-assets-and-start', 'watch'])
