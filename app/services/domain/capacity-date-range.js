@@ -1,8 +1,9 @@
 const ValidationError = require('../errors/validation-error')
-const FieldsetValidator = require('../validators/fieldset-validator')
+const validator = require('../validators/common-validator')
 const ErrorHandler = require('../validators/error-handler')
 const dateFormatter = require('../date-formatter')
 const ERROR_MESSAGES = require('../validators/validation-error-messages')
+const CASELOAD_CAPACITY = require('../../constants/caseload-capacity')
 
 class CapacityDateRange {
   constructor (fromDay, fromMonth, fromYear, toDay, toMonth, toYear) {
@@ -27,17 +28,37 @@ class CapacityDateRange {
   isValid () {
     var errors = ErrorHandler()
 
-    FieldsetValidator(this.fromFields, 'capacityFromDate', errors)
-      .isRequired(ERROR_MESSAGES.isRequired)
-      .isValidDate(this.capacityFromDate)
-      .isPastDate(this.capacityFromDate)
-      .isOlderThanMaxHistory(this.capacityFromDate)
+    if(validator.isRequired(this.fromFields)) {
+      this.errors.add('capacityFromDate', ERROR_MESSAGES.isRequired)
+    }
 
-    FieldsetValidator(this.toFields, 'capacityToDate', errors)
-      .isRequired(ERROR_MESSAGES.isRequired)
-      .isValidDate(this.capacityToDate)
-      .isPastDate(this.capacityToDate)
-      .isOlderThanMaxHistory(this.capacityToDate)
+    if(!validator.isValidDate(this.capacityFromDate)) {
+      errors.add('capacityFromDate', ERROR_MESSAGES.getInvalidDateFormatMessage)
+    }
+
+    if(!validator.isDateInThePast(this.capacityFromDate)) {
+      errors.add('capacityFromDate', ERROR_MESSAGES.getPastDateMessage)
+    }
+
+    if(validator.isDateOlderThanMaxHistory(this.capacityFromDate)) {
+      errors.add('capacityFromDate', ERROR_MESSAGES.getIsOlderThanMaxHistory, { years: CASELOAD_CAPACITY.MAX_HISTORY })
+    }
+
+    if(validator.isRequired(this.toFields)) {
+      this.errors.add('capacityFromDate', ERROR_MESSAGES.isRequired)
+    }
+
+    if(!validator.isValidDate(this.capacityToDate)) {
+      errors.add('capacityFromDate', ERROR_MESSAGES.getInvalidDateFormatMessage)
+    }
+
+    if(!validator.isDateInThePast(this.capacityToDate)) {
+      errors.add('capacityFromDate', ERROR_MESSAGES.getPastDateMessage)
+    }
+
+    if(validator.isDateOlderThanMaxHistory(this.capacityToDate)) {
+      errors.add('capacityFromDate', ERROR_MESSAGES.getIsOlderThanMaxHistory, { years: CASELOAD_CAPACITY.MAX_HISTORY })
+    }
 
     var validationErrors = errors.get()
 

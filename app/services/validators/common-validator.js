@@ -1,19 +1,29 @@
 const CASELOAD_CAPACITY = require('../../constants/caseload-capacity')
 
-/**
- * This file defines all generic validation tests used in the application. This file can and should be used by the
- * three higher level validators: FieldValidator, FieldSetValidator, and UrlPathValidator.
- */
 const moment = require('moment')
 
 const dateFormatter = require('../date-formatter')
 
-exports.isNullOrUndefined = function (value) {
-  return typeof value === "undefined" || value === null
+exports.isNullOrUndefined = function (data) {
+  return typeof data === "undefined" || data === null
+}
+
+exports.isRequired = function (data) {
+  var isValid = true
+  var self = this
+
+  if (data instanceof Array) {
+    data.forEach(function (value) {
+      if (self.isNullOrUndefined(value)) {
+        isValid = false
+      }
+    })
+  } else if (self.isNullOrUndefined(data) ) {
+    isValid = false
+  }
 }
 
 exports.isValidDate = function (date) {
-
   return date instanceof moment && date.isValid()
 }
 
