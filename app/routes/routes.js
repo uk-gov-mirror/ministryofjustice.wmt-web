@@ -3,7 +3,7 @@
  */
 var routes = [
   require('./index'),
-  require('./offender-manager-utilisation')
+  require('./offender-manager-capacity')
 ]
 
 module.exports = function (router) {

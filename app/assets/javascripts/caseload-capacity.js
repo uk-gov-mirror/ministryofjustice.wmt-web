@@ -1,13 +1,13 @@
 
 trace1 = {
-    x: utilisationTable.headings,
-    y: utilisationTable.rows[0].values,
+    x: capacityTable.headings,
+    y: capacityTable.rows[0].values,
     line: {width: 3.5},
     marker: {
         line: {width: -0.5},
         size: 9
     },
-    name: 'Utilisation %',
+    name: 'Capacity %',
 };
 data = [trace1];
 layout = {
@@ -65,7 +65,7 @@ layout = {
         range: [0, 120],
         showline: true,
         ticks: 'outside',
-        title: 'Utilisation %',
+        title: 'Capacity %',
         type: 'linear'
     }
 };
