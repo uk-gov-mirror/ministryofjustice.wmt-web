@@ -1,23 +1,25 @@
 const getUtilisation = require('./data/get-utilisation')
 const DisplayTable = require('./domain/display-table')
+const dateFormatter = require('./date-formatter')
 
-module.exports = function (orgUnitType, id, date) {
+
+module.exports = function (orgUnitType, id, capacityDateRange) {
 
     var headings = []
     var rows = []
     var row = { label: 'orgUnitType ' + id, values: [] }
 
-    //TODO validate orgUnitType, id and date
-
-    //if no date, change to 2017. Needs handled better. Could be a datetime lib
-    if(undefined === date) {
-      date = '2017-03-01T00:00:00Z'
-    }
-    utilisationResults = getUtilisation(orgUnitType, id, date)
+    //TODO validate orgUnitType, id.
+    utilisationResults = getUtilisation(
+        orgUnitType,
+        id,
+        capacityDateRange.capacityFromDate.toISOString(),
+        capacityDateRange.capacityToDate.toISOString()
+    )
 
     utilisationResults.forEach(function (utilisation) {
-      headings.push(utilisation['month'])
-      row.values.push(utilisation['utilisation_percentage'])
+      headings.push(utilisation['workload_report_date'])
+      row.values.push(utilisation['capacity_percentage'])
     })
     rows.push(row)
 

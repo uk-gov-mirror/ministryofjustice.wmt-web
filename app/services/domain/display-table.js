@@ -6,7 +6,7 @@ class DisplayTable {
   }
 
   isValid () {
-    var valid = true 
+    var valid = true
     if(this.headings.length < 1) {
       throw new Error("No headings found");
     }
@@ -14,16 +14,3 @@ class DisplayTable {
 }
 
 module.exports = DisplayTable
-
-function convertResultsToTableData (results) {
-    var utilisationTable = {}
-    utilisationTable.headings = []
-    utilisationTable.values = []
-
-    results.forEach(function (result) {
-      utilisationTable.headings.push(result['month'])
-      utilisationTable.values.push(result['utilisation_percentage'])
-    })
-
-    return utilisationTable
-}
