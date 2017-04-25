@@ -5,7 +5,6 @@ const route = require('../../../app/routes/index')
 const expect = require('chai').expect
 
 describe(`${INDEX_URI}`, function () {
-
   var app
 
   beforeEach(function () {

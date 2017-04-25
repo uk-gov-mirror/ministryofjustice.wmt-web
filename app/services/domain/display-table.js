@@ -6,9 +6,8 @@ class DisplayTable {
   }
 
   isValid () {
-    var valid = true
-    if(this.headings.length < 1) {
-      throw new Error("No headings found");
+    if (this.headings.length < 1) {
+      throw new Error('No headings found')
     }
   }
 }
