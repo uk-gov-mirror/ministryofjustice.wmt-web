@@ -1,11 +1,11 @@
-const getUtilisationTable = require('../services/get-utilisation-table')
+const getCapacityTable = require('../services/get-capacity-table')
 const CapacityDateRange = require('../services/domain/capacity-date-range')
 const ORG_UNIT_TYPE = require('../constants/organisation-unit-type-enum')
 const dateFormatter = require('../services/date-formatter')
 const ValidationError = require('../services/errors/validation-error')
 
 module.exports = function (router) {
-  router.get(`/caseload-utilisation/${ORG_UNIT_TYPE.OFFENDER_MANAGER}/:id/`, function (req, res, next) {
+  router.get(`/caseload-capacity/${ORG_UNIT_TYPE.OFFENDER_MANAGER}/:id/`, function (req, res, next) {
     try {
       var capacityDateRange
 
@@ -23,21 +23,21 @@ module.exports = function (router) {
         )
       } else {
         capacityDateRange = new CapacityDateRange(
-          req.query['utilisation-from-day'],
-          req.query['utilisation-from-month'],
-          req.query['utilisation-from-year'],
-          req.query['utilisation-to-day'],
-          req.query['utilisation-to-month'],
-          req.query['utilisation-to-year']
+          req.query['capacity-from-day'],
+          req.query['capacity-from-month'],
+          req.query['capacity-from-year'],
+          req.query['capacity-to-day'],
+          req.query['capacity-to-month'],
+          req.query['capacity-to-year']
         )
       }
 
-      return res.render('utilisation', {
-        utilisation: getUtilisationTable(ORG_UNIT_TYPE.OFFENDER_MANAGER, req.params.id, capacityDateRange)
+      return res.render('capacity', {
+        capacity: getCapacityTable(ORG_UNIT_TYPE.OFFENDER_MANAGER, req.params.id, capacityDateRange)
       })
     } catch (error) {
       if (error instanceof ValidationError) {
-        return res.status(400).render('utilisation', {
+        return res.status(400).render('capacity', {
           errors: error.validationErrors
         })
       } else {

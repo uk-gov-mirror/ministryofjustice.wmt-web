@@ -1,4 +1,4 @@
-const getUtilisation = require('./data/get-utilisation')
+const getCapacity = require('./data/get-capacity')
 const DisplayTable = require('./domain/display-table')
 
 module.exports = function (orgUnitType, id, capacityDateRange) {
@@ -7,16 +7,16 @@ module.exports = function (orgUnitType, id, capacityDateRange) {
   var row = { label: 'orgUnitType ' + id, values: [] }
 
     // TODO validate orgUnitType, id.
-  var utilisationResults = getUtilisation(
+  var capacityResults = getCapacity(
         orgUnitType,
         id,
         capacityDateRange.capacityFromDate.toISOString(),
         capacityDateRange.capacityToDate.toISOString()
     )
 
-  utilisationResults.forEach(function (utilisation) {
-    headings.push(utilisation['workload_report_date'])
-    row.values.push(utilisation['capacity_percentage'])
+  capacityResults.forEach(function (capacity) {
+    headings.push(capacity['workload_report_date'])
+    row.values.push(capacity['capacity_percentage'])
   })
   rows.push(row)
 

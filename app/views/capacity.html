@@ -1,0 +1,96 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/validation-error-messages.html" %}
+<h2 class="heading-large">
+    View your caseload capacity
+</h2>
+
+<form action="/caseload-capacity/offendermanager/1" method="get">
+
+    <div class="form-group {% if errors['capacityFromDate'][0] %} form-group-error {% endif %}">
+        {% if errors %}
+            <span class="error-message">{{ errors['capacityFromDate'][0] }}</span>
+        {% endif %}
+        <fieldset>
+            <legend>
+                <span class="form-label-bold">
+                    Show capacity from:
+                </span>
+                <span class="form-hint" id="capacity-from-hint">For example, 31 3 1980</span>
+            </legend>
+            <div id="capacity-from-date" class="form-date">
+                <div class="form-group form-group-day">
+                    <label class="form-label" for="capacity-from-day">Day</label>
+                    <input class="form-control" id="capacity-from-day" name="capacity-from-day" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="capacity-from-hint">
+                </div>
+                <div class="form-group form-group-month">
+                    <label class="form-label" for="capacity-from-month">Month</label>
+                    <input class="form-control" id="capacity-from-month" name="capacity-from-month" type="number" pattern="[0-9]*" min="0" max="12">
+                </div>
+                <div class="form-group form-group-year">
+                    <label class="form-label" for="capacity-from-year">Year</label>
+                    <input class="form-control" id="capacity-from-year" name="capacity-from-year" type="number" pattern="[0-9]*" min="0" max="2017">
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="form-group {% if errors['capacityToDate'][0] %} form-group-error {% endif %}">
+        {% if errors %}
+            <span class="error-message">{{ errors['capacityToDate'][0] }}</span>
+        {% endif %}
+        <fieldset>
+            <legend>
+                <span class="form-label-bold">
+                    Show capacity to:
+                </span>
+                <span class="form-hint" id="capacity-to-hint">For example, 31 3 1980</span>
+            </legend>
+            <div id="capacity-to-date" class="form-date">
+                <div class="form-group form-group-day">
+                    <label class="form-label" for="capacity-to-day">Day</label>
+                    <input class="form-control" id="capacity-to-day" name="capacity-to-day" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="capacity-to-hint">
+                </div>
+                <div class="form-group form-group-month">
+                    <label class="form-label" for="capacity-to-month">Month</label>
+                    <input class="form-control" id="capacity-to-month" name="capacity-to-month" type="number" pattern="[0-9]*" min="0" max="12">
+                </div>
+                <div class="form-group form-group-year">
+                    <label class="form-label" for="capacity-to-year">Year</label>
+                    <input class="form-control" id="capacity-to-year" name="capacity-to-year" type="number" pattern="[0-9]*" min="0" max="2017">
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <input id="caseload-filter-submit" type="submit" value="filter" class="button">
+
+<form>
+<table class="non-javascript">
+    <tr>
+    {% for heading in capacity.headings %}
+        <th scope="col">{{ heading }}</th>
+    {% endfor %}
+    </tr>
+    <tr>
+    {% for value in capacity.rows[0].values %}
+        <td> {{value}}% </td>
+    {% endfor %}
+    </tr>
+</table>
+
+<div id="plotly-div-line"></div>
+
+</main>
+{% endblock %}
+
+{% block body_end %}
+    <script type="text/javascript">
+        var capacityTable = {{ capacity | dump | safe }}
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="/public/javascripts/caseload-capacity.js"></script>
+{% endblock %}
