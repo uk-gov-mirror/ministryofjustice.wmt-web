@@ -29,7 +29,7 @@ class CapacityDateRange {
     var errors = ErrorHandler()
 
     if(validator.isRequired(this.fromFields)) {
-      this.errors.add('capacityFromDate', ERROR_MESSAGES.isRequired)
+      errors.add('capacityFromDate', ERROR_MESSAGES.getIsRequired)
     }
 
     if(!validator.isValidDate(this.capacityFromDate)) {
@@ -45,19 +45,19 @@ class CapacityDateRange {
     }
 
     if(validator.isRequired(this.toFields)) {
-      this.errors.add('capacityFromDate', ERROR_MESSAGES.isRequired)
+      errors.add('capacityToDate', ERROR_MESSAGES.getIsRequired)
     }
 
     if(!validator.isValidDate(this.capacityToDate)) {
-      errors.add('capacityFromDate', ERROR_MESSAGES.getInvalidDateFormatMessage)
+      errors.add('capacityToDate', ERROR_MESSAGES.getInvalidDateFormatMessage)
     }
 
     if(!validator.isDateInThePast(this.capacityToDate)) {
-      errors.add('capacityFromDate', ERROR_MESSAGES.getPastDateMessage)
+      errors.add('capacityToDate', ERROR_MESSAGES.getPastDateMessage)
     }
 
     if(validator.isDateOlderThanMaxHistory(this.capacityToDate)) {
-      errors.add('capacityFromDate', ERROR_MESSAGES.getIsOlderThanMaxHistory, { years: CASELOAD_CAPACITY.MAX_HISTORY })
+      errors.add('capacityToDate', ERROR_MESSAGES.getIsOlderThanMaxHistory, { years: CASELOAD_CAPACITY.MAX_HISTORY })
     }
 
     var validationErrors = errors.get()

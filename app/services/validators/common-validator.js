@@ -9,18 +9,20 @@ exports.isNullOrUndefined = function (data) {
 }
 
 exports.isRequired = function (data) {
-  var isValid = true
+  var isRequired = false
   var self = this
 
   if (data instanceof Array) {
     data.forEach(function (value) {
       if (self.isNullOrUndefined(value)) {
-        isValid = false
+        isRequired = true
       }
     })
   } else if (self.isNullOrUndefined(data) ) {
-    isValid = false
+    isRequired = true
   }
+
+  return isRequired
 }
 
 exports.isValidDate = function (date) {
