@@ -23,7 +23,8 @@ gulp.task('standard', function () {
     '!app/govuk_modules/**/*.js',
     '!app/assets/javascripts/**/*.js',
     '!app/public/javascripts/**/*.js',
-    'app/**/*.js'
+    'app/**/*.js',
+    'test/**/*.js'
   ])
     .pipe(standard())
     .pipe(standard.reporter('default', {
