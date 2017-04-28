@@ -1,9 +1,6 @@
-const proxyquire = require('proxyquire')
 const route = require('../../../app/routes/offender-manager-capacity')
 const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
-const sinon = require('sinon')
-const expect = require('chai').expect
 
 // test data
 const OFFENDER_MANAGER_CAPACITY_URI = '/caseload-capacity/offendermanager'
@@ -16,8 +13,6 @@ const CAPACITY_FROM_YEAR = 'capacity-from-year='
 const CAPACITY_TO_DAY = 'capacity-to-day='
 const CAPACITY_TO_MONTH = 'capacity-to-month='
 const CAPACITY_TO_YEAR = 'capacity-to-year='
-
-const YEAR = 2016
 
 describe('/caseload-capacity', function () {
   var app
@@ -45,77 +40,6 @@ describe('/caseload-capacity', function () {
         .expect(200)
     })
 
-    it('should respond with a 400 when valid URI and invalid from day is used', function () {
-      return supertest(app)
-        .get(OFFENDER_MANAGER_CAPACITY_URI + '/' + ID + '?' +
-        CAPACITY_FROM_DAY + '33&' +
-        CAPACITY_FROM_MONTH + '01&' +
-        CAPACITY_FROM_YEAR + '2017&' +
-        CAPACITY_TO_DAY + '31&' +
-        CAPACITY_TO_MONTH + '31&' +
-        CAPACITY_TO_YEAR + '2017')
-        .expect(400)
-    })
-
-    it('should respond with a 400 when valid URI and invalid from month is used', function () {
-      return supertest(app)
-        .get(OFFENDER_MANAGER_CAPACITY_URI + '/' + ID + '?' +
-        CAPACITY_FROM_DAY + '01&' +
-        CAPACITY_FROM_MONTH + 'jeff&' +
-        CAPACITY_FROM_YEAR + '2017&' +
-        CAPACITY_TO_DAY + '31&' +
-        CAPACITY_TO_MONTH + '31&' +
-        CAPACITY_TO_YEAR + '2017')
-        .expect(400)
-    })
-
-    it('should respond with a 400 when valid URI and invalid from year is used', function () {
-      return supertest(app)
-        .get(OFFENDER_MANAGER_CAPACITY_URI + '/' + ID + '?' +
-        CAPACITY_FROM_DAY + '01&' +
-        CAPACITY_FROM_MONTH + '01&' +
-        CAPACITY_FROM_YEAR + '&' +
-        CAPACITY_TO_DAY + '31&' +
-        CAPACITY_TO_MONTH + '31&' +
-        CAPACITY_TO_YEAR + '2017')
-        .expect(400)
-    })
-
-    it('should respond with a 400 when valid URI and invalid from day is used', function () {
-      return supertest(app)
-        .get(OFFENDER_MANAGER_CAPACITY_URI + '/' + ID + '?' +
-        CAPACITY_FROM_DAY + '01&' +
-        CAPACITY_FROM_MONTH + '01&' +
-        CAPACITY_FROM_YEAR + '2017&' +
-        CAPACITY_TO_DAY + '33&' +
-        CAPACITY_TO_MONTH + '31&' +
-        CAPACITY_TO_YEAR + '2017')
-        .expect(400)
-    })
-
-    it('should respond with a 400 when valid URI and invalid from month is used', function () {
-      return supertest(app)
-        .get(OFFENDER_MANAGER_CAPACITY_URI + '/' + ID + '?' +
-        CAPACITY_FROM_DAY + '01&' +
-        CAPACITY_FROM_MONTH + '01&' +
-        CAPACITY_FROM_YEAR + '2017&' +
-        CAPACITY_TO_DAY + '31&' +
-        CAPACITY_TO_MONTH + 'jeff&' +
-        CAPACITY_TO_YEAR + '2017')
-        .expect(400)
-    })
-
-    it('should respond with a 400 when valid URI and invalid to year is used', function () {
-      return supertest(app)
-        .get(OFFENDER_MANAGER_CAPACITY_URI + '/' + ID + '?' +
-        CAPACITY_FROM_DAY + '01&' +
-        CAPACITY_FROM_MONTH + '01&' +
-        CAPACITY_FROM_YEAR + '2017&' +
-        CAPACITY_TO_DAY + '31&' +
-        CAPACITY_TO_MONTH + '31&' +
-        CAPACITY_TO_YEAR + '')
-        .expect(400)
-    })
     // Tests do not use app.js where 404 handler is defined. Defaults to 500.
 
     it('should respond with a 500 when id is missing'

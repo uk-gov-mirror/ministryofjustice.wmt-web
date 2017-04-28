@@ -25,7 +25,7 @@ const CAPACITY_RESULTS = {
 
 describe('services/domain/display-table', function () {
   it('should construct a table given valid headers and values', function () {
-    capacityTable = new DisplayTable(
+    var capacityTable = new DisplayTable(
       CAPACITY_RESULTS.headings, CAPACITY_RESULTS.rows)
 
     expect(capacityTable.headings[3]).to.equal(TEST_MONTH_HEADING)

@@ -2,7 +2,6 @@ const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const INDEX_URI = '/'
 const route = require('../../../app/routes/index')
-const expect = require('chai').expect
 
 describe(`${INDEX_URI}`, function () {
   var app
