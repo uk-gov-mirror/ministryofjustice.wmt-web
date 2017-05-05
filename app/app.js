@@ -1,11 +1,15 @@
 const bodyParser = require('body-parser')
 const express = require('express')
 const favicon = require('serve-favicon')
+const helmet = require('helmet')
 const nunjucks = require('express-nunjucks')
 const path = require('path')
 const routes = require('./routes/routes')
 
 var app = express()
+
+// Set security headers.
+app.use(helmet())
 
 var developmentMode = app.get('env') === 'development'
 
