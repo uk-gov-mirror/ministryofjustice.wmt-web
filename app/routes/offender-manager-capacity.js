@@ -31,7 +31,7 @@ module.exports = function (router) {
     }
 
     return res.render('capacity', {
-      capacity: getCapacityTable(ORG_UNIT_TYPE.OFFENDER_MANAGER, req.params.id, capacityDateRange)
+      capacity: getCapacityTable(req.params.id, capacityDateRange)
     })
   })
 }

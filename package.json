@@ -43,6 +43,7 @@
     "knex": "0.12.x",
     "mocha": "3.2.x",
     "moment": "^2.18.1",
+    "mssql": "3.3.0",
     "nunjucks": "3.0.x",
     "pg": "6.1.x",
     "proxyquire": "1.7.x",

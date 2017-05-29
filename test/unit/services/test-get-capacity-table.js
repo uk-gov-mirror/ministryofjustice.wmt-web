@@ -55,11 +55,11 @@ describe('services/get-capacity-table', function () {
   it('should return a DisplayTable with valid headers and values', function () {
     var getCapacity = sinon.stub().returns(CAPACITY_RESULTS)
     var getCapacityTable =
-      proxyquire('../../../app/services/get-capacity-table', {'./data/get-capacity': getCapacity})
+      proxyquire('../../../app/services/get-capacity-table', {'./data/get-capacity-for-individual': getCapacity})
 
     var capacityDateRange = new CapacityDateRange(1, 1, 2017, 31, 3, 2017)
 
-    var results = getCapacityTable('offendermanager', 5, capacityDateRange)
+    var results = getCapacityTable(5, capacityDateRange)
     expect(results.headings[5]).to.equal(HEADINGS_MONTH)
     expect(results.rows[0].values[5]).to.equal(VALUES_CAPACITY)
     expect(results instanceof DisplayTable)

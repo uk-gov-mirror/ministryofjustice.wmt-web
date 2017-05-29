@@ -1,6 +1,7 @@
-const route = require('../../../app/routes/offender-manager-capacity')
 const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
+const proxyquire = require('proxyquire')
+const sinon = require('sinon')
 
 // test data
 const OFFENDER_MANAGER_CAPACITY_URI = '/caseload-capacity/offendermanager'
@@ -18,6 +19,10 @@ describe('/caseload-capacity', function () {
   var app
 
   beforeEach(function () {
+    var route = proxyquire(
+    '../../../app/routes/offender-manager-capacity', {
+      '../services/get-capacity-table': sinon.stub()
+    })
     app = routeHelper.buildApp(route)
   })
 
@@ -42,12 +47,11 @@ describe('/caseload-capacity', function () {
 
     // Tests do not use app.js where 404 handler is defined. Defaults to 500.
 
-    it('should respond with a 500 when id is missing'
-      , function () {
-        return supertest(app)
-          .get(OFFENDER_MANAGER_CAPACITY_URI)
-          .expect(500)
-      })
+    it('should respond with a 500 when id is missing', function () {
+      return supertest(app)
+        .get(OFFENDER_MANAGER_CAPACITY_URI)
+        .expect(500)
+    })
 
     it('should respond with a 500 when user id parameter is missing', function () {
       return supertest(app)
