@@ -5,7 +5,9 @@
   "main": "app/app.js",
   "scripts": {
     "start": "gulp",
-    "test": "gulp test"
+    "test": "gulp unit-test integration-test",
+    "unit-test": "gulp unit-test",
+    "integration-test": "gulp integration-test"
   },
   "standard": {
     "ignore": [
