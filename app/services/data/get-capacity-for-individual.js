@@ -9,13 +9,21 @@ module.exports = function (id, fromDate, toDate) {
         .where('workload.workload_owner_id', id)
         .select('workload_points_calculations.effective_from',
                 'workload_points_calculations.total_points',
+                'workload_points_calculations.sdr_points',
+                'workload_points_calculations.sdr_conversion_points',
+                'workload_points_calculations.paroms_points',
                 'workload_points_calculations.available_points')
        .then(function (workloadReports) {
          var capacities = []
          workloadReports.forEach(function (report) {
-           var capacityPercentage = (report.total_points / report.available_points) * 100
-           capacities.push({ workload_report_date: report.effective_from,
-             capacity_percentage: capacityPercentage })
+           var allPoints = report.total_points + report.sdr_points +
+               report.sdr_conversion_points + report.paroms_points
+           var capacityPercentage = (allPoints / report.available_points) * 100
+
+           capacities.push({
+             workload_report_date: report.effective_from,
+             capacity_percentage: capacityPercentage
+           })
          })
          return capacities
        })

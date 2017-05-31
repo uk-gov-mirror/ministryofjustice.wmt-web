@@ -110,7 +110,9 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
 
       var calculations = []
       calculations.push(Object.assign({}, defaultWorkloadPoints, {total_points: 50, available_points: 25, effective_from: new Date(2009, 0, 1)}))
-      calculations.push(Object.assign({}, defaultWorkloadPoints, {total_points: 200, available_points: 100, effective_from: new Date(2010, 0, 31)}))
+      calculations.push(Object.assign({}, defaultWorkloadPoints, {
+        total_points: 50, available_points: 100, effective_from: new Date(2010, 0, 31), paroms_points: 50, sdr_points: 50, sdr_conversion_points: 50
+      }))
       calculations.push(Object.assign({}, defaultWorkloadPoints, {total_points: 20, available_points: 10, effective_from: new Date(2010, 0, 1)}))
       calculations.push(Object.assign({}, defaultWorkloadPoints, {total_points: 20, available_points: 10, effective_from: new Date(2011, 0, 1)}))
 
