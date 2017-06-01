@@ -1,5 +1,6 @@
 const expect = require('chai').expect
 const sinon = require('sinon')
+require('sinon-bluebird')
 const proxyquire = require('proxyquire')
 const DisplayTable = require('../../../app/services/domain/display-table')
 const CapacityDateRange = require('../../../app/services/domain/capacity-date-range')
@@ -52,16 +53,19 @@ const CAPACITY_RESULTS = [
 ]
 
 describe('services/get-capacity-table', function () {
-  it('should return a DisplayTable with valid headers and values', function () {
-    var getCapacity = sinon.stub().returns(CAPACITY_RESULTS)
+  it('should return a DisplayTable with valid headers and values', function (done) {
+    var getCapacity = sinon.stub()
     var getCapacityTable =
       proxyquire('../../../app/services/get-capacity-table', {'./data/get-capacity-for-individual': getCapacity})
 
     var capacityDateRange = new CapacityDateRange(1, 1, 2017, 31, 3, 2017)
 
-    var results = getCapacityTable(5, capacityDateRange)
-    expect(results.headings[5]).to.equal(HEADINGS_MONTH)
-    expect(results.rows[0].values[5]).to.equal(VALUES_CAPACITY)
-    expect(results instanceof DisplayTable)
+    getCapacity.resolves(CAPACITY_RESULTS)
+    getCapacityTable(5, capacityDateRange).then((results) => {
+      expect(results.headings[5]).to.equal(HEADINGS_MONTH)
+      expect(results.rows[0].values[5]).to.equal(VALUES_CAPACITY)
+      expect(results instanceof DisplayTable)
+      done()
+    })
   })
 })
