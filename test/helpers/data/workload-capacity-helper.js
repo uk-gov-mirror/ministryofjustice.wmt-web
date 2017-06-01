@@ -5,7 +5,7 @@ var Promise = require('bluebird').Promise
 module.exports.addWorkloadCapacitiesForOffenderManager = function () {
   var inserts = []
 
-  return knex('offender_manager_type').returning('id').insert({description: 'test'})
+  var promise = knex('offender_manager_type').returning('id').insert({description: 'test'})
     .then(function (ids) {
       inserts.push({ table: 'offender_manager_type', id: ids[0] })
       return knex('offender_manager').returning('id').insert({type_id: ids[0]})
@@ -124,6 +124,8 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
       })
       return inserts
     })
+
+    return promise
 }
 
 module.exports.removeWorkloadCapactitiesForOffenderManager = function (inserts) {

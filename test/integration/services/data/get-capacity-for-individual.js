@@ -17,7 +17,7 @@ describe('services/data/get-capacity-for-individual', function () {
       })
   })
 
-  it('should retrieve all the workloads withiin the date range', function (done) {
+  it('should retrieve all the workloads within the date range', function (done) {
     getCapacityForIndividual(inserts.filter((item) => item.table === 'workload_owner')[0].id, START_DATE, END_DATE)
     .then(function (results) {
       expect(results.length).to.equal(2)
