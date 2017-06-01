@@ -1,4 +1,5 @@
 var gulp = require('gulp')
+var path = require('path')
 var mocha = require('gulp-mocha')
 var gulpNSP = require('gulp-nsp')
 var sass = require('gulp-sass')
@@ -76,7 +77,7 @@ gulp.task('generate-assets-and-start', ['generate-assets', 'server'], function (
 })
 
 gulp.task('nsp', function (cb) {
-  gulpNSP({package: __dirname + '/package.json'}, cb)
+  gulpNSP({package: path.join(__dirname, '/package.json')}, cb)
 })
 
 gulp.task('watch', function () {

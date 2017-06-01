@@ -4,7 +4,7 @@ const favicon = require('serve-favicon')
 const helmet = require('helmet')
 const nunjucks = require('express-nunjucks')
 const path = require('path')
-const routes = require('./routes/routes')
+const routes = require('./routes')
 
 var app = express()
 
