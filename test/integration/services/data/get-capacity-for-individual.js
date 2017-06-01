@@ -30,7 +30,8 @@ describe('services/data/get-capacity-for-individual', function () {
     })
   })
 
-  after(function () {
+  after(function (done) {
     workloadCapactiyHelper.removeWorkloadCapactitiesForOffenderManager(inserts)
+      .then(() => done())
   })
 })

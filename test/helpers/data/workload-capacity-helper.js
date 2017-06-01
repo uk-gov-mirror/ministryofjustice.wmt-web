@@ -1,4 +1,4 @@
-const config = require('../../../knexfile')
+const config = require('../../../knexfile').integrationTests
 const knex = require('knex')(config)
 var Promise = require('bluebird').Promise
 
@@ -8,7 +8,7 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
   return knex('offender_manager_type').returning('id').insert({description: 'test'})
     .then(function (ids) {
       inserts.push({ table: 'offender_manager_type', id: ids[0] })
-      return knex('offender_manager').returning('id').insert({om_type_id: ids[0]})
+      return knex('offender_manager').returning('id').insert({type_id: ids[0]})
     })
     .then(function (ids) {
       inserts.push({ table: 'offender_manager', id: ids[0] })
@@ -119,14 +119,16 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
       return knex('workload_points_calculations').returning('id').insert(calculations)
     })
     .then(function (ids) {
-      inserts.push({table: 'workload_points_calculations', id: ids[0]})
+      ids.forEach((id) => {
+        inserts.push({table: 'workload_points_calculations', id: id})
+      })
       return inserts
     })
 }
 
 module.exports.removeWorkloadCapactitiesForOffenderManager = function (inserts) {
-  inserts.reverse()
+  inserts = inserts.reverse()
   return Promise.each(inserts, (insert) => {
-    knex(insert.table).where('id', insert.id).del()
+    return knex(insert.table).where('id', insert.id).del()
   })
 }

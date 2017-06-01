@@ -40,7 +40,7 @@ gulp.task('mocha-unit', function () {
 
 gulp.task('mocha-integration', function () {
   return gulp.src(['test/integration/**/*.js'], { read: false })
-      .pipe(mocha({ reporter: 'spec' }))
+      .pipe(mocha({ reporter: 'spec', timeout: 5000 }))
 })
 
 gulp.task('unit-test', ['standard', 'mocha-unit'])

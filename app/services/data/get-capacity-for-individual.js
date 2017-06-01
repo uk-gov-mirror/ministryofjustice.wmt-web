@@ -1,4 +1,4 @@
-const config = require('../../../knexfile')
+const config = require('../../../knexfile').web
 const knex = require('knex')(config)
 
 module.exports = function (id, fromDate, toDate) {
