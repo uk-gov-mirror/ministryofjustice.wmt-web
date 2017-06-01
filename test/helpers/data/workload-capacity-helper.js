@@ -125,7 +125,7 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
       return inserts
     })
 
-    return promise
+  return promise
 }
 
 module.exports.removeWorkloadCapactitiesForOffenderManager = function (inserts) {
