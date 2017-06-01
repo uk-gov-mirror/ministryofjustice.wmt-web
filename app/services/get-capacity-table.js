@@ -7,16 +7,17 @@ module.exports = function (id, capacityDateRange) {
   var row = { label: 'Workload Owner ' + id, values: [] }
 
   // TODO validate id.
-  var capacityResults = getCapacity(
+  return getCapacity(
     id,
     capacityDateRange.capacityFromDate.toISOString(),
     capacityDateRange.capacityToDate.toISOString()
-  )
-  capacityResults.forEach(function (capacity) {
-    headings.push(capacity['workload_report_date'])
-    row.values.push(capacity['capacity_percentage'])
-  })
-  rows.push(row)
+  ).then((capacityResults) => {
+    capacityResults.forEach(function (capacity) {
+      headings.push(capacity['workload_report_date'])
+      row.values.push(capacity['capacity_percentage'])
+    })
+    rows.push(row)
 
-  return new DisplayTable(headings, rows)
+    return new DisplayTable(headings, rows)
+  })
 }
