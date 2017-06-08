@@ -1,6 +1,8 @@
-const route = require('../../../app/routes/offender-manager-capacity')
 const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
+const proxyquire = require('proxyquire')
+const sinon = require('sinon')
+require('sinon-bluebird')
 
 // test data
 const OFFENDER_MANAGER_CAPACITY_URI = '/caseload-capacity/offendermanager'
@@ -16,19 +18,27 @@ const CAPACITY_TO_YEAR = 'capacity-to-year='
 
 describe('/caseload-capacity', function () {
   var app
+  var getCapacityStub
 
   beforeEach(function () {
+    getCapacityStub = sinon.stub()
+    var route = proxyquire(
+    '../../../app/routes/offender-manager-capacity', {
+      '../services/get-capacity-table': getCapacityStub
+    })
     app = routeHelper.buildApp(route)
   })
 
   describe(`GET ${OFFENDER_MANAGER_CAPACITY_URI}`, function () {
     it('should respond with a 200 when valid URI is used', function () {
+      getCapacityStub.resolves()
       return supertest(app)
         .get(OFFENDER_MANAGER_CAPACITY_URI + '/' + ID)
         .expect(200)
     })
 
     it('should respond with a 200 when valid URI and from/to date query is used', function () {
+      getCapacityStub.resolves()
       return supertest(app)
         .get(OFFENDER_MANAGER_CAPACITY_URI + '/' + ID + '?' +
         CAPACITY_FROM_DAY + '01&' +
@@ -42,14 +52,15 @@ describe('/caseload-capacity', function () {
 
     // Tests do not use app.js where 404 handler is defined. Defaults to 500.
 
-    it('should respond with a 500 when id is missing'
-      , function () {
-        return supertest(app)
-          .get(OFFENDER_MANAGER_CAPACITY_URI)
-          .expect(500)
-      })
+    it('should respond with a 500 when id is missing', function () {
+      getCapacityStub.resolves()
+      return supertest(app)
+        .get(OFFENDER_MANAGER_CAPACITY_URI)
+        .expect(500)
+    })
 
     it('should respond with a 500 when user id parameter is missing', function () {
+      getCapacityStub.resolves()
       return supertest(app)
         .get(OFFENDER_MANAGER_CAPACITY_URI + '?date=' + DATE)
         .expect(500)

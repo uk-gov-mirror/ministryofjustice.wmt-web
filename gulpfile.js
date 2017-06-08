@@ -34,12 +34,21 @@ gulp.task('standard', function () {
     }))
 })
 
-gulp.task('mocha', function () {
-  return gulp.src(['test/**/*.js'], { read: false })
+gulp.task('mocha-unit', function () {
+  return gulp.src(['test/unit/**/*.js'], { read: false })
       .pipe(mocha({ reporter: 'spec' }))
 })
 
-gulp.task('test', ['standard', 'mocha'])
+gulp.task('mocha-integration', function () {
+  return gulp.src(['test/integration/**/*.js'], { read: false })
+      .pipe(mocha({ reporter: 'spec', timeout: 5000 }))
+})
+
+gulp.task('unit-test', ['standard', 'mocha-unit'])
+
+gulp.task('integration-test', ['mocha-integration'])
+
+gulp.task('test', ['unit-test', 'integration-test'])
 
 gulp.task('templates', function () {
   gulp.src('node_modules/govuk_template_jinja/views/layouts/govuk_template.html')

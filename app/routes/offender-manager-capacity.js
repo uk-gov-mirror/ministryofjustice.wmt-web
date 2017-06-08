@@ -30,8 +30,10 @@ module.exports = function (router) {
       )
     }
 
-    return res.render('capacity', {
-      capacity: getCapacityTable(ORG_UNIT_TYPE.OFFENDER_MANAGER, req.params.id, capacityDateRange)
+    getCapacityTable(req.params.id, capacityDateRange).then((capacityTable) => {
+      return res.render('capacity', {
+        capacity: capacityTable
+      })
     })
   })
 }
