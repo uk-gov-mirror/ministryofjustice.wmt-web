@@ -12,7 +12,7 @@ module.exports = {
         encrypt: true
       }
     },
-    debug: true
+    debug: false
   },
   integrationTests: {
     client: 'mssql',
@@ -25,6 +25,6 @@ module.exports = {
         encrypt: true
       }
     },
-    debug: true
+    debug: false
   }
 }
