@@ -22,8 +22,8 @@ describe('services/data/get-capacity-for-individual', function () {
     .then(function (results) {
       expect(results.length).to.equal(2)
       var expectedResults = [
-        {workload_report_date: END_DATE, capacity_percentage: 200},
-        {workload_report_date: START_DATE, capacity_percentage: 200}
+        {workload_report_date: END_DATE, capacity_percentage: 200, reductions: 3},
+        {workload_report_date: START_DATE, capacity_percentage: 200, reductions: 3}
       ]
       expect(results).to.eql(expectedResults)
       done()

@@ -103,7 +103,8 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
         nominal_target: 0,
         available_points: 0,
         effective_from: new Date(2009, 0, 1),
-        effective_to: new Date(2010, 0, 1)
+        effective_to: new Date(2010, 0, 1),
+        reduction_hours: 3
       }
 
       var calculations = []
