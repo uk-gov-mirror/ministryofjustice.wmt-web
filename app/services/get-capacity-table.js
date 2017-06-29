@@ -4,7 +4,8 @@ const DisplayTable = require('./domain/display-table')
 module.exports = function (id, capacityDateRange) {
   var headings = []
   var rows = []
-  var row = { label: 'Workload Owner ' + id, values: [] }
+  var capacityRow = { label: 'Workload Owner ' + id, values: [] }
+  var reductionRow = { label: 'Workload Owner ' + id, values: [] }
 
   // TODO validate id.
   return getCapacity(
@@ -14,10 +15,11 @@ module.exports = function (id, capacityDateRange) {
   ).then((capacityResults) => {
     capacityResults.forEach(function (capacity) {
       headings.push(capacity['workload_report_date'])
-      row.values.push(capacity['capacity_percentage'])
-      row.values.push(capacity['reduction_hours'])
+      capacityRow.values.push(capacity['capacity_percentage'])
+      reductionRow.values.push(capacity['reductions'])
     })
-    rows.push(row)
+    rows.push(capacityRow)
+    rows.push(reductionRow)
 
     return new DisplayTable(headings, rows)
   })
