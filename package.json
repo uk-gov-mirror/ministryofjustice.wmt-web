@@ -7,7 +7,8 @@
     "start": "gulp",
     "test": "gulp unit-test integration-test",
     "unit-test": "gulp unit-test",
-    "integration-test": "gulp integration-test"
+    "integration-test": "gulp integration-test",
+    "test-e2e": "gulp --gulpfile gulpfile-e2e.js"
   },
   "standard": {
     "ignore": [
@@ -22,7 +23,8 @@
       "beforeEach",
       "afterEach",
       "after",
-      "it"
+      "it",
+      "browser"
     ]
   },
   "devDependencies": {
@@ -41,6 +43,7 @@
     "gulp-mocha": "4.2.x",
     "gulp-nsp": "2.4.x",
     "gulp-sass": "3.1.x",
+    "gulp-webdriver": "^2.0.3",
     "helmet": "^3.6.0",
     "knex": "0.12.x",
     "mocha": "3.2.x",
@@ -50,11 +53,15 @@
     "nunjucks-date-filter": "^0.1.1",
     "pg": "6.1.x",
     "proxyquire": "1.7.x",
+    "selenium-standalone": "^6.5.0",
     "serve-favicon": "2.4.x",
     "sinon": "^1.17.5",
     "sinon-bluebird": "^3.1.0",
+    "sql-cli": "^0.6.2",
     "supertest": "3.0.x",
     "util": "^0.10.3",
-    "validator": "^7.0.0"
+    "validator": "^7.0.0",
+    "wdio-mocha-framework": "^0.5.10",
+    "webdriverio": "^4.8.0"
   }
 }
