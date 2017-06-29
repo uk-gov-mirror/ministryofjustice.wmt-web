@@ -23,7 +23,8 @@
       "beforeEach",
       "afterEach",
       "after",
-      "it"
+      "it",
+      "browser"
     ]
   },
   "devDependencies": {
