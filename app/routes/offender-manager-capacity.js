@@ -32,6 +32,7 @@ module.exports = function (router) {
 
     getCapacityTable(req.params.id, capacityDateRange).then((capacityTable) => {
       return res.render('capacity', {
+        title: 'View your caseload capacity',
         capacity: capacityTable
       })
     })
