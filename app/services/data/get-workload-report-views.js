@@ -2,6 +2,7 @@ const config = require('../../../knexfile').web
 const knex = require('knex')(config)
 const CapacityType = require('../../constants/capacity-type')
 
+// TODO: Expand with id
 module.exports = function (type) {
   if (type === undefined ||
       (CapacityType.REGION !== type &&
