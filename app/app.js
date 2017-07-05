@@ -1,11 +1,15 @@
-const bodyParser = require('body-parser')
+const config = require('../config')
 const express = require('express')
 const favicon = require('serve-favicon')
+const bodyParser = require('body-parser')
 const helmet = require('helmet')
+const cookieParser = require('cookie-parser')
+const csurf = require('csurf')
 const nunjucks = require('express-nunjucks')
 const dateFilter = require('nunjucks-date-filter')
 const path = require('path')
 const routes = require('./routes')
+const cookieSession = require('cookie-session')
 
 var app = express()
 
@@ -32,6 +36,19 @@ app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_t
 app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_frontend_toolkit')))
 app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images', 'favicon.ico')))
 
+// Cookie session
+app.set('trust proxy', 1) // trust first proxy
+app.use(cookieSession({
+  name: 'apvs-start-application',
+  keys: [config.APPLICATION_SECRET],
+  maxAge: parseInt(config.SESSION_COOKIE_MAXAGE)
+}))
+// Update a value in the cookie so that the set-cookie will be sent
+app.use(function (req, res, next) {
+  req.session.nowInMinutes = Date.now() / 60e3
+  next()
+})
+
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // Send assetPath to all views.
@@ -44,6 +61,24 @@ app.use(function (req, res, next) {
 app.use(function (req, res, next) {
   // Log response started.
   console.log(req.method, req.path, 'called.')
+  next()
+})
+
+// Use cookie parser middleware (required for csurf)
+app.use(cookieParser(config.APPLICATION_SECRET, { httpOnly: true, secure: config.SECURE_COOKIE === 'true' }))
+
+// Check for valid CSRF tokens on state-changing methods.
+var csrfProtection = csurf({ cookie: { httpOnly: true, secure: config.SECURE_COOKIE === 'true' } })
+
+app.use(function (req, res, next) {
+  csrfProtection(req, res, next)
+})
+
+// Generate CSRF tokens to be sent in POST requests
+app.use(function (req, res, next) {
+  if (req.hasOwnProperty('csrfToken')) {
+    res.locals.csrfToken = req.csrfToken()
+  }
   next()
 })
 

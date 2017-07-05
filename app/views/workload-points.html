@@ -1,0 +1,52 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/validation-error-messages.html" %}
+<h2 class="heading-large">
+    Adjust workload points
+</h2>
+
+<form action="/workload-points"
+      method="post">
+
+ <div class="heading-medium-prevent-margin-collapse">
+          <p class="heading-medium">Address</p>
+          <p>Nominal Target Points</p>
+  </div>
+
+  <div class="form-group">
+    <label id="nominal-target-points-po" class="form-label-bold" for="nominal-target-points-po-input">PO</label>
+    <input id="nominal-target-points-po-input"
+            name="NominalTargetPointsPO"
+            type="text"
+            autocomplete="off"
+            class="form-control"
+            value="{{ workloadPoints['nominalTargetPointsPO'] }}">
+  </div>
+
+    <div class="form-group">
+    <label id="nominal-target-points-spo" class="form-label-bold" for="nominal-target-points-spo-input">PO</label>
+    <input id="nominal-target-points-spo-input"
+            name="NominalTargetPointsSPO"
+            type="text"
+            autocomplete="off"
+            class="form-control"
+            value="{{ workloadPoints['nominalTargetPointsSPO'] }}">
+  </div>
+
+  {% include "partials/csrf-hidden-input.html" %}
+
+  <input id="workload-points-submit"
+          type="submit"
+          class="button"
+          value="Submit">
+</form>
+
+</main>
+{% endblock %}
+
+{% block body_end %}
+{% endblock %}
