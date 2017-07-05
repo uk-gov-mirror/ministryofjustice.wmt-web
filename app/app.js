@@ -2,6 +2,7 @@ const config = require('../config')
 const express = require('express')
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
+const expressSanitized = require('express-sanitized')
 const helmet = require('helmet')
 const cookieParser = require('cookie-parser')
 const csurf = require('csurf')
@@ -50,6 +51,7 @@ app.use(function (req, res, next) {
 })
 
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(expressSanitized())
 
 // Send assetPath to all views.
 app.use(function (req, res, next) {
