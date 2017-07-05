@@ -68,5 +68,45 @@ describe('services/organisational-hierarchy-tree', function () {
         done()
       })
     })
+
+    it('should build a tree with null values for nullable fields', function (done) {
+      var getOrganisationalHierarchyData = sinon.stub()
+      var organisationalHierarchyTree =
+      proxyquire('../../../app/services/organisational-hierarchy-tree', {'./data/get-organisational-hierarchy-data': getOrganisationalHierarchyData})
+
+      getOrganisationalHierarchyData.resolves(dataHelper.ORGANISATIONAL_HIERARCHY_DATA_NULL_VALUES)
+      organisationalHierarchyTree.build().then(function () {
+        expect(organisationalHierarchyTree.get()).to.eql(dataHelper.ORGANISATIONAL_HIERARCHY_TREE_NULL_VALUES)
+        done()
+      })
+    })
+
+    it('should throw an error when the DB call throws an error', function (done) {
+      var getOrganisationalHierarchyData = sinon.stub()
+      var organisationalHierarchyTree =
+      proxyquire('../../../app/services/organisational-hierarchy-tree', {'./data/get-organisational-hierarchy-data': getOrganisationalHierarchyData})
+
+      getOrganisationalHierarchyData.rejects('DB Error')
+      organisationalHierarchyTree.build().then(function () {
+        fail()
+      })
+      .catch(function () {
+        done()
+      })
+    })
+
+    it('should throw an error when the DB call returns undefined', function (done) {
+      var getOrganisationalHierarchyData = sinon.stub()
+      var organisationalHierarchyTree =
+      proxyquire('../../../app/services/organisational-hierarchy-tree', {'./data/get-organisational-hierarchy-data': getOrganisationalHierarchyData})
+
+      getOrganisationalHierarchyData.resolves(undefined)
+      organisationalHierarchyTree.build().then(function () {
+        fail()
+      })
+      .catch(function () {
+        done()
+      })
+    })
   })
 })
