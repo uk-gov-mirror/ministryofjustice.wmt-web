@@ -6,6 +6,7 @@ const nunjucks = require('express-nunjucks')
 const dateFilter = require('nunjucks-date-filter')
 const path = require('path')
 const routes = require('./routes')
+const cookieParser = require('cookie-parser')
 
 var app = express()
 
@@ -33,10 +34,19 @@ app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_f
 app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images', 'favicon.ico')))
 
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 // Send assetPath to all views.
 app.use(function (req, res, next) {
   res.locals.asset_path = '/public/'
+  next()
+})
+
+// Log last path to cookie
+app.use(function (req, res, next) {
+  if (req.path !== '/login') {
+    res.cookie('lastPath', req.path)
+  }
   next()
 })
 
