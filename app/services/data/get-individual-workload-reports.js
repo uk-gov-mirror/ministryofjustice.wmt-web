@@ -2,7 +2,6 @@ const config = require('../../../knexfile').web
 const knex = require('knex')(config)
 
 module.exports = function (id, fromDate, toDate) {
-  console.log(id + ' ' + fromDate + '' + toDate + '')
   return knex('workload_points_calculations')
         .join('workload', 'workload_points_calculations.workload_id', '=', 'workload.id')
         .where('workload_points_calculations.effective_from', '>=', fromDate)

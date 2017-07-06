@@ -11,11 +11,12 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
   var workloadReportsPromise
   organisationLevel === routeType.CAPACITY_OFFENDER_MANAGER
     ? workloadReportsPromise = getIndividualWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString())
-    : workloadReportsPromise = getWorkloadReports(id, capacityDateRange.fromDate, capacityDateRange.toDate, organisationLevel)
+    : workloadReportsPromise = getWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString(), organisationLevel)
 
   // return breadcrumbsPromise.then(function (results) {
   //   // TODO: swap for real method
   //   result.breadcrumbs = results
+
   return workloadReportsPromise.then(function (results) {
     result.capacityTable = tableCreator.createCapacityTable(id, 'TABLE TYPE GOES HERE', capacityDateRange, results)
     result.title = organisationLevel + ' Capacity'
