@@ -6,6 +6,6 @@ module.exports = function (router) {
   })
 
   router.post('/workload-points', function (req, res, next) {
-    return res.redirect(`/`)
+    return res.send(req.body.workloadPoints)
   })
 }

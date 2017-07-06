@@ -40,7 +40,7 @@ app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images'
 // Cookie session
 app.set('trust proxy', 1) // trust first proxy
 app.use(cookieSession({
-  name: 'apvs-start-application',
+  name: 'wmt-start-application',
   keys: [config.APPLICATION_SECRET],
   maxAge: parseInt(config.SESSION_COOKIE_MAXAGE)
 }))
@@ -50,6 +50,7 @@ app.use(function (req, res, next) {
   next()
 })
 
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(expressSanitized())
 
