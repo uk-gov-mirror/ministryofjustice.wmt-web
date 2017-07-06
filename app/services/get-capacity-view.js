@@ -1,15 +1,15 @@
 // TODO: Swap in real breadcrumbs method
-const getBreadcrumbs = require('')
-const getIndividualWorkloadReports = require('../services/data/get-workload-report-views')
+const getBreadcrumbs = require('../services/data/breadcrumbs/get-breadcrumbs-for-ldu')
+const getIndividualWorkloadReports = require('../services/data/get-individual-workload-reports')
 const getWorkloadReports = require('../services/data/get-workload-report-views')
-const capacityType = require('../services/constants/capacity-type')
+const routeType = require('../services/constants/paths')
 const tableCreator = require('../services/helpers/table-creator')
 
 module.exports = function (id, capacityDateRange, organisationLevel) {
   var breadcrumbsPromise = getBreadcrumbs(id)
   var result
   var workloadReportsPromise
-  organisationLevel === capacityType.WORKLOAD_OWNER
+  organisationLevel === routeType.CAPACITY_OFFENDER_MANAGER
     ? workloadReportsPromise = getIndividualWorkloadReports(id, capacityDateRange.fromDate, capacityDateRange.toDate)
     : workloadReportsPromise = getWorkloadReports(id, capacityDateRange.fromDate, capacityDateRange.toDate, organisationLevel)
 

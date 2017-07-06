@@ -1,5 +1,5 @@
-const dateFormatter = require('../services/date-formatter')
-const CapacityDateRange = require('../services/domain/capacity-date-range')
+const dateFormatter = require('../date-formatter')
+const CapacityDateRange = require('../domain/capacity-date-range')
 
 module.exports.createCapacityDateRange = function (dateParameters) {
   var capacityDateRange

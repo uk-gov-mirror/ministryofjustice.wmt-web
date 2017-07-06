@@ -1,5 +1,5 @@
-const DisplayTable = require('./domain/display-table')
-const capacityCalculator = require('./helpers/capacity-calculator')
+const DisplayTable = require('../domain/display-table')
+const capacityCalculator = require('../helpers/capacity-calculator')
 
 module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, workloadReports) {
   var headings = []

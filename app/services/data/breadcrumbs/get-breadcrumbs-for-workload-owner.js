@@ -2,7 +2,7 @@ const config = require('../../../knexfile').web
 const knex = require('knex')(config)
 
 module.exports = function (workloadOwnerId) {
-    return knex('workload_owner')
+  return knex('workload_owner')
         .first('team_id',
                 'team.description as team_name',
                 'ldu_id',
@@ -14,10 +14,10 @@ module.exports = function (workloadOwnerId) {
         .join('region', 'ldu.region_id', '=', 'region.id')
         .where('workload_owner.id', workloadOwnerId)
         .then((result) => {
-            return {
-                region: {id: result.region_id, name: result.region_name},
-                ldu: {id: result.ldu_id, name: result.ldu_name},
-                team: {id: result.team_id, name: result.team_name},
-            }
+          return {
+            region: {id: result.region_id, name: result.region_name},
+            ldu: {id: result.ldu_id, name: result.ldu_name},
+            team: {id: result.team_id, name: result.team_name}
+          }
         })
 }

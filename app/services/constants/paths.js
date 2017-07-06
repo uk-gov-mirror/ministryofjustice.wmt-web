@@ -1,5 +1,6 @@
 module.exports = {
-  CAPACITY_REGION: '/caseload-capacity/region/',
-  CAPACITY_LDU: '/caseload-capacity/ldu/',
-  CAPACITY_TEAM: '/caseload-capacity/team/'
+  CAPACITY_REGION: 'region',
+  CAPACITY_LDU: 'ldu',
+  CAPACITY_TEAM: 'team',
+  CAPACITY_OFFENDER_MANAGER: 'offenderManager'
 }
