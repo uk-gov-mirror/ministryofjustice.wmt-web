@@ -2,7 +2,7 @@ module.exports = {
   // Session and Cookie security (defaults for development)
   APPLICATION_SECRET: process.env.WMT_WEB_APPLICATION_SECRET, // NO DEFAULT FOR SECURITY REASONS, WILL FAIL IF NOT SET
   SECURE_COOKIE: process.env.WMT_WEB_SECURE_COOKIE || 'false',
-  SESSION_COOKIE_MAXAGE: process.env.WMT_WEB_SESSION_COOKIE_MAXAGE || '1200000', // 20 min default
+  SESSION_COOKIE_MAXAGE: process.env.WMT_WEB_SESSION_COOKIE_MAXAGE || '3600000', // 60 min default
 
   // DB
   DATABASE_SERVER: process.env.WMT_DB_SERVER || 'localhost',
