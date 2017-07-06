@@ -1,5 +1,5 @@
 
-module.exports = function (workloadReports) {
+module.exports.calculate = function (workloadReports) {
   var capacities = []
   workloadReports.forEach(function (report) {
     var allPoints = report.total_points + report.sdr_points +

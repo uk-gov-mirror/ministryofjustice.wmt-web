@@ -32,7 +32,8 @@ module.exports = function (id, fromDate, toDate, type) {
             'app.' + table + '.sdr_conversion_points',
             'app.' + table + '.paroms_points',
             'app.' + table + '.available_points',
-            'app.' + table + '.effective_from')
+            'app.' + table + '.effective_from',
+            'app.' + table + '.reduction_hours')
     .then(function (results) {
       return results
     })

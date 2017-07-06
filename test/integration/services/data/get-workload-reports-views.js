@@ -22,7 +22,7 @@ describe('services/data/get-capacity-for-individual', function () {
     .then(function (results) {
       expect(results.length).to.equal(1)
       var expectedResults = [
-        {effective_from: START_DATE, total_points: 140, sdr_points: 50, sdr_conversion_points: 50, paroms_points: 50, available_points: 145}
+        {effective_from: START_DATE, total_points: 140, sdr_points: 50, sdr_conversion_points: 50, paroms_points: 50, available_points: 145, reduction_hours: 12}
       ]
       expect(results).to.eql(expectedResults)
       done()
@@ -34,7 +34,7 @@ describe('services/data/get-capacity-for-individual', function () {
     .then(function (results) {
       expect(results.length).to.equal(1)
       var expectedResults = [
-        {effective_from: START_DATE, total_points: 140, sdr_points: 50, sdr_conversion_points: 50, paroms_points: 50, available_points: 145}
+        {effective_from: START_DATE, total_points: 140, sdr_points: 50, sdr_conversion_points: 50, paroms_points: 50, available_points: 145, reduction_hours: 12}
       ]
       expect(results).to.eql(expectedResults)
       done()
@@ -46,7 +46,7 @@ describe('services/data/get-capacity-for-individual', function () {
     .then(function (results) {
       expect(results.length).to.equal(1)
       var expectedResults = [
-        {effective_from: START_DATE, total_points: 140, sdr_points: 50, sdr_conversion_points: 50, paroms_points: 50, available_points: 145}
+        {effective_from: START_DATE, total_points: 140, sdr_points: 50, sdr_conversion_points: 50, paroms_points: 50, available_points: 145, reduction_hours: 12}
       ]
       expect(results).to.eql(expectedResults)
       done()
