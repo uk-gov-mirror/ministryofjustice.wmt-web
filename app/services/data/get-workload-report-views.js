@@ -26,7 +26,6 @@ module.exports = function (id, fromDate, toDate, type) {
   return knex('app.' + table)
     .where('app.' + table + '.id', id)
     .where('app.' + table + '.effective_from', '>=', fromDate)
-    .where('app.' + table + '.effective_from', '<=', toDate)
     .select('app.' + table + '.total_points',
             'app.' + table + '.sdr_points',
             'app.' + table + '.sdr_conversion_points',
