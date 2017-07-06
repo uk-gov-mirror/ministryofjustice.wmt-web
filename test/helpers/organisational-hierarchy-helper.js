@@ -11,14 +11,14 @@ var baseRow = {
 }
 
 var baseTree = {
-  N1: { name: 'NPS', parent: undefined, children: ['R1'] },
-  R1: { name: 'Region 1', parent: 'N1', children: ['L1'] },
+  N: { name: 'NPS', parent: undefined, children: ['R1'] },
+  R1: { name: 'Region 1', parent: 'N', children: ['L1'] },
   L1: { name: 'LDU 1', parent: 'R1', children: ['T1'] },
   T1: { name: 'Team 1', parent: 'L1', children: ['I1'] },
   I1: { name: 'John Doe', parent: 'T1', children: [] }
 }
 
-module.exports.ROOT_REF = 'N1'
+module.exports.ROOT_REF = 'N'
 
 module.exports.ROOT_NODE = {
   name: 'NPS',
@@ -58,8 +58,8 @@ module.exports.ORGANISATIONAL_HIERARCHY_DATA_MULTIPLE_BRANCHES = [
 ]
 
 module.exports.ORGANISATIONAL_HIERARCHY_TREE_MULTIPLE_BRANCHES = {
-  N1: { parent: undefined, name: 'NPS', children: ['R1', 'R2'] },
-  R1: { parent: 'N1', name: 'Region 1', children: ['L1', 'L2'] },
+  N: { parent: undefined, name: 'NPS', children: ['R1', 'R2'] },
+  R1: { parent: 'N', name: 'Region 1', children: ['L1', 'L2'] },
   L1: { parent: 'R1', name: 'LDU 1', children: ['T1', 'T2'] },
   T1: { parent: 'L1', name: 'Team 1', children: ['I1', 'I2'] },
   I1: { parent: 'T1', name: 'John Doe', children: [] },
@@ -69,7 +69,7 @@ module.exports.ORGANISATIONAL_HIERARCHY_TREE_MULTIPLE_BRANCHES = {
   L2: { parent: 'R1', name: 'LDU 2', children: ['T3'] },
   T3: { parent: 'L2', name: 'Team 3', children: ['I4'] },
   I4: { parent: 'T3', name: 'John Jones', children: [] },
-  R2: { parent: 'N1', name: 'Region 2', children: ['L3'] },
+  R2: { parent: 'N', name: 'Region 2', children: ['L3'] },
   L3: { parent: 'R2', name: 'LDU 3', children: ['T4'] },
   T4: { parent: 'L3', name: 'Team 4', children: ['I5', 'I6'] },
   I5: { parent: 'T4', name: 'James Jones', children: [] },
@@ -84,9 +84,9 @@ module.exports.ORGANISATIONAL_HIERARCHY_DATA_NULL_VALUES = [
 ]
 
 module.exports.ORGANISATIONAL_HIERARCHY_TREE_NULL_VALUES = Object.assign({}, baseTree, {
-  N1: { name: 'NPS', parent: undefined, children: ['R1', 'R2'] },
+  N: { name: 'NPS', parent: undefined, children: ['R1', 'R2'] },
   T1: { name: 'Team 1', parent: 'L1', children: ['I1', 'I3', 'I4'] },
-  R2: { name: undefined, parent: 'N1', children: ['L2'] },
+  R2: { name: undefined, parent: 'N', children: ['L2'] },
   L2: { name: undefined, parent: 'R2', children: ['T2'] },
   T2: { name: undefined, parent: 'L2', children: ['I2'] },
   I2: { name: undefined, parent: 'T2', children: [] },
