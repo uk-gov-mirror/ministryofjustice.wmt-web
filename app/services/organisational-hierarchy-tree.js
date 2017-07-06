@@ -1,5 +1,5 @@
 const getOrganisationalHierarchyData = require('./data/get-organisational-hierarchy-data')
-const ROOT_REF = 'N1'
+const ROOT_REF = 'N'
 
 var tree
 
