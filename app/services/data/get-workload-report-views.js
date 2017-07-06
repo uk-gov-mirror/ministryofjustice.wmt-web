@@ -1,24 +1,24 @@
 const config = require('../../../knexfile').web
 const knex = require('knex')(config)
-const routeType = require('../constants/paths')
+const organisationUnit = require('../../constants/organisation-unit')
 const CapacityType = require('../constants/capacity-type')
 
 module.exports = function (id, fromDate, toDate, type) {
   if (type === undefined ||
-      (routeType.CAPACITY_LDU !== type &&
-      routeType.CAPACITY_REGION !== type &&
-      routeType.CAPACITY_TEAM !== type)) {
+      (organisationUnit.LDU.name !== type &&
+      organisationUnit.REGION.name !== type &&
+      organisationUnit.TEAM.name !== type)) {
     throw new Error(type + ' should be REGION, TEAM or LDU')
   }
   var table = ''
   switch (type) {
-    case routeType.CAPACITY_LDU:
+    case organisationUnit.LDU.name:
       table = CapacityType.LDU
       break
-    case routeType.CAPACITY_REGION:
+    case organisationUnit.REGION.name:
       table = CapacityType.REGION
       break
-    case routeType.CAPACITY_TEAM:
+    case organisationUnit.TEAM.name:
       table = CapacityType.TEAM
       break
   }

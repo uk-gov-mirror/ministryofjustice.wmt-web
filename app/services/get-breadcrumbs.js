@@ -23,7 +23,7 @@ var getReference = function (id, organisationLevel) {
   var reference
   var organisationKey = Object.keys(orgUnit).find(key => orgUnit[key].name === organisationLevel)
   if (organisationKey === undefined) {
-    throw new Error('Organisation level' + organisationLevel + ' does not exist')
+    throw new Error('Organisation level ' + organisationLevel + ' does not exist')
   }
 
   switch (organisationKey) {
