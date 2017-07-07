@@ -8,7 +8,10 @@
 
 {% include "includes/validation-error-messages.html" %}
 <h2 class="heading-large">
-    {{ title }}
+    <span class="heading-secondary">
+        {{ subTitle | title }}
+    </span>
+    {{ title | title }}
 </h2>
 
 <table class="non-javascript">
