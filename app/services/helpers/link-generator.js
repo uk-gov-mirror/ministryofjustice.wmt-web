@@ -1,4 +1,4 @@
-const orgUnit = require('../../constants/organisation-unit')
+const orgUnitFinder = require('./org-unit-finder')
 
 module.exports = function (reference) {
   var referenceRegex = /^[A-Z]{1}[0-9]*$/
@@ -13,9 +13,9 @@ module.exports = function (reference) {
 
   var organisationRef = reference.substring(0, 1)
   var organisationId = reference.substring(1)
-  var organisationKey = Object.keys(orgUnit).find(key => orgUnit[key].ref === organisationRef)
+  var organisationUnit = orgUnitFinder('ref', organisationRef)
 
-  if (organisationKey === undefined) {
+  if (organisationUnit === undefined) {
     throw new Error('Organisation ref ' + organisationRef + ' is not valid')
   }
 
@@ -23,10 +23,10 @@ module.exports = function (reference) {
 
   switch (organisationRef) {
     case 'N':
-      link = '/' + orgUnit[organisationKey].name
+      link = '/' + organisationUnit.name
       break
     default:
-      link = '/' + orgUnit[organisationKey].name + '/' + organisationId
+      link = '/' + organisationUnit.name + '/' + organisationId
   }
 
   return link

@@ -1,27 +1,13 @@
 const config = require('../../../knexfile').web
 const knex = require('knex')(config)
-const routeType = require('../constants/paths')
-const CapacityType = require('../constants/capacity-type')
+const orgUnitFinder = require('../helpers/org-unit-finder')
 
 module.exports = function (id, fromDate, toDate, type) {
-  if (type === undefined ||
-      (routeType.CAPACITY_LDU !== type &&
-      routeType.CAPACITY_REGION !== type &&
-      routeType.CAPACITY_TEAM !== type)) {
+  var orgUnit = orgUnitFinder('name', type)
+  if (orgUnit === undefined) {
     throw new Error(type + ' should be REGION, TEAM or LDU')
   }
-  var table = ''
-  switch (type) {
-    case routeType.CAPACITY_LDU:
-      table = CapacityType.LDU
-      break
-    case routeType.CAPACITY_REGION:
-      table = CapacityType.REGION
-      break
-    case routeType.CAPACITY_TEAM:
-      table = CapacityType.TEAM
-      break
-  }
+  var table = orgUnit.capacityView
 
   return knex('app.' + table)
     .where('app.' + table + '.id', id)

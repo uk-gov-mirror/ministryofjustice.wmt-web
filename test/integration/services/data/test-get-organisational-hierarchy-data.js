@@ -16,7 +16,6 @@ describe('services/data/get-organisational-hierarchy-data', function () {
 
   it('should retrieve the organisational hierarchy', function (done) {
     getOrgansationalHierarchyData().then(function (results) {
-      console.log(results)
       var expectedResults = {
         region_id: inserts[inserts.findIndex(element => element.table === 'region')].id,
         region_description: 'OH Region',

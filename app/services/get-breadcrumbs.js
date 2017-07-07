@@ -1,7 +1,7 @@
 const linkGenerator = require('./helpers/link-generator')
 const organisationalHierarchyTree = require('./organisational-hierarchy-tree')
 const Breadcrumb = require('./domain/breadcrumb')
-const orgUnit = require('../constants/organisation-unit')
+const orgUnitFinder = require('../services/helpers/org-unit-finder')
 
 module.exports = function (id, organisationLevel) {
   if (organisationLevel === undefined) {
@@ -21,21 +21,21 @@ module.exports = function (id, organisationLevel) {
 
 var getReference = function (id, organisationLevel) {
   var reference
-  var organisationKey = Object.keys(orgUnit).find(key => orgUnit[key].name === organisationLevel)
-  if (organisationKey === undefined) {
-    throw new Error('Organisation level' + organisationLevel + ' does not exist')
+  var organisationUnit = orgUnitFinder('name', organisationLevel)
+  if (organisationUnit === undefined) {
+    throw new Error('Organisation level ' + organisationLevel + ' does not exist')
   }
 
-  switch (organisationKey) {
-    case 'NATIONAL':
-      reference = orgUnit[organisationKey].ref
+  switch (organisationUnit.ref) {
+    case 'N':
+      reference = organisationUnit.ref
       break
     default:
       var idRegex = /^[0-9]+$/
       if (!idRegex.test(id) || id === undefined) {
         throw new Error('ID ' + reference + ' is not valid')
       }
-      reference = orgUnit[organisationKey].ref + id
+      reference = organisationUnit.ref + id
   }
   return reference
 }
