@@ -16,8 +16,9 @@
 
 <table class="non-javascript">
     <tr>
+        <th></th>
     {% for heading in capacity.headings %}
-        <th scope="col">{{ heading }}</th>
+        <th scope="col">{{ heading | date("MMM DD, YYYY")}}</th>
     {% endfor %}
     </tr>
     <tr>

@@ -3,6 +3,7 @@ const express = require('express')
 const favicon = require('serve-favicon')
 const helmet = require('helmet')
 const nunjucks = require('express-nunjucks')
+const dateFilter = require('nunjucks-date-filter')
 const path = require('path')
 const routes = require('./routes')
 
@@ -16,9 +17,14 @@ var developmentMode = app.get('env') === 'development'
 app.set('view engine', 'html')
 app.set('views', path.join(__dirname, 'views'))
 
-nunjucks(app, {
+var nunjucksObj = nunjucks(app, {
   watch: developmentMode,
   noCache: developmentMode
+})
+
+nunjucksObj.env.addFilter('date', dateFilter)
+nunjucksObj.env.addFilter('isObject', function (obj) {
+  return typeof obj === 'object'
 })
 
 app.use('/public', express.static(path.join(__dirname, 'public')))
