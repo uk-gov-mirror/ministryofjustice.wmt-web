@@ -12,6 +12,7 @@ module.exports = function (router) {
     return capacityViewPromise.then(function (result) {
       return res.render('capacity', {
         title: result.title,
+        subTitle: result.subTitle,
         breadcrumbs: result.breadcrumbs,
         capacity: result.capacityTable
       })
