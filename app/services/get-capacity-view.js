@@ -11,7 +11,7 @@ const getOrganisationalHierarchyTree = require('./organisational-hierarchy-tree'
 module.exports = function (id, capacityDateRange, organisationLevel) {
   // TODO Move building of OH tree out
   return getOrganisationalHierarchyTree.build().then(function () {
-    var tableType = getOrganisationUnit('displayText', organisationLevel)
+    var tableType = getOrganisationUnit('name', organisationLevel)
     var breadcrumbs = getBreadcrumbs(id, organisationLevel)
     var result = {}
     var workloadReportsPromise
@@ -23,8 +23,8 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
 
     return workloadReportsPromise.then(function (results) {
       result.capacityTable = tableCreator.createCapacityTable(id, tableType, capacityDateRange, results)
-      result.title = tableType + ' Capacity'
-      result.subTitle = breadcrumbs[breadcrumbs.length - 1].name
+      result.title = tableType.displayText + ' Capacity'
+      result.subTitle = breadcrumbs[0].title
       return result
     })
   })
