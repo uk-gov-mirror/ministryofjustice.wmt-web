@@ -1,4 +1,5 @@
 const expect = require('chai').expect
+const assert = require('chai').assert
 const sinon = require('sinon')
 require('sinon-bluebird')
 const proxyquire = require('proxyquire')
@@ -88,7 +89,7 @@ describe('services/organisational-hierarchy-tree', function () {
 
       getOrganisationalHierarchyData.rejects('DB Error')
       organisationalHierarchyTree.build().then(function () {
-        fail()
+        assert.fail()
       })
       .catch(function () {
         done()
@@ -102,7 +103,7 @@ describe('services/organisational-hierarchy-tree', function () {
 
       getOrganisationalHierarchyData.resolves(undefined)
       organisationalHierarchyTree.build().then(function () {
-        fail()
+        assert.fail()
       })
       .catch(function () {
         done()

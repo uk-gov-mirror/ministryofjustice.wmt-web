@@ -1,9 +1,9 @@
 var baseRow = {
-  region_desc: 'Region 1',
+  region_description: 'Region 1',
   region_id: 1,
-  ldu_desc: 'LDU 1',
+  ldu_description: 'LDU 1',
   ldu_id: 1,
-  team_desc: 'Team 1',
+  team_description: 'Team 1',
   team_id: 1,
   offender_manager_forename: 'John',
   offender_manager_surname: 'Doe',
@@ -41,7 +41,7 @@ module.exports.ORGANISATIONAL_HIERARCHY_DATA_MULTIPLE_INDIVIDUALS = [
 ]
 
 module.exports.ORGANISATIONAL_HIERARCHY_TREE_MULTIPLE_INDIVIDUALS = Object.assign({}, baseTree, {
-  T1: { parent: 'L1', name: 'Team 1', children: ['I1', 'I2', 'I3', 'I4', 'I5' ] },
+  T1: { parent: 'L1', name: 'Team 1', children: [ 'I1', 'I2', 'I3', 'I4', 'I5' ] },
   I2: { parent: 'T1', name: 'Jane Smith', children: [] },
   I3: { parent: 'T1', name: 'Mike Smith', children: [] },
   I4: { parent: 'T1', name: 'John Jones', children: [] },
@@ -51,10 +51,10 @@ module.exports.ORGANISATIONAL_HIERARCHY_TREE_MULTIPLE_INDIVIDUALS = Object.assig
 module.exports.ORGANISATIONAL_HIERARCHY_DATA_MULTIPLE_BRANCHES = [
   baseRow,
   Object.assign({}, baseRow, {offender_manager_forename: 'Jane', offender_manager_surname: 'Smith', offender_manager_id: 2}),
-  Object.assign({}, baseRow, {team_desc: 'Team 2', team_id: 2, offender_manager_forename: 'Mike', offender_manager_surname: 'Jones', offender_manager_id: 3}),
-  Object.assign({}, baseRow, {ldu_desc: 'LDU 2', ldu_id: 2, team_desc: 'Team 3', team_id: 3, offender_manager_forename: 'John', offender_manager_surname: 'Jones', offender_manager_id: 4}),
-  Object.assign({}, baseRow, {region_desc: 'Region 2', region_id: 2, ldu_desc: 'LDU 3', ldu_id: 3, team_desc: 'Team 4', team_id: 4, offender_manager_forename: 'James', offender_manager_surname: 'Jones', offender_manager_id: 5}),
-  Object.assign({}, baseRow, {region_desc: 'Region 2', region_id: 2, ldu_desc: 'LDU 3', ldu_id: 3, team_desc: 'Team 4', team_id: 4, offender_manager_forename: 'Tim', offender_manager_surname: 'Jones', offender_manager_id: 6})
+  Object.assign({}, baseRow, {team_description: 'Team 2', team_id: 2, offender_manager_forename: 'Mike', offender_manager_surname: 'Jones', offender_manager_id: 3}),
+  Object.assign({}, baseRow, {ldu_description: 'LDU 2', ldu_id: 2, team_description: 'Team 3', team_id: 3, offender_manager_forename: 'John', offender_manager_surname: 'Jones', offender_manager_id: 4}),
+  Object.assign({}, baseRow, {region_description: 'Region 2', region_id: 2, ldu_description: 'LDU 3', ldu_id: 3, team_description: 'Team 4', team_id: 4, offender_manager_forename: 'James', offender_manager_surname: 'Jones', offender_manager_id: 5}),
+  Object.assign({}, baseRow, {region_description: 'Region 2', region_id: 2, ldu_description: 'LDU 3', ldu_id: 3, team_description: 'Team 4', team_id: 4, offender_manager_forename: 'Tim', offender_manager_surname: 'Jones', offender_manager_id: 6})
 ]
 
 module.exports.ORGANISATIONAL_HIERARCHY_TREE_MULTIPLE_BRANCHES = {
@@ -78,7 +78,7 @@ module.exports.ORGANISATIONAL_HIERARCHY_TREE_MULTIPLE_BRANCHES = {
 
 module.exports.ORGANISATIONAL_HIERARCHY_DATA_NULL_VALUES = [
   baseRow,
-  Object.assign({}, baseRow, {region_id: 2, region_desc: undefined, ldu_id: 2, ldu_desc: undefined, team_id: 2, team_desc: undefined, offender_manager_id: 2, offender_manager_forename: undefined, offender_manager_surname: undefined}),
+  Object.assign({}, baseRow, {region_id: 2, region_description: undefined, ldu_id: 2, ldu_description: undefined, team_id: 2, team_description: undefined, offender_manager_id: 2, offender_manager_forename: undefined, offender_manager_surname: undefined}),
   Object.assign({}, baseRow, {offender_manager_id: 3, offender_manager_forename: undefined, offender_manager_surname: 'Lee'}),
   Object.assign({}, baseRow, {offender_manager_id: 4, offender_manager_forename: 'Kim', offender_manager_surname: undefined})
 ]
