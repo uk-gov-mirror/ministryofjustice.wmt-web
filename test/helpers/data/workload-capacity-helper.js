@@ -44,12 +44,16 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
         sdr_due_next_30_days: 0,
         sdr_conversions_last_30_days: 0,
         paroms_completed_last_30_days: 0,
-        paroms_due_next_30_days: 0
+        paroms_due_next_30_days: 0,
+        license_last_16_weeks: 9,
+        community_last_16_weeks: 10
       })
     })
     .then(function (ids) {
       inserts.push({table: 'workload', id: ids[0]})
-      return knex('workload_report').returning('id').insert({})
+      return knex('workload_report').returning('id').insert({
+        effective_from: new Date(2010, 0, 1)
+      })
     })
     .then(function (ids) {
       inserts.push({table: 'workload_report', id: ids[0]})

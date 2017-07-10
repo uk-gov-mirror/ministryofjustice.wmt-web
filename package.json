@@ -51,6 +51,7 @@
     "gulp-webdriver": "^2.0.3",
     "helmet": "^3.6.0",
     "knex": "0.12.x",
+    "lodash": "^4.17.4",
     "mocha": "3.2.x",
     "moment": "^2.18.1",
     "mssql": "3.3.0",

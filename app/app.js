@@ -11,6 +11,7 @@ const dateFilter = require('nunjucks-date-filter')
 const path = require('path')
 const routes = require('./routes')
 const cookieSession = require('cookie-session')
+const getOrganisationalHierarchyTree = require('./services/organisational-hierarchy-tree')
 
 var app = express()
 
@@ -116,5 +117,8 @@ app.use(function (err, req, res, next) {
     })
   }
 })
+
+// Build the organisational hierarchy tree from DB
+getOrganisationalHierarchyTree.build()
 
 module.exports = app
