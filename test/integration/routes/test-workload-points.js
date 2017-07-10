@@ -47,7 +47,9 @@ describe(`${WORKLOAD_POINTS_URI}`, function () {
             return err
           }
           agent.post(WORKLOAD_POINTS_URI)
-                .send({})
+                .send({
+                  _csrf: 'invalidToken'
+                })
                 .expect(403)
                 .end(done)
         })

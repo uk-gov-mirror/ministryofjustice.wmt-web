@@ -71,11 +71,7 @@ app.use(function (req, res, next) {
 app.use(cookieParser(config.APPLICATION_SECRET, { httpOnly: true, secure: config.SECURE_COOKIE === 'true' }))
 
 // Check for valid CSRF tokens on state-changing methods.
-var csrfProtection = csurf({ cookie: { httpOnly: true, secure: config.SECURE_COOKIE === 'true' } })
-
-app.use(function (req, res, next) {
-  csrfProtection(req, res, next)
-})
+app.use(csurf({ cookie: { httpOnly: true, secure: config.SECURE_COOKIE === 'true' } }))
 
 // Generate CSRF tokens to be sent in POST requests
 app.use(function (req, res, next) {
