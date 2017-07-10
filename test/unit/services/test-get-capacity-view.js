@@ -139,7 +139,7 @@ const CAPACITY_RESULTS = [
 describe('services/get-capacity-view', function () {
   it('should return a result object with a table, title and breadcrumbs object for ldu', function () {
     var getCapacityStub = sinon.stub()
-    var getBreadcrumbs = sinon.stub()
+    var getBreadcrumbs = sinon.stub().returns(breadcrumbHelper.LDU_BREADCRUMBS)
     var capacityDateRange = new CapacityDateRange(1, 1, 2017, 31, 3, 2017)
     var getCapacityView =
       proxyquire('../../../app/services/get-capacity-view',
@@ -147,17 +147,16 @@ describe('services/get-capacity-view', function () {
           '../services/data/get-workload-report-views': getCapacityStub,
           '../services/get-breadcrumbs': getBreadcrumbs})
     getCapacityStub.resolves(CAPACITY_RESULTS)
-    getBreadcrumbs.resolves(breadcrumbHelper.LDU_BREADCRUMBS)
 
     getCapacityView(5, capacityDateRange, 'ldu').then((result) => {
       expect(result.capacityTable).to.be.an('object')
-      expect(result.title).to.equal('ldu Capacity')
-      expect(result.breadcrumbs).to.be.an('object')
+      expect(result.title).to.equal('LDU Capacity')
+      expect(result.breadcrumbs).to.be.an('Array')
     })
   })
   it('should return a result object with a table, title and breadcrumbs object for team', function () {
     var getCapacityStub = sinon.stub()
-    var getBreadcrumbs = sinon.stub()
+    var getBreadcrumbs = sinon.stub().returns(breadcrumbHelper.TEAM_BREADCRUMBS)
     var capacityDateRange = new CapacityDateRange(1, 1, 2017, 31, 3, 2017)
     var getCapacityView =
       proxyquire('../../../app/services/get-capacity-view',
@@ -165,17 +164,16 @@ describe('services/get-capacity-view', function () {
           '../services/data/get-workload-report-views': getCapacityStub,
           '../services/get-breadcrumbs': getBreadcrumbs})
     getCapacityStub.resolves(CAPACITY_RESULTS)
-    getBreadcrumbs.resolves(breadcrumbHelper.TEAM_BREADCRUMBS)
 
     getCapacityView(5, capacityDateRange, 'team').then((result) => {
       expect(result.capacityTable).to.be.an('object')
-      expect(result.title).to.equal('team Capacity')
-      expect(result.breadcrumbs).to.be.an('object')
+      expect(result.title).to.equal('Team Capacity')
+      expect(result.breadcrumbs).to.be.an('Array')
     })
   })
   it('should return a result object with a table, title and breadcrumbs object for region', function () {
     var getCapacityStub = sinon.stub()
-    var getBreadcrumbs = sinon.stub()
+    var getBreadcrumbs = sinon.stub().returns(breadcrumbHelper.REGION_BREADCRUMBS)
     var capacityDateRange = new CapacityDateRange(1, 1, 2017, 31, 3, 2017)
     var getCapacityView =
       proxyquire('../../../app/services/get-capacity-view',
@@ -183,17 +181,16 @@ describe('services/get-capacity-view', function () {
           '../services/data/get-workload-report-views': getCapacityStub,
           '../services/get-breadcrumbs': getBreadcrumbs})
     getCapacityStub.resolves(CAPACITY_RESULTS)
-    getBreadcrumbs.resolves(breadcrumbHelper.REGION_BREADCRUMBS)
 
     getCapacityView(5, capacityDateRange, 'region').then((result) => {
       expect(result.capacityTable).to.be.an('object')
-      expect(result.title).to.equal('region Capacity')
-      expect(result.breadcrumbs).to.be.an('object')
+      expect(result.title).to.equal('Region Capacity')
+      expect(result.breadcrumbs).to.be.an('Array')
     })
   })
   it('should return a result object with a table, title and breadcrumbs object for offender manager', function () {
     var getCapacityStub = sinon.stub()
-    var getBreadcrumbs = sinon.stub()
+    var getBreadcrumbs = sinon.stub().returns(breadcrumbHelper.OFFENDER_MANAGER_BREADCRUMBS)
     var capacityDateRange = new CapacityDateRange(1, 1, 2017, 31, 3, 2017)
     var getCapacityView =
       proxyquire('../../../app/services/get-capacity-view',
@@ -201,12 +198,11 @@ describe('services/get-capacity-view', function () {
           '../services/data/get-workload-report-views': getCapacityStub,
           '../services/get-breadcrumbs': getBreadcrumbs})
     getCapacityStub.resolves(CAPACITY_RESULTS)
-    getBreadcrumbs.resolves(breadcrumbHelper.OFFENDER_MANAGER_BREADCRUMBS)
 
-    getCapacityView(5, capacityDateRange, 'offenderManager').then((result) => {
+    getCapacityView(5, capacityDateRange, 'offendermanager').then((result) => {
       expect(result.capacityTable).to.be.an('object')
-      expect(result.title).to.equal('offenderManager Capacity')
-      expect(result.breadcrumbs).to.be.an('object')
+      expect(result.title).to.equal('Offender Manager Capacity')
+      expect(result.breadcrumbs).to.be.an('Array')
     })
   })
 })
