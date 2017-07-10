@@ -9,16 +9,17 @@ module.exports = function (id, fromDate, toDate, type) {
   }
   var table = orgUnit.capacityView
 
-  return knex('app.' + table)
-    .where('app.' + table + '.id', id)
-    .where('app.' + table + '.effective_from', '>=', fromDate)
-    .select('app.' + table + '.total_points',
-            'app.' + table + '.sdr_points',
-            'app.' + table + '.sdr_conversion_points',
-            'app.' + table + '.paroms_points',
-            'app.' + table + '.available_points',
-            'app.' + table + '.effective_from',
-            'app.' + table + '.reduction_hours')
+  return knex(table)
+    .where(table + '.id', id)
+    .where(table + '.effective_from', '>=', fromDate)
+    .where(table + '.effective_from', '<=', toDate)
+    .select(table + '.total_points',
+            table + '.sdr_points',
+            table + '.sdr_conversion_points',
+            table + '.paroms_points',
+            table + '.available_points',
+            table + '.effective_from',
+            table + '.reduction_hours')
     .then(function (results) {
       return results
     })

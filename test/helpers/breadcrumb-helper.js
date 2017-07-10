@@ -1,6 +1,6 @@
 const Breadcrumb = require('../../app/services/domain/breadcrumb')
 
-var offenderManagerBreadcrumb = new Breadcrumb('John Doe', '/offendermanager/1')
+var offenderManagerBreadcrumb = new Breadcrumb('John Doe', '/offender-manager/1')
 var teamBreadcrumb = new Breadcrumb('Team 1', '/team/1')
 var lduBreadcrumb = new Breadcrumb('LDU 1', '/ldu/1')
 var regionBreadcrumb = new Breadcrumb('Region 1', '/region/1')

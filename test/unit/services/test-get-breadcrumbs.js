@@ -12,8 +12,8 @@ describe('services/get-breadcrumbs', function () {
     }
     var getBreadcrumbs = proxyquire('../../../app/services/get-breadcrumbs', {'./organisational-hierarchy-tree': getTree})
 
-    expect(getBreadcrumbs(1, 'offendermanager').length).to.eql(5)
-    expect(getBreadcrumbs(1, 'offendermanager')).to.eql(breadcrumbDataHelper.OFFENDER_MANAGER_BREADCRUMBS)
+    expect(getBreadcrumbs(1, 'offender-manager').length).to.eql(5)
+    expect(getBreadcrumbs(1, 'offender-manager')).to.eql(breadcrumbDataHelper.OFFENDER_MANAGER_BREADCRUMBS)
   })
 
   it('should return the correct breadcrumbs for teams', function () {

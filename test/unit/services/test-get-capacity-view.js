@@ -199,7 +199,7 @@ describe('services/get-capacity-view', function () {
           '../services/get-breadcrumbs': getBreadcrumbs})
     getCapacityStub.resolves(CAPACITY_RESULTS)
 
-    getCapacityView(5, capacityDateRange, 'offendermanager').then((result) => {
+    getCapacityView(5, capacityDateRange, 'offender-manager').then((result) => {
       expect(result.capacityTable).to.be.an('object')
       expect(result.title).to.equal('Offender Manager Capacity')
       expect(result.breadcrumbs).to.be.an('Array')
