@@ -3,7 +3,7 @@ const expect = require('chai').expect
 const workloadCapactiyHelper = require('../../../helpers/data/workload-capacity-helper')
 const getCapacityForIndividual = require('../../../../app/services/data/get-capacity-for-individual')
 
-const START_DATE = new Date(2010, 0, 1)
+const START_DATE = new Date(2009, 0, 1)
 const END_DATE = new Date(2010, 0, 31)
 
 var inserts = []
@@ -22,7 +22,7 @@ describe('services/data/get-capacity-for-individual', function () {
     .then(function (results) {
       expect(results.length).to.equal(2)
       var expectedResults = [
-        {workload_report_date: END_DATE, capacity_percentage: 200, reductions: 3},
+        {workload_report_date: START_DATE, capacity_percentage: 200, reductions: 3},
         {workload_report_date: START_DATE, capacity_percentage: 200, reductions: 3}
       ]
       expect(results).to.eql(expectedResults)
