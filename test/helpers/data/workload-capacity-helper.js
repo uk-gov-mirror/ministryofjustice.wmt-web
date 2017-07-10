@@ -116,12 +116,18 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
       }
 
       var calculations = []
-      calculations.push(Object.assign({}, defaultWorkloadPoints, {total_points: 50, available_points: 25}))
       calculations.push(Object.assign({}, defaultWorkloadPoints, {
-        total_points: 50, available_points: 100, paroms_points: 50, sdr_points: 50, sdr_conversion_points: 50, workload_report_id: workloadReports[0].id
+        total_points: 50, available_points: 25, workload_report_id: workloadReports[0].id
       }))
-      calculations.push(Object.assign({}, defaultWorkloadPoints, {total_points: 20, available_points: 10}))
-      calculations.push(Object.assign({}, defaultWorkloadPoints, {total_points: 20, available_points: 10, workload_report_id: workloadReports[2].id}))
+      calculations.push(Object.assign({}, defaultWorkloadPoints, {
+        total_points: 50, available_points: 100, paroms_points: 50, sdr_points: 50, sdr_conversion_points: 50
+      }))
+      calculations.push(Object.assign({}, defaultWorkloadPoints, {
+        total_points: 20, available_points: 10
+      }))
+      calculations.push(Object.assign({}, defaultWorkloadPoints, {
+        total_points: 20, available_points: 10, workload_report_id: workloadReports[2].id
+      }))
 
       return knex('workload_points_calculations').returning('id').insert(calculations)
     })

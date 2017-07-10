@@ -4,9 +4,14 @@
 
 <main id="content" role="main">
 
+{% include "includes/breadcrumbs.html" %}
+
 {% include "includes/validation-error-messages.html" %}
 <h2 class="heading-large">
-    View your caseload capacity
+    <span class="heading-secondary">
+        {{ subTitle | title }}
+    </span>
+    {{ title | title }}
 </h2>
 
 <table class="non-javascript">
