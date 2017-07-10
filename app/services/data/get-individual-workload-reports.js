@@ -15,18 +15,6 @@ module.exports = function (id, fromDate, toDate) {
                 'workload_points_calculations.available_points',
                 'workload_points_calculations.reduction_hours')
        .then(function (workloadReports) {
-         var capacities = []
-         workloadReports.forEach(function (report) {
-           var allPoints = report.total_points + report.sdr_points +
-               report.sdr_conversion_points + report.paroms_points
-           var capacityPercentage = (allPoints / report.available_points) * 100
-
-           capacities.push({
-             workload_report_date: report.effective_from,
-             capacity_percentage: capacityPercentage,
-             reductions: report.reduction_hours
-           })
-         })
-         return capacities
+         return workloadReports
        })
 }

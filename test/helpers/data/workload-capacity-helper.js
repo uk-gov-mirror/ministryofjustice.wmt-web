@@ -51,7 +51,9 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
     })
     .then(function (ids) {
       inserts.push({table: 'workload', id: ids[0]})
-      return knex('workload_report').returning('id').insert({})
+      return knex('workload_report').returning('id').insert({
+        effective_from: new Date(2010, 0, 1)
+      })
     })
     .then(function (ids) {
       inserts.push({table: 'workload_report', id: ids[0]})
