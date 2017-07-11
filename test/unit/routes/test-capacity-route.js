@@ -22,7 +22,7 @@ const CAPACITY_TO_YEAR = 'capacity-to-year='
 describe('/caseload-capacity', function () {
   var app
   var getCapacityStub
-  var capacityStubResult = {title: 'Test', capacityTable: {}}
+  var capacityStubResult = {title: 'Test', capacityTable: {}, subNav: [{}]}
 
   beforeEach(function () {
     getCapacityStub = sinon.stub()
@@ -35,6 +35,7 @@ describe('/caseload-capacity', function () {
 
   describe('/ldu/{id}/caseload-capacity', function () {
     it('should respond with 200 when ldu and id is used with date parameters', function () {
+      capacityStubResult.subNav[0].link = LDU_CAPACITY_URI
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
         .get(LDU_CAPACITY_URI + '?' +
@@ -48,6 +49,7 @@ describe('/caseload-capacity', function () {
     })
 
     it('should respond with 200 when ldu and id is used', function () {
+      capacityStubResult.subNav[0].link = LDU_CAPACITY_URI
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
         .get(LDU_CAPACITY_URI)
@@ -57,12 +59,14 @@ describe('/caseload-capacity', function () {
 
   describe('/region/{id}/caseload-capacity', function () {
     it('should respond with 200 when region and id is used', function () {
+      capacityStubResult.subNav[0].link = REGION_CAPACITY_URI
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
         .get(REGION_CAPACITY_URI)
         .expect(200)
     })
     it('should respond with 500 when region is used but id is missing', function () {
+      capacityStubResult.subNav[0].link = REGION_CAPACITY_URI
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
         .get(REGION_CAPACITY_URI_MISSING_ID)
@@ -72,6 +76,7 @@ describe('/caseload-capacity', function () {
 
   describe('/team/{id}/caseload-capacity', function () {
     it('should respond with 200 when team and id is used', function () {
+      capacityStubResult.subNav[0].link = TEAM_CAPACITY_URI
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
         .get(TEAM_CAPACITY_URI)
@@ -81,6 +86,7 @@ describe('/caseload-capacity', function () {
 
   describe('/offender-manager/{id}/caseload-capacity', function () {
     it('should respond with 200 when team and id is used', function () {
+      capacityStubResult.subNav[0].link = OFFENDER_MANAGER_CAPACITY_URI
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
         .get(OFFENDER_MANAGER_CAPACITY_URI)
