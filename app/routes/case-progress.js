@@ -1,5 +1,6 @@
 const getCaseProgress = require('../services/get-case-progress')
 const orgUnit = require('../constants/organisation-unit')
+const getSubNav = require('../services/get-sub-nav')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/case-progress', function (req, res, next) {
@@ -14,12 +15,11 @@ module.exports = function (router) {
     var caseProgressPromise = getCaseProgress(id, organisationLevel)
 
     return caseProgressPromise.then(function (result) {
-      // TODO Update to new sub nav
       return res.render('case-progress', {
         title: result.title,
         subTitle: result.subTitle,
         breadcrumbs: result.breadcrumbs,
-        subNav: result.subNav,
+        subNav: getSubNav(id, organisationLevel, req.path),
         caseProgress: result.caseProgress
       })
     })

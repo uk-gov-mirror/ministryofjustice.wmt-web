@@ -1,6 +1,7 @@
 const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
+const expect = require('chai').expect
 const sinon = require('sinon')
 require('sinon-bluebird')
 
@@ -22,20 +23,22 @@ const CAPACITY_TO_YEAR = 'capacity-to-year='
 describe('/caseload-capacity', function () {
   var app
   var getCapacityStub
+  var getSubNavStub
   var capacityStubResult = {title: 'Test', capacityTable: {}, subNav: [{}]}
 
   beforeEach(function () {
     getCapacityStub = sinon.stub()
+    getSubNavStub = sinon.stub()
     var route = proxyquire(
       '../../../app/routes/capacity-route', {
-        '../services/get-capacity-view': getCapacityStub
+        '../services/get-capacity-view': getCapacityStub,
+        '../services/get-sub-nav': getSubNavStub
       })
     app = routeHelper.buildApp(route)
   })
 
   describe('/ldu/{id}/caseload-capacity', function () {
     it('should respond with 200 when ldu and id is used with date parameters', function () {
-      capacityStubResult.subNav[0].link = LDU_CAPACITY_URI
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
         .get(LDU_CAPACITY_URI + '?' +
@@ -49,24 +52,31 @@ describe('/caseload-capacity', function () {
     })
 
     it('should respond with 200 when ldu and id is used', function () {
-      capacityStubResult.subNav[0].link = LDU_CAPACITY_URI
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
         .get(LDU_CAPACITY_URI)
         .expect(200)
     })
+
+    it('should call the getSubNav with the correct parameters', function () {
+      getCapacityStub.resolves(capacityStubResult)
+      return supertest(app)
+        .get(LDU_CAPACITY_URI)
+        .expect(200)
+        .then(() => {
+          expect(getSubNavStub.calledWith('1', 'ldu', LDU_CAPACITY_URI)).to.be.true //eslint-disable-line
+        })
+    })
   })
 
   describe('/region/{id}/caseload-capacity', function () {
     it('should respond with 200 when region and id is used', function () {
-      capacityStubResult.subNav[0].link = REGION_CAPACITY_URI
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
         .get(REGION_CAPACITY_URI)
         .expect(200)
     })
     it('should respond with 500 when region is used but id is missing', function () {
-      capacityStubResult.subNav[0].link = REGION_CAPACITY_URI
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
         .get(REGION_CAPACITY_URI_MISSING_ID)
@@ -76,7 +86,6 @@ describe('/caseload-capacity', function () {
 
   describe('/team/{id}/caseload-capacity', function () {
     it('should respond with 200 when team and id is used', function () {
-      capacityStubResult.subNav[0].link = TEAM_CAPACITY_URI
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
         .get(TEAM_CAPACITY_URI)
@@ -86,7 +95,6 @@ describe('/caseload-capacity', function () {
 
   describe('/offender-manager/{id}/caseload-capacity', function () {
     it('should respond with 200 when team and id is used', function () {
-      capacityStubResult.subNav[0].link = OFFENDER_MANAGER_CAPACITY_URI
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
         .get(OFFENDER_MANAGER_CAPACITY_URI)

@@ -1,3 +1,4 @@
+const expect = require('chai').expect
 const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
@@ -13,43 +14,53 @@ const CASE_PROGRESS = {
   subTitle: 'SubTitle',
   breadcrumbs: {},
   subNav: {},
-  caseProgress: [{
+  caseProgress: {
     community_last_16_weeks: 1,
     license_last_16_weeks: 2,
     total_cases: 3,
     warrants_total: 4,
     unpaid_work_total: 5,
     overdue_terminations_total: 6
-  }]
+  }
 }
 
+var app
+var route
+var getCaseProgress
+var getSubNavStub
+
+before(function () {
+  getSubNavStub = sinon.stub()
+  getCaseProgress = sinon.stub()
+  route = proxyquire('../../../app/routes/case-progress', {
+    '../services/get-case-progress': getCaseProgress,
+    '../services/get-sub-nav': getSubNavStub})
+  app = routeHelper.buildApp(route)
+})
+
 describe('case-progress route', function () {
-  var app
-
   it('should respond with 200 when offender-manager and id included in URL', function () {
-    var getCaseProgress = sinon.stub()
-    var route = proxyquire('../../../app/routes/case-progress', {'../services/get-case-progress': getCaseProgress})
-    app = routeHelper.buildApp(route)
     getCaseProgress.resolves(CASE_PROGRESS)
-
     return supertest(app).get(OFFENDER_MANAGER_CASE_PROGRESS_URL).expect(200)
   })
 
   it('should respond with 500 when offender-manager, but no id, included in URL', function () {
-    var getCaseProgress = sinon.stub()
-    var route = proxyquire('../../../app/routes/case-progress', {'../services/get-case-progress': getCaseProgress})
-    app = routeHelper.buildApp(route)
     getCaseProgress.resolves(CASE_PROGRESS)
-
     return supertest(app).get(OFFENDER_MANAGER_MISSING_ID_URL).expect(500)
   })
 
   it('should respond with 500 when path has typo', function () {
-    var getCaseProgress = sinon.stub()
-    var route = proxyquire('../../../app/routes/case-progress', {'../services/get-case-progress': getCaseProgress})
-    app = routeHelper.buildApp(route)
     getCaseProgress.resolves(CASE_PROGRESS)
-
     return supertest(app).get(OFFENDER_MANAGER_TYPO_URL).expect(500)
+  })
+
+  it('should call the getSubNav with the correct parameters', function () {
+    getCaseProgress.resolves(CASE_PROGRESS)
+    return supertest(app)
+        .get(OFFENDER_MANAGER_CASE_PROGRESS_URL)
+        .expect(200)
+        .then(function () {
+          expect(getSubNavStub.calledWith('1', 'offender-manager', OFFENDER_MANAGER_CASE_PROGRESS_URL)).to.be.true //eslint-disable-line
+        })
   })
 })

@@ -29,4 +29,11 @@ describe('services/get-sub-nav', function () {
     expect(subNav[0].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'caseload-capacity')
     expect(subNav[1].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'case-progress')
   })
+
+  it('marks the current link as active', function () {
+    var currentLink = '/' + organisationalUnitName + '/' + id + '/' + 'caseload-capacity'
+    var subNav = getSubNav(id, organisationalUnitName, currentLink)
+    expect(subNav[0].active).to.be.true //eslint-disable-line
+    expect(subNav[1].active).to.be.undefined //eslint-disable-line
+  })
 })
