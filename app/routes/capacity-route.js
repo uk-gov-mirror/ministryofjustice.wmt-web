@@ -16,7 +16,7 @@ module.exports = function (router) {
       return res.render('capacity', {
         title: result.title,
         subTitle: result.subTitle,
-        subnav: result.subNav,
+        subNav: result.subNav,
         breadcrumbs: result.breadcrumbs,
         capacity: result.capacityTable
       })

@@ -1,5 +1,5 @@
 trace1 = {
-  x: [caseProgress.community_last_16_weeks], 
+  x: [caseProgress[0].community_last_16_weeks], 
   y: [rowTitle], 
   hoverinfo: 'x', 
   marker: {color: 'rgb(131, 202, 207)'}, 
@@ -9,7 +9,7 @@ trace1 = {
   uid: 'ccd732'
 };
 trace2 = {
-  x: [caseProgress.license_last_16_weeks], 
+  x: [caseProgress[0].license_last_16_weeks], 
   y: [rowTitle], 
   hoverinfo: 'x', 
   marker: {color: 'rgb(65, 157, 197)'}, 
@@ -19,7 +19,7 @@ trace2 = {
   uid: '37661e'
 };
 trace3 = {
-  x: [caseProgress.total_cases], 
+  x: [caseProgress[0].total_cases], 
   y: [rowTitle], 
   hoverinfo: 'x', 
   marker: {color: 'rgb(52, 116, 172)'}, 
@@ -29,7 +29,7 @@ trace3 = {
   uid: 'afc4b3'
 };
 trace4 = {
-  x: [caseProgress.warrants_total], 
+  x: [caseProgress[0].warrants_total], 
   y: [rowTitle], 
   hoverinfo: 'x', 
   marker: {color: 'rgb(30, 48, 130)'}, 
@@ -39,7 +39,7 @@ trace4 = {
   uid: '523497'
 };
 trace5 = {
-  x: [caseProgress.unpaid_work_total], 
+  x: [caseProgress[0].unpaid_work_total], 
   y: [rowTitle], 
   hoverinfo: 'x', 
   marker: {color: 'rgb(227, 119, 194)'}, 
@@ -49,7 +49,7 @@ trace5 = {
   uid: '964533'
 };
 trace6 = {
-  x: [caseProgress.overdue_terminations_total], 
+  x: [caseProgress[0].overdue_terminations_total], 
   y: [rowTitle], 
   hoverinfo: 'x', 
   marker: {color: 'rgb(214, 39, 40)'}, 

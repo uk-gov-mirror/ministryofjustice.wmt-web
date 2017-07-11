@@ -1,25 +1,27 @@
 const getCaseProgress = require('../services/get-case-progress')
+const orgUnit = require('../constants/organisation-unit')
 
 module.exports = function (router) {
-  // TODO Double check URL
   router.get('/:organisationLevel/:id/case-progress', function (req, res, next) {
     var id = req.params.id
     var organisationLevel = req.params.organisationLevel
 
-    // TODO Currently only dealing with offender manager. Add Team, LDU and Region
-    // if (organisationLevel !== ) {
-        // Only dealing with offendermanager
-    // }
+    // Currently only dealing with Offender Managers
+    if (organisationLevel !== orgUnit.OFFENDER_MANAGER.name) {
+      throw new Error(organisationLevel + ' should be offender-manager')
+    }
 
-    var result = getCaseProgress(id, organisationLevel)
+    var caseProgressPromise = getCaseProgress(id, organisationLevel)
 
-  //  return caseProgressPromise.then(function (result) {
-    return res.render('case-progress', {
-      title: result.title,
-      subTitle: result.subTitle,
-      breadcrumbs: result.breadcrumbs,
-      caseProgress: result.caseProgress
+    return caseProgressPromise.then(function (result) {
+      // TODO Update to new sub nav
+      return res.render('case-progress', {
+        title: result.title,
+        subTitle: result.subTitle,
+        breadcrumbs: result.breadcrumbs,
+        subNav: result.subNav,
+        caseProgress: result.caseProgress
+      })
     })
-    // })
   })
 }
