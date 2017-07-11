@@ -51,10 +51,16 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
     })
     .then(function (ids) {
       inserts.push({table: 'workload', id: ids[0]})
-      return knex('workload_report').returning('id').insert({})
+      return knex('workload_report').returning('id').insert([
+        { effective_from: new Date(2008, 0, 1) },
+        { effective_from: new Date(2009, 0, 1) },
+        { effective_from: new Date(2011, 0, 1) }
+      ])
     })
     .then(function (ids) {
-      inserts.push({table: 'workload_report', id: ids[0]})
+      ids.forEach(function (id) {
+        inserts.push({table: 'workload_report', id: id})
+      })
       return knex('workload_points').returning('id').insert({
         comm_tier_1: 0,
         comm_tier_2: 0,
@@ -94,8 +100,10 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
     .then(function (ids) {
       inserts.push({table: 'workload_points', id: ids[0]})
 
+      var workloadReports = inserts.filter((item) => item.table === 'workload_report')
+
       var defaultWorkloadPoints = {
-        workload_report_id: inserts.filter((item) => item.table === 'workload_report')[0].id,
+        workload_report_id: workloadReports[1].id,
         workload_points_id: inserts.filter((item) => item.table === 'workload_points')[0].id,
         workload_id: inserts.filter((item) => item.table === 'workload')[0].id,
         total_points: 0,
@@ -104,18 +112,22 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
         paroms_points: 0,
         nominal_target: 0,
         available_points: 0,
-        effective_from: new Date(2009, 0, 1),
-        effective_to: new Date(2010, 0, 1),
         reduction_hours: 3
       }
 
       var calculations = []
-      calculations.push(Object.assign({}, defaultWorkloadPoints, {total_points: 50, available_points: 25, effective_from: new Date(2009, 0, 1)}))
       calculations.push(Object.assign({}, defaultWorkloadPoints, {
-        total_points: 50, available_points: 100, effective_from: new Date(2010, 0, 31), paroms_points: 50, sdr_points: 50, sdr_conversion_points: 50
+        total_points: 50, available_points: 25, workload_report_id: workloadReports[0].id
       }))
-      calculations.push(Object.assign({}, defaultWorkloadPoints, {total_points: 20, available_points: 10, effective_from: new Date(2010, 0, 1)}))
-      calculations.push(Object.assign({}, defaultWorkloadPoints, {total_points: 20, available_points: 10, effective_from: new Date(2011, 0, 1)}))
+      calculations.push(Object.assign({}, defaultWorkloadPoints, {
+        total_points: 50, available_points: 100, paroms_points: 50, sdr_points: 50, sdr_conversion_points: 50
+      }))
+      calculations.push(Object.assign({}, defaultWorkloadPoints, {
+        total_points: 20, available_points: 10
+      }))
+      calculations.push(Object.assign({}, defaultWorkloadPoints, {
+        total_points: 20, available_points: 10, workload_report_id: workloadReports[2].id
+      }))
 
       return knex('workload_points_calculations').returning('id').insert(calculations)
     })
