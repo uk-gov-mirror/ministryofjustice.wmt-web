@@ -123,6 +123,33 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
       ids.forEach((id) => {
         inserts.push({table: 'workload_points_calculations', id: id})
       })
+
+      var defaultTier = {
+        workload_id: inserts.filter((item) => item.table === 'workload')[0].id,
+        tier_number: 1,
+        overdue_terminations_total: 10,
+        unpaid_work_total: 10,
+        warrants_total: 10,
+        total_cases: 10,
+        location: 'COMMUNITY'}
+
+      var tiers = []
+
+      for (let i = 1; i <= 7; i++) {
+        defaultTier.tier_number = i
+        defaultTier.location = 'COMMUNITY'
+        tiers.push(defaultTier)
+        defaultTier.location = 'LICENSE'
+        tiers.push(defaultTier)
+        defaultTier.location = 'CUSTODY'
+        tiers.push(defaultTier)
+      }
+      return knex('tiers').returning('id').insert(tiers)
+    })
+    .then(function (ids) {
+      ids.forEach((id) => {
+        inserts.push({table: 'tiers', id: id})
+      })
       return inserts
     })
 
