@@ -11,7 +11,6 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
   var result = {}
   var workloadReportsPromise
   organisationLevel === routeType.OFFENDER_MANAGER.name
-
     ? workloadReportsPromise = getIndividualWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString())
     : workloadReportsPromise = getWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString(), organisationLevel)
 

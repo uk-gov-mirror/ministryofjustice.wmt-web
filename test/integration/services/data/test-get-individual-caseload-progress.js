@@ -18,7 +18,6 @@ describe('services/data/get-individual-caseload-progress', function () {
     // TODO: Write test to get individual caseload progress and verify
     getIndividualCaseloadProgress(inserts.filter((item) => item.table === 'offender_manager')[0].id)
       .then(function (results) {
-        console.log(results)
         expect(results.length).to.equal(1)
         var expectedResults = [
           {

@@ -16,9 +16,6 @@ module.exports = function (id) {
     .sum('tiers.overdue_terminations_total AS overdue_terminations_total')
     .sum('tiers.unpaid_work_total AS unpaid_work_total')
     .groupBy('workload.id')
-    // .groupBy('workload.community_last_16_weeks')
-    // .groupBy('workload.license_last_16_weeks')
-    // .groupBy('workload.total_cases')
     .then(function (caseloadProgress) {
       return caseloadProgress
     })
