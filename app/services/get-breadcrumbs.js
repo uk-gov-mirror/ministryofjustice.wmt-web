@@ -1,6 +1,6 @@
 const linkGenerator = require('./helpers/link-generator')
 const organisationalHierarchyTree = require('./organisational-hierarchy-tree')
-const Breadcrumb = require('./domain/breadcrumb')
+const Link = require('./domain/link')
 const orgUnitFinder = require('../services/helpers/org-unit-finder')
 
 module.exports = function (id, organisationLevel) {
@@ -13,7 +13,7 @@ module.exports = function (id, organisationLevel) {
   var reference = getReference(id, organisationLevel)
 
   do {
-    breadcrumbs.push(new Breadcrumb(tree[reference].name, linkGenerator(reference)))
+    breadcrumbs.push(new Link(tree[reference].name, linkGenerator.fromReference(reference)))
     reference = tree[reference].parent
   } while (reference !== undefined)
   return breadcrumbs
