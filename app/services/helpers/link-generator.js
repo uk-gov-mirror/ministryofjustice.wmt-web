@@ -23,10 +23,19 @@ module.exports.fromReference = function (reference) {
 }
 
 module.exports.fromIdAndName = function (id, name) {
+  if (name === undefined) {
+    throw new TypeError('Organisational unit name is undefined')
+  }
+
   var link
+  var numberRegex = /^[0-9]+$/
+
   if (id === undefined || id === '') {
     link = '/' + name
   } else {
+    if (!numberRegex.test(id.toString())) {
+      throw new TypeError('ID must be a number')
+    }
     link = '/' + name + '/' + id
   }
 
