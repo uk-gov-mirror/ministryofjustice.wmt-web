@@ -1,5 +1,4 @@
 const getBreadcrumbs = require('./get-breadcrumbs')
-const getSubNav = require('./get-sub-nav')
 const getIndividualWorkloadReports = require('./data/get-individual-workload-reports')
 const getWorkloadReports = require('./data/get-workload-report-views')
 const routeType = require('../constants/organisation-unit')
@@ -18,7 +17,6 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
   }
 
   result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
-  result.subNav = getSubNav(id, organisationLevel)
 
   return workloadReportsPromise.then(function (results) {
     result.capacityTable = tableCreator.createCapacityTable(id, organisationalUnitType, capacityDateRange, results)

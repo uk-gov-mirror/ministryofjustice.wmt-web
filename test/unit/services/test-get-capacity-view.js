@@ -76,28 +76,4 @@ describe('services/get-capacity-view', function () {
       done()
     })
   })
-  it('should call the sub nav service with the correct parameters', function (done) {
-    var id = 5
-    var organisationalUnitName = 'offender-manager'
-
-    getCapacityStub.resolves(CAPACITY_RESULTS)
-
-    getCapacityView(id, capacityDateRange, organisationalUnitName).then((result) => {
-      expect(getSubNav.calledWith(id, organisationalUnitName)).to.be.true //eslint-disable-line
-      done()
-    })
-  })
-  it('return the subnav object in the result', function (done) {
-    var id = 5
-    var organisationalUnitName = 'offender-manager'
-    var expectedSubNav = [{id: '1', link: 'link'}]
-
-    getSubNav.returns(expectedSubNav)
-    getCapacityStub.resolves(CAPACITY_RESULTS)
-
-    getCapacityView(id, capacityDateRange, organisationalUnitName).then((result) => {
-      expect(result.subNav).to.eql(expectedSubNav)
-      done()
-    })
-  })
 })
