@@ -15,12 +15,12 @@ const CASE_PROGRESS = {
   breadcrumbs: {},
   subNav: {},
   caseProgress: {
-    community_last_16_weeks: 1,
-    license_last_16_weeks: 2,
-    total_cases: 3,
-    warrants_total: 4,
-    unpaid_work_total: 5,
-    overdue_terminations_total: 6
+    communityLast16Weeks: 1,
+    licenseLast16Weeks: 2,
+    totalCases: 3,
+    warrantsTotal: 4,
+    unpaidWorkTotal: 5,
+    overdueTerminationsTotal: 6
   }
 }
 
