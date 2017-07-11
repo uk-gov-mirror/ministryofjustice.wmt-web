@@ -2,7 +2,7 @@
   <ol>
   {% for breadcrumb in breadcrumbs.reverse() %}
     {% if loop.last %}
-      <li aria-current="page">{{ breadcrumb.title | title }}</li>
+      <li>{{ breadcrumb.title | title }}</li>
     {% else %}
       <li><a href="{{ breadcrumb.link }}">{{ breadcrumb.title | title }}</a></li>
     {% endif %}
