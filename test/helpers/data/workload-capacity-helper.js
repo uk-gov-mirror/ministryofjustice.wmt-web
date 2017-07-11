@@ -54,8 +54,6 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
       return knex('workload_report').returning('id').insert([
         { effective_from: new Date(2008, 0, 1) },
         { effective_from: new Date(2009, 0, 1), effective_to: new Date(2010, 0, 1) }
-        // { effective_from: new Date(2011, 0, 1), effective_to: new Date(2010, 0, 1) },
-        // { effective_from: new Date(2010, 0, 1), effective_to: new Date(2010, 0, 1) }
       ])
     })
     .then(function (ids) {
@@ -143,13 +141,9 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
       var tiers = []
 
       for (let i = 1; i <= 7; i++) {
-        defaultTier.tier_number = i
-        defaultTier.location = 'COMMUNITY'
-        tiers.push(defaultTier)
-        defaultTier.location = 'LICENSE'
-        tiers.push(defaultTier)
-        defaultTier.location = 'CUSTODY'
-        tiers.push(defaultTier)
+        tiers.push(Object.assign({}, defaultTier, {tier_number: i, location: 'COMMUNITY'}))
+        tiers.push(Object.assign({}, defaultTier, {tier_number: i, location: 'CUSTODY'}))
+        tiers.push(Object.assign({}, defaultTier, {tier_number: i, location: 'LICENSE'}))
       }
       return knex('tiers').returning('id').insert(tiers)
     })
