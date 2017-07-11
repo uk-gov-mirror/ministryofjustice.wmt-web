@@ -6,6 +6,7 @@ module.exports = function (id, organisationalUnitName) {
   var navigation = []
 
   navigation.push(new Link('Capacity', baseLink + '/caseload-capacity'))
+  navigation.push(new Link('Case Progress', baseLink + '/case-progress'))
 
   return navigation
 }
