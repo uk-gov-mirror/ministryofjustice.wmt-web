@@ -2,28 +2,48 @@ const expect = require('chai').expect
 const linkGenerator = require('../../../app/services/helpers/link-generator')
 
 describe('services/helpers/link-generator', function () {
-  it('should return the correct link for each organisational unit, including ID', function () {
-    expect(linkGenerator('R1')).to.eql('/region/1')
-    expect(linkGenerator('L34')).to.eql('/ldu/34')
-    expect(linkGenerator('T178')).to.eql('/team/178')
-  })
+  describe('fromReference', function () {
+    it('should return the correct link for each organisational unit, including ID', function () {
+      expect(linkGenerator.fromReference('R1')).to.eql('/region/1')
+      expect(linkGenerator.fromReference('L34')).to.eql('/ldu/34')
+      expect(linkGenerator.fromReference('T178')).to.eql('/team/178')
+    })
 
-  it('should return the correct link for national level (no ID)', function () {
-    expect(linkGenerator('N')).to.eql('/nps')
-  })
+    it('should return the correct link for national level (no ID)', function () {
+      expect(linkGenerator.fromReference('N')).to.eql('/nps')
+    })
 
-  it('should throw an error when passed undefined reference', function () {
-    expect(() => linkGenerator(undefined)).to.throw(/undefined/)
-  })
+    it('should throw an error when passed undefined reference', function () {
+      expect(() => linkGenerator.fromReference(undefined)).to.throw(/undefined/)
+    })
 
-  it('should throw an error when passed a reference with an organisational unit ID that does not exist', function () {
-    expect(() => linkGenerator('Y4')).to.throw(/not valid/)
-  })
+    it('should throw an error when passed a reference with an organisational unit ID that does not exist', function () {
+      expect(() => linkGenerator.fromReference('Y4')).to.throw(/not valid/)
+    })
 
-  it('should throw an error when passed a reference of an incorrect format', function () {
-    expect(() => linkGenerator('123')).to.throw(/incorrect format/)
-    expect(() => linkGenerator('r1')).to.throw(/incorrect format/)
-    expect(() => linkGenerator('Region1')).to.throw(/incorrect format/)
-    expect(() => linkGenerator('Team1A')).to.throw(/incorrect format/)
+    it('should throw an error when passed a reference of an incorrect format', function () {
+      expect(() => linkGenerator.fromReference('123')).to.throw(/incorrect format/)
+      expect(() => linkGenerator.fromReference('r1')).to.throw(/incorrect format/)
+      expect(() => linkGenerator.fromReference('Region1')).to.throw(/incorrect format/)
+      expect(() => linkGenerator.fromReference('Team1A')).to.throw(/incorrect format/)
+    })
+  })
+  describe('fromIdAndName', function () {
+    it('should generate a link based on the id and name supplied', function () {
+      expect(linkGenerator.fromIdAndName(1, 'offender-manager')).to.eql('/offender-manager/1')
+    })
+
+    it('should return no trailing slashes when an empty id is supplied', function () {
+      expect(linkGenerator.fromIdAndName(undefined, 'nps')).to.eql('/nps')
+      expect(linkGenerator.fromIdAndName('', 'nps')).to.eql('/nps')
+    })
+
+    it('should throw an error when passed an invalid name', function () {
+      expect(() => linkGenerator.fromIdAndName(1, undefined)).to.throw(/undefined/)
+    })
+
+    it('should throw an error if an id field is supplied and isn\'t a number', function () {
+      expect(() => linkGenerator.fromIdAndName('non-number', 'team')).to.throw(/number/)
+    })
   })
 })

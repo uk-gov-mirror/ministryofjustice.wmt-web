@@ -1,8 +1,8 @@
-class Breadcrumb {
+class Link {
   constructor (title, link) {
     this.title = title
     this.link = link
   }
 }
 
-module.exports = Breadcrumb
+module.exports = Link
