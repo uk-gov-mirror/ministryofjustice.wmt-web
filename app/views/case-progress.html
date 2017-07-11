@@ -1,0 +1,30 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/breadcrumbs.html" %}
+
+{% include "includes/validation-error-messages.html" %}
+
+<h2 class="heading-large">
+    <span class="heading-secondary">
+        {{ subTitle | title }}
+    </span>
+    {{ title | title }}
+</h2>
+
+<div id="plotly-div-cases"></div>
+
+</main>
+{% endblock %}
+
+{% block body_end %}
+    <script type="text/javascript">
+        var rowTitle = {{ title | dump | safe }}
+        var caseProgress = {{ caseProgress | dump | safe }}
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="/public/javascripts/case-progress.js"></script>
+{% endblock %}
