@@ -4,10 +4,11 @@ const knex = require('knex')(config)
 module.exports = function (id, fromDate, toDate) {
   return knex('workload_points_calculations')
         .join('workload', 'workload_points_calculations.workload_id', '=', 'workload.id')
-        .where('workload_points_calculations.effective_from', '>=', fromDate)
-        .where('workload_points_calculations.effective_from', '<=', toDate)
+        .join('workload_report', 'workload_points_calculations.workload_report_id', '=', 'workload_report.id')
+        .where('workload_report.effective_from', '>=', fromDate)
+        .where('workload_report.effective_from', '<=', toDate)
         .where('workload.workload_owner_id', id)
-        .select('workload_points_calculations.effective_from',
+        .select('workload_report.effective_from',
                 'workload_points_calculations.total_points',
                 'workload_points_calculations.sdr_points',
                 'workload_points_calculations.sdr_conversion_points',
