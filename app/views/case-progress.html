@@ -17,6 +17,25 @@
 
 {% include "includes/sub-nav.html" %}
 
+<table class="non-javascript">
+    <tr>
+        <th>Community Last 16 Weeks</th>
+        <th>License Last 16 Weeks</th>
+        <th>Total Cases</th>
+        <th>Warrants Total</th>
+        <th>Unpaid Work Total</th>
+        <th>Overdue Terminations Total</th>
+    </tr>
+    <tr>
+        <td>{{ caseProgress.communityLast16Weeks }}</td>
+        <td>{{ caseProgress.licenseLast16Weeks }}</td>
+        <td>{{ caseProgress.totalCases }}</td>
+        <td>{{ caseProgress.warrantsTotal }}</td>
+        <td>{{ caseProgress.unpaidWorkTotal }}</td>
+        <td>{{ caseProgress.overdueTerminationsTotal }}</td>
+    </tr>
+</table>
+
 <div id="plotly-div-cases"></div>
 
 </main>
