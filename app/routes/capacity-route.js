@@ -14,7 +14,7 @@ module.exports = function (router) {
       return res.render('capacity', {
         title: result.title,
         subTitle: result.subTitle,
-        subnav: getSubNav(id, organisationLevel, req.path),
+        subNav: getSubNav(id, organisationLevel, req.path),
         breadcrumbs: result.breadcrumbs,
         capacity: result.capacityTable
       })
