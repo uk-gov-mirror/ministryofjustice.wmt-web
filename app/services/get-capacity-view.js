@@ -9,7 +9,6 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
   var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
   var result = {}
   var workloadReportsPromise
-
   if (organisationLevel === routeType.OFFENDER_MANAGER.name) {
     workloadReportsPromise = getIndividualWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString())
   } else {

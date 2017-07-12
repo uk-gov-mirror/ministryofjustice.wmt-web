@@ -53,8 +53,7 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
       inserts.push({table: 'workload', id: ids[0]})
       return knex('workload_report').returning('id').insert([
         { effective_from: new Date(2008, 0, 1) },
-        { effective_from: new Date(2009, 0, 1) },
-        { effective_from: new Date(2011, 0, 1) }
+        { effective_from: new Date(2009, 0, 1), effective_to: new Date(2010, 0, 1) }
       ])
     })
     .then(function (ids) {
@@ -120,13 +119,7 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
         total_points: 50, available_points: 25, workload_report_id: workloadReports[0].id
       }))
       calculations.push(Object.assign({}, defaultWorkloadPoints, {
-        total_points: 50, available_points: 100, paroms_points: 50, sdr_points: 50, sdr_conversion_points: 50
-      }))
-      calculations.push(Object.assign({}, defaultWorkloadPoints, {
-        total_points: 20, available_points: 10
-      }))
-      calculations.push(Object.assign({}, defaultWorkloadPoints, {
-        total_points: 20, available_points: 10, workload_report_id: workloadReports[2].id
+        total_points: 20, available_points: 10, workload_report_id: workloadReports[1].id
       }))
 
       return knex('workload_points_calculations').returning('id').insert(calculations)
@@ -134,6 +127,26 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
     .then(function (ids) {
       ids.forEach((id) => {
         inserts.push({table: 'workload_points_calculations', id: id})
+      })
+
+      var defaultTier = {
+        workload_id: inserts.filter((item) => item.table === 'workload')[0].id,
+        tier_number: 1,
+        overdue_terminations_total: 10,
+        unpaid_work_total: 10,
+        warrants_total: 10,
+        total_cases: 10,
+        location: 'COMMUNITY'}
+
+      var tiers = []
+      tiers.push(Object.assign({}, defaultTier, {tier_number: 1, location: 'COMMUNITY'}))
+      tiers.push(Object.assign({}, defaultTier, {tier_number: 2, location: 'CUSTODY'}))
+      tiers.push(Object.assign({}, defaultTier, {tier_number: 3, location: 'LICENSE'}))
+      return knex('tiers').returning('id').insert(tiers)
+    })
+    .then(function (ids) {
+      ids.forEach((id) => {
+        inserts.push({table: 'tiers', id: id})
       })
       return inserts
     })

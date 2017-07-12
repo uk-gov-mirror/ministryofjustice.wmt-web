@@ -19,12 +19,12 @@ describe('services/data/get-workload-report-views', function () {
 
   var expectedResult = {
     effective_from: START_DATE,
-    total_points: 70,
-    sdr_points: 50,
-    sdr_conversion_points: 50,
-    paroms_points: 50,
-    available_points: 110,
-    reduction_hours: 6
+    total_points: 20,
+    sdr_points: 0,
+    sdr_conversion_points: 0,
+    paroms_points: 0,
+    available_points: 10,
+    reduction_hours: 3
   }
 
   it('should retrieve all the workloads within the date range for a given Region', function (done) {
