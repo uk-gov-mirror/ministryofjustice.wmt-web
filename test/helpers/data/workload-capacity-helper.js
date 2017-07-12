@@ -154,6 +154,25 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
   return promise
 }
 
+module.exports.selectIdsForWorkloadOwner = function () {
+  var results = []
+
+  var promise = knex('workload_owner').first('id', 'team_id')
+    .then(function (result) {
+      results.push({ table: 'workload_owner', id: result.id }, { table: 'team', id: result.team_id })
+      return knex('team').select('ldu_id').where('id', '=', result.team_id)
+    })
+    .then(function (result) {
+      results.push({ table: 'ldu', id: result[0].ldu_id })
+      return knex('ldu').select('region_id').where('id', '=', result[0].ldu_id)
+    })
+    .then(function (result) {
+      results.push({ table: 'region', id: result[0].region_id })
+      return results
+    })
+  return promise
+}
+
 module.exports.removeWorkloadCapactitiesForOffenderManager = function (inserts) {
   inserts = inserts.reverse()
   return Promise.each(inserts, (insert) => {
