@@ -17,16 +17,15 @@ describe('services/data/get-individual-caseload-progress', function () {
   it('should retrieve current caseload progress for an workload owner', function (done) {
     getIndividualCaseloadProgress(inserts.filter((item) => item.table === 'workload_owner')[0].id)
       .then(function (results) {
-        expect(results.length).to.equal(1)
-        var expectedResults = [
+        var expectedResults =
           {
-            community_last_16_weeks: 10,
-            license_last_16_weeks: 9,
-            total_cases: 0,
-            warrants_total: 30,
-            overdue_terminations_total: 30,
-            unpaid_work_total: 30
-          }]
+            communityLast16Weeks: 10,
+            licenseLast16Weeks: 9,
+            totalCases: 0,
+            warrantsTotal: 30,
+            overdueTerminationsTotal: 30,
+            unpaidWorkTotal: 30
+          }
         expect(results).to.eql(expectedResults)
         done()
       })
