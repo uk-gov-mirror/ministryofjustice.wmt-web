@@ -10,9 +10,11 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
   var breadcrumbs = getBreadcrumbs(id, organisationLevel)
   var result = {}
   var workloadReportsPromise
-  organisationLevel === routeType.OFFENDER_MANAGER.name
-    ? workloadReportsPromise = getIndividualWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString())
-    : workloadReportsPromise = getWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString(), organisationLevel)
+  if (organisationLevel === routeType.OFFENDER_MANAGER.name) {
+    workloadReportsPromise = getIndividualWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString())
+  } else {
+    workloadReportsPromise = getWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString(), organisationLevel)
+  }
 
   result.breadcrumbs = breadcrumbs
 

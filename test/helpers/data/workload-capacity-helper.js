@@ -139,12 +139,9 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
         location: 'COMMUNITY'}
 
       var tiers = []
-
-      for (let i = 1; i <= 7; i++) {
-        tiers.push(Object.assign({}, defaultTier, {tier_number: i, location: 'COMMUNITY'}))
-        tiers.push(Object.assign({}, defaultTier, {tier_number: i, location: 'CUSTODY'}))
-        tiers.push(Object.assign({}, defaultTier, {tier_number: i, location: 'LICENSE'}))
-      }
+      tiers.push(Object.assign({}, defaultTier, {tier_number: 1, location: 'COMMUNITY'}))
+      tiers.push(Object.assign({}, defaultTier, {tier_number: 2, location: 'CUSTODY'}))
+      tiers.push(Object.assign({}, defaultTier, {tier_number: 3, location: 'LICENSE'}))
       return knex('tiers').returning('id').insert(tiers)
     })
     .then(function (ids) {
