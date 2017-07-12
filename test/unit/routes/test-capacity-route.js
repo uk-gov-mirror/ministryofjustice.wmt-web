@@ -1,6 +1,7 @@
 const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
+const expect = require('chai').expect
 const sinon = require('sinon')
 require('sinon-bluebird')
 
@@ -22,13 +23,16 @@ const CAPACITY_TO_YEAR = 'capacity-to-year='
 describe('/caseload-capacity', function () {
   var app
   var getCapacityStub
-  var capacityStubResult = {title: 'Test', capacityTable: {}}
+  var getSubNavStub
+  var capacityStubResult = {title: 'Test', capacityTable: {}, subNav: [{}]}
 
   beforeEach(function () {
     getCapacityStub = sinon.stub()
+    getSubNavStub = sinon.stub()
     var route = proxyquire(
       '../../../app/routes/capacity-route', {
-        '../services/get-capacity-view': getCapacityStub
+        '../services/get-capacity-view': getCapacityStub,
+        '../services/get-sub-nav': getSubNavStub
       })
     app = routeHelper.buildApp(route)
   })
@@ -52,6 +56,16 @@ describe('/caseload-capacity', function () {
       return supertest(app)
         .get(LDU_CAPACITY_URI)
         .expect(200)
+    })
+
+    it('should call the getSubNav with the correct parameters', function () {
+      getCapacityStub.resolves(capacityStubResult)
+      return supertest(app)
+        .get(LDU_CAPACITY_URI)
+        .expect(200)
+        .then(() => {
+          expect(getSubNavStub.calledWith('1', 'ldu', LDU_CAPACITY_URI)).to.be.true //eslint-disable-line
+        })
     })
   })
 
