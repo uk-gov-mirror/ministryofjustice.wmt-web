@@ -44,7 +44,7 @@ describe('View your caseload capacity flow', () => {
 
   it('should navigate to the team caseload capacity screen', () => {
     return browser.url('/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/caseload-capacity')
-      
+
       .waitForExist('.plot-container.plotly')
       .waitForExist('.heading-secondary')
       .getValue('.heading-secondary', function (title) {
