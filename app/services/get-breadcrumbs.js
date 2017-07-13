@@ -12,6 +12,10 @@ module.exports = function (id, organisationLevel) {
   var tree = organisationalHierarchyTree.get()
   var reference = getReference(id, organisationLevel)
 
+  if (tree[reference] === undefined) {
+    throw new Error(organisationLevel + ' with ID ' + id + ' does not exist in the organisational tree')
+  }
+
   do {
     breadcrumbs.push(new Link(tree[reference].name, linkGenerator.fromReference(reference)))
     reference = tree[reference].parent
