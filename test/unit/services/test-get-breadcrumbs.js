@@ -83,4 +83,13 @@ describe('services/get-breadcrumbs', function () {
 
     expect(() => getBreadcrumbs('3', 'person')).to.throw(/does not exist/)
   })
+
+  it('should throw an error when passed an id which does not exist in the organisational tree', function () {
+    var getTree = {
+      get: sinon.stub().returns(ohDataHelper.ORGANISATIONAL_HIERARCHY_TREE_MULTIPLE_BRANCHES)
+    }
+    var getBreadcrumbs = proxyquire('../../../app/services/get-breadcrumbs', {'./organisational-hierarchy-tree': getTree})
+
+    expect(() => getBreadcrumbs('7', 'team')).to.throw(/does not exist in the organisational tree/)
+  })
 })
