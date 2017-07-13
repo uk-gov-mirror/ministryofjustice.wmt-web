@@ -1,16 +1,16 @@
-.c-subNav {
+.wmt-sub-nav {
   background-color: #fff;
   border-bottom: 1px solid #bfc1c3;
   padding: 0;
   margin-bottom: 30px;
 }
 
-  .c-subNav__item {
+  .wmt-sub-nav__item {
     position: relative;
     display: inline-block;
   }
 
-  .c-subNav__link:link {
+  .wmt-sub-nav__link:link {
     color: $black;
     display: inline-block;
     margin: 0;
@@ -19,7 +19,7 @@
     text-decoration: none;
   }
 
-  .c-subNav__link.is-active {
+  .wmt-sub-nav__link.is-active {
     color: $govuk-blue;
 
     &:after {

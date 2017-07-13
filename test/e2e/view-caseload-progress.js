@@ -15,12 +15,12 @@ describe('View caseload progress flow', () => {
   it('should navigate to the workload owner caseload progress screen', () => {
     return browser.url('/offender-manager/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id + '/caseload-capacity')
       .waitForExist('.breadcrumbs')
-      .waitForExist('.c-subNav')
+      .waitForExist('.sln-subnav')
       // Check the href for case progress using the id exists
       .click('[href="/offender-manager/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id + '/case-progress"]')
-      .waitForExist('.heading-secondary')
+      .waitForExist('.sln-page-subtitle')
       .waitForExist('.js-plotly-plot')
-      .getValue('.heading-secondary', function (title) {
+      .getValue('.sln-page-subtitle', function (title) {
         expect(title).to.equal('Offender Manager')
       })
   })
