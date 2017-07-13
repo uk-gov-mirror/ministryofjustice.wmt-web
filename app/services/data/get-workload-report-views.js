@@ -4,9 +4,6 @@ const orgUnitFinder = require('../helpers/org-unit-finder')
 
 module.exports = function (id, fromDate, toDate, type) {
   var orgUnit = orgUnitFinder('name', type)
-  if (orgUnit === undefined) {
-    throw new Error(type + ' should be REGION, TEAM or LDU')
-  }
   var table = orgUnit.capacityView
 
   return knex(table)
