@@ -23,7 +23,6 @@ module.exports = function (id, organisationLevel) {
   return breadcrumbs
 }
 
-
 var getReference = function (id, organisationLevel) {
   var reference
   var organisationUnit = orgUnitFinder('name', organisationLevel)

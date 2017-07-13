@@ -9,7 +9,7 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
   var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
   var result = {}
   var workloadReportsPromise
-  
+
   if (organisationalUnitType === undefined) {
     throw new Error(organisationLevel + ' should be offender-manager, region, team or ldu')
   }
