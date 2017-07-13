@@ -18,7 +18,7 @@ describe('View your caseload capacity flow', () => {
       .waitForExist('.plot-container.plotly')
       .waitForExist('.heading-secondary')
       .getValue('.heading-secondary', function (title) {
-        expect(title).to.contains('Offender Manager Capacity')
+        expect(title).to.contains('Offender Manager')
       })
   })
 
@@ -28,7 +28,7 @@ describe('View your caseload capacity flow', () => {
       .waitForExist('.plot-container.plotly')
       .waitForExist('.heading-secondary')
       .getValue('.heading-secondary', function (title) {
-        expect(title).to.contains('Ldu Capacity')
+        expect(title).to.contains('LDU')
       })
   })
 
@@ -38,17 +38,17 @@ describe('View your caseload capacity flow', () => {
     .waitForExist('.plot-container.plotly')
     .waitForExist('.heading-secondary')
     .getValue('.heading-secondary', function (title) {
-      expect(title).to.equal('Region Capacity')
+      expect(title).to.equal('Region')
     })
   })
 
   it('should navigate to the team caseload capacity screen', () => {
     return browser.url('/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/caseload-capacity')
-      .waitForExist('.breadcrumbs')
+      
       .waitForExist('.plot-container.plotly')
       .waitForExist('.heading-secondary')
       .getValue('.heading-secondary', function (title) {
-        expect(title).to.equal('Team Capacity')
+        expect(title).to.equal('Team')
       })
   })
 })
