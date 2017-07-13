@@ -2,9 +2,9 @@
   <ol>
   {% for breadcrumb in breadcrumbs.reverse() %}
     {% if loop.last %}
-      <li>{{ breadcrumb.title | title }}</li>
+      <li>{{ breadcrumb.title }}</li>
     {% else %}
-      <li><a href="{{ breadcrumb.link }}">{{ breadcrumb.title | title }}</a></li>
+      <li><a href="{{ breadcrumb.link }}">{{ breadcrumb.title }}</a></li>
     {% endif %}
   {% else %}
       <!-- <li>This would display if the breadcrumbs collection were empty</li> -->
