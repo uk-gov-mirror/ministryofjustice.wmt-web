@@ -14,6 +14,17 @@ var caseProgressRow = {
   unpaidWorkTotal: 30
 }
 
+var lduWithOneTeamRow = caseProgressRow
+
+var lduWithTwoTeamsRow = {
+  communityLast16Weeks: 20,
+  licenseLast16Weeks: 18,
+  totalCases: 10,
+  warrantsTotal: 60,
+  overdueTerminationsTotal: 60,
+  unpaidWorkTotal: 60
+}
+
 describe('services/data/get-org-unit-caseload-progress', function () {
   before(function (done) {
     workloadCapacityHelper.addCaseProgressDataForAllOrgUnits()
@@ -57,6 +68,19 @@ describe('services/data/get-org-unit-caseload-progress', function () {
       .then(function (results) {
         expect(results.length).to.eql(2)
         expect(results).to.eql(teamWithMultipleOffenderManagers)
+        done()
+      })
+  })
+
+  it('should retrieve current caseload progress for all teams in an LDU', function (done) {
+    var lduWithMultipleTeams = [
+      lduWithTwoTeamsRow,
+      lduWithOneTeamRow
+    ]
+    getCaseProgress(inserts.filter((item) => item.table === 'ldu')[0].id, 'ldu')
+      .then(function (results) {
+        expect(results.length).to.eql(2)
+        expect(results).to.eql(lduWithMultipleTeams)
         done()
       })
   })

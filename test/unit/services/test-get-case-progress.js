@@ -5,14 +5,16 @@ const proxyquire = require('proxyquire')
 
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 
-const CASE_PROGRESS = {
-  communityLast16Weeks: 1,
-  licenseLast16Weeks: 2,
-  totalCases: 3,
-  warrantsTotal: 4,
-  unpaidWorkTotal: 5,
-  overdueTerminationsTotal: 6
-}
+const CASE_PROGRESS = [
+  {
+    communityLast16Weeks: 1,
+    licenseLast16Weeks: 2,
+    totalCases: 3,
+    warrantsTotal: 4,
+    unpaidWorkTotal: 5,
+    overdueTerminationsTotal: 6
+  }
+]
 
 var id = 1
 var organisationalUnit = 'offender-manager'
