@@ -7,10 +7,13 @@ module.exports = function (router) {
     var organisationLevel = req.params.organisationLevel
     var id
 
+<<<<<<< HEAD
     if (organisationLevel !== organisationUnit.NATIONAL.name) {
       id = req.params.id
     }
 
+=======
+>>>>>>> f08fb13... 636: Updating non js version and graph table to accept arrays of data.
     var caseProgressPromise = getCaseProgress(id, organisationLevel)
 
     return caseProgressPromise.then(function (result) {
@@ -19,7 +22,7 @@ module.exports = function (router) {
         subTitle: result.subTitle,
         breadcrumbs: result.breadcrumbs,
         subNav: getSubNav(id, organisationLevel, req.path),
-        caseProgress: result.caseProgress
+        caseProgressList: result.caseProgressList
       })
     })
   })
