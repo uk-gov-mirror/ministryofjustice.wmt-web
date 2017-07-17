@@ -1,14 +1,14 @@
 const expect = require('chai').expect
 
 const workloadCapacityHelper = require('../../../helpers/data/workload-capacity-helper')
-const getCaseProgress = require('../../../../app/services/data/get-org-unit-caseload-progress')
+const getCaseProgress = require('../../../../app/services/data/get-caseload-progress')
 
 var inserts = []
 
 var caseProgressRow = {
   communityLast16Weeks: 10,
   licenseLast16Weeks: 9,
-  totalCases: 0,
+  totalCases: 5,
   warrantsTotal: 30,
   overdueTerminationsTotal: 30,
   unpaidWorkTotal: 30
@@ -19,6 +19,19 @@ describe('services/data/get-org-unit-caseload-progress', function () {
     workloadCapacityHelper.addCaseProgressDataForAllOrgUnits()
       .then(function (builtInserts) {
         inserts = builtInserts
+        done()
+      })
+  })
+
+  // TODO check that is it indeed current - no effective_to date
+  it('should retrieve current caseload progress for a workload owner', function (done) {
+    getCaseProgress(inserts.filter((item) => item.table === 'workload_owner')[0].id, 'offender-manager')
+      .then(function (results) {
+        var expectedResults =
+          [
+            caseProgressRow
+          ]
+        expect(results).to.eql(expectedResults)
         done()
       })
   })

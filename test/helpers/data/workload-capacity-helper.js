@@ -3,7 +3,7 @@ const knex = require('knex')(config)
 var Promise = require('bluebird').Promise
 
 var defaultWorkload = {
-  total_cases: 0,
+  total_cases: 5,
   total_community_cases: 0,
   total_custody_cases: 0,
   total_license_cases: 0,
