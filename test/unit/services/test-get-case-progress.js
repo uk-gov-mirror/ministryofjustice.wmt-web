@@ -42,7 +42,7 @@ before(function () {
 describe('services/get-case-progress', function () {
   it('should return a result object with a case progress row and title for offender manager', function () {
     getCaseProgress(id, organisationalUnit).then(function (result) {
-      expect(result.caseProgress).to.be.an('object')
+      expect(result.caseProgress).to.be.an('Array')
       expect(result.title).to.equal(expectedTitle)
     })
   })
