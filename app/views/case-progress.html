@@ -14,6 +14,7 @@
 
 <table class="non-javascript">
     <tr>
+        <th>Name</th>
         <th>Community Last 16 Weeks</th>
         <th>License Last 16 Weeks</th>
         <th>Total Cases</th>
@@ -21,7 +22,9 @@
         <th>Unpaid Work Total</th>
         <th>Overdue Terminations Total</th>
     </tr>
+    {% for caseProgress in caseProgressList%}
     <tr>
+        <td>{{ caseProgress.name }}</td>
         <td>{{ caseProgress.communityLast16Weeks }}</td>
         <td>{{ caseProgress.licenseLast16Weeks }}</td>
         <td>{{ caseProgress.totalCases }}</td>
@@ -29,6 +32,7 @@
         <td>{{ caseProgress.unpaidWorkTotal }}</td>
         <td>{{ caseProgress.overdueTerminationsTotal }}</td>
     </tr>
+    {% endfor%}
 </table>
 
 <div id="plotly-div-cases"></div>
