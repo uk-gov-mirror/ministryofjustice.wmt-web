@@ -55,7 +55,7 @@ describe('services/data/get-workload-report-views', function () {
   })
 
   after(function (done) {
-    workloadCapactiyHelper.removeWorkloadCapactitiesForOffenderManager(inserts)
+    workloadCapactiyHelper.removeInsertedData(inserts)
       .then(() => done())
   })
 })

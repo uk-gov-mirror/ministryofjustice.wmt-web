@@ -32,7 +32,7 @@ describe('services/data/get-individual-caseload-progress', function () {
   })
 
   after(function (done) {
-    workloadCapacityHelper.removeWorkloadCapactitiesForOffenderManager(inserts)
+    workloadCapacityHelper.removeInsertedData(inserts)
       .then(() => done())
   })
 })
