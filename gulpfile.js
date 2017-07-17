@@ -1,9 +1,7 @@
 var gulp = require('gulp')
 var path = require('path')
-var mocha = require('gulp-mocha')
 var gulpNSP = require('gulp-nsp')
 var sass = require('gulp-sass')
-var standard = require('gulp-standard')
 var spawn = require('child_process').spawn
 var node
 
@@ -17,38 +15,6 @@ gulp.task('assets', function () {
   gulp.src('node_modules/govuk_template_jinja/assets/**/*')
     .pipe(gulp.dest('app/govuk_modules/govuk_template/', { overwrite: true }))
 })
-
-gulp.task('standard', function () {
-  return gulp.src([
-    '!node_modules/*',
-    '!app/govuk_modules/**/*.js',
-    '!app/assets/javascripts/**/*.js',
-    '!app/public/javascripts/**/*.js',
-    'app/**/*.js',
-    'test/**/*.js'
-  ])
-    .pipe(standard())
-    .pipe(standard.reporter('default', {
-      breakOnError: true,
-      quiet: true
-    }))
-})
-
-gulp.task('mocha-unit', function () {
-  return gulp.src(['test/unit/**/*.js'], { read: false })
-      .pipe(mocha({ reporter: 'spec' }))
-})
-
-gulp.task('mocha-integration', function () {
-  return gulp.src(['test/integration/**/*.js'], { read: false })
-      .pipe(mocha({ reporter: 'spec', timeout: 5000 }))
-})
-
-gulp.task('unit-test', ['standard', 'mocha-unit'])
-
-gulp.task('integration-test', ['mocha-integration'])
-
-gulp.task('test', ['unit-test', 'integration-test'])
 
 gulp.task('templates', function () {
   gulp.src('node_modules/govuk_template_jinja/views/layouts/govuk_template.html')
