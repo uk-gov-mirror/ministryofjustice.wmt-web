@@ -1,4 +1,5 @@
 <div class="breadcrumbs">
+{% if breadcrumbs.length > 1 %}
   <ol>
   {% for breadcrumb in breadcrumbs.reverse() %}
     {% if loop.last %}
@@ -6,8 +7,7 @@
     {% else %}
       <li><a href="{{ breadcrumb.link }}">{{ breadcrumb.title }}</a></li>
     {% endif %}
-  {% else %}
-      <!-- <li>This would display if the breadcrumbs collection were empty</li> -->
   {% endfor %}
   </ol>
+{% endif %}
 </div>
