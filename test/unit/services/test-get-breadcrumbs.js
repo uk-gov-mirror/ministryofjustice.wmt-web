@@ -52,8 +52,8 @@ describe('services/get-breadcrumbs', function () {
     }
     var getBreadcrumbs = proxyquire('../../../app/services/get-breadcrumbs', {'./organisational-hierarchy-tree': getTree})
 
-    expect(getBreadcrumbs(1, 'nps').length).to.eql(1)
-    expect(getBreadcrumbs(1, 'nps')).to.eql(breadcrumbDataHelper.NATIONAL_BREADCRUMBS)
+    expect(getBreadcrumbs(1, 'hmpps').length).to.eql(1)
+    expect(getBreadcrumbs(1, 'hmpps')).to.eql(breadcrumbDataHelper.NATIONAL_BREADCRUMBS)
   })
 
   it('should throw an error when passed an undefined organisation unit', function () {
