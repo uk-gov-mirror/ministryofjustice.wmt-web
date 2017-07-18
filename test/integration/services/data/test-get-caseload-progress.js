@@ -55,15 +55,25 @@ var lduWithTwoTeamsRow = {
   unpaidWorkTotal: 90
 }
 
-// var regionWithTwoLdusRow = {
-//   name: 'Test Region',
-//   communityLast16Weeks: 40,
-//   licenseLast16Weeks: 36,
-//   totalCases: 20,
-//   warrantsTotal: 120,
-//   overdueTerminationsTotal: 120,
-//   unpaidWorkTotal: 120
-// }
+var regionCaseProgressRow = {
+  name: 'Test Region',
+  communityLast16Weeks: 10,
+  licenseLast16Weeks: 9,
+  totalCases: 5,
+  warrantsTotal: 30,
+  overdueTerminationsTotal: 30,
+  unpaidWorkTotal: 30
+}
+
+var regionWithTwoLdusRow = {
+  name: 'Test Region',
+  communityLast16Weeks: 40,
+  licenseLast16Weeks: 36,
+  totalCases: 20,
+  warrantsTotal: 120,
+  overdueTerminationsTotal: 120,
+  unpaidWorkTotal: 120
+}
 
 describe('services/data/get-org-unit-caseload-progress', function () {
   before(function (done) {
@@ -74,7 +84,6 @@ describe('services/data/get-org-unit-caseload-progress', function () {
       })
   })
 
-  // TODO check that is it indeed current - no effective_to date
   it('should retrieve current caseload progress for an offender manager', function (done) {
     getCaseProgress(inserts.filter((item) => item.table === 'workload_owner')[0].id, 'offender-manager')
       .then(function (results) {
@@ -150,20 +159,15 @@ describe('services/data/get-org-unit-caseload-progress', function () {
       })
   })
 
-  // TODO Add back in when national routes updated
-
-  // it('should retrieve current caseload progress for all regions in the system', function (done) {
-  //   var regions = [
-  //     regionWithTwoLdusRow,
-  //     caseProgressRow
-  //   ]
-  //   getCaseProgress(undefined, 'nps')
-  //     .then(function (results) {
-  //       expect(results.length).to.eql(2)
-  //       expect(results).to.eql(regions)
-  //       done()
-  //     })
-  // })
+  it('should retrieve current caseload progress for all regions in the system', function (done) {
+    getCaseProgress(undefined, 'hmpps')
+      .then(function (results) {
+        expect(results.length).to.be.greaterThan(1)
+        expect(results).to.contain(regionWithTwoLdusRow)
+        expect(results).to.contain(regionCaseProgressRow)
+        done()
+      })
+  })
 
   after(function (done) {
     workloadCapacityHelper.removeInsertedData(inserts)
