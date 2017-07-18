@@ -43,7 +43,7 @@
 {% block body_end %}
     <script type="text/javascript">
         var rowTitle = {{ title | dump | safe }}
-        var caseProgress = {{ caseProgress | dump | safe }}
+        var caseProgress = {{ caseProgressList | dump | safe }}
     </script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="/public/javascripts/case-progress.js"></script>
