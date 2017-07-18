@@ -11,7 +11,7 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
   var workloadReportsPromise
 
   if (organisationalUnitType === undefined) {
-    throw new Error(organisationLevel + ' should be offender-manager, region, team or ldu')
+    throw new Error(organisationLevel + ' should be offender-manager, region, team, ldu or hmpps')
   }
 
   if (organisationLevel === routeType.OFFENDER_MANAGER.name) {

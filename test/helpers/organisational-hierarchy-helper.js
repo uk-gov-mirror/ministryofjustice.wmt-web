@@ -11,7 +11,7 @@ var baseRow = {
 }
 
 var baseTree = {
-  N: { name: 'NPS', parent: undefined, children: ['R1'] },
+  N: { name: 'HMPPS', parent: undefined, children: ['R1'] },
   R1: { name: 'Region 1', parent: 'N', children: ['L1'] },
   L1: { name: 'LDU 1', parent: 'R1', children: ['T1'] },
   T1: { name: 'Team 1', parent: 'L1', children: ['I1'] },
@@ -21,7 +21,7 @@ var baseTree = {
 module.exports.ROOT_REF = 'N'
 
 module.exports.ROOT_NODE = {
-  name: 'NPS',
+  name: 'HMPPS',
   parent: undefined,
   children: []
 }
@@ -58,7 +58,7 @@ module.exports.ORGANISATIONAL_HIERARCHY_DATA_MULTIPLE_BRANCHES = [
 ]
 
 module.exports.ORGANISATIONAL_HIERARCHY_TREE_MULTIPLE_BRANCHES = {
-  N: { parent: undefined, name: 'NPS', children: ['R1', 'R2'] },
+  N: { parent: undefined, name: 'HMPPS', children: ['R1', 'R2'] },
   R1: { parent: 'N', name: 'Region 1', children: ['L1', 'L2'] },
   L1: { parent: 'R1', name: 'LDU 1', children: ['T1', 'T2'] },
   T1: { parent: 'L1', name: 'Team 1', children: ['I1', 'I2'] },
@@ -84,7 +84,7 @@ module.exports.ORGANISATIONAL_HIERARCHY_DATA_NULL_VALUES = [
 ]
 
 module.exports.ORGANISATIONAL_HIERARCHY_TREE_NULL_VALUES = Object.assign({}, baseTree, {
-  N: { name: 'NPS', parent: undefined, children: ['R1', 'R2'] },
+  N: { name: 'HMPPS', parent: undefined, children: ['R1', 'R2'] },
   T1: { name: 'Team 1', parent: 'L1', children: ['I1', 'I3', 'I4'] },
   R2: { name: undefined, parent: 'N', children: ['L2'] },
   L2: { name: undefined, parent: 'R2', children: ['T2'] },

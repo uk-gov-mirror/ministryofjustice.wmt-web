@@ -6,17 +6,23 @@ module.exports = function (id, fromDate, toDate, type) {
   var orgUnit = orgUnitFinder('name', type)
   var table = orgUnit.capacityView
 
+  var whereObject = {}
+
+  if (id !== undefined) {
+    whereObject.id = id
+  }
+
   return knex(table)
-    .where(table + '.id', id)
-    .where(table + '.effective_from', '>=', fromDate)
-    .where(table + '.effective_from', '<=', toDate)
-    .select(table + '.total_points',
-            table + '.sdr_points',
-            table + '.sdr_conversion_points',
-            table + '.paroms_points',
-            table + '.available_points',
-            table + '.effective_from',
-            table + '.reduction_hours')
+    .where(whereObject)
+    .where('effective_from', '>=', fromDate)
+    .where('effective_from', '<=', toDate)
+    .select('total_points',
+            'sdr_points',
+            'sdr_conversion_points',
+            'paroms_points',
+            'available_points',
+            'effective_from',
+            'reduction_hours')
     .then(function (results) {
       return results
     })
