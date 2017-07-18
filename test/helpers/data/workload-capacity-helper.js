@@ -52,6 +52,31 @@ var defaultWorkloadPoints = {
   parom: 0
 }
 
+module.exports.addCaseProgressDataForAllOrgUnits = function () {
+  return module.exports.addWorkloadCapacitiesForOffenderManager()
+  .then(function (inserts) {
+    return addOffenderManager(inserts)
+  })
+  .then(function (inserts) {
+    return addTeam(inserts)
+  })
+  .then(function (inserts) {
+    return addOffenderManager(inserts)
+  })
+  .then(function (inserts) {
+    return addLdu(inserts)
+  })
+  .then(function (inserts) {
+    return addTeam(inserts)
+  })
+  .then(function (inserts) {
+    return addOffenderManager(inserts)
+  })
+  .then(function (inserts) {
+    return addPopulatedRegion(inserts)
+  })
+}
+
 module.exports.addWorkloadCapacitiesForOffenderManager = function () {
   var inserts = []
 
@@ -75,69 +100,57 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
     })
     .then(function (ids) {
       inserts.push({ table: 'offender_manager_type', id: ids[0] })
-      return knex('region').returning('id').insert({})
-    })
-    .then(function (ids) {
-      inserts.push({ table: 'region', id: ids[0] })
-      return knex('ldu').returning('id').insert({region_id: ids[0]})
-    })
-    .then(function (ids) {
-      inserts.push({ table: 'ldu', id: ids[0] })
-      return addTeam(inserts)
-    .then(function () {
-      return addOffenderManager(inserts)
-    })
+      return addPopulatedRegion(inserts)
     })
   return promise
 }
 
-module.exports.addWorkloadPointsCalculationsForMultipleOffenderManagers = function () {
-  return module.exports.addWorkloadCapacitiesForOffenderManager()
+var addPopulatedRegion = function (inserts) {
+  return addRegion(inserts)
+  .then(function (inserts) {
+    return addLdu(inserts)
+  })
+  .then(function (inserts) {
+    return addTeam(inserts)
+  })
   .then(function (inserts) {
     return addOffenderManager(inserts)
-    .then(function (workloadOwnerInserts) {
-      return workloadOwnerInserts
-    })
-  })
-}
-
-module.exports.addCaseProgressDataForAllOrgUnits = function () {
-  return module.exports.addWorkloadCapacitiesForOffenderManager()
-  .then(function (inserts) {
-    return addOffenderManager(inserts)
-    .then(function (workloadOwnerInserts) {
-      return workloadOwnerInserts
-    })
-  })
-  .then(function (multipleOmInserts) {
-    return addTeam(multipleOmInserts)
-    .then(function (teamInserts) {
-      return teamInserts
-    })
-  })
-  .then(function (teamInserts) {
-    return addOffenderManager(teamInserts)
-    .then(function (teamWoInserts) {
-      return teamWoInserts
-    })
   })
 }
 
 var addTeam = function (inserts) {
-  return knex('team').returning('id').insert({ldu_id: inserts.filter((item) => item.table === 'ldu')[0].id})
-    .then(function (ids) {
-      inserts.push({table: 'team', id: ids[0]})
-      return inserts
-    })
+  var ldus = inserts.filter((item) => item.table === 'ldu')
+  return knex('team').returning('id').insert({ldu_id: ldus[ldus.length - 1].id, description: 'Test Team'})
+  .then(function (ids) {
+    inserts.push({table: 'team', id: ids[0]})
+    return inserts
+  })
+}
+
+var addLdu = function (inserts) {
+  var regions = inserts.filter((item) => item.table === 'region')
+  return knex('ldu').returning('id').insert({region_id: regions[regions.length - 1].id, description: 'Test LDU'})
+  .then(function (ids) {
+    inserts.push({ table: 'ldu', id: ids[0] })
+    return inserts
+  })
+}
+
+var addRegion = function (inserts) {
+  return knex('region').returning('id').insert({description: 'Test Region'})
+  .then(function (ids) {
+    inserts.push({ table: 'region', id: ids[0] })
+    return inserts
+  })
 }
 
 var addOffenderManager = function (inserts) {
-  return knex('offender_manager').returning('id').insert({type_id: inserts.filter((item) => item.table === 'offender_manager_type')[0].id})
+  return knex('offender_manager').returning('id').insert({type_id: inserts.filter((item) => item.table === 'offender_manager_type')[0].id, forename: 'Test_Forename', surname: 'Test_Surname'})
     .then(function (ids) {
       inserts.push({ table: 'offender_manager', id: ids[0] })
-      var teamIds = inserts.filter((item) => item.table === 'team')
+      var teams = inserts.filter((item) => item.table === 'team')
       return knex('workload_owner').returning('id')
-        .insert({team_id: teamIds[teamIds.length - 1].id,
+        .insert({team_id: teams[teams.length - 1].id,
           offender_manager_id: ids[0]})
     })
     .then(function (ids) {
@@ -176,9 +189,9 @@ var addOffenderManager = function (inserts) {
       ids.forEach((id) => {
         inserts.push({table: 'workload_points_calculations', id: id})
       })
-      var workloadIds = inserts.filter((item) => item.table === 'workload')
+      var workloads = inserts.filter((item) => item.table === 'workload')
       var defaultTier = {
-        workload_id: workloadIds[workloadIds.length - 1].id,
+        workload_id: workloads[workloads.length - 1].id,
         tier_number: 1,
         overdue_terminations_total: 10,
         unpaid_work_total: 10,
