@@ -5,14 +5,16 @@ const proxyquire = require('proxyquire')
 
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 
-const CASE_PROGRESS = {
-  communityLast16Weeks: 1,
-  licenseLast16Weeks: 2,
-  totalCases: 3,
-  warrantsTotal: 4,
-  unpaidWorkTotal: 5,
-  overdueTerminationsTotal: 6
-}
+const CASE_PROGRESS = [
+  {
+    communityLast16Weeks: 1,
+    licenseLast16Weeks: 2,
+    totalCases: 3,
+    warrantsTotal: 4,
+    unpaidWorkTotal: 5,
+    overdueTerminationsTotal: 6
+  }
+]
 
 var id = 1
 var organisationalUnit = 'offender-manager'
@@ -40,7 +42,7 @@ before(function () {
 describe('services/get-case-progress', function () {
   it('should return a result object with a case progress row and title for offender manager', function () {
     getCaseProgress(id, organisationalUnit).then(function (result) {
-      expect(result.caseProgress).to.be.an('object')
+      expect(result.caseProgress).to.be.an('Array')
       expect(result.title).to.equal(expectedTitle)
     })
   })
