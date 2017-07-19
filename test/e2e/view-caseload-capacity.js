@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 
-const workloadCapacityHelper = require('../helpers/data/workload-capacity-helper')
+const workloadCapacityHelper = require('../helpers/data/aggregated-data-helper')
 
 var workloadOwnerIds = []
 

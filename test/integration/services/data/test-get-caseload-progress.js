@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 
-const workloadCapacityHelper = require('../../../helpers/data/workload-capacity-helper')
+const workloadCapacityHelper = require('../../../helpers/data/aggregated-data-helper')
 const getCaseProgress = require('../../../../app/services/data/get-caseload-progress')
 
 var inserts = []
