@@ -23,8 +23,7 @@ trace1 = {
   marker: {color: 'rgb(131, 202, 207)'}, 
   name: 'Community <16WK', 
   orientation: 'h', 
-  type: 'bar', 
-  uid: 'ccd732'
+  type: 'bar'
 }
 trace2 = {
   x: licenseLast16WeeksX,
@@ -33,8 +32,7 @@ trace2 = {
   marker: {color: 'rgb(65, 157, 197)'}, 
   name: 'Licence <16WK', 
   orientation: 'h', 
-  type: 'bar', 
-  uid: '37661e'
+  type: 'bar'
 }
 trace3 = {
   x: totalCasesX,
@@ -43,8 +41,7 @@ trace3 = {
   marker: {color: 'rgb(52, 116, 172)'}, 
   name: 'Total Active Cases', 
   orientation: 'h', 
-  type: 'bar', 
-  uid: 'afc4b3'
+  type: 'bar'
 }
 trace4 = {
   x: warrantsTotalX,
@@ -53,8 +50,7 @@ trace4 = {
   marker: {color: 'rgb(30, 48, 130)'}, 
   name: 'Active Warrants', 
   orientation: 'h', 
-  type: 'bar', 
-  uid: '523497'
+  type: 'bar'
 }
 trace5 = {
   x: unpaidWorkTotalX,
@@ -63,8 +59,7 @@ trace5 = {
   marker: {color: 'rgb(227, 119, 194)'}, 
   name: 'UPW', 
   orientation: 'h', 
-  type: 'bar', 
-  uid: '964533'
+  type: 'bar'
 }
 trace6 = {
   x: overdueTerminationsTotalX,
@@ -73,8 +68,7 @@ trace6 = {
   marker: {color: 'rgb(214, 39, 40)'}, 
   name: 'Overdue Terminations', 
   orientation: 'h', 
-  type: 'bar', 
-  uid: '06b618'
+  type: 'bar'
 }
 
 data = [trace1, trace2, trace3, trace4, trace5, trace6]
