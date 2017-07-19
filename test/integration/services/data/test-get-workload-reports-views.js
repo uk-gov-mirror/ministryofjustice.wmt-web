@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 
-const workloadCapactiyHelper = require('../../../helpers/data/workload-capacity-helper')
+const workloadCapactiyHelper = require('../../../helpers/data/aggregated-data-helper')
 const getWorkloadReportsViews = require('../../../../app/services/data/get-workload-report-views')
 
 const START_DATE = new Date(2009, 0, 1)
@@ -55,7 +55,7 @@ describe('services/data/get-workload-report-views', function () {
   })
 
   after(function (done) {
-    workloadCapactiyHelper.removeWorkloadCapactitiesForOffenderManager(inserts)
+    workloadCapactiyHelper.removeInsertedData(inserts)
       .then(() => done())
   })
 })
