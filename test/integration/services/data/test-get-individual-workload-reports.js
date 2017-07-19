@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 
-const workloadCapactiyHelper = require('../../../helpers/data/workload-capacity-helper')
+const workloadCapactiyHelper = require('../../../helpers/data/aggregated-data-helper')
 const getWorkloadReportsForIndividual = require('../../../../app/services/data/get-individual-workload-reports')
 
 const START_DATE = new Date(2009, 0, 1)
