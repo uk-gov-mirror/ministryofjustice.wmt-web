@@ -1,6 +1,7 @@
 const config = require('../../../knexfile').integrationTests
 const knex = require('knex')(config)
 var Promise = require('bluebird').Promise
+const _ = require('lodash')
 
 var defaultWorkload = {
   total_cases: 5,
@@ -61,19 +62,10 @@ module.exports.addCaseProgressDataForAllOrgUnits = function () {
     return addTeam(inserts)
   })
   .then(function (inserts) {
-    return addOffenderManager(inserts)
-  })
-  .then(function (inserts) {
     return addLdu(inserts)
   })
   .then(function (inserts) {
-    return addTeam(inserts)
-  })
-  .then(function (inserts) {
-    return addOffenderManager(inserts)
-  })
-  .then(function (inserts) {
-    return addPopulatedRegion(inserts)
+    return addRegion(inserts)
   })
 }
 
@@ -100,21 +92,19 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
     })
     .then(function (ids) {
       inserts.push({ table: 'offender_manager_type', id: ids[0] })
-      return addPopulatedRegion(inserts)
+      return addRegion(inserts)
     })
   return promise
 }
 
-var addPopulatedRegion = function (inserts) {
-  return addRegion(inserts)
+var addRegion = function (inserts) {
+  return knex('region').returning('id').insert({description: 'Test Region'})
+  .then(function (ids) {
+    inserts.push({ table: 'region', id: ids[0] })
+    return inserts
+  })
   .then(function (inserts) {
     return addLdu(inserts)
-  })
-  .then(function (inserts) {
-    return addTeam(inserts)
-  })
-  .then(function (inserts) {
-    return addOffenderManager(inserts)
   })
 }
 
@@ -125,6 +115,9 @@ var addTeam = function (inserts) {
     inserts.push({table: 'team', id: ids[0]})
     return inserts
   })
+  .then(function (inserts) {
+    return addOffenderManager(inserts)
+  })
 }
 
 var addLdu = function (inserts) {
@@ -134,13 +127,8 @@ var addLdu = function (inserts) {
     inserts.push({ table: 'ldu', id: ids[0] })
     return inserts
   })
-}
-
-var addRegion = function (inserts) {
-  return knex('region').returning('id').insert({description: 'Test Region'})
-  .then(function (ids) {
-    inserts.push({ table: 'region', id: ids[0] })
-    return inserts
+  .then(function (inserts) {
+    return addTeam(inserts)
   })
 }
 
@@ -238,4 +226,14 @@ module.exports.removeInsertedData = function (inserts) {
   return Promise.each(inserts, (insert) => {
     return knex(insert.table).where('id', insert.id).del()
   })
+}
+
+module.exports.rowGenerator = function (name, baseRow, multiplier) {
+  var row = Object.assign({}, baseRow)
+  if (multiplier !== undefined) {
+    _.forOwn(baseRow, function (value, key) {
+      row[key] = value * multiplier
+    })
+  }
+  return Object.assign({}, row, { name: name })
 }
