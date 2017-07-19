@@ -8,7 +8,7 @@ module.exports = function (id, organisationLevel) {
   var caseProgressPromise = getCaseProgress(id, organisationLevel)
 
   return caseProgressPromise.then(function (results) {
-    result.caseProgressList = [results]
+    result.caseProgressList = results
     result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
     result.title = result.breadcrumbs[0].title
     result.subTitle = organisationalUnitType.displayText
