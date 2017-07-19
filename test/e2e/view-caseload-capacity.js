@@ -52,9 +52,20 @@ describe('View your caseload capacity flow', () => {
     .waitForExist('.plot-container.plotly')
     .waitForExist('.heading-secondary')
     .getValue('.heading-secondary', function (title) {
-      expect(title).to.equal('Region')
+      expect(title).to.equal('Regionbvhjbhjbj')
     })
   })
 
-  // TODO Add in National level
+  it('should navigate to the national caseload capacity screen', () => {
+    return browser.url('/hmpps/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/caseload-capacity')
+      .waitForExist('.sln-subnav')
+      .waitForExist('.sln-page-subtitle')
+      .waitForExist('.js-plotly-plot')
+      .waitForExist('.breadcrumbs', true)
+      .getValue('.sln-page-subtitle', function (title) {
+        console.log('TITLE!!!!!!!!!!!!!!!')
+        console.log(title)
+        expect(title).to.equal('HMPPSbhjbhj') // This should fail because of case
+      })
+  })
 })

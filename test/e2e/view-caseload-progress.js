@@ -25,55 +25,57 @@ describe('View caseload progress flow', () => {
       })
   })
 
-  it('should navigate to the team caseload progress screen', () => {
-    return browser.url('/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/case-progress')
-      .waitForExist('.breadcrumbs')
-      .waitForExist('.sln-subnav')
-      .waitForExist('[href="/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/caseload-capacity"]')
-      .waitForExist('[href="/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/case-progress"]')
-      .waitForExist('.sln-page-subtitle')
-      .waitForExist('.js-plotly-plot')
-      .getValue('.sln-page-subtitle', function (title) {
-        expect(title).to.equal('Team')
-      })
-  })
+  // TODO Add back in once case progress front end is in
 
-  it('should navigate to the ldu caseload progress screen', () => {
-    return browser.url('/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/case-progress')
-      .waitForExist('.breadcrumbs')
-      .waitForExist('.sln-subnav')
-      .waitForExist('[href="/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/caseload-capacity"]')
-      .waitForExist('[href="/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/case-progress"]')
-      .waitForExist('.sln-page-subtitle')
-      .waitForExist('.js-plotly-plot')
-      .getValue('.sln-page-subtitle', function (title) {
-        expect(title).to.equal('LDU')
-      })
-  })
+  // it('should navigate to the team caseload progress screen', () => {
+  //   return browser.url('/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/case-progress')
+  //     .waitForExist('.breadcrumbs')
+  //     .waitForExist('.sln-subnav')
+  //     .waitForExist('[href="/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/caseload-capacity"]')
+  //     .waitForExist('[href="/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/case-progress"]')
+  //     .waitForExist('.sln-page-subtitle')
+  //     .waitForExist('.js-plotly-plot')
+  //     .getValue('.sln-page-subtitle', function (title) {
+  //       expect(title).to.equal('Team')
+  //     })
+  // })
 
-  it('should navigate to the region caseload progress screen', () => {
-    return browser.url('/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/case-progress')
-      .waitForExist('.breadcrumbs')
-      .waitForExist('.sln-subnav')
-      .waitForExist('[href="/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/caseload-capacity"]')
-      .waitForExist('[href="/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/case-progress"]')
-      .waitForExist('.sln-page-subtitle')
-      .waitForExist('.js-plotly-plot')
-      .getValue('.sln-page-subtitle', function (title) {
-        expect(title).to.equal('Region')
-      })
-  })
+  // it('should navigate to the ldu caseload progress screen', () => {
+  //   return browser.url('/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/case-progress')
+  //     .waitForExist('.breadcrumbs')
+  //     .waitForExist('.sln-subnav')
+  //     .waitForExist('[href="/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/caseload-capacity"]')
+  //     .waitForExist('[href="/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/case-progress"]')
+  //     .waitForExist('.sln-page-subtitle')
+  //     .waitForExist('.js-plotly-plot')
+  //     .getValue('.sln-page-subtitle', function (title) {
+  //       expect(title).to.equal('LDU')
+  //     })
+  // })
 
-  it('should navigate to the national caseload progress screen', () => {
-    return browser.url('/hmpps/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/case-progress')
-      .waitForExist('.sln-subnav')
-      .waitForExist('[href="/hmpps/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/caseload-capacity"]')
-      .waitForExist('[href="/hmpps/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/case-progress"]')
-      .waitForExist('.sln-page-subtitle')
-      .waitForExist('.js-plotly-plot')
-      .isExisting('.breadcrumbs').should.eventually.equal(false)
-      .getValue('.sln-page-subtitle', function (title) {
-        expect(title).to.equal('HMPPS') // This should fail because of case
-      })
-  })
+  // it('should navigate to the region caseload progress screen', () => {
+  //   return browser.url('/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/case-progress')
+  //     .waitForExist('.breadcrumbs')
+  //     .waitForExist('.sln-subnav')
+  //     .waitForExist('[href="/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/caseload-capacity"]')
+  //     .waitForExist('[href="/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/case-progress"]')
+  //     .waitForExist('.sln-page-subtitle')
+  //     .waitForExist('.js-plotly-plot')
+  //     .getValue('.sln-page-subtitle', function (title) {
+  //       expect(title).to.equal('Region')
+  //     })
+  // })
+
+  // it('should navigate to the national caseload progress screen', () => {
+  //   return browser.url('/hmpps/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/case-progress')
+  //     .waitForExist('.sln-subnav')
+  //     .waitForExist('[href="/hmpps/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/caseload-capacity"]')
+  //     .waitForExist('[href="/hmpps/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/case-progress"]')
+  //     .waitForExist('.sln-page-subtitle')
+  //     .waitForExist('.js-plotly-plot')
+  //     .waitForExist('.breadcrumbs', true)
+  //     .getValue('.sln-page-subtitle', function (title) {
+  //       expect(title).to.equal('HMPPS') // This should fail because of case
+  //     })
+  // })
 })
