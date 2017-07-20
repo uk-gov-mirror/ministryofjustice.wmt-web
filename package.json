@@ -6,7 +6,7 @@
   "scripts": {
     "start": "gulp",
     "unit-test": "standard && mocha --recursive test/unit/",
-    "integration-test": "mocha --recursive test/integration --timeout=10000",
+    "integration-test": "gulp assets && mocha --recursive test/integration --timeout=10000",
     "test": "yarn unit-test && yarn integration-test",
     "test-e2e": "gulp --gulpfile gulpfile-e2e.js"
   },
