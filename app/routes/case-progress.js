@@ -19,7 +19,7 @@ module.exports = function (router) {
         subTitle: result.subTitle,
         breadcrumbs: result.breadcrumbs,
         subNav: getSubNav(id, organisationLevel, req.path),
-        caseProgress: result.caseProgress
+        caseProgressList: result.caseProgressList
       })
     })
   })
