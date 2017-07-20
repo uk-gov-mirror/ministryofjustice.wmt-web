@@ -16,10 +16,13 @@ describe('View your caseload capacity flow', () => {
     return browser.url('/offender-manager/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id + '/caseload-capacity')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
+      .waitForExist('[href="/offender-manager/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id + '/caseload-capacity"]')
+      .waitForExist('[href="/offender-manager/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id + '/case-progress"]')
       .waitForExist('.plot-container.plotly')
-      .waitForExist('.heading-secondary')
-      .getValue('.heading-secondary', function (title) {
-        expect(title).to.contains('Offender Manager')
+      .waitForExist('.sln-page-subtitle')
+      .getText('.sln-page-subtitle')
+      .then(function (text) {
+        expect(text).to.equal('Offender Manager')
       })
   })
 
@@ -27,10 +30,13 @@ describe('View your caseload capacity flow', () => {
     return browser.url('/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/caseload-capacity')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
+      .waitForExist('[href="/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/caseload-capacity"]')
+      .waitForExist('[href="/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/case-progress"]')
       .waitForExist('.plot-container.plotly')
-      .waitForExist('.heading-secondary')
-      .getValue('.heading-secondary', function (title) {
-        expect(title).to.equal('Team')
+      .waitForExist('.sln-page-subtitle')
+      .getText('.sln-page-subtitle')
+      .then(function (text) {
+        expect(text).to.equal('Team')
       })
   })
 
@@ -38,10 +44,13 @@ describe('View your caseload capacity flow', () => {
     return browser.url('/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/caseload-capacity')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
+      .waitForExist('[href="/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/caseload-capacity"]')
+      .waitForExist('[href="/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/case-progress"]')
       .waitForExist('.plot-container.plotly')
-      .waitForExist('.heading-secondary')
-      .getValue('.heading-secondary', function (title) {
-        expect(title).to.contains('LDU')
+      .waitForExist('.sln-page-subtitle')
+      .getText('.sln-page-subtitle')
+      .then(function (text) {
+        expect(text).to.equal('LDU')
       })
   })
 
@@ -49,23 +58,27 @@ describe('View your caseload capacity flow', () => {
     return browser.url('/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/caseload-capacity')
     .waitForExist('.breadcrumbs')
     .waitForExist('.sln-subnav')
+    .waitForExist('[href="/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/caseload-capacity"]')
+    .waitForExist('[href="/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/case-progress"]')
     .waitForExist('.plot-container.plotly')
-    .waitForExist('.heading-secondary')
-    .getValue('.heading-secondary', function (title) {
-      expect(title).to.equal('Regionbvhjbhjbj')
-    })
+      .waitForExist('.sln-page-subtitle')
+      .getText('.sln-page-subtitle')
+      .then(function (text) {
+        expect(text).to.equal('Region')
+      })
   })
 
   it('should navigate to the national caseload capacity screen', () => {
-    return browser.url('/hmpps/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/caseload-capacity')
+    return browser.url('/hmpps/0/caseload-capacity')
       .waitForExist('.sln-subnav')
-      .waitForExist('.sln-page-subtitle')
+      .waitForExist('[href="/hmpps/0/caseload-capacity"]')
+      .waitForExist('[href="/hmpps/0/case-progress"]')
       .waitForExist('.js-plotly-plot')
       .waitForExist('.breadcrumbs', true)
-      .getValue('.sln-page-subtitle', function (title) {
-        console.log('TITLE!!!!!!!!!!!!!!!')
-        console.log(title)
-        expect(title).to.equal('HMPPSbhjbhj') // This should fail because of case
+      .waitForExist('.sln-page-subtitle')
+      .getText('.sln-page-subtitle')
+      .then(function (text) {
+        expect(text).to.equal('National')
       })
   })
 })
