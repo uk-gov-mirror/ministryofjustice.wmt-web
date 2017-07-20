@@ -6,7 +6,7 @@ unpaidWorkTotalX = []
 overdueTerminationsTotalX = []
 namesY = []
 
-caseProgress[0].forEach(function (caseInfo) {
+caseProgress.forEach(function (caseInfo) {
   commLast16WeeksX.push(caseInfo.communityLast16Weeks)
   licenseLast16WeeksX.push(caseInfo.licenseLast16Weeks)
   totalCasesX.push(caseInfo.totalCases)
