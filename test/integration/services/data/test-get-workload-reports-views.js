@@ -55,7 +55,6 @@ describe('services/data/get-workload-report-views', function () {
       getExpectedNationalCapacity(START_DATE, END_DATE).then(function (capacityResults) {
         expect(queryResults).to.eql(capacityResults)
       })
-
       done()
     })
   })
