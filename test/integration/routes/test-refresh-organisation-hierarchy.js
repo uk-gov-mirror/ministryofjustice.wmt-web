@@ -2,14 +2,13 @@ const supertest = require('supertest')
 const expect = require('chai').expect
 const REFRESH_ORG_HIERARCHY_URI = '/refresh'
 const app = require('../../../app/app')
-const _ = require('underscore')
 
 const workloadCapactiyHelper = require('../../helpers/data/aggregated-data-helper')
 const organisationalHierarchyTree = require('../../../app/services/organisational-hierarchy-tree')
 
 var inserts = []
 
-describe(`${REFRESH_ORG_HIERARCHY_URI}`, function () {
+describe(REFRESH_ORG_HIERARCHY_URI, function () {
   before(function (done) {
     workloadCapactiyHelper.addWorkloadCapacitiesForOffenderManager()
       .then(function (builtInserts) {
@@ -20,7 +19,6 @@ describe(`${REFRESH_ORG_HIERARCHY_URI}`, function () {
 
   it('should refresh the hierarchy and the new inserts should appear', function (done) {
     var oldTree = organisationalHierarchyTree.get()
-    console.log(oldTree)
     supertest(app)
         .get(REFRESH_ORG_HIERARCHY_URI)
         .expect(200)
