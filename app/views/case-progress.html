@@ -13,26 +13,30 @@
 {% include "includes/sub-nav.html" %}
 
 <table class="non-javascript">
-    <tr>
-        <th>Name</th>
-        <th>Community Last 16 Weeks</th>
-        <th>License Last 16 Weeks</th>
-        <th>Total Cases</th>
-        <th>Warrants Total</th>
-        <th>Unpaid Work Total</th>
-        <th>Overdue Terminations Total</th>
-    </tr>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Community Last 16 Weeks</th>
+            <th>License Last 16 Weeks</th>
+            <th>Total Cases</th>
+            <th>Warrants Total</th>
+            <th>Unpaid Work Total</th>
+            <th>Overdue Terminations Total</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for caseProgress in caseProgressList%}
-    <tr>
-        <td>{{ caseProgress.name }}</td>
-        <td>{{ caseProgress.communityLast16Weeks }}</td>
-        <td>{{ caseProgress.licenseLast16Weeks }}</td>
-        <td>{{ caseProgress.totalCases }}</td>
-        <td>{{ caseProgress.warrantsTotal }}</td>
-        <td>{{ caseProgress.unpaidWorkTotal }}</td>
-        <td>{{ caseProgress.overdueTerminationsTotal }}</td>
-    </tr>
+        <tr>
+            <th scope="row">{{ caseProgress.name }}</th>
+            <td>{{ caseProgress.communityLast16Weeks }}</td>
+            <td>{{ caseProgress.licenseLast16Weeks }}</td>
+            <td>{{ caseProgress.totalCases }}</td>
+            <td>{{ caseProgress.warrantsTotal }}</td>
+            <td>{{ caseProgress.unpaidWorkTotal }}</td>
+            <td>{{ caseProgress.overdueTerminationsTotal }}</td>
+        </tr>
     {% endfor%}
+    </tbody>
 </table>
 
 <div id="plotly-div-cases"></div>

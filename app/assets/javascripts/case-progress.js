@@ -124,7 +124,7 @@ layout = {
     tickprefix: '', 
     ticks: 'outside', 
     ticksuffix: '', 
-    title: 'Cases', 
+    title: 'Number of Cases', 
     type: 'linear', 
     zeroline: true, 
     zerolinewidth: 1
