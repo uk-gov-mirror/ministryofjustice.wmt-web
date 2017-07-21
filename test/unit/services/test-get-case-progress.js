@@ -35,7 +35,6 @@ before(function () {
 })
 
 describe('services/get-case-progress', function () {
-  
   it('should return a result array with a case progress row, title and breadcrumbs for offender manager', function (done) {
     getCaseProgress(id, 'offender-manager').then(function (result) {
       expect(result.caseProgressList).to.be.an('Array')
