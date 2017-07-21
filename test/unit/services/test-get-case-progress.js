@@ -17,40 +17,71 @@ const CASE_PROGRESS = [
 ]
 
 var id = 1
-var organisationalUnit = 'offender-manager'
 var breadcrumbs = breadcrumbHelper.OFFENDER_MANAGER_BREADCRUMBS
 var expectedTitle = breadcrumbs[0].title
-var expectedSubNav = [{id: '1', link: 'link'}]
 
 var getCaseProgress
-var getCaseProgressRow
+var getCaseProgressList
 var getBreadcrumbs
-var getSubNav
 
 before(function () {
-  getCaseProgressRow = sinon.stub()
+  getCaseProgressList = sinon.stub()
   getBreadcrumbs = sinon.stub().returns(breadcrumbs)
-  getSubNav = sinon.stub().returns(expectedSubNav)
   getCaseProgress =
       proxyquire('../../../app/services/get-case-progress',
-        {'./data/get-individual-caseload-progress': getCaseProgressRow,
-          './get-breadcrumbs': getBreadcrumbs,
-          './get-sub-nav': getSubNav})
-  getCaseProgressRow.resolves(CASE_PROGRESS)
+        {'./data/get-caseload-progress': getCaseProgressList,
+          './get-breadcrumbs': getBreadcrumbs})
+  getCaseProgressList.resolves(CASE_PROGRESS)
 })
 
 describe('services/get-case-progress', function () {
-  it('should return a result object with a case progress row and title for offender manager', function () {
-    getCaseProgress(id, organisationalUnit).then(function (result) {
-      expect(result.caseProgress).to.be.an('Array')
+  it('should return a result array with a case progress row, title and breadcrumbs for offender manager', function (done) {
+    getCaseProgress(id, 'offender-manager').then(function (result) {
+      expect(result.caseProgressList).to.be.an('Array')
       expect(result.title).to.equal(expectedTitle)
+      expect(result.breadcrumbs).to.be.an('Array')
+      expect(result.breadcrumbs).to.eql(breadcrumbs)
+      done()
     })
   })
 
-  it('should return a result object with expected breadcrumbs for offender manager', function () {
-    getCaseProgress(id, organisationalUnit).then(function (result) {
+  it('should return a result array with a case progress row, title and breadcrumbs for team', function (done) {
+    getCaseProgress(id, 'team').then(function (result) {
+      expect(result.caseProgressList).to.be.an('Array')
+      expect(result.title).to.equal(expectedTitle)
       expect(result.breadcrumbs).to.be.an('Array')
       expect(result.breadcrumbs).to.eql(breadcrumbs)
+      done()
+    })
+  })
+
+  it('should return a result array with a case progress row, title and breadcrumbs for ldu', function (done) {
+    getCaseProgress(id, 'ldu').then(function (result) {
+      expect(result.caseProgressList).to.be.an('Array')
+      expect(result.title).to.equal(expectedTitle)
+      expect(result.breadcrumbs).to.be.an('Array')
+      expect(result.breadcrumbs).to.eql(breadcrumbs)
+      done()
+    })
+  })
+
+  it('should return a result array with a case progress row, title and breadcrumbs for region', function (done) {
+    getCaseProgress(id, 'region').then(function (result) {
+      expect(result.caseProgressList).to.be.an('Array')
+      expect(result.title).to.equal(expectedTitle)
+      expect(result.breadcrumbs).to.be.an('Array')
+      expect(result.breadcrumbs).to.eql(breadcrumbs)
+      done()
+    })
+  })
+
+  it('should return a result array with a case progress row, title and breadcrumbs for hmpps', function (done) {
+    getCaseProgress(id, 'hmpps').then(function (result) {
+      expect(result.caseProgressList).to.be.an('Array')
+      expect(result.title).to.equal(expectedTitle)
+      expect(result.breadcrumbs).to.be.an('Array')
+      expect(result.breadcrumbs).to.eql(breadcrumbs)
+      done()
     })
   })
 })
