@@ -31,7 +31,7 @@ module.exports.fromIdAndName = function (id, name) {
   var numberRegex = /^[0-9]+$/
 
   if (id === undefined || id === '') {
-    link = '/' + name
+    link = '/' + name + '/0'
   } else {
     if (!numberRegex.test(id.toString())) {
       throw new TypeError('ID must be a number')
