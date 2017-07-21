@@ -33,24 +33,26 @@ before(function () {
   getSubNav = sinon.stub().returns(expectedSubNav)
   getCaseProgress =
       proxyquire('../../../app/services/get-case-progress',
-        {'./data/get-individual-caseload-progress': getCaseProgressRow,
+        {'./data/get-caseload-progress': getCaseProgressRow,
           './get-breadcrumbs': getBreadcrumbs,
           './get-sub-nav': getSubNav})
   getCaseProgressRow.resolves(CASE_PROGRESS)
 })
 
 describe('services/get-case-progress', function () {
-  it('should return a result object with a case progress row and title for offender manager', function () {
+  it('should return a result array with a case progress row and title for offender manager', function (done) {
     getCaseProgress(id, organisationalUnit).then(function (result) {
-      expect(result.caseProgress).to.be.an('Array')
+      expect(result.caseProgressList).to.be.an('Array')
       expect(result.title).to.equal(expectedTitle)
+      done()
     })
   })
 
-  it('should return a result object with expected breadcrumbs for offender manager', function () {
+  it('should return a result object with expected breadcrumbs for offender manager', function (done) {
     getCaseProgress(id, organisationalUnit).then(function (result) {
       expect(result.breadcrumbs).to.be.an('Array')
       expect(result.breadcrumbs).to.eql(breadcrumbs)
+      done()
     })
   })
 })
