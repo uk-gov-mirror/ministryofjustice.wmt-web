@@ -1,4 +1,7 @@
 module.exports = {
+  LOGGING_PATH: process.env.LOGGING_PATH || 'logs/wmt-web.log',
+  LOGGING_LEVEL: process.env.LOGGING_LEVEL || 'DEBUG',
+
   // Session and Cookie security (defaults for development)
   APPLICATION_SECRET: process.env.WMT_WEB_APPLICATION_SECRET, // NO DEFAULT FOR SECURITY REASONS, WILL FAIL IF NOT SET
   SECURE_COOKIE: process.env.WMT_WEB_SECURE_COOKIE || 'false',
