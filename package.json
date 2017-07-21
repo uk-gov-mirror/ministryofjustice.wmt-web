@@ -5,9 +5,9 @@
   "main": "app/app.js",
   "scripts": {
     "start": "gulp",
-    "test": "gulp unit-test integration-test",
-    "unit-test": "gulp unit-test",
-    "integration-test": "gulp integration-test",
+    "unit-test": "standard && mocha --recursive test/unit/",
+    "integration-test": "gulp assets && mocha --recursive test/integration --timeout=10000",
+    "test": "yarn unit-test && yarn integration-test",
     "test-e2e": "gulp --gulpfile gulpfile-e2e.js"
   },
   "standard": {
@@ -30,7 +30,13 @@
   "devDependencies": {
     "cheerio": "^1.0.0-rc.2",
     "gulp-standard": "9.0.x",
-    "standard": "^10.0.2"
+    "mocha": "3.2.x",
+    "sinon": "^1.17.5",
+    "sinon-bluebird": "^3.1.0",
+    "standard": "^10.0.2",
+    "supertest": "3.0.x",
+    "wdio-mocha-framework": "^0.5.10",
+    "webdriverio": "^4.8.0"
   },
   "dependencies": {
     "body-parser": "1.17.x",
@@ -52,7 +58,6 @@
     "helmet": "^3.6.0",
     "knex": "0.12.x",
     "lodash": "^4.17.4",
-    "mocha": "3.2.x",
     "moment": "^2.18.1",
     "mssql": "3.3.0",
     "nunjucks": "3.0.x",
@@ -61,13 +66,8 @@
     "proxyquire": "1.7.x",
     "selenium-standalone": "^6.5.0",
     "serve-favicon": "2.4.x",
-    "sinon": "^1.17.5",
-    "sinon-bluebird": "^3.1.0",
-    "sql-cli": "^0.6.2",
-    "supertest": "3.0.x",
+    "underscore": "^1.8.3",
     "util": "^0.10.3",
-    "validator": "^7.0.0",
-    "wdio-mocha-framework": "^0.5.10",
-    "webdriverio": "^4.8.0"
+    "validator": "^7.0.0"
   }
 }

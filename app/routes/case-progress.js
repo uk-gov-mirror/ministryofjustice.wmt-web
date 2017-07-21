@@ -1,15 +1,14 @@
 const getCaseProgress = require('../services/get-case-progress')
-const orgUnit = require('../constants/organisation-unit')
 const getSubNav = require('../services/get-sub-nav')
+const organisationUnit = require('../constants/organisation-unit')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/case-progress', function (req, res, next) {
-    var id = req.params.id
     var organisationLevel = req.params.organisationLevel
+    var id
 
-    // Currently only dealing with Offender Managers
-    if (organisationLevel !== orgUnit.OFFENDER_MANAGER.name) {
-      throw new Error(organisationLevel + ' should be offender-manager')
+    if (organisationLevel !== organisationUnit.NATIONAL.name) {
+      id = req.params.id
     }
 
     var caseProgressPromise = getCaseProgress(id, organisationLevel)
@@ -20,7 +19,7 @@ module.exports = function (router) {
         subTitle: result.subTitle,
         breadcrumbs: result.breadcrumbs,
         subNav: getSubNav(id, organisationLevel, req.path),
-        caseProgress: result.caseProgress
+        caseProgressList: result.caseProgressList
       })
     })
   })

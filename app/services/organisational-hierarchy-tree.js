@@ -5,7 +5,7 @@ var tree
 
 module.exports.build = function () {
   tree = {}
-  tree[ROOT_REF] = { name: 'NPS', parent: undefined, children: [] }
+  tree[ROOT_REF] = { name: 'HMPPS', parent: undefined, children: [] }
 
   return getOrganisationalHierarchyData().then(function (result) {
     result.forEach(function (row) {

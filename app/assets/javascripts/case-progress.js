@@ -1,65 +1,77 @@
+commLast16WeeksX = []
+licenseLast16WeeksX = []
+totalCasesX = []
+warrantsTotalX = []
+unpaidWorkTotalX = []
+overdueTerminationsTotalX = []
+namesY = []
+
+caseProgress.forEach(function (caseInfo) {
+  commLast16WeeksX.push(caseInfo.communityLast16Weeks)
+  licenseLast16WeeksX.push(caseInfo.licenseLast16Weeks)
+  totalCasesX.push(caseInfo.totalCases)
+  warrantsTotalX.push(caseInfo.warrantsTotal)
+  unpaidWorkTotalX.push(caseInfo.unpaidWorkTotal)
+  overdueTerminationsTotalX.push(caseInfo.overdueTerminationsTotal)
+  namesY.push(caseInfo.name)
+})
+
 trace1 = {
-  x: [caseProgress.communityLast16Weeks], 
-  y: [rowTitle], 
+  x: commLast16WeeksX,
+  y: namesY,
   hoverinfo: 'x', 
   marker: {color: 'rgb(131, 202, 207)'}, 
   name: 'Community <16WK', 
   orientation: 'h', 
-  type: 'bar', 
-  uid: 'ccd732'
-};
+  type: 'bar'
+}
 trace2 = {
-  x: [caseProgress.licenseLast16Weeks], 
-  y: [rowTitle], 
+  x: licenseLast16WeeksX,
+  y: namesY,
   hoverinfo: 'x', 
   marker: {color: 'rgb(65, 157, 197)'}, 
   name: 'Licence <16WK', 
   orientation: 'h', 
-  type: 'bar', 
-  uid: '37661e'
-};
+  type: 'bar'
+}
 trace3 = {
-  x: [caseProgress.totalCases], 
-  y: [rowTitle], 
+  x: totalCasesX,
+  y: namesY,
   hoverinfo: 'x', 
   marker: {color: 'rgb(52, 116, 172)'}, 
   name: 'Total Active Cases', 
   orientation: 'h', 
-  type: 'bar', 
-  uid: 'afc4b3'
-};
+  type: 'bar'
+}
 trace4 = {
-  x: [caseProgress.warrantsTotal], 
-  y: [rowTitle], 
+  x: warrantsTotalX,
+  y: namesY,
   hoverinfo: 'x', 
   marker: {color: 'rgb(30, 48, 130)'}, 
   name: 'Active Warrants', 
   orientation: 'h', 
-  type: 'bar', 
-  uid: '523497'
-};
+  type: 'bar'
+}
 trace5 = {
-  x: [caseProgress.unpaidWorkTotal], 
-  y: [rowTitle], 
+  x: unpaidWorkTotalX,
+  y: namesY,
   hoverinfo: 'x', 
   marker: {color: 'rgb(227, 119, 194)'}, 
   name: 'UPW', 
   orientation: 'h', 
-  type: 'bar', 
-  uid: '964533'
-};
+  type: 'bar'
+}
 trace6 = {
-  x: [caseProgress.overdueTerminationsTotal], 
-  y: [rowTitle], 
+  x: overdueTerminationsTotalX,
+  y: namesY,
   hoverinfo: 'x', 
   marker: {color: 'rgb(214, 39, 40)'}, 
   name: 'Overdue Terminations', 
   orientation: 'h', 
-  type: 'bar', 
-  uid: '06b618'
-};
-data = [trace1, trace2, trace3, trace4, trace5, trace6];
+  type: 'bar'
+}
 
+data = [trace1, trace2, trace3, trace4, trace5, trace6]
 
 layout = {
   autosize: true, 
@@ -112,7 +124,7 @@ layout = {
     tickprefix: '', 
     ticks: 'outside', 
     ticksuffix: '', 
-    title: 'Cases', 
+    title: 'Number of Cases', 
     type: 'linear', 
     zeroline: true, 
     zerolinewidth: 1
