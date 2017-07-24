@@ -205,9 +205,9 @@ var addOffenderManager = function (inserts) {
 module.exports.selectIdsForWorkloadOwner = function () {
   var results = []
 
-  var promise = knex('workload_owner').first('id', 'team_id')
+  var promise = knex('workload_owner').first('id', 'team_id', 'grade')
     .then(function (result) {
-      results.push({ table: 'workload_owner', id: result.id }, { table: 'team', id: result.team_id })
+      results.push({ table: 'workload_owner', id: result.id, grade: result.grade }, { table: 'team', id: result.team_id })
       return knex('team').select('ldu_id').where('id', '=', result.team_id)
     })
     .then(function (result) {
