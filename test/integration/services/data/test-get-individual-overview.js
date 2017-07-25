@@ -5,7 +5,7 @@ const getIndividualOverview = require('../../../../app/services/data/get-individ
 
 var inserts = []
 
-overview = {
+var overview = {
   grade: 'PO',
   teamName: 'Test Team',
   availablePoints: 10,

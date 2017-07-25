@@ -130,10 +130,10 @@ var addLdu = function (inserts) {
 
 var addOffenderManager = function (inserts) {
   return knex('offender_manager').returning('id').insert(
-      {type_id: inserts.filter((item) => item.table === 'offender_manager_type')[0].id, 
-       forename: 'Test_Forename', 
-       surname: 'Test_Surname',
-       grade_code: 'PO'})
+    {type_id: inserts.filter((item) => item.table === 'offender_manager_type')[0].id,
+      forename: 'Test_Forename',
+      surname: 'Test_Surname',
+      grade_code: 'PO'})
     .then(function (ids) {
       inserts.push({ table: 'offender_manager', id: ids[0] })
       var teams = inserts.filter((item) => item.table === 'team')
