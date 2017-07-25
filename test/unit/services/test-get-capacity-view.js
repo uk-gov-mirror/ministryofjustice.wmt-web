@@ -9,9 +9,6 @@ const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 const CAPACITY_RESULTS = [
   { effective_from: '2017-01-01',
     total_points: 100,
-    sdr_points: 100,
-    sdr_conversion_points: 100,
-    paroms_points: 100,
     available_points: 100,
     reduction_hours: 6}
 ]

@@ -17,9 +17,6 @@ module.exports = function (id, fromDate, toDate, type) {
     .where('effective_from', '>=', fromDate)
     .where('effective_from', '<=', toDate)
     .select('total_points',
-            'sdr_points',
-            'sdr_conversion_points',
-            'paroms_points',
             'available_points',
             'effective_from',
             'reduction_hours')
