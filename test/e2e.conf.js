@@ -1,8 +1,10 @@
+const appConfig = require('../config.js')
+
 exports.config = {
   specs: ['./test/e2e/**/*.js'],
   exclude: [],
   maxInstances: 1,
-  baseUrl: 'http://localhost:3000',
+  baseUrl: appConfig.BASE_URL,
   capabilities: [{
     maxInstances: 1,
     browserName: 'chrome'
