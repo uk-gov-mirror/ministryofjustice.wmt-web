@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Script to run pa11y accessibility checker against local running copy
-# generates html reports stored in test/accessibility
 # requires pa11y installed globally `npm install -g pa11y`
 # requires existing workload data in the application so screens load correctly
 
