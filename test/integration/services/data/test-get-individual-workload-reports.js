@@ -22,7 +22,7 @@ describe('services/data/get-capacity-for-individual', function () {
     .then(function (results) {
       expect(results.length).to.equal(1)
       var expectedResults = [
-        {effective_from: START_DATE, total_points: 20, sdr_points: 0, sdr_conversion_points: 0, paroms_points: 0, available_points: 10, reduction_hours: 3}
+        {effective_from: START_DATE, total_points: 20, available_points: 10, reduction_hours: 3}
       ]
       expect(results).to.eql(expectedResults)
       done()
