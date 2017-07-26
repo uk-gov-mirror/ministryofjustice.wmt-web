@@ -84,10 +84,6 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
       ids.forEach(function (id) {
         inserts.push({table: 'workload_report', id: id})
       })
-      return knex('working_hours').returning('id').insert({})
-    })
-    .then(function (ids) {
-      inserts.push({table: 'working_hours', id: ids[0]})
       return knex('offender_manager_type').returning('id').insert({description: 'test'})
     })
     .then(function (ids) {
@@ -133,13 +129,18 @@ var addLdu = function (inserts) {
 }
 
 var addOffenderManager = function (inserts) {
-  return knex('offender_manager').returning('id').insert({type_id: inserts.filter((item) => item.table === 'offender_manager_type')[0].id, forename: 'Test_Forename', surname: 'Test_Surname'})
+  return knex('offender_manager').returning('id').insert(
+    {type_id: inserts.filter((item) => item.table === 'offender_manager_type')[0].id,
+      forename: 'Test_Forename',
+      surname: 'Test_Surname',
+      grade_code: 'PO'})
     .then(function (ids) {
       inserts.push({ table: 'offender_manager', id: ids[0] })
       var teams = inserts.filter((item) => item.table === 'team')
       return knex('workload_owner').returning('id')
         .insert({team_id: teams[teams.length - 1].id,
-          offender_manager_id: ids[0]})
+          offender_manager_id: ids[0],
+          contracted_hours: 40})
     })
     .then(function (ids) {
       inserts.push({table: 'workload_owner', id: ids[0]})
@@ -165,10 +166,10 @@ var addOffenderManager = function (inserts) {
 
       var calculations = []
       calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
-        total_points: 50, available_points: 25, workload_report_id: workloadReports[0].id
+        total_points: 50, available_points: 25, workload_report_id: workloadReports[0].id, effective_from: '2015-03-01T00:00:00.000Z', effective_to: '2016-03-01T00:00:00.000Z'
       }))
       calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
-        total_points: 20, available_points: 10, workload_report_id: workloadReports[1].id
+        total_points: 20, available_points: 10, workload_report_id: workloadReports[1].id, effective_from: '2015-03-01T00:00:00.000Z'
       }))
 
       return knex('workload_points_calculations').returning('id').insert(calculations)
