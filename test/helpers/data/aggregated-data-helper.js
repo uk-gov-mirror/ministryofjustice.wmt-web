@@ -152,6 +152,7 @@ var addOffenderManager = function (inserts) {
       var workloadReports = inserts.filter((item) => item.table === 'workload_report')
 
       var defaultWorkloadPointsCalculations = {
+        workload_report_id: workloadReports[1].id,
         workload_points_id: inserts.filter((item) => item.table === 'workload_points')[0].id,
         workload_id: ids[0],
         total_points: 0,
