@@ -1,12 +1,12 @@
 const expect = require('chai').expect
 
-const workloadCapacityHelper = require('../helpers/data/aggregated-data-helper')
+const dataHelper = require('../helpers/data/aggregated-data-helper')
 
 var workloadOwnerIds = []
 
 describe('View overview', () => {
   before(function () {
-    return workloadCapacityHelper.selectIdsForWorkloadOwner()
+    return dataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
       })
