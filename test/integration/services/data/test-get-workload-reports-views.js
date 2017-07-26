@@ -15,9 +15,6 @@ var getExpectedNationalCapacity = function (fromDate, toDate) {
     .where('effective_from', '>=', fromDate)
     .where('effective_from', '<=', toDate)
     .select('total_points',
-            'sdr_points',
-            'sdr_conversion_points',
-            'paroms_points',
             'available_points',
             'effective_from',
             'reduction_hours')
@@ -39,9 +36,6 @@ describe('services/data/get-workload-report-views', function () {
     {
       effective_from: START_DATE,
       total_points: 20,
-      sdr_points: 0,
-      sdr_conversion_points: 0,
-      paroms_points: 0,
       available_points: 10,
       reduction_hours: 3
     }
