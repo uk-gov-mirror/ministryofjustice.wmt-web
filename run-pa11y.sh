@@ -15,21 +15,40 @@ lduId=$2
 teamId=$3
 omId=$4
 
-pa11yCommand="""pa11y --standard WCAG2AA --ignore "notice" --hide-elements "div[role=presentation]" --reporter html"""
+pa11yCommand="""pa11y --standard WCAG2AA --ignore "warning\;notice" --hide-elements "div[role=presentation]" """
+host="http://localhost:3000"
+
+urls=()
+errors=false
 
 # Root
-$pa11yCommand "http://localhost:3000/" > "test/accessibility/001-root.html"
+urls+=("$host/")
 
 # Caseload Capacity
 capacity_url='caseload-capacity'
-$pa11yCommand "http://localhost:3000/offender-manager/$omId/$capacity_url" > "test/accessibility/002-om-$capacity_url.html"
-$pa11yCommand "http://localhost:3000/team/$teamId/$capacity_url" > "test/accessibility/003-team-$capacity_url.html"
-$pa11yCommand "http://localhost:3000/ldu/$lduId/$capacity_url" > "test/accessibility/004-ldu-$capacity_url.html"
-$pa11yCommand "http://localhost:3000/region/$regionId/$capacity_url" > "test/accessibility/005-region-$capacity_url.html"
+urls+=("$host/offender-manager/$omId/$capacity_url")
+urls+=("$host/team/$teamId/$capacity_url")
+urls+=("$host/ldu/$lduId/$capacity_url")
+urls+=("$host/region/$regionId/$capacity_url")
 
 # Case Progress
 case_progress_url='case-progress'
-$pa11yCommand "http://localhost:3000/offender-manager/$omId/$case_progress_url" > "test/accessibility/006-om-$case_progress_url.html"
-$pa11yCommand "http://localhost:3000/team/$teamId/$case_progress_url" > "test/accessibility/007-team-case-$case_progress_url.html"
-$pa11yCommand "http://localhost:3000/ldu/$lduId/$case_progress_url" > "test/accessibility/008-ldu-case-$case_progress_url.html"
-$pa11yCommand "http://localhost:3000/region/$regionId/$case_progress_url" > "test/accessibility/009-region-$case_progress_url.html"
+urls+=("$host/offender-manager/$omId/$case_progress_url")
+urls+=("$host/team/$teamId/$case_progress_url")
+urls+=("$host/ldu/$lduId/$case_progress_url")
+urls+=("$host/region/$regionId/$case_progress_url")
+
+for url in "${urls[@]}"
+do
+  $pa11yCommand $url
+  if [ $? == 2 ]
+  then
+    errors=true
+  fi
+done
+
+if [ "$errors" = true ]
+then
+  echo "Errors found"
+  exit 1
+fi
