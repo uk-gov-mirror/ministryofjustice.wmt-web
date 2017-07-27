@@ -7,7 +7,7 @@ exports.config = {
   baseUrl: appConfig.BASE_URL,
   capabilities: [{
     maxInstances: 1,
-    browserName: 'chrome'
+    browserName: 'phantomjs'
   }],
   sync: false,
   logLevel: 'verbose',
