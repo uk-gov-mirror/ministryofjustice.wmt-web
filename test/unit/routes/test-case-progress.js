@@ -14,16 +14,7 @@ const CASE_PROGRESS = {
   subTitle: 'SubTitle',
   breadcrumbs: {},
   subNav: {},
-  caseProgress: [
-    {
-      communityLast16Weeks: 1,
-      licenseLast16Weeks: 2,
-      totalCases: 3,
-      warrantsTotal: 4,
-      unpaidWorkTotal: 5,
-      overdueTerminationsTotal: 6
-    }
-  ]
+  caseProgress: [{}]
 }
 
 var app

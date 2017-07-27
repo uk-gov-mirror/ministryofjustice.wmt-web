@@ -12,7 +12,7 @@ module.exports.build = function () {
       var branch = [{name: row.region_description, ref: 'R' + row.region_id},
         {name: row.ldu_description, ref: 'L' + row.ldu_id},
         {name: row.team_description, ref: 'T' + row.team_id},
-        {name: getFullName(row.offender_manager_forename, row.offender_manager_surname), ref: 'I' + row.offender_manager_id}
+        {name: getFullName(row.offender_manager_forename, row.offender_manager_surname), ref: 'I' + row.workload_owner_id}
       ]
       createBranch(ROOT_REF, branch)
     })

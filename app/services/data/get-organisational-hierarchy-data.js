@@ -13,7 +13,7 @@ module.exports = function () {
             'ldu.description AS ldu_description',
             'team.id AS team_id',
             'team.description AS team_description',
-            'offender_manager.id AS offender_manager_id',
+            'workload_owner.id AS workload_owner_id',
             'offender_manager.forename AS offender_manager_forename',
             'offender_manager.surname AS offender_manager_surname')
 }
