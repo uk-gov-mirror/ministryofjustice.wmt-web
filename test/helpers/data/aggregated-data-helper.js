@@ -225,11 +225,11 @@ module.exports.selectIdsForWorkloadOwner = function () {
 
 module.exports.selectGradeForWorkloadOwner = function (workloadOwnerId) {
   var promise = knex('workload_owner')
-    .first('grade_code')
+    .first('offender_manager.grade_code')
     .where('workload_owner.id', workloadOwnerId)
     .join('offender_manager', 'offender_manager.id', 'offender_manager_id')
     .then(function (results) {
-      return results.grade
+      return results.grade_code
     })
   return promise
 }

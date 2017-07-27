@@ -2,26 +2,26 @@ const expect = require('chai').expect
 
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 
-var workloadOwnerIds
+var workloadOwnerId
 var workloadOwnerGrade
 
-describe('View overview', () => {
+describe('View overview', function () {
   before(function () {
     return dataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
-        workloadOwnerIds = results[0]
+        workloadOwnerId = results.filter((item) => item.table === 'workload_owner')[0].id
         return results
       })
       .then(function (results) {
-        dataHelper.selectGradeForWorkloadOwner(results[0].id)
+        dataHelper.selectGradeForWorkloadOwner(workloadOwnerId)
         .then(function (gradeResult) {
           workloadOwnerGrade = gradeResult
         })
       })
   })
 
-  it('should navigate to the overview page', () => {
-    return browser.url('/offender-manager/' + workloadOwnerIds.id + '/overview')
+  it('should navigate to the overview page', function () {
+    return browser.url('/offender-manager/' + workloadOwnerId + '/overview')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('.sln-grade')
