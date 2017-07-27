@@ -140,7 +140,7 @@ var addOffenderManager = function (inserts) {
       return knex('workload_owner').returning('id')
         .insert({team_id: teams[teams.length - 1].id,
           offender_manager_id: ids[0],
-          contracted_hours: 40})
+          contracted_hours: 37.5})
     })
     .then(function (ids) {
       inserts.push({table: 'workload_owner', id: ids[0]})
