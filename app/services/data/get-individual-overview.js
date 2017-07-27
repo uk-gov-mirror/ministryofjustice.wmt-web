@@ -6,6 +6,7 @@ module.exports = function (id) {
     .join('team', 'workload_owner.team_id', 'team.id')
     .join('workload', 'workload.workload_owner_id', 'workload_owner.id')
     .join('workload_points_calculations', 'workload_points_calculations.workload_id', 'workload.id')
+    .join('workload_report', 'workload_points_calculations.workload_report_id', 'workload_report.id')
     .join('offender_manager', 'offender_manager.id', 'workload_owner.offender_manager_id')
     .first('offender_manager.grade_code AS grade',
            'team.id AS teamId',
