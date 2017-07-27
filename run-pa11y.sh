@@ -37,6 +37,10 @@ urls+=("$host/team/$teamId/$case_progress_url")
 urls+=("$host/ldu/$lduId/$case_progress_url")
 urls+=("$host/region/$regionId/$case_progress_url")
 
+# Overview
+overview_url='overview'
+urls+=("$host/offender-manager/$omId/$overview_url")
+
 for url in "${urls[@]}"
 do
   $pa11yCommand $url
