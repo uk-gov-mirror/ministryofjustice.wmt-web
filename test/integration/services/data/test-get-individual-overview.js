@@ -8,8 +8,8 @@ var inserts = []
 var overview = {
   grade: 'PO',
   teamName: 'Test Team',
-  availablePoints: 10,
-  totalPoints: 20,
+  availablePoints: 25,
+  totalPoints: 50,
   cases: 5,
   contractedHours: 40,
   reduction: 3

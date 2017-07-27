@@ -166,10 +166,10 @@ var addOffenderManager = function (inserts) {
 
       var calculations = []
       calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
-        total_points: 50, available_points: 25, workload_report_id: workloadReports[0].id, effective_from: '2015-03-01T00:00:00.000Z', effective_to: '2016-03-01T00:00:00.000Z'
+        total_points: 50, available_points: 25, workload_report_id: workloadReports[0].id
       }))
       calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
-        total_points: 20, available_points: 10, workload_report_id: workloadReports[1].id, effective_from: '2015-03-01T00:00:00.000Z'
+        total_points: 20, available_points: 10, workload_report_id: workloadReports[1].id
       }))
 
       return knex('workload_points_calculations').returning('id').insert(calculations)
