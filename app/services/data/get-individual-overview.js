@@ -14,7 +14,7 @@ module.exports = function (id) {
            'workload_points_calculations.available_points AS availablePoints',
            'workload_points_calculations.total_points AS totalPoints',
            'workload.total_cases AS cases',
-           'workload_owner.contracted_hours AS contractedHours',
+           'workload_points_calculations.contracted_hours AS contractedHours',
            'workload_points_calculations.reduction_hours AS reduction')
     .where('workload_owner.id', id)
     .whereNot('workload_report.effective_from', null)
