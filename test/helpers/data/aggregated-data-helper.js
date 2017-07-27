@@ -161,6 +161,7 @@ var addOffenderManager = function (inserts) {
         paroms_points: 0,
         nominal_target: 0,
         available_points: 0,
+        contracted_hours: 37.5,
         reduction_hours: 3
       }
 
@@ -206,9 +207,9 @@ var addOffenderManager = function (inserts) {
 module.exports.selectIdsForWorkloadOwner = function () {
   var results = []
 
-  var promise = knex('workload_owner').first('id', 'team_id', 'grade')
+  var promise = knex('workload_owner').first('id', 'team_id')
     .then(function (result) {
-      results.push({ table: 'workload_owner', id: result.id, grade: result.grade }, { table: 'team', id: result.team_id })
+      results.push({ table: 'workload_owner', id: result.id }, { table: 'team', id: result.team_id })
       return knex('team').select('ldu_id').where('id', '=', result.team_id)
     })
     .then(function (result) {
@@ -218,6 +219,17 @@ module.exports.selectIdsForWorkloadOwner = function () {
     .then(function (result) {
       results.push({ table: 'region', id: result[0].region_id })
       return results
+    })
+  return promise
+}
+
+module.exports.selectGradeForWorkloadOwner = function (workloadOwnerId) {
+  var promise = knex('workload_owner')
+    .first('grade_code')
+    .where('workload_owner.id', workloadOwnerId)
+    .join('offender_manager', 'offender_manager.id', 'offender_manager_id')
+    .then(function (results) {
+      return results.grade
     })
   return promise
 }

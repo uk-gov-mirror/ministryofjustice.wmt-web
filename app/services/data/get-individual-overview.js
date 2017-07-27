@@ -16,8 +16,8 @@ module.exports = function (id) {
            'workload_owner.contracted_hours AS contractedHours',
            'workload_points_calculations.reduction_hours AS reduction')
     .where('workload_owner.id', id)
-    .whereNot('workload_points_calculations.effective_from', null)
-    .where('workload_points_calculations.effective_to', null)
+    .whereNot('workload_report.effective_from', null)
+    .where('workload_report.effective_to', null)
     .then(function (results) {
       return results
     })
