@@ -84,10 +84,6 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
       ids.forEach(function (id) {
         inserts.push({table: 'workload_report', id: id})
       })
-      return knex('working_hours').returning('id').insert({})
-    })
-    .then(function (ids) {
-      inserts.push({table: 'working_hours', id: ids[0]})
       return knex('offender_manager_type').returning('id').insert({description: 'test'})
     })
     .then(function (ids) {
@@ -133,13 +129,18 @@ var addLdu = function (inserts) {
 }
 
 var addOffenderManager = function (inserts) {
-  return knex('offender_manager').returning('id').insert({type_id: inserts.filter((item) => item.table === 'offender_manager_type')[0].id, forename: 'Test_Forename', surname: 'Test_Surname'})
+  return knex('offender_manager').returning('id').insert(
+    {type_id: inserts.filter((item) => item.table === 'offender_manager_type')[0].id,
+      forename: 'Test_Forename',
+      surname: 'Test_Surname',
+      grade_code: 'PO'})
     .then(function (ids) {
       inserts.push({ table: 'offender_manager', id: ids[0] })
       var teams = inserts.filter((item) => item.table === 'team')
       return knex('workload_owner').returning('id')
         .insert({team_id: teams[teams.length - 1].id,
-          offender_manager_id: ids[0]})
+          offender_manager_id: ids[0],
+          contracted_hours: 37.5})
     })
     .then(function (ids) {
       inserts.push({table: 'workload_owner', id: ids[0]})
@@ -160,6 +161,7 @@ var addOffenderManager = function (inserts) {
         paroms_points: 0,
         nominal_target: 0,
         available_points: 0,
+        contracted_hours: 37.5,
         reduction_hours: 3
       }
 
@@ -217,6 +219,17 @@ module.exports.selectIdsForWorkloadOwner = function () {
     .then(function (result) {
       results.push({ table: 'region', id: result[0].region_id })
       return results
+    })
+  return promise
+}
+
+module.exports.selectGradeForWorkloadOwner = function (workloadOwnerId) {
+  var promise = knex('workload_owner')
+    .first('offender_manager.grade_code')
+    .where('workload_owner.id', workloadOwnerId)
+    .join('offender_manager', 'offender_manager.id', 'offender_manager_id')
+    .then(function (results) {
+      return results.grade_code
     })
   return promise
 }
