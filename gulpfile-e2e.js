@@ -16,8 +16,7 @@ gulp.task('selenium', (done) => {
 
 gulp.task('e2e', ['selenium'], () => {
   return gulp.src('test/e2e.conf.js')
-    .pipe(webdriver({logLevel: 'verbose'}))
-    .on('error', () => {
+    .pipe(webdriver()).on('error', () => {
       seleniumServer.kill()
       process.exit(1)
     })
