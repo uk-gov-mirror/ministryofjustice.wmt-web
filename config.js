@@ -18,5 +18,5 @@ module.exports = {
   MIGRATION_APP_DATABASE_PASSWORD: process.env.WMT_MIGRATION_APP_DATABASE_PASSWORD || 'wmt_app',
 
   // E2E Tests
-  BASE_URL: process.env.WMT_BASE_URL || 'localhost:3000'
+  BASE_URL: process.env.WMT_BASE_URL || 'http://localhost:3000'
 }
