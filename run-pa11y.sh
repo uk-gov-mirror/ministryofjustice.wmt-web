@@ -15,7 +15,13 @@ teamId=$3
 omId=$4
 
 pa11yCommand="""pa11y --standard WCAG2AA --ignore "warning\;notice" --hide-elements "div[role=presentation]" """
-host="http://localhost:3000"
+
+if [ $WMT_BASE_URL ]
+then 
+  host=$WMT_BASE_URL 
+else
+  host="http://localhost:3000"
+fi 
 
 urls=()
 errors=false
@@ -44,7 +50,7 @@ urls+=("$host/offender-manager/$omId/$overview_url")
 for url in "${urls[@]}"
 do
   $pa11yCommand $url
-  if [ $? == 2 ]
+  if [ $? != 0 ]
   then
     errors=true
   fi
