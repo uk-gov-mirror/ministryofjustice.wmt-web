@@ -52,8 +52,8 @@ describe('services/get-breadcrumbs', function () {
     }
     var getBreadcrumbs = proxyquire('../../../app/services/get-breadcrumbs', {'./organisational-hierarchy-tree': getTree})
 
-    expect(getBreadcrumbs(1, 'nps').length).to.eql(1)
-    expect(getBreadcrumbs(1, 'nps')).to.eql(breadcrumbDataHelper.NATIONAL_BREADCRUMBS)
+    expect(getBreadcrumbs(1, 'hmpps').length).to.eql(1)
+    expect(getBreadcrumbs(1, 'hmpps')).to.eql(breadcrumbDataHelper.NATIONAL_BREADCRUMBS)
   })
 
   it('should throw an error when passed an undefined organisation unit', function () {
@@ -82,5 +82,14 @@ describe('services/get-breadcrumbs', function () {
     var getBreadcrumbs = proxyquire('../../../app/services/get-breadcrumbs', {'./organisational-hierarchy-tree': getTree})
 
     expect(() => getBreadcrumbs('3', 'person')).to.throw(/does not exist/)
+  })
+
+  it('should throw an error when passed an id which does not exist in the organisational tree', function () {
+    var getTree = {
+      get: sinon.stub().returns(ohDataHelper.ORGANISATIONAL_HIERARCHY_TREE_MULTIPLE_BRANCHES)
+    }
+    var getBreadcrumbs = proxyquire('../../../app/services/get-breadcrumbs', {'./organisational-hierarchy-tree': getTree})
+
+    expect(() => getBreadcrumbs('7', 'team')).to.throw(/does not exist in the organisational tree/)
   })
 })

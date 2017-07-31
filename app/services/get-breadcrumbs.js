@@ -1,6 +1,6 @@
 const linkGenerator = require('./helpers/link-generator')
 const organisationalHierarchyTree = require('./organisational-hierarchy-tree')
-const Breadcrumb = require('./domain/breadcrumb')
+const Link = require('./domain/link')
 const orgUnitFinder = require('../services/helpers/org-unit-finder')
 
 module.exports = function (id, organisationLevel) {
@@ -12,10 +12,15 @@ module.exports = function (id, organisationLevel) {
   var tree = organisationalHierarchyTree.get()
   var reference = getReference(id, organisationLevel)
 
+  if (tree[reference] === undefined) {
+    throw new Error(organisationLevel + ' with ID ' + id + ' does not exist in the organisational tree')
+  }
+
   do {
-    breadcrumbs.push(new Breadcrumb(tree[reference].name, linkGenerator(reference)))
+    breadcrumbs.push(new Link(tree[reference].name, linkGenerator.fromReference(reference)))
     reference = tree[reference].parent
   } while (reference !== undefined)
+
   return breadcrumbs
 }
 

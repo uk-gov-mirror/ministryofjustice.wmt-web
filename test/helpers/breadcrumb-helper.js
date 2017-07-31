@@ -1,10 +1,10 @@
-const Breadcrumb = require('../../app/services/domain/breadcrumb')
+const Link = require('../../app/services/domain/link')
 
-var offenderManagerBreadcrumb = new Breadcrumb('John Doe', '/offender-manager/1')
-var teamBreadcrumb = new Breadcrumb('Team 1', '/team/1')
-var lduBreadcrumb = new Breadcrumb('LDU 1', '/ldu/1')
-var regionBreadcrumb = new Breadcrumb('Region 1', '/region/1')
-var nationalBreadcrumb = new Breadcrumb('NPS', '/nps')
+var offenderManagerBreadcrumb = new Link('John Doe', '/offender-manager/1')
+var teamBreadcrumb = new Link('Team 1', '/team/1')
+var lduBreadcrumb = new Link('LDU 1', '/ldu/1')
+var regionBreadcrumb = new Link('Region 1', '/region/1')
+var nationalBreadcrumb = new Link('HMPPS', '/hmpps/0')
 
 module.exports.OFFENDER_MANAGER_BREADCRUMBS = [
   offenderManagerBreadcrumb,

@@ -1,6 +1,6 @@
 const orgUnitFinder = require('./org-unit-finder')
 
-module.exports = function (reference) {
+module.exports.fromReference = function (reference) {
   var referenceRegex = /^[A-Z]{1}[0-9]*$/
 
   if (reference === undefined) {
@@ -19,14 +19,24 @@ module.exports = function (reference) {
     throw new Error('Organisation ref ' + organisationRef + ' is not valid')
   }
 
-  var link
+  return module.exports.fromIdAndName(organisationId, organisationUnit.name)
+}
 
-  switch (organisationRef) {
-    case 'N':
-      link = '/' + organisationUnit.name
-      break
-    default:
-      link = '/' + organisationUnit.name + '/' + organisationId
+module.exports.fromIdAndName = function (id, name) {
+  if (name === undefined) {
+    throw new TypeError('Organisational unit name is undefined')
+  }
+
+  var link
+  var numberRegex = /^[0-9]+$/
+
+  if (id === undefined || id === '') {
+    link = '/' + name + '/0'
+  } else {
+    if (!numberRegex.test(id.toString())) {
+      throw new TypeError('ID must be a number')
+    }
+    link = '/' + name + '/' + id
   }
 
   return link
