@@ -75,15 +75,6 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
   var promise = knex('workload_points').returning('id').insert(defaultWorkloadPoints)
     .then(function (ids) {
       inserts.push({table: 'workload_points', id: ids[0]})
-      return knex('workload_report').returning('id').insert([
-        { effective_from: new Date(2008, 0, 1) },
-        { effective_from: new Date(2009, 0, 1), effective_to: new Date(2010, 0, 1) }
-      ])
-    })
-    .then(function (ids) {
-      ids.forEach(function (id) {
-        inserts.push({table: 'workload_report', id: id})
-      })
       return knex('offender_manager_type').returning('id').insert({description: 'test'})
     })
     .then(function (ids) {
@@ -149,12 +140,12 @@ var addOffenderManager = function (inserts) {
     .then(function (ids) {
       inserts.push({table: 'workload', id: ids[0]})
 
-      var workloadReports = inserts.filter((item) => item.table === 'workload_report')
-
+      return knex('workload_report').select('id').orderBy('effective_from', 'desc')
+    }).then(function (workloadReports) {
       var defaultWorkloadPointsCalculations = {
         workload_report_id: workloadReports[1].id,
         workload_points_id: inserts.filter((item) => item.table === 'workload_points')[0].id,
-        workload_id: ids[0],
+        workload_id: inserts.filter((item) => item.table === 'workload')[0].id,
         total_points: 0,
         sdr_points: 0,
         sdr_conversion_points: 0,
@@ -167,7 +158,7 @@ var addOffenderManager = function (inserts) {
 
       var calculations = []
       calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
-        total_points: 50, available_points: 25, workload_report_id: workloadReports[0].id
+        total_points: 50, available_points: 25
       }))
       calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
         total_points: 20, available_points: 10, workload_report_id: workloadReports[1].id
