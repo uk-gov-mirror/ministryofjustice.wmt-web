@@ -135,17 +135,24 @@ var addOffenderManager = function (inserts) {
     })
     .then(function (ids) {
       inserts.push({table: 'workload_owner', id: ids[0]})
-      return knex('workload').returning('id').insert(Object.assign({}, defaultWorkload, {workload_owner_id: ids[0]}))
+      var workloads = [
+        Object.assign({}, defaultWorkload, {workload_owner_id: ids[0]}),
+        Object.assign({}, defaultWorkload, {workload_owner_id: ids[0]})
+      ]
+      return knex('workload').returning('id').insert(workloads)
     })
     .then(function (ids) {
-      inserts.push({table: 'workload', id: ids[0]})
+      ids.forEach((id) => {
+        inserts.push({table: 'workload', id: id})
+      })
 
       return knex('workload_report').select('id').orderBy('effective_from', 'desc')
     }).then(function (workloadReports) {
+        var workloads = inserts.filter((item) => item.table === 'workload')
       var defaultWorkloadPointsCalculations = {
-        workload_report_id: workloadReports[1].id,
+        workload_report_id: workloadReports[0].id,
         workload_points_id: inserts.filter((item) => item.table === 'workload_points')[0].id,
-        workload_id: inserts.filter((item) => item.table === 'workload')[0].id,
+        workload_id: workloads[workloads.length - 1].id,
         total_points: 0,
         sdr_points: 0,
         sdr_conversion_points: 0,
@@ -161,7 +168,10 @@ var addOffenderManager = function (inserts) {
         total_points: 50, available_points: 25
       }))
       calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
-        total_points: 20, available_points: 10, workload_report_id: workloadReports[1].id
+        total_points: 20,
+        available_points: 10,
+        workload_report_id: workloadReports[1].id,
+        workload_id: inserts.filter((item) => item.table === 'workload')[0].id
       }))
 
       return knex('workload_points_calculations').returning('id').insert(calculations)
@@ -240,4 +250,11 @@ module.exports.rowGenerator = function (name, baseRow, multiplier) {
     })
   }
   return Object.assign({}, row, { name: name })
+}
+
+module.exports.getWorkloadReportEffectiveFromDate = function () {
+    return knex('workload_report')
+      .first('effective_from')
+      .whereNull('effective_to')
+      .orderBy('effective_from', 'desc')
 }

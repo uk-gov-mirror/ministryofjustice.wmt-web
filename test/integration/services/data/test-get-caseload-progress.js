@@ -24,7 +24,6 @@ describe('services/data/get-org-unit-caseload-progress', function () {
   })
 
   it('should retrieve current caseload progress for an offender manager', function (done) {
-    console.log('workload owner id: ' + inserts.filter((item) => item.table === 'workload_owner')[0].id)
     getCaseProgress(inserts.filter((item) => item.table === 'workload_owner')[0].id, 'offender-manager')
       .then(function (results) {
         var omResults = [
