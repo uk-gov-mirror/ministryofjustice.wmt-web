@@ -46,4 +46,4 @@ You need to globally install the webdriver io module:
 Run tests using the following commands:
 
 - `yarn test-e2e-ie11` # Internet Explorer 11
-- `yarn test-e2e-test` # Firefox 17
+- `yarn test-e2e-firefox` # Firefox 17

@@ -1,3 +1,4 @@
+const authentication = require('./authentication')
 const config = require('../config')
 const express = require('express')
 const favicon = require('serve-favicon')
@@ -10,6 +11,7 @@ const nunjucks = require('express-nunjucks')
 const dateFilter = require('nunjucks-date-filter')
 const path = require('path')
 const routes = require('./routes')
+const routesNoCsrf = require('./routes-no-csrf')
 const cookieSession = require('cookie-session')
 const getOrganisationalHierarchyTree = require('./services/organisational-hierarchy-tree')
 
@@ -17,6 +19,8 @@ var app = express()
 
 // Set security headers.
 app.use(helmet())
+
+authentication(app)
 
 var developmentMode = app.get('env') === 'development'
 
@@ -70,6 +74,12 @@ app.use(function (req, res, next) {
 
 // Use cookie parser middleware (required for csurf)
 app.use(cookieParser(config.APPLICATION_SECRET, { httpOnly: true, secure: config.SECURE_COOKIE === 'true' }))
+
+// Add routes that are allowed to be accessed from outside the application
+// i.e. authentication-saml
+var routerNoCsrf = new express.Router()
+routesNoCsrf(routerNoCsrf)
+app.use('/', routerNoCsrf)
 
 // Check for valid CSRF tokens on state-changing methods.
 app.use(csurf({ cookie: { httpOnly: true, secure: config.SECURE_COOKIE === 'true' } }))
