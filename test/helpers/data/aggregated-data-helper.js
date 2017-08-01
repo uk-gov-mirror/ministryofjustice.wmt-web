@@ -75,15 +75,6 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
   var promise = knex('workload_points').returning('id').insert(defaultWorkloadPoints)
     .then(function (ids) {
       inserts.push({table: 'workload_points', id: ids[0]})
-      return knex('workload_report').returning('id').insert([
-        { effective_from: new Date(2008, 0, 1) },
-        { effective_from: new Date(2009, 0, 1), effective_to: new Date(2010, 0, 1) }
-      ])
-    })
-    .then(function (ids) {
-      ids.forEach(function (id) {
-        inserts.push({table: 'workload_report', id: id})
-      })
       return knex('offender_manager_type').returning('id').insert({description: 'test'})
     })
     .then(function (ids) {
@@ -144,17 +135,24 @@ var addOffenderManager = function (inserts) {
     })
     .then(function (ids) {
       inserts.push({table: 'workload_owner', id: ids[0]})
-      return knex('workload').returning('id').insert(Object.assign({}, defaultWorkload, {workload_owner_id: ids[0]}))
+      var workloads = [
+        Object.assign({}, defaultWorkload, {workload_owner_id: ids[0]}),
+        Object.assign({}, defaultWorkload, {workload_owner_id: ids[0]})
+      ]
+      return knex('workload').returning('id').insert(workloads)
     })
     .then(function (ids) {
-      inserts.push({table: 'workload', id: ids[0]})
+      ids.forEach((id) => {
+        inserts.push({table: 'workload', id: id})
+      })
 
-      var workloadReports = inserts.filter((item) => item.table === 'workload_report')
-
+      return knex('workload_report').select('id').orderBy('effective_from', 'desc')
+    }).then(function (workloadReports) {
+      var workloads = inserts.filter((item) => item.table === 'workload')
       var defaultWorkloadPointsCalculations = {
-        workload_report_id: workloadReports[1].id,
+        workload_report_id: workloadReports[0].id,
         workload_points_id: inserts.filter((item) => item.table === 'workload_points')[0].id,
-        workload_id: ids[0],
+        workload_id: workloads[workloads.length - 1].id,
         total_points: 0,
         sdr_points: 0,
         sdr_conversion_points: 0,
@@ -167,10 +165,13 @@ var addOffenderManager = function (inserts) {
 
       var calculations = []
       calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
-        total_points: 50, available_points: 25, workload_report_id: workloadReports[0].id
+        total_points: 50, available_points: 25
       }))
       calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
-        total_points: 20, available_points: 10, workload_report_id: workloadReports[1].id
+        total_points: 20,
+        available_points: 10,
+        workload_report_id: workloadReports[1].id,
+        workload_id: inserts.filter((item) => item.table === 'workload')[0].id
       }))
 
       return knex('workload_points_calculations').returning('id').insert(calculations)
@@ -207,7 +208,13 @@ var addOffenderManager = function (inserts) {
 module.exports.selectIdsForWorkloadOwner = function () {
   var results = []
 
-  var promise = knex('workload_owner').first('id', 'team_id')
+  var promise = knex('workload_owner')
+  .join('workload', 'workload.workload_owner_id', 'workload_owner.id')
+  .join('workload_points_calculations', 'workload_points_calculations.workload_id', 'workload.id')
+  .join('workload_report', 'workload_points_calculations.workload_report_id', 'workload_report.id')
+  .whereNull('workload_report.effective_to')
+  .orderBy('workload_report.effective_from', 'desc')
+  .first('workload_owner.id', 'team_id')
     .then(function (result) {
       results.push({ table: 'workload_owner', id: result.id }, { table: 'team', id: result.team_id })
       return knex('team').select('ldu_id').where('id', '=', result.team_id)
@@ -249,4 +256,11 @@ module.exports.rowGenerator = function (name, baseRow, multiplier) {
     })
   }
   return Object.assign({}, row, { name: name })
+}
+
+module.exports.getWorkloadReportEffectiveFromDate = function () {
+  return knex('workload_report')
+      .first('effective_from')
+      .whereNull('effective_to')
+      .orderBy('effective_from', 'desc')
 }
