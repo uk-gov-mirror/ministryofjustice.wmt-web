@@ -8,9 +8,9 @@ module.exports = function (router) {
     var id = req.params.id
 
     // Currently only dealing with Offender Managers
-    if (organisationLevel !== orgUnit.OFFENDER_MANAGER.name) {
-      throw new Error(organisationLevel + ' should be offender-manager')
-    }
+    // if (organisationLevel !== orgUnit.OFFENDER_MANAGER.name) {
+    //   throw new Error(organisationLevel + ' should be offender-manager')
+    // }
 
     var overviewPromise = getOverview(id, organisationLevel)
 
@@ -20,7 +20,9 @@ module.exports = function (router) {
         subTitle: result.subTitle,
         breadcrumbs: result.breadcrumbs,
         subNav: getSubNav(id, organisationLevel, req.path),
-        overviewDetails: result.overviewDetails
+        overviewDetails: result.overviewDetails,
+        // TODO: Add overview Table for new caseload overview
+        overviewTable: result.overviewTable
       })
     })
   })
