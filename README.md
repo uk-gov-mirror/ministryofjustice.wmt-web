@@ -34,3 +34,16 @@ npm install -g pa11y
 # usage: ./run-pa11y regionId lduId teamId omId
 ./run-pa11y.sh 1 1 1 1
 ```
+
+## E2E Tests
+
+E2E Tests are run using [Sauce Labs]().
+
+You need to globally install the webdriver io module:
+
+`npm install -g wdio`
+
+Run tests using the following commands:
+
+- `yarn test-e2e-ie11` # Internet Explorer 11
+- `yarn test-e2e-firefox` # Firefox 17

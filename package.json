@@ -9,7 +9,9 @@
     "unit-test": "standard && mocha --recursive test/unit/",
     "integration-test": "gulp assets && mocha --recursive test/integration --timeout=10000",
     "test": "yarn unit-test && yarn integration-test",
-    "test-e2e": "gulp --gulpfile gulpfile-e2e.js"
+    "test-e2e": "gulp --gulpfile gulpfile-e2e.js",
+    "test-e2e-firefox": "wdio test/wdio.conf.sauce.test.js",
+    "test-e2e-ie11": "wdio test/wdio.conf.sauce.ie11.js"
   },
   "standard": {
     "ignore": [
@@ -42,6 +44,7 @@
     "standard": "^10.0.2",
     "supertest": "3.0.x",
     "wdio-mocha-framework": "^0.5.10",
+    "wdio-sauce-service": "^0.4.0",
     "webdriverio": "^4.8.0"
   },
   "dependencies": {
@@ -65,6 +68,11 @@
     "mssql": "3.3.0",
     "nunjucks": "3.0.x",
     "nunjucks-date-filter": "^0.1.1",
+    "passport": "^0.3.2",
+    "passport-saml": "^0.15.0",
+    "pg": "6.1.x",
+    "proxyquire": "1.7.x",
+    "selenium-standalone": "^6.5.0",
     "serve-favicon": "2.4.x",
     "underscore": "^1.8.3",
     "util": "^0.10.3",
