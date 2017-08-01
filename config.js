@@ -1,5 +1,5 @@
 module.exports = {
-  
+
   LOGGING_PATH: process.env.LOGGING_PATH || 'logs/wmt-web.log',
   LOGGING_LEVEL: process.env.LOGGING_LEVEL || 'DEBUG',
 
