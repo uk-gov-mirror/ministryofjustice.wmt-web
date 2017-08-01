@@ -11,7 +11,8 @@
     "test": "yarn unit-test && yarn integration-test",
     "test-e2e": "gulp --gulpfile gulpfile-e2e.js",
     "test-e2e-firefox": "wdio test/wdio.conf.sauce.test.js",
-    "test-e2e-ie11": "wdio test/wdio.conf.sauce.ie11.js"
+    "test-e2e-ie11": "wdio test/wdio.conf.sauce.ie11.js",
+    "accessibility-test": "mocha --recursive test/accessibility --timeout=100000"
   },
   "standard": {
     "ignore": [
