@@ -11,6 +11,8 @@ app/public/*
 node_modules
 app/govuk_modules
 
+*.log
+
 # Ignore dev assets
 errorShots/*
 .DS_Store

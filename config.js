@@ -1,4 +1,8 @@
 module.exports = {
+
+  LOGGING_PATH: process.env.LOGGING_PATH || 'logs/wmt-web.log',
+  LOGGING_LEVEL: process.env.LOGGING_LEVEL || 'DEBUG',
+
   // Authentication (defaults for development)
   AUTHENTICATION_ENABLED: process.env.WMT_WEB_AUTHENTICATION_ENABLED || false,
   ACTIVE_DIRECTORY_ENTRY_POINT: process.env.WMT_ACTIVE_DIRECTORY_ENTRY_POINT || 'enter here', // SAML-P Sign-On Endpoint

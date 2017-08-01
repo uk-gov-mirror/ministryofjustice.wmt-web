@@ -14,6 +14,42 @@ const routes = require('./routes')
 const routesNoCsrf = require('./routes-no-csrf')
 const cookieSession = require('cookie-session')
 const getOrganisationalHierarchyTree = require('./services/organisational-hierarchy-tree')
+const bunyan = require('bunyan')
+const PrettyStream = require('bunyan-prettystream')
+
+// Add logging
+var prettyStream = new PrettyStream()
+prettyStream.pipe(process.stdout)
+
+var log = bunyan.createLogger({
+  name: 'wmt-web',
+  streams: [],
+  serializers: {
+    'error': errorSerializer
+  }
+})
+
+log.addStream({
+  level: 'DEBUG',
+  stream: prettyStream
+})
+
+// Add file stream.
+log.addStream({
+  type: 'rotating-file',
+  level: config.LOGGING_LEVEL,
+  path: config.LOGGING_PATH,
+  period: '1d',
+  count: 7
+})
+
+function errorSerializer (error) {
+  return {
+    message: error.message,
+    name: error.name,
+    stack: error.stack
+  }
+}
 
 var app = express()
 
@@ -68,7 +104,7 @@ app.use(function (req, res, next) {
 // Log each HTML request and it's response.
 app.use(function (req, res, next) {
   // Log response started.
-  console.log(req.method, req.path, 'called.')
+  log.info(req.method, req.path, 'called.')
   next()
 })
 
@@ -117,7 +153,7 @@ app.use(function (err, req, res, next) {
 
 // Development error handler.
 app.use(function (err, req, res, next) {
-  console.log({error: err})
+  log.error({error: err})
   res.status(err.status || 500)
   if (err.status === 404) {
     res.render('includes/error-404')
