@@ -10,7 +10,7 @@ describe('View overview', function () {
     return dataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         var workloadOwnerIds = results.filter((item) => item.table === 'workload_owner')
-        workloadOwnerId = workloadOwnerIds[workloadOwnerIds.length - 1].id
+        workloadOwnerId = workloadOwnerIds[0].id
         return results
       })
       .then(function (results) {
