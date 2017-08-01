@@ -10,8 +10,9 @@
     "integration-test": "gulp assets && mocha --recursive test/integration --timeout=10000",
     "test": "yarn unit-test && yarn integration-test",
     "test-e2e": "gulp --gulpfile gulpfile-e2e.js",
-    "test-e2e-firefox": "wdio test/wdio.conf.sauce.test.js",
+    "test-e2e-firefox": "wdio test/wdio.conf.sauce.firefox.js",
     "test-e2e-ie11": "wdio test/wdio.conf.sauce.ie11.js",
+    "test-e2e-ie11-jenkins": "wdio test/wdio.conf.sauce.ie11.jenkins.js",
     "accessibility-test": "mocha --recursive test/accessibility --timeout=100000"
   },
   "standard": {
@@ -50,6 +51,8 @@
   },
   "dependencies": {
     "body-parser": "1.17.x",
+    "bunyan": "^1.8.10",
+    "bunyan-prettystream": "^0.1.3",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-beta.2",
     "csurf": "^1.9.0",

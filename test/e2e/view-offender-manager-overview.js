@@ -9,7 +9,8 @@ describe('View overview', function () {
   before(function () {
     return dataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
-        workloadOwnerId = results.filter((item) => item.table === 'workload_owner')[0].id
+        var workloadOwnerIds = results.filter((item) => item.table === 'workload_owner')
+        workloadOwnerId = workloadOwnerIds[0].id
         return results
       })
       .then(function (results) {
