@@ -34,7 +34,7 @@ describe('services/data/get-workload-report-views', function () {
     })
     .then(function () {
       workloadCapactiyHelper.getWorkloadReportEffectiveFromDate()
-      .then(function(result) {
+      .then(function (result) {
         startDate = result.effective_from
         endDate = new Date((startDate.getTime() + 360 * ONE_DAY_IN_MS))
         expectedResults = [
@@ -45,12 +45,11 @@ describe('services/data/get-workload-report-views', function () {
             reduction_hours: 3
           }
         ]
-       done()
+        done()
       })
     })
   })
 
-  
   it('should retrieve all the workloads within the date range at National level', function (done) {
     var queryResults
     getWorkloadReportsViews(undefined, startDate, endDate, 'hmpps')

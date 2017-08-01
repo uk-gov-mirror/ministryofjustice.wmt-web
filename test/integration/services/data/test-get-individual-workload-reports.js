@@ -18,7 +18,7 @@ describe('services/data/get-capacity-for-individual', function () {
     })
     .then(function () {
       workloadCapactiyHelper.getWorkloadReportEffectiveFromDate()
-      .then(function(result) {
+      .then(function (result) {
         startDate = result.effective_from
         endDate = new Date((startDate.getTime() + ONE_DAY_IN_MS))
         done()

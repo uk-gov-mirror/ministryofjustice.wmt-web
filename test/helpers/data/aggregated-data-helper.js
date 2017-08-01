@@ -148,7 +148,7 @@ var addOffenderManager = function (inserts) {
 
       return knex('workload_report').select('id').orderBy('effective_from', 'desc')
     }).then(function (workloadReports) {
-        var workloads = inserts.filter((item) => item.table === 'workload')
+      var workloads = inserts.filter((item) => item.table === 'workload')
       var defaultWorkloadPointsCalculations = {
         workload_report_id: workloadReports[0].id,
         workload_points_id: inserts.filter((item) => item.table === 'workload_points')[0].id,
@@ -208,7 +208,13 @@ var addOffenderManager = function (inserts) {
 module.exports.selectIdsForWorkloadOwner = function () {
   var results = []
 
-  var promise = knex('workload_owner').first('id', 'team_id')
+  var promise = knex('workload_owner')
+  .join('workload', 'workload.workload_owner_id', 'workload_owner.id')
+  .join('workload_points_calculations', 'workload_points_calculations.workload_id', 'workload.id')
+  .join('workload_report', 'workload_points_calculations.workload_report_id', 'workload_report.id')
+  .whereNull('workload_report.effective_to')
+  .orderBy('workload_report.effective_from', 'desc')
+  .first('workload_owner.id', 'team_id')
     .then(function (result) {
       results.push({ table: 'workload_owner', id: result.id }, { table: 'team', id: result.team_id })
       return knex('team').select('ldu_id').where('id', '=', result.team_id)
@@ -253,7 +259,7 @@ module.exports.rowGenerator = function (name, baseRow, multiplier) {
 }
 
 module.exports.getWorkloadReportEffectiveFromDate = function () {
-    return knex('workload_report')
+  return knex('workload_report')
       .first('effective_from')
       .whereNull('effective_to')
       .orderBy('effective_from', 'desc')
