@@ -1,6 +1,13 @@
 module.exports = {
+  
   LOGGING_PATH: process.env.LOGGING_PATH || 'logs/wmt-web.log',
   LOGGING_LEVEL: process.env.LOGGING_LEVEL || 'DEBUG',
+
+  // Authentication (defaults for development)
+  AUTHENTICATION_ENABLED: process.env.WMT_WEB_AUTHENTICATION_ENABLED || false,
+  ACTIVE_DIRECTORY_ENTRY_POINT: process.env.WMT_ACTIVE_DIRECTORY_ENTRY_POINT || 'enter here', // SAML-P Sign-On Endpoint
+  ACTIVE_DIRECTORY_ISSUER: process.env.WMT_ACTIVE_DIRECTORY_ISSUER || 'app id', // APP-ID
+  ACTIVE_DIRECTORY_RETURN_ADDRESS: process.env.WMT_ACTIVE_DIRECTORY_RETURN_ADDRESS || '/authentication-saml',
 
   // Session and Cookie security (defaults for development)
   APPLICATION_SECRET: process.env.WMT_WEB_APPLICATION_SECRET, // NO DEFAULT FOR SECURITY REASONS, WILL FAIL IF NOT SET

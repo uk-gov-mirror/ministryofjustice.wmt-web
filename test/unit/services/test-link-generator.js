@@ -10,7 +10,7 @@ describe('services/helpers/link-generator', function () {
     })
 
     it('should return the correct link for national level (no ID)', function () {
-      expect(linkGenerator.fromReference('N')).to.eql('/nps')
+      expect(linkGenerator.fromReference('N')).to.eql('/hmpps/0')
     })
 
     it('should throw an error when passed undefined reference', function () {
@@ -34,8 +34,8 @@ describe('services/helpers/link-generator', function () {
     })
 
     it('should return no trailing slashes when an empty id is supplied', function () {
-      expect(linkGenerator.fromIdAndName(undefined, 'nps')).to.eql('/nps')
-      expect(linkGenerator.fromIdAndName('', 'nps')).to.eql('/nps')
+      expect(linkGenerator.fromIdAndName(undefined, 'hmpps')).to.eql('/hmpps/0')
+      expect(linkGenerator.fromIdAndName('', 'hmpps')).to.eql('/hmpps/0')
     })
 
     it('should throw an error when passed an invalid name', function () {

@@ -20,6 +20,7 @@ module.exports = function (id, organisationLevel) {
     breadcrumbs.push(new Link(tree[reference].name, linkGenerator.fromReference(reference)))
     reference = tree[reference].parent
   } while (reference !== undefined)
+
   return breadcrumbs
 }
 

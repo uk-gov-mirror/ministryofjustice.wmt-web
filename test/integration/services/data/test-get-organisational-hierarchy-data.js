@@ -23,7 +23,7 @@ describe('services/data/get-organisational-hierarchy-data', function () {
         ldu_description: 'OH LDU',
         team_id: inserts[inserts.findIndex(element => element.table === 'team')].id,
         team_description: 'OH Team',
-        offender_manager_id: inserts[inserts.findIndex(element => element.table === 'offender_manager')].id,
+        workload_owner_id: inserts[inserts.findIndex(element => element.table === 'workload_owner')].id,
         offender_manager_forename: 'OH Forename',
         offender_manager_surname: 'OH Surname'
       }
