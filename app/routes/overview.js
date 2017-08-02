@@ -15,7 +15,7 @@ module.exports = function (router) {
     var overviewPromise = getOverview(id, organisationLevel)
 
     return overviewPromise.then(function (result) {
-      return res.render('overview', {
+      return res.render('overview-team', {
         title: result.title,
         subTitle: result.subTitle,
         breadcrumbs: result.breadcrumbs,
