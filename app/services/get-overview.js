@@ -1,7 +1,7 @@
 const getBreadcrumbs = require('./get-breadcrumbs')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const getIndividualOverview = require('./data/get-individual-overview')
-const getOverview = require('./data/get-team-overview')
+const getTeamOverview = require('./data/get-team-caseload-overview')
 const orgUnit = require('../constants/organisation-unit')
 
 module.exports = function (id, organisationLevel) {
@@ -11,7 +11,7 @@ module.exports = function (id, organisationLevel) {
 
   switch (organisationLevel) {
     case orgUnit.TEAM.name:
-      overviewPromise = getOverview(id, organisationLevel)
+      overviewPromise = getTeamOverview(id, organisationLevel)
       break
     case orgUnit.OFFENDER_MANAGER.name:
       overviewPromise = getIndividualOverview(id, organisationLevel)
@@ -21,12 +21,18 @@ module.exports = function (id, organisationLevel) {
   }
 
   return overviewPromise.then(function (results) {
-    var capacityPercentage = (results.totalPoints / results.availablePoints) * 100
+    if (results.length !== undefined) {
+      results.forEach(function (result) {
+        result.capacityPercentage = (result.totalPoints / result.availablePoints) * 100
+      })
+      result.overviewDetails = results
+    } else {
+      var capacityPercentage = (results.totalPoints / results.availablePoints) * 100
+      result.overviewDetails = Object.assign({}, results, {capacity: capacityPercentage})
+    }
     result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
     result.title = result.breadcrumbs[0].title
     result.subTitle = organisationalUnitType.displayText
-    result.overviewDetails = Object.assign({}, results, {capacity: capacityPercentage})
-    result.overviewTable = {}
     return result
   })
 }
