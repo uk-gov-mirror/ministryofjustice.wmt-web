@@ -46,6 +46,7 @@ urls+=("$host/region/$regionId/$case_progress_url")
 # Overview
 overview_url='overview'
 urls+=("$host/offender-manager/$omId/$overview_url")
+urls+=("$host/team/$teamId/$overview_url")
 
 for url in "${urls[@]}"
 do

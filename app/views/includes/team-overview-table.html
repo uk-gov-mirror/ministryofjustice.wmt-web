@@ -2,32 +2,32 @@
 <table id="example" class="data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     <thead>
       <tr>
-        <th colspan="2">Offender manager</th>
-        <th colspan="2">Capacity</th>
-        <th colspan="2">Hours</th>
-        <th>Cases</th>
+        <th id="om" colspan="2">Offender manager</th>
+        <th id="cap" colspan="2">Capacity</th>
+        <th id="hrs" colspan="2">Hours</th>
+        <th id="cases">Cases</th>
       </tr>
 
       <tr>
-        <th>Name</th>
-        <th>Grade</th>
-        <th>Current (%)</th>
-        <th>Points</th>
-        <th>Contracted</th>
-        <th>Reduction</th>
-        <th>Total</th>
+        <th headers="om" id="name" >Name</th>
+        <th headers="om" id="grade" >Grade</th>
+        <th headers="cap" id="current">Current (%)</th>
+        <th headers="cap" id="points">Points</th>
+        <th headers="hrs" id="contracted">Contracted</th>
+        <th headers="hrs" id="reduction">Reduction</th>
+        <th headers="cases" id="total">Total</th>
       </tr>
     </thead>
     <tbody>
     {% for member in overviewDetails %}
-      <tr>
-        <td><a href="/offender-manager/{{ member.personId }}">{{ member.name }}</td>
-        <td>{{ member.gradeCode }}</td>
-        <td>{{ member.capacityPercentage | round }}%</td>
-        <td>{{ member.availablePoints }}</td>
-        <td>{{ member.contractedHours }}</td>
-        <td>{{ member.reductionHours }}</td>
-        <td>{{ member.totalCases }}</td>
+      <tr >
+        <td headers="name om"><a href="/offender-manager/{{ member.personId }}">{{ member.name }}</td>
+        <td headers="grade om">{{ member.gradeCode }}</td>
+        <td headers="current cap">{{ member.capacityPercentage | round }}%</td>
+        <td headers="points cap">{{ member.availablePoints }}</td>
+        <td headers="hrs contracted">{{ member.contractedHours }}</td>
+        <td headers="hrs reduction">{{ member.reductionHours }}</td>
+        <td headers="cases total">{{ member.totalCases }}</td>
       </tr>
         {% endfor%}
     </tbody>
