@@ -230,6 +230,15 @@ module.exports.selectIdsForWorkloadOwner = function () {
   return promise
 }
 
+module.exports.getTeamId = function () {
+  var promise = knex('team')
+      .first('id')
+      .then(function (result) {
+        return result
+      })
+  return promise
+}
+
 module.exports.selectGradeForWorkloadOwner = function (workloadOwnerId) {
   var promise = knex('workload_owner')
     .first('offender_manager.grade_code')
