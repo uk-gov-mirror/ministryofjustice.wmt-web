@@ -13,27 +13,32 @@
 {% include "includes/sub-nav.html" %}
 
 <table class="non-javascript">
-    <tr>
-        <th></th>
-    {% for heading in capacity.headings %}
-        <th scope="col">{{ heading | date("MMM DD, YYYY")}}</th>
-    {% endfor %}
-    </tr>
-    <tr>
-        <th>Capacity</th>
-    {% for i in range(0, capacity.rows[0].values.length)%}
-        <td> {{capacity.rows[0].values[i] | round}}% </td>
-    {% endfor%}
-    </tr>
-    <tr>
-        <th>Reductions</th>
-        {% for i in range(0, capacity.rows[0].values.length)%}
-        <td> {{capacity.rows[1].values[i] }}</td>
-        {% endfor%}
-    </tr>
+    <thead>
+        <tr>
+            <th scope="col"></th>
+             {% for heading in capacity.headings %}
+                <th scope="col">{{ heading | date("MMM DD, YYYY")}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Capacity</th>
+            {% for i in range(0, capacity.rows[0].values.length)%}
+                <td> {{capacity.rows[0].values[i] | round}}% </td>
+            {% endfor%}
+        </tr>
+        <tr>
+            <th scope="row">Reductions</th>
+            {% for i in range(0, capacity.rows[0].values.length)%}
+                <td> {{capacity.rows[1].values[i] }}</td>
+            {% endfor%}
+        </tr>
+    </tbody>
+    
 </table>
 
-<div id="plotly-div-line"></div>
+<div id="plotly-div-line" role="presentation"></div>
 
 </main>
 {% endblock %}
