@@ -2,6 +2,7 @@ const expect = require('chai').expect
 const sinon = require('sinon')
 require('sinon-bluebird')
 const proxyquire = require('proxyquire')
+const orgUnitConstant = require('../../../app/constants/organisation-unit.js')
 const orgUnitFinder = require('../../../app/services/helpers/org-unit-finder')
 
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
@@ -46,7 +47,7 @@ before(function () {
 
 describe('services/get-overview', function () {
   it('should return a results object with breadcrumbs, title and subtitle for an offender manager', function (done) {
-    var omName = 'offender-manager'
+    var omName = orgUnitConstant.OFFENDER_MANAGER.name
     getOverview(id, omName).then(function (result) {
       var omSubtitle = orgUnitFinder('name', omName).displayText
       expect(getBreadcrumbs).to.have.been.called //eslint-disable-line
@@ -58,7 +59,7 @@ describe('services/get-overview', function () {
   })
 
   it('should return a results object with the correct overview details for an offender manager', function (done) {
-    var omName = 'offender-manager'
+    var omName = orgUnitConstant.OFFENDER_MANAGER.name
     getOverview(id, omName).then(function (result) {
       expect(result.overviewDetails).to.eql(expectedOverview)
       done()
@@ -66,7 +67,7 @@ describe('services/get-overview', function () {
   })
 
   it('should return a results object with the correct overview details for a team', function (done) {
-    var teamName = 'team'
+    var teamName = orgUnitConstant.TEAM.name
     getOverview(id, teamName).then(function (result) {
       expect(result.overviewDetails).to.eql(TEAM_OVERVIEWS)
       done()
@@ -74,7 +75,7 @@ describe('services/get-overview', function () {
   })
 
   it('should throw an error when something other than team or offender manager is sent', function (done) {
-    var nonOmOrTeamName = 'ldu'
+    var nonOmOrTeamName = orgUnitConstant.LDU.name
     expect(() => getOverview(id, nonOmOrTeamName)).to.throw(/Organisation level must be offender manager or team/)
     done()
   })

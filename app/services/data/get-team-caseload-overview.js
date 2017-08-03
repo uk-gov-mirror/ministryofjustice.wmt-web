@@ -2,7 +2,7 @@ const config = require('../../../knexfile').web
 const knex = require('knex')(config)
 
 module.exports = function (id) {
-  return knex('app.team_case_overview')
+  return knex('team_case_overview')
     .select('name',
             'grade_code AS gradeCode',
             'total_cases AS totalCases',

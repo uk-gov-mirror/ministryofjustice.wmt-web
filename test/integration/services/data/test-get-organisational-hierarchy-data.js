@@ -6,16 +6,15 @@ const getOrgansationalHierarchyData = require('../../../../app/services/data/get
 var inserts = []
 
 describe('services/data/get-organisational-hierarchy-data', function () {
-  before(function (done) {
-    organisationalHierarchyHelper.addOrganisationalHierachy()
+  before(function () {
+    return organisationalHierarchyHelper.addOrganisationalHierachy()
       .then(function (builtInserts) {
         inserts = builtInserts
-        done()
       })
   })
 
-  it('should retrieve the organisational hierarchy', function (done) {
-    getOrgansationalHierarchyData().then(function (results) {
+  it('should retrieve the organisational hierarchy', function () {
+    return getOrgansationalHierarchyData().then(function (results) {
       var expectedResults = {
         region_id: inserts[inserts.findIndex(element => element.table === 'region')].id,
         region_description: 'OH Region',
@@ -28,12 +27,10 @@ describe('services/data/get-organisational-hierarchy-data', function () {
         offender_manager_surname: 'OH Surname'
       }
       expect(results).to.include(expectedResults)
-      done()
     })
   })
 
-  after(function (done) {
-    organisationalHierarchyHelper.removeOrganisationalHierarchy(inserts)
-      .then(() => done())
+  after(function () {
+    return organisationalHierarchyHelper.removeOrganisationalHierarchy(inserts)
   })
 })

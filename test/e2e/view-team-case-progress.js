@@ -4,7 +4,7 @@ const workloadCapacityHelper = require('../helpers/data/aggregated-data-helper')
 
 var teamId
 
-describe('View Team overview', function () {
+describe('View Team Overview', function () {
   before(function () {
     return workloadCapacityHelper.getTeamId()
       .then(function (result) {

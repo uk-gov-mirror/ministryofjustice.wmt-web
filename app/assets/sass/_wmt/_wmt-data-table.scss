@@ -1,0 +1,113 @@
+.data-container {
+    overflow-y: scroll;
+    margin-bottom: 20px;
+    overflow-x:scroll;
+    overflow-y:visible;
+    padding:0;
+}
+
+table.data-table {
+    max-width: 1024px!important;
+}
+
+table.data-table tr th{
+    padding: 0 10px;
+    border: 1px solid #d9d9d9;
+}
+
+table.data-table tr td{
+    padding:5px 10px 5px 10px;
+    border-left: 1px solid #d9d9d9;
+    border: 1px solid #d9d9d9!important;
+}
+
+table.data-table tr:nth-child(odd){
+    padding: 10px 5px;
+}
+
+table.data-table tr th:first-child{
+    padding:10px 5px 15px 15px;
+}
+
+table.data-table tr td:first-child{
+    min-width: 120px!important;
+    padding:5px 10px 5px 10px;
+}
+
+table.data-table tr.data-sub-header td {
+    min-width: 25px;
+    font-weight: bold;
+    background: #e6f4fb;
+    padding: 5px 10px 5px 10px;
+}
+
+table.data-table tr.data-sub-header td:first-child{
+
+    padding: 5px 5px 5px  15px;
+}
+
+table.data-table tr.data-sub-header td:first-child,
+table.data-table tr.data-sub-header td:nth-child(5),
+table.data-table tr.data-sub-header td:nth-child(6),
+table.data-table tr.data-sub-header td:nth-child(7) {
+    min-width: 60px;
+    font-weight: bold;
+}
+
+ul.sub-tier-header {
+    width: 369px;
+    display: block;
+    float: left;
+    margin: -5px -10px -5px -10px;
+}
+
+ul.sub-tier-header li {
+    display: inline-block;
+    width: 35px;
+    font-weight: bold;
+    padding: 5px 0;
+    background-color: rgba(255,228,157,0.8);
+    margin:0;
+    float: left;
+    border-left: 1px solid #d9d9d9;
+}
+
+ul.sub-tier-header li:first-child {
+    display: inline-block;
+    width: 45px;
+    padding:5px 5px;
+}
+
+ul.sub-tier-header li:nth-child(2) {
+    display: inline-block;
+    width: 60px;
+}
+
+
+ul.tier {
+    width: 369px;
+    display: block;
+    float: left;
+    margin: -10px -10px -10px -10px;
+}
+
+ul.tier li {
+    display: inline-block;
+    width: 35px;
+    padding: 5px 0;
+    background: rgba(255,228,157,0.5);
+    margin:0;
+    float: left;
+    border-left: 1px solid #d9d9d9;
+}
+
+ul.tier li:first-child {
+    display: inline-block;
+    width: 45px;
+    padding:5px 5px;
+}
+
+ul.tier li:nth-child(2) {
+    display: inline-block;
+    width: 60px;
+}
