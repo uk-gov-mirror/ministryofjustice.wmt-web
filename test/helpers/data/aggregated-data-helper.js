@@ -230,7 +230,7 @@ module.exports.selectIdsForWorkloadOwner = function () {
   return promise
 }
 
-module.exports.getTeamId = function () {
+module.exports.getAnyExistingTeamId = function () {
   var promise = knex('team')
       .first('id')
       .then(function (result) {

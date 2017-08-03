@@ -6,7 +6,7 @@ var teamId
 
 describe('View Team Overview', function () {
   before(function () {
-    return workloadCapacityHelper.getTeamId()
+    return workloadCapacityHelper.getAnyExistingTeamId()
       .then(function (result) {
         teamId = result.id
       })

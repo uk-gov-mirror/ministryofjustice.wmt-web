@@ -1,4 +1,37 @@
-{% if organisationLevel === "team" %}
+{% if organisationLevel === "offender-manager" %}
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <table>
+    <tbody>
+        <tr>
+        <th scope="row">Grade</th>
+        <td class="sln-grade numeric">{{ overviewDetails.grade }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Team</th>
+        <td class="numeric"><a href="/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
+        </tr>
+        <tr>
+        <th scope="row">Capacity</th>
+        <td class="numeric"> {{ overviewDetails.capacity | round }}%</td>
+        </tr>
+        <tr>
+        <th scope="row">Cases</th>
+        <td class="numeric">{{ overviewDetails.cases }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Contracted hours</th>
+        <td class="numeric">{{ overviewDetails.contractedHours }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Reduction</th>
+        <td class="numeric">{{ overviewDetails.reduction }}</td>
+        </tr>
+    </tbody>
+    </table>
+  </div>
+</div>
+{% elseif organisationLevel === "team" %}
 <table id="example" class="data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     <thead>
       <tr>
