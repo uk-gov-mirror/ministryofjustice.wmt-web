@@ -49,7 +49,7 @@ describe('services/get-overview', function () {
     var omName = orgUnitConstant.OFFENDER_MANAGER.name
     getIndividualOverview.withArgs(id, omName).resolves(OVERVIEW)
 
-    getOverview(id, omName).then(function (result) {
+    return getOverview(id, omName).then(function (result) {
       var omSubtitle = orgUnitFinder('name', omName).displayText
       expect(getBreadcrumbs).to.have.been.called //eslint-disable-line
       expect(result.breadcrumbs).to.eql(breadcrumbs)
@@ -62,7 +62,7 @@ describe('services/get-overview', function () {
     var omName = orgUnitConstant.OFFENDER_MANAGER.name
     getIndividualOverview.withArgs(id, omName).resolves(OVERVIEW)
 
-    getOverview(id, omName).then(function (result) {
+    return getOverview(id, omName).then(function (result) {
       assert(getIndividualOverview.called)
       assert(!getOrganisationOverview.called)
       expect(result.overviewDetails).to.eql(expectedOverview)
@@ -73,7 +73,7 @@ describe('services/get-overview', function () {
     var orgName = orgUnitConstant.TEAM.name
     getOrganisationOverview.withArgs(id, orgName).resolves(ORGANISATION_OVERVIEWS)
 
-    getOverview(id, orgName).then(function (result) {
+    return getOverview(id, orgName).then(function (result) {
       assert(!getIndividualOverview.called)
       assert(getOrganisationOverview.called)
       expect(result.overviewDetails).to.eql(ORGANISATION_OVERVIEWS)
@@ -84,7 +84,7 @@ describe('services/get-overview', function () {
     var orgName = orgUnitConstant.LDU.name
     getOrganisationOverview.withArgs(id, orgName).resolves(ORGANISATION_OVERVIEWS)
 
-    getOverview(id, orgName).then(function (result) {
+    return getOverview(id, orgName).then(function (result) {
       assert(!getIndividualOverview.called)
       assert(getOrganisationOverview.called)
       expect(result.overviewDetails).to.eql(ORGANISATION_OVERVIEWS)
@@ -95,7 +95,7 @@ describe('services/get-overview', function () {
     var orgName = orgUnitConstant.REGION.name
     getOrganisationOverview.withArgs(id, orgName).resolves(ORGANISATION_OVERVIEWS)
 
-    getOverview(id, orgName).then(function (result) {
+    return getOverview(id, orgName).then(function (result) {
       assert(!getIndividualOverview.called)
       assert(getOrganisationOverview.called)
       expect(result.overviewDetails).to.eql(ORGANISATION_OVERVIEWS)
@@ -106,7 +106,7 @@ describe('services/get-overview', function () {
     var orgName = orgUnitConstant.NATIONAL.name
     getOrganisationOverview.withArgs(id, orgName).resolves(ORGANISATION_OVERVIEWS)
 
-    getOverview(id, orgName).then(function (result) {
+    return getOverview(id, orgName).then(function (result) {
       assert(!getIndividualOverview.called)
       assert(getOrganisationOverview.called)
       expect(result.overviewDetails).to.eql(ORGANISATION_OVERVIEWS)
