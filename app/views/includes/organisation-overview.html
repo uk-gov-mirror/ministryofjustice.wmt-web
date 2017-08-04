@@ -31,11 +31,15 @@
     </table>
   </div>
 </div>
-{% elseif organisationLevel === "team" %}
+{% else %}
 <table id="example" class="data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     <thead>
       <tr>
-        <th id="om" colspan="2">Offender manager</th>
+        {% if organisationLevel === 'team' %}
+          <th class="sln-table-org-level" id="om" colspan="2">{{ organisationLevelDisplayText }}</th>
+        {% else %}
+          <th class="sln-table-org-level" id="om" >{{ organisationLevelDisplayText }}</th>
+        {% endif %}
         <th id="cap" colspan="2">Capacity</th>
         <th id="hrs" colspan="2">Hours</th>
         <th id="cases">Cases</th>
@@ -43,7 +47,9 @@
 
       <tr>
         <th headers="om" id="name" >Name</th>
-        <th headers="om" id="grade" >Grade</th>
+        {% if organisationLevel === 'team' %}
+          <th headers="om" id="grade" >Grade</th>
+        {% endif %}
         <th headers="cap" id="current">Current (%)</th>
         <th headers="cap" id="points">Points</th>
         <th headers="hrs" id="contracted">Contracted</th>
@@ -54,8 +60,10 @@
     <tbody>
     {% for member in overviewDetails %}
       <tr >
-        <td headers="name om"><a href="/offender-manager/{{ member.personId }}">{{ member.name }}</td>
-        <td headers="grade om">{{ member.gradeCode }}</td>
+        <td headers="name om"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</td>
+        {% if organisationLevel === 'team' %}
+          <td headers="grade om">{{ member.gradeCode }}</td>
+        {% endif %}
         <td headers="current cap">{{ member.capacityPercentage | round }}%</td>
         <td headers="points cap">{{ member.availablePoints }}</td>
         <td headers="hrs contracted">{{ member.contractedHours }}</td>
