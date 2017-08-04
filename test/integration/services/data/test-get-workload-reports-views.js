@@ -27,13 +27,13 @@ var getExpectedNationalCapacity = function (fromDate, toDate) {
 }
 
 describe('services/data/get-workload-report-views', function () {
-  before(function (done) {
-    workloadCapactiyHelper.addWorkloadCapacitiesForOffenderManager()
+  before(function () {
+    return workloadCapactiyHelper.addWorkloadCapacitiesForOffenderManager()
     .then(function (builtInserts) {
       inserts = builtInserts
     })
     .then(function () {
-      workloadCapactiyHelper.getWorkloadReportEffectiveFromDate()
+      return workloadCapactiyHelper.getWorkloadReportEffectiveFromDate()
       .then(function (result) {
         startDate = result.effective_from
         endDate = new Date((startDate.getTime() + 360 * ONE_DAY_IN_MS))
@@ -45,49 +45,43 @@ describe('services/data/get-workload-report-views', function () {
             reduction_hours: 3
           }
         ]
-        done()
       })
     })
   })
 
-  it('should retrieve all the workloads within the date range at National level', function (done) {
+  it('should retrieve all the workloads within the date range at National level', function () {
     var queryResults
-    getWorkloadReportsViews(undefined, startDate, endDate, 'hmpps')
+    return getWorkloadReportsViews(undefined, startDate, endDate, 'hmpps')
     .then(function (results) {
       queryResults = results
-      getExpectedNationalCapacity(startDate, endDate).then(function (capacityResults) {
+      return getExpectedNationalCapacity(startDate, endDate).then(function (capacityResults) {
         expect(queryResults).to.eql(capacityResults)
       })
-      done()
     })
   })
 
-  it('should retrieve all the workloads within the date range for a given Region', function (done) {
-    getWorkloadReportsViews(inserts.filter((item) => item.table === 'region')[0].id, startDate, endDate, 'region')
+  it('should retrieve all the workloads within the date range for a given Region', function () {
+    return getWorkloadReportsViews(inserts.filter((item) => item.table === 'region')[0].id, startDate, endDate, 'region')
     .then(function (results) {
       expect(results).to.eql(expectedResults)
-      done()
     })
   })
 
-  it('should retrieve all the workloads within the date range for a given LDU', function (done) {
-    getWorkloadReportsViews(inserts.filter((item) => item.table === 'ldu')[0].id, startDate, endDate, 'ldu')
+  it('should retrieve all the workloads within the date range for a given LDU', function () {
+    return getWorkloadReportsViews(inserts.filter((item) => item.table === 'ldu')[0].id, startDate, endDate, 'ldu')
     .then(function (results) {
       expect(results).to.eql(expectedResults)
-      done()
     })
   })
 
-  it('should retrieve all the workloads within the date range for a given Team', function (done) {
-    getWorkloadReportsViews(inserts.filter((item) => item.table === 'team')[0].id, startDate, endDate, 'team')
+  it('should retrieve all the workloads within the date range for a given Team', function () {
+    return getWorkloadReportsViews(inserts.filter((item) => item.table === 'team')[0].id, startDate, endDate, 'team')
     .then(function (results) {
       expect(results).to.eql(expectedResults)
-      done()
     })
   })
 
-  after(function (done) {
-    workloadCapactiyHelper.removeInsertedData(inserts)
-      .then(() => done())
+  after(function () {
+    return workloadCapactiyHelper.removeInsertedData(inserts)
   })
 })
