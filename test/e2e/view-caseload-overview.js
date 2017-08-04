@@ -23,7 +23,6 @@ describe('View overview', function () {
   })
 
   it('should navigate to the workload owner overview page', function () {
-    console.log(workloadOwnerIds)
     return browser.url('/offender-manager/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id + '/overview')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
