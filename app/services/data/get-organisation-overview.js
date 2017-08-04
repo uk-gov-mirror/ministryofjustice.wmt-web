@@ -20,7 +20,7 @@ module.exports = function (id, type) {
     'reduction_hours AS reductionHours',
     'link_id AS linkId']
 
-  if (orgUnit === orgUnitConstants.TEAM.name || orgUnit === orgUnitConstants.OFFENDER_MANAGER.name) {
+  if (orgUnit.name === orgUnitConstants.TEAM.name || orgUnit.name === orgUnitConstants.OFFENDER_MANAGER.name) {
     selectColumns.push('grade_code AS gradeCode')
   }
 
