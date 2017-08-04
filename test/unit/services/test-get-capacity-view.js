@@ -33,44 +33,43 @@ before(function () {
 })
 
 describe('services/get-capacity-view', function () {
-  it('should return a result object with a table, title and breadcrumbs object for ldu', function (done) {
+  it('should return a result object with a table, title and breadcrumbs object for ldu', function () {
     getCapacityStub.resolves(CAPACITY_RESULTS)
 
-    getCapacityView(5, capacityDateRange, 'ldu').then((result) => {
+    return getCapacityView(5, capacityDateRange, 'ldu').then((result) => {
       expect(result.capacityTable).to.be.an('object')
       expect(result.title).to.equal(expectedTitle)
       expect(result.breadcrumbs).to.be.an('Array')
-      done()
     })
   })
-  it('should return a result object with a table, title and breadcrumbs object for team', function (done) {
+
+  it('should return a result object with a table, title and breadcrumbs object for team', function () {
     getCapacityStub.resolves(CAPACITY_RESULTS)
 
-    getCapacityView(5, capacityDateRange, 'team').then((result) => {
+    return getCapacityView(5, capacityDateRange, 'team').then((result) => {
       expect(result.capacityTable).to.be.an('object')
       expect(result.title).to.equal(expectedTitle)
       expect(result.breadcrumbs).to.be.an('Array')
-      done()
     })
   })
-  it('should return a result object with a table, title and breadcrumbs object for region', function (done) {
+
+  it('should return a result object with a table, title and breadcrumbs object for region', function () {
     getCapacityStub.resolves(CAPACITY_RESULTS)
 
-    getCapacityView(5, capacityDateRange, 'region').then((result) => {
+    return getCapacityView(5, capacityDateRange, 'region').then((result) => {
       expect(result.capacityTable).to.be.an('object')
       expect(result.title).to.equal(expectedTitle)
       expect(result.breadcrumbs).to.be.an('Array')
-      done()
     })
   })
-  it('should return a result object with a table, title and breadcrumbs object for offender manager', function (done) {
+
+  it('should return a result object with a table, title and breadcrumbs object for offender manager', function () {
     getCapacityStub.resolves(CAPACITY_RESULTS)
 
-    getCapacityView(5, capacityDateRange, 'offender-manager').then((result) => {
+    return getCapacityView(5, capacityDateRange, 'offender-manager').then((result) => {
       expect(result.capacityTable).to.be.an('object')
       expect(result.title).to.equal(expectedTitle)
       expect(result.breadcrumbs).to.be.an('Array')
-      done()
     })
   })
 })
