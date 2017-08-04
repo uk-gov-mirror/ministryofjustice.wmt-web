@@ -38,6 +38,7 @@ describe('View overview', function () {
     return browser.url('/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/overview')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
+      .waitForExist('[href="/offender-manager/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id + '/overview"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
         expect(text).to.equal('Team')
@@ -48,6 +49,7 @@ describe('View overview', function () {
     return browser.url('/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/overview')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
+      .waitForExist('[href="/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/overview"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
         expect(text).to.equal('LDU')
@@ -58,6 +60,7 @@ describe('View overview', function () {
     return browser.url('/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/overview')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
+      .waitForExist('[href="/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/overview"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
         expect(text).to.equal('Region')
@@ -68,6 +71,7 @@ describe('View overview', function () {
     return browser.url('/hmpps/0/overview')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
+      .waitForExist('[href="/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id + '/overview"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
         expect(text).to.equal('National')

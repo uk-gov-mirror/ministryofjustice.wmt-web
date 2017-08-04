@@ -22,6 +22,7 @@ module.exports = function (router) {
         breadcrumbs: result.breadcrumbs,
         organisationLevel: organisationLevel,
         organisationLevelDisplayText: organisationUnit.displayText,
+        childOrganisationLevel: organisationUnit.childOrganisationLevel,
         subNav: getSubNav(id, organisationLevel, req.path),
         overviewDetails: result.overviewDetails
       })
