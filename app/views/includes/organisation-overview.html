@@ -66,3 +66,19 @@
     </tbody>
   </table>
 {% endif %}
+
+{% block page_specific_scripts %}
+  <script>
+    $(document).ready(function() {
+      $('#example').dataTable({
+        paging: false,
+        searching: false,
+        info: false,
+        columnDefs: [
+          {targets: 4, sortable: true},
+          {targets: '_all', sortable: false}
+        ]
+      });
+    });
+  </script>
+{% endblock %}
