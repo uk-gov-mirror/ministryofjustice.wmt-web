@@ -1,7 +1,7 @@
 const getBreadcrumbs = require('./get-breadcrumbs')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const getIndividualOverview = require('./data/get-individual-overview')
-const getTeamOverview = require('./data/get-team-caseload-overview')
+const getOrganisationOverview = require('./data/get-organisation-overview')
 const orgUnit = require('../constants/organisation-unit')
 
 module.exports = function (id, organisationLevel) {
@@ -9,15 +9,10 @@ module.exports = function (id, organisationLevel) {
   var overviewPromise = {}
   var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
 
-  switch (organisationLevel) {
-    case orgUnit.TEAM.name:
-      overviewPromise = getTeamOverview(id, organisationLevel)
-      break
-    case orgUnit.OFFENDER_MANAGER.name:
-      overviewPromise = getIndividualOverview(id, organisationLevel)
-      break
-    default:
-      throw new Error('Organisation level must be offender manager or team')
+  if (organisationLevel === orgUnit.OFFENDER_MANAGER.name) {
+    overviewPromise = getIndividualOverview(id, organisationLevel)
+  } else {
+    overviewPromise = getOrganisationOverview(id, organisationLevel)
   }
 
   return overviewPromise.then(function (results) {

@@ -6,6 +6,10 @@ const sinon = require('sinon')
 require('sinon-bluebird')
 
 const OM_OVERVIEW_URL = '/offender-manager/1/overview'
+const LDU_OVERVIEW_URL = '/ldu/1/overview'
+const REGION_OVERVIEW_URL = '/region/1/overview'
+const HMPPS_OVERVIEW_URL = '/hmpps/1/overview'
+
 const OM_MISSING_ID_URL = '/offender-manager/overview'
 
 const OVERVIEW = {
@@ -30,10 +34,25 @@ before(function () {
   app = routeHelper.buildApp(route)
 })
 
-describe('case-progress route', function () {
+describe('overview route', function () {
   it('should respond with 200 when offender-manager and id included in URL', function () {
     getOverview.resolves(OVERVIEW)
     return supertest(app).get(OM_OVERVIEW_URL).expect(200)
+  })
+
+  it('should respond with 200 when ldu and id included in URL', function () {
+    getOverview.resolves(OVERVIEW)
+    return supertest(app).get(LDU_OVERVIEW_URL).expect(200)
+  })
+
+  it('should respond with 200 when region and id included in URL', function () {
+    getOverview.resolves(OVERVIEW)
+    return supertest(app).get(REGION_OVERVIEW_URL).expect(200)
+  })
+
+  it('should respond with 200 when national and id included in URL', function () {
+    getOverview.resolves(OVERVIEW)
+    return supertest(app).get(HMPPS_OVERVIEW_URL).expect(200)
   })
 
   it('should respond with 500 when offender-manager, but no id, included in URL', function () {

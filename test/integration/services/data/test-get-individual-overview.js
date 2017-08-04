@@ -24,7 +24,7 @@ describe('services/data/get-individual-overview', function () {
   })
 
   it('should retrieve the overview details for a workload owner', function () {
-    getIndividualOverview(inserts.filter((item) => item.table === 'workload_owner')[0].id)
+    return getIndividualOverview(inserts.filter((item) => item.table === 'workload_owner')[0].id)
     .then(function (results) {
       var insertedTeamId = inserts.filter((item) => item.table === 'team')[0].id
       expect(results).to.be.an('object')
