@@ -16,3 +16,9 @@
 
 </main>
 {% endblock %}
+
+{% block page_specific_scripts %}
+  <script src="{{ asset_path }}javascripts/jquery-3.2.1.js"></script>
+  <script src="{{ asset_path }}javascripts/jquery.dataTable.min.js"></script>
+  <script "{{ asset_path }}javascripts/case-overview.js"></script>
+{% endblock %}
