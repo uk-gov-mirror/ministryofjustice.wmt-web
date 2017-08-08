@@ -9,6 +9,7 @@ const orgUnitFinder = require('../../../app/services/helpers/org-unit-finder')
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 
 const CASELOAD = {
+  name: 'Todd Umptious',
   grade: 'PO',
   teamId: '1',
   linkId: '2',
@@ -56,7 +57,7 @@ describe('services/get-caseload', function () {
     })
   })
 
-  it('should call get-team-caseload and return a results object with the correct overview details for an offender manager', function () {
+  it('should call get-team-caseload and return a results object with the correct caseload details for a team', function () {
     var teamName = orgUnitConstant.TEAM.name
     getTeamCaseload.withArgs(id).resolves(TEAM_CASELOAD)
 

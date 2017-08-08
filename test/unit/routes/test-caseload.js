@@ -6,8 +6,8 @@ const sinon = require('sinon')
 require('sinon-bluebird')
 
 const TEAM_CASELOAD_URL = '/team/1/caseload'
-
 const TEAM_MISSING_ID_URL = '/team/caseload'
+const REGION_CASELOAD_URL = '/region/1/caseload'
 
 const CASELOAD = {
   title: 'Title',
@@ -37,9 +37,14 @@ describe('caseload route', function () {
     return supertest(app).get(TEAM_CASELOAD_URL).expect(200)
   })
 
-  it('should respond with 500 when offender-manager, but no id, included in URL', function () {
+  it('should respond with 500 when team, but no id, included in URL', function () {
     getCaseload.resolves(CASELOAD)
     return supertest(app).get(TEAM_MISSING_ID_URL).expect(500)
+  })
+
+  it('should repsond with 500 for non-team URL', function () {
+    getCaseload.resolves(CASELOAD)
+    return supertest(app).get(REGION_CASELOAD_URL).expect(500)
   })
 
   it('should call the getSubNav with the correct parameters', function () {

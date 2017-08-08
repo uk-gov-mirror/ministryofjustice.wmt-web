@@ -22,16 +22,16 @@ describe('services/get-sub-nav', function () {
     var subNav = getSubNav(id, organisationalUnitName)
     expect(subNav[0].title).to.eql('Overview')
     expect(subNav[1].title).to.eql('Capacity')
-    expect(subNav[2].title).to.eql('Case Progress')
-    expect(subNav[3].title).to.eql('Caseload')
+    expect(subNav[2].title).to.eql('Caseload')
+    expect(subNav[3].title).to.eql('Case Progress')
   })
 
   it('returns the correct links', function () {
     var subNav = getSubNav(id, organisationalUnitName)
     expect(subNav[0].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'overview')
     expect(subNav[1].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'caseload-capacity')
-    expect(subNav[2].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'case-progress')
-    expect(subNav[3].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'caseload')
+    expect(subNav[2].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'caseload')
+    expect(subNav[3].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'case-progress')
   })
 
   it('marks the current link as active', function () {
