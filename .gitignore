@@ -16,3 +16,6 @@ app/govuk_modules
 # Ignore dev assets
 errorShots/*
 .DS_Store
+
+# Ignore vendor JS files
+app/assets/javascripts/vendor
