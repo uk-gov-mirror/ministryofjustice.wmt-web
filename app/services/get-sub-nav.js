@@ -8,6 +8,7 @@ module.exports = function (id, organisationalUnitName, currentPath) {
   navigation.push(new Link('Overview', baseLink + '/overview'))
   navigation.push(new Link('Capacity', baseLink + '/caseload-capacity'))
   navigation.push(new Link('Case Progress', baseLink + '/case-progress'))
+  navigation.push(new Link('Caseload', baseLink + '/caseload'))
 
   navigation.forEach(function (item) {
     if (item.link === currentPath) {
