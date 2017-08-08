@@ -35,53 +35,48 @@ before(function () {
 })
 
 describe('services/get-case-progress', function () {
-  it('should return a result array with a case progress row, title and breadcrumbs for offender manager', function (done) {
-    getCaseProgress(id, 'offender-manager').then(function (result) {
+  it('should return a result array with a case progress row, title and breadcrumbs for offender manager', function () {
+    return getCaseProgress(id, 'offender-manager').then(function (result) {
       expect(result.caseProgressList).to.be.an('Array')
       expect(result.title).to.equal(expectedTitle)
       expect(result.breadcrumbs).to.be.an('Array')
       expect(result.breadcrumbs).to.eql(breadcrumbs)
-      done()
     })
   })
 
-  it('should return a result array with a case progress row, title and breadcrumbs for team', function (done) {
-    getCaseProgress(id, 'team').then(function (result) {
+  it('should return a result array with a case progress row, title and breadcrumbs for team', function () {
+    return getCaseProgress(id, 'team').then(function (result) {
       expect(result.caseProgressList).to.be.an('Array')
       expect(result.title).to.equal(expectedTitle)
       expect(result.breadcrumbs).to.be.an('Array')
       expect(result.breadcrumbs).to.eql(breadcrumbs)
-      done()
     })
   })
 
-  it('should return a result array with a case progress row, title and breadcrumbs for ldu', function (done) {
-    getCaseProgress(id, 'ldu').then(function (result) {
+  it('should return a result array with a case progress row, title and breadcrumbs for ldu', function () {
+    return getCaseProgress(id, 'ldu').then(function (result) {
       expect(result.caseProgressList).to.be.an('Array')
       expect(result.title).to.equal(expectedTitle)
       expect(result.breadcrumbs).to.be.an('Array')
       expect(result.breadcrumbs).to.eql(breadcrumbs)
-      done()
     })
   })
 
-  it('should return a result array with a case progress row, title and breadcrumbs for region', function (done) {
-    getCaseProgress(id, 'region').then(function (result) {
+  it('should return a result array with a case progress row, title and breadcrumbs for region', function () {
+    return getCaseProgress(id, 'region').then(function (result) {
       expect(result.caseProgressList).to.be.an('Array')
       expect(result.title).to.equal(expectedTitle)
       expect(result.breadcrumbs).to.be.an('Array')
       expect(result.breadcrumbs).to.eql(breadcrumbs)
-      done()
     })
   })
 
-  it('should return a result array with a case progress row, title and breadcrumbs for hmpps', function (done) {
-    getCaseProgress(id, 'hmpps').then(function (result) {
+  it('should return a result array with a case progress row, title and breadcrumbs for hmpps', function () {
+    return getCaseProgress(id, 'hmpps').then(function (result) {
       expect(result.caseProgressList).to.be.an('Array')
       expect(result.title).to.equal(expectedTitle)
       expect(result.breadcrumbs).to.be.an('Array')
       expect(result.breadcrumbs).to.eql(breadcrumbs)
-      done()
     })
   })
 })
