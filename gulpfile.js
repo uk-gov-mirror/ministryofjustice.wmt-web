@@ -1,11 +1,9 @@
 var gulp = require('gulp')
 var path = require('path')
 var gulpNSP = require('gulp-nsp')
-var uglify = require('gulp-uglify')
 var rename = require('gulp-rename')
 var sass = require('gulp-sass')
 var spawn = require('child_process').spawn
-var gutil = require('gulp-util')
 var node
 
 gulp.task('assets', function () {
