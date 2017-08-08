@@ -5,6 +5,7 @@ var uglify = require('gulp-uglify')
 var rename = require('gulp-rename')
 var sass = require('gulp-sass')
 var spawn = require('child_process').spawn
+var gutil = require('gulp-util')
 var node
 
 gulp.task('assets', function () {
@@ -36,7 +37,6 @@ gulp.task('vendorJS', function () {
 
 gulp.task('sync', function () {
   gulp.src('app/assets/javascripts/**/*.js')
-    .pipe(uglify())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
   gulp.src('app/assets/images/**/*')
