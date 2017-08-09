@@ -21,8 +21,19 @@ gulp.task('templates', function () {
     .pipe(gulp.dest('app/views/', { overwrite: true }))
 })
 
+gulp.task('vendorJS', function () {
+  const vendorJSFiles = [
+    'node_modules/jquery/dist/jquery.js',
+    'node_modules/datatables.net/js/jquery.datatables.js',
+    'node_modules/plotly.js/dist/plotly.js'
+  ]
+
+  gulp.src(vendorJSFiles)
+    .pipe(gulp.dest('app/assets/javascripts/vendor/'))
+})
+
 gulp.task('sync', function () {
-  gulp.src('app/assets/javascripts/**/*')
+  gulp.src('app/assets/javascripts/**/*.js')
     .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
   gulp.src('app/assets/images/**/*')
     .pipe(gulp.dest('app/public/images/', { overwrite: true }))
@@ -45,7 +56,7 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('app/public/stylesheets'))
 })
 
-gulp.task('generate-assets', ['assets', 'templates', 'sync', 'sass'])
+gulp.task('generate-assets', ['assets', 'templates', 'vendorJS', 'sync', 'sass'])
 
 gulp.task('generate-assets-and-start', ['generate-assets', 'server'], function () {
 

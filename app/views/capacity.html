@@ -35,7 +35,7 @@
             {% endfor%}
         </tr>
     </tbody>
-    
+
 </table>
 
 <div id="plotly-div-line" role="presentation"></div>
@@ -47,6 +47,6 @@
     <script type="text/javascript">
         var capacityTable = {{ capacity | dump | safe }}
     </script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="/public/javascripts/caseload-capacity.js"></script>
+    <script src="/public/javascripts/vendor/plotly.min.js"></script>
+    <script src="/public/javascripts/caseload-capacity.min.js"></script>
 {% endblock %}
