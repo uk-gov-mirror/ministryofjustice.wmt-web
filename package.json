@@ -5,7 +5,7 @@
   "main": "app/app.js",
   "scripts": {
     "start": "gulp",
-    "build": "yarn install && gulp generate-assets",
+    "build": "yarn install && gulp generate-assets && gulp sync",
     "unit-test": "standard && mocha --recursive test/unit/",
     "integration-test": "gulp assets && mocha --recursive test/integration --timeout=10000",
     "test": "yarn unit-test && yarn integration-test",
