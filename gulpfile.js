@@ -1,7 +1,6 @@
 var gulp = require('gulp')
 var path = require('path')
 var gulpNSP = require('gulp-nsp')
-var rename = require('gulp-rename')
 var sass = require('gulp-sass')
 var spawn = require('child_process').spawn
 var node
