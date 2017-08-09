@@ -35,7 +35,6 @@ gulp.task('vendorJS', function () {
 
 gulp.task('sync', function () {
   gulp.src('app/assets/javascripts/**/*.js')
-    .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
   gulp.src('app/assets/images/**/*')
     .pipe(gulp.dest('app/public/images/', { overwrite: true }))
