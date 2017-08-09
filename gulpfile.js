@@ -1,7 +1,6 @@
 var gulp = require('gulp')
 var path = require('path')
 var gulpNSP = require('gulp-nsp')
-var rename = require('gulp-rename')
 var sass = require('gulp-sass')
 var spawn = require('child_process').spawn
 var node
@@ -35,7 +34,6 @@ gulp.task('vendorJS', function () {
 
 gulp.task('sync', function () {
   gulp.src('app/assets/javascripts/**/*.js')
-    .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
   gulp.src('app/assets/images/**/*')
     .pipe(gulp.dest('app/public/images/', { overwrite: true }))

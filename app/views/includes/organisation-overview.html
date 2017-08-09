@@ -32,7 +32,7 @@
   </div>
 </div>
 {% else %}
-<table id="example" class="data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+<table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     <thead>
       <tr>
         {% if organisationLevel === 'team' %}
@@ -74,3 +74,11 @@
     </tbody>
   </table>
 {% endif %}
+
+{% block page_specific_scripts %}
+  {% if organisationLevel === 'team' %}
+    <script src="{{ asset_path }}javascripts/vendor/jquery.js"></script>
+    <script src="{{ asset_path }}javascripts/vendor/jquery.datatables.js"></script>
+    <script src="{{ asset_path }}javascripts/case-overview.js"></script>
+  {% endif %}    
+{% endblock %}
