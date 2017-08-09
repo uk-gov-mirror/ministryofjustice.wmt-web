@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "includes/layout.html" %}
 
 {% block content %}
 
@@ -10,45 +10,45 @@
 
 {% include "includes/title-subtitle.html" %}
 
-{% include "includes/sub_nav.html" %}
+{% include "includes/sub-nav.html" %}
 
 <h3 class="heading-medium">Overall caseload by tier</h3>
 
 <table class="sln-table-caseload data-table">
   <thead>
     <tr>
-      <th colspan="2">Offender manager</th>
-      <th colspan="9">Case tiers</th>
+      <th colspan="2" id="om">Offender manager</th>
+      <th colspan="9" id="tiers">Case tiers</th>
     </tr>
     <tr>
-      <th>Name</th>
-      <th>Grade</th>
-      <th>Untiered</th>
-      <th>D2</th>
-      <th>D1</th>
-      <th>C2</th>
-      <th>C1</th>
-      <th>B2</th>
-      <th>B1</th>
-      <th>A</th>
-      <th>Total</th>
+      <th id="name">Name</th>
+      <th id="grade">Grade</th>
+      <th id="untiered">Untiered</th>
+      <th id="d2">D2</th>
+      <th id="d1">D1</th>
+      <th id="c2">C2</th>
+      <th id="c1">C1</th>
+      <th id="b2">B2</th>
+      <th id="b1">B1</th>
+      <th id="a">A</th>
+      <th id="total">Total</th>
     </tr>
   </thead>
 
   <tbody class="">
     {% for member in caseloadDetails %}
       <tr>
-        <td><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
-        <td>{{ member.gradeCode }}</td>
-        <td>{{ member.untiered }}</td>
-        <td>{{ member.d2 }}</td>
-        <td>{{ member.d1 }}</td>
-        <td>{{ member.c2 }}</td>
-        <td>{{ member.c1 }}</td>
-        <td>{{ member.b2 }}</td>
-        <td>{{ member.b1 }}</td>
-        <td>{{ member.a }}</td>
-        <td>{{ member.total }}</td>
+        <td headers="om name"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+        <td headers="om grade">{{ member.gradeCode }}</td>
+        <td headers="tiers untiered">{{ member.untiered }}</td>
+        <td headers="tiers d2">{{ member.d2 }}</td>
+        <td headers="tiers d1">{{ member.d1 }}</td>
+        <td headers="tiers c2">{{ member.c2 }}</td>
+        <td headers="tiers c1">{{ member.c1 }}</td>
+        <td headers="tiers b2">{{ member.b2 }}</td>
+        <td headers="tiers b1">{{ member.b1 }}</td>
+        <td headers="tiers a">{{ member.a }}</td>
+        <td headers="tiers total">{{ member.totalCases }}</td>
       </tr>
     {% endfor %}
   </tbody>

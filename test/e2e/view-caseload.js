@@ -19,6 +19,7 @@ describe('View your caseload flow', () => {
       .waitForExist('[href="/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/overview"]')
       .waitForExist('[href="/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/caseload-capacity"]')
       .waitForExist('[href="/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/case-progress"]')
+      .waitForExist('[href="/offender-mananger/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id)
       .waitForExist('.sln-table-caseload')
       .waitForExist('.sln-page-subtitle')
       .getText('.sln-page-subtitle')
