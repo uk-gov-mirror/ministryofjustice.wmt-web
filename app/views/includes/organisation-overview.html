@@ -76,7 +76,9 @@
 {% endif %}
 
 {% block page_specific_scripts %}
-  <script src="{{ asset_path }}javascripts/vendor/jquery.js"></script>
-  <script src="{{ asset_path }}javascripts/vendor/jquery.datatables.js"></script>
-  <script src="{{ asset_path }}javascripts/case-overview.js"></script>
+  {% if organisationLevel === 'team' %}
+    <script src="{{ asset_path }}javascripts/vendor/jquery.js"></script>
+    <script src="{{ asset_path }}javascripts/vendor/jquery.datatables.js"></script>
+    <script src="{{ asset_path }}javascripts/case-overview.js"></script>
+  {% endif %}    
 {% endblock %}
