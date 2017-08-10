@@ -32,7 +32,7 @@ gulp.task('vendorJS', function () {
     .pipe(gulp.dest('app/assets/javascripts/vendor/'))
 })
 
-gulp.task('sync',['vendorJS'], function () {
+gulp.task('sync', ['vendorJS'], function () {
   gulp.src('app/assets/javascripts/**/*.js')
     .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
   gulp.src('app/assets/images/**/*')
