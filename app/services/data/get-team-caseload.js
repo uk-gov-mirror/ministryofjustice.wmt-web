@@ -1,7 +1,7 @@
 const config = require('../../../knexfile').web
 const knex = require('knex')(config)
 module.exports = function (id, type) {
-  var table = "team_caseload_overview"
+  var table = 'team_caseload_overview'
   var whereObject = {}
   if (id !== undefined) {
     whereObject.id = id
