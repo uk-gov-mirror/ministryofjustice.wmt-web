@@ -10,7 +10,7 @@ module.exports = function (id, type) {
   return knex(table)
     .where(whereObject)
     .select('name',
-            'gradeCode',
+            'grade_code as gradeCode',
             'untiered',
             'd2',
             'd1',
@@ -19,7 +19,7 @@ module.exports = function (id, type) {
             'b2',
             'b1',
             'a',
-            'totalCases')
+            'total_cases as totalCases')
     .then(function (results) {
       return results
     })
