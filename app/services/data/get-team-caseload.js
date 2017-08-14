@@ -1,14 +1,10 @@
 const config = require('../../../knexfile').web
 const knex = require('knex')(config)
 module.exports = function (id) {
-  var table = 'team_caseload_overview'
-  var whereObject = {}
-  if (id !== undefined) {
-    whereObject.id = id
-  }
+  var table = 'team_caseload_view'
 
   return knex(table)
-    .where(whereObject)
+    .where('id', id)
     .select('name',
             'grade_code AS gradeCode',
             'untiered',

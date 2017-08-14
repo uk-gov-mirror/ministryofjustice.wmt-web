@@ -194,8 +194,8 @@ var addOffenderManager = function (inserts) {
       var tiers = []
       var locations = ['COMMUNITY', 'CUSTODY', 'LICENSE']
       locations.forEach(function (location) {
-        for (var tierNumber = 0; tierNumber < 8; tierNumber++) {
-          tiers.push(Object.assign({}, defaultTier, {tier_number: tierNumber, location: location}))
+        for (var tierNumber = 0, totalCases = 0; tierNumber < 8; tierNumber++, totalCases++) {
+          tiers.push(Object.assign({}, defaultTier, {tier_number: tierNumber, location: location, total_cases: totalCases}))
         }
       })
       return knex('tiers').returning('id').insert(tiers)
