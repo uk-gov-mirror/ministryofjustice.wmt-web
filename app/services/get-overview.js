@@ -30,12 +30,16 @@ var calculateCapacityPercentage = function (results) {
   if (results.length !== undefined) {
     results.forEach(function (result) {
       result.capacityPercentage = (result.totalPoints / result.availablePoints) * 100
-      result.contractedHours = getContractedHours(result)
+      if (result.contractedHours === 0) {
+        result.contractedHours = getContractedHours(result)
+      }
     })
     return results
   } else {
     var capacityPercentage = (results.totalPoints / results.availablePoints) * 100
-    results.contractedHours = getContractedHours(results)
+    if (results.contractedHours === 0) {
+      results.contractedHours = getContractedHours(results)
+    }
     return Object.assign({}, results, {capacity: capacityPercentage})
   }
 }
