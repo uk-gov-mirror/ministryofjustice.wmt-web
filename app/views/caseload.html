@@ -1,0 +1,58 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/breadcrumbs.html" %}
+
+{% include "includes/validation-error-messages.html" %}
+
+{% include "includes/title-subtitle.html" %}
+
+{% include "includes/sub-nav.html" %}
+
+<h3 class="heading-medium">Overall caseload by tier</h3>
+
+<table class="sln-table-caseload data-table">
+  <thead>
+    <tr>
+      <th colspan="2" id="om">Offender manager</th>
+      <th colspan="9" id="tiers">Case tiers</th>
+    </tr>
+    <tr>
+      <th id="name">Name</th>
+      <th id="grade">Grade</th>
+      <th id="untiered">Untiered</th>
+      <th id="d2">D2</th>
+      <th id="d1">D1</th>
+      <th id="c2">C2</th>
+      <th id="c1">C1</th>
+      <th id="b2">B2</th>
+      <th id="b1">B1</th>
+      <th id="a">A</th>
+      <th id="total">Total</th>
+    </tr>
+  </thead>
+
+  <tbody class="">
+    {% for member in caseloadDetails %}
+      <tr>
+        <td headers="om name"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+        <td headers="om grade">{{ member.gradeCode }}</td>
+        <td headers="tiers untiered">{{ member.untiered }}</td>
+        <td headers="tiers d2">{{ member.d2 }}</td>
+        <td headers="tiers d1">{{ member.d1 }}</td>
+        <td headers="tiers c2">{{ member.c2 }}</td>
+        <td headers="tiers c1">{{ member.c1 }}</td>
+        <td headers="tiers b2">{{ member.b2 }}</td>
+        <td headers="tiers b1">{{ member.b1 }}</td>
+        <td headers="tiers a">{{ member.a }}</td>
+        <td headers="tiers total">{{ member.totalCases }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</main>
+{% endblock %}

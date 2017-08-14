@@ -29,7 +29,7 @@ errors=false
 # Root
 urls+=("$host/")
 
-# Caseload Capacity
+# Capacity
 capacity_url='caseload-capacity'
 urls+=("$host/offender-manager/$omId/$capacity_url")
 urls+=("$host/team/$teamId/$capacity_url")
@@ -50,6 +50,10 @@ urls+=("$host/team/$teamId/$overview_url")
 urls+=("$host/ldu/$lduId/$overview_url")
 urls+=("$host/region/$regionId/$overview_url")
 urls+=("$host/hmpps/0/$overview_url")
+
+# Caseload
+caseload_url='caseload'
+urls+=("$host/team/$teamId/$caseload_url")
 
 for url in "${urls[@]}"
 do
