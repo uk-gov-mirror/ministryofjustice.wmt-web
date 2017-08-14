@@ -16,7 +16,10 @@ const OVERVIEW = {
   totalPoints: 40,
   cases: '2',
   hours: '3',
-  reduction: '4'
+  reduction: '4',
+  contractedHours: 0,
+  defaultContractedHoursPo: 3,
+  defaultContractedHoursPso: 0
 }
 const ORGANISATION_OVERVIEWS = [
   Object.assign({}, OVERVIEW, {capacityPercentage: 80}), Object.assign({}, OVERVIEW, {capacityPercentage: 80})
