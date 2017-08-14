@@ -7,6 +7,7 @@ module.exports = function (id) {
     .where('id', id)
     .select('name',
             'grade_code AS gradeCode',
+            'case_type AS caseType',
             'untiered',
             'd2',
             'd1',
