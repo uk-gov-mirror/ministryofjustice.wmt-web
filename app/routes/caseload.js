@@ -18,7 +18,22 @@ module.exports = function (router) {
         subTitle: result.subTitle,
         breadcrumbs: result.breadcrumbs,
         subNav: getSubNav(id, organisationLevel, req.path),
-        caseloadDetails: result.caseloadDetails
+        caseTypes: [
+          { displayName: 'overall',
+            array: result.overallCaseloadDetails
+          },
+          { displayName: 'custody',
+            array: result.custodyCaseloadDetails,
+          },
+          {
+            displayName: 'community',
+            array: result.communityCaseloadDetails,
+          },
+          {
+            displayName: 'license',
+            array: result.licenseCaseloadDetails,
+          }
+        ]
       })
     })
   })
