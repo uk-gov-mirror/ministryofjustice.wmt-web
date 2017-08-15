@@ -23,15 +23,15 @@ module.exports = function (router) {
             array: result.overallCaseloadDetails
           },
           { displayName: 'custody',
-            array: result.custodyCaseloadDetails,
+            array: result.custodyCaseloadDetails
           },
           {
             displayName: 'community',
-            array: result.communityCaseloadDetails,
+            array: result.communityCaseloadDetails
           },
           {
             displayName: 'license',
-            array: result.licenseCaseloadDetails,
+            array: result.licenseCaseloadDetails
           }
         ]
       })
