@@ -12,47 +12,78 @@
 
 {% include "includes/sub-nav.html" %}
 
-<h3 class="heading-medium">Overall caseload by tier</h3>
+<h2 class="heading-large">Caseload type breakdown</h2>
 
-<table class="sln-table-caseload data-table">
-  <thead>
-    <tr>
-      <th colspan="2" id="om">Offender manager</th>
-      <th colspan="9" id="tiers">Case tiers</th>
-    </tr>
-    <tr>
-      <th id="name">Name</th>
-      <th id="grade">Grade</th>
-      <th id="untiered">Untiered</th>
-      <th id="d2">D2</th>
-      <th id="d1">D1</th>
-      <th id="c2">C2</th>
-      <th id="c1">C1</th>
-      <th id="b2">B2</th>
-      <th id="b1">B1</th>
-      <th id="a">A</th>
-      <th id="total">Total</th>
-    </tr>
-  </thead>
+<div class="js-tabs">
+  <ul class="js-tabs-links">
+	  <li><a href="#overall">Overall</a></li>
+		<li><a href="#custody">Custody</a></li>
+		<li><a href="#community">Community</a></li>
+		<li><a href="#license">License</a></li>
+  </ul>
+  
+  <div class="js-tabs-content">
 
-  <tbody class="">
-    {% for member in caseloadDetails %}
-      <tr>
-        <td headers="om name"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
-        <td headers="om grade">{{ member.gradeCode }}</td>
-        <td headers="tiers untiered">{{ member.untiered }}</td>
-        <td headers="tiers d2">{{ member.d2 }}</td>
-        <td headers="tiers d1">{{ member.d1 }}</td>
-        <td headers="tiers c2">{{ member.c2 }}</td>
-        <td headers="tiers c1">{{ member.c1 }}</td>
-        <td headers="tiers b2">{{ member.b2 }}</td>
-        <td headers="tiers b1">{{ member.b1 }}</td>
-        <td headers="tiers a">{{ member.a }}</td>
-        <td headers="tiers total">{{ member.totalCases }}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  {% for caseType in caseTypes %}
+    <div id="{{caseType.displayName}}">
+      <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by tier</h3>
+
+      <table class="sln-table-caseload data-table">
+        <thead>
+          <tr>
+            <th colspan="2" id="om">Offender manager</th>
+            <th colspan="9" id="tiers">Case tiers</th>
+          </tr>
+          <tr>
+            <th id="name">Name</th>
+            <th id="grade">Grade</th>
+            <th id="untiered">Untiered</th>
+            <th id="d2">D2</th>
+            <th id="d1">D1</th>
+            <th id="c2">C2</th>
+            <th id="c1">C1</th>
+            <th id="b2">B2</th>
+            <th id="b1">B1</th>
+            <th id="a">A</th>
+            <th id="total">Total</th>
+          </tr>
+        </thead>
+
+        <tbody class="">
+          {% for member in caseType.array %}
+            <tr>
+              <td headers="om name"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td headers="om grade">{{ member.gradeCode }}</td>
+              <td headers="tiers untiered">{{ member.untiered }}</td>
+              <td headers="tiers d2">{{ member.d2 }}</td>
+              <td headers="tiers d1">{{ member.d1 }}</td>
+              <td headers="tiers c2">{{ member.c2 }}</td>
+              <td headers="tiers c1">{{ member.c1 }}</td>
+              <td headers="tiers b2">{{ member.b2 }}</td>
+              <td headers="tiers b1">{{ member.b1 }}</td>
+              <td headers="tiers a">{{ member.a }}</td>
+              <td headers="tiers total">{{ member.totalCases }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  {% endfor %}
+
+  </div>
+</div>
 
 </main>
+{% endblock %}
+
+{% block body_end %}
+  <script src="/public/javascripts/vendor/jquery.js"></script>
+  <script src="/public/javascripts/jquery.tabs.js"></script>
+
+  <script>
+    $(function(){
+      $('.js-tabs').tabs();
+    });
+  </script>
 {% endblock %}
