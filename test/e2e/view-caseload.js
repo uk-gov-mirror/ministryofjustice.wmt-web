@@ -14,7 +14,7 @@ describe('View your caseload flow', () => {
       })
   })
 
-  describe('should navigate to the team caseload screen', () => { 
+  describe('should navigate to the team caseload screen', () => {
     it('with the correct breadcrumbs, subnav and title', () => {
       return browser.url(teamCaseloadUrl)
         .waitForExist('.breadcrumbs')
