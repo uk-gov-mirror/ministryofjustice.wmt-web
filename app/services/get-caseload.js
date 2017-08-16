@@ -58,5 +58,7 @@ function getOverallCaseload (caseloads) {
   Filter the caseloads by the given type parameter.
 */
 function getCaseloadByType (caseloads, type) {
-  return caseloads.filter(caseload => caseload.caseType === type)
+  if (caseloads.constructor === Array) {
+    return caseloads.filter(caseload => caseload.caseType === type)
+  }
 }
