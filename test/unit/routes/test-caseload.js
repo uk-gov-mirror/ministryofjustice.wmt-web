@@ -14,7 +14,7 @@ const CASELOAD = {
   subTitle: 'SubTitle',
   breadcrumbs: {},
   subNav: {},
-  caseloadDetails: [{}]
+  caseTypes: [{}]
 }
 
 var app
