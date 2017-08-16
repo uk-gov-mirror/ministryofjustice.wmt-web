@@ -8,9 +8,15 @@ const orgUnitFinder = require('../../../app/services/helpers/org-unit-finder')
 
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 
+var CASE_TYPE = {
+  COMMUNITY: 'COMMUNITY',
+  CUSTODY: 'CUSTODY',
+  LICENSE: 'LICENSE'
+}
+
 const CASELOAD = {
   name: 'Todd Umptious',
-  caseType: 'COMMUNITY',
+  caseType: CASE_TYPE.COMMUNITY,
   grade: 'PO',
   teamId: '1',
   linkId: '2',
@@ -26,11 +32,22 @@ const CASELOAD = {
 }
 
 const OVERALL_CASELOAD = Object.assign({}, CASELOAD, {totalCases: 9, untiered: 3, d2: 3, c1: 3, b1: 3})
-const COMMUNITY_CASELOAD = Object.assign({}, CASELOAD, {caseType: 'COMMUNITY'})
-const CUSTODY_CASELOAD = Object.assign({}, CASELOAD, {caseType: 'CUSTODY'})
-const LICENSE_CASELOAD = Object.assign({}, CASELOAD, {caseType: 'LICENSE'})
 
-const TEAM_CASELOAD = [COMMUNITY_CASELOAD, CUSTODY_CASELOAD, LICENSE_CASELOAD]
+const COMMUNITY_CASELOAD = Object.assign({}, CASELOAD, {caseType: CASE_TYPE.COMMUNITY})
+const CUSTODY_CASELOAD = Object.assign({}, CASELOAD, {caseType: CASE_TYPE.CUSTODY})
+const LICENSE_CASELOAD = Object.assign({}, CASELOAD, {caseType: CASE_TYPE.LICENSE})
+
+const COMMUNITY_CASELOAD_1 = Object.assign({}, CASELOAD, {linkId: 3}, {caseType: CASE_TYPE.COMMUNITY})
+const CUSTODY_CASELOAD_1 = Object.assign({}, CASELOAD, {linkId: 3}, {caseType: CASE_TYPE.CUSTODY})
+const LICENSE_CASELOAD_1 = Object.assign({}, CASELOAD, {linkId: 3}, {caseType: CASE_TYPE.LICENSE})
+
+const COMMUNITY_CASELOAD_2 = Object.assign({}, CASELOAD, {linkId: 4}, {caseType: CASE_TYPE.COMMUNITY})
+const CUSTODY_CASELOAD_2 = Object.assign({}, CASELOAD, {linkId: 4}, {caseType: CASE_TYPE.CUSTODY})
+const LICENSE_CASELOAD_2 = Object.assign({}, CASELOAD, {linkId: 4}, {caseType: CASE_TYPE.LICENSE})
+
+const TEAM_CASELOAD = [COMMUNITY_CASELOAD, COMMUNITY_CASELOAD_1, COMMUNITY_CASELOAD_2,
+  CUSTODY_CASELOAD, CUSTODY_CASELOAD_1, CUSTODY_CASELOAD_2,
+  LICENSE_CASELOAD, LICENSE_CASELOAD_1, LICENSE_CASELOAD_2]
 
 var id = 1
 var breadcrumbs = breadcrumbHelper.TEAM_BREADCRUMBS
@@ -67,7 +84,10 @@ describe('services/get-caseload', function () {
     getTeamCaseload.withArgs(id).resolves(TEAM_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
       assert(getTeamCaseload.called)
+      expect(result.overallCaseloadDetails.length).to.eql(3)
       expect(result.overallCaseloadDetails[0]).to.eql(OVERALL_CASELOAD)
+      expect(result.overallCaseloadDetails[1]).to.eql(Object.assign({}, OVERALL_CASELOAD, {linkId: 3}))
+      expect(result.overallCaseloadDetails[2]).to.eql(Object.assign({}, OVERALL_CASELOAD, {linkId: 4}))
     })
   })
 
