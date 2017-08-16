@@ -33,7 +33,7 @@ describe('View your caseload flow', () => {
       return browser.url(teamCaseloadUrl)
         .waitForExist('[href="#overall"]')
         .waitForExist('.sln-table-caseload')
-        .waitForExist('[href="/offender-mananger/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id)
+        .waitForExist('[href="/offender-manager/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id)
         .click('[href="#custody"]')
         .waitForExist('.sln-table-caseload')
         .click('[href="#community"]')
