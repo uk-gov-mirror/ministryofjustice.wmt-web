@@ -86,6 +86,6 @@
     "underscore": "^1.8.3",
     "util": "^0.10.3",
     "validator": "^7.0.0",
-    "wmt-probation-rules": "ministryofjustice/wmt-probation-rules.git#tech/wmt-787/make-default-contracted-hours-more-generic"
+    "wmt-probation-rules": "ministryofjustice/wmt-probation-rules.git#0.1.8"
   }
 }

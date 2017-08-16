@@ -17,7 +17,7 @@ const OVERVIEW = {
   cases: '2',
   hours: '3',
   reduction: '4',
-  contractedHours: 0,
+  contractedHours: 37,
   defaultContractedHoursPo: 3,
   defaultContractedHoursPso: 0
 }

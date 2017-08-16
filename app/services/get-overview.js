@@ -18,7 +18,7 @@ module.exports = function (id, organisationLevel) {
   }
 
   return overviewPromise.then(function (results) {
-    result.overviewDetails = calculateCapacityPercentage(results)
+    result.overviewDetails = calcualteValues(results)
     result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
     result.title = result.breadcrumbs[0].title
     result.subTitle = organisationalUnitType.displayText
@@ -26,7 +26,7 @@ module.exports = function (id, organisationLevel) {
   })
 }
 
-var calculateCapacityPercentage = function (results) {
+var calcualteValues = function (results) {
   if (results.length !== undefined) {
     results.forEach(function (result) {
       result.capacityPercentage = (result.totalPoints / result.availablePoints) * 100
