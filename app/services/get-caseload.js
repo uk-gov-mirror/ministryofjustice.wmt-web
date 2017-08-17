@@ -1,27 +1,42 @@
 const getBreadcrumbs = require('./get-breadcrumbs')
 const getTeamCaseload = require('./data/get-team-caseload')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
-
+const CASE_TYPE = {
+  CUSTODY: 'CUSTODY',
+  COMMUNITY: 'COMMUNITY',
+  LICENSE: 'LICENSE'
+}
 module.exports = function (id, organisationLevel) {
   var organisationUnitType = getOrganisationUnit('name', organisationLevel)
 
   return getTeamCaseload(id)
-  .then(function (results) {
-    var breadcrumbs = getBreadcrumbs(id, organisationLevel)
-    var overallResults = getOverallCaseload(results)
-    var communityResults = getCaseloadByType(results, 'COMMUNITY')
-    var custodyResults = getCaseloadByType(results, 'CUSTODY')
-    var licenseResults = getCaseloadByType(results, 'LICENSE')
-    return {
-      overallCaseloadDetails: overallResults,
-      communityCaseloadDetails: communityResults,
-      custodyCaseloadDetails: custodyResults,
-      licenseCaseloadDetails: licenseResults,
-      breadcrumbs: breadcrumbs,
-      title: breadcrumbs[0].title,
-      subTitle: organisationUnitType.displayText
-    }
-  })
+    .then(function (results) {
+      var breadcrumbs = getBreadcrumbs(id, organisationLevel)
+      // Overall cases
+      var overallResults = getOverallCaseload(results)
+      // Custory cases
+      var custodyResults = getCaseloadByType(results, CASE_TYPE.CUSTODY)
+      var custodySummary = getCaseloadSummary(custodyResults)
+      // Community cases
+      var communityResults = getCaseloadByType(results, CASE_TYPE.COMMUNITY)
+      var communitySummary = getCaseloadSummary(communityResults)
+      // License cases
+      var licenseResults = getCaseloadByType(results, CASE_TYPE.LICENSE)
+      var licenseSummary = getCaseloadSummary(licenseResults)
+      // Return the result set
+      return {
+        overallCaseloadDetails: overallResults,
+        communityCaseloadDetails: communityResults,
+        custodyCaseloadDetails: custodyResults,
+        licenseCaseloadDetails: licenseResults,
+        custodyTotalSummary: custodySummary,
+        communityTotalSummary: communitySummary,
+        licenseTotalSummary: licenseSummary,
+        breadcrumbs: breadcrumbs,
+        title: breadcrumbs[0].title,
+        subTitle: organisationUnitType.displayText
+      }
+    })
 }
 
 function getOverallCaseload (caseloads) {
@@ -60,5 +75,14 @@ function getOverallCaseload (caseloads) {
 function getCaseloadByType (caseloads, type) {
   if (caseloads.constructor === Array) {
     return caseloads.filter(caseload => caseload.caseType === type)
+  }
+}
+
+/*
+  Adds the total cases to create a summary for the list of casesloads.
+*/
+function getCaseloadSummary (caseloads) {
+  if (caseloads.constructor === Array) {
+    return caseloads.reduce((prev, curr) => prev + curr.totalCases, 0)
   }
 }
