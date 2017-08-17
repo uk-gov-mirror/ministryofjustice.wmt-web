@@ -16,13 +16,13 @@ module.exports = function (id, organisationLevel) {
       var overallResults = getOverallCaseload(results)
       // Custory cases
       var custodyResults = getCaseloadByType(results, CASE_TYPE.CUSTODY)
-      var custodySummary = getCaseloadSummary(custodyResults)
+      var custodySummary = getCaseloadTotalSummary(custodyResults)
       // Community cases
       var communityResults = getCaseloadByType(results, CASE_TYPE.COMMUNITY)
-      var communitySummary = getCaseloadSummary(communityResults)
+      var communitySummary = getCaseloadTotalSummary(communityResults)
       // License cases
       var licenseResults = getCaseloadByType(results, CASE_TYPE.LICENSE)
-      var licenseSummary = getCaseloadSummary(licenseResults)
+      var licenseSummary = getCaseloadTotalSummary(licenseResults)
       // Return the result set
       return {
         overallCaseloadDetails: overallResults,
@@ -73,7 +73,7 @@ function getOverallCaseload (caseloads) {
   Filter the caseloads by the given type parameter.
 */
 function getCaseloadByType (caseloads, type) {
-  if (caseloads.constructor === Array) {
+  if (Array.isArray(caseloads)) {
     return caseloads.filter(caseload => caseload.caseType === type)
   }
 }
@@ -81,8 +81,8 @@ function getCaseloadByType (caseloads, type) {
 /*
   Adds the total cases to create a summary for the list of casesloads.
 */
-function getCaseloadSummary (caseloads) {
-  if (caseloads.constructor === Array) {
+function getCaseloadTotalSummary (caseloads) {
+  if (Array.isArray(caseloads)) {
     return caseloads.reduce((prev, curr) => prev + curr.totalCases, 0)
   }
 }

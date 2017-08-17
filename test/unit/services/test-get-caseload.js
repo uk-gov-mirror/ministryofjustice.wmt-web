@@ -91,15 +91,6 @@ describe('services/get-caseload', function () {
     })
   })
 
-  it('should call get-team-caseload and return a caseload object with the COMMUNITY casetype for a team', function () {
-    var teamName = orgUnitConstant.TEAM.name
-    getTeamCaseload.withArgs(id).resolves(TEAM_CASELOAD)
-    return getCaseload(id, teamName).then(function (result) {
-      assert(getTeamCaseload.called)
-      expect(result.communityCaseloadDetails[0]).to.eql(COMMUNITY_CASELOAD)
-    })
-  })
-
   it('should call get-team-caseload and return a caseload object with the CUSTODY casetype for a team', function () {
     var teamName = orgUnitConstant.TEAM.name
     getTeamCaseload.withArgs(id).resolves(TEAM_CASELOAD)
@@ -109,12 +100,48 @@ describe('services/get-caseload', function () {
     })
   })
 
+  it('should call get-team-caseload and return a caseload object with the COMMUNITY casetype for a team', function () {
+    var teamName = orgUnitConstant.TEAM.name
+    getTeamCaseload.withArgs(id).resolves(TEAM_CASELOAD)
+    return getCaseload(id, teamName).then(function (result) {
+      assert(getTeamCaseload.called)
+      expect(result.communityCaseloadDetails[0]).to.eql(COMMUNITY_CASELOAD)
+    })
+  })
+
   it('should call get-team-caseload and return a caseload object with the LICENSE casetype for a team', function () {
     var teamName = orgUnitConstant.TEAM.name
     getTeamCaseload.withArgs(id).resolves(TEAM_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
       assert(getTeamCaseload.called)
       expect(result.licenseCaseloadDetails[0]).to.eql(LICENSE_CASELOAD)
+    })
+  })
+
+  it('should call get-team-caseload and return caseload total summary for CUSTODY casetype for a team', function () {
+    var teamName = orgUnitConstant.TEAM.name
+    getTeamCaseload.withArgs(id).resolves(TEAM_CASELOAD)
+    return getCaseload(id, teamName).then(function (result) {
+      assert(getTeamCaseload.called)
+      expect(result.custodyTotalSummary).to.eql(9)
+    })
+  })
+
+  it('should call get-team-caseload and return caseload total summary for COMMUNITY casetype for a team', function () {
+    var teamName = orgUnitConstant.TEAM.name
+    getTeamCaseload.withArgs(id).resolves(TEAM_CASELOAD)
+    return getCaseload(id, teamName).then(function (result) {
+      assert(getTeamCaseload.called)
+      expect(result.communityTotalSummary).to.eql(9)
+    })
+  })
+
+  it('should call get-team-caseload and return caseload total summary for LICENSE casetype for a team', function () {
+    var teamName = orgUnitConstant.TEAM.name
+    getTeamCaseload.withArgs(id).resolves(TEAM_CASELOAD)
+    return getCaseload(id, teamName).then(function (result) {
+      assert(getTeamCaseload.called)
+      expect(result.licenseTotalSummary).to.eql(9)
     })
   })
 })
