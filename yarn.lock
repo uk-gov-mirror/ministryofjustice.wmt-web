@@ -3745,10 +3745,6 @@ joi@^6.9.1:
     moment "2.x.x"
     topo "1.x.x"
 
-jquery-tabs@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/jquery-tabs/-/jquery-tabs-0.5.0.tgz#f5b297c63a045e424339593a3e8c28912b322de7"
-
 jquery@>=1.7:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
@@ -4179,13 +4175,13 @@ mapbox-gl-function@^1.2.1:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/mapbox-gl-function/-/mapbox-gl-function-1.3.0.tgz#cee3d95750c189d45e83ab41a0a57fc2a8a509bc"
 
-"mapbox-gl-shaders@github:mapbox/mapbox-gl-shaders#de2ab007455aa2587c552694c68583f94c9f2747":
+mapbox-gl-shaders@mapbox/mapbox-gl-shaders#de2ab007455aa2587c552694c68583f94c9f2747:
   version "1.0.0"
   resolved "https://codeload.github.com/mapbox/mapbox-gl-shaders/tar.gz/de2ab007455aa2587c552694c68583f94c9f2747"
   dependencies:
     brfs "^1.4.0"
 
-"mapbox-gl-style-spec@github:mapbox/mapbox-gl-style-spec#83b1a3e5837d785af582efd5ed1a212f2df6a4ae":
+mapbox-gl-style-spec@mapbox/mapbox-gl-style-spec#83b1a3e5837d785af582efd5ed1a212f2df6a4ae:
   version "8.8.0"
   resolved "https://codeload.github.com/mapbox/mapbox-gl-style-spec/tar.gz/83b1a3e5837d785af582efd5ed1a212f2df6a4ae"
   dependencies:
@@ -7065,9 +7061,9 @@ window-size@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.4.tgz#f8e1aa1ee5a53ec5bf151ffa09742a6ad7697876"
 
-wmt-probation-rules@ministryofjustice/wmt-probation-rules.git#tech/wmt-787/make-default-contracted-hours-more-generic:
+wmt-probation-rules@ministryofjustice/wmt-probation-rules.git#0.1.8:
   version "0.1.8"
-  resolved "https://codeload.github.com/ministryofjustice/wmt-probation-rules/tar.gz/2c57f8860c8f801aa620adb4d86b12ec927fb827"
+  resolved "https://codeload.github.com/ministryofjustice/wmt-probation-rules/tar.gz/5f9c4255e5d8e8e6c8eb7623f45a1f7a16e8f8c6"
   dependencies:
     lodash "^4.17.4"
     moment "^2.18.1"
