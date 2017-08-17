@@ -62,7 +62,7 @@ beforeEach(function () {
   getBreadcrumbs = sinon.stub().returns(breadcrumbs)
   getCaseload =
       proxyquire('../../../app/services/get-caseload',
-        {'./data/get-team-caseload': getTeamCaseload,
+        {'./data/get-caseload': getTeamCaseload,
           './get-breadcrumbs': getBreadcrumbs})
 })
 
