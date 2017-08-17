@@ -4,7 +4,6 @@ const orgUnitConstants = require('../../constants/organisation-unit')
 const orgUnitFinder = require('../helpers/org-unit-finder')
 
 module.exports = function (id, type) {
-
   var orgUnit = orgUnitFinder('name', type)
   var table = orgUnit.caseloadView
 
