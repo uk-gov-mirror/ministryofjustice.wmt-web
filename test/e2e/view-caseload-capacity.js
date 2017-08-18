@@ -50,7 +50,7 @@ describe('View your caseload capacity flow', () => {
       .waitForExist('.sln-page-subtitle')
       .getText('.sln-page-subtitle')
       .then(function (text) {
-        expect(text).to.equal('LDU')
+        expect(text).to.equal('LDU Cluster')
       })
   })
 
@@ -64,7 +64,7 @@ describe('View your caseload capacity flow', () => {
       .waitForExist('.sln-page-subtitle')
       .getText('.sln-page-subtitle')
       .then(function (text) {
-        expect(text).to.equal('Region')
+        expect(text).to.equal('Division')
       })
   })
 
