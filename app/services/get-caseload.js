@@ -1,11 +1,11 @@
 const getBreadcrumbs = require('./get-breadcrumbs')
-const getTeamCaseload = require('./data/get-team-caseload')
+const getCaseload = require('./data/get-caseload')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 
 module.exports = function (id, organisationLevel) {
   var organisationUnitType = getOrganisationUnit('name', organisationLevel)
 
-  return getTeamCaseload(id)
+  return getCaseload(id)
   .then(function (results) {
     var breadcrumbs = getBreadcrumbs(id, organisationLevel)
     var overallResults = getOverallCaseload(results)
