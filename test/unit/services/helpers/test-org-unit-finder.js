@@ -1,6 +1,6 @@
 const expect = require('chai').expect
-const orgUnitFinder = require('../../../app/services/helpers/org-unit-finder')
-const orgUnit = require('../../../app/constants/organisation-unit')
+const orgUnitFinder = require('../../../../app/services/helpers/org-unit-finder')
+const orgUnit = require('../../../../app/constants/organisation-unit')
 
 describe('services/get-breadcrumbs', function () {
   it('should return the correct object when passed a org unit property', function () {
