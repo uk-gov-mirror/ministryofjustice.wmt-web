@@ -48,7 +48,7 @@ describe('View caseload progress flow', () => {
       .waitForExist('.js-plotly-plot')
       .getText('.sln-page-subtitle')
       .then(function (text) {
-        expect(text).to.equal('LDU')
+        expect(text).to.equal('LDU Cluster')
       })
   })
 
@@ -61,7 +61,7 @@ describe('View caseload progress flow', () => {
       .waitForExist('.js-plotly-plot')
       .getText('.sln-page-subtitle')
       .then(function (text) {
-        expect(text).to.equal('Region')
+        expect(text).to.equal('Division')
       })
   })
 
