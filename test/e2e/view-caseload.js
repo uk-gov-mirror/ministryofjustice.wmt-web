@@ -33,15 +33,21 @@ describe('View your caseload flow', () => {
       return browser.url(teamCaseloadUrl)
         .getText('#custodyTotal')
         .then(function (text) {
-          expect(text).to.eql('315\nCustody cases')
+          var textTotal = text.split('\n')
+          expect(Number(textTotal[0])).to.be.not.empty()
+          expect(textTotal[1]).to.eql('Custody cases')
         })
         .getText('#communityTotal')
         .then(function (text) {
-          expect(text).to.eql('315\nCommunity cases')
+          var textTotal = text.split('\n')
+          expect(Number(textTotal[0])).to.be.not.empty()
+          expect(textTotal[1]).to.eql('Community cases')
         })
         .getText('#licenseTotal')
         .then(function (text) {
-          expect(text).to.eql('315\nLicense cases')
+          var textTotal = text.split('\n')
+          expect(Number(textTotal[0])).to.be.not.empty()
+          expect(textTotal[1]).to.eql('License cases')
         })
     })
 

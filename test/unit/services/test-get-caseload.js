@@ -16,7 +16,7 @@ var CASE_TYPE = {
 
 const CASELOAD = {
   name: 'Todd Umptious',
-  caseType: CASE_TYPE.COMMUNITY,
+  caseType: CASE_TYPE.CUSTODY,
   grade: 'PO',
   teamId: '1',
   linkId: '2',
@@ -31,22 +31,22 @@ const CASELOAD = {
   a: 0
 }
 
-const OVERALL_CASELOAD = Object.assign({}, CASELOAD, {totalCases: 9, untiered: 3, d2: 3, c1: 3, b1: 3})
+const OVERALL_CASELOAD = Object.assign({}, CASELOAD, {totalCases: 18, untiered: 3, d2: 3, c1: 3, b1: 3})
 
-const COMMUNITY_CASELOAD = Object.assign({}, CASELOAD, {caseType: CASE_TYPE.COMMUNITY})
 const CUSTODY_CASELOAD = Object.assign({}, CASELOAD, {caseType: CASE_TYPE.CUSTODY})
-const LICENSE_CASELOAD = Object.assign({}, CASELOAD, {caseType: CASE_TYPE.LICENSE})
+const COMMUNITY_CASELOAD = Object.assign({}, CASELOAD, {totalCases: 6}, {caseType: CASE_TYPE.COMMUNITY})
+const LICENSE_CASELOAD = Object.assign({}, CASELOAD, {totalCases: 9}, {caseType: CASE_TYPE.LICENSE})
 
-const COMMUNITY_CASELOAD_1 = Object.assign({}, CASELOAD, {linkId: 3}, {caseType: CASE_TYPE.COMMUNITY})
 const CUSTODY_CASELOAD_1 = Object.assign({}, CASELOAD, {linkId: 3}, {caseType: CASE_TYPE.CUSTODY})
-const LICENSE_CASELOAD_1 = Object.assign({}, CASELOAD, {linkId: 3}, {caseType: CASE_TYPE.LICENSE})
+const COMMUNITY_CASELOAD_1 = Object.assign({}, CASELOAD, {linkId: 3}, {totalCases: 6}, {caseType: CASE_TYPE.COMMUNITY})
+const LICENSE_CASELOAD_1 = Object.assign({}, CASELOAD, {linkId: 3}, {totalCases: 9}, {caseType: CASE_TYPE.LICENSE})
 
-const COMMUNITY_CASELOAD_2 = Object.assign({}, CASELOAD, {linkId: 4}, {caseType: CASE_TYPE.COMMUNITY})
 const CUSTODY_CASELOAD_2 = Object.assign({}, CASELOAD, {linkId: 4}, {caseType: CASE_TYPE.CUSTODY})
-const LICENSE_CASELOAD_2 = Object.assign({}, CASELOAD, {linkId: 4}, {caseType: CASE_TYPE.LICENSE})
+const COMMUNITY_CASELOAD_2 = Object.assign({}, CASELOAD, {linkId: 4}, {totalCases: 6}, {caseType: CASE_TYPE.COMMUNITY})
+const LICENSE_CASELOAD_2 = Object.assign({}, CASELOAD, {linkId: 4}, {totalCases: 9}, {caseType: CASE_TYPE.LICENSE})
 
-const TEAM_CASELOAD = [COMMUNITY_CASELOAD, COMMUNITY_CASELOAD_1, COMMUNITY_CASELOAD_2,
-  CUSTODY_CASELOAD, CUSTODY_CASELOAD_1, CUSTODY_CASELOAD_2,
+const TEAM_CASELOAD = [CUSTODY_CASELOAD, CUSTODY_CASELOAD_1, CUSTODY_CASELOAD_2,
+  COMMUNITY_CASELOAD, COMMUNITY_CASELOAD_1, COMMUNITY_CASELOAD_2,
   LICENSE_CASELOAD, LICENSE_CASELOAD_1, LICENSE_CASELOAD_2]
 
 var id = 1
@@ -132,7 +132,7 @@ describe('services/get-caseload', function () {
     getTeamCaseload.withArgs(id).resolves(TEAM_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
       assert(getTeamCaseload.called)
-      expect(result.communityTotalSummary).to.eql(9)
+      expect(result.communityTotalSummary).to.eql(18)
     })
   })
 
@@ -141,7 +141,7 @@ describe('services/get-caseload', function () {
     getTeamCaseload.withArgs(id).resolves(TEAM_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
       assert(getTeamCaseload.called)
-      expect(result.licenseTotalSummary).to.eql(9)
+      expect(result.licenseTotalSummary).to.eql(27)
     })
   })
 })
