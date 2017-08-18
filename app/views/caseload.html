@@ -16,14 +16,12 @@
 
 <div class="js-tabs">
   <ul class="js-tabs-links">
-	  <li><a href="#overall">Overall</a></li>
-		<li><a href="#custody">Custody</a></li>
-		<li><a href="#community">Community</a></li>
-		<li><a href="#license">License</a></li>
+    {% for caseType in caseTypes %}
+	    <li><a href="#{{caseType.displayName}}" role="dynamic">{{caseType.displayName | title}}</a></li>
+    {% endfor %}
   </ul>
   
   <div class="js-tabs-content">
-
   {% for caseType in caseTypes %}
     <div id="{{caseType.displayName}}">
       <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by tier</h3>
@@ -31,38 +29,38 @@
       <table class="sln-table-caseload data-table">
         <thead>
           <tr>
-            <th colspan="2" id="om">Offender manager</th>
-            <th colspan="9" id="tiers">Case tiers</th>
+            <th colspan="2" id="{{caseType.displayName}}_om">Offender manager</th>
+            <th colspan="9" id="{{caseType.displayName}}_tiers">Case tiers</th>
           </tr>
           <tr>
-            <th id="name">Name</th>
-            <th id="grade">Grade</th>
-            <th id="untiered">Untiered</th>
-            <th id="d2">D2</th>
-            <th id="d1">D1</th>
-            <th id="c2">C2</th>
-            <th id="c1">C1</th>
-            <th id="b2">B2</th>
-            <th id="b1">B1</th>
-            <th id="a">A</th>
-            <th id="total">Total</th>
+            <th id="{{caseType.displayName}}_name">Name</th>
+            <th id="{{caseType.displayName}}_grade">Grade</th>
+            <th id="{{caseType.displayName}}_untiered">Untiered</th>
+            <th id="{{caseType.displayName}}_d2">D2</th>
+            <th id="{{caseType.displayName}}_d1">D1</th>
+            <th id="{{caseType.displayName}}_c2">C2</th>
+            <th id="{{caseType.displayName}}_c1">C1</th>
+            <th id="{{caseType.displayName}}_b2">B2</th>
+            <th id="{{caseType.displayName}}_b1">B1</th>
+            <th id="{{caseType.displayName}}_a">A</th>
+            <th id="{{caseType.displayName}}_total">Total</th>
           </tr>
         </thead>
 
         <tbody class="">
           {% for member in caseType.array %}
             <tr>
-              <td headers="om name"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
-              <td headers="om grade">{{ member.gradeCode }}</td>
-              <td headers="tiers untiered">{{ member.untiered }}</td>
-              <td headers="tiers d2">{{ member.d2 }}</td>
-              <td headers="tiers d1">{{ member.d1 }}</td>
-              <td headers="tiers c2">{{ member.c2 }}</td>
-              <td headers="tiers c1">{{ member.c1 }}</td>
-              <td headers="tiers b2">{{ member.b2 }}</td>
-              <td headers="tiers b1">{{ member.b1 }}</td>
-              <td headers="tiers a">{{ member.a }}</td>
-              <td headers="tiers total">{{ member.totalCases }}</td>
+              <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.gradeCode }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ member.untiered }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ member.d2 }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ member.d1 }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ member.c2 }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ member.c1 }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b2">{{ member.b2 }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ member.b1 }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ member.a }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total">{{ member.totalCases }}</td>
             </tr>
           {% endfor %}
         </tbody>
