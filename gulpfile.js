@@ -24,7 +24,6 @@ gulp.task('templates', function () {
 gulp.task('vendorJS', function () {
   const vendorJSFiles = [
     'node_modules/jquery/dist/jquery.js',
-    'node_modules/datatables.net/js/jquery.datatables.js',
     'node_modules/plotly.js/dist/plotly.js'
   ]
 
