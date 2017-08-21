@@ -76,7 +76,6 @@
 </div>
 {% elseif organisationLevel === 'ldu'%}
 
-{% for team in teams %}
 <h3 class="heading-medium">Caseload by grade</h3>
   <table class="sln-table-caseload data-table">
     <thead>
@@ -99,26 +98,27 @@
       </tr>
     </thead>
     <tbody class="">
-      {% for i in range(0, grades.length) %}
-      <tr>
-        {% if i === 0 %}
-        <td rowspan="2" headers="name team"><a href="/team/{{ grades[i].linkId }}">{{ team.name }}</a></td>
-        {% endif %}
-        <td headers="grade team">{{ grades[i].gradeCode }}</td>
-        <td headers="overall tiers">{{ grades[i].overall }}%</td>
-        <td headers="untiered tiers">{{ grades[i].untiered }}%</td>
-        <td headers="d2 tiers">{{ grades[i].d2 }}%</td>
-        <td headers="d1 tiers">{{ grades[i].d1 }}%</td>
-        <td headers="c2 tiers">{{ grades[i].c2 }}%</td>
-        <td headers="b2 tiers">{{ grades[i].c1 }}%</td>
-        <td headers="b1 tiers">{{ grades[i].b2 }}%</td>
-        <td headers="b1 tiers">{{ grades[i].b1 }}%</td>
-        <td headers="a tiers">{{ grades[i].a }}%</td>
-      </tr>
+      {% for team in lduCaseloadDetails %}
+        {% for i in range(0, team.grades.length) %}
+        <tr>
+          {% if i === 0 %}
+          <td rowspan="2" headers="name team"><a href="/team/{{ team.grades[i].linkId }}">{{ team.name }}</a></td>
+          {% endif %}
+          <td headers="grade team">{{ team.grades[i].gradeCode }}</td>
+          <td headers="overall tiers">{{ team.grades[i].overall }}%</td>
+          <td headers="untiered tiers">{{ team.grades[i].untiered }}%</td>
+          <td headers="d2 tiers">{{ team.grades[i].d2 }}%</td>
+          <td headers="d1 tiers">{{ team.grades[i].d1 }}%</td>
+          <td headers="c2 tiers">{{ team.grades[i].c2 }}%</td>
+          <td headers="b2 tiers">{{ team.grades[i].c1 }}%</td>
+          <td headers="b1 tiers">{{ team.grades[i].b2 }}%</td>
+          <td headers="b1 tiers">{{ team.grades[i].b1 }}%</td>
+          <td headers="a tiers">{{ team.grades[i].a }}%</td>
+        </tr>
+        {% endfor %}
       {% endfor %}
     </tbody>
   </table>
-  {% endfor %}
 
 {% endif %}
 
