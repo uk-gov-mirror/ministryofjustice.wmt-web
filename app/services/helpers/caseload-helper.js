@@ -32,7 +32,16 @@ module.exports.getOverallCaseload = function (caseloads) {
   Filter the caseloads by the given type parameter.
 */
 module.exports.getCaseloadByType = function (caseloads, type) {
-  if (caseloads.constructor === Array) {
+  if (Array.isArray(caseloads)) {
     return caseloads.filter(caseload => caseload.caseType === type)
+  }
+}
+
+/*
+  Adds the total cases to create a summary for the list of casesloads.
+*/
+module.exports.getCaseloadTotalSummary = function (caseloads) {
+  if (Array.isArray(caseloads)) {
+    return caseloads.reduce((prev, curr) => prev + curr.totalCases, 0)
   }
 }
