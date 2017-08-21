@@ -71,7 +71,7 @@ beforeEach(function () {
 describe('services/get-caseload', function () {
   it('should return a results object with breadcrumbs, title and subtitle for a team', function () {
     var teamName = orgUnitConstant.TEAM.name
-    getCaseloadDetail.withArgs(id).resolves(OVERALL_CASELOAD)
+    getCaseloadDetail.withArgs(id, teamName).resolves(OVERALL_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
       var teamSubtitle = orgUnitFinder('name', teamName).displayText
       expect(getBreadcrumbs).to.have.been.called //eslint-disable-line
@@ -83,7 +83,7 @@ describe('services/get-caseload', function () {
 
   it('should call get-caseload and return a results object with the overall caseload details for a team', function () {
     var teamName = orgUnitConstant.TEAM.name
-    getCaseloadDetail.withArgs(id).resolves(TEAM_CASELOAD)
+    getCaseloadDetail.withArgs(id, teamName).resolves(TEAM_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
       assert(getCaseloadDetail.called)
       expect(result.overallCaseloadDetails.length).to.eql(3)
@@ -95,7 +95,7 @@ describe('services/get-caseload', function () {
 
   it('should call get-caseload and return a caseload object with the CUSTODY casetype for a team', function () {
     var teamName = orgUnitConstant.TEAM.name
-    getCaseloadDetail.withArgs(id).resolves(TEAM_CASELOAD)
+    getCaseloadDetail.withArgs(id, teamName).resolves(TEAM_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
       assert(getCaseloadDetail.called)
       expect(result.custodyCaseloadDetails[0]).to.eql(CUSTODY_CASELOAD)
@@ -104,7 +104,7 @@ describe('services/get-caseload', function () {
 
   it('should call get-caseload and return a caseload object with the COMMUNITY casetype for a team', function () {
     var teamName = orgUnitConstant.TEAM.name
-    getCaseloadDetail.withArgs(id).resolves(TEAM_CASELOAD)
+    getCaseloadDetail.withArgs(id, teamName).resolves(TEAM_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
       assert(getCaseloadDetail.called)
       expect(result.communityCaseloadDetails[0]).to.eql(COMMUNITY_CASELOAD)
@@ -113,7 +113,7 @@ describe('services/get-caseload', function () {
 
   it('should call get-caseload and return a caseload object with the LICENSE casetype for a team', function () {
     var teamName = orgUnitConstant.TEAM.name
-    getCaseloadDetail.withArgs(id).resolves(TEAM_CASELOAD)
+    getCaseloadDetail.withArgs(id, teamName).resolves(TEAM_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
       assert(getCaseloadDetail.called)
       expect(result.licenseCaseloadDetails[0]).to.eql(LICENSE_CASELOAD)
@@ -122,7 +122,7 @@ describe('services/get-caseload', function () {
 
   it('should call get-caseload and return caseload total summary for CUSTODY casetype for a team', function () {
     var teamName = orgUnitConstant.TEAM.name
-    getCaseloadDetail.withArgs(id).resolves(TEAM_CASELOAD)
+    getCaseloadDetail.withArgs(id, teamName).resolves(TEAM_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
       assert(getCaseloadDetail.called)
       expect(result.custodyTotalSummary).to.eql(9)
@@ -131,7 +131,7 @@ describe('services/get-caseload', function () {
 
   it('should call get-caseload and return caseload total summary for COMMUNITY casetype for a team', function () {
     var teamName = orgUnitConstant.TEAM.name
-    getCaseloadDetail.withArgs(id).resolves(TEAM_CASELOAD)
+    getCaseloadDetail.withArgs(id, teamName).resolves(TEAM_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
       assert(getCaseloadDetail.called)
       expect(result.communityTotalSummary).to.eql(18)
@@ -140,7 +140,7 @@ describe('services/get-caseload', function () {
 
   it('should call get-caseload and return caseload total summary for LICENSE casetype for a team', function () {
     var teamName = orgUnitConstant.TEAM.name
-    getCaseloadDetail.withArgs(id).resolves(TEAM_CASELOAD)
+    getCaseloadDetail.withArgs(id, teamName).resolves(TEAM_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
       assert(getCaseloadDetail.called)
       expect(result.licenseTotalSummary).to.eql(27)
@@ -149,7 +149,7 @@ describe('services/get-caseload', function () {
 
   it('should return a results object with breadcrumbs, title and subtitle for LDU', function () {
     var lduName = orgUnitConstant.LDU.name
-    getCaseloadDetail.withArgs(id).resolves(OVERALL_CASELOAD)
+    getCaseloadDetail.withArgs(id, lduName).resolves(OVERALL_CASELOAD)
     return getCaseload(id, lduName).then(function (result) {
       var lduSubtitle = orgUnitFinder('name', lduName).displayText
       expect(getBreadcrumbs).to.have.been.called //eslint-disable-line
@@ -161,7 +161,7 @@ describe('services/get-caseload', function () {
 
   it('should call get-caseload and return ldu caseload object', function () {
     var lduName = orgUnitConstant.LDU.name
-    getCaseloadDetail.withArgs(id).resolves(TEAM_CASELOAD)
+    getCaseloadDetail.withArgs(id, lduName).resolves(TEAM_CASELOAD)
     return getCaseload(id, lduName).then(function (result) {
       assert(getCaseloadDetail.called)
       expect(result.lduCaseloadDetails.length).to.eql(3)
