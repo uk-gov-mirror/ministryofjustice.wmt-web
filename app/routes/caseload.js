@@ -18,6 +18,9 @@ module.exports = function (router) {
         subTitle: result.subTitle,
         breadcrumbs: result.breadcrumbs,
         subNav: getSubNav(id, organisationLevel, req.path),
+        custodyTotalSummary: result.custodyTotalSummary,
+        communityTotalSummary: result.communityTotalSummary,
+        licenseTotalSummary: result.licenseTotalSummary,
         caseTypes: [
           { displayName: 'overall',
             array: result.overallCaseloadDetails

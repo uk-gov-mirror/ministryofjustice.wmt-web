@@ -14,6 +14,9 @@ const CASELOAD = {
   subTitle: 'SubTitle',
   breadcrumbs: {},
   subNav: {},
+  custodyTotalSummary: 0,
+  communityTotalSummary: 0,
+  licenseTotalSummary: 0,
   caseTypes: [{}]
 }
 

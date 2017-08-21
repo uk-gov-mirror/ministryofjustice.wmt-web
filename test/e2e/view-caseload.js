@@ -29,6 +29,28 @@ describe('View your caseload flow', () => {
         })
     })
 
+    it('with the correct caseload total summary for each case type', function () {
+      return browser.url(teamCaseloadUrl)
+        .getText('#custodyTotal')
+        .then(function (text) {
+          var textTotal = text.split('\n')
+          expect(Number(textTotal[0])).to.be.not.empty()
+          expect(textTotal[1]).to.eql('Custody cases')
+        })
+        .getText('#communityTotal')
+        .then(function (text) {
+          var textTotal = text.split('\n')
+          expect(Number(textTotal[0])).to.be.not.empty()
+          expect(textTotal[1]).to.eql('Community cases')
+        })
+        .getText('#licenseTotal')
+        .then(function (text) {
+          var textTotal = text.split('\n')
+          expect(Number(textTotal[0])).to.be.not.empty()
+          expect(textTotal[1]).to.eql('License cases')
+        })
+    })
+
     it('with the correct tabs and tables', () => {
       return browser.url(teamCaseloadUrl)
         .waitForExist('[href="#overall"]')
