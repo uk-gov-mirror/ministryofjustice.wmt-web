@@ -12,7 +12,7 @@
 
 {% include "includes/sub-nav.html" %}
 
-
+{% if organisationLevel === 'team'%}
 <h2 class="heading-large">Caseload totals</h2>
 
 <div id="caseloadSummary" class="grid-row">
@@ -37,8 +37,6 @@
 </div>
 
 <h2 class="heading-large">Caseload type breakdown</h2>
-
-{% if organisationLevel === 'team'%}
 <div class="js-tabs">
   <ul class="js-tabs-links">
     {% for caseType in caseTypes %}
@@ -124,10 +122,10 @@
         {% for i in range(0, team.grades.length) %}
         <tr>
           {% if i === 0 %}
-          <td rowspan="2" headers="name team"><a href="/team/{{ team.grades[i].linkId }}">{{ team.name }}</a></td>
+          <td rowspan="2" headers="name team"><a href="/team/{{ team.linkId }}">{{ team.name }}</a></td>
           {% endif %}
           <td headers="grade team">{{ team.grades[i].gradeCode }}</td>
-          <td headers="overall tiers">{{ team.grades[i].overall }}%</td>
+          <td headers="overall tiers">{{ team.grades[i].totalCases }}%</td>
           <td headers="untiered tiers">{{ team.grades[i].untiered }}%</td>
           <td headers="d2 tiers">{{ team.grades[i].d2 }}%</td>
           <td headers="d1 tiers">{{ team.grades[i].d1 }}%</td>
