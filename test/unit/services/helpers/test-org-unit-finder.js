@@ -1,8 +1,8 @@
 const expect = require('chai').expect
-const orgUnitFinder = require('../../../app/services/helpers/org-unit-finder')
-const orgUnit = require('../../../app/constants/organisation-unit')
+const orgUnitFinder = require('../../../../app/services/helpers/org-unit-finder')
+const orgUnit = require('../../../../app/constants/organisation-unit')
 
-describe('services/get-breadcrumbs', function () {
+describe('services/get-org-unit-finder', function () {
   it('should return the correct object when passed a org unit property', function () {
     expect(orgUnitFinder('name', 'team')).to.eql(orgUnit.TEAM)
     expect(orgUnitFinder('ref', 'R')).to.eql(orgUnit.REGION)
