@@ -32,10 +32,13 @@ gulp.task('vendorJS', function () {
 })
 
 gulp.task('sync', ['vendorJS'], function () {
-  gulp.src('app/assets/javascripts/**/*.js')
-    .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
-  gulp.src('app/assets/images/**/*')
-    .pipe(gulp.dest('app/public/images/', { overwrite: true }))
+  return gulp.src('app/assets/javascripts/**/*.js')
+          .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
+})
+
+gulp.task('syncAssets', function () {
+  return gulp.src('app/assets/images/**/*')
+          .pipe(gulp.dest('app/public/images/', { overwrite: true }))
 })
 
 gulp.task('sass', function () {
@@ -55,7 +58,7 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('app/public/stylesheets'))
 })
 
-gulp.task('generate-assets', ['assets', 'templates', 'sync', 'sass'])
+gulp.task('generate-assets', ['assets', 'templates', 'sync', 'sass', 'syncAssets'])
 
 gulp.task('generate-assets-and-start', ['generate-assets', 'server'], function () {
 
