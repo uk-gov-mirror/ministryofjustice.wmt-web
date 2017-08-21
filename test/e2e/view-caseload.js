@@ -36,19 +36,19 @@ describe('View your caseload flow', () => {
         .getText('#custodyTotal')
         .then(function (text) {
           var textTotal = text.split('\n')
-          expect(Number(textTotal[0])).to.be.not.empty()
+          expect(Number(textTotal[0])).to.not.be.empty // eslint-disable-line
           expect(textTotal[1]).to.eql('Custody cases')
         })
         .getText('#communityTotal')
         .then(function (text) {
           var textTotal = text.split('\n')
-          expect(Number(textTotal[0])).to.be.not.empty()
+          expect(Number(textTotal[0])).to.not.be.empty // eslint-disable-line
           expect(textTotal[1]).to.eql('Community cases')
         })
         .getText('#licenseTotal')
         .then(function (text) {
           var textTotal = text.split('\n')
-          expect(Number(textTotal[0])).to.be.not.empty()
+          expect(Number(textTotal[0])).to.not.be.empty // eslint-disable-line
           expect(textTotal[1]).to.eql('License cases')
         })
     })
