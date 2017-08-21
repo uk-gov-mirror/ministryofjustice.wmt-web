@@ -7,8 +7,8 @@ exports.config = wdioConfHelper({
   baseUrl: process.env.WMT_BASE_URL || 'http://localhost:3000',
   capabilities: [{
     maxInstances: 1,
-    browserName: 'internet explorer',
-    platform: 'Windows 7',
-    version: '11.0'
+    browserName: 'firefox',
+    platform: 'Windows 10',
+    version: '41.0'
   }]
 })
