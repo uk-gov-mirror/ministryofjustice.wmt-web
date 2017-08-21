@@ -51,7 +51,7 @@ describe('View overview', function () {
       .waitForExist('[href="/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/overview"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
-        expect(text).to.equal('LDU')
+        expect(text).to.equal('LDU Cluster')
       })
   })
 
@@ -62,7 +62,7 @@ describe('View overview', function () {
       .waitForExist('[href="/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/overview"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
-        expect(text).to.equal('Region')
+        expect(text).to.equal('Division')
       })
   })
 

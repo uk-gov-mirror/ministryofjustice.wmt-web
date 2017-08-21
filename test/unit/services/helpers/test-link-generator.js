@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const linkGenerator = require('../../../app/services/helpers/link-generator')
+const linkGenerator = require('../../../../app/services/helpers/link-generator')
 
 describe('services/helpers/link-generator', function () {
   describe('fromReference', function () {
