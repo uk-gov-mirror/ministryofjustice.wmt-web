@@ -9,6 +9,6 @@ exports.config = wdioConfHelper({
     maxInstances: 1,
     browserName: 'internet explorer',
     platform: 'Windows 7',
-    version: '11.0'
+    version: '10'
   }]
 })
