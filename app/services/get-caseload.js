@@ -1,88 +1,53 @@
 const getBreadcrumbs = require('./get-breadcrumbs')
-const getTeamCaseload = require('./data/get-team-caseload')
+const getCaseload = require('./data/get-caseload')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
-const CASE_TYPE = {
-  CUSTODY: 'CUSTODY',
-  COMMUNITY: 'COMMUNITY',
-  LICENSE: 'LICENSE'
-}
+const organisationUnitConstants = require('../constants/organisation-unit')
+const caseloadHelper = require('./helpers/caseload-helper')
+const percentageCalculator = require('./helpers/percentage-calculator')
+const caseType = require('../constants/case-type')
+
 module.exports = function (id, organisationLevel) {
   var organisationUnitType = getOrganisationUnit('name', organisationLevel)
 
-  return getTeamCaseload(id)
+  return getCaseload(id, organisationLevel)
     .then(function (results) {
       var breadcrumbs = getBreadcrumbs(id, organisationLevel)
-      // Overall cases
-      var overallResults = getOverallCaseload(results)
-      // Custory cases
-      var custodyResults = getCaseloadByType(results, CASE_TYPE.CUSTODY)
-      var custodySummary = getCaseloadTotalSummary(custodyResults)
-      // Community cases
-      var communityResults = getCaseloadByType(results, CASE_TYPE.COMMUNITY)
-      var communitySummary = getCaseloadTotalSummary(communityResults)
-      // License cases
-      var licenseResults = getCaseloadByType(results, CASE_TYPE.LICENSE)
-      var licenseSummary = getCaseloadTotalSummary(licenseResults)
-      // Return the result set
-      return {
-        overallCaseloadDetails: overallResults,
-        communityCaseloadDetails: communityResults,
-        custodyCaseloadDetails: custodyResults,
-        licenseCaseloadDetails: licenseResults,
-        custodyTotalSummary: custodySummary,
-        communityTotalSummary: communitySummary,
-        licenseTotalSummary: licenseSummary,
-        breadcrumbs: breadcrumbs,
-        title: breadcrumbs[0].title,
-        subTitle: organisationUnitType.displayText
+      var title = breadcrumbs[0].title
+      var subTitle = organisationUnitType.displayText
+
+      if (organisationLevel === organisationUnitConstants.LDU.name) {
+        var lduCaseloadResults = percentageCalculator(results)
+        return {
+          breadcrumbs: breadcrumbs,
+          title: title,
+          subTitle: subTitle,
+          lduCaseloadDetails: lduCaseloadResults
+        }
+      } else if (organisationLevel === organisationUnitConstants.TEAM.name) {
+        // Overall cases
+        var overallResults = caseloadHelper.getOverallCaseload(results)
+        // Custody cases
+        var custodyResults = caseloadHelper.getCaseloadByType(results, caseType.CUSTODY)
+        var custodySummary = caseloadHelper.getCaseloadTotalSummary(custodyResults)
+        // Community cases
+        var communityResults = caseloadHelper.getCaseloadByType(results, caseType.COMMUNITY)
+        var communitySummary = caseloadHelper.getCaseloadTotalSummary(communityResults)
+        // License cases
+        var licenseResults = caseloadHelper.getCaseloadByType(results, caseType.LICENSE)
+        var licenseSummary = caseloadHelper.getCaseloadTotalSummary(licenseResults)
+        // Return the result set
+        return {
+          overallCaseloadDetails: overallResults,
+          communityCaseloadDetails: communityResults,
+          custodyCaseloadDetails: custodyResults,
+          licenseCaseloadDetails: licenseResults,
+          custodyTotalSummary: custodySummary,
+          communityTotalSummary: communitySummary,
+          licenseTotalSummary: licenseSummary,
+          breadcrumbs: breadcrumbs,
+          title: title,
+          subTitle: subTitle
+        }
       }
     })
-}
-
-function getOverallCaseload (caseloads) {
-  // Create a mapping for the linkId to do the aggregation
-  var linkIdToCaseloadMap = new Map()
-  for (var idx = 0; idx < caseloads.length; idx++) {
-    var key = caseloads[idx].linkId
-    if (!linkIdToCaseloadMap.has(key)) {
-      // Make a copy of the object to ensure the original value isn't affected
-      var newValue = Object.assign({}, caseloads[idx])
-      linkIdToCaseloadMap.set(key, newValue)
-    } else {
-      var existingValue = linkIdToCaseloadMap.get(key)
-      existingValue.untiered += caseloads[idx].untiered
-      existingValue.d2 += caseloads[idx].d2
-      existingValue.d1 += caseloads[idx].d1
-      existingValue.c2 += caseloads[idx].c2
-      existingValue.c1 += caseloads[idx].c1
-      existingValue.b2 += caseloads[idx].b2
-      existingValue.b1 += caseloads[idx].b1
-      existingValue.a += caseloads[idx].a
-      existingValue.totalCases += caseloads[idx].totalCases
-    }
-  }
-  // Convert the map back to array of object
-  var overall = []
-  linkIdToCaseloadMap.forEach(function (val, key) {
-    overall.push(val)
-  })
-  return overall
-}
-
-/*
-  Filter the caseloads by the given type parameter.
-*/
-function getCaseloadByType (caseloads, type) {
-  if (Array.isArray(caseloads)) {
-    return caseloads.filter(caseload => caseload.caseType === type)
-  }
-}
-
-/*
-  Adds the total cases to create a summary for the list of casesloads.
-*/
-function getCaseloadTotalSummary (caseloads) {
-  if (Array.isArray(caseloads)) {
-    return caseloads.reduce((prev, curr) => prev + curr.totalCases, 0)
-  }
 }
