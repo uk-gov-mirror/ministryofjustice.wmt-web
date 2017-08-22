@@ -54,6 +54,7 @@ urls+=("$host/hmpps/0/$overview_url")
 # Caseload
 caseload_url='caseload'
 urls+=("$host/team/$teamId/$caseload_url")
+urls+=("$host/ldu/$lduId/$caseload_url")
 
 for url in "${urls[@]}"
 do
