@@ -25,7 +25,7 @@ var lduPercentageResults = [
   }
 ]
 
-describe('services/get-percentage-calculator', function () {
+describe('services/helpers/percentage-calculator', function () {
   it('should popluate percentage fields in each row of the object', function () {
     expect(caseloadPercentageCalculator(lduCaseloadQueryResults)).to.eql(lduPercentageResults)
   })
