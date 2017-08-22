@@ -4,6 +4,7 @@ const dataHelper = require('../helpers/data/aggregated-data-helper')
 
 var workloadOwnerIds = []
 var teamCaseloadUrl
+var lduCaseloadUrl
 
 describe('View your caseload flow', () => {
   before(function () {
@@ -11,6 +12,7 @@ describe('View your caseload flow', () => {
       .then(function (results) {
         workloadOwnerIds = results
         teamCaseloadUrl = '/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id + '/caseload'
+        lduCaseloadUrl = '/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id + '/caseload'
       })
   })
 
@@ -62,6 +64,19 @@ describe('View your caseload flow', () => {
         .waitForExist('.sln-table-caseload')
         .click('[href="#license"]')
         .waitForExist('.sln-table-caseload')
+    })
+  })
+
+  describe('should navigate to the LDU caseload screen', () => {
+    it('with the correct table and breadcrumbs', () => {
+      return browser.url(lduCaseloadUrl)
+        .waitForExist('.sln-table-caseload')
+        .waitForExist('.breadcrumbs')
+        .waitForExist('.sln-page-subtitle')
+        .getText('.sln-page-subtitle')
+        .then(function (text) {
+          expect(text).to.equal('LDU Cluster')
+        })
     })
   })
 })
