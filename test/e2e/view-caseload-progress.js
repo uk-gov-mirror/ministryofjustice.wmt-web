@@ -50,7 +50,7 @@ describe('View caseload progress flow', () => {
   })
 
   it('should navigate to the ldu caseload progress screen', () => {
-    return browser.url(lduDefaultUrl+ '/case-progress')
+    return browser.url(lduDefaultUrl + '/case-progress')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('[href="' + lduDefaultUrl + '/caseload-capacity"]')
