@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 
 const insertReduction = require('../../../../app/services/data/insert-reduction')
-const Reduction = require('../../../../app/services/domain/new-reduction')
+const Reduction = require('../../../../app/services/domain/reduction')
 const workloadCapacityHelper = require('../../../helpers/data/aggregated-data-helper')
 
 var reductionResult = {

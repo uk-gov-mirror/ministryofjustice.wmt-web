@@ -1,7 +1,7 @@
 const expect = require('chai').expect
-const Reduction = require('../../../../app/services/domain/new-reduction')
+const Reduction = require('../../../../app/services/domain/reduction')
 
-describe('services/domain/new-reduction', function () {
+describe('services/domain/reduction', function () {
   it('should construct a new-redution object with the correct values', function () {
     var reduction = new Reduction(1, 5, new Date(), new Date(), 'This is a test note')
 

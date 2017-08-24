@@ -1,6 +1,7 @@
 const organisationUnitConstants = require('../constants/organisation-unit')
 const reductionsService = require('../services/reductions-service')
-const Reduction = require('../services/domain/new-reduction')
+const getSubNav = require('../services/get-sub-nav')
+const Reduction = require('../services/domain/reduction')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/reductions', function (req, res, next) {
@@ -19,6 +20,8 @@ module.exports = function (router) {
         breadcrumbs: result.breadcrumbs,
         linkId: id,
         title: result.title,
+        subTitle: result.subTitle,
+        subNav: getSubNav(id, organisationLevel, req.path),
         active: [],
         scheduled: [],
         archived: [],
@@ -43,6 +46,7 @@ module.exports = function (router) {
         linkId: id,
         title: result.title,
         subTitle: result.subTitle,
+        subNav: getSubNav(id, organisationLevel, req.path),
         referenceData: result.referenceData,
         failureText: failureText
       })

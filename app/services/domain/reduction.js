@@ -1,4 +1,4 @@
-class NewReduction {
+class Reduction {
   constructor (reasonForReductionId, hours, reductionStartDate, reductionEndDate, notes) {
     this.reasonForReductionId = reasonForReductionId
     this.hours = hours
@@ -8,4 +8,4 @@ class NewReduction {
   }
 }
 
-module.exports = NewReduction
+module.exports = Reduction
