@@ -13,20 +13,17 @@ module.exports = function (router) {
       throw new Error('Only available for offender manager')
     }
 
-    var reductionsPromise = reductionsService.getReductions(id)
-
-    return reductionsPromise.then(function (result) {
-      return res.render('reductions', {
-        breadcrumbs: result.breadcrumbs,
-        linkId: id,
-        title: result.title,
-        subTitle: result.subTitle,
-        subNav: getSubNav(id, organisationLevel, req.path),
-        active: [],
-        scheduled: [],
-        archived: [],
-        successText: successText
-      })
+    var result = reductionsService.getReductions(id, organisationLevel)
+    return res.render('reductions', {
+      breadcrumbs: result.breadcrumbs,
+      linkId: id,
+      title: result.title,
+      subTitle: result.subTitle,
+      subNav: getSubNav(id, organisationLevel, req.path),
+      active: [],
+      scheduled: [],
+      archived: [],
+      successText: successText
     })
   })
 
@@ -61,20 +58,23 @@ module.exports = function (router) {
       throw new Error('Only available for offender manager')
     }
     var newReduction = new Reduction(
-      req.body.reasonForReduction, req.body.hours, req.body.reductionStartDate, req.body.reductionEndDate, req.body.notes
+      req.body.reasonForReductionId, req.body.hours, req.body.reductionStartDate, req.body.reductionEndDate, req.body.notes
     )
+    if (!valid(newReduction)) {
+      return res.redirect(307, '/' + organisationLevel + '/' + id + '/add-reduction')
+    }
+
     var addReductionsPromise = reductionsService.addReduction(id, newReduction)
 
     return addReductionsPromise.then(function () {
-      return res.redirect('/' + organisationLevel + '/' + id + '/reductions', {
-        successText: 'You have successfully added a new reduction'
-      })
-    })
-    .catch(function (err) {
-      console.log(err)
-      return res.redirect('/' + organisationLevel + '/' + id + '/reductions', {
-        failureText: 'Something went wrong when adding the reduction. Please try again later.'
-      })
+      return res.redirect(307, '/' + organisationLevel + '/' + id + '/reductions')
+      // , {
+      //   successText: 'You have successfully added a new reduction'
+      // })
     })
   })
+
+  var valid = function (reduction) {
+    return true
+  }
 }
