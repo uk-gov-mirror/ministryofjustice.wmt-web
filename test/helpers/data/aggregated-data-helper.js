@@ -287,6 +287,24 @@ module.exports.getAnyExistingTeamId = function () {
   return promise
 }
 
+module.exports.getAnyExistingWorkloadOwnerId = function () {
+  var promise = knex('workload_owner')
+      .first('id')
+      .then(function (result) {
+        return result
+      })
+  return promise
+}
+
+module.exports.getAnyExistingReductionReasonId = function () {
+  var promise = knex('reduction_reason')
+      .first('id')
+      .then(function (result) {
+        return result
+      })
+  return promise
+}
+
 module.exports.selectGradeForWorkloadOwner = function (workloadOwnerId) {
   var promise = knex('workload_owner')
     .first('offender_manager.grade_code')

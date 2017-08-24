@@ -6,9 +6,9 @@ describe('services/get-sub-nav', function () {
   var id = 1
   var organisationalUnitName = 'name'
 
-  it('returns a list which has four elements', function () {
+  it('returns a list which has five elements', function () {
     var subNav = getSubNav(id, organisationalUnitName)
-    expect(subNav.length).to.eql(4)
+    expect(subNav.length).to.eql(5)
   })
 
   it('returns a list of Link objects', function () {
@@ -24,6 +24,7 @@ describe('services/get-sub-nav', function () {
     expect(subNav[1].title).to.eql('Capacity')
     expect(subNav[2].title).to.eql('Caseload')
     expect(subNav[3].title).to.eql('Case Progress')
+    expect(subNav[4].title).to.eql('Reductions')
   })
 
   it('returns the correct links', function () {
@@ -32,6 +33,7 @@ describe('services/get-sub-nav', function () {
     expect(subNav[1].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'caseload-capacity')
     expect(subNav[2].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'caseload')
     expect(subNav[3].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'case-progress')
+    expect(subNav[4].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'reductions')
   })
 
   it('marks the current link as active', function () {
@@ -41,5 +43,6 @@ describe('services/get-sub-nav', function () {
     expect(subNav[1].active).to.be.undefined //eslint-disable-line
     expect(subNav[2].active).to.be.undefined //eslint-disable-line
     expect(subNav[3].active).to.be.undefined //eslint-disable-line
+    expect(subNav[4].active).to.be.undefined //eslint-disable-line
   })
 })

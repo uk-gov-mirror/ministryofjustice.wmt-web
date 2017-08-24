@@ -1,9 +1,9 @@
 class NewReduction {
-  constructor (reasonForReduction, hours, reductionStartDate, reductionEndDate, notes) {
-    this.reasonForReduction = reasonForReduction
+  constructor (reasonForReductionId, hours, reductionStartDate, reductionEndDate, notes) {
+    this.reasonForReductionId = reasonForReductionId
     this.hours = hours
     this.reductionStartDate = reductionStartDate
-    this.reasonForReduction = reductionEndDate
+    this.reductionEndDate = reductionEndDate
     this.notes = notes
   }
 }
