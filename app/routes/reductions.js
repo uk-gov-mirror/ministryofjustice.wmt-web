@@ -75,6 +75,12 @@ module.exports = function (router) {
   })
 
   var valid = function (reduction) {
+    if (reduction.reasonForReductionId === '' ||
+      reduction.reductionStartDate === '' ||
+      reduction.reductionEndDate === '' ||
+      reduction.hours === '') {
+      return false
+    }
     return true
   }
 }
