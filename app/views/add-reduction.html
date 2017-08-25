@@ -11,19 +11,19 @@
   {% if isViewOnly %}
     {% set reductionTitle='Reduction' %}
     {% set reductionDescription='Showing reduction for' %}
-    {% set method=PUT %}
+    {% set method='PUT' %}
   {% else %} 
     {% set reductionTitle='New reduction' %} 
     {% set reductionDescription='Add a new reduction for' %}
-    {% set method=POST %}
+    {% set method='POST' %}
   {% endif %}
 
   <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">
     {{ reductionTitle }}
   </header>
   <p class="lede">{{ reductionDescription }} <span class="bold">{{ title }}</span></p>
-
-  <form action="/offender-manager/{{ linkId }}/add-reduction" method="{{ method }}">
+  
+  <form action="/offender-manager/{{ linkId }}/add-reduction" method={{ method }}>
     <div class="form-group">
       <label class="form-label-bold" for="select-box">Reason for reduction</label>
       <select class="form-control" id="select-box" name="reductionType" onChange="javascript:populateHours(this)">
@@ -59,7 +59,7 @@
           </div>
           <div class="form-group form-group-year" id="reduction_start_year">
             <label class="form-label" for="start-year">Year</label>
-            <input class="form-control" id="start-year" name="red_start_year" type="number" pattern="[0-9]{4}" min="0" max=""
+            <input class="form-control" id="start-year" name="red_start_year" type="number" pattern="[0-9]*" min="0" max=""
             {% if isViewOnly %} value="{{ result.view.startYear }}" {% endif %}>
           </div>
         </div>
