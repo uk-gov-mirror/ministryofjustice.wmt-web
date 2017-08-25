@@ -1,0 +1,105 @@
+{% extends "includes/layout.html" %} 
+
+{% block content %}
+<main id="content" role="main">
+    {% include "includes/breadcrumbs.html" %}
+    
+    {% include "includes/validation-error-messages.html" %} 
+    
+    {% include "includes/title-subtitle.html"%}
+    
+    {% include "includes/sub-nav.html" %} 
+    
+    {% if newReduction %}
+    <div class="message message--success">You have successfully added a new reduction</div>
+    {% endif %}
+
+    <a href="/offender-manager/{{ linkId }}/add-reduction" class="button">Add a reduction</a>
+    
+    <h2 class="heading-large">Active<span class="visuallyhidden"> reductions</span></h2>
+
+    <table class="sln-table-reductions">
+        <thead>
+            <tr>
+                <th id="active_type">Type</th>
+                <th id="active_hours">Hours</th>
+                <th id="active_start_date">Start date</th>
+                <th id="active_end_date">End date</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody class="">
+            {% if newReduction %}
+            <tr>
+                <td headers="active_type">{{ newReduction.reason }}</td>
+                <td headers="active_hours">{{ newReduction.hours }}</td>
+                <td headers="active_start_date">{{ newReduction.startDate }}</td>
+                <td headers="active_end_date">{{ newReduction.endDate }}</td>
+                <td><a href="/om/{{omID}}/reductions/234">View</a></td>
+            </tr>
+            {% endif %}
+            {% for active in reductions.active %}
+            <tr>
+                <td headers="active_type">{{ active.type }}</td>
+                <td headers="active_hours">{{ active.hours }}</td>
+                <td headers="active_start_date">{{ active.start_date }}</td>
+                <td headers="active_end_date">{{ active.end_date }}</td>
+                <td><a href="/{{omID}}/reductions/{{ active.id }}">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 class="heading-large">Scheduled<span class="visuallyhidden"> reductions</span></h2>
+
+    <table class="sln-table-reductions">
+        <thead>
+            <tr>
+                <th id="scheduled_type">Type</th>
+                <th id="scheduled_hours">Hours</th>
+                <th id="scheduled_start_date">Start date</th>
+                <th id="scheduled_end_date">End date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="">
+            {% for scheduled in reductions.scheduled %}
+            <tr>
+                <td headers="scheduled_type">{{ scheduled.type }}</td>
+                <td headers="scheduled_hours">{{ scheduled.hours }}</td>
+                <td headers="scheduled_start_date">{{ scheduled.start_date }}</td>
+                <td headers="scheduled_end_date">{{ scheduled.end_date }}</td>
+                <td><a href="/{{omID}}/reductions/{{ scheduled.id }}">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 class="heading-large">Archived<span class="visuallyhidden"> reductions</span></h2>
+
+    <table class="sln-table-reductions">
+        <thead>
+            <tr>
+                <th id="archived_type">Type</th>
+                <th id="archived_hours">Hours</th>
+                <th id="archived_start_date">Start date</th>
+                <th id="archived_end_date">End date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="">
+            {% for scheduled in reductions.archived %}
+            <tr>
+                <td headers="archived_type">{{ archived.type }}</td>
+                <td headers="archived_hours">{{ archived.hours }}</td>
+                <td headers="archived_start_date">{{ archived.start_date }}</td>
+                <td headers="archived_end_date">{{ archived.end_date }}</td>
+                <td><a href="/{{omID}}/reductions/{{ archived.id }}">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</main>
+{% endblock %}
