@@ -291,7 +291,7 @@ module.exports.getAnyExistingWorkloadOwnerId = function () {
   var promise = knex('workload_owner')
       .first('id')
       .then(function (result) {
-        return result
+        return result.id
       })
   return promise
 }
@@ -300,7 +300,7 @@ module.exports.getAnyExistingReductionReasonId = function () {
   var promise = knex('reduction_reason')
       .first('id')
       .then(function (result) {
-        return result
+        return result.id
       })
   return promise
 }

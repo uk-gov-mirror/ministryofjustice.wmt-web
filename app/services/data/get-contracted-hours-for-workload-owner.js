@@ -3,9 +3,9 @@ const knex = require('knex')(config)
 
 module.exports = function (workloadOwnerId) {
   return knex('workload_owner')
-    .select('contracted_hours')
+    .first('contracted_hours')
     .where('id', workloadOwnerId)
-    .then(function (results) {
-      return results[0].contracted_hours
+    .then(function (result) {
+      return result.contracted_hours
     })
 }

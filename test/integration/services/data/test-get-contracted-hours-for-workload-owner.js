@@ -8,8 +8,8 @@ var workloadOwnerId
 describe('services/data/get-contracted-hours-for-workload-owner', function () {
   before(function () {
     return dataHelper.getAnyExistingWorkloadOwnerId()
-      .then(function (result) {
-        workloadOwnerId = result.id
+      .then(function (id) {
+        workloadOwnerId = id
       })
   })
 

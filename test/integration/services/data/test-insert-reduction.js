@@ -15,11 +15,11 @@ var workloadOwnerId
 describe('/services/data/insert-reduction', function () {
   before(function () {
     return workloadCapacityHelper.getAnyExistingWorkloadOwnerId()
-      .then(function (result) {
-        workloadOwnerId = result.id
+      .then(function (id) {
+        workloadOwnerId = id
         return workloadCapacityHelper.getAnyExistingReductionReasonId()
-          .then(function (result) {
-            testReduction.reasonForReductionId = result.id
+          .then(function (id) {
+            testReduction.reasonForReductionId = id
           })
       })
   })
