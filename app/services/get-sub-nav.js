@@ -1,5 +1,6 @@
 const Link = require('./domain/link')
 const linkGenerator = require('./helpers/link-generator')
+const organisationUnitConstants = require('../constants/organisation-unit')
 
 module.exports = function (id, organisationalUnitName, currentPath) {
   var baseLink = linkGenerator.fromIdAndName(id, organisationalUnitName)
@@ -10,6 +11,10 @@ module.exports = function (id, organisationalUnitName, currentPath) {
   navigation.push(new Link('Caseload', baseLink + '/caseload'))
   navigation.push(new Link('Case Progress', baseLink + '/case-progress'))
   navigation.push(new Link('Reductions', baseLink + '/reductions'))
+
+  if (organisationalUnitName === organisationUnitConstants.OFFENDER_MANAGER.name) {
+    navigation.push(new Link('Reductions', baseLink + '/reductions'))
+  }
 
   navigation.forEach(function (item) {
     if (item.link === currentPath) {
