@@ -12,8 +12,6 @@
 
 {% include "includes/sub-nav.html" %}
 
-{% include "includes/export.html" %}
-
 {% if organisationLevel === 'team'%}
 <h2 class="heading-large">Caseload totals</h2>
 
@@ -37,7 +35,11 @@
     </div>
   </div>
 </div>
+{% endif %}
 
+{% include "includes/export.html" %}
+
+{% if organisationLevel === 'team'%}
 <h2 class="heading-large">Caseload type breakdown</h2>
 <div class="js-tabs">
   <ul class="js-tabs-links">

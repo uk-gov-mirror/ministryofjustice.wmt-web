@@ -38,8 +38,8 @@ module.exports = function (router) {
       })
     })
   })
-
-  // TODO: might not be able to generalise this. Need a route per screen?
+  
+  // TODO: Do we need to do this for the underlying tables behind the capacity and case progress graphs?
   router.get('/:organisationLevel/:id/overview/csv', function (req, res, next) {
     var organisationLevel = req.params.organisationLevel
     var id
@@ -48,7 +48,6 @@ module.exports = function (router) {
     }
 
     return getOverview(id, organisationLevel).then(function (result) {
-      // Define vars to be used in column / file naming
       // TODO: Do we have an agreed naming scheme they would like for these csvs? Org level? Date?
       var replaceSpaces = / /g
       var orgName = result.breadcrumbs[0].title
@@ -62,8 +61,7 @@ module.exports = function (router) {
       } else {
         var organisationUnit = getOrganisationUnit('name', organisationLevel)
         var childOrgForColumnName = (getOrganisationUnit('name', organisationUnit.childOrganisationLevel).displayText).replace(replaceSpaces, '')
-
-        // Define fields and generate csv
+        
         fields = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
         fieldNames = [childOrgForColumnName + 'Name', 'CapacityPercentage', 'CapacityPoints', 'ContractedHours', 'ReductionHours', 'TotalCases']
 
