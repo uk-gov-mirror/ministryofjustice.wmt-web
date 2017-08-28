@@ -17,7 +17,6 @@ module.exports = function (router) {
 
     return getCaseload(id, organisationLevel)
       .then(function (result) {
-        console.log(result)
         if (organisationLevel === organisationUnitConstants.LDU.name) {
           return res.render('caseload', {
             screen: 'caseload',
@@ -77,6 +76,7 @@ module.exports = function (router) {
       var replaceSpaces = / /g
       var orgName = result.breadcrumbs[0].title
       var filename = (orgName + ' Caseload.csv').replace(replaceSpaces, '_')
+      var csv
 
       var organisationUnit = getOrganisationUnit('name', organisationLevel)
       var childOrgForColumnName = (getOrganisationUnit('name', organisationUnit.childOrganisationLevel).displayText).replace(replaceSpaces, '')
@@ -88,15 +88,14 @@ module.exports = function (router) {
         custodyCsv = json2csv({ data: result.custodyCaseloadDetails, fields: fields, fieldNames: fieldNames })
         communityCsv = json2csv({ data: result.communityCaseloadDetails, fields: fields, fieldNames: fieldNames })
         licenseCsv = json2csv({ data: result.licenseCaseloadDetails, fields: fields, fieldNames: fieldNames })
-        res.attachment(filename)
         // TODO: Do they want this in one csv file, or four? Currently one
-        res.send('OVERALL \n' + overallCsv + '\n\n\nCUSTODY \n' + custodyCsv + '\n\n\nCOMMUNITY \n' + communityCsv + '\n\n\nLICENSE \n' + licenseCsv)
+        csv = ('OVERALL \n' + overallCsv + '\n\n\nCUSTODY \n' + custodyCsv + '\n\n\nCOMMUNITY \n' + communityCsv + '\n\n\nLICENSE \n' + licenseCsv)
       } else if (organisationLevel === organisationUnitConstants.LDU.name) {
         var table = exportTableHelper.generateLduCaseloadTable(result.lduCaseloadDetails)
-        var csv = json2csv({ data: table, fields: fields, fieldNames: fieldNames })
-        res.attachment(filename)
-        res.send(csv)
+        csv = json2csv({ data: table, fields: fields, fieldNames: fieldNames })
       }
+      res.attachment(filename)
+      res.send(csv)
     })
   })
 } 
