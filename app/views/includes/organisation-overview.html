@@ -60,7 +60,7 @@
     <tbody>
     {% for member in overviewDetails %}
       <tr >
-        <td headers="name om"><a href="/{{ childOrganisationLevel }}/{{ member.linkId }}/overview">{{ member.name }}</td>
+        <td headers="name om"><a href="/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
         {% if organisationLevel === 'team' %}  
           <td headers="grade om">{{ member.gradeCode }}</td>
         {% endif %}

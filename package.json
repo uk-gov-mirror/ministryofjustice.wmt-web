@@ -79,7 +79,6 @@
     "passport": "^0.3.2",
     "passport-saml": "^0.15.0",
     "pg": "6.1.x",
-    "plotly.js": "^1.29.3",
     "proxyquire": "1.7.x",
     "serve-favicon": "2.4.x",
     "underscore": "^1.8.3",
