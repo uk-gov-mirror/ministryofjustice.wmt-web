@@ -23,10 +23,12 @@ describe('View your caseload flow', () => {
   })
 
   describe('should navigate to the team caseload screen', () => {
-    it('with the correct breadcrumbs, subnav and title', () => {
+    it('with the correct breadcrumbs, subnav, title and export button', () => {
       return browser.url(teamDefaultUrl + '/caseload')
         .waitForExist('.breadcrumbs')
         .waitForExist('.sln-subnav')
+        .waitForExist('.sln-export')
+        .waitForExist('[href="' + teamDefaultUrl + '/caseload/csv"]')
         .waitForExist('[href="' + teamDefaultUrl + '/overview"]')
         .waitForExist('[href="' + teamDefaultUrl + '/caseload-capacity"]')
         .waitForExist('[href="' + teamDefaultUrl + '/case-progress"]')
@@ -74,10 +76,12 @@ describe('View your caseload flow', () => {
   })
 
   describe('should navigate to the LDU caseload screen', () => {
-    it('with the correct table and breadcrumbs', () => {
+    it('with the correct table, breadcrumbs and export button', () => {
       return browser.url(lduDefaultUrl + '/caseload')
         .waitForExist('.sln-table-caseload')
         .waitForExist('.breadcrumbs')
+        .waitForExist('.sln-export')
+        .waitForExist('[href="' + lduDefaultUrl + '/caseload/csv"]')
         .waitForExist('.sln-page-subtitle')
         .getText('.sln-page-subtitle')
         .then(function (text) {

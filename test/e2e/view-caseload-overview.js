@@ -36,6 +36,8 @@ describe('View overview', function () {
     return browser.url(workloadOwnerDefaultUrl + '/overview')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
+      .waitForExist('.sln-export')
+      .waitForExist('[href="' + workloadOwnerDefaultUrl + '/overview/csv"]')
       .waitForExist('.sln-grade')
       .getText('.sln-grade')
       .then(function (text) {
@@ -47,10 +49,12 @@ describe('View overview', function () {
     return browser.url(teamDefaultUrl + '/overview')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
+      .waitForExist('.sln-export')
+      .waitForExist('[href="' + teamDefaultUrl + '/overview/csv"]')
       .waitForExist('[href="' + workloadOwnerDefaultUrl + '"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
-        expect(text).to.equal('Team')
+        expect(text).to.equal('Offender Manager')
       })
   })
 
@@ -58,10 +62,12 @@ describe('View overview', function () {
     return browser.url(lduDefaultUrl + '/overview')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
+      .waitForExist('.sln-export')
+      .waitForExist('[href="' + lduDefaultUrl + '/overview/csv"]')
       .waitForExist('[href="' + teamDefaultUrl + '"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
-        expect(text).to.equal('LDU Cluster')
+        expect(text).to.equal('Team')
       })
   })
 
@@ -69,10 +75,12 @@ describe('View overview', function () {
     return browser.url(regionDefaultUrl + '/overview')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
+      .waitForExist('.sln-export')
+      .waitForExist('[href="' + regionDefaultUrl + '/overview/csv"]')
       .waitForExist('[href="' + lduDefaultUrl + '"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
-        expect(text).to.equal('Division')
+        expect(text).to.equal('LDU Cluster')
       })
   })
 
@@ -80,10 +88,12 @@ describe('View overview', function () {
     return browser.url(nationalDefaultUrl + '/overview')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
+      .waitForExist('.sln-export')
+      .waitForExist('[href="' + nationalDefaultUrl + '/overview/csv"]')
       .waitForExist('[href="' + regionDefaultUrl + '"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
-        expect(text).to.equal('National')
+        expect(text).to.equal('Division')
       })
   })
 
