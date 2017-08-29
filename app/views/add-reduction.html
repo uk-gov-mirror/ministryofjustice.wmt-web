@@ -21,7 +21,9 @@
   <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">
     {{ reductionTitle }}
   </header>
+  {%if failureText %}
   <p class="message message--failure">{{ failureText }}</p>
+  {% endif %}
   <p class="lede">{{ reductionDescription }} <span class="bold">{{ title }}</span></p>
   
   <form action="/offender-manager/{{ linkId }}/add-reduction" method={{ method }}>

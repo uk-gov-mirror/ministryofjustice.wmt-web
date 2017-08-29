@@ -10,7 +10,9 @@
     
     {% include "includes/sub-nav.html" %} 
     
+    {% if successText %}
     <div class="message message--success">{{ successText }}</div>
+    {% endif %}
 
     <a href="/offender-manager/{{ linkId }}/add-reduction" class="button">Add a reduction</a>
     
