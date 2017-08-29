@@ -103,20 +103,17 @@
     
     if (chosenReduction.allowancePercentage !== null) {
       document.getElementById('hours').value = chosenReduction.allowanceHours
+      document.getElementById('hours').setAttribute('readonly', true)
     } else {
-      value = ''
       document.getElementById('hours').value = value
       document.getElementById('hours').removeAttribute('readonly')
     }
     
     if (chosenReduction.maxAllowancePercentage !== null) {
       document.getElementById('hours').setAttribute('max', chosenReduction.maxAllowanceHours)
-    } else {
-      document.getElementById('hours').setAttribute('readonly', true)
     }
 
     document.getElementById('hiddenId').value = hiddenIdValue
-
   }
 
   var calculateExpiry = function () {    
