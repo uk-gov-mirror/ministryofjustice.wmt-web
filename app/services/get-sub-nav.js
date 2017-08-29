@@ -10,7 +10,6 @@ module.exports = function (id, organisationalUnitName, currentPath) {
   navigation.push(new Link('Capacity', baseLink + '/caseload-capacity'))
   navigation.push(new Link('Caseload', baseLink + '/caseload'))
   navigation.push(new Link('Case Progress', baseLink + '/case-progress'))
-  navigation.push(new Link('Reductions', baseLink + '/reductions'))
 
   if (organisationalUnitName === organisationUnitConstants.OFFENDER_MANAGER.name) {
     navigation.push(new Link('Reductions', baseLink + '/reductions'))

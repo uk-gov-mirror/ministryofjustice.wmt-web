@@ -7,7 +7,8 @@ module.exports = function (router) {
   router.get('/:organisationLevel/:id/reductions', function (req, res, next) {
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
-    var successText = req.body.successText ? req.params.successText : null
+    var success = req.query.success
+    var successText = success ? 'You have successfully added a new reduction!' : null
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -30,11 +31,13 @@ module.exports = function (router) {
   router.get('/:organisationLevel/:id/add-reduction', function (req, res, next) {
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
+    var fail = req.query.fail
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
     }
-    var failureText = req.body.failureText ? req.params.failureText : null
+
+    var failureText = fail ? 'Something went wrong. Please try again.' : null
     var getAddReductionsReferenceDataPromise = reductionsService.getAddReductionsRefData(id, organisationLevel)
 
     return getAddReductionsReferenceDataPromise.then(function (result) {
@@ -57,28 +60,35 @@ module.exports = function (router) {
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
     }
-    var newReduction = new Reduction(
-      req.body.reasonForReductionId, req.body.hours, req.body.reductionStartDate, req.body.reductionEndDate, req.body.notes
-    )
-    if (!valid(newReduction)) {
-      return res.redirect(307, '/' + organisationLevel + '/' + id + '/add-reduction')
+    if (!valid(req.body)) {
+      var string = encodeURIComponent(false)
+      return res.redirect(301, '/' + organisationLevel + '/' + id + '/add-reduction?fail=' + string)
     }
+
+    var reductionStartDate = new Date(req.body.red_start_year, req.body.red_start_month - 1, req.body.red_start_day)
+    var reductionEndDate = new Date(req.body.red_end_year, req.body.red_end_month - 1, req.body.red_end_day)
+
+    var newReduction = new Reduction(
+      req.body.reasonForReductionId, req.body.hours, reductionStartDate, reductionEndDate, req.body.notes
+    )
 
     var addReductionsPromise = reductionsService.addReduction(id, newReduction)
 
     return addReductionsPromise.then(function () {
-      return res.redirect(307, '/' + organisationLevel + '/' + id + '/reductions')
-      // , {
-      //   successText: 'You have successfully added a new reduction'
-      // })
+      var string = encodeURIComponent(true)
+      return res.redirect(301, '/' + organisationLevel + '/' + id + '/reductions?success=' + string)
     })
   })
 
-  var valid = function (reduction) {
-    if (reduction.reasonForReductionId === '' ||
-      reduction.reductionStartDate === '' ||
-      reduction.reductionEndDate === '' ||
-      reduction.hours === '') {
+  var valid = function (requestBody) {
+    if (requestBody.reasonForReductionId === '' ||
+      requestBody.red_start_year === '' ||
+      requestBody.red_start_month === '' ||
+      requestBody.red_start_day === '' ||
+      requestBody.red_end_year === '' ||
+      requestBody.red_end_month === '' ||
+      requestBody.red_end_day === '' ||
+      requestBody.hours === '') {
       return false
     }
     return true

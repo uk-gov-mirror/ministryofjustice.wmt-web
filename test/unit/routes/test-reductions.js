@@ -80,7 +80,7 @@ describe('reductions route', function () {
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
         .send({'reasonForReductionId': 1, 'hours': 5, 'reductionStartDate': '01/06/2017', 'reductionEndDate': '01/06/2017', 'notes': 'This is a test note'})
-        .expect(307, 'Temporary Redirect. Redirecting to /offender-manager/1/reductions')
+        .expect(301, 'Moved Permanently. Redirecting to /offender-manager/1/reductions?success=true')
     })
     it('should post incorrect data and failure text should be populated', function () {
       reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
@@ -88,7 +88,7 @@ describe('reductions route', function () {
         .post(ADD_REDUCTION_POST_URL)
         .send({'reasonForReductionId': 1, 'hours': 5, 'reductionStartDate': '', 'reductionEndDate': '', 'notes': 'This is a test note'})
         // Expect a redirect
-        .expect(307, 'Temporary Redirect. Redirecting to /offender-manager/1/add-reduction')
+        .expect(301, 'Moved Permanently. Redirecting to /offender-manager/1/reductions?success=true')
     })
   })
 })

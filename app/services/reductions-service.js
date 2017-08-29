@@ -27,6 +27,7 @@ module.exports.getAddReductionsRefData = function (id, organisationLevel) {
 
   return getContractedHoursPromise.then(function (hours) {
     return getReferenceDataPromise.then(function (results) {
+      result.contractedHours = hours
       result.referenceData = reductionsCalculator(results, hours)
       return result
     })
