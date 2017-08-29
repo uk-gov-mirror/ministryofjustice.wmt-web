@@ -56,6 +56,10 @@ caseload_url='caseload'
 urls+=("$host/team/$teamId/$caseload_url")
 urls+=("$host/ldu/$lduId/$caseload_url")
 
+# Reduction
+reduction_url='reduction'
+urls+=("$host/offender-manager/$omId/$reduction_url")
+
 for url in "${urls[@]}"
 do
   $pa11yCommand $url
