@@ -1,9 +1,8 @@
 const getSubNav = require('../services/get-sub-nav')
 const organisationUnitConstants = require('../constants/organisation-unit')
-const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const getCaseload = require('../services/get-caseload')
-const exportTableHelper = require('../services/helpers/export-tables-helper.js')
-const json2csv = require('json2csv')
+const getExportCsv = require('../services/get-export-csv')
+const tabs = require('../constants/wmt-tabs')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/caseload', function (req, res, next) {
@@ -73,29 +72,9 @@ module.exports = function (router) {
     }
 
     return getCaseload(id, organisationLevel).then(function (result) {
-      var replaceSpaces = / /g
-      var orgName = result.breadcrumbs[0].title
-      var filename = (orgName + ' Caseload.csv').replace(replaceSpaces, '_')
-      var csv
-
-      var organisationUnit = getOrganisationUnit('name', organisationLevel)
-      var childOrgForColumnName = (getOrganisationUnit('name', organisationUnit.childOrganisationLevel).displayText).replace(replaceSpaces, '')
-      var fields = ['name', 'gradeCode', 'totalCases', 'untiered', 'd2', 'd1', 'c2', 'c1', 'b2', 'b1', 'a']
-      var fieldNames = [childOrgForColumnName + 'Name', 'Grade', 'Overall', 'Untiered', 'D2', 'D1', 'C2', 'C1', 'B2', 'B1', 'A']
-
-      if (organisationLevel === organisationUnitConstants.TEAM.name) {
-        overallCsv = json2csv({ data: result.overallCaseloadDetails, fields: fields, fieldNames: fieldNames })
-        custodyCsv = json2csv({ data: result.custodyCaseloadDetails, fields: fields, fieldNames: fieldNames })
-        communityCsv = json2csv({ data: result.communityCaseloadDetails, fields: fields, fieldNames: fieldNames })
-        licenseCsv = json2csv({ data: result.licenseCaseloadDetails, fields: fields, fieldNames: fieldNames })
-        // TODO: Do they want this in one csv file, or four? Currently one
-        csv = ('OVERALL \n' + overallCsv + '\n\n\nCUSTODY \n' + custodyCsv + '\n\n\nCOMMUNITY \n' + communityCsv + '\n\n\nLICENSE \n' + licenseCsv)
-      } else if (organisationLevel === organisationUnitConstants.LDU.name) {
-        var table = exportTableHelper.generateLduCaseloadTable(result.lduCaseloadDetails)
-        csv = json2csv({ data: table, fields: fields, fieldNames: fieldNames })
-      }
-      res.attachment(filename)
-      res.send(csv)
+      var exportCsv = getExportCsv(organisationLevel, result, tabs.CASELOAD)
+      res.attachment(exportCsv.filename)
+      return res.send(exportCsv.csv)
     })
   })
-} 
+}
