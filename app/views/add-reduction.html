@@ -15,14 +15,12 @@
     <div class="form-group" id="reduction_reason_selection">
       <label class="form-label-bold" for="select-box">Reason for reduction</label>
       <select class="form-control" id="select-box" name="reductionType" onChange="populateHours(), calculateExpiry()">        
-      {% for reason in referenceData %}
-      {% if first === true %}
-        <option selected value="{{ reason.id }}">{{ reason.reasonShortName }}</option>
-        {% set first = false %}
-      {% else %}
+        <option value="" disabled selected>Please select a reason...</option>
+        {% for reason in referenceData %}
         <option value="{{ reason.id }}">{{ reason.reasonShortName }}</option>
-      {% endif %}  
-      {% endfor %}
+        {% else %}
+        <option value="{{ reason.id }}">{{ reason.reasonShortName }}</option>
+        {% endfor %}
       </select>
     </div>
 
