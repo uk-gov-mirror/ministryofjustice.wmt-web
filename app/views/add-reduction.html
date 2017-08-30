@@ -14,7 +14,7 @@
   <form action="/offender-manager/{{ linkId }}/add-reduction" method=POST id="reductionForm">
     <div class="form-group" id="reduction_reason_selection">
       <label class="form-label-bold" for="select-box">Reason for reduction</label>
-      <select class="form-control" id="select-box" name="reductionType" onChange="populateHours(), calculateExpiry()">        
+      <select class="form-control" id="select-box" name="reasonForReductionId" onChange="populateHours(), calculateExpiry()">        
         <option value="" disabled selected>Please select a reason...</option>
         {% for reason in referenceData %}
         <option value="{{ reason.id }}">{{ reason.reasonShortName }}</option>
@@ -78,8 +78,7 @@
     <div class="form-group">
       <label class="form-label-bold" for="textarea">Additional notes</label>
       <textarea class="form-control form-control-3-4" name="notes" id="textarea" rows="5"></textarea>
-    </div>
-    <input type="hidden" name="reasonForReductionId" id="hiddenId" value="0"> 
+    </div> 
     {% include "includes/csrf-hidden-input.html"%} 
     <input class="button" type="submit" value="Add reduction">
   </form>

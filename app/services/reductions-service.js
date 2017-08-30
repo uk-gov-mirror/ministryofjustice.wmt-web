@@ -1,6 +1,7 @@
 const addReduction = require('./data/insert-reduction')
 const getReferenceData = require('./data/get-reduction-reasons')
 const getContractedHoursForWorkloadOwner = require('./data/get-contracted-hours-for-workload-owner')
+const createWorkloadPointsRecalculationTask = require('./data/create-calculate-workload-points-task')
 const reductionsCalculator = require('./helpers/reduction-hours-calculator')
 const getBreadcrumbs = require('./get-breadcrumbs')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
@@ -36,7 +37,10 @@ module.exports.getAddReductionsRefData = function (id, organisationLevel) {
 
 module.exports.addReduction = function (id, newReduction) {
   var addReductionPromise = addReduction(id, newReduction)
+  var createRecalculationTaskPromise = createWorkloadPointsRecalculationTask(id)
   return addReductionPromise.then(function (result) {
-    return result
+    return createRecalculationTaskPromise.then(function (result) {
+      return result
+    })
   })
 }
