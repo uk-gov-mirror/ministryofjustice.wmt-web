@@ -1,50 +1,38 @@
 {% extends "includes/layout.html" %} {% block content %}
 
-<!-- TEMPORARY VALUE START -->
-{% set isViewOnly=false %}
-
-<!-- TEMPORARY VALUE END -->
-
 <main id="content" role="main">
-  {% include "includes/breadcrumbs.html" %}
+  {% include "includes/breadcrumbs.html" %} 
   
-  {% if isViewOnly %}
-    {% set reductionTitle='Reduction' %}
-    {% set reductionDescription='Showing reduction for' %}
-    {% set method='PUT' %}
-  {% else %} 
-    {% set reductionTitle='New reduction' %} 
-    {% set reductionDescription='Add a new reduction for' %}
-    {% set method='POST' %}
-  {% endif %}
-
   <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">
-    {{ reductionTitle }}
+    New reduction
   </header>
   {%if failureText %}
   <p class="message message--failure">{{ failureText }}</p>
   {% endif %}
-  <p class="lede">{{ reductionDescription }} <span class="bold">{{ title }}</span></p>
-  
-  <form action="/offender-manager/{{ linkId }}/add-reduction" method={{ method }}>
-    <div class="form-group">
+  <p class="lede">Add a new reduction for <span class="bold">{{ title }}</span></p>
+  {% set first = true %}
+  <form action="/offender-manager/{{ linkId }}/add-reduction" method=POST id="reductionForm">
+    <div class="form-group" id="reduction_reason_selection">
       <label class="form-label-bold" for="select-box">Reason for reduction</label>
-      <select class="form-control" id="select-box" name="reductionType" onChange="javascript:populateHours(this)">
-        <option>Select reason</option>
-        {% for reason in referenceData %}
-        <option value="{{ reason.reasonShortName }}">{{ reason.reasonShortName }}</option>
-        {% endfor %}
+      <select class="form-control" id="select-box" name="reductionType" onChange="populateHours(), calculateExpiry()">        
+      {% for reason in referenceData %}
+      {% if first === true %}
+        <option selected value="{{ reason.id }}">{{ reason.reasonShortName }}</option>
+        {% set first = false %}
+      {% else %}
+        <option value="{{ reason.id }}">{{ reason.reasonShortName }}</option>
+      {% endif %}  
+      {% endfor %}
       </select>
     </div>
 
     <div class="form-group" id="reduction_hours">
       <label class="form-label-bold" for="hours">Hours</label>
-      <input class="form-control" id="hours" name="hours" type="number" style="width: 100px"      
-      {% if isViewOnly %} value="{{ result.view.hours }}" {% endif %}>
+      <input class="form-control" id="hours" name="hours" type="number" style="width: 100px">
     </div>
 
     <div class="form-group" id="reduction_start_date">
-      <fieldset onchange="javascript:calcualteExpiry(this)">
+      <fieldset>
         <legend>
           <span class="form-label-bold">Reduction start date</span>
           <span class="form-hint">For example, 31 3 1980</span>
@@ -52,18 +40,15 @@
         <div class="form-date" id="reduction_start_day">
           <div class="form-group form-group-day">
             <label class="form-label" for="start-day">Day</label>
-            <input class="form-control" id="start-day" name="red_start_day" type="number" min="1" max="31" 
-            {% if isViewOnly %} value="{{ result.view.startDay }}" {% endif %}>
+            <input class="form-control" id="start-day" name="red_start_day" type="number" min="1" max="31">
           </div>
           <div class="form-group form-group-month" id="reduction_start_month">
             <label class="form-label" for="start-month">Month</label>
-            <input class="form-control" id="start-month" name="red_start_month" type="number" min="1" max="12"
-            {% if isViewOnly %} value="{{ result.view.startMonth }}" {% endif %}>
+            <input class="form-control" id="start-month" name="red_start_month" type="number" min="1" max="12">
           </div>
           <div class="form-group form-group-year" id="reduction_start_year">
             <label class="form-label" for="start-year">Year</label>
-            <input class="form-control" id="start-year" name="red_start_year" type="number" min="0" max="2099"
-            {% if isViewOnly %} value="{{ result.view.startYear }}" {% endif %}>
+            <input class="form-control" id="start-year" name="red_start_year" type="number" min="0" max="2099" onchange="calculateExpiry()">
           </div>
         </div>
       </fieldset>
@@ -78,18 +63,15 @@
         <div class="form-date" id="reduction_end_day">
           <div class="form-group form-group-day">
             <label class="form-label" for="end-day">Day</label>
-            <input class="form-control" id="end-day" name="red_end_day" type="number" pattern="[+-]?[0-9]{1,2}" min="1" max="31" 
-            {% if isViewOnly %} value="{{ result.view.endDay }}" {% endif %}>
+            <input class="form-control" id="end-day" name="red_end_day" type="number" pattern="[+-]?[0-9]{1,2}" min="1" max="31">
           </div>
           <div class="form-group form-group-month" id="reduction_end_month">
             <label class="form-label" for="end-month">Month</label>
-            <input class="form-control" id="end-month" name="red_end_month" type="number" pattern="[+-]?[0-9]{1,2}" min="1" max="12" 
-            {% if isViewOnly %} value="{{ result.view.endMonth }}" {% endif %}>
+            <input class="form-control" id="end-month" name="red_end_month" type="number" pattern="[+-]?[0-9]{1,2}" min="1" max="12">
           </div>
           <div class="form-group form-group-year" id="reduction_end_year">
             <label class="form-label" for="end-year">Year</label>
-            <input class="form-control" id="end-year" name="red_end_year" type="number" pattern="[+-]?[0-9]{1,4}" min="0" max=""
-            {% if isViewOnly %} value="{{ result.view.endYear }}" {% endif %}>
+            <input class="form-control" id="end-year" name="red_end_year" type="number" pattern="[+-]?[0-9]{1,4}" min="0" max="">
           </div>
         </div>
       </fieldset>
@@ -97,93 +79,79 @@
 
     <div class="form-group">
       <label class="form-label-bold" for="textarea">Additional notes</label>
-      <textarea class="form-control form-control-3-4" name="notes" id="textarea" rows="5">{% if isViewOnly %} {{ result.view.notes }} {% endif %}</textarea>
+      <textarea class="form-control form-control-3-4" name="notes" id="textarea" rows="5"></textarea>
     </div>
-    <input type="hidden" name="reasonForReductionId" id="hiddenId" value="0">
-    {% include "includes/csrf-hidden-input.html" %}
-    
-    {% if isViewOnly %}
-    <a class="button" href="/offender-manager/{{ linkId }}/add-reduction">Save changes</a>
-    <h2 class="heading-small">Other options</h2>
-    <ul>
-      <li><a href="#">Archive reduction</a></li>
-      <li><a href="#">Delete reduction</a></li>
-    </ul>
-    {% else %}
-    
-    <input class="button" type="submit" value="Add reduction"> {% endif %}
+    <input type="hidden" name="reasonForReductionId" id="hiddenId" value="0"> 
+    {% include "includes/csrf-hidden-input.html"%} 
+    <input class="button" type="submit" value="Add reduction">
   </form>
 
 </main>
-{% endblock %}
-
-{% block body_end %}
+{% endblock %} {% block body_end %}
 <script type="text/javascript">
-
-  var refData = {{ referenceData | dump| safe }}
+  var refData = {{ referenceData | dump | safe }}
 
   var chosenReduction
-    
-  var populateHours = function (reasonShortName) {
-    var disabled= false
-    var value=''
+
+  var populateHours = function () {    
+    var value = ''
     var hiddenIdValue
 
-    var chosenReductionValue = document.getElementById("select-box").selectedIndex
+    var chosenReductionIndex = document.getElementById("select-box").selectedIndex
 
-    chosenReduction = refData[chosenReductionValue]
-
-    refData.forEach(function(refData) {
-      if (refData.reasonShortName === reasonShortName.value) {
-        hiddenIdValue = refData.id
-        if (refData.allowancePercentage !== null) {
-          document.getElementById('hours').value = refData.allowanceHours
-        } else {
-          value = ''
-          document.getElementById('hours').value = value
-          document.getElementById('hours').removeAttribute('readonly')
-        }
-        if(refData.maxAllowancePercentage !== null) {
-          document.getElementById('hours').setAttribute('max', refData.maxAllowanceHours)
-        } else {
-          document.getElementById('hours').setAttribute('readonly', true)
-        }
-      }
-    })
+    chosenReduction = refData[chosenReductionIndex]
+    
+    if (chosenReduction.allowancePercentage !== null) {
+      document.getElementById('hours').value = chosenReduction.allowanceHours
+      document.getElementById('hours').setAttribute('readonly', true)
+    } else {
+      document.getElementById('hours').value = value
+      document.getElementById('hours').removeAttribute('readonly')
+    }
+    
+    if (chosenReduction.maxAllowancePercentage !== null) {
+      document.getElementById('hours').setAttribute('max', chosenReduction.maxAllowanceHours)
+    }
 
     document.getElementById('hiddenId').value = hiddenIdValue
-    
   }
 
-  var calcualteExpiry = function (expiryMonth) {
-    // console.log('I GOTS HERE!!!!')
-    // var startDay = document.getElementById("start-day").value
-    // var startMonth = document.getElementById("start-month").value
-    // var startYear = document.getElementById("start-year").value
-    // var disabled = false
-    // var day = startDay
-    // var month = startMonth
-    // var year = startYear
-    // if ((startDay > 0) && (startMonth > 0) && (startYear > 0) && (expiryMonth > 0)) {
-    //   var newMonth = month + expiryMonth
-    //   var newYear = year
-    //   disabled = true
-    //   if (newMonth > 12) {
-    //     month = newMonth % 12
-    //     year += Math.floor((newMonth + expiryMonth) / 12)
-    //   }
-    // } else {
-    //   disabled = false
-    //   day = ''
-    //   month = ''
-    //   year = ''
-    // }
-    // document.getElementById('end-day').value = day
-    // document.getElementById('end-day').disabled = disabled
-    // document.getElementById('end-month').value = month
-    // document.getElementById('end-month').disabled = disabled
-    // document.getElementById('end-year').value = year
-    // document.getElementById('end-year').disabled = disabled
+  var calculateExpiry = function () {    
+    var chosenReductionIndex = document.getElementById("select-box").selectedIndex
+    chosenReduction = refData[chosenReductionIndex]
+
+    var startMonth = document.getElementById("start-month").value
+    var readonly = false
+    var endDay = ''
+    var endMonth = ''
+    var endYear = ''
+
+    if (chosenReduction.monthsToExpiry !== null) {
+      if (Number(startMonth) > 0 && Number(startMonth) < 13) {
+        readonly = true
+        endDay = document.getElementById("start-day").value
+        endMonth = Number(startMonth) + Number(chosenReduction.monthsToExpiry)
+        endYear = document.getElementById("start-year").value        
+        if (endMonth > 12) {
+          endMonth = endMonth % 12
+          newYear = (Number(startMonth) + Number(chosenReduction.monthsToExpiry)) / 12
+          endYear = Number(endYear) + Math.floor(newYear)         
+        }
+      }
+    }
+
+    if (readonly){
+      document.getElementById('end-day').setAttribute('readonly', readonly)
+      document.getElementById('end-month').setAttribute('readonly', readonly)
+      document.getElementById('end-year').setAttribute('readonly', readonly)
+    } else {
+      document.getElementById('end-day').removeAttribute('readonly')
+      document.getElementById('end-month').removeAttribute('readonly')
+      document.getElementById('end-year').removeAttribute('readonly')
+    }
+    document.getElementById('end-day').value = endDay
+    document.getElementById('end-month').value = endMonth
+    document.getElementById('end-year').value = endYear
   }
 
 </script>
