@@ -17,9 +17,9 @@ module.exports = function (id, organisationLevel) {
     overviewPromise = getOrganisationOverview(id, organisationLevel)
   }
 
+  result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
   return overviewPromise.then(function (results) {
     result.overviewDetails = calculateValues(results)
-    result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
     result.title = result.breadcrumbs[0].title
     result.subTitle = organisationalUnitType.displayText
     return result
