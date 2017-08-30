@@ -1,0 +1,92 @@
+const expect = require('chai').expect
+const routeHelper = require('../../helpers/routes/route-helper')
+const supertest = require('supertest')
+const proxyquire = require('proxyquire')
+const sinon = require('sinon')
+require('sinon-bluebird')
+
+const OM_CONTRACTED_HOURS_URL = '/offender-manager/1/contracted-hours'
+const LDU_CONTRACTED_HOURS_URL = '/ldu/1/contracted-hours'
+const REGION_CONTRACTED_HOURS_URL = '/region/1/contracted-hours'
+const HMPPS_CONTRACTED_HOURS_URL = '/hmpps/1/contracted-hours'
+
+const OM_MISSING_ID_URL = '/offender-manager/contracted-hours'
+
+const CONTRACTEDHOURS = {
+  title: 'Title',
+  subTitle: 'SubTitle',
+  breadcrumbs: {},
+  contractedHours: 37.5
+}
+
+const UPDATED_CONTRACTED_HOURS = 11.23
+
+var app
+var route
+var contractedHoursService
+var getSubNavStub
+
+before(function () {
+  getSubNavStub = sinon.stub()
+  contractedHoursService = sinon.stub()
+  contractedHoursService.getContractedHours = sinon.stub()
+  contractedHoursService.updateContractedHours = sinon.stub()
+  route = proxyquire('../../../app/routes/contracted-hours', {
+    '../services/contracted-hours-service': contractedHoursService,
+    '../services/get-sub-nav': getSubNavStub })
+  app = routeHelper.buildApp(route)
+})
+
+describe('contracted-hours route', function () {
+  it('should respond with 200 when offender-manager and id included in URL', function () {
+    contractedHoursService.getContractedHours.resolves(CONTRACTEDHOURS)
+    return supertest(app).get(OM_CONTRACTED_HOURS_URL).expect(200)
+  })
+
+  it('should respond with 404 when ldu and id included in URL', function () {
+    contractedHoursService.getContractedHours.resolves(CONTRACTEDHOURS)
+    return supertest(app).get(LDU_CONTRACTED_HOURS_URL).expect(404)
+  })
+
+  it('should respond with 404 when region and id included in URL', function () {
+    contractedHoursService.getContractedHours.resolves(CONTRACTEDHOURS)
+    return supertest(app).get(REGION_CONTRACTED_HOURS_URL).expect(404)
+  })
+
+  it('should respond with 404 when national and id included in URL', function () {
+    contractedHoursService.getContractedHours.resolves(CONTRACTEDHOURS)
+    return supertest(app).get(HMPPS_CONTRACTED_HOURS_URL).expect(404)
+  })
+
+  it('should respond with 500 when offender-manager, but no id, included in URL', function () {
+    contractedHoursService.getContractedHours.resolves(CONTRACTEDHOURS)
+    return supertest(app).get(OM_MISSING_ID_URL).expect(500)
+  })
+
+  it('should call the getSubNav with the correct parameters', function () {
+    contractedHoursService.getContractedHours.resolves(CONTRACTEDHOURS)
+    return supertest(app)
+        .get(OM_CONTRACTED_HOURS_URL)
+        .expect(200)
+        .then(function () {
+          expect(getSubNavStub.calledWith('1', 'offender-manager', OM_CONTRACTED_HOURS_URL)).to.be.true //eslint-disable-line
+        })
+  })
+
+  it('should call update method of contracted-hours service for POST, redirect to GET', function () {
+    contractedHoursService.updateContractedHours.resolves()
+    return supertest(app)
+    .post(OM_CONTRACTED_HOURS_URL)
+    .send({hours: UPDATED_CONTRACTED_HOURS})
+    .expect(302)
+    .then(function (response) {
+      console.log(response)
+      expect(contractedHoursService.updateContractedHours.calledWith('1','offender-manager', UPDATED_CONTRACTED_HOURS)).to.be.true //eslint-disable-line
+    })
+  })
+
+  it('should respond with 404 when LDU and id included in URL for POST', function () {
+    return supertest(app).post(LDU_CONTRACTED_HOURS_URL).send({hours: UPDATED_CONTRACTED_HOURS})
+    .expect(404)
+  })
+})

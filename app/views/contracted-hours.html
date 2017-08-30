@@ -1,0 +1,42 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/breadcrumbs.html" %}
+
+{% include "includes/validation-error-messages.html" %}
+
+{% include "includes/title-subtitle.html" %}
+
+{% include "includes/sub-nav.html" %}
+
+{% if hoursUpdatedSuccess %}
+  <div class="message message--success">You have successfully updated the contracted hours for {{title}}</div>
+{% endif %}
+
+<h2 class="heading-large">Contracted hours</h2>
+
+<p class="lede">Change the contracted hours for <span class="bold">{{title}}</span></p>
+
+<form action="/offender-manager/{{woId}}/contracted-hours" method="post" class="sln-form-action">
+  <input type="hidden" name="sub_page" value="true">
+  <div class="form-group">
+    <label class="form-label-bold" for="contracted-hours">Contracted hours</label>
+    <input class="form-control" id="contracted-hours" name="hours" type="text" pattern="(\d{1,2})(.(\d{1,2}))?" oninvalid="this.setCustomValidity('Please enter numeric value up to two decimal places')" style="width: 100px" value="{{contractedHours}}">
+  </div>
+
+  <br>
+  <div class="form-group">
+    <input class="button" type="submit" value="Save changes">
+    <div class="u-space-t10">
+      or <a href="/offender-manager/{{woId}}/overview">cancel and return to overview</a>
+    </div>
+  </div>
+
+  {% include "includes/csrf-hidden-input.html" %}
+</form>
+
+</main>
+{% endblock %}

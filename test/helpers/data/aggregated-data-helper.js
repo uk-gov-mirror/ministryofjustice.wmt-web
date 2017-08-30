@@ -321,3 +321,11 @@ module.exports.getWorkloadReportEffectiveFromDate = function () {
       .whereNull('effective_to')
       .orderBy('effective_from', 'desc')
 }
+
+module.exports.generateNonExistantWorkloadOwnerId = function () {
+  return knex('workload_owner')
+  .max('id as maxId')
+  .then(function (maxId) {
+    return maxId[0].maxId + 1
+  })
+}
