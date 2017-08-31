@@ -12,7 +12,4 @@ module.exports = function (id, newReduction) {
       notes: newReduction.notes
     })
     .returning('id')
-    .then(function (result) {
-      return result
-    })
 }

@@ -1,4 +1,5 @@
 const expect = require('chai').expect
+const assert = require('chai').assert
 const sinon = require('sinon')
 require('sinon-bluebird')
 
@@ -60,6 +61,7 @@ describe('services/reductions-service', function () {
       var result = reductionService.getReductions(1, orgUnitConstant.OFFENDER_MANAGER.name)
       expect(result.title).to.equal('John Doe')
       expect(result.subTitle).to.equal('Offender Manager')
+      assert(getBreadcrumbsStub.called)
     })
   })
   describe('Get reductions with reference data', function () {
@@ -69,6 +71,9 @@ describe('services/reductions-service', function () {
           expect(result.referenceData).to.be.an('array')
           expect(result.title).to.equal('John Doe')
           expect(result.subTitle).to.equal('Offender Manager')
+          expect(getContractedHoursForWorkloadOwnerStub.calledWith(1)).to.be.true //eslint-disable-line
+          assert(getBreadcrumbsStub.called)
+          assert(getReferenceDataStub.called)
         })
     })
   })
@@ -78,6 +83,8 @@ describe('services/reductions-service', function () {
       addReductionStub.withArgs(1, reduction).resolves(1)
       return reductionService.addReduction(1, reduction)
         .then(function (result) {
+          expect(createCalculateWorkloadTaskStub.calledWith(1)).to.be.true //eslint-disable-line
+          expect(addReductionStub.calledWith(1, reduction)).to.be.true //eslint-disable-line
           expect(result).to.equal(1)
         })
     })

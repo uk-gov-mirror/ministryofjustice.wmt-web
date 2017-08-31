@@ -13,9 +13,11 @@ module.exports = function (reductionReasonsQueryResults, woContractedHours) {
 }
 
 var calculateHours = function (woContractedHours, percentage) {
+  var result
   if (percentage === undefined) {
-    return undefined
+    result = undefined
   } else {
-    return (woContractedHours / 100) * percentage
+    result = (woContractedHours / 100) * percentage
   }
+  return result
 }

@@ -87,7 +87,7 @@ describe('reductions route', function () {
           'red_end_month': '7',
           'red_end_day': '1',
           'notes': 'This is a test note'})
-        .expect(301, 'Moved Permanently. Redirecting to /offender-manager/1/reductions?success=true')
+        .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?success=true')
     })
     it('should post incorrect data and failure text should be populated', function () {
       reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
@@ -104,7 +104,7 @@ describe('reductions route', function () {
           'red_end_day': '',
           'notes': 'This is a test note'})
         // Expect a redirect
-        .expect(301, 'Moved Permanently. Redirecting to /offender-manager/1/add-reduction?fail=true')
+        .expect(302, 'Found. Redirecting to /offender-manager/1/add-reduction?fail=true')
     })
   })
 })

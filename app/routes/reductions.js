@@ -60,9 +60,8 @@ module.exports = function (router) {
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
     }
-    if (!areVariablesPopulated(req.body)) {
-      var string = encodeURIComponent(true)
-      return res.redirect(301, '/' + organisationLevel + '/' + id + '/add-reduction?fail=' + string)
+    if (!requestDataVerified(req.body)) {
+      return res.redirect(302, '/' + organisationLevel + '/' + id + '/add-reduction?fail=true')
     }
 
     var reductionStartDate = new Date(req.body.red_start_year, req.body.red_start_month - 1, req.body.red_start_day)
@@ -75,12 +74,12 @@ module.exports = function (router) {
     var addReductionsPromise = reductionsService.addReduction(id, newReduction)
 
     return addReductionsPromise.then(function () {
-      var string = encodeURIComponent(true)
-      return res.redirect(301, '/' + organisationLevel + '/' + id + '/reductions?success=' + string)
+      return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
     })
   })
 
-  var areVariablesPopulated = function (requestBody) {
+  var requestDataVerified = function (requestBody) {
+    var result
     if (requestBody.reasonForReductionId === '' || requestBody.reasonForReductionId === undefined ||
       requestBody.red_start_year === '' || requestBody.red_start_year === undefined ||
       requestBody.red_start_month === '' || requestBody.red_start_month === undefined ||
@@ -89,8 +88,11 @@ module.exports = function (router) {
       requestBody.red_end_month === '' || requestBody.red_end_month === undefined ||
       requestBody.red_end_day === '' || requestBody.red_end_day === undefined ||
       requestBody.hours === '' || requestBody.hours === undefined) {
-      return false
+      result = false
+    } else {
+      result = true
     }
-    return true
+
+    return result
   }
 }

@@ -9,8 +9,8 @@ module.exports = function (id) {
     .where('workload_owner.id', id)
     .select('workload_report.id AS workloadReportId',
             'workload.id AS workloadId')
-    .whereNot('workload_report.effective_from', null)
-    .where('workload_report.effective_to', null)
+    .whereNotNull('workload_report.effective_from')
+    .whereNull('workload_report.effective_to', null)
     .then(function (result) {
       return result[0]
     })
