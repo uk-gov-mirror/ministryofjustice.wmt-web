@@ -7,8 +7,8 @@ module.exports = function (id) {
     .then(function (result) {
       var newTask = {
         submitting_agent: 'WEB',
-        type: 'CALCULATE_WORKLOAD_POINTS',
-        additional_data: JSON.stringify({startingId: result.workloadId, batchSize: 1}),
+        type: 'CALCULATE-WORKLOAD-POINTS',
+        additional_data: JSON.stringify({workloadBatch: {startingId: result.workloadId, batchSize: 1}}),
         workload_report_id: result.workloadReportId,
         date_created: undefined,
         status: 'PENDING'

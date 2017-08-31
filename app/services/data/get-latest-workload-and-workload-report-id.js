@@ -12,7 +12,6 @@ module.exports = function (id) {
     .whereNot('workload_report.effective_from', null)
     .where('workload_report.effective_to', null)
     .then(function (result) {
-      console.log(result)
       return result[0]
     })
 }
