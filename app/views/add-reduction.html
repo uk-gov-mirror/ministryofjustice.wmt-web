@@ -131,7 +131,6 @@
 
     if (chosenReduction.monthsToExpiry !== null) {
       if (Number(startMonth) > 0 && Number(startMonth) < 13) {
-        console.log('I IS IN HERE!!!')
         var startDate = new Date(Number(document.getElementById("start-year").value),
                                  Number(document.getElementById("start-month").value),
                                  Number(document.getElementById("start-day").value))
@@ -149,8 +148,6 @@
       document.getElementById('end-month').removeAttribute('readonly')
       document.getElementById('end-year').removeAttribute('readonly')
     }
-    console.log(startDate)
-    console.log(endDate)
     if(endDate !== null) {
       document.getElementById('end-day').value = endDate.getDay()
       document.getElementById('end-month').value = endDate.getMonth()
