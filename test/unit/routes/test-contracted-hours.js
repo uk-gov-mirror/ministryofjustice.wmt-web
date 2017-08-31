@@ -12,7 +12,7 @@ const HMPPS_CONTRACTED_HOURS_URL = '/hmpps/1/contracted-hours'
 
 const OM_MISSING_ID_URL = '/offender-manager/contracted-hours'
 
-const CONTRACTEDHOURS = {
+const CONTRACTED_HOURS = {
   title: 'Title',
   subTitle: 'SubTitle',
   breadcrumbs: {},
@@ -39,32 +39,32 @@ before(function () {
 
 describe('contracted-hours route', function () {
   it('should respond with 200 when offender-manager and id included in URL', function () {
-    contractedHoursService.getContractedHours.resolves(CONTRACTEDHOURS)
+    contractedHoursService.getContractedHours.resolves(CONTRACTED_HOURS)
     return supertest(app).get(OM_CONTRACTED_HOURS_URL).expect(200)
   })
 
   it('should respond with 404 when ldu and id included in URL', function () {
-    contractedHoursService.getContractedHours.resolves(CONTRACTEDHOURS)
+    contractedHoursService.getContractedHours.resolves(CONTRACTED_HOURS)
     return supertest(app).get(LDU_CONTRACTED_HOURS_URL).expect(404)
   })
 
   it('should respond with 404 when region and id included in URL', function () {
-    contractedHoursService.getContractedHours.resolves(CONTRACTEDHOURS)
+    contractedHoursService.getContractedHours.resolves(CONTRACTED_HOURS)
     return supertest(app).get(REGION_CONTRACTED_HOURS_URL).expect(404)
   })
 
   it('should respond with 404 when national and id included in URL', function () {
-    contractedHoursService.getContractedHours.resolves(CONTRACTEDHOURS)
+    contractedHoursService.getContractedHours.resolves(CONTRACTED_HOURS)
     return supertest(app).get(HMPPS_CONTRACTED_HOURS_URL).expect(404)
   })
 
   it('should respond with 500 when offender-manager, but no id, included in URL', function () {
-    contractedHoursService.getContractedHours.resolves(CONTRACTEDHOURS)
+    contractedHoursService.getContractedHours.resolves(CONTRACTED_HOURS)
     return supertest(app).get(OM_MISSING_ID_URL).expect(500)
   })
 
   it('should call the getSubNav with the correct parameters', function () {
-    contractedHoursService.getContractedHours.resolves(CONTRACTEDHOURS)
+    contractedHoursService.getContractedHours.resolves(CONTRACTED_HOURS)
     return supertest(app)
         .get(OM_CONTRACTED_HOURS_URL)
         .expect(200)

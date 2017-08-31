@@ -6,7 +6,7 @@ var workloadOwnerIds = []
 var workloadOwnerId
 var workloadOwnerDefaultUrl
 
-describe('View overview', function () {
+describe('View contracted hours', function () {
   before(function () {
     return dataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
@@ -27,5 +27,20 @@ describe('View overview', function () {
       .then(function (text) {
         expect(text).to.equal('Offender Manager')
       })
+  })
+
+  it('should be accessible via the Contracted Hours tab when on any other tab', () => {
+    return browser.url(workloadOwnerDefaultUrl + '/overview')
+      .waitForExist('.sln-subnav')
+      .click('[href="' + workloadOwnerDefaultUrl + '/contracted-hours"]')
+      .waitForExist('.sln-form-action')
+      .click('[href="' + workloadOwnerDefaultUrl + '/caseload-capacity"]')
+      .waitForExist('.sln-subnav')
+      .click('[href="' + workloadOwnerDefaultUrl + '/contracted-hours"]')
+      .waitForExist('.sln-form-action')
+      .click('[href="' + workloadOwnerDefaultUrl + '/case-progress"]')
+      .waitForExist('.sln-subnav')
+      .click('[href="' + workloadOwnerDefaultUrl + '/contracted-hours"]')
+      .waitForExist('.sln-form-action')
   })
 })
