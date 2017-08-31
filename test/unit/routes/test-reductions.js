@@ -1,4 +1,3 @@
-// const expect = require('chai').expect
 const routeHelper = require('../../helpers/routes/route-helper')
 const superTest = require('supertest')
 const proxyquire = require('proxyquire')
@@ -36,7 +35,7 @@ const getReductionsFailureTextResult = {
   title: 'Title',
   subTitle: 'SubTitle',
   breadcrumbs: {},
-  successText: 'You have successfully added a new reduction'
+  failureText: 'Something went wrong. Please try again.'
 }
 
 var app

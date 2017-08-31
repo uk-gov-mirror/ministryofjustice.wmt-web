@@ -1,4 +1,6 @@
-{% extends "includes/layout.html" %} {% block content %}
+{% extends "includes/layout.html" %} 
+
+{% block content %}
 
 <main id="content" role="main">
   {% include "includes/breadcrumbs.html" %} 
@@ -6,9 +8,11 @@
   <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">
     New reduction
   </header>
+
   {%if failureText %}
   <p class="message message--failure">{{ failureText }}</p>
   {% endif %}
+
   <p class="lede">Add a new reduction for <span class="bold">{{ title }}</span></p>
   {% set first = true %}
   <form action="/offender-manager/{{ linkId }}/add-reduction" method=POST id="reductionForm">
@@ -38,15 +42,15 @@
         <div class="form-date" id="reduction_start_day">
           <div class="form-group form-group-day">
             <label class="form-label" for="start-day">Day</label>
-            <input class="form-control" id="start-day" name="red_start_day" type="number" min="1" max="31">
+            <input class="form-control" id="start-day" name="red_start_day" type="number" min="1" pattern="[+-]?[0-9]{1,2}" max="31" onchange="calculateExpiry()">
           </div>
           <div class="form-group form-group-month" id="reduction_start_month">
             <label class="form-label" for="start-month">Month</label>
-            <input class="form-control" id="start-month" name="red_start_month" type="number" min="1" max="12">
+            <input class="form-control" id="start-month" name="red_start_month" type="number" min="1" pattern="[+-]?[0-9]{1,2}" max="12" onchange="calculateExpiry()">
           </div>
           <div class="form-group form-group-year" id="reduction_start_year">
             <label class="form-label" for="start-year">Year</label>
-            <input class="form-control" id="start-year" name="red_start_year" type="number" min="0" max="2099" onchange="calculateExpiry()">
+            <input class="form-control" id="start-year" name="red_start_year" type="number" min="0" pattern="[+-]?[0-9]{1,4}" max="2099" onchange="calculateExpiry()">
           </div>
         </div>
       </fieldset>
@@ -90,13 +94,18 @@
 
   var chosenReduction
 
-  var populateHours = function () {    
+  var populateHours = function () {
+
+    // Set current year dynamically
+    var currentYear = new Date().getYear()
+    document.getElementById('start-year').setAttribute('min', currentYear)
+
     var value = ''
-    var hiddenIdValue
 
     var chosenReductionIndex = document.getElementById("select-box").selectedIndex
 
-    chosenReduction = refData[chosenReductionIndex]
+    // Dummy option in dropdown means array is offset by one.
+    chosenReduction = refData[chosenReductionIndex - 1]
     
     if (chosenReduction.allowancePercentage !== null) {
       document.getElementById('hours').value = chosenReduction.allowanceHours
@@ -109,8 +118,6 @@
     if (chosenReduction.maxAllowancePercentage !== null) {
       document.getElementById('hours').setAttribute('max', chosenReduction.maxAllowanceHours)
     }
-
-    document.getElementById('hiddenId').value = hiddenIdValue
   }
 
   var calculateExpiry = function () {    
@@ -119,21 +126,17 @@
 
     var startMonth = document.getElementById("start-month").value
     var readonly = false
-    var endDay = ''
-    var endMonth = ''
-    var endYear = ''
+    var endDate = null
+    var startDate
 
     if (chosenReduction.monthsToExpiry !== null) {
       if (Number(startMonth) > 0 && Number(startMonth) < 13) {
+        console.log('I IS IN HERE!!!')
+        var startDate = new Date(Number(document.getElementById("start-year").value),
+                                 Number(document.getElementById("start-month").value),
+                                 Number(document.getElementById("start-day").value))
+        var endDate = new Date(startDate.setMonth(startDate.getMonth() + chosenReduction.monthsToExpiry))
         readonly = true
-        endDay = document.getElementById("start-day").value
-        endMonth = Number(startMonth) + Number(chosenReduction.monthsToExpiry)
-        endYear = document.getElementById("start-year").value        
-        if (endMonth > 12) {
-          endMonth = endMonth % 12
-          newYear = (Number(startMonth) + Number(chosenReduction.monthsToExpiry)) / 12
-          endYear = Number(endYear) + Math.floor(newYear)         
-        }
       }
     }
 
@@ -146,9 +149,17 @@
       document.getElementById('end-month').removeAttribute('readonly')
       document.getElementById('end-year').removeAttribute('readonly')
     }
-    document.getElementById('end-day').value = endDay
-    document.getElementById('end-month').value = endMonth
-    document.getElementById('end-year').value = endYear
+    console.log(startDate)
+    console.log(endDate)
+    if(endDate !== null) {
+      document.getElementById('end-day').value = endDate.getDay()
+      document.getElementById('end-month').value = endDate.getMonth()
+      document.getElementById('end-year').value = endDate.getFullYear()
+    } else {
+      document.getElementById('end-day').value = ''
+      document.getElementById('end-month').value = ''
+      document.getElementById('end-year').value = ''
+    }
   }
 
 </script>

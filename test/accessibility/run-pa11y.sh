@@ -57,8 +57,10 @@ urls+=("$host/team/$teamId/$caseload_url")
 urls+=("$host/ldu/$lduId/$caseload_url")
 
 # Reduction
-reduction_url='reduction'
-urls+=("$host/offender-manager/$omId/$reduction_url")
+reductions_url='reductions'
+add_reductions_url='add_reduction'
+urls+=("$host/offender-manager/$omId/$reductions_url")
+urls+=("$host/offender-manager/$omId/$add_reductions_url/")
 
 for url in "${urls[@]}"
 do
