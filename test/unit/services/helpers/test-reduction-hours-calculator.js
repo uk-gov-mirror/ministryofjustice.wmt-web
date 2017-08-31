@@ -5,23 +5,23 @@ var baseReductionReasonsRow = {
   reason: 'Test Reason',
   reason_short_name: 'T',
   category: 'Test Category',
-  allowance_percentage: 100,
-  max_allowance_percentage: undefined,
-  months_to_expiry: 6
+  allowancePercentage: 100,
+  maxAllowancePercentage: undefined,
+  monthsToExpiry: 6
 }
 
 var reductionQueryResults = [
   baseReductionReasonsRow,
-  Object.assign({}, baseReductionReasonsRow, { allowance_percentage: 40, max_allowance_percentage: undefined }),
-  Object.assign({}, baseReductionReasonsRow, { allowance_percentage: undefined, max_allowance_percentage: 50 }),
-  Object.assign({}, baseReductionReasonsRow, { allowance_percentage: 47, max_allowance_percentage: 50 })
+  Object.assign({}, baseReductionReasonsRow, { allowancePercentage: 40, maxAllowancePercentage: undefined }),
+  Object.assign({}, baseReductionReasonsRow, { allowancePercentage: undefined, maxAllowancePercentage: 50 }),
+  Object.assign({}, baseReductionReasonsRow, { allowancePercentage: 47, maxAllowancePercentage: 50 })
 ]
 
 var reductionWithHoursResults = [
-  Object.assign({}, baseReductionReasonsRow, { allowance_hours: 37, max_allowance_hours: undefined }),
-  Object.assign({}, baseReductionReasonsRow, { allowance_hours: 14.8, max_allowance_hours: undefined, allowance_percentage: 40, max_allowance_percentage: undefined }),
-  Object.assign({}, baseReductionReasonsRow, { allowance_hours: undefined, max_allowance_hours: 18.5, allowance_percentage: undefined, max_allowance_percentage: 50 }),
-  Object.assign({}, baseReductionReasonsRow, { allowance_hours: 17.39, max_allowance_hours: 18.5, allowance_percentage: 47, max_allowance_percentage: 50 })
+  Object.assign({}, baseReductionReasonsRow, { allowanceHours: 37, maxAllowanceHours: undefined }),
+  Object.assign({}, baseReductionReasonsRow, { allowanceHours: 14.8, maxAllowanceHours: undefined, allowancePercentage: 40, maxAllowancePercentage: undefined }),
+  Object.assign({}, baseReductionReasonsRow, { allowanceHours: undefined, maxAllowanceHours: 18.5, allowancePercentage: undefined, maxAllowancePercentage: 50 }),
+  Object.assign({}, baseReductionReasonsRow, { allowanceHours: 17.39, maxAllowanceHours: 18.5, allowancePercentage: 47, maxAllowancePercentage: 50 })
 ]
 
 var woContractedHours = 37
