@@ -333,7 +333,7 @@ module.exports.getWorkloadReportEffectiveFromDate = function () {
 
 module.exports.generateNonExistantWorkloadOwnerId = function () {
   return knex('workload_owner')
-  .max('id as maxId')
+  .max('id AS maxId')
   .then(function (maxId) {
     return maxId[0].maxId + 1
   })

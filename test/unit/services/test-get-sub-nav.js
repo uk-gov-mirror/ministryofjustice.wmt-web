@@ -14,12 +14,7 @@ describe('services/get-sub-nav', function () {
 
   it('returns a list which has five elements for offender-manager', function () {
     var subNav = getSubNav(id, omOrganisationalUnitName)
-    expect(subNav.length).to.eql(5)
-  })
-
-  it('returns a list which has four elements for non offender-manager', function () {
-    var subNav = getSubNav(id, organisationalUnitName)
-    expect(subNav.length).to.eql(4)
+    expect(subNav.length).to.eql(6)
   })
 
   it('returns a list of Link objects', function () {
@@ -29,13 +24,22 @@ describe('services/get-sub-nav', function () {
     })
   })
 
-  it('returns the correct titles', function () {
+  it('returns the correct titles for offender-manager', function () {
     var subNav = getSubNav(id, omOrganisationalUnitName)
     expect(subNav[0].title).to.eql('Overview')
     expect(subNav[1].title).to.eql('Capacity')
     expect(subNav[2].title).to.eql('Caseload')
     expect(subNav[3].title).to.eql('Contracted Hours')
     expect(subNav[4].title).to.eql('Case Progress')
+    expect(subNav[5].title).to.eql('Reductions')
+  })
+
+  it('returns the correct titles for non offender-manager', function () {
+    var subNav = getSubNav(id, organisationalUnitName)
+    expect(subNav[0].title).to.eql('Overview')
+    expect(subNav[1].title).to.eql('Capacity')
+    expect(subNav[2].title).to.eql('Caseload')
+    expect(subNav[3].title).to.eql('Case Progress')
   })
 
   it('returns the correct links', function () {
