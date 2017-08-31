@@ -13,6 +13,7 @@ var addReductionStub
 var getReferenceDataStub
 var getContractedHoursForWorkloadOwnerStub
 var getBreadcrumbsStub
+var createCalculateWorkloadTaskStub
 var reductionService
 
 var reduction = new Reduction(1, 1, new Date(), new Date(), 'This is a test note')
@@ -38,6 +39,7 @@ var referenceData = [
 
 before(function () {
   addReductionStub = sinon.stub()
+  createCalculateWorkloadTaskStub = sinon.stub()
   getContractedHoursForWorkloadOwnerStub = sinon.stub().resolves(5)
   getReferenceDataStub = sinon.stub().resolves(referenceData)
   getBreadcrumbsStub = sinon.stub().returns(breadcrumbs)
@@ -47,7 +49,8 @@ before(function () {
         './data/insert-reduction': addReductionStub,
         './get-breadcrumbs': getBreadcrumbsStub,
         './data/get-contracted-hours-for-workload-owner': getContractedHoursForWorkloadOwnerStub,
-        './data/get-reduction-reasons': getReferenceDataStub
+        './data/get-reduction-reasons': getReferenceDataStub,
+        './data/create-calculate-workload-points-task': createCalculateWorkloadTaskStub
       })
 })
 
@@ -71,6 +74,7 @@ describe('services/reductions-service', function () {
   })
   describe('Add reduction', function () {
     it('should add a reduction', function () {
+      createCalculateWorkloadTaskStub.resolves(1)
       addReductionStub.withArgs(1, reduction).resolves(1)
       return reductionService.addReduction(1, reduction)
         .then(function (result) {

@@ -78,16 +78,33 @@ describe('reductions route', function () {
       reductionsService.addReduction.resolves(getReductionsSuccessTextResult)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
-        .send({'reasonForReductionId': 1, 'hours': 5, 'reductionStartDate': '01/06/2017', 'reductionEndDate': '01/06/2017', 'notes': 'This is a test note'})
+        .send({'reasonForReductionId': 1,
+          'hours': 5,
+          'red_start_year': '2018',
+          'red_start_month': '1',
+          'red_start_day': '1',
+          'red_end_year': '2018',
+          'red_end_month': '7',
+          'red_end_day': '1',
+          'notes': 'This is a test note'})
         .expect(301, 'Moved Permanently. Redirecting to /offender-manager/1/reductions?success=true')
     })
     it('should post incorrect data and failure text should be populated', function () {
       reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
-        .send({'reasonForReductionId': 1, 'hours': 5, 'reductionStartDate': '', 'reductionEndDate': '', 'notes': 'This is a test note'})
+        .send({
+          'reasonForReductionId': 1,
+          'hours': 5,
+          'red_start_year': '',
+          'red_start_month': '',
+          'red_start_day': '',
+          'red_end_year': '',
+          'red_end_month': '',
+          'red_end_day': '',
+          'notes': 'This is a test note'})
         // Expect a redirect
-        .expect(301, 'Moved Permanently. Redirecting to /offender-manager/1/reductions?success=true')
+        .expect(301, 'Moved Permanently. Redirecting to /offender-manager/1/add-reduction?fail=true')
     })
   })
 })

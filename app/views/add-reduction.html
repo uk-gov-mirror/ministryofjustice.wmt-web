@@ -91,14 +91,13 @@
 {% endblock %} {% block body_end %}
 <script type="text/javascript">
   var refData = {{ referenceData | dump | safe }}
+  // Set current year dynamically
+  var currentYear = new Date().getYear()
+  document.getElementById('start-year').setAttribute('min', currentYear)
 
   var chosenReduction
 
   var populateHours = function () {
-
-    // Set current year dynamically
-    var currentYear = new Date().getYear()
-    document.getElementById('start-year').setAttribute('min', currentYear)
 
     var value = ''
 
@@ -117,6 +116,8 @@
     
     if (chosenReduction.maxAllowancePercentage !== null) {
       document.getElementById('hours').setAttribute('max', chosenReduction.maxAllowanceHours)
+    } else {
+      document.getElementById('hours').removeAttribute('max')
     }
   }
 
