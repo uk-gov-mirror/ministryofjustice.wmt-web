@@ -1,5 +1,6 @@
 const getContractedHoursForWorkloadOwner = require('./data/get-contracted-hours-for-workload-owner')
 const updateContractedHoursForWorkloadOwner = require('./data/update-contracted-hours-for-workload-owner')
+const createWorkloadPointsRecalculationTask = require('./data/create-calculate-workload-points-task')
 const getBreadcrumbs = require('./get-breadcrumbs')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
@@ -33,6 +34,7 @@ module.exports.updateContractedHours = function (id, organisationLevel, hours) {
     if (count === 0) {
       throw new Error('Offender manager with id: ' + id + ' has not had contracted hours updated')
     }
+    return createWorkloadPointsRecalculationTask(id)
   }).catch(function (err) {
     throw err
   })
