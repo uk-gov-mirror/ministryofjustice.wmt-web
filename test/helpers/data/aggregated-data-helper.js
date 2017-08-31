@@ -278,11 +278,20 @@ module.exports.selectIdsForWorkloadOwner = function () {
   return promise
 }
 
-module.exports.getAnyExistingTeamId = function () {
-  var promise = knex('team')
+module.exports.getAnyExistingWorkloadOwnerId = function () {
+  var promise = knex('workload_owner')
       .first('id')
       .then(function (result) {
-        return result
+        return result.id
+      })
+  return promise
+}
+
+module.exports.getAnyExistingReductionReasonId = function () {
+  var promise = knex('reduction_reason')
+      .first('id')
+      .then(function (result) {
+        return result.id
       })
   return promise
 }
