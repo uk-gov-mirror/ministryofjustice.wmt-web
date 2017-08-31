@@ -10,7 +10,7 @@ module.exports = function (id) {
     .select('workload_report.id AS workloadReportId',
             'workload.id AS workloadId')
     .whereNotNull('workload_report.effective_from')
-    .whereNull('workload_report.effective_to', null)
+    .whereNull('workload_report.effective_to')
     .then(function (result) {
       return result[0]
     })
