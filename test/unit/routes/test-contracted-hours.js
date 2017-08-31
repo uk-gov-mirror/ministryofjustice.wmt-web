@@ -80,7 +80,6 @@ describe('contracted-hours route', function () {
     .send({hours: UPDATED_CONTRACTED_HOURS})
     .expect(302)
     .then(function (response) {
-      console.log(response)
       expect(contractedHoursService.updateContractedHours.calledWith('1','offender-manager', UPDATED_CONTRACTED_HOURS)).to.be.true //eslint-disable-line
     })
   })
