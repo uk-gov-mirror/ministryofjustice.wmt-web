@@ -4,6 +4,8 @@ const dataHelper = require('../helpers/data/aggregated-data-helper')
 
 var offenderManagerId
 var offenderManagerUrl
+var reductionId
+var reductionUrl
 
 describe('View adding a new reduction', () => {
   before(function () {
@@ -43,13 +45,13 @@ describe('View adding a new reduction', () => {
 
   describe('should navigate to the edit reduction screen and reason prepopulated', () => {
     it('with the correct breadcrumbs and heading title', () => {
-      return browser.url(offenderManagerUrl)
+      return browser.url(reductionUrl)
         .waitForExist('.breadcrumbs')
         .waitForExist('#hours')
         .getText('#hours')
-        .then(function (text){
-          expect(text).to.be.not.null
-      })
+        .then(function (text) {
+          expect(text).to.be.a('number') //eslint-disable-line
+        })
     })
   })
 })
