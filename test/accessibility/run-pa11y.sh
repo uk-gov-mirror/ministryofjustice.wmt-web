@@ -56,6 +56,10 @@ caseload_url='caseload'
 urls+=("$host/team/$teamId/$caseload_url")
 urls+=("$host/ldu/$lduId/$caseload_url")
 
+# Contracted hours
+contracted_hours_url='contracted-hours'
+urls+=("$host/offender-manager/$omId/$contracted_hours_url")
+
 # Reduction
 reductions_url='reductions'
 add_reductions_url='add_reduction'

@@ -5,10 +5,16 @@ const Link = require('../../../app/services/domain/link')
 describe('services/get-sub-nav', function () {
   var id = 1
   var organisationalUnitName = 'name'
+  var omOrganisationalUnitName = 'offender-manager'
 
   it('returns a list which has four elements', function () {
     var subNav = getSubNav(id, organisationalUnitName)
     expect(subNav.length).to.eql(4)
+  })
+
+  it('returns a list which has five elements for offender-manager', function () {
+    var subNav = getSubNav(id, omOrganisationalUnitName)
+    expect(subNav.length).to.eql(6)
   })
 
   it('returns a list of Link objects', function () {
@@ -18,7 +24,17 @@ describe('services/get-sub-nav', function () {
     })
   })
 
-  it('returns the correct titles', function () {
+  it('returns the correct titles for offender-manager', function () {
+    var subNav = getSubNav(id, omOrganisationalUnitName)
+    expect(subNav[0].title).to.eql('Overview')
+    expect(subNav[1].title).to.eql('Capacity')
+    expect(subNav[2].title).to.eql('Caseload')
+    expect(subNav[3].title).to.eql('Contracted Hours')
+    expect(subNav[4].title).to.eql('Case Progress')
+    expect(subNav[5].title).to.eql('Reductions')
+  })
+
+  it('returns the correct titles for non offender-manager', function () {
     var subNav = getSubNav(id, organisationalUnitName)
     expect(subNav[0].title).to.eql('Overview')
     expect(subNav[1].title).to.eql('Capacity')
@@ -27,19 +43,21 @@ describe('services/get-sub-nav', function () {
   })
 
   it('returns the correct links', function () {
-    var subNav = getSubNav(id, organisationalUnitName)
-    expect(subNav[0].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'overview')
-    expect(subNav[1].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'caseload-capacity')
-    expect(subNav[2].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'caseload')
-    expect(subNav[3].link).to.eql('/' + organisationalUnitName + '/' + id + '/' + 'case-progress')
+    var subNav = getSubNav(id, omOrganisationalUnitName)
+    expect(subNav[0].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'overview')
+    expect(subNav[1].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'caseload-capacity')
+    expect(subNav[2].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'caseload')
+    expect(subNav[3].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'contracted-hours')
+    expect(subNav[4].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'case-progress')
   })
 
   it('marks the current link as active', function () {
-    var currentLink = '/' + organisationalUnitName + '/' + id + '/' + 'overview'
-    var subNav = getSubNav(id, organisationalUnitName, currentLink)
+    var currentLink = '/' + omOrganisationalUnitName + '/' + id + '/' + 'overview'
+    var subNav = getSubNav(id, omOrganisationalUnitName, currentLink)
     expect(subNav[0].active).to.be.true //eslint-disable-line
     expect(subNav[1].active).to.be.undefined //eslint-disable-line
     expect(subNav[2].active).to.be.undefined //eslint-disable-line
-    expect(subNav[3].active).to.be.undefined //eslint-disable-line
+    expect(subNav[3].active).to.be.undefined //eslint-disable-line    
+    expect(subNav[4].active).to.be.undefined //eslint-disable-line
   })
 })
