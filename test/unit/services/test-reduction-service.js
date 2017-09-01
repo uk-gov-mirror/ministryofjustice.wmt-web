@@ -16,7 +16,9 @@ var getContractedHoursForWorkloadOwnerStub
 var getBreadcrumbsStub
 var createCalculateWorkloadTaskStub
 var reductionService
+var getReductionById
 
+var existingReductionId = 1
 var reduction = new Reduction(1, 1, new Date(), new Date(), 'This is a test note')
 
 var referenceData = [
@@ -38,12 +40,13 @@ var referenceData = [
   }
 ]
 
-before(function () {
+beforeEach(function () {
   addReductionStub = sinon.stub()
   createCalculateWorkloadTaskStub = sinon.stub()
   getContractedHoursForWorkloadOwnerStub = sinon.stub().resolves(5)
   getReferenceDataStub = sinon.stub().resolves(referenceData)
   getBreadcrumbsStub = sinon.stub().returns(breadcrumbs)
+  getReductionById = sinon.stub()
   reductionService =
     proxyquire('../../../app/services/reductions-service',
       {
@@ -51,7 +54,8 @@ before(function () {
         './get-breadcrumbs': getBreadcrumbsStub,
         './data/get-contracted-hours-for-workload-owner': getContractedHoursForWorkloadOwnerStub,
         './data/get-reduction-reasons': getReferenceDataStub,
-        './data/create-calculate-workload-points-task': createCalculateWorkloadTaskStub
+        './data/create-calculate-workload-points-task': createCalculateWorkloadTaskStub,
+        './data/get-reduction-by-id': getReductionById
       })
 })
 
@@ -87,6 +91,25 @@ describe('services/reductions-service', function () {
           expect(addReductionStub.calledWith(1, reduction)).to.be.true //eslint-disable-line
           expect(result).to.equal(1)
         })
+    })
+  })
+
+  describe('Get Reduction By reduction Id', function () {
+    it('should cal on to data service with correct reduction id and return reduction', function () {
+      getReductionById.resolves(reduction)
+      return reductionService.getReductionByReductionId(existingReductionId)
+      .then(function (result) {
+        expect(getReductionById.calledWith(existingReductionId)).to.be.true //eslint-disable-line
+        expect(result).to.eql(reduction)
+      })
+    })
+
+    it('should not call on to service for undefined id and return undefined', function () {
+      return reductionService.getReductionByReductionId(undefined)
+      .then(function (result) {
+        expect(getReductionById.called).to.be.false //eslint-disable-line        
+        expect(result).to.equal(undefined)
+      })
     })
   })
 })

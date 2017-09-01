@@ -38,17 +38,28 @@ const getReductionsFailureTextResult = {
   failureText: 'Something went wrong. Please try again.'
 }
 
+const existingReduction = {
+  id: 1,
+  reductionReasonId: 2,
+  reductionHours: 12,
+  effective_from: new Date(2000, 8, 1),
+  effective_to: new Date(2000, 9, 1)
+}
+
+const nonExistingReductionId = 2
+
 var app
 var route
 var reductionsService
 var getSubNavStub
 
-before(function () {
+beforeEach(function () {
   getSubNavStub = sinon.stub()
   reductionsService = sinon.stub()
   reductionsService.getReductions = sinon.stub()
   reductionsService.getAddReductionsRefData = sinon.stub()
   reductionsService.addReduction = sinon.stub()
+  reductionsService.getReductionByReductionId = sinon.stub()
   route = proxyquire('../../../app/routes/reductions', {
     '../services/reductions-service': reductionsService,
     '../services/get-sub-nav': getSubNavStub
@@ -66,13 +77,31 @@ describe('reductions route', function () {
     })
   })
   describe('For the add reductions page route', function () {
-    it('should respond with 200 and the correct data', function () {
+    it('should respond with 200 and the correct data and no existing reduction', function () {
       reductionsService.getAddReductionsRefData.resolves(addReduction)
+      reductionsService.getReductionByReductionId.withArgs(undefined).resolves(undefined)
       return superTest(app)
         .get(ADD_REDUCTION_PAGE_URL)
         .expect(200)
     })
+
+    it('should respond with 200 and the correct data and an existing reduction', function () {
+      reductionsService.getAddReductionsRefData.resolves(addReduction)
+      reductionsService.getReductionByReductionId.resolves(existingReduction)
+      return superTest(app)
+        .get(ADD_REDUCTION_PAGE_URL + '?reductionId=' + existingReduction.id)
+        .expect(200)
+    })
+
+    it('should respond with 200 and the correct data and no existing reduction', function () {
+      reductionsService.getAddReductionsRefData.resolves(addReduction)
+      reductionsService.getReductionByReductionId.resolves(undefined)
+      return superTest(app)
+        .get(ADD_REDUCTION_PAGE_URL + '?reductionId=' + nonExistingReductionId)
+        .expect(200)
+    })
   })
+
   describe('For the add reductions POST route', function () {
     it('should post the correct data and respond with 200', function () {
       reductionsService.addReduction.resolves(getReductionsSuccessTextResult)

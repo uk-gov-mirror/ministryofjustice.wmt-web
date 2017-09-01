@@ -32,7 +32,8 @@ module.exports = function (router) {
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
     var fail = req.query.fail
-
+    var reductionId = req.query.reductionId
+    console.log(reductionId)
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
     }
@@ -40,15 +41,21 @@ module.exports = function (router) {
     var failureText = fail ? 'Something went wrong. Please try again.' : null
     var getAddReductionsReferenceDataPromise = reductionsService.getAddReductionsRefData(id, organisationLevel)
 
-    return getAddReductionsReferenceDataPromise.then(function (result) {
-      return res.render('add-reduction', {
-        breadcrumbs: result.breadcrumbs,
-        linkId: id,
-        title: result.title,
-        subTitle: result.subTitle,
-        subNav: getSubNav(id, organisationLevel, req.path),
-        referenceData: result.referenceData,
-        failureText: failureText
+    return getAddReductionsReferenceDataPromise
+    .then(function (result) {
+      return reductionsService.getReductionByReductionId(reductionId)
+      .then(function (reduction) {
+        console.log(reduction)
+        return res.render('add-reduction', {
+          breadcrumbs: result.breadcrumbs,
+          linkId: id,
+          title: result.title,
+          subTitle: result.subTitle,
+          subNav: getSubNav(id, organisationLevel, req.path),
+          referenceData: result.referenceData,
+          failureText: failureText,
+          reduction: mapReductionToViewModel(reduction)
+        })
       })
     })
   })
@@ -94,5 +101,23 @@ module.exports = function (router) {
     }
 
     return result
+  }
+
+  var mapReductionToViewModel = function (reduction) {
+    var viewModel
+    if (reduction !== undefined) {
+      viewModel = {
+        reasonId: reduction.reduction_reason_id,
+        hours: reduction.hours,
+        start_day: reduction.effective_from.getDate(),
+        start_month: reduction.effective_from.getMonth() + 1,
+        start_year: reduction.effective_from.getFullYear(),
+        end_day: reduction.effective_to.getDate(),
+        end_month: reduction.effective_to.getMonth() + 1,
+        end_year: reduction.effective_to.getFullYear()
+      }
+    }
+
+    return viewModel
   }
 }
