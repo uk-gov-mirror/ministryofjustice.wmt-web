@@ -17,3 +17,10 @@ function applyDaylightSavingTime (date) {
   }
   return date
 }
+
+exports.formatDate = function (date, format){
+  if (date instanceof Date) {
+      date = moment(date).format(format)
+  }
+  return date
+}
