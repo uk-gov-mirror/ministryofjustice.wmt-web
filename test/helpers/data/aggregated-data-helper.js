@@ -330,3 +330,10 @@ module.exports.getWorkloadReportEffectiveFromDate = function () {
       .whereNull('effective_to')
       .orderBy('effective_from', 'desc')
 }
+
+module.exports.getAnyExistingWorkloadOwnerIdWithReduction = function () {
+  return knex('workload_owner')
+      .join('reductions', 'workload_owner.id', 'workload_owner_id')
+      .first('workload_owner.id AS workloadOwnerId',
+       'reductions.id AS reductionId')
+}

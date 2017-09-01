@@ -7,10 +7,12 @@ var offenderManagerUrl
 
 describe('View adding a new reduction', () => {
   before(function () {
-    return dataHelper.getAnyExistingWorkloadOwnerId()
+    return dataHelper.getAnyExistingWorkloadOwnerIdWithReduction()
         .then(function (results) {
-          offenderManagerId = results
+          offenderManagerId = results.workloadOwnerId
           offenderManagerUrl = '/offender-manager/' + offenderManagerId + '/add-reduction'
+          reductionId = results.reductionId
+          reductionUrl = offenderManagerUrl + '?reductionId=' + reductionId
         })
   })
 
@@ -36,6 +38,18 @@ describe('View adding a new reduction', () => {
       browser.setValue('#red_start_year', '2018')
       browser.setValue('#notes', 'New note')
       browser.submitForm('#reductionForm')
+    })
+  })
+
+  describe('should navigate to the edit reduction screen and reason prepopulated', () => {
+    it('with the correct breadcrumbs and heading title', () => {
+      return browser.url(offenderManagerUrl)
+        .waitForExist('.breadcrumbs')
+        .waitForExist('#hours')
+        .getText('#hours')
+        .then(function (text){
+          expect(text).to.be.not.null
+      })
     })
   })
 })
