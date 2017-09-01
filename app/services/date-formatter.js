@@ -18,9 +18,9 @@ function applyDaylightSavingTime (date) {
   return date
 }
 
-exports.formatDate = function (date, format){
+exports.formatDate = function (date, format) {
   if (date instanceof Date) {
-      date = moment(date).format(format)
+    date = moment(date).format(format)
   }
   return date
 }
