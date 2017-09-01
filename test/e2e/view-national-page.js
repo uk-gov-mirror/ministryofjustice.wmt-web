@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 
-describe('View landing Page and national view', () => {
+describe('View landing page and national view', () => {
   it('should navigate to the landing page and have a link present', () => {
     return browser.url('/')
       .waitForExist('.sln-overview-heading')
