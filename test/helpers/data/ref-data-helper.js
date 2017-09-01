@@ -42,5 +42,5 @@ module.exports.getMaxId = function () {
   .max('id AS maxId')
     .then(function (maxId) {
       return maxId[0].maxId
-  })
+    })
 }
