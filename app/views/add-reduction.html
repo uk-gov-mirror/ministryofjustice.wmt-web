@@ -20,6 +20,7 @@
   <p class="lede">Add a new reduction for <span class="bold">{{ title }}</span></p>
   {% set first = true %}
   <form action="/offender-manager/{{ linkId }}/add-reduction" method=POST id="reductionForm">
+    <input type="hidden" name="reductionId" value="{{reduction.id}}"/>
     <div class="form-group" id="reduction_reason_selection">
       <label class="form-label-bold" for="select-box">Reason for reduction</label>
       <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}" onChange="populateHours(), calculateExpiry()">        

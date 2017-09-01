@@ -11,6 +11,7 @@ const Reduction = require('../../../app/services/domain/reduction')
 var breadcrumbs = breadcrumbHelper.OFFENDER_MANAGER_BREADCRUMBS
 
 var addReductionStub
+var updateReductionStub
 var getReferenceDataStub
 var getContractedHoursForWorkloadOwnerStub
 var getBreadcrumbsStub
@@ -18,7 +19,9 @@ var createCalculateWorkloadTaskStub
 var reductionService
 var getReductionById
 
-var existingReductionId = 1
+var newReductionId = 9
+var existingReductionId = 10
+var workloadOwnerId = 11
 var reduction = new Reduction(1, 1, new Date(), new Date(), 'This is a test note')
 
 var referenceData = [
@@ -42,6 +45,7 @@ var referenceData = [
 
 beforeEach(function () {
   addReductionStub = sinon.stub()
+  updateReductionStub = sinon.stub()
   createCalculateWorkloadTaskStub = sinon.stub()
   getContractedHoursForWorkloadOwnerStub = sinon.stub().resolves(5)
   getReferenceDataStub = sinon.stub().resolves(referenceData)
@@ -51,6 +55,7 @@ beforeEach(function () {
     proxyquire('../../../app/services/reductions-service',
       {
         './data/insert-reduction': addReductionStub,
+        './data/update-reduction': updateReductionStub,
         './get-breadcrumbs': getBreadcrumbsStub,
         './data/get-contracted-hours-for-workload-owner': getContractedHoursForWorkloadOwnerStub,
         './data/get-reduction-reasons': getReferenceDataStub,
@@ -81,14 +86,25 @@ describe('services/reductions-service', function () {
         })
     })
   })
-  describe('Add reduction', function () {
-    it('should add a reduction', function () {
+  describe('UpSert reduction', function () {
+    it('should add a new reduction when no valid reduction Id given', function () {
       createCalculateWorkloadTaskStub.resolves(1)
-      addReductionStub.withArgs(1, reduction).resolves(1)
-      return reductionService.addReduction(1, reduction)
+      addReductionStub.withArgs(workloadOwnerId, reduction).resolves(newReductionId)
+      return reductionService.upsertReduction(workloadOwnerId, undefined, reduction)
         .then(function (result) {
-          expect(createCalculateWorkloadTaskStub.calledWith(1)).to.be.true //eslint-disable-line
-          expect(addReductionStub.calledWith(1, reduction)).to.be.true //eslint-disable-line
+          expect(createCalculateWorkloadTaskStub.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+          expect(addReductionStub.calledWith(workloadOwnerId, reduction)).to.be.true //eslint-disable-line
+          expect(result).to.equal(1)
+        })
+    })
+
+    it('should update reduction when reduction Id given', function () {
+      createCalculateWorkloadTaskStub.resolves(1)
+      updateReductionStub.withArgs(existingReductionId, workloadOwnerId, reduction).resolves(existingReductionId)
+      return reductionService.upsertReduction(workloadOwnerId, existingReductionId, reduction)
+        .then(function (result) {
+          expect(createCalculateWorkloadTaskStub.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+          expect(updateReductionStub.calledWith(existingReductionId, workloadOwnerId,reduction)).to.be.true //eslint-disable-line
           expect(result).to.equal(1)
         })
     })

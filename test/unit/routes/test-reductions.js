@@ -107,7 +107,24 @@ describe('reductions route', function () {
       reductionsService.addReduction.resolves(getReductionsSuccessTextResult)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
-        .send({'reasonForReductionId': 1,
+        .send({'id': undefined,
+          'reasonForReductionId': 1,
+          'hours': 5,
+          'red_start_year': '2018',
+          'red_start_month': '1',
+          'red_start_day': '1',
+          'red_end_year': '2018',
+          'red_end_month': '7',
+          'red_end_day': '1',
+          'notes': 'This is a test note'})
+        .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?success=true')
+    })
+    it('should post the correct data and respond with 200 for existing reduction', function () {
+      reductionsService.addReduction.resolves(getReductionsSuccessTextResult)
+      return superTest(app)
+        .post(ADD_REDUCTION_POST_URL)
+        .send({'id': 1,
+          'reasonForReductionId': 1,
           'hours': 5,
           'red_start_year': '2018',
           'red_start_month': '1',
