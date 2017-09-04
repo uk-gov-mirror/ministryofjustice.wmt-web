@@ -18,39 +18,41 @@ var defaultWorkload = {
 }
 
 var defaultWorkloadPoints = {
-  comm_tier_1: 0,
-  comm_tier_2: 0,
-  comm_tier_3: 0,
-  comm_tier_4: 0,
-  comm_tier_5: 0,
-  comm_tier_6: 0,
-  comm_tier_7: 0,
-  cust_tier_1: 0,
-  cust_tier_2: 0,
-  cust_tier_3: 0,
-  cust_tier_4: 0,
-  cust_tier_5: 0,
-  cust_tier_6: 0,
-  cust_tier_7: 0,
-  lic_tier_1: 0,
-  lic_tier_2: 0,
-  lic_tier_3: 0,
-  lic_tier_4: 0,
-  lic_tier_5: 0,
-  lic_tier_6: 0,
-  lic_tier_7: 0,
-  user_id: 0,
-  sdr: 0,
-  sdr_conversion: 0,
-  nominal_target_spo: 0,
-  nominal_target_po: 0,
-  default_contracted_hours_po: 0,
-  default_contracted_hours_pso: 0,
-  weighting_o: 0,
-  weighting_w: 0,
-  weighting_u: 0,
-  paroms_enabled: 0,
-  parom: 0
+  comm_tier_1: 11,
+  comm_tier_2: 12,
+  comm_tier_3: 13,
+  comm_tier_4: 14,
+  comm_tier_5: 15,
+  comm_tier_6: 16,
+  comm_tier_7: 17,
+  cust_tier_1: 21,
+  cust_tier_2: 22,
+  cust_tier_3: 23,
+  cust_tier_4: 24,
+  cust_tier_5: 25,
+  cust_tier_6: 26,
+  cust_tier_7: 27,
+  lic_tier_1: 31,
+  lic_tier_2: 32,
+  lic_tier_3: 33,
+  lic_tier_4: 34,
+  lic_tier_5: 35,
+  lic_tier_6: 36,
+  lic_tier_7: 37,
+  user_id: 123,
+  sdr: 4,
+  sdr_conversion: 5,
+  nominal_target_spo: 1234,
+  nominal_target_po: 5678,
+  default_contracted_hours_po: 37,
+  default_contracted_hours_pso: 38,
+  weighting_o: 10,
+  weighting_w: 20,
+  weighting_u: 70,
+  paroms_enabled: 1,
+  parom: 99,
+  effective_from: '2017-04-01',
+  effective_to: null
 }
 
 module.exports.addOrgHierarchyWithPoAndPso = function () {
@@ -94,9 +96,8 @@ module.exports.addCaseProgressDataForAllOrgUnits = function () {
 module.exports.addWorkloadCapacitiesForOffenderManager = function () {
   var inserts = []
 
-  var promise = knex('workload_points').returning('id').insert(defaultWorkloadPoints)
-    .then(function (ids) {
-      inserts.push({table: 'workload_points', id: ids[0]})
+  var promise = module.exports.addWorkloadPoints(inserts)
+    .then(function (inserts) {
       return knex('offender_manager_type').returning('id').insert({description: 'test'})
     })
     .then(function (ids) {
@@ -104,6 +105,31 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
       return addRegion(inserts)
     })
   return promise
+}
+
+module.exports.addWorkloadPoints = function (inserts) {
+  if (inserts === undefined) {
+    inserts = []
+  }
+
+  var workloadPoints = [
+    defaultWorkloadPoints,
+    Object.assign({}, defaultWorkloadPoints, {
+      comm_tier_1: 111,
+      comm_tier_2: 112,
+      comm_tier_3: 113,
+      effective_from: '2017-01-01',
+      effective_to: '2017-02-01'
+    })
+  ]
+
+  return knex('workload_points').returning('id').insert(workloadPoints)
+  .then(function (ids) {
+    ids.forEach((id) => {
+      inserts.push({table: 'workload_points', id: id})
+    })
+    return inserts
+  })
 }
 
 var addRegion = function (inserts) {
