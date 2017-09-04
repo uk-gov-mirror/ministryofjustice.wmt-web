@@ -67,10 +67,12 @@ beforeEach(function () {
 describe('services/reductions-service', function () {
   describe('Get reductions', function () {
     it('should create the result object with the right information', function () {
-      var result = reductionService.getReductions(1, orgUnitConstant.OFFENDER_MANAGER.name)
-      expect(result.title).to.equal('John Doe')
-      expect(result.subTitle).to.equal('Offender Manager')
-      assert(getBreadcrumbsStub.called)
+      reductionService.getReductions(1, orgUnitConstant.OFFENDER_MANAGER.name)
+        .then(function (result) {
+          expect(result.title).to.equal('John Doe')
+          expect(result.subTitle).to.equal('Offender Manager')
+          assert(getBreadcrumbsStub.called)
+        })
     })
   })
   describe('Get reductions with reference data', function () {

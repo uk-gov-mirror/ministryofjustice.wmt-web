@@ -14,17 +14,25 @@
     <div class="message message--success">{{ successText }}</div>
     {% endif %}
 
+    {% set columnNameType='Type' %}
+    {% set columnNameHours='Hours' %}
+    {% set columnNameStartDate='Start date' %}
+    {% set columnNameEndDate='End date' %}
+
     <a href="/offender-manager/{{ linkId }}/add-reduction" class="button">Add a reduction</a>
     
-    <h2 class="heading-large">Active<span class="visuallyhidden"> reductions</span></h2>
-
+    <h2 id="headingActive" class="heading-large">Active<span class="visuallyhidden"> reductions</span></h2>
+    
     <table class="sln-table-reductions">
+        <colgroup>
+            <col span="1" style="width:35%;">
+        </colgroup>
         <thead>
             <tr>
-                <th id="active_type">Type</th>
-                <th id="active_hours">Hours</th>
-                <th id="active_start_date">Start date</th>
-                <th id="active_end_date">End date</th>
+                <th id="active_type">{{ columnNameType }}</th>
+                <th id="active_hours">{{ columnNameHours }}</th>
+                <th id="active_start_date">{{ columnNameStartDate }}</th>
+                <th id="active_end_date">{{ columnNameEndDate }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -32,70 +40,76 @@
         <tbody class="">
             {% if newReduction %}
             <tr>
-                <td headers="active_type">{{ newReduction.reason }}</td>
+                <td headers="active_type">{{ newReduction.reasonShortName }}</td>
                 <td headers="active_hours">{{ newReduction.hours }}</td>
-                <td headers="active_start_date">{{ newReduction.startDate }}</td>
-                <td headers="active_end_date">{{ newReduction.endDate }}</td>
-                <td><a href="/om/{{omID}}/reductions/234">View</a></td>
+                <td headers="active_start_date">{{ newReduction.reductionStartDate }}</td>
+                <td headers="active_end_date">{{ newReduction.reductionEndDate }}</td>
+                <td><a href="/offender-manager/{{ linkId }}/add-reduction?reductionId={{ newReduction.id }}">View</a></td>
             </tr>
             {% endif %}
-            {% for active in reductions.active %}
+            {% for active in activeReductions %}
             <tr>
-                <td headers="active_type">{{ active.type }}</td>
+                <td headers="active_type">{{ active.reasonShortName }}</td>
                 <td headers="active_hours">{{ active.hours }}</td>
-                <td headers="active_start_date">{{ active.start_date }}</td>
-                <td headers="active_end_date">{{ active.end_date }}</td>
-                <td><a href="/{{omID}}/reductions/{{ active.id }}">View</a></td>
+                <td headers="active_start_date">{{ active.reductionStartDate }}</td>
+                <td headers="active_end_date">{{ active.reductionEndDate }}</td>
+                <td><a href="/offender-manager/{{ linkId }}/add-reduction?reductionId={{ active.id }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <h2 class="heading-large">Scheduled<span class="visuallyhidden"> reductions</span></h2>
+    <h2 id="headingScheduled" class="heading-large">Scheduled<span class="visuallyhidden"> reductions</span></h2>
 
     <table class="sln-table-reductions">
+        <colgroup>
+            <col span="1" style="width:35%;">
+        </colgroup>
         <thead>
             <tr>
-                <th id="scheduled_type">Type</th>
-                <th id="scheduled_hours">Hours</th>
-                <th id="scheduled_start_date">Start date</th>
-                <th id="scheduled_end_date">End date</th>
+                <th id="scheduled_type">{{ columnNameType }}</th>
+                <th id="scheduled_hours">{{ columnNameHours }}</th>
+                <th id="scheduled_start_date">{{ columnNameStartDate }}</th>
+                <th id="scheduled_end_date">{{ columnNameEndDate }}</th>
                 <th></th>
             </tr>
         </thead>
         <tbody class="">
-            {% for scheduled in reductions.scheduled %}
+            {% for scheduled in scheduledReductions %}
             <tr>
-                <td headers="scheduled_type">{{ scheduled.type }}</td>
+                <td headers="scheduled_type">{{ scheduled.reasonShortName }}</td>
                 <td headers="scheduled_hours">{{ scheduled.hours }}</td>
-                <td headers="scheduled_start_date">{{ scheduled.start_date }}</td>
-                <td headers="scheduled_end_date">{{ scheduled.end_date }}</td>
-                <td><a href="/{{omID}}/reductions/{{ scheduled.id }}">View</a></td>
+                <td headers="scheduled_start_date">{{ scheduled.reductionStartDate }}</td>
+                <td headers="scheduled_end_date">{{ scheduled.reductionEndDate }}</td>                
+                <td><a href="/offender-manager/{{ linkId }}/add-reduction?reductionId={{ scheduled.id }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <h2 class="heading-large">Archived<span class="visuallyhidden"> reductions</span></h2>
+    <h2 id="headingArchived" class="heading-large">Archived<span class="visuallyhidden"> reductions</span></h2>
 
     <table class="sln-table-reductions">
+        <colgroup>
+            <col span="1" style="width:35%;">
+        </colgroup>
         <thead>
             <tr>
-                <th id="archived_type">Type</th>
-                <th id="archived_hours">Hours</th>
-                <th id="archived_start_date">Start date</th>
-                <th id="archived_end_date">End date</th>
+                <th id="archived_type">{{ columnNameType }}</th>
+                <th id="archived_hours">{{ columnNameHours }}</th>
+                <th id="archived_start_date">{{ columnNameStartDate }}</th>
+                <th id="archived_end_date">{{ columnNameEndDate }}</th>
                 <th></th>
             </tr>
         </thead>
         <tbody class="">
-            {% for scheduled in reductions.archived %}
+            {% for archived in archivedReductions %}
             <tr>
-                <td headers="archived_type">{{ archived.type }}</td>
+                <td headers="archived_type">{{ archived.reasonShortName }}</td>
                 <td headers="archived_hours">{{ archived.hours }}</td>
-                <td headers="archived_start_date">{{ archived.start_date }}</td>
-                <td headers="archived_end_date">{{ archived.end_date }}</td>
-                <td><a href="/{{omID}}/reductions/{{ archived.id }}">View</a></td>
+                <td headers="archived_start_date">{{ archived.reductionStartDate }}</td>
+                <td headers="archived_end_date">{{ archived.reductionEndDate }}</td>
+                <td><a href="/offender-manager/{{ linkId }}/add-reduction?reductionId={{ archived.id }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>

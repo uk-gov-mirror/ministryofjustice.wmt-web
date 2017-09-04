@@ -13,18 +13,20 @@ module.exports = function (router) {
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
     }
+    var getReductionsPromise = reductionsService.getReductions(id, organisationLevel)
 
-    var result = reductionsService.getReductions(id, organisationLevel)
-    return res.render('reductions', {
-      breadcrumbs: result.breadcrumbs,
-      linkId: id,
-      title: result.title,
-      subTitle: result.subTitle,
-      subNav: getSubNav(id, organisationLevel, req.path),
-      active: [],
-      scheduled: [],
-      archived: [],
-      successText: successText
+    return getReductionsPromise.then(function (result) {
+      return res.render('reductions', {
+        breadcrumbs: result.breadcrumbs,
+        linkId: id,
+        title: result.title,
+        subTitle: result.subTitle,
+        subNav: getSubNav(id, organisationLevel, req.path),
+        activeReductions: result.activeReductions,
+        scheduledReductions: result.scheduledReductions,
+        archivedReductions: result.archivedReductions,
+        successText: successText
+      })
     })
   })
 
@@ -72,6 +74,7 @@ module.exports = function (router) {
 
     var id = req.params.id
     var reductionId = req.body.reductionId
+    console.log(reductionId)
     if (!requestDataVerified(req.body)) {
       return res.redirect(302, '/' + organisationLevel + '/' + id + '/add-reduction?fail=true')
     }
