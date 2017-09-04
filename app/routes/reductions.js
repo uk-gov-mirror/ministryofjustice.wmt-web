@@ -45,7 +45,9 @@ module.exports = function (router) {
     .then(function (result) {
       return reductionsService.getReductionByReductionId(reductionId)
       .then(function (reduction) {
-        console.log(reduction)
+        if (reduction !== undefined && reduction.workload_owner_id !== id) {
+          reduction = undefined
+        }
         return res.render('add-reduction', {
           breadcrumbs: result.breadcrumbs,
           linkId: id,
