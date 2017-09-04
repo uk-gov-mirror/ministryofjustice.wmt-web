@@ -4,49 +4,419 @@
 
 <main id="content" role="main">
 
+{% include "includes/breadcrumbs.html" %}  
+
 {% include "includes/validation-error-messages.html" %}
-<h2 class="heading-large">
-    Adjust workload points
-</h2>
 
-<form action="/workload-points"
-      method="post">
+{% include "includes/title-subtitle.html" %}
 
- <div class="heading-medium-prevent-margin-collapse">
-          <p class="heading-medium">Address</p>
-          <p>Nominal Target Points</p>
+<p>Workload points are set here and are used to calculate capacity points for all Offender Managers throughout the Workload Management Tool.</p>
+
+
+<!-- TODO: Format date. Include user. -->
+
+<p>Current Workload Points created by <span class="bold">test user</span> on <span class="bold">{{ wp.effectiveFrom }}</span></p> 
+
+<!-- WAS ATTEMPTING TO GENERATE THE FIRST THREE TABS USING A LOOP. FIELD NAMES WERE PROVING A PROBLEM
+  
+  {% set wpTypes = [
+  {name: 'custody', shortName: 'cus'}, 
+  {name: 'license', shortName: 'lic'}, 
+  {name: 'community', shortName: 'comm'}
+] %} -->
+
+<form action="/admin/workload-points" method=POST id="workloadPointsForm">
+
+  <input class="form-control" id="previousWpId" name="previousWpId" type="hidden" value="{{ wp.workloadPointsId }}">
+
+  <div class="js-tabs">
+    <ul class="js-tabs-links">
+      <li><a href="#custody">Custody</a></li>
+      <li><a href="#license">License</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#other">Other</a></li>
+    </ul>
+
+    <div class="js-tabs-content">
+
+      <!-- {% for type in wpTypes %}
+      <p> {{ type.name }} </p>
+      <p> {{ type.shortName }} </p>
+      {% endfor %} -->
+
+      <div id="custody">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+              <table>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="cus-a">Cus A</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="cus-a" name="cusA" type="number" value="{{ wp.cusA }}">
+                    </td>
+                  </tr>
+                  <tr>            
+                    <th scope="row">
+                      <label class="form-label-bold" for="cus-b1">Cus B1</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="cus-b1" name="cusB1" type="number" value="{{ wp.cusB1 }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="cus-b2">Cus B2</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="cus-b2" name="cusB2" type="number" value="{{ wp.cusB2 }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="cus-c1">Cus C1</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="cus-c1" name="cusC1" type="number" value="{{ wp.cusC1 }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="cus-c2">Cus C2</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="cus-c2" name="cusC2" type="number" value="{{ wp.cusC2 }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="cus-d1">Cus D1</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="cus-d1" name="cusD1" type="number" value="{{ wp.cusD1 }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="cus-d2">Cus D2</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="cus-d2" name="cusD2" type="number" value="{{ wp.cusD2 }}">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+
+      <div id="license">
+        <div class="grid-row">
+          <div class="column-two-thirds">
+            <table>
+              <tbody>
+                <tr>
+                  <th scope="row">
+                    <label class="form-label-bold" for="lic-a">Lic A</label>
+                  </th>
+                  <td class="numeric">
+                    <input class="form-control" id="lic-a" name="licA" type="number" value="{{ wp.licA }}">
+                  </td>
+                </tr>
+                <tr>            
+                  <th scope="row">
+                    <label class="form-label-bold" for="lic-b1">Lic B1</label>
+                  </th>
+                  <td class="numeric">
+                    <input class="form-control" id="lic-b1" name="licB1" type="number" value="{{ wp.licB1 }}">
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <label class="form-label-bold" for="lic-b2">Lic B2</label>
+                  </th>
+                  <td class="numeric">
+                    <input class="form-control" id="lic-b2" name="licB2" type="number" value="{{ wp.licB2 }}">
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <label class="form-label-bold" for="lic-c1">Lic C1</label>
+                  </th>
+                  <td class="numeric">
+                    <input class="form-control" id="lic-c1" name="licC1" type="number" value="{{ wp.licC1 }}">
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <label class="form-label-bold" for="lic-c2">Lic C2</label>
+                  </th>
+                  <td class="numeric">
+                    <input class="form-control" id="lic-c2" name="licC2" type="number" value="{{ wp.licC2 }}">
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <label class="form-label-bold" for="lic-d1">Lic D1</label>
+                  </th>
+                  <td class="numeric">
+                    <input class="form-control" id="lic-d1" name="licD1" type="number" value="{{ wp.licD1 }}">
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <label class="form-label-bold" for="lic-d2">Lic D2</label>
+                  </th>
+                  <td class="numeric">
+                    <input class="form-control" id="lic-d2" name="licD2" type="number" value="{{ wp.licD2 }}">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="community">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+              <table>
+                <tbody>
+                    <tr>
+                      <th scope="row">
+                        <label class="form-label-bold" for="comm-a">Comm A</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-a" name="commA" type="number" value="{{ wp.commA }}">
+                      </td>
+                    </tr>
+                    <tr>            
+                      <th scope="row">
+                        <label class="form-label-bold" for="comm-b1">Comm B1</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-b1" name="commB1" type="number" value="{{ wp.commB1 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <label class="form-label-bold" for="comm-b2">Comm B2</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-b2" name="commB2" type="number" value="{{ wp.commB2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <label class="form-label-bold" for="comm-c1">Comm C1</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-c1" name="commC1" type="number" value="{{ wp.commC1 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <label class="form-label-bold" for="comm-c2">Comm C2</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-c2" name="commC2" type="number" value="{{ wp.commC2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <label class="form-label-bold" for="comm-d1">Comm D1</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d1" name="commD1" type="number" value="{{ wp.commD1 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <label class="form-label-bold" for="comm-d2">Comm D2</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+
+      <div id="other">
+          <p><span class="bold">Delivery Report Workload Points</span></p>
+          <div class="grid-row">
+            <div class="column-two-thirds">
+              <table>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="sdr">SDR</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="sdr" name="sdr" type="number" value="{{ wp.sdr }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="fdr">FDR (SDR Conversion)</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="fdr" name="fdr" type="number" value="{{ wp.sdrConversion }}">
+                    </td>                    
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="parom">PAROM</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="parom" name="parom" type="number" value="{{ wp.parom }}">
+                    </td>                       
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <br>
+          <p><span class="bold">Weighting</span></p>
+          <div class="grid-row">
+            <div class="column-two-thirds">
+              <table>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="weightingOverdue">Overdue Terminations</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="weightingOverdue" name="weightingOverdue" type="number" value="{{ wp.weightingOverdue }}">
+                    </td>                       
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="weightingWarrants">Active Warrants</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="weightingWarrants" name="weightingWarrants" type="number" value="{{ wp.weightingWarrants }}">
+                    </td>                       
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="weightingUpw">Only UPW Outstanding</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="weightingUpw" name="weightingUpw" type="number" value="{{ wp.weightingUpw }}">
+                    </td>   
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <br>
+          <p><span class="bold">Nominal Target (Points)</span></p>
+          <div class="grid-row">
+            <div class="column-two-thirds">
+              <table>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="nominalTargetPo">PO</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="nominalTargetPo" name="nominalTargetPo" type="number" value="{{ wp.nominalTargetPo }}">
+                    </td>                       
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="nominalTargetPso">PSO</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="nominalTargetPso" name="nominalTargetPso" type="number" value="{{ wp.nominalTargetPso }}">
+                    </td>   
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+         
+          <br>
+          <p><span class="bold">Default Contracted Hours</span></p>
+          <div class="grid-row">
+            <div class="column-two-thirds">
+              <table>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="defaultContractedHoursPo">PO</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="defaultContractedHoursPo" name="defaultContractedHoursPo" type="number" value="{{ wp.defaultContractedHoursPo }}">
+                    </td>                       
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <label class="form-label-bold" for="defaultContractedHoursPso">PSO</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="defaultContractedHoursPso" name="defaultContractedHoursPso" type="number" value="{{ wp.defaultContractedHoursPso }}">
+                    </td>   
+                  </tr>                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div> 
+
+    </div>
   </div>
 
-  <div class="form-group">
-    <label id="nominal-target-points-po" class="form-label-bold" for="nominal-target-points-po-input">PO</label>
-    <input id="nominal-target-points-po-input"
-            name="NominalTargetPointsPO"
-            type="text"
-            autocomplete="off"
-            class="form-control"
-            value="{{ workloadPoints['nominalTargetPointsPO'] }}">
-  </div>
+  <a onclick="edit()" class="button" id="edit-button">Edit</a>
 
-    <div class="form-group">
-    <label id="nominal-target-points-spo" class="form-label-bold" for="nominal-target-points-spo-input">PO</label>
-    <input id="nominal-target-points-spo-input"
-            name="NominalTargetPointsSPO"
-            type="text"
-            autocomplete="off"
-            class="form-control"
-            value="{{ workloadPoints['nominalTargetPointsSPO'] }}">
+  <div class="notice" id="save-notice">
+      <i class="icon icon-important"></i>
+      <strong class="bold-small">
+        Saving changes made here will cause reports to be updated. The report update process can take 30 minutes to complete, in which time no further changes can be saved.
+      </strong>
   </div>
+  <br>
+  <input class="button" type="submit" id="save-button" value="Save">
 
   {% include "includes/csrf-hidden-input.html" %}
 
-  <input id="workload-points-submit"
-          type="submit"
-          class="button"
-          value="Submit">
 </form>
 
 </main>
 {% endblock %}
 
 {% block body_end %}
+<script src="/public/javascripts/vendor/jquery.js"></script>
+<script src="/public/javascripts/jquery.tabs.js"></script>
+
+<script>
+  $(function(){
+    $('.js-tabs').tabs();
+  });
+
+  $('.form-control').each(function(i, textbox) {
+    textbox.setAttribute('readonly', true)
+    textbox.setAttribute('style', 'border:none; width: 60px; outline:none; text-align:right;')
+  });
+  document.getElementById('save-button').setAttribute('style', 'display: none;')
+  document.getElementById('save-notice').setAttribute('style', 'display: none;')
+
+  var edit = function () {
+    $('.form-control').each(function(i, textbox) {
+     textbox.removeAttribute('readonly')
+     textbox.setAttribute('style', 'width: 50px; text-align:right;')
+    });
+
+    document.getElementById('edit-button').setAttribute('style', 'display: none;')
+    document.getElementById('save-button').setAttribute('style', 'display: inline-block;')
+    document.getElementById('save-notice').setAttribute('style', 'display: block;')
+  }
+</script>
 {% endblock %}
+
