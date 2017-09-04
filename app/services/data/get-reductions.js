@@ -1,15 +1,16 @@
 const config = require('../../../knexfile').web
 const knex = require('knex')(config)
 
-module.exports = function (id) {
+module.exports = function (workloadOwnerId) {
+  var whereObject = {}
+  if (workloadOwnerId !== undefined) {
+    whereObject.workload_owner_id = workloadOwnerId
+  }
+
   return knex('reductions')
     .join('reduction_reason', 'reductions.reduction_reason_id', 'reduction_reason.id')
     .join('reduction_category', 'reduction_reason.category_id', 'reduction_category.id')
-    .modify(function (whereBlock) {
-      if (id !== undefined) {
-        whereBlock.where('reductions.workload_owner_id', id)
-      }
-    })
+    .where(whereObject)
     .select('reductions.id',
             'workload_owner_id AS workloadOwnerId',
             'hours',

@@ -1,18 +1,20 @@
 
 var dateFormatter = require('../date-formatter')
 
-module.exports.determineReductionsStatus = function (reductions) {
+module.exports.getReductionsByStatus = function (reductions) {
   var active = []
   var scheduled = []
   var archived = []
   var currentDate = new Date()
   reductions.filter(function (reduction) {
-    if (currentDate.getTime() > reduction.reductionStartDate.getTime() &&
-            currentDate.getTime() < reduction.reductionEndDate.getTime()) {
+    if ((reduction.status !== 'ARCHIVED') && (reduction.status !== 'DELETED') &&
+        (currentDate.getTime() > reduction.reductionStartDate.getTime()) &&
+        (currentDate.getTime() < reduction.reductionEndDate.getTime())) {
       active.push(reduction)
-    } else if (currentDate.getTime() < reduction.reductionStartDate.getTime()) {
+    } else if ((reduction.status !== 'ARCHIVED') && (reduction.status !== 'DELETED') &&
+      (currentDate.getTime() < reduction.reductionStartDate.getTime())) {
       scheduled.push(reduction)
-    } else if (currentDate.getTime() > reduction.reductionEndDate.getTime()) {
+    } else if (reduction.status === 'ARCHIVED') {
       archived.push(reduction)
     }
     formatReductionDates(reduction)
