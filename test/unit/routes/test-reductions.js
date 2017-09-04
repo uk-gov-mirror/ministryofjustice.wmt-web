@@ -58,7 +58,7 @@ beforeEach(function () {
   reductionsService = sinon.stub()
   reductionsService.getReductions = sinon.stub()
   reductionsService.getAddReductionsRefData = sinon.stub()
-  reductionsService.addReduction = sinon.stub()
+  reductionsService.upsertReduction = sinon.stub()
   reductionsService.getReductionByReductionId = sinon.stub()
   route = proxyquire('../../../app/routes/reductions', {
     '../services/reductions-service': reductionsService,
@@ -79,7 +79,7 @@ describe('reductions route', function () {
   describe('For the add reductions page route', function () {
     it('should respond with 200 and the correct data and no existing reduction', function () {
       reductionsService.getAddReductionsRefData.resolves(addReduction)
-      reductionsService.getReductionByReductionId.withArgs(undefined).resolves(undefined)
+      reductionsService.getReductionByReductionId.resolves(undefined)
       return superTest(app)
         .get(ADD_REDUCTION_PAGE_URL)
         .expect(200)
@@ -93,7 +93,7 @@ describe('reductions route', function () {
         .expect(200)
     })
 
-    it('should respond with 200 and the correct data and no existing reduction', function () {
+    it('should respond with 200 and the correct data and no existing reduction for non-existant reductionId', function () {
       reductionsService.getAddReductionsRefData.resolves(addReduction)
       reductionsService.getReductionByReductionId.resolves(undefined)
       return superTest(app)
@@ -104,7 +104,7 @@ describe('reductions route', function () {
 
   describe('For the add reductions POST route', function () {
     it('should post the correct data and respond with 200', function () {
-      reductionsService.addReduction.resolves(getReductionsSuccessTextResult)
+      reductionsService.upsertReduction.resolves(getReductionsSuccessTextResult)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
         .send({'id': undefined,
@@ -120,7 +120,7 @@ describe('reductions route', function () {
         .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?success=true')
     })
     it('should post the correct data and respond with 200 for existing reduction', function () {
-      reductionsService.addReduction.resolves(getReductionsSuccessTextResult)
+      reductionsService.upsertReduction.resolves(getReductionsSuccessTextResult)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
         .send({'id': 1,

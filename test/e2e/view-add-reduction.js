@@ -47,10 +47,10 @@ describe('View adding a new reduction', () => {
     it('with the correct breadcrumbs and heading title', () => {
       return browser.url(reductionUrl)
         .waitForExist('.breadcrumbs')
-        .waitForExist('#hours')
-        .getText('#hours')
+        .waitForExist('.heading-xlarge')
+        .getText('.heading-xlarge')
         .then(function (text) {
-          expect(text).to.be.a('number') //eslint-disable-line
+          expect(text).to.equal('Reduction')
         })
     })
   })

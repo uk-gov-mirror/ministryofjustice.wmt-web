@@ -30,9 +30,9 @@ module.exports = function (router) {
 
   router.get('/:organisationLevel/:id/add-reduction', function (req, res, next) {
     var organisationLevel = req.params.organisationLevel
-    var id = req.params.id
+    var id = parseInt(req.params.id)
     var fail = req.query.fail
-    var reductionId = req.query.reductionId
+    var reductionId = parseInt(req.query.reductionId)
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -45,9 +45,10 @@ module.exports = function (router) {
     .then(function (result) {
       return reductionsService.getReductionByReductionId(reductionId)
       .then(function (reduction) {
-        if (reduction !== undefined && reduction.workload_owner_id !== id) {
+        if (reduction !== undefined && reduction.workloadOwnerId !== id) {
           reduction = undefined
         }
+
         return res.render('add-reduction', {
           breadcrumbs: result.breadcrumbs,
           linkId: id,
@@ -64,12 +65,13 @@ module.exports = function (router) {
 
   router.post('/:organisationLevel/:id/add-reduction', function (req, res, next) {
     var organisationLevel = req.params.organisationLevel
-    var id = req.params.id
-    var reductionId = req.body.reductionId
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
     }
+
+    var id = req.params.id
+    var reductionId = req.body.reductionId
     if (!requestDataVerified(req.body)) {
       return res.redirect(302, '/' + organisationLevel + '/' + id + '/add-reduction?fail=true')
     }
@@ -81,7 +83,7 @@ module.exports = function (router) {
       req.body.reasonForReductionId, req.body.hours, reductionStartDate, reductionEndDate, req.body.notes
     )
 
-    var addReductionsPromise = reductionsService.addReduction(id, reductionId, reduction)
+    var addReductionsPromise = reductionsService.upsertReduction(id, reductionId, reduction)
 
     return addReductionsPromise.then(function () {
       return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
@@ -111,17 +113,17 @@ module.exports = function (router) {
     if (reduction !== undefined) {
       viewModel = {
         id: reduction.id,
-        reasonId: reduction.reduction_reason_id,
+        reasonId: reduction.reductionReasonId,
         hours: reduction.hours,
-        start_day: reduction.effective_from.getDate(),
-        start_month: reduction.effective_from.getMonth() + 1,
-        start_year: reduction.effective_from.getFullYear(),
-        end_day: reduction.effective_to.getDate(),
-        end_month: reduction.effective_to.getMonth() + 1,
-        end_year: reduction.effective_to.getFullYear()
+        start_day: reduction.reductionStartDate.getDate(),
+        start_month: reduction.reductionStartDate.getMonth() + 1,
+        start_year: reduction.reductionStartDate.getFullYear(),
+        end_day: reduction.reductionEndDate.getDate(),
+        end_month: reduction.reductionEndDate.getMonth() + 1,
+        end_year: reduction.reductionEndDate.getFullYear(),
+        notes: reduction.notes
       }
     }
-
     return viewModel
   }
 }

@@ -5,19 +5,23 @@
 <main id="content" role="main">
   {% include "includes/breadcrumbs.html" %} 
   
-  <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">
-    {% if reduction.reasonId !== undefined %}
-      Reduction
-    {% else %}
-      New reduction
-    {% endif %}
-  </header>
+  {%if reduction %}
+    {% set headerText='Reduction' %}
+    {% set reductionText='Showing reduction for' %}
+    {% set submitButtonText='Save changes' %}
+  {% else %}
+    {% set headerText='New reduction' %}
+    {% set reductionText='Add a new reduction for' %}
+    {% set submitButtonText='Add reduction' %}
+  {% endif %}
+
+  <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">{{ headerText }}</header>
 
   {%if failureText %}
   <p class="message message--failure">{{ failureText }}</p>
   {% endif %}
 
-  <p class="lede">Add a new reduction for <span class="bold">{{ title }}</span></p>
+  <p class="lede">{{ reductionText }}<span class="bold">{{ title }}</span></p>
   {% set first = true %}
   <form action="/offender-manager/{{ linkId }}/add-reduction" method=POST id="reductionForm">
     <input type="hidden" name="reductionId" value="{{reduction.id}}"/>
@@ -87,13 +91,7 @@
       <textarea class="form-control form-control-3-4" name="notes" id="textarea" rows="5" >{{ reduction.notes }}</textarea>
     </div> 
     {% include "includes/csrf-hidden-input.html"%} 
-    <input class="button" type="submit" 
-    {% if reduction.reasonId !== undefined %}
-      value="Save changes"  
-    {% else %}
-      value="Add reduction"
-    {% endif %}
-    >
+    <input class="button" type="submit" value="{{ submitButtonText }}">
   </form>
 
 </main>
