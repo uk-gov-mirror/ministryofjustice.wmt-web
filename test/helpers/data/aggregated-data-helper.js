@@ -336,4 +336,12 @@ module.exports.getAnyExistingWorkloadOwnerIdWithReduction = function () {
       .join('reductions', 'workload_owner.id', 'workload_owner_id')
       .first('workload_owner.id AS workloadOwnerId',
        'reductions.id AS reductionId')
+  }
+
+module.exports.generateNonExistantWorkloadOwnerId = function () {
+  return knex('workload_owner')
+  .max('id AS maxId')
+  .then(function (maxId) {
+    return maxId[0].maxId + 1
+  })
 }
