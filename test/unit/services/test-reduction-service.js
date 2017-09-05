@@ -88,22 +88,25 @@ describe('services/reductions-service', function () {
         })
     })
   })
-  describe('UpSert reduction', function () {
+
+  describe('Add reduction', function () {
     it('should add a new reduction when no valid reduction Id given', function () {
       createCalculateWorkloadTaskStub.resolves(1)
       addReductionStub.withArgs(workloadOwnerId, reduction).resolves(newReductionId)
-      return reductionService.upsertReduction(workloadOwnerId, undefined, reduction)
+      return reductionService.addReduction(workloadOwnerId, reduction)
         .then(function (result) {
           expect(createCalculateWorkloadTaskStub.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
           expect(addReductionStub.calledWith(workloadOwnerId, reduction)).to.be.true //eslint-disable-line
           expect(result).to.equal(1)
         })
     })
+  })
 
+  describe('Update reduction', function () {
     it('should update reduction when reduction Id given', function () {
       createCalculateWorkloadTaskStub.resolves(1)
       updateReductionStub.withArgs(existingReductionId, workloadOwnerId, reduction).resolves(existingReductionId)
-      return reductionService.upsertReduction(workloadOwnerId, existingReductionId, reduction)
+      return reductionService.updateReduction(workloadOwnerId, existingReductionId, reduction)
         .then(function (result) {
           expect(createCalculateWorkloadTaskStub.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
           expect(updateReductionStub.calledWith(existingReductionId, workloadOwnerId,reduction)).to.be.true //eslint-disable-line

@@ -34,7 +34,6 @@ module.exports = function (router) {
     var organisationLevel = req.params.organisationLevel
     var id = parseInt(req.params.id)
     var fail = req.query.fail
-    var reductionId = parseInt(req.query.reductionId)
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -57,7 +56,7 @@ module.exports = function (router) {
     })
   })
 
-  router.get('/:organisationLevel/:id/edit-reduction', function (req, res, next){
+  router.get('/:organisationLevel/:id/edit-reduction', function (req, res, next) {
     var organisationLevel = req.params.organisationLevel
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -66,7 +65,7 @@ module.exports = function (router) {
     var id = parseInt(req.params.id)
     var reductionId = parseInt(req.query.reductionId)
     var fail = req.query.fail
-    
+
     var failureText = fail ? 'Something went wrong. Please try again.' : null
 
     reductionsService.getAddReductionsRefData(id, organisationLevel)
@@ -127,14 +126,14 @@ module.exports = function (router) {
     }
 
     var reduction = generateNewReductionFromRequest(req.body)
-    console.log(reduction)
+
     return reductionsService.updateReduction(id, reductionId, reduction)
     .then(function () {
       return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
     })
   })
-  
-  var generateNewReductionFromRequest = function(requestBody) {
+
+  var generateNewReductionFromRequest = function (requestBody) {
     var reductionStartDate = new Date(requestBody.red_start_year, requestBody.red_start_month - 1, requestBody.red_start_day)
     var reductionEndDate = new Date(requestBody.red_end_year, requestBody.red_end_month - 1, requestBody.red_end_day)
 
