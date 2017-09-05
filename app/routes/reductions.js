@@ -74,7 +74,7 @@ module.exports = function (router) {
 
     var id = req.params.id
     var reductionId = req.body.reductionId
-    console.log(reductionId)
+
     if (!requestDataVerified(req.body)) {
       return res.redirect(302, '/' + organisationLevel + '/' + id + '/add-reduction?fail=true')
     }

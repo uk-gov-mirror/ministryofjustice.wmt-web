@@ -48,7 +48,6 @@ module.exports.getAddReductionsRefData = function (id, organisationLevel) {
 }
 
 module.exports.upsertReduction = function (id, reductionId, reduction) {
-  console.log(reduction)
   var reductionPromise
   if (reductionId) {
     reductionPromise = updateReduction(reductionId, id, reduction)
