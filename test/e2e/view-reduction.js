@@ -9,16 +9,16 @@ var reductionUrl
 
 describe('View adding a new reduction', () => {
   before(function () {
-    return dataHelper.getAnyExistingWorkloadOwnerIdWithReduction()
+    return dataHelper.getAnyExistingWorkloadOwnerIdWithActiveReduction()
       .then(function (results) {
         offenderManagerId = results.workloadOwnerId
         offenderManagerUrl = '/offender-manager/' + offenderManagerId + '/reductions'
         reductionId = results.reductionId
-        reductionUrl = '/offender-manager/' + offenderManagerId + '/add-reduction?reductionId=' + reductionId
+        reductionUrl = '/offender-manager/' + offenderManagerId + '/edit-reduction?reductionId=' + reductionId
       })
   })
 
-  describe('should navigate to the add reduction', () => {
+  describe('should navigate to the reduction', () => {
     it('with the correct breadcrumbs and heading title', () => {
       return browser.url(offenderManagerUrl)
         .waitForExist('.breadcrumbs')
