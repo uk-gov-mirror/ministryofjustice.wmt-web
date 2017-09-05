@@ -9,10 +9,12 @@
     {% set headerText='Reduction' %}
     {% set reductionText='Showing reduction for' %}
     {% set submitButtonText='Save changes' %}
+    {% set fromAction='/offender-manager/{{ linkId }}/edit-reduction' %}
   {% else %}
     {% set headerText='New reduction' %}
     {% set reductionText='Add a new reduction for' %}
     {% set submitButtonText='Add reduction' %}
+    {% set fromAction='/offender-manager/{{ linkId }}/add-reduction' %}    
   {% endif %}
 
   <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">{{ headerText }}</header>
@@ -23,7 +25,7 @@
 
   <p class="lede">{{ reductionText }}<span class="bold">{{ title }}</span></p>
   {% set first = true %}
-  <form action="/offender-manager/{{ linkId }}/add-reduction" method=POST id="reductionForm">
+  <form action="{{ formAction }}" method=POST id="reductionForm">
     <input type="hidden" name="reductionId" value="{{reduction.id}}"/>
     <div class="form-group" id="reduction_reason_selection">
       <label class="form-label-bold" for="select-box">Reason for reduction</label>

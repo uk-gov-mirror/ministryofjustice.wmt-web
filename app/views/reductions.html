@@ -44,7 +44,7 @@
                 <td headers="active_hours">{{ newReduction.hours }}</td>
                 <td headers="active_start_date">{{ newReduction.reductionStartDate }}</td>
                 <td headers="active_end_date">{{ newReduction.reductionEndDate }}</td>
-                <td><a href="/offender-manager/{{ linkId }}/add-reduction?reductionId={{ newReduction.id }}">View</a></td>
+                <td><a href="/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ newReduction.id }}">View</a></td>
             </tr>
             {% endif %}
             {% for active in activeReductions %}
@@ -53,7 +53,7 @@
                 <td headers="active_hours">{{ active.hours }}</td>
                 <td headers="active_start_date">{{ active.reductionStartDate }}</td>
                 <td headers="active_end_date">{{ active.reductionEndDate }}</td>
-                <td><a href="/offender-manager/{{ linkId }}/add-reduction?reductionId={{ active.id }}">View</a></td>
+                <td><a href="/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ active.id }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -81,7 +81,7 @@
                 <td headers="scheduled_hours">{{ scheduled.hours }}</td>
                 <td headers="scheduled_start_date">{{ scheduled.reductionStartDate }}</td>
                 <td headers="scheduled_end_date">{{ scheduled.reductionEndDate }}</td>                
-                <td><a href="/offender-manager/{{ linkId }}/add-reduction?reductionId={{ scheduled.id }}">View</a></td>
+                <td><a href="/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ scheduled.id }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -109,7 +109,7 @@
                 <td headers="archived_hours">{{ archived.hours }}</td>
                 <td headers="archived_start_date">{{ archived.reductionStartDate }}</td>
                 <td headers="archived_end_date">{{ archived.reductionEndDate }}</td>
-                <td><a href="/offender-manager/{{ linkId }}/add-reduction?reductionId={{ archived.id }}">View</a></td>
+                <td><a href="/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ archived.id }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
