@@ -1,9 +1,11 @@
 const addReduction = require('./data/insert-reduction')
+const updateReduction = require('./data/update-reduction')
 const getReductions = require('./data/get-reductions')
 const getReductionReasons = require('./data/get-reduction-reasons')
 const getContractedHoursForWorkloadOwner = require('./data/get-contracted-hours-for-workload-owner')
 const createWorkloadPointsRecalculationTask = require('./data/create-calculate-workload-points-task')
 const reductionsCalculator = require('./helpers/reduction-hours-calculator')
+const getReductionById = require('./data/get-reduction-by-id')
 const getBreadcrumbs = require('./get-breadcrumbs')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const reductionHelper = require('./helpers/reduction-helper')
@@ -45,12 +47,26 @@ module.exports.getAddReductionsRefData = function (id, organisationLevel) {
   })
 }
 
-module.exports.addReduction = function (id, newReduction) {
-  var addReductionPromise = addReduction(id, newReduction)
+module.exports.upsertReduction = function (id, reductionId, reduction) {
+  console.log(reduction)
+  var reductionPromise
+  if (reductionId) {
+    reductionPromise = updateReduction(reductionId, id, reduction)
+  } else {
+    reductionPromise = addReduction(id, reduction)
+  }
   var createRecalculationTaskPromise = createWorkloadPointsRecalculationTask(id)
-  return addReductionPromise.then(function (result) {
+  return reductionPromise.then(function (result) {
     return createRecalculationTaskPromise.then(function (result) {
       return result
     })
   })
+}
+
+module.exports.getReductionByReductionId = function (reductionId) {
+  var reduction = Promise.resolve(undefined)
+  if (reductionId) {
+    reduction = getReductionById(reductionId)
+  }
+  return reduction
 }

@@ -4,13 +4,17 @@ const dataHelper = require('../helpers/data/aggregated-data-helper')
 
 var offenderManagerId
 var offenderManagerUrl
+var reductionId
+var reductionUrl
 
 describe('View adding a new reduction', () => {
   before(function () {
-    return dataHelper.getAnyExistingWorkloadOwnerId()
+    return dataHelper.getAnyExistingWorkloadOwnerIdWithReduction()
       .then(function (results) {
-        offenderManagerId = results
+        offenderManagerId = results.workloadOwnerId
         offenderManagerUrl = '/offender-manager/' + offenderManagerId + '/reductions'
+        reductionId = results.reductionId
+        reductionUrl = '/offender-manager/' + offenderManagerId + '/add-reduction?reductionId=' + reductionId
       })
   })
 
@@ -94,6 +98,20 @@ describe('View adding a new reduction', () => {
         .getText('#archived_end_date')
         .then(function (text) {
           expect(text).to.equal('End date')
+        })
+    })
+
+    it('should be able to navigate to existing reduction screen', () => {
+      return browser.url(offenderManagerUrl)
+        .waitForExist('.breadcrumbs')
+        .waitForExist('.sln-subnav')
+        .waitForExist('.sln-page-subtitle')
+        .waitForExist('[href="' + reductionUrl + '"]')
+        .click('[href="' + reductionUrl + '"]')
+        .waitForExist('.heading-xlarge')
+        .getText('.heading-xlarge')
+        .then(function (text) {
+          expect(text).to.equal('Reduction')
         })
     })
   })
