@@ -2,22 +2,27 @@ const workloadPointsService = require('../services/workload-points-service.js')
 
 module.exports = function (router) {
   router.get('/admin/workload-points', function (req, res) {
-    return workloadPointsService.getWorkloadPoints().then(function (result) {
-      return res.render('workload-points', {
-        title: result.title,
-        subTitle: result.subTitle,
-        breadcrumbs: result.breadcrumbs,
-        wp: result.workloadPoints
+    var success = req.query.success
+    var successText = success ? 'You have successfully updated the workload points!' : null
+
+    return workloadPointsService.getWorkloadPoints()
+      .then(function (result) {
+        return res.render('workload-points', {
+          title: result.title,
+          subTitle: result.subTitle,
+          breadcrumbs: result.breadcrumbs,
+          wp: result.workloadPoints,
+          successText: successText
+        })
       })
-    })
   })
 
   router.post('/admin/workload-points', function (req, res, next) {
-    // var updatedWorkloadPoints = req.body
+    var updatedWorkloadPoints = req.body
 
-    // return updateWorkloadPoints(updatedWorkloadPoints).then(function () {
-      // TODO: Add in success message?
-    return res.redirect('/admin/workload-points')
-    // })
+    return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints)
+      .then(function () {
+        return res.redirect(302, '/admin/workload-points?success=true')
+      })
   })
 }
