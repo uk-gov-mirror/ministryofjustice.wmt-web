@@ -58,9 +58,11 @@ module.exports = function (router) {
               }
             ]
           })
-        } // else if
-      }) // then
-  }) // router
+        }
+      }).catch(function (error) {
+        next(error)
+      })
+  })
 
   router.get('/:organisationLevel/:id/caseload/csv', function (req, res, next) {
     var organisationLevel = req.params.organisationLevel
@@ -75,6 +77,8 @@ module.exports = function (router) {
       var exportCsv = getExportCsv(organisationLevel, result, tabs.CASELOAD)
       res.attachment(exportCsv.filename)
       return res.send(exportCsv.csv)
+    }).catch(function (error) {
+      next(error)
     })
   })
 }

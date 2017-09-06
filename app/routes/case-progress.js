@@ -21,6 +21,8 @@ module.exports = function (router) {
         subNav: getSubNav(id, organisationLevel, req.path),
         caseProgressList: result.caseProgressList
       })
+    }).catch(function (error) {
+      next(error)
     })
   })
 }
