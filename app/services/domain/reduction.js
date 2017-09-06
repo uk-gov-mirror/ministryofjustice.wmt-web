@@ -1,10 +1,11 @@
 class Reduction {
-  constructor (reasonForReductionId, hours, reductionStartDate, reductionEndDate, notes) {
+  constructor (reasonForReductionId, hours, reductionStartDate, reductionEndDate, notes, status) {
     this.reasonForReductionId = reasonForReductionId
     this.hours = hours
     this.reductionStartDate = reductionStartDate
     this.reductionEndDate = reductionEndDate
     this.notes = notes
+    this.status = status
   }
 }
 

@@ -2,6 +2,7 @@ const organisationUnitConstants = require('../constants/organisation-unit')
 const reductionsService = require('../services/reductions-service')
 const getSubNav = require('../services/get-sub-nav')
 const Reduction = require('../services/domain/reduction')
+const reductionStatusType = require('../constants/reduction-status-type')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/reductions', function (req, res, next) {
@@ -133,17 +134,65 @@ module.exports = function (router) {
     })
   })
 
+  router.post('/:organisationLevel/:id/update-reduction-status', function (req, res, next) {
+    var organisationLevel = req.params.organisationLevel
+
+    if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
+      throw new Error('Only available for offender manager')
+    }
+
+    var reductionStatus = req.body.status
+    var id = req.params.id
+    var reductionId = req.body.reductionId
+
+    if (!requestStatusVerified(reductionStatus)) {
+      return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?fail=true')
+    }
+
+    return reductionsService.updateReductionStatus(id, reductionId, reductionStatus)
+    .then(function () {
+      return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
+    })
+  })
+
   var generateNewReductionFromRequest = function (requestBody) {
     var reductionStartDate = new Date(requestBody.red_start_year, requestBody.red_start_month - 1, requestBody.red_start_day)
     var reductionEndDate = new Date(requestBody.red_end_year, requestBody.red_end_month - 1, requestBody.red_end_day)
+    var reductionStatus = setReductionStatus(reductionStartDate, reductionEndDate)
 
     return new Reduction(
-      requestBody.reasonForReductionId, requestBody.hours, reductionStartDate, reductionEndDate, requestBody.notes
+      requestBody.reasonForReductionId, requestBody.hours, reductionStartDate, reductionEndDate, requestBody.notes, reductionStatus
     )
   }
 
+  var setReductionStatus = function (reductionStartDate, reductionEndDate) {
+    var currentDate = new Date()
+    var status = reductionStatusType.ACTIVE
+    if ((reductionStartDate < currentDate) && (reductionEndDate > currentDate)) {
+      status = reductionStatusType.ACTIVE
+    } else if ((reductionStartDate > currentDate) && (reductionEndDate > currentDate)) {
+      status = reductionStatusType.SCHEDULED
+    } else if ((reductionStartDate < currentDate) && (reductionEndDate < currentDate)) {
+      status = reductionStatusType.ARCHIVED
+    }
+
+    return status
+  }
+
+  var requestStatusVerified = function (reductionStatus) {
+    if (reductionStatus !== reductionStatusType.ACTIVE &&
+        reductionStatus !== reductionStatusType.SCHEDULED &&
+        reductionStatus !== reductionStatusType.ARCHIVED &&
+        reductionStatus !== reductionStatusType.DELETED) {
+      console.log('reductionStatus: ' + reductionStatus)
+      return false
+    }
+
+    return true
+  }
+
   var requestDataVerified = function (requestBody) {
-    var result
+    // Check all fields are filled in
     if (requestBody.reasonForReductionId === '' || requestBody.reasonForReductionId === undefined ||
       requestBody.red_start_year === '' || requestBody.red_start_year === undefined ||
       requestBody.red_start_month === '' || requestBody.red_start_month === undefined ||
@@ -152,12 +201,16 @@ module.exports = function (router) {
       requestBody.red_end_month === '' || requestBody.red_end_month === undefined ||
       requestBody.red_end_day === '' || requestBody.red_end_day === undefined ||
       requestBody.hours === '' || requestBody.hours === undefined) {
-      result = false
-    } else {
-      result = true
+      return false
+    }
+    // Check if the end date is after the start date
+    var reductionStartDate = new Date(requestBody.red_start_year, requestBody.red_start_month - 1, requestBody.red_start_day)
+    var reductionEndDate = new Date(requestBody.red_end_year, requestBody.red_end_month - 1, requestBody.red_end_day)
+    if (reductionEndDate < reductionStartDate) {
+      return false
     }
 
-    return result
+    return true
   }
 
   var mapReductionToViewModel = function (reduction) {

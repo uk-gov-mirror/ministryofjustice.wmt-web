@@ -92,9 +92,30 @@
       <label class="form-label-bold" for="textarea">Additional notes</label>
       <textarea class="form-control form-control-3-4" name="notes" id="textarea" rows="5" >{{ reduction.notes }}</textarea>
     </div> 
-    {% include "includes/csrf-hidden-input.html"%} 
+    {% include "includes/csrf-hidden-input.html"%}
     <input class="button" type="submit" value="{{ submitButtonText }}">
   </form>
+  {% if reduction %}
+  <h2 class="heading-small">Other options</h2>
+  <form name="archiveReduction" method="POST" action="/offender-manager/{{ linkId }}/update-reduction-status">
+    <!-- Including the csrf-hidden-input.html hides the links -->
+    <input type="hidden"  name="_csrf"  value="{{ csrfToken }}">
+    <input type="hidden" name="reductionId" value="{{reduction.id}}">
+    <input type="hidden" name="status" value="ARCHIVED">
+  </form>
+  <form name="deleteReduction" method="POST" action="/offender-manager/{{ linkId }}/update-reduction-status">
+    <!-- Including the csrf-hidden-input.html hides the links -->
+    <input type="hidden"  name="_csrf"  value="{{ csrfToken }}">
+    <input type="hidden" name="reductionId" value="{{ reduction.id }}">
+    <input type="hidden" name="status" value="DELETED">
+  </form>
+  <div>
+  <ul>
+    <li><a  href="javascript:document.archiveReduction.submit()">Archive reduction</a></li>
+    <li><a  href="javascript:document.deleteReduction.submit()">Delete reduction</a></li>
+  </ul>
+  </div>
+  {% endif %}
 
 </main>
 {% endblock %} {% block body_end %}
