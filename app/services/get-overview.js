@@ -29,7 +29,10 @@ module.exports = function (id, organisationLevel) {
 var calculateValues = function (results) {
   if (results.length !== undefined) {
     results.forEach(function (result) {
-      result.capacityPercentage = (result.totalPoints / result.availablePoints) * 100
+      result.capacityPercentage = 0
+      if (result.availablePoints > 0) {
+        result.capacityPercentage = (result.totalPoints / result.availablePoints) * 100
+      }
       if (result.contractedHours === 0) {
         result.contractedHours = getContractedHours(result)
       }
