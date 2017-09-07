@@ -65,6 +65,34 @@ layout = {
         ticks: 'outside',
         title: '2016',
         titlefont: {size: 15},
+        range: ['2015-02-17', '2017-02-16'], 
+        rangeselector: {buttons: [
+        {
+          count: 1, 
+          label: '1 Month', 
+          step: 'month', 
+          stepmode: 'backward'
+        }, 
+        {
+          count: 6, 
+          label: '6 Months', 
+          step: 'month', 
+          stepmode: 'backward'
+        },
+        {
+          count: 12, 
+          label: '12 Months', 
+          step: 'month', 
+          stepmode: 'backward'
+        }, 
+        {
+          count: 18, 
+          label: '18 Months', 
+          step: 'month', 
+          stepmode: 'backward'
+        },
+        {step: 'all'}
+      ]}, 
         type: 'date',
         zeroline: false,
         zerolinewidth: 11
