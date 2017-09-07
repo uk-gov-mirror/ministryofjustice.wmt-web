@@ -3,8 +3,9 @@ const expect = require('chai').expect
 const insertReduction = require('../../../../app/services/data/insert-reduction')
 const Reduction = require('../../../../app/services/domain/reduction')
 const workloadCapacityHelper = require('../../../helpers/data/aggregated-data-helper')
-const updateReduction = require('../../../../app/services/data/update-reduction')
+const updateReductionStatus = require('../../../../app/services/data/update-reduction-status')
 const reductionStatusType = require('../../../../app/constants/reduction-status-type')
+const getReductionById = require('../../../../app/services/data/get-reduction-by-id')
 
 var reductionResult = {
   table: 'reductions',
@@ -12,11 +13,10 @@ var reductionResult = {
 }
 
 var testReduction = new Reduction(1, 5, new Date(), new Date(), 'Test Note', reductionStatusType.ACTIVE)
-const updatedReductionNote = 'New test note'
 var workloadOwnerId
 var addedReductionId
 
-describe('/services/data/update-reduction', function () {
+describe('/services/data/update-reduction-status', function () {
   before(function () {
     return workloadCapacityHelper.getAnyExistingWorkloadOwnerId()
       .then(function (id) {
@@ -28,26 +28,25 @@ describe('/services/data/update-reduction', function () {
             return insertReduction(workloadOwnerId, testReduction)
               .then(function (reductionId) {
                 addedReductionId = reductionId
+                reductionResult.id = addedReductionId[0]
               })
           })
       })
   })
 
-  it('should update a reduction and return an id ', function () {
-    var updatedReduction = new Reduction(testReduction.reasonForReductionId,
-      testReduction.hours,
-      testReduction.reductionStartDate,
-      testReduction.reductionEndDate,
-      testReduction.reasonForReductionId,
-      updatedReductionNote,
-      testReduction.status)
-
-    return updateReduction(addedReductionId, workloadOwnerId, updatedReduction)
+  it('should update a reduction status and return an id ', function () {
+    return updateReductionStatus(addedReductionId, reductionStatusType.ARCHIVED)
       .then(function (result) {
-        // Store the id so that we can delete it after the test is complete
-        reductionResult.id = result
         expect(result[0]).to.be.a('number')
         expect(result).to.eql(addedReductionId)
+      })
+  })
+
+  it('should get the updated reduction status', function () {
+    return getReductionById(addedReductionId)
+      .then(function (result) {
+        expect(result.id).to.eql(addedReductionId[0])
+        expect(result.status).to.be.equal(reductionStatusType.ARCHIVED)
       })
   })
 

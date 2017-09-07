@@ -28,6 +28,8 @@ module.exports = function (router) {
         archivedReductions: result.archivedReductions,
         successText: successText
       })
+    }).catch(function (error) {
+      next(error)
     })
   })
 
@@ -44,17 +46,19 @@ module.exports = function (router) {
     var getAddReductionsReferenceDataPromise = reductionsService.getAddReductionsRefData(id, organisationLevel)
 
     return getAddReductionsReferenceDataPromise
-    .then(function (result) {
-      return res.render('add-reduction', {
-        breadcrumbs: result.breadcrumbs,
-        linkId: id,
-        title: result.title,
-        subTitle: result.subTitle,
-        subNav: getSubNav(id, organisationLevel, req.path),
-        referenceData: result.referenceData,
-        failureText: failureText
+      .then(function (result) {
+        return res.render('add-reduction', {
+          breadcrumbs: result.breadcrumbs,
+          linkId: id,
+          title: result.title,
+          subTitle: result.subTitle,
+          subNav: getSubNav(id, organisationLevel, req.path),
+          referenceData: result.referenceData,
+          failureText: failureText
+        })
+      }).catch(function (error) {
+        next(error)
       })
-    })
   })
 
   router.get('/:organisationLevel/:id/edit-reduction', function (req, res, next) {
@@ -70,24 +74,26 @@ module.exports = function (router) {
     var failureText = fail ? 'Something went wrong. Please try again.' : null
 
     reductionsService.getAddReductionsRefData(id, organisationLevel)
-    .then(function (result) {
-      return reductionsService.getReductionByReductionId(reductionId)
-      .then(function (reduction) {
-        if (reduction !== undefined && reduction.workloadOwnerId !== id) {
-          reduction = undefined
-        }
-        return res.render('add-reduction', {
-          breadcrumbs: result.breadcrumbs,
-          linkId: id,
-          title: result.title,
-          subTitle: result.subTitle,
-          subNav: getSubNav(id, organisationLevel, req.path),
-          referenceData: result.referenceData,
-          failureText: failureText,
-          reduction: mapReductionToViewModel(reduction)
-        })
+      .then(function (result) {
+        return reductionsService.getReductionByReductionId(reductionId)
+          .then(function (reduction) {
+            if (reduction !== undefined && reduction.workloadOwnerId !== id) {
+              reduction = undefined
+            }
+            return res.render('add-reduction', {
+              breadcrumbs: result.breadcrumbs,
+              linkId: id,
+              title: result.title,
+              subTitle: result.subTitle,
+              subNav: getSubNav(id, organisationLevel, req.path),
+              referenceData: result.referenceData,
+              failureText: failureText,
+              reduction: mapReductionToViewModel(reduction)
+            })
+          }).catch(function (error) {
+            next(error)
+          })
       })
-    })
   })
 
   router.post('/:organisationLevel/:id/add-reduction', function (req, res, next) {
@@ -109,6 +115,8 @@ module.exports = function (router) {
 
     return addReductionsPromise.then(function () {
       return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
+    }).catch(function (error) {
+      next(error)
     })
   })
 
@@ -129,9 +137,11 @@ module.exports = function (router) {
     var reduction = generateNewReductionFromRequest(req.body)
 
     return reductionsService.updateReduction(id, reductionId, reduction)
-    .then(function () {
-      return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
-    })
+      .then(function () {
+        return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
+      }).catch(function (error) {
+        next(error)
+      })
   })
 
   router.post('/:organisationLevel/:id/update-reduction-status', function (req, res, next) {
@@ -150,9 +160,11 @@ module.exports = function (router) {
     }
 
     return reductionsService.updateReductionStatus(id, reductionId, reductionStatus)
-    .then(function () {
-      return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
-    })
+      .then(function () {
+        return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
+      }).catch(function (error) {
+        next(error)
+      })
   })
 
   var generateNewReductionFromRequest = function (requestBody) {
@@ -180,18 +192,24 @@ module.exports = function (router) {
   }
 
   var requestStatusVerified = function (reductionStatus) {
-    if (reductionStatus !== reductionStatusType.ACTIVE &&
-        reductionStatus !== reductionStatusType.SCHEDULED &&
-        reductionStatus !== reductionStatusType.ARCHIVED &&
-        reductionStatus !== reductionStatusType.DELETED) {
-      console.log('reductionStatus: ' + reductionStatus)
-      return false
+    var result = true
+
+    var status = [
+      reductionStatusType.ACTIVE,
+      reductionStatusType.SCHEDULED,
+      reductionStatusType.ARCHIVED,
+      reductionStatusType.DELETED
+    ]
+
+    if (!status.includes(reductionStatus)) {
+      result = false
     }
 
-    return true
+    return result
   }
 
   var requestDataVerified = function (requestBody) {
+    var result = true
     // Check all fields are filled in
     if (requestBody.reasonForReductionId === '' || requestBody.reasonForReductionId === undefined ||
       requestBody.red_start_year === '' || requestBody.red_start_year === undefined ||
@@ -201,16 +219,17 @@ module.exports = function (router) {
       requestBody.red_end_month === '' || requestBody.red_end_month === undefined ||
       requestBody.red_end_day === '' || requestBody.red_end_day === undefined ||
       requestBody.hours === '' || requestBody.hours === undefined) {
-      return false
-    }
-    // Check if the end date is after the start date
-    var reductionStartDate = new Date(requestBody.red_start_year, requestBody.red_start_month - 1, requestBody.red_start_day)
-    var reductionEndDate = new Date(requestBody.red_end_year, requestBody.red_end_month - 1, requestBody.red_end_day)
-    if (reductionEndDate < reductionStartDate) {
-      return false
+      result = false
+    } else {
+      // Check if the end date is after the start date
+      var reductionStartDate = new Date(requestBody.red_start_year, requestBody.red_start_month - 1, requestBody.red_start_day)
+      var reductionEndDate = new Date(requestBody.red_end_year, requestBody.red_end_month - 1, requestBody.red_end_day)
+      if (reductionEndDate < reductionStartDate) {
+        result = false
+      }
     }
 
-    return true
+    return result
   }
 
   var mapReductionToViewModel = function (reduction) {

@@ -69,7 +69,7 @@ module.exports.updateReduction = function (id, reductionId, reduction) {
 }
 
 module.exports.updateReductionStatus = function (id, reductionId, reductionStatus) {
-  return updateReductionStatus(reductionId, id, reductionStatus)
+  return updateReductionStatus(reductionId, reductionStatus)
   .then(function (result) {
     return createWorkloadPointsRecalculationTask(id)
     .then(function (result) {

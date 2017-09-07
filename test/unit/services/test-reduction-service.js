@@ -123,11 +123,11 @@ describe('services/reductions-service', function () {
     it('should update reduction status when reduction Id given', function () {
       var newReductonStatus = reductionStatusType.ARCHIVED
       createCalculateWorkloadTaskStub.resolves(1)
-      updateReductionStatusStub.withArgs(existingReductionId, workloadOwnerId, newReductonStatus).resolves(existingReductionId)
+      updateReductionStatusStub.withArgs(existingReductionId, newReductonStatus).resolves(existingReductionId)
       return reductionService.updateReductionStatus(workloadOwnerId, existingReductionId, newReductonStatus)
         .then(function (result) {
           expect(createCalculateWorkloadTaskStub.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
-          expect(updateReductionStatusStub.calledWith(existingReductionId, workloadOwnerId, newReductonStatus)).to.be.true //eslint-disable-line
+          expect(updateReductionStatusStub.calledWith(existingReductionId, newReductonStatus)).to.be.true //eslint-disable-line
           expect(result).to.equal(1)
         })
     })
