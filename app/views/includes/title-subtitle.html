@@ -2,5 +2,9 @@
     <span class="sln-page-subtitle heading-secondary">
         {{ subTitle }}
     </span>
+{% if organisationLevel === 'hmpps' %}
+    {{ title}}
+{% else %}
     {{ title | title}}
+{% endif %}
 </h1>
