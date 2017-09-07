@@ -5,6 +5,37 @@
 
   var chosenReduction
 
+  var setHoursAndEndDateToReadOnly = function () {
+    var chosenReductionIndex = document.getElementById("select-box").selectedIndex
+    
+    if(chosenReductionIndex){
+      // Dummy option in dropdown means array is offset by one.
+      chosenReduction = refData[chosenReductionIndex - 1]
+        
+      if (chosenReduction.allowancePercentage !== null) {
+        document.getElementById('hours').setAttribute('readonly', true)
+      } else {
+        document.getElementById('hours').removeAttribute('readonly')
+      }
+        
+      if (chosenReduction.maxAllowancePercentage !== null) {
+        document.getElementById('hours').setAttribute('max', chosenReduction.maxAllowanceHours)
+      } else {
+        document.getElementById('hours').removeAttribute('max')
+      }
+
+      if (chosenReduction.monthsToExpiry !== null) {
+        document.getElementById('end-day').setAttribute('readonly', true)
+        document.getElementById('end-month').setAttribute('readonly', true)
+        document.getElementById('end-year').setAttribute('readonly', true)
+      } else {
+        document.getElementById('end-day').removeAttribute('readonly')
+        document.getElementById('end-month').removeAttribute('readonly')
+        document.getElementById('end-year').removeAttribute('readonly')
+      }    
+    }
+  }
+
   var populateHours = function () {
 
     var value = ''
@@ -64,7 +95,7 @@
           readonly = true
         }
       }
-
+      
       if (readonly){
         document.getElementById('end-day').setAttribute('readonly', readonly)
         document.getElementById('end-month').setAttribute('readonly', readonly)
@@ -87,6 +118,5 @@
   }
 
   window.onload = function () {
-    populateHours()
-    calculateExpiry()
+    setHoursAndEndDateToReadOnly()
   }
