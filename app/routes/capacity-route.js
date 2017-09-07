@@ -23,6 +23,8 @@ module.exports = function (router) {
         breadcrumbs: result.breadcrumbs,
         capacity: result.capacityTable
       })
+    }).catch(function (error) {
+      next(error)
     })
   })
 }

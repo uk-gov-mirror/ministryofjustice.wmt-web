@@ -27,6 +27,8 @@ module.exports = function (router) {
         archivedReductions: result.archivedReductions,
         successText: successText
       })
+    }).catch(function (error) {
+      next(error)
     })
   })
 
@@ -53,6 +55,8 @@ module.exports = function (router) {
         referenceData: result.referenceData,
         failureText: failureText
       })
+    }).catch(function (error) {
+      next(error)
     })
   })
 
@@ -86,6 +90,8 @@ module.exports = function (router) {
           reduction: mapReductionToViewModel(reduction)
         })
       })
+    }).catch(function (error) {
+      next(error)
     })
   })
 
@@ -108,6 +114,8 @@ module.exports = function (router) {
 
     return addReductionsPromise.then(function () {
       return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
+    }).catch(function (error) {
+      next(error)
     })
   })
 
@@ -130,6 +138,8 @@ module.exports = function (router) {
     return reductionsService.updateReduction(id, reductionId, reduction)
     .then(function () {
       return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
+    }).catch(function (error) {
+      next(error)
     })
   })
 
