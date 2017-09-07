@@ -89,8 +89,7 @@ layout = {
           label: '18 Months',
           step: 'month',
           stepmode: 'backward'
-        },
-        {step: 'all'}
+        }
       ]},
         type: 'date',
         zeroline: false,
