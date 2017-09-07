@@ -335,7 +335,7 @@ module.exports.getAnyExistingWorkloadOwnerIdWithActiveReduction = function () {
   return knex('workload_owner')
       .join('reductions', 'workload_owner.id', 'workload_owner_id')
       .where('effective_to', '>', knex.raw('GETDATE()'))
-      .andWhereNot('status', 'DELETED' )
+      .andWhereNot('status', 'DELETED')
       .first('workload_owner.id AS workloadOwnerId',
        'reductions.id AS reductionId')
 }
