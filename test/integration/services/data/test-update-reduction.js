@@ -4,13 +4,14 @@ const insertReduction = require('../../../../app/services/data/insert-reduction'
 const Reduction = require('../../../../app/services/domain/reduction')
 const workloadCapacityHelper = require('../../../helpers/data/aggregated-data-helper')
 const updateReduction = require('../../../../app/services/data/update-reduction')
+const reductionStatusType = require('../../../../app/constants/reduction-status-type')
 
 var reductionResult = {
   table: 'reductions',
   id: 0
 }
 
-var testReduction = new Reduction(1, 5, new Date(), new Date(), 'Test Note')
+var testReduction = new Reduction(1, 5, new Date(), new Date(), 'Test Note', reductionStatusType.ACTIVE)
 const updatedReductionNote = 'New test note'
 var workloadOwnerId
 var addedReductionId
@@ -34,11 +35,12 @@ describe('/services/data/update-reduction', function () {
 
   it('should update a reduction and return an id ', function () {
     var updatedReduction = new Reduction(testReduction.reasonForReductionId,
-        testReduction.hours,
-        testReduction.reductionStartDate,
-        testReduction.reductionEndDate,
-        testReduction.reasonForReductionId,
-        updatedReductionNote)
+      testReduction.hours,
+      testReduction.reductionStartDate,
+      testReduction.reductionEndDate,
+      testReduction.reasonForReductionId,
+      updatedReductionNote,
+      testReduction.status)
 
     return updateReduction(addedReductionId, workloadOwnerId, updatedReduction)
       .then(function (result) {

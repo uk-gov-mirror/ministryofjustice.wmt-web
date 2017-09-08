@@ -36,24 +36,20 @@ describe('View adding a new reduction', () => {
     })
   })
 
-  describe('should navigate to the edit reduction screen and be editable', () => {
-    it('with the correct breadcrumbs and heading title', () => {
+  describe('Clicking on Archive reduction link', function () {
+    it('should post the reduction for a ARCHIVE status', function () {
       return browser.url(reductionUrl)
-        .waitForExist('.breadcrumbs')
-        .waitForExist('.heading-xlarge')
-        .getText('.heading-xlarge')
+        .getAttribute('=Archive reduction', 'href')
         .then(function (text) {
-          expect(text).to.equal('Reduction')
-          browser.setValue('#reductionType', 'Reduction 1')
-          browser.setValue('#hours', '10')
-          browser.setValue('#red_start_day', '1')
-          browser.setValue('#red_start_month', '2')
-          browser.setValue('#red_start_year', '2017')
-          browser.setValue('#red_start_day', '1')
-          browser.setValue('#red_start_month', '2')
-          browser.setValue('#red_start_year', '2018')
-          browser.setValue('#notes', 'New note')
-          browser.submitForm('#reductionForm')
+          expect(text).to.equal('javascript:document.archiveReduction.submit()')
+        })
+    })
+
+    it('should post the reduction for a DELETE status', function () {
+      return browser.url(reductionUrl)
+        .getAttribute('=Delete reduction', 'href')
+        .then(function (text) {
+          expect(text).to.equal('javascript:document.deleteReduction.submit()')
         })
     })
   })

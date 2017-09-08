@@ -4,13 +4,14 @@ const getReductionById = require('../../../../app/services/data/get-reduction-by
 const insertReduction = require('../../../../app/services/data/insert-reduction')
 const Reduction = require('../../../../app/services/domain/reduction')
 const workloadCapacityHelper = require('../../../helpers/data/aggregated-data-helper')
+const reductionStatusType = require('../../../../app/constants/reduction-status-type')
 
 var reductionResult = {
   table: 'reductions',
   id: 0
 }
 
-var testReduction = new Reduction(1, 5, new Date(), new Date(), 'Test Note')
+var testReduction = new Reduction(1, 5, new Date(), new Date(), 'Test Note', reductionStatusType.ACTIVE)
 var workloadOwnerId
 var addedReductionId
 

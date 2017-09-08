@@ -15,7 +15,8 @@ module.exports = function (id) {
             'reduction_reason_id AS reductionReasonId',
             'effective_from AS reductionStartDate',
             'effective_to AS reductionEndDate',
-            'notes')
+            'notes',
+            'status')
     .then(function (reduction) {
       return reduction[0]
     })

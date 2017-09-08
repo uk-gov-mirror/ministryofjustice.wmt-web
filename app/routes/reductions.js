@@ -2,6 +2,7 @@ const organisationUnitConstants = require('../constants/organisation-unit')
 const reductionsService = require('../services/reductions-service')
 const getSubNav = require('../services/get-sub-nav')
 const Reduction = require('../services/domain/reduction')
+const reductionStatusType = require('../constants/reduction-status-type')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/reductions', function (req, res, next) {
@@ -45,19 +46,19 @@ module.exports = function (router) {
     var getAddReductionsReferenceDataPromise = reductionsService.getAddReductionsRefData(id, organisationLevel)
 
     return getAddReductionsReferenceDataPromise
-    .then(function (result) {
-      return res.render('add-reduction', {
-        breadcrumbs: result.breadcrumbs,
-        linkId: id,
-        title: result.title,
-        subTitle: result.subTitle,
-        subNav: getSubNav(id, organisationLevel, req.path),
-        referenceData: result.referenceData,
-        failureText: failureText
+      .then(function (result) {
+        return res.render('add-reduction', {
+          breadcrumbs: result.breadcrumbs,
+          linkId: id,
+          title: result.title,
+          subTitle: result.subTitle,
+          subNav: getSubNav(id, organisationLevel, req.path),
+          referenceData: result.referenceData,
+          failureText: failureText
+        })
+      }).catch(function (error) {
+        next(error)
       })
-    }).catch(function (error) {
-      next(error)
-    })
   })
 
   router.get('/:organisationLevel/:id/edit-reduction', function (req, res, next) {
@@ -73,26 +74,26 @@ module.exports = function (router) {
     var failureText = fail ? 'Something went wrong. Please try again.' : null
 
     reductionsService.getAddReductionsRefData(id, organisationLevel)
-    .then(function (result) {
-      return reductionsService.getReductionByReductionId(reductionId)
-      .then(function (reduction) {
-        if (reduction !== undefined && reduction.workloadOwnerId !== id) {
-          reduction = undefined
-        }
-        return res.render('add-reduction', {
-          breadcrumbs: result.breadcrumbs,
-          linkId: id,
-          title: result.title,
-          subTitle: result.subTitle,
-          subNav: getSubNav(id, organisationLevel, req.path),
-          referenceData: result.referenceData,
-          failureText: failureText,
-          reduction: mapReductionToViewModel(reduction)
-        })
+      .then(function (result) {
+        return reductionsService.getReductionByReductionId(reductionId)
+          .then(function (reduction) {
+            if (reduction !== undefined && reduction.workloadOwnerId !== id) {
+              reduction = undefined
+            }
+            return res.render('add-reduction', {
+              breadcrumbs: result.breadcrumbs,
+              linkId: id,
+              title: result.title,
+              subTitle: result.subTitle,
+              subNav: getSubNav(id, organisationLevel, req.path),
+              referenceData: result.referenceData,
+              failureText: failureText,
+              reduction: mapReductionToViewModel(reduction)
+            })
+          }).catch(function (error) {
+            next(error)
+          })
       })
-    }).catch(function (error) {
-      next(error)
-    })
   })
 
   router.post('/:organisationLevel/:id/add-reduction', function (req, res, next) {
@@ -136,24 +137,80 @@ module.exports = function (router) {
     var reduction = generateNewReductionFromRequest(req.body)
 
     return reductionsService.updateReduction(id, reductionId, reduction)
-    .then(function () {
-      return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
-    }).catch(function (error) {
-      next(error)
-    })
+      .then(function () {
+        return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
+      }).catch(function (error) {
+        next(error)
+      })
+  })
+
+  router.post('/:organisationLevel/:id/update-reduction-status', function (req, res, next) {
+    var organisationLevel = req.params.organisationLevel
+
+    if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
+      throw new Error('Only available for offender manager')
+    }
+
+    var reductionStatus = req.body.status
+    var id = req.params.id
+    var reductionId = req.body.reductionId
+
+    if (!requestStatusVerified(reductionStatus)) {
+      return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?fail=true')
+    }
+
+    return reductionsService.updateReductionStatus(id, reductionId, reductionStatus)
+      .then(function () {
+        return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
+      }).catch(function (error) {
+        next(error)
+      })
   })
 
   var generateNewReductionFromRequest = function (requestBody) {
     var reductionStartDate = new Date(requestBody.red_start_year, requestBody.red_start_month - 1, requestBody.red_start_day)
     var reductionEndDate = new Date(requestBody.red_end_year, requestBody.red_end_month - 1, requestBody.red_end_day)
+    var reductionStatus = setReductionStatus(reductionStartDate, reductionEndDate)
 
     return new Reduction(
-      requestBody.reasonForReductionId, requestBody.hours, reductionStartDate, reductionEndDate, requestBody.notes
+      requestBody.reasonForReductionId, requestBody.hours, reductionStartDate, reductionEndDate, requestBody.notes, reductionStatus
     )
   }
 
+  var setReductionStatus = function (reductionStartDate, reductionEndDate) {
+    var currentDate = new Date()
+    var status = reductionStatusType.ACTIVE
+    if ((reductionStartDate < currentDate) && (reductionEndDate > currentDate)) {
+      status = reductionStatusType.ACTIVE
+    } else if ((reductionStartDate > currentDate) && (reductionEndDate > currentDate)) {
+      status = reductionStatusType.SCHEDULED
+    } else if ((reductionStartDate < currentDate) && (reductionEndDate < currentDate)) {
+      status = reductionStatusType.ARCHIVED
+    }
+
+    return status
+  }
+
+  var requestStatusVerified = function (reductionStatus) {
+    var result = true
+
+    var status = [
+      reductionStatusType.ACTIVE,
+      reductionStatusType.SCHEDULED,
+      reductionStatusType.ARCHIVED,
+      reductionStatusType.DELETED
+    ]
+
+    if (!status.includes(reductionStatus)) {
+      result = false
+    }
+
+    return result
+  }
+
   var requestDataVerified = function (requestBody) {
-    var result
+    var result = true
+    // Check all fields are filled in
     if (requestBody.reasonForReductionId === '' || requestBody.reasonForReductionId === undefined ||
       requestBody.red_start_year === '' || requestBody.red_start_year === undefined ||
       requestBody.red_start_month === '' || requestBody.red_start_month === undefined ||
@@ -164,7 +221,12 @@ module.exports = function (router) {
       requestBody.hours === '' || requestBody.hours === undefined) {
       result = false
     } else {
-      result = true
+      // Check if the end date is after the start date
+      var reductionStartDate = new Date(requestBody.red_start_year, requestBody.red_start_month - 1, requestBody.red_start_day)
+      var reductionEndDate = new Date(requestBody.red_end_year, requestBody.red_end_month - 1, requestBody.red_end_day)
+      if (reductionEndDate < reductionStartDate) {
+        result = false
+      }
     }
 
     return result
