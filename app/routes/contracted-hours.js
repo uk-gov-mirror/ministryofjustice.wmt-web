@@ -22,6 +22,8 @@ module.exports = function (router) {
         woId: id,
         hoursUpdatedSuccess: req.query.hoursUpdatedSuccess
       })
+    }).catch(function (error) {
+      next(error)
     })
   })
 
@@ -37,6 +39,8 @@ module.exports = function (router) {
     return contractedHoursService.updateContractedHours(id, organisationLevel, updatedHours)
     .then(function () {
       return res.redirect('/offender-manager/' + id + '/contracted-hours?hoursUpdatedSuccess=true')
+    }).catch(function (error) {
+      next(error)
     })
   })
 }
