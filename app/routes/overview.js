@@ -37,6 +37,8 @@ module.exports = function (router) {
         subNav: getSubNav(id, organisationLevel, req.path),
         overviewDetails: result.overviewDetails
       })
+    }).catch(function (error) {
+      next(error)
     })
   })
 
@@ -51,6 +53,8 @@ module.exports = function (router) {
       var exportCsv = getExportCsv(organisationLevel, result, tabs.OVERVIEW)
       res.attachment(exportCsv.filename)
       res.send(exportCsv.csv)
+    }).catch(function (error) {
+      next(error)
     })
   })
 }

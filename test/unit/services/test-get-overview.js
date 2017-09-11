@@ -25,6 +25,24 @@ const ORGANISATION_OVERVIEWS = [
   Object.assign({}, OVERVIEW, {capacityPercentage: 80}), Object.assign({}, OVERVIEW, {capacityPercentage: 80})
 ]
 
+var ZERO_AVAILABLE_POINTS_OVERVIEW = {
+  grade: 'PO',
+  teamId: '1',
+  teamName: 'Medway',
+  availablePoints: 0,
+  totalPoints: 40,
+  cases: '2',
+  hours: '3',
+  reduction: '4',
+  contractedHours: 37,
+  defaultContractedHoursPo: 3,
+  defaultContractedHoursPso: 0
+}
+
+const ZERO_AVAILABLE_POINTS_OVERVIEWS = [
+  Object.assign({}, ZERO_AVAILABLE_POINTS_OVERVIEW, {capacity: 0})
+]
+
 var expectedOverview = Object.assign({}, OVERVIEW, {capacity: 80})
 
 var id = 1
@@ -113,6 +131,17 @@ describe('services/get-overview', function () {
       assert(!getIndividualOverview.called)
       assert(getOrganisationOverview.called)
       expect(result.overviewDetails).to.eql(ORGANISATION_OVERVIEWS)
+    })
+  })
+
+  it('should call get-organisation-overview and return a results object with zero capacity if available points is zero', function () {
+    var orgName = orgUnitConstant.REGION.name
+    getOrganisationOverview.withArgs(id, orgName).resolves(ZERO_AVAILABLE_POINTS_OVERVIEWS)
+
+    return getOverview(id, orgName).then(function (result) {
+      assert(!getIndividualOverview.called)
+      assert(getOrganisationOverview.called)
+      expect(result.overviewDetails).to.eql(ZERO_AVAILABLE_POINTS_OVERVIEWS)
     })
   })
 })

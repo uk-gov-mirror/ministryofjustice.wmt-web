@@ -10,6 +10,10 @@
 
 {% include "includes/title-subtitle.html" %}
 
+{% if successText %}
+<div class="message message--success">{{ successText }}</div>
+{% endif %}
+
 <p>Workload points are set here and are used to calculate capacity points for all Offender Managers throughout the Workload Management Tool.</p>
 
 

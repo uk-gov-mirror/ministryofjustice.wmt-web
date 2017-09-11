@@ -357,6 +357,14 @@ module.exports.getWorkloadReportEffectiveFromDate = function () {
       .orderBy('effective_from', 'desc')
 }
 
+module.exports.getAnyExistingWorkloadOwnerIdWithActiveReduction = function () {
+  return knex('workload_owner')
+      .join('reductions', 'workload_owner.id', 'workload_owner_id')
+      .where('effective_to', '>', knex.raw('GETDATE()'))
+      .first('workload_owner.id AS workloadOwnerId',
+       'reductions.id AS reductionId')
+}
+
 module.exports.generateNonExistantWorkloadOwnerId = function () {
   return knex('workload_owner')
   .max('id AS maxId')
