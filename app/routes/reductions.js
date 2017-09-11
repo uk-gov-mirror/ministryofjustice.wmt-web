@@ -8,17 +8,8 @@ module.exports = function (router) {
   router.get('/:organisationLevel/:id/reductions', function (req, res, next) {
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
-    var successText = null
 
-    if (req.query.success) {
-      successText = 'You have successfully added a new reduction!'
-    } else if (req.query.edited) {
-      successText = 'You have successfully updated the reduction!'
-    } else if (req.query.archived) {
-      successText = 'You have successfully archived the reduction!'
-    } else if (req.query.deleted) {
-      successText = 'You have successfully deleted the reduction!'
-    }
+    var successText = getStatusText(req)
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -182,6 +173,20 @@ module.exports = function (router) {
         next(error)
       })
   })
+
+  var getStatusText = function (request) {
+    var successText = null
+    if (request.query.success) {
+      successText = 'You have successfully added a new reduction!'
+    } else if (request.query.edited) {
+      successText = 'You have successfully updated the reduction!'
+    } else if (request.query.archived) {
+      successText = 'You have successfully archived the reduction!'
+    } else if (request.query.deleted) {
+      successText = 'You have successfully deleted the reduction!'
+    }
+    return successText
+  }
 
   var generateNewReductionFromRequest = function (requestBody) {
     var reductionStartDate = new Date(requestBody.red_start_year, requestBody.red_start_month - 1, requestBody.red_start_day)
