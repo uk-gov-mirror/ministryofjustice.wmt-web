@@ -8,8 +8,8 @@ module.exports = function (router) {
   router.get('/:organisationLevel/:id/reductions', function (req, res, next) {
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
-    var success = req.query.success
-    var successText = success ? 'You have successfully added a new reduction!' : null
+
+    var successText = getStatusText(req)
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -138,7 +138,7 @@ module.exports = function (router) {
 
     return reductionsService.updateReduction(id, reductionId, reduction)
       .then(function () {
-        return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
+        return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?edited=true')
       }).catch(function (error) {
         next(error)
       })
@@ -159,13 +159,34 @@ module.exports = function (router) {
       return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?fail=true')
     }
 
+    var successType
+    if (reductionStatus === reductionStatusType.ARCHIVED) {
+      successType = '?archived=true'
+    } else if (reductionStatus === reductionStatusType.DELETED) {
+      successType = '?deleted=true'
+    }
+
     return reductionsService.updateReductionStatus(id, reductionId, reductionStatus)
       .then(function () {
-        return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
+        return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions' + successType)
       }).catch(function (error) {
         next(error)
       })
   })
+
+  var getStatusText = function (request) {
+    var successText = null
+    if (request.query.success) {
+      successText = 'You have successfully added a new reduction!'
+    } else if (request.query.edited) {
+      successText = 'You have successfully updated the reduction!'
+    } else if (request.query.archived) {
+      successText = 'You have successfully archived the reduction!'
+    } else if (request.query.deleted) {
+      successText = 'You have successfully deleted the reduction!'
+    }
+    return successText
+  }
 
   var generateNewReductionFromRequest = function (requestBody) {
     var reductionStartDate = new Date(requestBody.red_start_year, requestBody.red_start_month - 1, requestBody.red_start_day)

@@ -9,6 +9,7 @@ const ADD_REDUCTION_PAGE_URL = '/offender-manager/1/add-reduction'
 const ADD_REDUCTION_POST_URL = '/offender-manager/1/add-reduction'
 const EDIT_REDUCTION_PAGE_URL = '/offender-manager/1/edit-reduction'
 const EDIT_REDUCTION_POST_URL = '/offender-manager/1/edit-reduction'
+const UPDATE_REDUCTION_STATUS_POST_URL = '/offender-manager/1/update-reduction-status'
 
 const addReduction = {
   title: 'Title',
@@ -48,6 +49,33 @@ const existingReduction = {
   effective_to: new Date(2000, 9, 1)
 }
 
+const succuessDataToPost = {
+  id: undefined,
+  reasonForReductionId: 1,
+  hours: 5,
+  red_start_year: '2018',
+  red_start_month: '1',
+  red_start_day: '1',
+  red_end_year: '2018',
+  red_end_month: '7',
+  red_end_day: '1',
+  notes: 'This is a test note',
+  status: 'SCHEDULED'
+}
+
+const failureDataToPost = {
+  reasonForReductionId: 1,
+  hours: 5,
+  red_start_year: '',
+  red_start_month: '',
+  red_start_day: '',
+  red_end_year: '',
+  red_end_month: '',
+  red_end_day: '',
+  notes: 'This is a test note',
+  status: 'SCHEDULED'
+}
+
 var app
 var route
 var reductionsService
@@ -60,6 +88,7 @@ beforeEach(function () {
   reductionsService.getAddReductionsRefData = sinon.stub()
   reductionsService.addReduction = sinon.stub()
   reductionsService.updateReduction = sinon.stub()
+  reductionsService.updateReductionStatus = sinon.stub()
   reductionsService.getReductionByReductionId = sinon.stub()
   route = proxyquire('../../../app/routes/reductions', {
     '../services/reductions-service': reductionsService,
@@ -101,51 +130,21 @@ describe('reductions route', function () {
       reductionsService.addReduction.resolves(getReductionsSuccessTextResult)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
-        .send({'id': undefined,
-          'reasonForReductionId': 1,
-          'hours': 5,
-          'red_start_year': '2018',
-          'red_start_month': '1',
-          'red_start_day': '1',
-          'red_end_year': '2018',
-          'red_end_month': '7',
-          'red_end_day': '1',
-          'notes': 'This is a test note',
-          'status': 'SCHEDULED'})
+        .send(succuessDataToPost)
         .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?success=true')
     })
     it('should post the correct data and respond with 200 for existing reduction', function () {
       reductionsService.addReduction.resolves(getReductionsSuccessTextResult)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
-        .send({'id': 1,
-          'reasonForReductionId': 1,
-          'hours': 5,
-          'red_start_year': '2018',
-          'red_start_month': '1',
-          'red_start_day': '1',
-          'red_end_year': '2018',
-          'red_end_month': '7',
-          'red_end_day': '1',
-          'notes': 'This is a test note',
-          'status': 'SCHEDULED'})
+        .send(succuessDataToPost)
         .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?success=true')
     })
     it('should post incorrect data and failure text should be populated', function () {
       reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
-        .send({
-          'reasonForReductionId': 1,
-          'hours': 5,
-          'red_start_year': '',
-          'red_start_month': '',
-          'red_start_day': '',
-          'red_end_year': '',
-          'red_end_month': '',
-          'red_end_day': '',
-          'notes': 'This is a test note',
-          'status': 'SCHEDULED'})
+        .send(failureDataToPost)
         // Expect a redirect
         .expect(302, 'Found. Redirecting to /offender-manager/1/add-reduction?fail=true')
     })
@@ -156,34 +155,41 @@ describe('reductions route', function () {
       reductionsService.updateReduction.resolves(getReductionsSuccessTextResult)
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
-        .send({'id': 1,
-          'reasonForReductionId': 1,
-          'hours': 5,
-          'red_start_year': '2018',
-          'red_start_month': '1',
-          'red_start_day': '1',
-          'red_end_year': '2018',
-          'red_end_month': '7',
-          'red_end_day': '1',
-          'notes': 'This is a test note',
-          'status': 'SCHEDULED'})
-        .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?success=true')
+        .send(succuessDataToPost)
+        .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?edited=true')
     })
     it('should post incorrect data and failure text should be populated', function () {
       reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
-        .send({
-          'reasonForReductionId': 1,
-          'hours': 5,
-          'red_start_year': '',
-          'red_start_month': '',
-          'red_start_day': '',
-          'red_end_year': '',
-          'red_end_month': '',
-          'red_end_day': '',
-          'notes': 'This is a test note',
-          'status': 'SCHEDULED'})
+        .send({failureDataToPost})
+        // Expect a redirect
+        .expect(302, 'Found. Redirecting to /offender-manager/1/add-reduction?fail=true')
+    })
+  })
+
+  describe('For the update reduction status POST route', function () {
+    it('should post the correct data with archived status and respond with 200 for existing reduction', function () {
+      reductionsService.updateReductionStatus.resolves(getReductionsSuccessTextResult)
+      return superTest(app)
+        .post(UPDATE_REDUCTION_STATUS_POST_URL)
+        .send(Object.assign({}, succuessDataToPost, {status: 'ARCHIVED'}))
+        .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?archived=true')
+    })
+
+    it('should post the correct data with deleted status and respond with 200 for existing reduction', function () {
+      reductionsService.updateReductionStatus.resolves(getReductionsSuccessTextResult)
+      return superTest(app)
+        .post(UPDATE_REDUCTION_STATUS_POST_URL)
+        .send(Object.assign({}, succuessDataToPost, {status: 'DELETED'}))
+        .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?deleted=true')
+    })
+
+    it('should post incorrect data and failure text should be populated', function () {
+      reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
+      return superTest(app)
+        .post(EDIT_REDUCTION_POST_URL)
+        .send(failureDataToPost)
         // Expect a redirect
         .expect(302, 'Found. Redirecting to /offender-manager/1/add-reduction?fail=true')
     })
