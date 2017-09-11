@@ -9,7 +9,8 @@ module.exports = function (id, newReduction) {
       hours: newReduction.hours,
       effective_from: newReduction.reductionStartDate,
       effective_to: newReduction.reductionEndDate,
-      notes: newReduction.notes
+      notes: newReduction.notes,
+      status: newReduction.status
     })
     .returning('id')
 }

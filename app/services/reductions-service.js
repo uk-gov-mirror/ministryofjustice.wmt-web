@@ -1,5 +1,6 @@
 const addReduction = require('./data/insert-reduction')
-const updateaReduction = require('./data/update-reduction')
+const updateReduction = require('./data/update-reduction')
+const updateReductionStatus = require('./data/update-reduction-status')
 const getReductions = require('./data/get-reductions')
 const getReductionReasons = require('./data/get-reduction-reasons')
 const getContractedHoursForWorkloadOwner = require('./data/get-contracted-hours-for-workload-owner')
@@ -58,7 +59,17 @@ module.exports.addReduction = function (id, reduction) {
 }
 
 module.exports.updateReduction = function (id, reductionId, reduction) {
-  return updateaReduction(reductionId, id, reduction)
+  return updateReduction(reductionId, id, reduction)
+  .then(function (result) {
+    return createWorkloadPointsRecalculationTask(id)
+    .then(function (result) {
+      return result
+    })
+  })
+}
+
+module.exports.updateReductionStatus = function (id, reductionId, reductionStatus) {
+  return updateReductionStatus(reductionId, reductionStatus)
   .then(function (result) {
     return createWorkloadPointsRecalculationTask(id)
     .then(function (result) {

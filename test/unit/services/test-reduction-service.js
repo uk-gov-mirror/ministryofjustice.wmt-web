@@ -7,11 +7,13 @@ const proxyquire = require('proxyquire')
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 const orgUnitConstant = require('../../../app/constants/organisation-unit.js')
 const Reduction = require('../../../app/services/domain/reduction')
+const reductionStatusType = require('../../../app/constants/reduction-status-type')
 
 var breadcrumbs = breadcrumbHelper.OFFENDER_MANAGER_BREADCRUMBS
 
 var addReductionStub
 var updateReductionStub
+var updateReductionStatusStub
 var getReferenceDataStub
 var getContractedHoursForWorkloadOwnerStub
 var getBreadcrumbsStub
@@ -22,7 +24,7 @@ var getReductionById
 var newReductionId = 9
 var existingReductionId = 10
 var workloadOwnerId = 11
-var reduction = new Reduction(1, 1, new Date(), new Date(), 'This is a test note')
+var reduction = new Reduction(1, 1, new Date(), new Date(), 'This is a test note', reductionStatusType.ACTIVE)
 
 var referenceData = [
   {
@@ -46,6 +48,7 @@ var referenceData = [
 beforeEach(function () {
   addReductionStub = sinon.stub()
   updateReductionStub = sinon.stub()
+  updateReductionStatusStub = sinon.stub()
   createCalculateWorkloadTaskStub = sinon.stub()
   getContractedHoursForWorkloadOwnerStub = sinon.stub().resolves(5)
   getReferenceDataStub = sinon.stub().resolves(referenceData)
@@ -56,6 +59,7 @@ beforeEach(function () {
       {
         './data/insert-reduction': addReductionStub,
         './data/update-reduction': updateReductionStub,
+        './data/update-reduction-status': updateReductionStatusStub,
         './get-breadcrumbs': getBreadcrumbsStub,
         './data/get-contracted-hours-for-workload-owner': getContractedHoursForWorkloadOwnerStub,
         './data/get-reduction-reasons': getReferenceDataStub,
@@ -110,6 +114,20 @@ describe('services/reductions-service', function () {
         .then(function (result) {
           expect(createCalculateWorkloadTaskStub.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
           expect(updateReductionStub.calledWith(existingReductionId, workloadOwnerId,reduction)).to.be.true //eslint-disable-line
+          expect(result).to.equal(1)
+        })
+    })
+  })
+
+  describe('Update reduction status', function () {
+    it('should update reduction status when reduction Id given', function () {
+      var newReductonStatus = reductionStatusType.ARCHIVED
+      createCalculateWorkloadTaskStub.resolves(1)
+      updateReductionStatusStub.withArgs(existingReductionId, newReductonStatus).resolves(existingReductionId)
+      return reductionService.updateReductionStatus(workloadOwnerId, existingReductionId, newReductonStatus)
+        .then(function (result) {
+          expect(createCalculateWorkloadTaskStub.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+          expect(updateReductionStatusStub.calledWith(existingReductionId, newReductonStatus)).to.be.true //eslint-disable-line
           expect(result).to.equal(1)
         })
     })

@@ -4,8 +4,9 @@ const Reduction = require('../../../../app/services/domain/reduction')
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 const getReductions = require('../../../../app/services/data/get-reductions')
 const insertReduction = require('../../../../app/services/data/insert-reduction')
+const reductionStatusType = require('../../../../app/constants/reduction-status-type')
 
-var reductionToInsert = new Reduction(1, 10, new Date(), new Date(), 'Test Note')
+var reductionToInsert = new Reduction(1, 10, new Date(), new Date(), 'Test Note', reductionStatusType.ACTIVE)
 var workloadOwnerId
 var reductionReasonId
 var insertedReduction = {

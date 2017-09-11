@@ -110,7 +110,8 @@ describe('reductions route', function () {
           'red_end_year': '2018',
           'red_end_month': '7',
           'red_end_day': '1',
-          'notes': 'This is a test note'})
+          'notes': 'This is a test note',
+          'status': 'SCHEDULED'})
         .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?success=true')
     })
     it('should post the correct data and respond with 200 for existing reduction', function () {
@@ -126,7 +127,8 @@ describe('reductions route', function () {
           'red_end_year': '2018',
           'red_end_month': '7',
           'red_end_day': '1',
-          'notes': 'This is a test note'})
+          'notes': 'This is a test note',
+          'status': 'SCHEDULED'})
         .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?success=true')
     })
     it('should post incorrect data and failure text should be populated', function () {
@@ -142,7 +144,8 @@ describe('reductions route', function () {
           'red_end_year': '',
           'red_end_month': '',
           'red_end_day': '',
-          'notes': 'This is a test note'})
+          'notes': 'This is a test note',
+          'status': 'SCHEDULED'})
         // Expect a redirect
         .expect(302, 'Found. Redirecting to /offender-manager/1/add-reduction?fail=true')
     })
@@ -162,7 +165,8 @@ describe('reductions route', function () {
           'red_end_year': '2018',
           'red_end_month': '7',
           'red_end_day': '1',
-          'notes': 'This is a test note'})
+          'notes': 'This is a test note',
+          'status': 'SCHEDULED'})
         .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?success=true')
     })
     it('should post incorrect data and failure text should be populated', function () {
@@ -178,7 +182,8 @@ describe('reductions route', function () {
           'red_end_year': '',
           'red_end_month': '',
           'red_end_day': '',
-          'notes': 'This is a test note'})
+          'notes': 'This is a test note',
+          'status': 'SCHEDULED'})
         // Expect a redirect
         .expect(302, 'Found. Redirecting to /offender-manager/1/add-reduction?fail=true')
     })
