@@ -2,9 +2,7 @@ const config = require('../../../knexfile').web
 const knex = require('knex')(config)
 
 module.exports = function (id, fromDate, toDate) {
-  return knex('workload_points_calculations')
-    .join('workload', 'workload_points_calculations.workload_id', '=', 'workload.id')
-    .join('workload_report', 'workload_points_calculations.workload_report_id', '=', 'workload_report.id')
+  return knex('individual_capacity_view')
     .where('workload_report.effective_from', '>=', fromDate)
     .where('workload_report.effective_from', '<=', toDate)
     .where('workload.workload_owner_id', id)

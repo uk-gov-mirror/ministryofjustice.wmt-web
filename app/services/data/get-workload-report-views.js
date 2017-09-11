@@ -20,6 +20,7 @@ module.exports = function (id, fromDate, toDate, type) {
             'available_points',
             'effective_from',
             'reduction_hours')
+    .orderBy('effective_from')
     .then(function (results) {
       return results
     })

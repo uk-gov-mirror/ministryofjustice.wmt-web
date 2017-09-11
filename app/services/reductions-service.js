@@ -19,8 +19,7 @@ module.exports.getReductions = function (id, organisationLevel) {
   result.title = result.breadcrumbs[0].title
   result.subTitle = organisationalUnitType.displayText
 
-  var getReductionsDataPromise = getReductions(id)
-  return getReductionsDataPromise.then(function (results) {
+  return getReductions(id).then(function (results) {
     var reductionsByStatus = reductionHelper.getReductionsByStatus(results)
     result.activeReductions = reductionsByStatus.activeReductions
     result.scheduledReductions = reductionsByStatus.scheduledReductions
