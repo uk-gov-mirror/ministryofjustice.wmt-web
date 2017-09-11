@@ -9,7 +9,8 @@ module.exports = function (id) {
     .join('workload_points', 'workload_points_calculations.workload_points_id', 'workload_points.id')
     .join('workload_report', 'workload_points_calculations.workload_report_id', 'workload_report.id')
     .join('offender_manager', 'offender_manager.id', 'workload_owner.offender_manager_id')
-    .first('offender_manager.grade_code AS grade',
+    .join('offender_manager_type', 'offender_manager.type_id', 'offender_manager_type.id')
+    .first('offender_manager_type.grade_code AS grade',
            'team.id AS teamId',
            'team.description AS teamName',
            'workload_points_calculations.available_points AS availablePoints',

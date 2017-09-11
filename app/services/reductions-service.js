@@ -15,11 +15,11 @@ module.exports.getReductions = function (id, organisationLevel) {
   var result = {}
   var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
 
-  var getReductionsDataPromise = getReductions(id)
-
   result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
   result.title = result.breadcrumbs[0].title
   result.subTitle = organisationalUnitType.displayText
+
+  var getReductionsDataPromise = getReductions(id)
   return getReductionsDataPromise.then(function (results) {
     var reductionsByStatus = reductionHelper.getReductionsByStatus(results)
     result.activeReductions = reductionsByStatus.activeReductions
