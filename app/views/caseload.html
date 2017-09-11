@@ -126,7 +126,7 @@
         {% for i in range(0, team.grades.length) %}
         <tr>
           {% if i === 0 %}
-          <td rowspan="2" headers="name team"><a href="/team/{{ team.linkId }}">{{ team.name }}</a></td>
+          <td rowspan="{{ team.grades.length }}" headers="name team"><a href="/team/{{ team.linkId }}">{{ team.name }}</a></td>
           {% endif %}
           <td headers="grade team">{{ team.grades[i].gradeCode }}</td>
           <td headers="overall tiers">{{ team.grades[i].totalCases }}%</td>
