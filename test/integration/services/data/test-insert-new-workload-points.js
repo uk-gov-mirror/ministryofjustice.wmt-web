@@ -3,8 +3,6 @@ const expect = require('chai').expect
 const insertWorkloadPoints = require('../../../../app/services/data/insert-workload-points')
 const workloadCapacityHelper = require('../../../helpers/data/aggregated-data-helper')
 
-var workloadOwnerId
-
 var workloadPointsResult = {
   table: 'workload_points',
   id: 0
@@ -41,23 +39,16 @@ var defaultWorkloadPoints = {
   defaultContractedHoursPso: 38,
   weightingOverdue: 10,
   weightingWarrants: 20,
-  weightingUnpaidWork: 70,
+  weightingUpw: 70,
   paromsEnabled: 1,
   parom: 99,
   effective_from: '2017-04-01',
   effective_to: null
 }
 
-describe('/services/data/insert-new-workload-points', function () {
-  before(function () {
-    return workloadCapacityHelper.getAnyExistingWorkloadOwnerId()
-      .then(function (id) {
-        workloadOwnerId = id
-      })
-  })
-
+describe('services/data/insert-new-workload-points', function () {
   it('should return an id when a valid workload points object has been added', function () {
-    return insertWorkloadPoints(workloadOwnerId, defaultWorkloadPoints)
+    return insertWorkloadPoints(defaultWorkloadPoints)
       .then(function (id) {
         workloadPointsResult.id = id
         expect(id[0]).to.be.a('number')
