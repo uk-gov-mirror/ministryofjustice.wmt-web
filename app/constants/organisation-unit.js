@@ -31,6 +31,7 @@ module.exports = {
     capacityView: 'region_capacity_view',
     caseProgressView: 'region_case_progress_view',
     overviewView: 'region_case_overview',
+    caseloadView: 'region_caseload_view',
     childOrganisationLevel: 'ldu' },
   NATIONAL: {
     name: 'hmpps',
@@ -39,5 +40,6 @@ module.exports = {
     capacityView: 'national_capacity_view',
     caseProgressView: 'national_case_progress_view',
     overviewView: 'national_case_overview',
+    caseloadView: 'national_caseload_view',
     childOrganisationLevel: 'region' }
 }

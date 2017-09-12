@@ -16,24 +16,16 @@
 <h2 class="heading-large">Caseload totals</h2>
 
 <div id="caseloadSummary" class="grid-row">
-  <div class="column-one-third">
-    <div id="custodyTotal" class="data">
-      <span class="data-item bold-xlarge">{{ custodyTotalSummary }}</span>
-      <span class="data-item bold-xsmall">Custody cases</span>
+  {% for caseType in caseloadDetails %}
+    {% if caseType.displayName !== 'Overall' %}
+    <div class="column-one-third">
+      <div id="{{ caseType.displayName }}Total" class="data">
+        <span class="data-item bold-xlarge">{{ caseType.totalSummary }}</span>
+        <span class="data-item bold-xsmall">{{ caseType.displayName }} cases</span>
+      </div>
     </div>
-  </div>
-  <div class="column-one-third">
-    <div id="communityTotal" class="data">
-      <span class="data-item bold-xlarge">{{ communityTotalSummary }}</span>
-      <span class="data-item bold-xsmall">Community cases</span>
-    </div>
-  </div>
-  <div class="column-one-third">
-    <div id="licenseTotal" class="data">
-      <span class="data-item bold-xlarge">{{ licenseTotalSummary }}</span>
-      <span class="data-item bold-xsmall">License cases</span>
-    </div>
-  </div>
+    {% endif %}
+  {% endfor %}
 </div>
 {% endif %}
 
@@ -43,20 +35,20 @@
 <h2 class="heading-large">Caseload type breakdown</h2>
 <div class="js-tabs">
   <ul class="js-tabs-links">
-    {% for caseType in caseTypes %}
+    {% for caseType in caseloadDetails %}
 	    <li><a href="#{{caseType.displayName}}" role="dynamic">{{caseType.displayName | title}}</a></li>
     {% endfor %}
   </ul>
   
   <div class="js-tabs-content">
-  {% for caseType in caseTypes %}
+  {% for caseType in caseloadDetails %}
     <div id="{{caseType.displayName}}">
       <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by tier</h3>
 
       <table class="sln-table-caseload data-table">
         <thead>
           <tr>
-            <th colspan="2" id="{{caseType.displayName}}_om">Offender manager</th>
+            <th colspan="2" id="{{caseType.displayName}}_om">{{ childOrganisationLevelDisplayText }}</th>
             <th colspan="9" id="{{caseType.displayName}}_tiers">Case tiers</th>
           </tr>
           <tr>
@@ -77,7 +69,7 @@
         <tbody class="">
           {% for member in caseType.array %}
             <tr>
-              <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
               <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.gradeCode }}</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ member.untiered }}</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ member.d2 }}</td>
@@ -98,13 +90,14 @@
 
   </div>
 </div>
-{% elseif organisationLevel === 'ldu'%}
+
+{% elseif organisationLevel !== 'team'%}
 
 <h3 class="heading-medium">Caseload by grade</h3>
   <table class="sln-table-caseload data-table">
     <thead>
       <tr>
-        <th colspan="2" id="team">Team</th>
+        <th colspan="2" id="team">{{ childOrganisationLevelDisplayText }}</th>
         <th colspan="9" id="tiers">Cases by tier</th>
       </tr>
       <tr>
@@ -122,22 +115,22 @@
       </tr>
     </thead>
     <tbody class="">
-      {% for team in lduCaseloadDetails %}
-        {% for i in range(0, team.grades.length) %}
+      {% for org in caseloadDetails %}
+        {% for i in range(0, org.grades.length) %}
         <tr>
           {% if i === 0 %}
-          <td rowspan="{{ team.grades.length }}" headers="name team"><a href="/team/{{ team.linkId }}">{{ team.name }}</a></td>
+          <td rowspan="{{ org.grades.length }}" headers="name team"><a href="/{{ childOrganisationLevel }}/{{ org.linkId }}">{{ org.name }}</a></td>
           {% endif %}
-          <td headers="grade team">{{ team.grades[i].gradeCode }}</td>
-          <td headers="overall tiers">{{ team.grades[i].totalCases }}%</td>
-          <td headers="untiered tiers">{{ team.grades[i].untiered }}%</td>
-          <td headers="d2 tiers">{{ team.grades[i].d2 }}%</td>
-          <td headers="d1 tiers">{{ team.grades[i].d1 }}%</td>
-          <td headers="c2 tiers">{{ team.grades[i].c2 }}%</td>
-          <td headers="c1 tiers">{{ team.grades[i].c1 }}%</td>
-          <td headers="b2 tiers">{{ team.grades[i].b2 }}%</td>
-          <td headers="b1 tiers">{{ team.grades[i].b1 }}%</td>
-          <td headers="a tiers">{{ team.grades[i].a }}%</td>
+          <td headers="grade team">{{ org.grades[i].gradeCode }}</td>
+          <td headers="overall tiers">{{ ((org.grades[i].totalCases * 10)  | round) / 10 }}%</td>
+          <td headers="untiered tiers">{{ ((org.grades[i].untiered * 10) | round) / 10 }}%</td>
+          <td headers="d2 tiers">{{ ((org.grades[i].d2 * 10) | round) / 10 }}%</td>
+          <td headers="d1 tiers">{{ ((org.grades[i].d1) | round) / 10 }}%</td>
+          <td headers="c2 tiers">{{ ((org.grades[i].c2) | round) / 10 }}%</td>
+          <td headers="c1 tiers">{{ ((org.grades[i].c1) | round) / 10 }}%</td>
+          <td headers="b2 tiers">{{ ((org.grades[i].b2) | round) / 10 }}%</td>
+          <td headers="b1 tiers">{{ ((org.grades[i].b1) | round) / 10 }}%</td>
+          <td headers="a tiers">{{ ((org.grades[i].a) | round) / 10 }}%</td>
         </tr>
         {% endfor %}
       {% endfor %}
