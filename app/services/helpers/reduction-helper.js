@@ -6,23 +6,17 @@ module.exports.getReductionsByStatus = function (reductions) {
   var active = []
   var scheduled = []
   var archived = []
-  var currentDate = new Date()
+
   if (reductions instanceof Array) {
     reductions.filter(function (reduction) {
-      if ((reduction.reductionStartDate instanceof Date) &&
-        (reduction.reductionEndDate instanceof Date)) {
-        if ((reduction.status !== reductionStatusType.ARCHIVED) && (reduction.status !== reductionStatusType.DELETED) &&
-          (currentDate.getTime() > reduction.reductionStartDate.getTime()) &&
-          (currentDate.getTime() < reduction.reductionEndDate.getTime())) {
-          active.push(reduction)
-        } else if ((reduction.status !== reductionStatusType.ARCHIVED) && (reduction.status !== reductionStatusType.DELETED) &&
-          (currentDate.getTime() < reduction.reductionStartDate.getTime())) {
-          scheduled.push(reduction)
-        } else if (reduction.status === reductionStatusType.ARCHIVED) {
-          archived.push(reduction)
-        }
-        formatReductionDates(reduction)
+      if (reduction.status === reductionStatusType.ACTIVE) {
+        active.push(reduction)
+      } else if (reduction.status === reductionStatusType.SCHEDULED) {
+        scheduled.push(reduction)
+      } else if (reduction.status === reductionStatusType.ARCHIVED) {
+        archived.push(reduction)
       }
+      formatReductionDates(reduction)
     })
   }
 

@@ -18,7 +18,7 @@ var REDUCTIONS = [ACTIVE_REDUCTION, SCHEDULED_REDUCTION, ARCHIVE_REDUCTION, DELE
 
 describe('services/helpers/reduction-helper', function () {
   describe('getReductionsByStatus', function () {
-    it('should return reductions by status of active archived and scheduled', function () {
+    it('should return reductions by status of active, scheduled, archived', function () {
       var result = reductionHelper.getReductionsByStatus(REDUCTIONS)
       expect(result.activeReductions.length).to.eql(1)
       expect(result.activeReductions[0]).to.eql(ACTIVE_REDUCTION)
