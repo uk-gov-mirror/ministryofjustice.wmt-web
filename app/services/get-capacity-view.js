@@ -1,7 +1,5 @@
 const getBreadcrumbs = require('./get-breadcrumbs')
-const getIndividualWorkloadReports = require('./data/get-individual-workload-reports')
 const getWorkloadReports = require('./data/get-workload-report-views')
-const routeType = require('../constants/organisation-unit')
 const tableCreator = require('./helpers/table-creator')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 
@@ -14,11 +12,7 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
     throw new Error(organisationLevel + ' should be offender-manager, region, team, ldu or hmpps')
   }
 
-  if (organisationLevel === routeType.OFFENDER_MANAGER.name) {
-    workloadReportsPromise = getIndividualWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString())
-  } else {
-    workloadReportsPromise = getWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString(), organisationLevel)
-  }
+  workloadReportsPromise = getWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString(), organisationLevel)
 
   result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
 

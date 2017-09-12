@@ -20,6 +20,8 @@ var getBreadcrumbsStub
 var createCalculateWorkloadTaskStub
 var reductionService
 var getReductionById
+var getReductions
+var reductionHelper
 
 var newReductionId = 9
 var existingReductionId = 10
@@ -45,6 +47,33 @@ var referenceData = [
   }
 ]
 
+var baseReduction =
+  { id: 1,
+    workloadOwnerId: 507,
+    hours: 5,
+    reductionReasonId: 1,
+    categoryId: 1,
+    reasonShortName: 'Disability',
+    allowancePercentage: null,
+    reductionStartDate: '11 Sep 16',
+    reductionEndDate: '09 Sep 27',
+    notes: null,
+    status: 'ACTIVE'
+  }
+
+var activeReductions = [ baseReduction ]
+
+var archivedReductions = [
+  Object.assign({}, baseReduction, { id: 2, status: 'ARCHIVED' }),
+  Object.assign({}, baseReduction, { id: 3, status: 'ARCHIVED' })
+]
+
+var reductionsByStatus = {
+  activeReductions: activeReductions,
+  scheduledReductions: [],
+  archivedReductions: archivedReductions
+}
+
 beforeEach(function () {
   addReductionStub = sinon.stub()
   updateReductionStub = sinon.stub()
@@ -54,9 +83,15 @@ beforeEach(function () {
   getReferenceDataStub = sinon.stub().resolves(referenceData)
   getBreadcrumbsStub = sinon.stub().returns(breadcrumbs)
   getReductionById = sinon.stub()
+  getReductions = sinon.stub()
+  reductionHelper = {
+    getReductionsByStatus: sinon.stub().returns(reductionsByStatus)
+  }
   reductionService =
     proxyquire('../../../app/services/reductions-service',
       {
+        './helpers/reduction-helper': reductionHelper,
+        './data/get-reductions': getReductions,
         './data/insert-reduction': addReductionStub,
         './data/update-reduction': updateReductionStub,
         './data/update-reduction-status': updateReductionStatusStub,
@@ -71,15 +106,20 @@ beforeEach(function () {
 describe('services/reductions-service', function () {
   describe('Get reductions', function () {
     it('should create the result object with the right information', function () {
-      reductionService.getReductions(1, orgUnitConstant.OFFENDER_MANAGER.name)
+      getReductions.resolves([])
+      return reductionService.getReductions(1, orgUnitConstant.OFFENDER_MANAGER.name)
         .then(function (result) {
+          assert(getReductions.called)
+          assert(getBreadcrumbsStub.called)
           expect(result.title).to.equal('John Doe')
           expect(result.subTitle).to.equal('Offender Manager')
-          assert(getBreadcrumbsStub.called)
+          expect(result.activeReductions).to.eql(activeReductions)
+          expect(result.scheduledReductions).to.eql([])
+          expect(result.archivedReductions).to.eql(archivedReductions)
         })
     })
   })
-  describe('Get reductions with reference data', function () {
+  describe('Get reductions reference data', function () {
     it('should get the reference data with the hours already worked out for each reduction reason', function () {
       return reductionService.getAddReductionsRefData(1, orgUnitConstant.OFFENDER_MANAGER.name)
         .then(function (result) {
