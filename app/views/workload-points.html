@@ -16,18 +16,9 @@
 
 <p>Workload points are set here and are used to calculate capacity points for all Offender Managers throughout the Workload Management Tool.</p>
 
-
-<!-- TODO: Format date. Include user. -->
+<!-- TODO: Include user. -->
 
 <p>Current Workload Points created by <span class="bold">test user</span> on <span class="bold">{{ wp.effectiveFrom }}</span></p> 
-
-<!-- WAS ATTEMPTING TO GENERATE THE FIRST THREE TABS USING A LOOP. FIELD NAMES WERE PROVING A PROBLEM
-  
-  {% set wpTypes = [
-  {name: 'custody', shortName: 'cus'}, 
-  {name: 'license', shortName: 'lic'}, 
-  {name: 'community', shortName: 'comm'}
-] %} -->
 
 <form action="/admin/workload-points" method=POST id="workloadPointsForm">
 
@@ -42,11 +33,6 @@
     </ul>
 
     <div class="js-tabs-content">
-
-      <!-- {% for type in wpTypes %}
-      <p> {{ type.name }} </p>
-      <p> {{ type.shortName }} </p>
-      {% endfor %} -->
 
       <div id="custody">
         <div class="grid-row">
@@ -398,29 +384,5 @@
 {% block body_end %}
 <script src="/public/javascripts/vendor/jquery.js"></script>
 <script src="/public/javascripts/jquery.tabs.js"></script>
-
-<script>
-  $(function(){
-    $('.js-tabs').tabs();
-  });
-
-  $('.form-control').each(function(i, textbox) {
-    textbox.setAttribute('readonly', true)
-    textbox.setAttribute('style', 'border:none; width: 60px; outline:none; text-align:right;')
-  });
-  document.getElementById('save-button').setAttribute('style', 'display: none;')
-  document.getElementById('save-notice').setAttribute('style', 'display: none;')
-
-  var edit = function () {
-    $('.form-control').each(function(i, textbox) {
-     textbox.removeAttribute('readonly')
-     textbox.setAttribute('style', 'width: 50px; text-align:right;')
-    });
-
-    document.getElementById('edit-button').setAttribute('style', 'display: none;')
-    document.getElementById('save-button').setAttribute('style', 'display: inline-block;')
-    document.getElementById('save-notice').setAttribute('style', 'display: block;')
-  }
-</script>
+<script src="/public/javascripts/workload-points.js"></script>
 {% endblock %}
-

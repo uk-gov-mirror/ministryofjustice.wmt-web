@@ -4,6 +4,7 @@ const insertNewWorkloadPoints = require('./data/insert-workload-points')
 // const getWorkloadBatchIdsAndWorkloadReport = require('./data/get-workload-batch-ids-and-workload-report-id')
 // const createCalculateWorkloadPointsTaskForWorkloads = require('./data/get-workload-ids-for-workload')
 const Link = require('./domain/link')
+const dateFormatter = require('./date-formatter')
 
 module.exports.getWorkloadPoints = function (id, organisationLevel) {
   var result = {}
@@ -14,6 +15,8 @@ module.exports.getWorkloadPoints = function (id, organisationLevel) {
   ]
 
   return getWorkloadPoints().then(function (results) {
+    var formattedDate = dateFormatter.formatDate(results.effectiveFrom, 'DD/MM/YYYY')
+    results.effectiveFrom = formattedDate
     result.title = 'Workload Points'
     result.subTitle = 'Admin'
     result.workloadPoints = results
