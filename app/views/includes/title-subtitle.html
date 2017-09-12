@@ -1,10 +1,16 @@
 <h1 class="heading-xlarge wmt-page-heading">
-    <span class="sln-page-subtitle heading-secondary">
-        {{ subTitle }}
+  <span class="sln-page-subtitle heading-secondary">
+      {{ subTitle }}
+  </span>
+
+  {% if organisationLevel === 'hmpps' %}
+    <span class="sln-page-title">
+      {{ title }}
     </span>
-{% if organisationLevel === 'hmpps' %}
-    {{ title}}
-{% else %}
-    {{ title | title}}
-{% endif %}
+  {% else %}
+    <span class="sln-page-title">
+      {{ title | title }}
+    </span>
+  {% endif %}
+  
 </h1>
