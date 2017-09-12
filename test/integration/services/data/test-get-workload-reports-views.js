@@ -81,6 +81,17 @@ describe('services/data/get-workload-report-views', function () {
     })
   })
 
+  it('should retrieve all the workloads within the date range for an OM', function () {
+    return getWorkloadReportsViews(inserts.filter((item) => item.table === 'workload_owner')[0].id, startDate, endDate, 'offender-manager')
+    .then(function (results) {
+      expect(results.length).to.equal(1)
+      var expectedResults = [
+        {effective_from: startDate, total_points: 50, available_points: 25, reduction_hours: 3}
+      ]
+      expect(results).to.eql(expectedResults)
+    })
+  })
+
   after(function () {
     return workloadCapactiyHelper.removeInsertedData(inserts)
   })

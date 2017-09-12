@@ -97,10 +97,17 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
   var promise = knex('workload_points').returning('id').insert(defaultWorkloadPoints)
     .then(function (ids) {
       inserts.push({table: 'workload_points', id: ids[0]})
-      return knex('offender_manager_type').returning('id').insert({description: 'test'})
+
+      var offenderManagerTypes = [
+        { grade_code: 'PO' },
+        { grade_code: 'PSO' }
+      ]
+      return knex('offender_manager_type').returning('id').insert(offenderManagerTypes)
     })
     .then(function (ids) {
-      inserts.push({ table: 'offender_manager_type', id: ids[0] })
+      ids.forEach((id) => {
+        inserts.push({table: 'offender_manager_type', id: id})
+      })
       return addRegion(inserts)
     })
   return promise
@@ -142,11 +149,13 @@ var addLdu = function (inserts) {
 }
 
 var addPOOffenderManager = function (inserts) {
+  var poOmType = inserts.filter((item) => item.table === 'offender_manager_type')[0]
   return knex('offender_manager').returning('id').insert(
-    {type_id: inserts.filter((item) => item.table === 'offender_manager_type')[0].id,
+    {
+      type_id: poOmType.id,
       forename: 'Test_Forename',
-      surname: 'Test_Surname',
-      grade_code: 'PO'})
+      surname: 'Test_Surname'
+    })
   .then(function (ids) {
     inserts.push({ table: 'offender_manager', id: ids[0] })
     return inserts
@@ -157,11 +166,13 @@ var addPOOffenderManager = function (inserts) {
 }
 
 var addPSOOffenderManager = function (inserts) {
+  var psoOmType = inserts.filter((item) => item.table === 'offender_manager_type')[1]
   return knex('offender_manager').returning('id').insert(
-    {type_id: inserts.filter((item) => item.table === 'offender_manager_type')[0].id,
+    {
+      type_id: psoOmType.id,
       forename: 'Test_Forename',
-      surname: 'Test_Surname',
-      grade_code: 'PSO'})
+      surname: 'Test_Surname'
+    })
   .then(function (ids) {
     inserts.push({ table: 'offender_manager', id: ids[0] })
     return inserts

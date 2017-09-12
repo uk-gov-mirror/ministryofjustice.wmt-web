@@ -26,45 +26,51 @@ fi
 urls=()
 errors=false
 
+offender_manager='offender-manager'
+team='team'
+ldu='ldu'
+region='region'
+national='hmpps/0'
+
 # Root
 urls+=("$host/")
 
 # Capacity
 capacity_url='caseload-capacity'
-urls+=("$host/offender-manager/$omId/$capacity_url")
-urls+=("$host/team/$teamId/$capacity_url")
-urls+=("$host/ldu/$lduId/$capacity_url")
-urls+=("$host/region/$regionId/$capacity_url")
+urls+=("$host/$offender_manager/$omId/$capacity_url")
+urls+=("$host/$team/$teamId/$capacity_url")
+urls+=("$host/$ldu/$lduId/$capacity_url")
+urls+=("$host/$region/$regionId/$capacity_url")
 
 # Case Progress
 case_progress_url='case-progress'
-urls+=("$host/offender-manager/$omId/$case_progress_url")
-urls+=("$host/team/$teamId/$case_progress_url")
-urls+=("$host/ldu/$lduId/$case_progress_url")
-urls+=("$host/region/$regionId/$case_progress_url")
+urls+=("$host/$offender_manager/$omId/$case_progress_url")
+urls+=("$host/$team/$teamId/$case_progress_url")
+urls+=("$host/$ldu/$lduId/$case_progress_url")
+urls+=("$host/$region/$regionId/$case_progress_url")
 
 # Overview
 overview_url='overview'
-urls+=("$host/offender-manager/$omId/$overview_url")
-urls+=("$host/team/$teamId/$overview_url")
-urls+=("$host/ldu/$lduId/$overview_url")
-urls+=("$host/region/$regionId/$overview_url")
-urls+=("$host/hmpps/0/$overview_url")
+urls+=("$host/$offender_manager/$omId/$overview_url")
+urls+=("$host/$team/$teamId/$overview_url")
+urls+=("$host/$ldu/$lduId/$overview_url")
+urls+=("$host/$region/$regionId/$overview_url")
+urls+=("$host/$national/$overview_url")
 
 # Caseload
 caseload_url='caseload'
-urls+=("$host/team/$teamId/$caseload_url")
-urls+=("$host/ldu/$lduId/$caseload_url")
+urls+=("$host/$team/$teamId/$caseload_url")
+urls+=("$host/$ldu/$lduId/$caseload_url")
 
 # Contracted hours
 contracted_hours_url='contracted-hours'
-urls+=("$host/offender-manager/$omId/$contracted_hours_url")
+urls+=("$host/$offender_manager/$omId/$contracted_hours_url")
 
 # Reduction
 reductions_url='reductions'
-add_reductions_url='add_reduction'
-urls+=("$host/offender-manager/$omId/$reductions_url")
-urls+=("$host/offender-manager/$omId/$add_reductions_url/")
+add_reductions_url='add-reduction'
+urls+=("$host/$offender_manager/$omId/$reductions_url")
+urls+=("$host/$offender_manager/$omId/$add_reductions_url")
 
 for url in "${urls[@]}"
 do

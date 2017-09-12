@@ -26,10 +26,11 @@ before(function () {
   getBreadcrumbs = sinon.stub().returns(breadcrumbHelper.LDU_BREADCRUMBS)
   getSubNav = sinon.stub()
   getCapacityView = proxyquire('../../../app/services/get-capacity-view',
-    {'./data/get-individual-workload-reports': getCapacityStub,
+    {
       './data/get-workload-report-views': getCapacityStub,
       './get-breadcrumbs': getBreadcrumbs,
-      './get-sub-nav': getSubNav})
+      './get-sub-nav': getSubNav
+    })
 })
 
 describe('services/get-capacity-view', function () {

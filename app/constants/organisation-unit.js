@@ -3,7 +3,7 @@ module.exports = {
     name: 'offender-manager',
     ref: 'I',
     displayText: 'Offender Manager',
-    capacityView: 'workload_owner',
+    capacityView: 'individual_capacity_view',
     caseProgressView: 'individual_case_progress_view'
   },
   TEAM: {
