@@ -92,6 +92,5 @@ describe('View / edit Workload Points', () => {
           expect(readonly).to.not.contain('false')
         })
     })
-
   })
 })
