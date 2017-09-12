@@ -19,7 +19,7 @@
   {% for caseType in caseloadDetails %}
     {% if caseType.displayName !== 'Overall' %}
     <div class="column-one-third">
-      <div id="{{ caseType.displayName }}Total" class="data">
+      <div id="{{ caseType.displayName.toLowerCase() }}Total" class="data">
         <span class="data-item bold-xlarge">{{ caseType.totalSummary }}</span>
         <span class="data-item bold-xsmall">{{ caseType.displayName }} cases</span>
       </div>
@@ -36,13 +36,13 @@
 <div class="js-tabs">
   <ul class="js-tabs-links">
     {% for caseType in caseloadDetails %}
-	    <li><a href="#{{caseType.displayName}}" role="dynamic">{{caseType.displayName | title}}</a></li>
+	    <li><a href="#{{ caseType.displayName.toLowerCase() }}" role="dynamic">{{caseType.displayName | title}}</a></li>
     {% endfor %}
   </ul>
   
   <div class="js-tabs-content">
   {% for caseType in caseloadDetails %}
-    <div id="{{caseType.displayName}}">
+    <div id="{{caseType.displayName.toLowerCase()}}">
       <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by tier</h3>
 
       <table class="sln-table-caseload data-table">

@@ -61,6 +61,8 @@ urls+=("$host/$national/$overview_url")
 caseload_url='caseload'
 urls+=("$host/$team/$teamId/$caseload_url")
 urls+=("$host/$ldu/$lduId/$caseload_url")
+urls+=("$host/$region/$regionId/$caseload_url")
+urls+=("$host/$national/$caseload_url")
 
 # Contracted hours
 contracted_hours_url='contracted-hours'
