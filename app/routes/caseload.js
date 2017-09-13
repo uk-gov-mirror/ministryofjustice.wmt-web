@@ -83,7 +83,7 @@ module.exports = function (router) {
     } else {
       details = result.caseloadDetails
     }
-    console.log(details[0].grades)
+
     return details
   }
 }
