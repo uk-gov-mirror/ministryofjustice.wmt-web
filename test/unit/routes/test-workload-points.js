@@ -14,16 +14,20 @@ const WORKLOAD_POINTS = {
   workloadPoints: []
 }
 
+const POSTED_WORKLOAD_POINTS = {}
+
 var app
 var route
-var getWorkloadPoints
+var workloadPointsService
 
 before(function () {
-  getWorkloadPoints = sinon.stub()
+  workloadPointsService = {
+    getWorkloadPoints: sinon.stub().resolves(WORKLOAD_POINTS),
+    updateWorkloadPoints: sinon.stub().resolves({})
+  }
   route = proxyquire('../../../app/routes/workload-points', {
-    '../services/get-workload-points': getWorkloadPoints
+    '../services/workload-points-service': workloadPointsService
   })
-  getWorkloadPoints.resolves(WORKLOAD_POINTS)
   app = routeHelper.buildApp(route)
 })
 
@@ -34,5 +38,12 @@ describe('Admin Workload Points route', function () {
 
   it('should respond with 500 when an incorrect url is called', function () {
     return supertest(app).get(WORKLOAD_POINTS_URL_TYPO).expect(500)
+  })
+
+  it('should post the correct data and respond with 200', function () {
+    return supertest(app)
+      .post(WORKLOAD_POINTS_URL)
+      .send(POSTED_WORKLOAD_POINTS)
+      .expect(302, 'Found. Redirecting to /admin/workload-points?success=true')
   })
 })

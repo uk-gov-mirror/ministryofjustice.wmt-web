@@ -49,17 +49,35 @@ var WORKLOAD_POINTS_BREADCRUMBS = [
   new Link('Admin', '/admin')
 ]
 
+var recalcIds = {
+  minWorkloadId: 1,
+  maxWorkloadId: 10,
+  workloadReportId: 99
+}
+
 var workloadPointsService
 var getWorkloadPointsData
+var updatePreviousWorkloadPointsEffectiveTo
+var insertNewWorkloadPoints
+var getWorkloadIdsForWpRecalc
+var createCalculateWorkloadPointsTask
 
 before(function () {
-  getWorkloadPointsData = sinon.stub()
+  getWorkloadPointsData = sinon.stub().resolves(WORKLOAD_POINTS_DETAILS)
+  updatePreviousWorkloadPointsEffectiveTo = sinon.stub().resolves()
+  insertNewWorkloadPoints = sinon.stub().resolves()
+  getWorkloadIdsForWpRecalc = sinon.stub().resolves(recalcIds)
+  createCalculateWorkloadPointsTask = sinon.stub().resolves()
   workloadPointsService =
     proxyquire('../../../app/services/workload-points-service',
       {
-        './data/get-workload-points': getWorkloadPointsData
-      })
-  getWorkloadPointsData.resolves(WORKLOAD_POINTS_DETAILS)
+        './data/get-workload-points': getWorkloadPointsData,
+        './data/update-workload-points-effective-to': updatePreviousWorkloadPointsEffectiveTo,
+        './data/insert-workload-points': insertNewWorkloadPoints,
+        './data/get-ids-for-workload-points-recalc': getWorkloadIdsForWpRecalc,
+        './data/create-calculate-workload-points-task': createCalculateWorkloadPointsTask
+      }
+    )
 })
 
 describe('services/workload-points-service', function () {
@@ -81,6 +99,18 @@ describe('services/workload-points-service', function () {
     it('should return a results object containing workload points details', function () {
       workloadPointsService.getWorkloadPoints().then(function (results) {
         expect(results.workloadPoints).to.eql(WORKLOAD_POINTS_DETAILS)
+      })
+    })
+  })
+
+  describe('updateWorkloadPoints', function () {
+    it('should call the necesssary functions with the correct parameters', function () {
+      var returnedWorkloadPoints = Object.assign({}, WORKLOAD_POINTS_DETAILS, { previousWpId: 123 })
+      workloadPointsService.updateWorkloadPoints(returnedWorkloadPoints).then(function (results) {
+        expect(updatePreviousWorkloadPointsEffectiveTo.calledWith(123)).to.be.true //eslint-disable-line  
+        expect(insertNewWorkloadPoints.calledWith(returnedWorkloadPoints)).to.be.true //eslint-disable-line  
+        expect(getWorkloadIdsForWpRecalc.calledWith(123)).to.be.true //eslint-disable-line  
+        expect(createCalculateWorkloadPointsTask.calledWith(recalcIds.minWorkloadId, recalcIds.workloadReportId, 9)).to.be.true //eslint-disable-line        
       })
     })
   })

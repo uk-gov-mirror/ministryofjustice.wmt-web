@@ -3,7 +3,7 @@ const expect = require('chai').expect
 const getReductionById = require('../../../../app/services/data/get-reduction-by-id')
 const insertReduction = require('../../../../app/services/data/insert-reduction')
 const Reduction = require('../../../../app/services/domain/reduction')
-const workloadCapacityHelper = require('../../../helpers/data/aggregated-data-helper')
+const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 const reductionStatusType = require('../../../../app/constants/reduction-status-type')
 
 var reductionResult = {
@@ -14,22 +14,26 @@ var reductionResult = {
 var testReduction = new Reduction(1, 5, new Date(), new Date(), 'Test Note', reductionStatusType.ACTIVE)
 var workloadOwnerId
 var addedReductionId
+var inserts = []
 
 describe('/services/data/get-reduction-by-id', function () {
   before(function () {
-    return workloadCapacityHelper.getAnyExistingWorkloadOwnerId()
-      .then(function (id) {
-        workloadOwnerId = id
-        return workloadCapacityHelper.getAnyExistingReductionReasonId()
-          .then(function (id) {
-            testReduction.reasonForReductionId = id
-
-            return insertReduction(workloadOwnerId, testReduction)
-              .then(function (reductionId) {
-                addedReductionId = reductionId
-              })
-          })
-      })
+    return dataHelper.addWorkloadCapacitiesForOffenderManager()
+    .then(function (result) {
+      inserts = result
+      return dataHelper.getAnyExistingWorkloadOwnerId()
+        .then(function (id) {
+          workloadOwnerId = id
+          return dataHelper.getAnyExistingReductionReasonId()
+            .then(function (id) {
+              testReduction.reasonForReductionId = id
+              return insertReduction(workloadOwnerId, testReduction)
+                .then(function (reductionId) {
+                  addedReductionId = reductionId
+                })
+            })
+        })
+    })
   })
 
   it('should get reduction by id', function () {
@@ -42,6 +46,7 @@ describe('/services/data/get-reduction-by-id', function () {
   })
 
   after(function () {
-    return workloadCapacityHelper.removeInsertedData([reductionResult])
+    inserts.push(reductionResult)
+    return dataHelper.removeInsertedData(inserts)
   })
 })

@@ -98,6 +98,16 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
 
   var promise = module.exports.addWorkloadPoints(inserts)
     .then(function (inserts) {
+      var workloadReports = [
+        { effective_from: '2017-01-01', effective_to: '2017-02-01' },
+        { effective_from: '2017-02-01' }
+      ]
+      return knex('workload_report').returning('id').insert(workloadReports)
+    })
+    .then(function (ids) {
+      ids.forEach((id) => {
+        inserts.push({table: 'workload_report', id: id})
+      })
       var offenderManagerTypes = [
         { grade_code: 'PO' },
         { grade_code: 'PSO' }
@@ -226,12 +236,12 @@ var addWorkload = function (inserts) {
     ids.forEach((id) => {
       inserts.push({table: 'workload', id: id})
     })
-    return knex('workload_report').select('id').orderBy('effective_from', 'desc')
-  })
-  .then(function (workloadReports) {
+
     var workloads = inserts.filter((item) => item.table === 'workload')
+    var workloadReports = inserts.filter((item) => item.table === 'workload_report')
+
     var defaultWorkloadPointsCalculations = {
-      workload_report_id: workloadReports[0].id,
+      workload_report_id: workloadReports[1].id,
       workload_points_id: inserts.filter((item) => item.table === 'workload_points')[0].id,
       workload_id: workloads[workloads.length - 1].id,
       total_points: 0,
@@ -251,7 +261,12 @@ var addWorkload = function (inserts) {
     calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
       total_points: 20,
       available_points: 10,
-      workload_report_id: workloadReports[1].id,
+      workload_id: inserts.filter((item) => item.table === 'workload')[0].id
+    }))
+    calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
+      total_points: 20,
+      available_points: 10,
+      workload_report_id: workloadReports[0].id,
       workload_id: inserts.filter((item) => item.table === 'workload')[0].id
     }))
 
@@ -323,6 +338,14 @@ module.exports.getAnyExistingWorkloadOwnerId = function () {
   return promise
 }
 
+module.exports.getAnyExistingWorkloadReportId = function () {
+  return knex('workload_report')
+    .first('id')
+    .then(function (result) {
+      return result.id
+    })
+}
+
 module.exports.getAnyExistingReductionReasonId = function () {
   var promise = knex('reduction_reason')
       .first('id')
@@ -364,7 +387,7 @@ module.exports.getWorkloadReportEffectiveFromDate = function () {
   return knex('workload_report')
       .first('effective_from')
       .whereNull('effective_to')
-      .orderBy('effective_from', 'desc')
+      .orderBy('id', 'desc')
 }
 
 module.exports.getAnyExistingWorkloadOwnerIdWithActiveReduction = function () {
@@ -382,4 +405,14 @@ module.exports.generateNonExistantWorkloadOwnerId = function () {
   .then(function (maxId) {
     return maxId[0].maxId + 1
   })
+}
+
+module.exports.getAllTasks = function () {
+  return knex('tasks')
+    .select('submitting_agent',
+            'type',
+            'additional_data',
+            'workload_report_id',
+            'status'
+    )
 }

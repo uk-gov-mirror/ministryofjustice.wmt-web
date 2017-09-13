@@ -2,7 +2,7 @@ const expect = require('chai').expect
 
 const insertReduction = require('../../../../app/services/data/insert-reduction')
 const Reduction = require('../../../../app/services/domain/reduction')
-const workloadCapacityHelper = require('../../../helpers/data/aggregated-data-helper')
+const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 const updateReductionStatus = require('../../../../app/services/data/update-reduction-status')
 const reductionStatusType = require('../../../../app/constants/reduction-status-type')
 const getReductionById = require('../../../../app/services/data/get-reduction-by-id')
@@ -15,23 +15,27 @@ var reductionResult = {
 var testReduction = new Reduction(1, 5, new Date(), new Date(), 'Test Note', reductionStatusType.ACTIVE)
 var workloadOwnerId
 var addedReductionId
+var inserts = []
 
 describe('/services/data/update-reduction-status', function () {
   before(function () {
-    return workloadCapacityHelper.getAnyExistingWorkloadOwnerId()
-      .then(function (id) {
-        workloadOwnerId = id
-        return workloadCapacityHelper.getAnyExistingReductionReasonId()
-          .then(function (id) {
-            testReduction.reasonForReductionId = id
-
-            return insertReduction(workloadOwnerId, testReduction)
-              .then(function (reductionId) {
-                addedReductionId = reductionId
-                reductionResult.id = addedReductionId[0]
-              })
-          })
-      })
+    return dataHelper.addWorkloadCapacitiesForOffenderManager()
+    .then(function (result) {
+      inserts = result
+      return dataHelper.getAnyExistingWorkloadOwnerId()
+        .then(function (id) {
+          workloadOwnerId = id
+          return dataHelper.getAnyExistingReductionReasonId()
+            .then(function (id) {
+              testReduction.reasonForReductionId = id
+              return insertReduction(workloadOwnerId, testReduction)
+                .then(function (reductionId) {
+                  addedReductionId = reductionId
+                  reductionResult.id = addedReductionId[0]
+                })
+            })
+        })
+    })
   })
 
   it('should update a reduction status and return an id ', function () {
@@ -51,6 +55,7 @@ describe('/services/data/update-reduction-status', function () {
   })
 
   after(function () {
-    return workloadCapacityHelper.removeInsertedData([reductionResult])
+    inserts.push(reductionResult)
+    return dataHelper.removeInsertedData(inserts)
   })
 })

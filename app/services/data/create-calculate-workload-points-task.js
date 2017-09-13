@@ -1,7 +1,7 @@
 const config = require('../../../knexfile').web
 const knex = require('knex')(config)
 
-module.exports = function (id, workloadId, workloadReportId, batchSize) {
+module.exports = function (workloadId, workloadReportId, batchSize) {
   var newTask = {
     submitting_agent: 'WEB',
     type: 'CALCULATE-WORKLOAD-POINTS',

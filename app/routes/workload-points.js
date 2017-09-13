@@ -1,4 +1,4 @@
-const workloadPointsService = require('../services/workload-points-service.js')
+const workloadPointsService = require('../services/workload-points-service')
 
 module.exports = function (router) {
   router.get('/admin/workload-points', function (req, res) {

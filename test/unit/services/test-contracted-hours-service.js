@@ -20,18 +20,23 @@ var getBreadcrumbs
 var getContractedHoursForWorkloadOwner
 var updateContractedHoursForWorkloadOwner
 var createWorkloadPointsRecalculationTask
+var getLatestIdsForWpRecalc
+
+var recalcIds = { workloadId: 3, workloadReportId: 2 }
 
 beforeEach(function () {
   getContractedHoursForWorkloadOwner = sinon.stub()
   updateContractedHoursForWorkloadOwner = sinon.stub()
   createWorkloadPointsRecalculationTask = sinon.stub()
   getBreadcrumbs = sinon.stub().returns(breadcrumbs)
+  getLatestIdsForWpRecalc = sinon.stub().resolves(recalcIds)
   contractedHoursService =
     proxyquire('../../../app/services/contracted-hours-service',
       {
         './data/get-contracted-hours-for-workload-owner': getContractedHoursForWorkloadOwner,
         './data/update-contracted-hours-for-workload-owner': updateContractedHoursForWorkloadOwner,
         './data/create-calculate-workload-points-task': createWorkloadPointsRecalculationTask,
+        './data/get-latest-workload-and-workload-report-id': getLatestIdsForWpRecalc,
         './get-breadcrumbs': getBreadcrumbs
       })
 })
@@ -71,7 +76,8 @@ describe('services/contracted-hours-service', function () {
       return contractedHoursService.updateContractedHours(id, orgUnitConstant.OFFENDER_MANAGER.name, UPDATED_CONTRACTED_HOURS)
       .then(function (result) {
         expect(updateContractedHoursForWorkloadOwner.calledWith(id, UPDATED_CONTRACTED_HOURS)).to.be.true //eslint-disable-line
-        expect(createWorkloadPointsRecalculationTask.calledWith(id)).to.be.true //eslint-disable-line
+        expect(getLatestIdsForWpRecalc.calledWith(id)).to.be.true //eslint-disable-line
+        expect(createWorkloadPointsRecalculationTask.calledWith(3, 2)).to.be.true //eslint-disable-line
       })
     })
 
