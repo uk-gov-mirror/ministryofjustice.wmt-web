@@ -61,14 +61,14 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
   switch (tab) {
     case tabs.CASELOAD:
       if (organisationLevel === organisationUnitConstants.TEAM.name) {
-        var overallCsv = generateCsv(result.overallCaseloadDetails, fields, fieldNames)
-        var custodyCsv = generateCsv(result.custodyCaseloadDetails, fields, fieldNames)
-        var communityCsv = generateCsv(result.communityCaseloadDetails, fields, fieldNames)
-        var licenseCsv = generateCsv(result.licenseCaseloadDetails, fields, fieldNames)
+        var overallCsv = generateCsv(result.caseloadDetails.overallCaseloadDetails, fields, fieldNames)
+        var custodyCsv = generateCsv(result.caseloadDetails.custodyCaseloadDetails, fields, fieldNames)
+        var communityCsv = generateCsv(result.caseloadDetails.communityCaseloadDetails, fields, fieldNames)
+        var licenseCsv = generateCsv(result.caseloadDetails.licenseCaseloadDetails, fields, fieldNames)
         // TODO: Do they want this in one csv file, or four? Currently one
         csv = ('OVERALL\n' + overallCsv + '\n\n\nCUSTODY\n' + custodyCsv + '\n\n\nCOMMUNITY\n' + communityCsv + '\n\n\nLICENSE\n' + licenseCsv)
-      } else if (organisationLevel === organisationUnitConstants.LDU.name) {
-        var table = generateLduCaseloadTable(result.lduCaseloadDetails)
+      } else {
+        var table = generateLduCaseloadTable(result.caseloadDetails)
         csv = generateCsv(table, fields, fieldNames)
       }
       break

@@ -40,9 +40,8 @@ module.exports = function (router) {
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 
-    if (organisationLevel !== organisationUnitConstants.LDU.name &&
-        organisationLevel !== organisationUnitConstants.TEAM.name) {
-      throw new Error('Only available for LDU or Team')
+    if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
+      throw new Error('Not available for offender-manager')
     }
 
     return getCaseload(id, organisationLevel).then(function (result) {

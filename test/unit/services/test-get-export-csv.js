@@ -14,6 +14,14 @@ describe('services/get-export-csv', function () {
       expect(getExportCsv(orgUnit.LDU.name, helper.LDU_CASELOAD_RESULT, tabs.CASELOAD)).to.eql(helper.LDU_CASELOAD_CSV)
     })
 
+    it('for Region Caseload', function () {
+      expect(getExportCsv(orgUnit.REGION.name, helper.REGION_CASELOAD_RESULT, tabs.CASELOAD)).to.eql(helper.REGION_CASELOAD_CSV)
+    })
+
+    it('for National Caseload', function () {
+      expect(getExportCsv(orgUnit.NATIONAL.name, helper.NATIONAL_CASELOAD_RESULT, tabs.CASELOAD)).to.eql(helper.NATIONAL_CASELOAD_CSV)
+    })
+
     it('for Offender Manager Overview', function () {
       expect(getExportCsv(orgUnit.OFFENDER_MANAGER.name, helper.OM_OVERVIEW_RESULT, tabs.OVERVIEW)).to.eql(helper.OM_OVERVIEW_CSV)
     })
