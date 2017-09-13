@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 
 const insertWorkloadPoints = require('../../../../app/services/data/insert-workload-points')
-const workloadCapacityHelper = require('../../../helpers/data/aggregated-data-helper')
+const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 
 var workloadPointsResult = {
   table: 'workload_points',
@@ -56,6 +56,6 @@ describe('services/data/insert-new-workload-points', function () {
   })
 
   after(function () {
-    return workloadCapacityHelper.removeInsertedData([workloadPointsResult])
+    return dataHelper.removeInsertedData([workloadPointsResult])
   })
 })

@@ -8,41 +8,7 @@ const getWorkloadPoints = require('../../../../app/services/data/get-workload-po
 var inserts = []
 var expectedWorkloadPoints
 
-var insertedWorkloadPoints = {
-  commA: 11,
-  commB1: 12,
-  commB2: 13,
-  commC1: 14,
-  commC2: 15,
-  commD1: 16,
-  commD2: 17,
-  cusA: 21,
-  cusB1: 22,
-  cusB2: 23,
-  cusC1: 24,
-  cusC2: 25,
-  cusD1: 26,
-  cusD2: 27,
-  licA: 31,
-  licB1: 32,
-  licB2: 33,
-  licC1: 34,
-  licC2: 35,
-  licD1: 36,
-  licD2: 37,
-  updatedByUserId: 123,
-  sdr: 4,
-  sdrConversion: 5,
-  nominalTargetPso: 1234,
-  nominalTargetPo: 5678,
-  defaultContractedHoursPo: 37,
-  defaultContractedHoursPso: 38,
-  weightingOverdue: 10,
-  weightingWarrants: 20,
-  weightingUpw: 70,
-  paromsEnabled: true,
-  parom: 99
-}
+var insertedWorkloadPoints = dataHelper.defaultWorkloadPoints
 
 var getExistingActiveWorkloadPoints = function () {
   return knex('workload_points')

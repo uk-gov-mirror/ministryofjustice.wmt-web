@@ -17,7 +17,7 @@ var defaultWorkload = {
   community_last_16_weeks: 10
 }
 
-var defaultWorkloadPoints = {
+module.exports.defaultWorkloadPoints = {
   comm_tier_1: 11,
   comm_tier_2: 12,
   comm_tier_3: 13,
@@ -129,8 +129,8 @@ module.exports.addWorkloadPoints = function (inserts) {
   }
 
   var workloadPoints = [
-    defaultWorkloadPoints,
-    Object.assign({}, defaultWorkloadPoints, {
+    module.exports.defaultWorkloadPoints,
+    Object.assign({}, module.exports.defaultWorkloadPoints, {
       comm_tier_1: 111,
       comm_tier_2: 112,
       comm_tier_3: 113,

@@ -5,44 +5,9 @@ require('sinon-bluebird')
 const proxyquire = require('proxyquire')
 
 const Link = require('../../../app/services/domain/link')
+const dataHelper = require('../../helpers/data/aggregated-data-helper')
 
-const WORKLOAD_POINTS_DETAILS = {
-  comm_tier_1: 11,
-  comm_tier_2: 12,
-  comm_tier_3: 13,
-  comm_tier_4: 14,
-  comm_tier_5: 15,
-  comm_tier_6: 16,
-  comm_tier_7: 17,
-  cust_tier_1: 21,
-  cust_tier_2: 22,
-  cust_tier_3: 23,
-  cust_tier_4: 24,
-  cust_tier_5: 25,
-  cust_tier_6: 26,
-  cust_tier_7: 27,
-  lic_tier_1: 31,
-  lic_tier_2: 32,
-  lic_tier_3: 33,
-  lic_tier_4: 34,
-  lic_tier_5: 35,
-  lic_tier_6: 36,
-  lic_tier_7: 37,
-  user_id: 123,
-  sdr: 4,
-  sdr_conversion: 5,
-  nominal_target_spo: 1234,
-  nominal_target_po: 5678,
-  default_contracted_hours_po: 37,
-  default_contracted_hours_pso: 38,
-  weighting_o: 10,
-  weighting_w: 20,
-  weighting_u: 70,
-  paroms_enabled: 1,
-  parom: 99,
-  effective_from: '2017-04-01',
-  effective_to: null
-}
+const WORKLOAD_POINTS_DETAILS = dataHelper.defaultWorkloadPoints
 
 var WORKLOAD_POINTS_BREADCRUMBS = [
   new Link('Workload Points', '/admin/workload-points'),
