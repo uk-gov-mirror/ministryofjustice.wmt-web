@@ -357,9 +357,10 @@ module.exports.getAnyExistingReductionReasonId = function () {
 
 module.exports.selectGradeForWorkloadOwner = function (workloadOwnerId) {
   var promise = knex('workload_owner')
-    .first('offender_manager.grade_code')
-    .where('workload_owner.id', workloadOwnerId)
     .join('offender_manager', 'offender_manager.id', 'offender_manager_id')
+    .join('offender_manager_type', 'offender_manager.type_id', 'offender_manager_type.id')
+    .first('offender_manager_type.grade_code')
+    .where('workload_owner.id', workloadOwnerId)
     .then(function (results) {
       return results.grade_code
     })
