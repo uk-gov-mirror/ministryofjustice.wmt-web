@@ -127,7 +127,6 @@ describe('View your caseload flow', () => {
           expect(text).to.equal('Division')
         })
     })
-  
 
     it('should be accessible via the Caseload tab on regions default view', () => {
       return browser.url(nationalDefaultUrl)
@@ -162,7 +161,6 @@ describe('View your caseload flow', () => {
           expect(text).to.equal('National')
         })
     })
-  
 
     it('should be accessible via the Caseload tab on regions default view', () => {
       return browser.url(nationalDefaultUrl)
