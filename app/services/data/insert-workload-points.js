@@ -25,6 +25,7 @@ module.exports = function (workloadPoints) {
       lic_tier_5: workloadPoints.licC2,
       lic_tier_6: workloadPoints.licD1,
       lic_tier_7: workloadPoints.licD2,
+      // TODO: Insert the actual id of the logged in user who changed the points 
       user_id: 35,
       sdr: workloadPoints.sdr,
       sdr_conversion: workloadPoints.fdr,

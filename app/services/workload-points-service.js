@@ -19,8 +19,8 @@ module.exports.getWorkloadPoints = function (id, organisationLevel) {
       var formattedUpdateDate = dateFormatter.formatDate(results.effectiveFrom, 'DD/MM/YYYY')
       results.effectiveFrom = formattedUpdateDate
     }
-    result.title = 'Workload Points'
-    result.subTitle = 'Admin'
+    result.title = breadcrumbs[0].title
+    result.subTitle = breadcrumbs[1].title
     result.workloadPoints = results
     result.breadcrumbs = breadcrumbs
     return result
