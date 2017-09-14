@@ -36,7 +36,6 @@ module.exports = function () {
             'weighting_o AS weightingOverdue',
             'weighting_w AS weightingWarrants',
             'weighting_u AS weightingUpw',
-            // TODO: Add in check box for this?
             'paroms_enabled AS paromsEnabled',
             'parom AS parom',
             'effective_from AS effectiveFrom')

@@ -23,6 +23,8 @@ module.exports = function (router) {
     return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints)
       .then(function () {
         return res.redirect(302, '/admin/workload-points?success=true')
+      }).catch(function (error) {
+        next(error)
       })
   })
 }

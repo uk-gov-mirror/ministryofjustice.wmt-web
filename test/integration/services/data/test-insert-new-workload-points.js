@@ -30,7 +30,6 @@ var defaultWorkloadPoints = {
   licC2: 35,
   licD1: 36,
   licD2: 37,
-  user_id: 123,
   sdr: 4,
   fdr: 5,
   nominalTargetPso: 1234,
@@ -40,18 +39,20 @@ var defaultWorkloadPoints = {
   weightingOverdue: 10,
   weightingWarrants: 20,
   weightingUpw: 70,
-  paromsEnabled: 1,
   parom: 99,
-  effective_from: '2017-04-01',
-  effective_to: null
+  effectiveTo: null
 }
 
 describe('services/data/insert-new-workload-points', function () {
-  it('should return an id when a valid workload points object has been added', function () {
+  it('should return an id when a valid workload points object has been added, and the row should exist in the DB', function () {
     return insertWorkloadPoints(defaultWorkloadPoints)
       .then(function (id) {
         workloadPointsResult.id = id
         expect(id[0]).to.be.a('number')
+        return dataHelper.getAllWorkloadPointsForTest()
+        .then(function (workloadPoints) {
+          expect(workloadPoints).to.contain(defaultWorkloadPoints)
+        })
       })
   })
 

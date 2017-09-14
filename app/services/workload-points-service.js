@@ -37,5 +37,7 @@ module.exports.updateWorkloadPoints = function (workloadPoints) {
         })
       })
     })
+  }).catch(function (err) {
+    throw err
   })
 }
