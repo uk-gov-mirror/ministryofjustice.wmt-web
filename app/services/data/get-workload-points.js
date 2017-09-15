@@ -25,7 +25,6 @@ module.exports = function () {
             'lic_tier_5 AS licC2',
             'lic_tier_6 AS licD1',
             'lic_tier_7 AS licD2',
-            // TODO: Possibly update this to store AD username rather than id?
             'user_id AS updatedByUserId',
             'sdr AS sdr',
             'sdr_conversion AS sdrConversion',
@@ -36,7 +35,6 @@ module.exports = function () {
             'weighting_o AS weightingOverdue',
             'weighting_w AS weightingWarrants',
             'weighting_u AS weightingUpw',
-            'paroms_enabled AS paromsEnabled',
             'parom AS parom',
             'effective_from AS effectiveFrom')
     .whereNotNull('effective_from')
