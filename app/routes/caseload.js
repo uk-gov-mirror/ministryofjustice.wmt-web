@@ -1,4 +1,5 @@
 const getSubNav = require('../services/get-sub-nav')
+const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
 const getCaseload = require('../services/get-caseload')
 const getExportCsv = require('../services/get-export-csv')
@@ -9,56 +10,27 @@ module.exports = function (router) {
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 
-    if (organisationLevel !== organisationUnitConstants.LDU.name &&
-        organisationLevel !== organisationUnitConstants.TEAM.name) {
-      throw new Error('Only available for LDU or Team')
+    if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
+      throw new Error('Not available for offender-manager')
     }
+
+    var orgUnit = getOrganisationUnit('name', organisationLevel)
+    var childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)
 
     return getCaseload(id, organisationLevel)
       .then(function (result) {
-        if (organisationLevel === organisationUnitConstants.LDU.name) {
-          return res.render('caseload', {
-            screen: 'caseload',
-            linkId: req.params.id,
-            title: result.title,
-            subTitle: result.subTitle,
-            breadcrumbs: result.breadcrumbs,
-            subNav: getSubNav(id, organisationLevel, req.path),
-            organisationLevel: organisationLevel,
-            lduCaseloadDetails: result.lduCaseloadDetails
-          })
-        } else if (organisationLevel === organisationUnitConstants.TEAM.name) {
-          return res.render('caseload', {
-            screen: 'caseload',
-            linkId: req.params.id,
-            title: result.title,
-            subTitle: result.subTitle,
-            breadcrumbs: result.breadcrumbs,
-            subNav: getSubNav(id, organisationLevel, req.path),
-            organisationLevel: organisationLevel,
-            custodyTotalSummary: result.custodyTotalSummary,
-            communityTotalSummary: result.communityTotalSummary,
-            licenseTotalSummary: result.licenseTotalSummary,
-            caseTypes: [
-              {
-                displayName: 'overall',
-                array: result.overallCaseloadDetails
-              },
-              {
-                displayName: 'custody',
-                array: result.custodyCaseloadDetails
-              },
-              {
-                displayName: 'community',
-                array: result.communityCaseloadDetails
-              },
-              {
-                displayName: 'license',
-                array: result.licenseCaseloadDetails
-              }
-            ]
-          })
-        }
+        return res.render('caseload', {
+          screen: 'caseload',
+          linkId: req.params.id,
+          title: result.title,
+          subTitle: result.subTitle,
+          breadcrumbs: result.breadcrumbs,
+          subNav: getSubNav(id, organisationLevel, req.path),
+          organisationLevel: organisationLevel,
+          childOrganisationLevel: orgUnit.childOrganisationLevel,
+          childOrganisationLevelDisplayText: childOrgUnit.displayText,
+          caseloadDetails: caseloadDetails(organisationLevel, result)
+        })
       }).catch(function (error) {
         next(error)
       })
@@ -68,9 +40,8 @@ module.exports = function (router) {
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 
-    if (organisationLevel !== organisationUnitConstants.LDU.name &&
-        organisationLevel !== organisationUnitConstants.TEAM.name) {
-      throw new Error('Only available for LDU or Team')
+    if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
+      throw new Error('Not available for offender-manager')
     }
 
     return getCaseload(id, organisationLevel).then(function (result) {
@@ -81,4 +52,37 @@ module.exports = function (router) {
       next(error)
     })
   })
+
+  var caseloadDetails = function (organisationLevel, result) {
+    var details
+
+    if (organisationLevel === organisationUnitConstants.TEAM.name) {
+      details = [
+        {
+          displayName: 'Overall',
+          array: result.caseloadDetails.overallCaseloadDetails,
+          totalSummary: null
+        },
+        {
+          displayName: 'Custody',
+          array: result.caseloadDetails.custodyCaseloadDetails,
+          totalSummary: result.caseloadDetails.custodyTotalSummary
+        },
+        {
+          displayName: 'Community',
+          array: result.caseloadDetails.communityCaseloadDetails,
+          totalSummary: result.caseloadDetails.communityTotalSummary
+        },
+        {
+          displayName: 'License',
+          array: result.caseloadDetails.licenseCaseloadDetails,
+          totalSummary: result.caseloadDetails.licenseTotalSummary
+        }
+      ]
+    } else {
+      details = result.caseloadDetails
+    }
+
+    return details
+  }
 }

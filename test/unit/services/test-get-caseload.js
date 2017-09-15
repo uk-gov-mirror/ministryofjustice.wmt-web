@@ -109,7 +109,7 @@ describe('services/get-caseload', function () {
   it('should return a results object with lduCaseloadDetails when org unit is LDU', function () {
     getCaseloadDetail.withArgs(id, lduName).resolves(LDU_CASELOAD)
     return getCaseload(id, lduName).then(function (result) {
-      expect(result.lduCaseloadDetails).to.eql(PERCENTAGE_RESULTS)
+      expect(result.caseloadDetails).to.eql(PERCENTAGE_RESULTS)
     })
   })
 
@@ -133,13 +133,13 @@ describe('services/get-caseload', function () {
   it('should return a results object with all necessary results when org unit is Team', function () {
     getCaseloadDetail.withArgs(id, teamName).resolves(TEAM_CASELOAD)
     return getCaseload(id, teamName).then(function (result) {
-      expect(result.overallCaseloadDetails).to.eql(OVERALL_CASELOAD)
-      expect(result.communityCaseloadDetails).to.eql(CASELOAD)
-      expect(result.custodyCaseloadDetails).to.eql(CASELOAD)
-      expect(result.licenseCaseloadDetails).to.eql(CASELOAD)
-      expect(result.custodyTotalSummary).to.eql(999)
-      expect(result.communityTotalSummary).to.eql(999)
-      expect(result.licenseTotalSummary).to.eql(999)
+      expect(result.caseloadDetails.overallCaseloadDetails).to.eql(OVERALL_CASELOAD)
+      expect(result.caseloadDetails.communityCaseloadDetails).to.eql(CASELOAD)
+      expect(result.caseloadDetails.custodyCaseloadDetails).to.eql(CASELOAD)
+      expect(result.caseloadDetails.licenseCaseloadDetails).to.eql(CASELOAD)
+      expect(result.caseloadDetails.custodyTotalSummary).to.eql(999)
+      expect(result.caseloadDetails.communityTotalSummary).to.eql(999)
+      expect(result.caseloadDetails.licenseTotalSummary).to.eql(999)
     })
   })
 })

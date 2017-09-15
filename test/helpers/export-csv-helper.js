@@ -1,12 +1,14 @@
 module.exports.TEAM_CASELOAD_RESULT = {
   title: 'Test Team',
-  overallCaseloadDetails: [
-    { linkId: 2767, name: 'John Smith', gradeCode: 'PO', untiered: 0, d2: 3, d1: 6, c2: 9, c1: 6, b2: 12, b1: 18, a: 9, totalCases: 189, caseType: 'COMMUNITY' },
-    { linkId: 2771, name: 'Tony Test', gradeCode: 'PO', untiered: 0, d2: 3, d1: 6, c2: 9, c1: 6, b2: 12, b1: 18, a: 9, totalCases: 189, caseType: 'COMMUNITY' }
-  ],
-  custodyCaseloadDetails: [],
-  communityCaseloadDetails: [],
-  licenseCaseloadDetails: []
+  caseloadDetails: {
+    overallCaseloadDetails: [
+      { linkId: 2767, name: 'John Smith', gradeCode: 'PO', untiered: 0, d2: 3, d1: 6, c2: 9, c1: 6, b2: 12, b1: 18, a: 9, totalCases: 189, caseType: 'COMMUNITY' },
+      { linkId: 2771, name: 'Tony Test', gradeCode: 'PO', untiered: 0, d2: 3, d1: 6, c2: 9, c1: 6, b2: 12, b1: 18, a: 9, totalCases: 189, caseType: 'COMMUNITY' }
+    ],
+    custodyCaseloadDetails: [],
+    communityCaseloadDetails: [],
+    licenseCaseloadDetails: []
+  }
 }
 
 module.exports.TEAM_CASELOAD_CSV = {
@@ -25,7 +27,7 @@ module.exports.TEAM_CASELOAD_CSV = {
 
 module.exports.LDU_CASELOAD_RESULT = {
   title: 'Test LDU',
-  lduCaseloadDetails: [
+  caseloadDetails: [
     { linkId: 1265,
       name: 'Test Team 1',
       grades: [
@@ -48,6 +50,60 @@ module.exports.LDU_CASELOAD_CSV = {
       '"Test Team 1","PO",50,0,50,25,10,0,50,50,50\n' +
       '"Test Team 1","PSO",50,0,50,75,90,100,50,50,50\n' +
       '"Test Team 2","PO",66.66666666666666,0,50,62.5,10,70,75,80,50'
+}
+
+module.exports.REGION_CASELOAD_RESULT = {
+  title: 'Test Region',
+  caseloadDetails: [
+    { linkId: 1265,
+      name: 'Test LDU 1',
+      grades: [
+        { gradeCode: 'PO', untiered: 0, d2: 50, d1: 25, c2: 10, c1: 0, b2: 50, b1: 50, a: 50, totalCases: 50 },
+        { gradeCode: 'PSO', untiered: 0, d2: 50, d1: 75, c2: 90, c1: 100, b2: 50, b1: 50, a: 50, totalCases: 50 }
+      ]
+    },
+    { linkId: 1266,
+      name: 'Test LDU 2',
+      grades: [
+        { gradeCode: 'PO', untiered: 0, d2: 50, d1: 62.5, c2: 10, c1: 70, b2: 75, b1: 80, a: 50, totalCases: 66.66666666666666 }
+      ]
+    }
+  ]
+}
+
+module.exports.REGION_CASELOAD_CSV = {
+  filename: 'Test_Region_Caseload.csv',
+  csv: '"LDUClusterName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n' +
+      '"Test LDU 1","PO",50,0,50,25,10,0,50,50,50\n' +
+      '"Test LDU 1","PSO",50,0,50,75,90,100,50,50,50\n' +
+      '"Test LDU 2","PO",66.66666666666666,0,50,62.5,10,70,75,80,50'
+}
+
+module.exports.NATIONAL_CASELOAD_RESULT = {
+  title: 'Test National',
+  caseloadDetails: [
+    { linkId: 1265,
+      name: 'Test Region 1',
+      grades: [
+        { gradeCode: 'PO', untiered: 0, d2: 50, d1: 25, c2: 10, c1: 0, b2: 50, b1: 50, a: 50, totalCases: 50 },
+        { gradeCode: 'PSO', untiered: 0, d2: 50, d1: 75, c2: 90, c1: 100, b2: 50, b1: 50, a: 50, totalCases: 50 }
+      ]
+    },
+    { linkId: 1266,
+      name: 'Test Region 2',
+      grades: [
+        { gradeCode: 'PO', untiered: 0, d2: 50, d1: 62.5, c2: 10, c1: 70, b2: 75, b1: 80, a: 50, totalCases: 66.66666666666666 }
+      ]
+    }
+  ]
+}
+
+module.exports.NATIONAL_CASELOAD_CSV = {
+  filename: 'Test_National_Caseload.csv',
+  csv: '"DivisionName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n' +
+      '"Test Region 1","PO",50,0,50,25,10,0,50,50,50\n' +
+      '"Test Region 1","PSO",50,0,50,75,90,100,50,50,50\n' +
+      '"Test Region 2","PO",66.66666666666666,0,50,62.5,10,70,75,80,50'
 }
 
 module.exports.OM_OVERVIEW_RESULT = {

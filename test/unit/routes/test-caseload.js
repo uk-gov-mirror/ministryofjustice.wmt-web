@@ -8,6 +8,7 @@ const orgUnit = require('../../../app/constants/organisation-unit')
 const tabs = require('../../../app/constants/wmt-tabs')
 
 const REGION_CASELOAD_URL = '/region/1/caseload'
+const NATIONAL_CASELOAD_URL = '/hmpps/0/caseload'
 const LDU_CASELOAD_URL = '/ldu/1/caseload'
 const LDU_MISSING_ID_URL = '/ldu/caseload'
 const TEAM_CASELOAD_URL = '/team/1/caseload'
@@ -16,19 +17,28 @@ const TEAM_MISSING_ID_URL = '/team/caseload'
 const TEAM_CASELOAD_CSV_URL = '/team/1/caseload/csv'
 const LDU_CASELOAD_CSV_URL = '/ldu/1/caseload/csv'
 
-const CASELOAD = {
+const TEAM_CASELOAD = {
   title: 'Title',
   subTitle: 'SubTitle',
   breadcrumbs: [{}],
   subNav: {},
-  custodyTotalSummary: 0,
-  communityTotalSummary: 0,
-  licenseTotalSummary: 0,
-  caseTypes: [{}],
-  overallCaseloadDetails: [],
-  custodyCaseloadDetails: [],
-  communityCaseloadDetails: [],
-  licenseCaseloadDetails: []
+  caseloadDetails: {
+    overallCaseloadDetails: [],
+    communityCaseloadDetails: [],
+    custodyCaseloadDetails: [],
+    licenseCaseloadDetails: [],
+    custodyTotalSummary: 0,
+    communityTotalSummary: 0,
+    licenseTotalSummary: 0
+  }
+}
+
+const ORG_CASELOAD = {
+  title: 'Title',
+  subTitle: 'SubTitle',
+  breadcrumbs: [{}],
+  subNav: {},
+  caseloadDetails: [{}]
 }
 
 const EXPORT_CSV_FILENAME = 'Test CSV File.csv'
@@ -57,22 +67,32 @@ before(function () {
 
 describe('caseload route', function () {
   it('should respond with 200 when team and id included in URL', function () {
-    getCaseload.resolves(CASELOAD)
+    getCaseload.resolves(TEAM_CASELOAD)
     return supertest(app).get(TEAM_CASELOAD_URL).expect(200)
   })
 
   it('should respond with 500 when team, but no id, included in URL', function () {
-    getCaseload.resolves(CASELOAD)
+    getCaseload.resolves(TEAM_CASELOAD)
     return supertest(app).get(TEAM_MISSING_ID_URL).expect(500)
   })
 
-  it('should repsond with 500 for non-team URL', function () {
-    getCaseload.resolves(CASELOAD)
-    return supertest(app).get(REGION_CASELOAD_URL).expect(500)
+  it('should repsond with 200 for LDU URL', function () {
+    getCaseload.resolves(ORG_CASELOAD)
+    return supertest(app).get(LDU_CASELOAD_URL).expect(200)
+  })
+
+  it('should repsond with 200 for Region URL', function () {
+    getCaseload.resolves(ORG_CASELOAD)
+    return supertest(app).get(REGION_CASELOAD_URL).expect(200)
+  })
+
+  it('should repsond with 200 for National URL', function () {
+    getCaseload.resolves(ORG_CASELOAD)
+    return supertest(app).get(NATIONAL_CASELOAD_URL).expect(200)
   })
 
   it('should call the getSubNav with the correct parameters team', function () {
-    getCaseload.resolves(CASELOAD)
+    getCaseload.resolves(TEAM_CASELOAD)
     return supertest(app)
       .get(TEAM_CASELOAD_URL)
       .expect(200)
@@ -83,17 +103,17 @@ describe('caseload route', function () {
 
   // LDU Level
   it('should respond with 200 when ldu and id are included in URL', function () {
-    getCaseload.resolves(CASELOAD)
+    getCaseload.resolves(TEAM_CASELOAD)
     return supertest(app).get(LDU_CASELOAD_URL).expect(200)
   })
 
   it('should respond with 500 when ldu, but no id, is included in URL', function () {
-    getCaseload.resolves(CASELOAD)
+    getCaseload.resolves(TEAM_CASELOAD)
     return supertest(app).get(LDU_MISSING_ID_URL).expect(500)
   })
 
   it('should call the getSubNav with the correct parameters for LDU', function () {
-    getCaseload.resolves(CASELOAD)
+    getCaseload.resolves(TEAM_CASELOAD)
     return supertest(app)
       .get(LDU_CASELOAD_URL)
       .expect(200)
@@ -106,22 +126,22 @@ describe('caseload route', function () {
 describe('Caseload csv export route', function () {
   describe('for a Team', function () {
     it('should respond with 200 when team and id included in URL', function () {
-      getCaseload.resolves(CASELOAD)
+      getCaseload.resolves(TEAM_CASELOAD)
       return supertest(app).get(TEAM_CASELOAD_CSV_URL).expect(200)
     })
 
     it('should call getExportCsv with the correct parameters', function () {
-      getCaseload.resolves(CASELOAD)
+      getCaseload.resolves(TEAM_CASELOAD)
       return supertest(app)
         .get(TEAM_CASELOAD_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getExportCsv.calledWith(orgUnit.TEAM.name, CASELOAD, tabs.CASELOAD)).to.be.true //eslint-disable-line
+          expect(getExportCsv.calledWith(orgUnit.TEAM.name, TEAM_CASELOAD, tabs.CASELOAD)).to.be.true //eslint-disable-line
         })
     })
 
     it('should add the correct csv to the response header', function () {
-      getCaseload.resolves(CASELOAD)
+      getCaseload.resolves(TEAM_CASELOAD)
       return supertest(app)
         .get(TEAM_CASELOAD_CSV_URL)
         .then(function (response) {
@@ -134,22 +154,22 @@ describe('Caseload csv export route', function () {
 
   describe('for an LDU', function () {
     it('should respond with 200 when ldu and id included in URL', function () {
-      getCaseload.resolves(CASELOAD)
+      getCaseload.resolves(TEAM_CASELOAD)
       return supertest(app).get(LDU_CASELOAD_CSV_URL).expect(200)
     })
 
     it('should call getExportCsv with the correct parameters', function () {
-      getCaseload.resolves(CASELOAD)
+      getCaseload.resolves(TEAM_CASELOAD)
       return supertest(app)
         .get(LDU_CASELOAD_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getExportCsv.calledWith(orgUnit.LDU.name, CASELOAD, tabs.CASELOAD)).to.be.true //eslint-disable-line
+          expect(getExportCsv.calledWith(orgUnit.LDU.name, TEAM_CASELOAD, tabs.CASELOAD)).to.be.true //eslint-disable-line
         })
     })
 
     it('should add the correct csv to the response header', function () {
-      getCaseload.resolves(CASELOAD)
+      getCaseload.resolves(TEAM_CASELOAD)
       return supertest(app)
         .get(LDU_CASELOAD_CSV_URL)
         .then(function (response) {

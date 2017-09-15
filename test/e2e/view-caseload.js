@@ -113,4 +113,71 @@ describe('View your caseload flow', () => {
       .click('[href="' + teamDefaultUrl + '/caseload"]')
       .waitForExist('.sln-table-caseload')
   })
+
+  describe('should navigate to the Region caseload screen', () => {
+    it('with the correct table, breadcrumbs and export button', () => {
+      return browser.url(regionDefaultUrl + '/caseload')
+        .waitForExist('.sln-table-caseload')
+        .waitForExist('.breadcrumbs')
+        .waitForExist('.sln-export')
+        .waitForExist('[href="' + regionDefaultUrl + '/caseload/csv"]')
+        .waitForExist('.sln-page-subtitle')
+        .getText('.sln-page-subtitle')
+        .then(function (text) {
+          expect(text).to.equal('Division')
+        })
+    })
+
+    it('should be accessible via the Caseload tab on regions default view', () => {
+      return browser.url(nationalDefaultUrl)
+        .click('[href="' + regionDefaultUrl + '"]')
+        .click('[href="' + regionDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload')
+    })
+
+    it('should be accessible via the Case Progress tab when on any other tab', () => {
+      return browser.url(regionDefaultUrl)
+        .click('[href="' + regionDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload')
+        .click('[href="' + regionDefaultUrl + '/case-progress"]')
+        .click('[href="' + regionDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload')
+        .click('[href="' + regionDefaultUrl + '/caseload-capacity"]')
+        .click('[href="' + regionDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload')
+    })
+  })
+
+  describe('should navigate to the National caseload screen', () => {
+    it('with the correct table, breadcrumbs and export button', () => {
+      return browser.url(nationalDefaultUrl + '/caseload')
+        .waitForExist('.sln-table-caseload')
+        .waitForExist('.breadcrumbs')
+        .waitForExist('.sln-export')
+        .waitForExist('[href="' + nationalDefaultUrl + '/caseload/csv"]')
+        .waitForExist('.sln-page-subtitle')
+        .getText('.sln-page-subtitle')
+        .then(function (text) {
+          expect(text).to.equal('National')
+        })
+    })
+
+    it('should be accessible via the Caseload tab on regions default view', () => {
+      return browser.url(nationalDefaultUrl)
+        .click('[href="' + nationalDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload')
+    })
+
+    it('should be accessible via the Case Progress tab when on any other tab', () => {
+      return browser.url(nationalDefaultUrl)
+        .click('[href="' + nationalDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload')
+        .click('[href="' + nationalDefaultUrl + '/case-progress"]')
+        .click('[href="' + nationalDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload')
+        .click('[href="' + nationalDefaultUrl + '/caseload-capacity"]')
+        .click('[href="' + nationalDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload')
+    })
+  })
 })

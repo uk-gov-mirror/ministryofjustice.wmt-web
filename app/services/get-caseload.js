@@ -15,39 +15,45 @@ module.exports = function (id, organisationLevel) {
       var title = breadcrumbs[0].title
       var subTitle = organisationUnitType.displayText
 
-      if (organisationLevel === organisationUnitConstants.LDU.name) {
-        var lduCaseloadResults = percentageCalculator(results)
-        return {
-          breadcrumbs: breadcrumbs,
-          title: title,
-          subTitle: subTitle,
-          lduCaseloadDetails: lduCaseloadResults
-        }
-      } else if (organisationLevel === organisationUnitConstants.TEAM.name) {
-        // Overall cases
-        var overallResults = caseloadHelper.getOverallCaseload(results)
-        // Custody cases
-        var custodyResults = caseloadHelper.getCaseloadByType(results, caseType.CUSTODY)
-        var custodySummary = caseloadHelper.getCaseloadTotalSummary(custodyResults)
-        // Community cases
-        var communityResults = caseloadHelper.getCaseloadByType(results, caseType.COMMUNITY)
-        var communitySummary = caseloadHelper.getCaseloadTotalSummary(communityResults)
-        // License cases
-        var licenseResults = caseloadHelper.getCaseloadByType(results, caseType.LICENSE)
-        var licenseSummary = caseloadHelper.getCaseloadTotalSummary(licenseResults)
-        // Return the result set
-        return {
-          overallCaseloadDetails: overallResults,
-          communityCaseloadDetails: communityResults,
-          custodyCaseloadDetails: custodyResults,
-          licenseCaseloadDetails: licenseResults,
-          custodyTotalSummary: custodySummary,
-          communityTotalSummary: communitySummary,
-          licenseTotalSummary: licenseSummary,
-          breadcrumbs: breadcrumbs,
-          title: title,
-          subTitle: subTitle
-        }
+      var caseloadResults = parseCaseloadResults(organisationLevel, results)
+
+      return {
+        breadcrumbs: breadcrumbs,
+        title: title,
+        subTitle: subTitle,
+        caseloadDetails: caseloadResults
       }
     })
+}
+
+var parseCaseloadResults = function (organisationLevel, results) {
+  var caseloadResults
+
+  if (organisationLevel !== organisationUnitConstants.TEAM.name) {
+    caseloadResults = percentageCalculator(results)
+  } else {
+    // Overall cases
+    var overallResults = caseloadHelper.getOverallCaseload(results)
+    // Custody cases
+    var custodyResults = caseloadHelper.getCaseloadByType(results, caseType.CUSTODY)
+    var custodySummary = caseloadHelper.getCaseloadTotalSummary(custodyResults)
+    // Community cases
+    var communityResults = caseloadHelper.getCaseloadByType(results, caseType.COMMUNITY)
+    var communitySummary = caseloadHelper.getCaseloadTotalSummary(communityResults)
+    // License cases
+    var licenseResults = caseloadHelper.getCaseloadByType(results, caseType.LICENSE)
+    var licenseSummary = caseloadHelper.getCaseloadTotalSummary(licenseResults)
+
+    caseloadResults = {
+      overallCaseloadDetails: overallResults,
+      communityCaseloadDetails: communityResults,
+      custodyCaseloadDetails: custodyResults,
+      licenseCaseloadDetails: licenseResults,
+      custodyTotalSummary: custodySummary,
+      communityTotalSummary: communitySummary,
+      licenseTotalSummary: licenseSummary
+    }
+  }
+
+  return caseloadResults
 }
