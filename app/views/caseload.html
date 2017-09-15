@@ -122,15 +122,15 @@
           <td rowspan="{{ org.grades.length }}" headers="name team"><a href="/{{ childOrganisationLevel }}/{{ org.linkId }}">{{ org.name }}</a></td>
           {% endif %}
           <td headers="grade team">{{ org.grades[i].gradeCode }}</td>
-          <td headers="overall tiers" class="sln-toRound">{{ org.grades[i].totalCases }}</td>
-          <td headers="untiered tiers" class="sln-toRound">{{ org.grades[i].untiered }}</td>
-          <td headers="d2 tiers" class="sln-toRound">{{ org.grades[i].d2 }}</td>
-          <td headers="d1 tiers" class="sln-toRound">{{ org.grades[i].d1 }}</td>
-          <td headers="c2 tiers" class="sln-toRound">{{ org.grades[i].c2 }}</td>
-          <td headers="c1 tiers" class="sln-toRound">{{ org.grades[i].c1 }}</td>
-          <td headers="b2 tiers" class="sln-toRound">{{ org.grades[i].b2 }}</td>
-          <td headers="b1 tiers" class="sln-toRound">{{ org.grades[i].b1 }}</td>
-          <td headers="a tiers" class="sln-toRound">{{ org.grades[i].a }}</td>
+          <td headers="overall tiers" class="sln-to-round">{{ org.grades[i].totalCases }}</td>
+          <td headers="untiered tiers" class="sln-to-round">{{ org.grades[i].untiered }}</td>
+          <td headers="d2 tiers" class="sln-to-round">{{ org.grades[i].d2 }}</td>
+          <td headers="d1 tiers" class="sln-to-round">{{ org.grades[i].d1 }}</td>
+          <td headers="c2 tiers" class="sln-to-round">{{ org.grades[i].c2 }}</td>
+          <td headers="c1 tiers" class="sln-to-round">{{ org.grades[i].c1 }}</td>
+          <td headers="b2 tiers" class="sln-to-round">{{ org.grades[i].b2 }}</td>
+          <td headers="b1 tiers" class="sln-to-round">{{ org.grades[i].b1 }}</td>
+          <td headers="a tiers" class="sln-to-round">{{ org.grades[i].a }}</td>
         </tr>
         {% endfor %}
       {% endfor %}
@@ -145,7 +145,7 @@
 {% block body_end %}
   <script src="/public/javascripts/vendor/jquery.js"></script>
   <script src="/public/javascripts/jquery.tabs.js"></script>
-
+  <script src="/public/javascripts/round-to-one-decimal-place.js"></script>
   <script>
     $(function(){
       $('.js-tabs').tabs();
@@ -153,13 +153,6 @@
   </script>
 
 <script>
-  function roundTableValues(){
-    var toRounds = document.getElementsByClassName('sln-toRound')
-    for(var i=0; i < toRounds.length; i++){
-      var roundedValue = Math.round(toRounds[i].innerHTML * 10 ) / 10
-      toRounds[i].innerHTML = roundedValue + '%'
-    }
-  }
-  document.onload = roundTableValues()
+  document.onload = roundValuesToOneDecimalPlace()
 </script>
 {% endblock %}
