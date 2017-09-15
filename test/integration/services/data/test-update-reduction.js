@@ -2,7 +2,7 @@ const expect = require('chai').expect
 
 const insertReduction = require('../../../../app/services/data/insert-reduction')
 const Reduction = require('../../../../app/services/domain/reduction')
-const workloadCapacityHelper = require('../../../helpers/data/aggregated-data-helper')
+const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 const updateReduction = require('../../../../app/services/data/update-reduction')
 const reductionStatusType = require('../../../../app/constants/reduction-status-type')
 
@@ -15,32 +15,38 @@ var testReduction = new Reduction(1, 5, new Date(), new Date(), 'Test Note', red
 const updatedReductionNote = 'New test note'
 var workloadOwnerId
 var addedReductionId
+var inserts = []
 
 describe('/services/data/update-reduction', function () {
   before(function () {
-    return workloadCapacityHelper.getAnyExistingWorkloadOwnerId()
-      .then(function (id) {
-        workloadOwnerId = id
-        return workloadCapacityHelper.getAnyExistingReductionReasonId()
-          .then(function (id) {
-            testReduction.reasonForReductionId = id
-
-            return insertReduction(workloadOwnerId, testReduction)
-              .then(function (reductionId) {
-                addedReductionId = reductionId
-              })
-          })
-      })
+    return dataHelper.addWorkloadCapacitiesForOffenderManager()
+    .then(function (result) {
+      inserts = result
+      return dataHelper.getAnyExistingWorkloadOwnerId()
+        .then(function (id) {
+          workloadOwnerId = id
+          return dataHelper.getAnyExistingReductionReasonId()
+            .then(function (id) {
+              testReduction.reasonForReductionId = id
+              return insertReduction(workloadOwnerId, testReduction)
+                .then(function (reductionId) {
+                  addedReductionId = reductionId
+                })
+            })
+        })
+    })
   })
 
   it('should update a reduction and return an id ', function () {
-    var updatedReduction = new Reduction(testReduction.reasonForReductionId,
+    var updatedReduction = new Reduction(
+      testReduction.reasonForReductionId,
       testReduction.hours,
       testReduction.reductionStartDate,
       testReduction.reductionEndDate,
       testReduction.reasonForReductionId,
       updatedReductionNote,
-      testReduction.status)
+      testReduction.status
+    )
 
     return updateReduction(addedReductionId, workloadOwnerId, updatedReduction)
       .then(function (result) {
@@ -52,6 +58,7 @@ describe('/services/data/update-reduction', function () {
   })
 
   after(function () {
-    return workloadCapacityHelper.removeInsertedData([reductionResult])
+    inserts.push(reductionResult)
+    return dataHelper.removeInsertedData(inserts)
   })
 })

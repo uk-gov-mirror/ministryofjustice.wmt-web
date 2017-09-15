@@ -14,7 +14,7 @@ lduId=$2
 teamId=$3
 omId=$4
 
-pa11yCommand="""pa11y --standard WCAG2AA --ignore "warning\;notice" --hide-elements "div[role=presentation],a[role=dynamic]" """
+pa11yCommand="""pa11y --standard WCAG2AA --ignore "warning\;notice" --hide-elements "div[role=presentation],a[role=dynamic],a[role=anchor-div]" """
 
 if [ $WMT_BASE_URL ]
 then 
@@ -34,6 +34,12 @@ national='hmpps/0'
 
 # Root
 urls+=("$host/")
+
+offender_manager='offender-manager'
+team='team'
+ldu='ldu'
+region='region'
+national='hmpps/0'
 
 # Capacity
 capacity_url='caseload-capacity'
@@ -71,6 +77,10 @@ reductions_url='reductions'
 add_reductions_url='add-reduction'
 urls+=("$host/$offender_manager/$omId/$reductions_url")
 urls+=("$host/$offender_manager/$omId/$add_reductions_url")
+
+# Admin
+admin='admin'
+urls+=("$host/$admin/workload-points")
 
 for url in "${urls[@]}"
 do

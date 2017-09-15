@@ -37,8 +37,8 @@ module.exports.removeInsertedData = function (inserts) {
   })
 }
 
-module.exports.getMaxId = function () {
-  return knex('workload_owner')
+module.exports.getMaxReductionReasonId = function () {
+  return knex('reduction_reason')
   .max('id AS maxId')
     .then(function (maxId) {
       return maxId[0].maxId

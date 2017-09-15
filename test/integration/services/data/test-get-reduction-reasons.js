@@ -18,7 +18,8 @@ var insertedId
 
 describe('services/data/get-reduction-reasons', function () {
   before(function () {
-    return helper.getMaxId().then(function (maxId) {
+    return helper.getMaxReductionReasonId()
+    .then(function (maxId) {
       insertedId = (maxId + 1)
       return helper.addReductionsRefData(maxId)
         .then(function (builtInserts) {

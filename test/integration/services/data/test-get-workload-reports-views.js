@@ -2,7 +2,7 @@ const expect = require('chai').expect
 const config = require('../../../../knexfile').integrationTests
 const knex = require('knex')(config)
 
-const workloadCapactiyHelper = require('../../../helpers/data/aggregated-data-helper')
+const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 const getWorkloadReportsViews = require('../../../../app/services/data/get-workload-report-views')
 
 const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000
@@ -28,21 +28,21 @@ var getExpectedNationalCapacity = function (fromDate, toDate) {
 
 describe('services/data/get-workload-report-views', function () {
   before(function () {
-    return workloadCapactiyHelper.addWorkloadCapacitiesForOffenderManager()
+    return dataHelper.addWorkloadCapacitiesForOffenderManager()
     .then(function (builtInserts) {
       inserts = builtInserts
     })
     .then(function () {
-      return workloadCapactiyHelper.getWorkloadReportEffectiveFromDate()
+      return dataHelper.getWorkloadReportEffectiveFromDate()
       .then(function (result) {
         startDate = result.effective_from
         endDate = new Date((startDate.getTime() + 360 * ONE_DAY_IN_MS))
         expectedResults = [
           {
             effective_from: startDate,
-            total_points: 50,
-            available_points: 25,
-            reduction_hours: 3
+            total_points: 70,
+            available_points: 35,
+            reduction_hours: 6
           }
         ]
       })
@@ -84,15 +84,16 @@ describe('services/data/get-workload-report-views', function () {
   it('should retrieve all the workloads within the date range for an OM', function () {
     return getWorkloadReportsViews(inserts.filter((item) => item.table === 'workload_owner')[0].id, startDate, endDate, 'offender-manager')
     .then(function (results) {
-      expect(results.length).to.equal(1)
-      var expectedResults = [
-        {effective_from: startDate, total_points: 50, available_points: 25, reduction_hours: 3}
+      expect(results.length).to.equal(2)
+      var omExpectedResults = [
+        { effective_from: startDate, total_points: 50, available_points: 25, reduction_hours: 3 },
+        { effective_from: startDate, total_points: 20, available_points: 10, reduction_hours: 3 }
       ]
-      expect(results).to.eql(expectedResults)
+      expect(results).to.eql(omExpectedResults)
     })
   })
 
   after(function () {
-    return workloadCapactiyHelper.removeInsertedData(inserts)
+    return dataHelper.removeInsertedData(inserts)
   })
 })

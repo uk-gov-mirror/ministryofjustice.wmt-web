@@ -1,19 +1,20 @@
 const expect = require('chai').expect
 
-describe('View landing page and national view', () => {
-  it('should navigate to the landing page and have a link present', () => {
+describe('View landing page', () => {
+  it('should navigate to the landing page and have a national view link present', () => {
     return browser.url('/')
       .waitForExist('.sln-overview-heading')
-      .waitForExist('.sln-capacity-link')
-      .getText('.sln-capacity-link')
+      .waitForExist('.sln-national-link')
+      .getText('.sln-national-link')
       .then(function (text) {
         expect(text).to.equal('National Level Capacity')
       })
   })
-  it('should click the link and the national view should appear', () => {
+
+  it('should click the national view link and the national view should appear', () => {
     return browser.url('/')
-      .waitForExist('.sln-capacity-link')
-      .click('.sln-capacity-link')
+      .waitForExist('.sln-national-link')
+      .click('.sln-national-link')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('.sln-page-subtitle')
