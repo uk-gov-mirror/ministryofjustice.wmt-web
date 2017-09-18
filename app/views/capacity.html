@@ -40,6 +40,49 @@
 
 <div id="plotly-div-line" role="presentation"></div>
 
+<div id="team-capacity"></div>
+
+  <h3 class="heading-medium">Capacity breakdown</h3>
+  <table id="example" class="data-table dataTable">
+    <thead>
+      <tr>
+        <th colspan="2">Offender manager</th>
+        <th class="" colspan="14">Capacity breakdown</th>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <th>Grade</th>
+        <th>Capacity(%)</th>
+        <th>Cases</th>
+        <th><abbr title="Parole assessment reports by the Offender Manager">PAROMs</abbr></th>
+        <th><abbr title="Fast delivery reports">FDRs</abbr></th>
+        <th><abbr title="Standard delivery reports">SDRs</abbr></th>
+        <th><abbr title="Active Risk Management System">ARMS</abbr></th>
+        <th><abbr title="Group supervision">GS</abbr></th>
+        <th><abbr title="Case management support">CMS</abbr></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for member in capacityBreakdown %}
+      <tr>
+        <td><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+        <td>{{ member.grade }}</td>
+        <td>{{ ((member.capacityPercentage * 10) | round) / 10 }}%</td>
+        <td>{{ member.totalCases }}</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>{{ member.cmsPercentage }}%</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+
+
+
 </main>
 {% endblock %}
 

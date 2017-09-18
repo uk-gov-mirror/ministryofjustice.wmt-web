@@ -31,7 +31,7 @@ module.exports = function (caseloadTotalsByGrade) {
   return percentageResults
 }
 
-var calculatePercentage = function (value, total) {
+module.exports.calculatePercentage = function (value, total) {
   var result = 0
 
   if (total !== 0) {
