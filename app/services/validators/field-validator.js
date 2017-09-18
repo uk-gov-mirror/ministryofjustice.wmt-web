@@ -1,3 +1,4 @@
+const validator = require('validator')
 const ERROR_MESSAGES = require('./validation-error-messages')
 
 class FieldValidator {
@@ -20,6 +21,18 @@ class FieldValidator {
     }
 
     return this
+  }
+
+  isInt (min, max) {
+    let options = { allow_leading_zeroes: false, min: min, max: max }
+    if (!validator.isInt(this.data, options)) {
+      this.errors.add(this.fieldName, ERROR_MESSAGES.getIsIntegerMessage, { min: min, max: max })
+    }
+    return this
+  }
+
+  isFloat (min, max) {
+    return false
   }
 }
 
