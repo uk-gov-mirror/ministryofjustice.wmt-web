@@ -26,7 +26,10 @@ describe('/services/data/create-calculate-workload-points-task', function () {
           task = {
             submitting_agent: 'WEB',
             type: 'CALCULATE-WORKLOAD-POINTS',
-            additional_data: JSON.stringify({workloadBatch: {startingId: workloadId, batchSize: batchSize}}),
+            additional_data: JSON.stringify({
+              workloadBatch: { startingId: workloadId, batchSize: batchSize },
+              operationType: 'UPDATE'
+            }),
             workload_report_id: workloadReportId,
             status: 'PENDING'
           }
