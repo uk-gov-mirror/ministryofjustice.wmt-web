@@ -129,5 +129,76 @@ describe('services/validators/field-validator', function () {
   })
 
   describe('isFloat', function () {
+    it('lower boundary (zero): should return false if passed valid data', function () {
+      var min = 0.0
+      var max = 99.0
+      FieldValidator('0.0', FIELD_NAME, errorHandler).isFloat(min, max)
+      var errors = errorHandler.get()
+      expect(errors).to.equal(false)
+    })
+
+    it('lower boundary (non-zero): should return false if passed valid data', function () {
+      var min = 1.1
+      var max = 99.0
+      FieldValidator('1.1', FIELD_NAME, errorHandler).isFloat(min, max)
+      var errors = errorHandler.get()
+      expect(errors).to.equal(false)
+    })
+
+    it('upper boundary: should return false if passed valid data', function () {
+      var min = 1.0
+      var max = 99.0
+      FieldValidator('99.0', FIELD_NAME, errorHandler).isFloat(min, max)
+      var errors = errorHandler.get()
+      expect(errors).to.equal(false)
+    })
+
+    it('lower boundary - 0.1: should return an error if passed invalid data', function () {
+      var min = 1.0
+      var max = 99.0
+      FieldValidator('0.9', FIELD_NAME, errorHandler).isFloat(min, max)
+      var errors = errorHandler.get()
+      expect(errors).to.have.property(FIELD_NAME)
+    })
+
+    it('upper boundary + 0.1: should return an error if passed invalid data', function () {
+      var min = 1.0
+      var max = 99.0
+      FieldValidator('99.1', FIELD_NAME, errorHandler).isFloat(min, max)
+      var errors = errorHandler.get()
+      expect(errors).to.have.property(FIELD_NAME)
+    })
+
+    it('whitespace: should return an error if passed invalid data', function () {
+      var min = 1.0
+      var max = 99.0
+      FieldValidator(' ', FIELD_NAME, errorHandler).isFloat(min, max)
+      var errors = errorHandler.get()
+      expect(errors).to.have.property(FIELD_NAME)
+    })
+
+    it('string: should return an error if passed invalid data', function () {
+      var min = 1.0
+      var max = 99.0
+      FieldValidator('testing', FIELD_NAME, errorHandler).isFloat(min, max)
+      var errors = errorHandler.get()
+      expect(errors).to.have.property(FIELD_NAME)
+    })
+
+    it('partial int: should return an error if passed invalid data', function () {
+      var min = 1.0
+      var max = 99.0
+      FieldValidator('£3.50', FIELD_NAME, errorHandler).isFloat(min, max)
+      var errors = errorHandler.get()
+      expect(errors).to.have.property(FIELD_NAME)
+    })
+
+    it('leading zeros: should return an error if passed a value interpreted as octal', function () {
+      var min = 1.0
+      var max = 99.0
+      FieldValidator('072', FIELD_NAME, errorHandler).isFloat(min, max)
+      var errors = errorHandler.get()
+      expect(errors).to.equal(false)
+    })
   })
 })
