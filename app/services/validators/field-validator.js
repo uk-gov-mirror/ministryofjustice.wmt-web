@@ -1,6 +1,5 @@
 const validator = require('validator')
 const ERROR_MESSAGES = require('./validation-error-messages')
-const FIELD_NAMES = require('./validation-field-names')
 
 class FieldValidator {
   /**
@@ -12,12 +11,11 @@ class FieldValidator {
   constructor (data, fieldName, errors) {
     this.data = data
     this.fieldName = fieldName
-    this.displayName = FIELD_NAMES[this.fieldName]
     this.errors = errors
   }
 
   isRequired (specificMessage) {
-    var message = (!specificMessage) ? getMsg => ERROR_MESSAGES.getIsRequired(this.displayName) : specificMessage
+    var message = (!specificMessage) ? ERROR_MESSAGES.getIsRequired : specificMessage
     if (!this.data) {
       this.errors.add(this.fieldName, message)
     }
@@ -28,7 +26,7 @@ class FieldValidator {
   isInt (min, max) {
     let options = { allow_leading_zeroes: false, min: min, max: max }
     if (!validator.isInt(this.data, options)) {
-      this.errors.add(this.fieldName, getMsg => ERROR_MESSAGES.getIsIntegerMessage(this.displayName, options), options)
+      this.errors.add(this.fieldName, ERROR_MESSAGES.getIsIntegerMessage, options)
     }
     return this
   }
@@ -36,7 +34,7 @@ class FieldValidator {
   isFloat (min, max) {
     let options = { min: min, max: max }
     if (!validator.isFloat(this.data, options)) {
-      this.errors.add(this.fieldName, getMsg => ERROR_MESSAGES.getIsFloatMessage(this.displayName, options), options)
+      this.errors.add(this.fieldName, ERROR_MESSAGES.getIsFloatMessage, options)
     }
     return this
   }
