@@ -1,3 +1,3 @@
 module.exports = {
-  'contractedHours': 'Contracted Hours'
+  'hours': 'Contracted Hours'
 }

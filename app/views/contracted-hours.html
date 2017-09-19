@@ -20,6 +20,10 @@
 
 <p class="lede">Change the contracted hours for <span class="bold">{{title}}</span></p>
 
+{% if errors['hours'][0] %}
+  <span class="error-message">{{ errors['hours'][0] }}</span>
+{% endif %}
+
 <form action="/offender-manager/{{woId}}/contracted-hours" method="post" class="sln-form-action">
   <input type="hidden" name="sub_page" value="true">
   <div class="form-group">
