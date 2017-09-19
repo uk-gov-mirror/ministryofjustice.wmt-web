@@ -15,19 +15,26 @@ module.exports.addReductionsRefData = function (maxId) {
       inserts.push({table: 'reduction_category', id: id})
     })
     var tableName = 'reduction_reason'
-    var insertStatement = 'INSERT INTO app.' + tableName + ' (id, reason, reason_short_name, category_id, allowance_percentage, max_allowance_percentage, months_to_expiry) VALUES '
+    var insertStatement = 'INSERT INTO app.' + tableName + ' (id, reason, reason_short_name, category_id, allowance_percentage, max_allowance_percentage, months_to_expiry, is_cms) VALUES '
     var sql = 'SET IDENTITY_INSERT app.' + tableName + ' ON;' +
-      insertStatement + '(' + (maxId + 1) + ',\'Test Reason 1\',1,' + ids[0] + ',20,null,6)'
+      insertStatement + '(' + (maxId + 1) + ',\'Test Reason 1\',1,' + ids[0] + ',20,null,6,0)' +
+      insertStatement + '(' + (maxId + 2) + ',\'CMS Test Reason 1\',1,' + ids[0] + ',20,null,6,1)'
     return knex.raw(sql).then(function () {
       return knex('reduction_reason')
         .select('id')
         .where('id', (maxId + 1))
     })
   })
-  .then(function (ids) {
-    inserts.push({table: 'reduction_reason', id: ids[0].id})
-    return inserts
-  })
+    .then(function (ids) {
+      inserts.push({table: 'reduction_reason', id: ids[0].id})
+      return knex('reduction_reason')
+      .select('id')
+      .where('id', (maxId + 2))
+      .then(function (ids) {
+        inserts.push({table: 'reduction_reason', id: ids[0].id})
+        return inserts
+      })
+    })
 }
 
 module.exports.removeInsertedData = function (inserts) {
