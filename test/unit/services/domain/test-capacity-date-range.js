@@ -1,16 +1,23 @@
 const expect = require('chai').expect
+const ValidationError = require('../../../../app/services/errors/validation-error')
 const dateFormatter = require('../../../../app/services/date-formatter')
 const CapacityDateRange = require('../../../../app/services/domain/capacity-date-range')
+const CASELOAD_CAPACITY = require('../../../../app/constants/caseload-capacity')
 
 var capacityDateRange
 
 describe('services/domain/capacity-date-range', function () {
   const VALID_FROM_DAY = '01'
   const VALID_FROM_MONTH = '01'
-  const VALID_FROM_YEAR = '2017'
+  const VALID_FROM_YEAR = (new Date()).getFullYear() - 2
   const VALID_TO_DAY = '31'
   const VALID_TO_MONTH = '03'
-  const VALID_TO_YEAR = '2017'
+  const VALID_TO_YEAR = (new Date()).getFullYear() - 1
+  const VALID_FUTURE_YEAR = '3030'
+
+  const INVALID_DAY = '32'
+  const INVALID_MONTH = '13'
+  const INVALID_YEAR = ''
 
   it('should construct a domain object given valid input', function () {
     capacityDateRange = new CapacityDateRange(
@@ -36,5 +43,165 @@ describe('services/domain/capacity-date-range', function () {
     expect(capacityDateRange.toFields[0]).to.equal(VALID_TO_DAY)
     expect(capacityDateRange.toFields[1]).to.equal(VALID_TO_MONTH)
     expect(capacityDateRange.toFields[2]).to.equal(VALID_TO_YEAR)
+  })
+
+  it('should throw ValidationError if a future date was given for capacity from date', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        VALID_FROM_DAY,
+        VALID_FROM_MONTH,
+        VALID_FUTURE_YEAR,
+        VALID_TO_DAY,
+        VALID_TO_MONTH,
+        VALID_TO_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if a future date was given for capacity to date', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        VALID_FROM_DAY,
+        VALID_FROM_MONTH,
+        VALID_FROM_YEAR,
+        VALID_TO_DAY,
+        VALID_TO_MONTH,
+        VALID_FUTURE_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if capacity from date is more than 6 years old', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        VALID_FROM_DAY,
+        VALID_FROM_MONTH,
+        dateFormatter.now().year() - (CASELOAD_CAPACITY.MAX_HISTORY + 1),
+        VALID_TO_DAY,
+        VALID_TO_MONTH,
+        VALID_FUTURE_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if capacity to date is more than 6 years old', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        VALID_FROM_DAY,
+        VALID_FROM_MONTH,
+        VALID_FROM_YEAR,
+        VALID_TO_DAY,
+        VALID_TO_MONTH,
+        dateFormatter.now().year() - (CASELOAD_CAPACITY.MAX_HISTORY + 1)
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if given invalid day for capacity from date', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        INVALID_DAY,
+        VALID_FROM_MONTH,
+        VALID_FROM_YEAR,
+        VALID_TO_DAY,
+        VALID_TO_MONTH,
+        VALID_TO_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if given invalid month for capacity from date', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        VALID_FROM_DAY,
+        INVALID_MONTH,
+        VALID_FROM_YEAR,
+        VALID_TO_DAY,
+        VALID_TO_MONTH,
+        VALID_TO_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if given invalid year for capacity from date', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        VALID_FROM_DAY,
+        VALID_FROM_MONTH,
+        INVALID_YEAR,
+        VALID_TO_DAY,
+        VALID_TO_MONTH,
+        VALID_TO_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if given invalid day for capacity to date', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        VALID_FROM_DAY,
+        VALID_FROM_MONTH,
+        VALID_FROM_YEAR,
+        INVALID_DAY,
+        VALID_TO_MONTH,
+        VALID_TO_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if given invalid month for capacity to date', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        VALID_FROM_DAY,
+        VALID_FROM_MONTH,
+        VALID_FROM_YEAR,
+        VALID_TO_DAY,
+        INVALID_MONTH,
+        VALID_TO_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if given invalid year for capacity to date', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        VALID_FROM_DAY,
+        VALID_FROM_MONTH,
+        VALID_FROM_YEAR,
+        VALID_TO_DAY,
+        VALID_TO_MONTH,
+        INVALID_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if given invalid day, month, and year for capacity from date', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        INVALID_DAY,
+        INVALID_MONTH,
+        INVALID_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if given invalid day, month, and year for capacity to date', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        INVALID_DAY,
+        INVALID_MONTH,
+        INVALID_YEAR
+      )
+    }).to.throw(ValidationError)
+  })
+
+  it('should throw ValidationError if given a capacity from date that is greater than the capacity to date', function () {
+    expect(function () {
+      return new CapacityDateRange(
+        INVALID_DAY,
+        INVALID_MONTH,
+        INVALID_YEAR
+      )
+    }).to.throw(ValidationError)
   })
 })

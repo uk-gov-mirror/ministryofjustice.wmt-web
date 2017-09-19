@@ -11,31 +11,35 @@
 
 {% include "includes/validation-error-messages.html" %}
 
-<form action="/caseload-capacity/offendermanager/1" method="get">
+<form method="get">
 
     <div class="form-group {% if errors['capacityFromDate'][0] %} form-group-error {% endif %}">
         {% if errors %}
             <span class="error-message">{{ errors['capacityFromDate'][0] }}</span>
         {% endif %}
-        <fieldset>
+        <fieldset id="capacityFromDate" >
             <legend>
                 <span class="form-label-bold">
                     Show capacity from:
                 </span>
-                <span class="form-hint" id="capacity-from-hint">For example, 31 3 1980</span>
+                <span class="form-hint" id="capacity-from-hint">For example, 30 1 2017</span>
             </legend>
-            <div id="capacity-from-date" class="form-date">
+            <div class="form-date">
                 <div class="form-group form-group-day">
                     <label class="form-label" for="capacity-from-day">Day</label>
-                    <input class="form-control" id="capacity-from-day" name="capacity-from-day" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="capacity-from-hint">
+                    <input class="form-control" id="capacity-from-day" name="capacity-from-day" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="capacity-from-hint"
+                        value={{query['capacity-from-day'] | int}}>
                 </div>
                 <div class="form-group form-group-month">
                     <label class="form-label" for="capacity-from-month">Month</label>
-                    <input class="form-control" id="capacity-from-month" name="capacity-from-month" type="number" pattern="[0-9]*" min="0" max="12">
+                    <input class="form-control" id="capacity-from-month" name="capacity-from-month" type="number" pattern="[0-9]*" min="0" max="12"
+                        value={{query['capacity-from-month'] | int}}>
                 </div>
                 <div class="form-group form-group-year">
                     <label class="form-label" for="capacity-from-year">Year</label>
-                    <input class="form-control" id="capacity-from-year" name="capacity-from-year" type="number" pattern="[0-9]*" min="0" max="2017">
+                    <input class="form-control" id="capacity-from-year"
+                    name="capacity-from-year" type="number" pattern="[0-9]*" min="0" max="9999"
+                        value={{query['capacity-from-year'] | int}}>
                 </div>
             </div>
         </fieldset>
@@ -44,25 +48,31 @@
         {% if errors %}
             <span class="error-message">{{ errors['capacityToDate'][0] }}</span>
         {% endif %}
-        <fieldset>
+        <fieldset id="capacityToDate">
             <legend>
                 <span class="form-label-bold">
                     Show capacity to:
                 </span>
-                <span class="form-hint" id="capacity-to-hint">For example, 31 3 1980</span>
+                <span class="form-hint" id="capacity-to-hint">For example, 31 3 2017</span>
             </legend>
-            <div id="capacity-to-date" class="form-date">
+            <div class="form-date">
                 <div class="form-group form-group-day">
                     <label class="form-label" for="capacity-to-day">Day</label>
-                    <input class="form-control" id="capacity-to-day" name="capacity-to-day" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="capacity-to-hint">
+                    <input class="form-control" id="capacity-to-day"
+                        name="capacity-to-day" type="number" pattern="[0-9]*"
+                        min="0" max="31" aria-describedby="capacity-to-hint"
+                        value={{query['capacity-to-day'] | int}}>
                 </div>
                 <div class="form-group form-group-month">
                     <label class="form-label" for="capacity-to-month">Month</label>
-                    <input class="form-control" id="capacity-to-month" name="capacity-to-month" type="number" pattern="[0-9]*" min="0" max="12">
+                    <input class="form-control" id="capacity-to-month" name="capacity-to-month" type="number" pattern="[0-9]*" min="0" max="12"
+                        value={{query['capacity-to-month'] | int}}>
                 </div>
                 <div class="form-group form-group-year">
                     <label class="form-label" for="capacity-to-year">Year</label>
-                    <input class="form-control" id="capacity-to-year" name="capacity-to-year" type="number" pattern="[0-9]*" min="0" max="2017">
+                    <input class="form-control" id="capacity-to-year"
+                        name="capacity-to-year" type="number" pattern="[0-9]*"
+                        min="0" max="9999" value={{query['capacity-to-year'] | int}}>
                 </div>
             </div>
         </fieldset>
