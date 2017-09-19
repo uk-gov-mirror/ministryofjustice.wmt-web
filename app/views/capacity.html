@@ -68,14 +68,14 @@
       <tr>
         <td headers="name team"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
         <td headers="grade team">{{ member.grade }}</td>
-        <td headers="capacity breakdown">{{ ((member.capacityPercentage * 10) | round) / 10 }}%</td>
+        <td headers="capacity breakdown" class="sln-to-round">{{ member.capacityPercentage }}</td>
         <td headers="cases breakdown">{{ member.totalCases }}</td>
         <td headers="paroms breakdown">-</td>
         <td headers="fdrs breakdown">-</td>
         <td headers="sdrs breakdown">-</td>
         <td headers="arms breakdown">-</td>
         <td headers="gs breakdown">-</td>
-        <td headers="cms breakdown">{{ member.cmsPercentage }}%</td>
+        <td headers="cms breakdown" class="sln-to-round">{{ member.cmsPercentage }}</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -91,4 +91,8 @@
     </script>
     <script src="/public/javascripts/plotly.js"></script>
     <script src="/public/javascripts/caseload-capacity.js"></script>
+    <script src="/public/javascripts/round-to-one-decimal-place.js"></script>
+    <script>
+        document.onload = roundValuesToOneDecimalPlace()
+    </script>
 {% endblock %}
