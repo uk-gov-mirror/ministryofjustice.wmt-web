@@ -78,8 +78,6 @@ module.exports = function (router) {
             if (reduction !== undefined && reduction.workloadOwnerId !== id) {
               reduction = undefined
             }
-            var errors = req.session.addReductionErrors
-            delete req.session.addReductionErrors
             return res.render('add-reduction', {
               breadcrumbs: result.breadcrumbs,
               linkId: id,
@@ -87,8 +85,7 @@ module.exports = function (router) {
               subTitle: result.subTitle,
               subNav: getSubNav(id, organisationLevel, req.path),
               referenceData: result.referenceData,
-              reduction: mapReductionToViewModel(reduction),
-              errors: errors
+              reduction: mapReductionToViewModel(reduction)
             })
           }).catch(function (error) {
             next(error)
@@ -104,14 +101,37 @@ module.exports = function (router) {
     }
 
     var id = req.params.id
-
     var reduction
     try {
       reduction = generateNewReductionFromRequest(req.body)
     } catch (error) {
       if (error instanceof ValidationError) {
-        req.session.addReductionErrors = error.validationErrors
-        return res.redirect(302, '/' + organisationLevel + '/' + id + '/add-reduction')
+        return reductionsService.getAddReductionsRefData(id, organisationLevel)
+          .then(function (result) {
+            return res.status(400).render('add-reduction', {
+              breadcrumbs: result.breadcrumbs,
+              linkId: id,
+              title: result.title,
+              subTitle: result.subTitle,
+              subNav: getSubNav(id, organisationLevel, req.path),
+              referenceData: result.referenceData,
+              reduction: {
+                id: req.body.reductionId,
+                reasonId: req.body.reasonForReductionId,
+                hours: req.body['reduction-hours'],
+                start_day: req.body.red_start_day,
+                start_month: req.body.red_start_month,
+                start_year: req.body.red_start_year,
+                end_day: req.body.red_end_day,
+                end_month: req.body.red_end_month,
+                end_year: req.body.red_end_year,
+                notes: req.body.notes
+              },
+              errors: error.validationErrors
+            })
+          }).catch(function (error) {
+            next(error)
+          })
       } else {
         next(error)
       }
@@ -141,12 +161,31 @@ module.exports = function (router) {
       reduction = generateNewReductionFromRequest(req.body)
     } catch (error) {
       if (error instanceof ValidationError) {
-        req.session.reduction = {
-          errors: error.validationErrors
-        }
-        return res.redirect(302, '/' + organisationLevel + '/' + id + '/add-reduction')
-      } else {
-        next(error)
+        return reductionsService.getAddReductionsRefData(id, organisationLevel)
+        .then(function (result) {
+          return res.status(400).render('add-reduction', {
+            breadcrumbs: result.breadcrumbs,
+            linkId: id,
+            title: result.title,
+            subTitle: result.subTitle,
+            subNav: getSubNav(id, organisationLevel, req.path),
+            referenceData: result.referenceData,
+            reduction: {
+              reasonId: req.body.reasonForReductionId,
+              hours: req.body['reduction-hours'],
+              start_day: req.body.red_start_day,
+              start_month: req.body.red_start_month,
+              start_year: req.body.red_start_year,
+              end_day: req.body.red_end_day,
+              end_month: req.body.red_end_month,
+              end_year: req.body.red_end_year,
+              notes: req.body.notes
+            },
+            errors: error.validationErrors
+          })
+        }).catch(function (error) {
+          next(error)
+        })
       }
     }
 
@@ -203,10 +242,8 @@ module.exports = function (router) {
   }
 
   var generateNewReductionFromRequest = function (requestBody) {
-    var reductionStartDate = [ requestBody.red_start_day, requestBody.red_start_month - 1, requestBody.red_start_year ]
-    var reductionEndDate = [ requestBody.red_end_day, requestBody.red_end_month - 1, requestBody.red_end_year ]
-
-    console.log(requestBody)
+    var reductionStartDate = [ requestBody.red_start_day, requestBody.red_start_month, requestBody.red_start_year ]
+    var reductionEndDate = [ requestBody.red_end_day, requestBody.red_end_month, requestBody.red_end_year ]
     var reasonId = !requestBody.reasonForReductionId ? 'select' : requestBody.reasonForReductionId
     return new Reduction(reasonId, requestBody['reduction-hours'], reductionStartDate, reductionEndDate, requestBody.notes)
   }

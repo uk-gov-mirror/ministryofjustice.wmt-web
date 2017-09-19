@@ -5,9 +5,9 @@
 <main id="content" role="main">
   {% include "includes/breadcrumbs.html" %} 
   
-  {%if reduction %}
+  {% if reduction %}
     {% set headerText='Reduction' %}
-    {% set reductionText='Showing reduction for' %}
+    {% set reductionText='Showing reduction for ' %}
     {% set submitButtonText='Save changes' %}
     {% set fromAction='/offender-manager/{{ linkId }}/edit-reduction' %}
   {% else %}
@@ -30,10 +30,10 @@
       {% if errors['reasonForReductionId'][0] %}
         <span class="error-message">{{ errors['reasonForReductionId'][0] }}</span>
       {% endif %}
-      <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}" onChange="populateHours(), calculateExpiry()">        
+      <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}" onChange="populateHours(), calculateExpiry()"> 
         <option value="select" disabled selected>Please select a reason...</option>
         {% for reason in referenceData %}
-        <option value="{{ reason.id }}" {% if reason.id === reduction.reasonId %} selected {% endif %}>{{ reason.reasonShortName }}</option>
+        <option value="{{ reason.id }}" {% if reason.id == reduction.reasonId %} selected {% endif %}>{{ reason.reasonShortName }}</option>
         {% endfor %}
       </select>
     </div>

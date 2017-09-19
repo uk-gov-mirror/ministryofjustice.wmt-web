@@ -46,12 +46,12 @@ class Reduction {
     }
 
     var validationErrors = errors.get()
-    console.log(validationErrors)
-
     if (validationErrors) {
       throw new ValidationError(validationErrors)
     }
 
+    this.reasonForReductionId = parseInt(this.reasonForReductionId)
+    this.hours = parseFloat(this.hours)
     this.reductionStartDate = startDate.toDate()
     this.reductionEndDate = endDate.toDate()
   }
