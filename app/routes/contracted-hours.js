@@ -17,10 +17,7 @@ module.exports = function (router) {
 
     return contractedHoursService.getContractedHours(id, organisationLevel)
     .then(function (result) {
-      var errors = req.session.contractedHourErrors
-      delete req.session.contractedHourErrors
       return res.render('contracted-hours', {
-        errors: errors,
         title: result.title,
         subTitle: result.subTitle,
         breadcrumbs: result.breadcrumbs,
@@ -47,8 +44,20 @@ module.exports = function (router) {
       if (updatedHours) isValid(updatedHours, next)
     } catch (error) {
       if (error instanceof ValidationError) {
-        req.session.contractedHourErrors = error.validationErrors
-        return res.redirect('/offender-manager/' + id + '/contracted-hours')
+        return contractedHoursService.getContractedHours(id, organisationLevel)
+          .then(function (result) {
+            return res.render('contracted-hours', {
+              errors: error.validationErrors,
+              title: result.title,
+              subTitle: result.subTitle,
+              breadcrumbs: result.breadcrumbs,
+              subNav: getSubNav(id, organisationLevel, req.path),
+              contractedHours: updatedHours,
+              woId: id
+            })
+          }).catch(function (error) {
+            next(error)
+          })
       } else {
         next(error)
       }
