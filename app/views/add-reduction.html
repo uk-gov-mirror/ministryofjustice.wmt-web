@@ -17,11 +17,9 @@
     {% set fromAction='/offender-manager/{{ linkId }}/add-reduction' %}    
   {% endif %}
 
-  <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">{{ headerText }}</header>
+  {% include "includes/validation-error-messages.html" %}
 
-  {%if failureText %}
-  <p class="message message--failure">{{ failureText }}</p>
-  {% endif %}
+  <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">{{ headerText }}</header>
 
   <p class="lede">{{ reductionText }}<span class="bold">{{ title }}</span></p>
   {% set first = true %}
@@ -29,8 +27,11 @@
     <input type="hidden" name="reductionId" value="{{reduction.id}}"/>
     <div class="form-group" id="reduction_reason_selection">
       <label class="form-label-bold" for="select-box">Reason for reduction</label>
+      {% if errors['reasonForReductionId'][0] %}
+        <span class="error-message">{{ errors['reasonForReductionId'][0] }}</span>
+      {% endif %}
       <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}" onChange="populateHours(), calculateExpiry()">        
-        <option value="" disabled selected>Please select a reason...</option>
+        <option value="select" disabled selected>Please select a reason...</option>
         {% for reason in referenceData %}
         <option value="{{ reason.id }}" {% if reason.id === reduction.reasonId %} selected {% endif %}>{{ reason.reasonShortName }}</option>
         {% endfor %}
@@ -38,8 +39,11 @@
     </div>
 
     <div class="form-group" id="reduction_hours">
+      {% if errors['reduction-hours'][0] %}
+        <span class="error-message">{{ errors['reduction-hours'][0] }}</span>
+      {% endif %}
       <label class="form-label-bold" for="hours">Hours</label>
-      <input class="form-control" id="hours" name="hours" type="number" style="width: 100px" value="{{reduction.hours}}">
+      <input class="form-control" id="hours" name="reduction-hours" style="width: 100px" value="{{reduction.hours}}">
     </div>
 
     <div class="form-group" id="reduction_start_date">
@@ -48,6 +52,9 @@
           <span class="form-label-bold">Reduction start date</span>
           <span class="form-hint">For example, 31 3 1980</span>
         </legend>
+        {% if errors['reduction_start_date'][0] %}
+          <span class="error-message">{{ errors['reduction_start_date'][0] }}</span>
+        {% endif %}
         <div class="form-date" id="reduction_start_day">
           <div class="form-group form-group-day">
             <label class="form-label" for="start-day">Day</label>
@@ -71,6 +78,9 @@
           <span class="form-label-bold">Reduction end date</span>
           <span class="form-hint">For example, 31 3 1980</span>
         </legend>
+        {% if errors['reduction_end_date'][0] %}
+          <span class="error-message">{{ errors['reduction_end_date'][0] }}</span>
+        {% endif %}
         <div class="form-date" id="reduction_end_day">
           <div class="form-group form-group-day">
             <label class="form-label" for="end-day">Day</label>
@@ -89,6 +99,9 @@
     </div>
 
     <div class="form-group">
+      {% if errors['notes'][0] %}
+        <span class="error-message">{{ errors['notes'][0] }}</span>
+      {% endif %}
       <label class="form-label-bold" for="textarea">Additional notes</label>
       <textarea class="form-control form-control-3-4" name="notes" id="textarea" rows="5" >{{ reduction.notes }}</textarea>
     </div> 

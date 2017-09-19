@@ -49,6 +49,13 @@ class FieldsetValidator {
     }
     return this
   }
+
+  isLaterThan (startDate, endDate) {
+    if (!isDateAfter(startDate, endDate)) {
+      this.errors.add(this.fieldName, ERROR_MESSAGES.getIsDateLaterThanMessage)
+    }
+    return this
+  }
 }
 
 function validateDate (date) {
@@ -60,6 +67,10 @@ function validateDate (date) {
 
 function isDateInTheFuture (date) {
   return validateDate(date) && date > dateFormatter.now()
+}
+
+function isDateAfter (startDate, endDate) {
+  return endDate > startDate
 }
 
 module.exports = function (data, fieldName, errors) {

@@ -18,8 +18,18 @@ class FieldValidator {
     var message = (!specificMessage) ? ERROR_MESSAGES.getIsRequired : specificMessage
     if (!this.data) {
       this.errors.add(this.fieldName, message)
+    } else if (this.data === 'select') {
+      this.errors.add(this.fieldName, message)
     }
 
+    return this
+  }
+
+  isLessThanLength (length, specificMessage) {
+    var message = (!specificMessage) ? ERROR_MESSAGES.getIsLessThanLengthMessage : specificMessage
+    if (!validator.isLength(this.data, { max: length })) {
+      this.errors.add(this.fieldName, message, { length: length })
+    }
     return this
   }
 
