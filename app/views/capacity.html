@@ -47,35 +47,35 @@
   <table id="example" class="data-table dataTable">
     <thead>
       <tr>
-        <th colspan="2">Offender manager</th>
-        <th class="" colspan="14">Capacity breakdown</th>
+        <th colspan="2" id="team">Offender manager</th>
+        <th class="" colspan="14" id="breakdown">Capacity breakdown</th>
       </tr>
       <tr>
-        <th>Name</th>
-        <th>Grade</th>
-        <th>Capacity(%)</th>
-        <th>Cases</th>
-        <th><abbr title="Parole assessment reports by the Offender Manager">PAROMs</abbr></th>
-        <th><abbr title="Fast delivery reports">FDRs</abbr></th>
-        <th><abbr title="Standard delivery reports">SDRs</abbr></th>
-        <th><abbr title="Active Risk Management System">ARMS</abbr></th>
-        <th><abbr title="Group supervision">GS</abbr></th>
-        <th><abbr title="Case management support">CMS</abbr></th>
+        <th id="name">Name</th>
+        <th id="grade">Grade</th>
+        <th id="capacity">Capacity(%)</th>
+        <th id="cases">Cases</th>
+        <th id="paroms"><abbr title="Parole assessment reports by the Offender Manager">PAROMs</abbr></th>
+        <th id="fdrs"><abbr title="Fast delivery reports">FDRs</abbr></th>
+        <th id="sdrs"><abbr title="Standard delivery reports">SDRs</abbr></th>
+        <th id="arms"><abbr title="Active Risk Management System">ARMS</abbr></th>
+        <th id="gs"><abbr title="Group supervision">GS</abbr></th>
+        <th id="cms"><abbr title="Case management support">CMS</abbr></th>
       </tr>
     </thead>
     <tbody>
       {% for member in capacityBreakdown %}
       <tr>
-        <td><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
-        <td>{{ member.grade }}</td>
-        <td>{{ ((member.capacityPercentage * 10) | round) / 10 }}%</td>
-        <td>{{ member.totalCases }}</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>{{ member.cmsPercentage }}%</td>
+        <td headers="name team"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+        <td headers="grade team">{{ member.grade }}</td>
+        <td headers="capacity breakdown">{{ ((member.capacityPercentage * 10) | round) / 10 }}%</td>
+        <td headers="cases breakdown">{{ member.totalCases }}</td>
+        <td headers="paroms breakdown">-</td>
+        <td headers="fdrs breakdown">-</td>
+        <td headers="sdrs breakdown">-</td>
+        <td headers="arms breakdown">-</td>
+        <td headers="gs breakdown">-</td>
+        <td headers="cms breakdown">{{ member.cmsPercentage }}%</td>
       </tr>
       {% endfor %}
     </tbody>
