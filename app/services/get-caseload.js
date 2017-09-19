@@ -3,7 +3,7 @@ const getCaseload = require('./data/get-caseload')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
 const caseloadHelper = require('./helpers/caseload-helper')
-const percentageCalculator = require('./helpers/percentage-calculator')
+const caseloadPercentageCalculator = require('./helpers/caseload-percentage-calculator')
 const caseType = require('../constants/case-type')
 
 module.exports = function (id, organisationLevel) {
@@ -30,7 +30,7 @@ var parseCaseloadResults = function (organisationLevel, results) {
   var caseloadResults
 
   if (organisationLevel !== organisationUnitConstants.TEAM.name) {
-    caseloadResults = percentageCalculator(results)
+    caseloadResults = caseloadPercentageCalculator(results)
   } else {
     // Overall cases
     var overallResults = caseloadHelper.getOverallCaseload(results)

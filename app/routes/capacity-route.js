@@ -22,7 +22,8 @@ module.exports = function (router) {
         subNav: getSubNav(id, organisationLevel, req.path),
         breadcrumbs: result.breadcrumbs,
         capacity: result.capacityTable,
-        capacityBreakdown: result.capacityBreakdown
+        capacityBreakdown: result.capacityBreakdown,
+        organisationLevel: organisationLevel
       })
     }).catch(function (error) {
       next(error)

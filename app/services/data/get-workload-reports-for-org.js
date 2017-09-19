@@ -4,8 +4,8 @@ const orgUnitFinder = require('../helpers/org-unit-finder')
 
 module.exports = function (orgId, type) {
   var orgUnit = orgUnitFinder('name', type)
-  var table = orgUnit.capacityView
 
+  var table = orgUnit.capacityView
   var whereObject = {}
 
   if (orgId !== undefined) {

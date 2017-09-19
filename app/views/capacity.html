@@ -40,6 +40,7 @@
 
 <div id="plotly-div-line" role="presentation"></div>
 
+{% if organisationLevel === 'team' %}
 <div id="team-capacity"></div>
 
   <h3 class="heading-medium">Capacity breakdown</h3>
@@ -79,10 +80,8 @@
       {% endfor %}
     </tbody>
   </table>
+  {% endif %}
   
-
-
-
 </main>
 {% endblock %}
 
