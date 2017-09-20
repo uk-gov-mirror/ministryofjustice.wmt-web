@@ -31,7 +31,7 @@ var defaultWorkloadPoints = {
   licD1: 36,
   licD2: 37,
   sdr: 4,
-  fdr: 5,
+  sdrConversion: 5,
   nominalTargetPso: 1234,
   nominalTargetPo: 5678,
   defaultContractedHoursPo: 37,
