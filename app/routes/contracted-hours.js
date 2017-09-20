@@ -41,7 +41,7 @@ module.exports = function (router) {
     }
 
     try {
-      if (updatedHours) isValid(updatedHours, next)
+      isValid(updatedHours, next)
     } catch (error) {
       if (error instanceof ValidationError) {
         return contractedHoursService.getContractedHours(id, organisationLevel)
