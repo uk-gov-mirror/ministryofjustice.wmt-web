@@ -1,8 +1,10 @@
 const ValidationError = require('../errors/validation-error')
 const ErrorHandler = require('../validators/error-handler')
+const FieldValidator = require('../validators/field-validator')
 
 class WorkloadPoints {
   constructor (request) {
+    this.previousWpId = request.previousWpId
     this.commA = request.commA
     this.commB1 = request.commB1
     this.commB2 = request.commB2
@@ -24,9 +26,9 @@ class WorkloadPoints {
     this.licC2 = request.licC2
     this.licD1 = request.licD1
     this.licD2 = request.licD2
-    this.user_id = request.user_id
+    this.user_id = 35 // TODO request.user_id
     this.sdr = request.sdr
-    this.fdr = request.fdr
+    this.sdrConversion = request.sdrConversion
     this.nominalTargetPso = request.nominalTargetPso
     this.nominalTargetPo = request.nominalTargetPo
     this.weightingOverdue = request.weightingOverdue
@@ -36,10 +38,106 @@ class WorkloadPoints {
     this.defaultContractedHoursPso = request.defaultContractedHoursPso
     this.parom = request.parom
     this.paroms_enabled = 1
+    this.isValid()
   }
 
   isValid () {
     var errors = ErrorHandler()
+
+    FieldValidator(this.cusA, 'cusA', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.cusB1, 'cusB1', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.cusB2, 'cusB2', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.cusC1, 'cusC1', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.cusC2, 'cusC2', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.cusD1, 'cusD1', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.cusD2, 'cusD2', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.commA, 'commA', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.commB1, 'commB1', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.commB2, 'commB2', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.commC1, 'commC1', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.commC2, 'commC2', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.commD1, 'commD1', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.commD2, 'commD2', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.licA, 'licA', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.licB1, 'licB1', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.licB2, 'licB2', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.licC1, 'licC1', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.licC2, 'licC2', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.licD1, 'licD1', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.licD2, 'licD2', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.sdr, 'sdr', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.sdrConversion, 'sdrConversion', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.nominalTargetPso, 'nominalTargetPso', errors)
+      .isRequired()
+      .isInt(0, 9999)
+    FieldValidator(this.nominalTargetPo, 'nominalTargetPo', errors)
+      .isRequired()
+      .isInt(0, 9999)
+    FieldValidator(this.weightingOverdue, 'weightingOverdue', errors)
+      .isRequired()
+      .isFloat(0, 100.0)
+    FieldValidator(this.weightingUpw, 'weightingUpw', errors)
+      .isRequired()
+      .isFloat(0, 100.0)
+    FieldValidator(this.weightingWarrants, 'weightingWarrants', errors)
+      .isRequired()
+      .isFloat(0, 100.0)
+    FieldValidator(this.defaultContractedHoursPo, 'defaultContractedHoursPo', errors)
+      .isRequired()
+      .isInt(0, 37)
+    FieldValidator(this.defaultContractedHoursPso, 'defaultContractedHoursPso', errors)
+      .isRequired()
+      .isInt(0, 37)
+    FieldValidator(this.parom, 'parom', errors)
+      .isRequired()
+      .isInt(0, 999)
+
     var validationErrors = errors.get()
     if (validationErrors) {
       throw new ValidationError(validationErrors)

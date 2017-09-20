@@ -28,7 +28,7 @@ module.exports = function (workloadPoints) {
       // TODO: Insert the actual id of the logged in user who changed the points
       user_id: 35,
       sdr: workloadPoints.sdr,
-      sdr_conversion: workloadPoints.fdr,
+      sdr_conversion: workloadPoints.sdrConversion,
       nominal_target_spo: workloadPoints.nominalTargetPso,
       nominal_target_po: workloadPoints.nominalTargetPo,
       weighting_o: workloadPoints.weightingOverdue,
