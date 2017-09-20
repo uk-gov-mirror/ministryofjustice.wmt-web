@@ -15,9 +15,7 @@ module.exports = function (id, organisationLevel) {
       var title = breadcrumbs[0].title
       var subTitle = organisationUnitType.displayText
 
-      console.log(results)
       var caseloadResults = parseCaseloadResults(organisationLevel, results)
-      console.log(caseloadResults)
       return {
         breadcrumbs: breadcrumbs,
         title: title,

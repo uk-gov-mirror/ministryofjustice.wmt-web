@@ -16,8 +16,8 @@ module.exports = function (router) {
 
     var orgUnit = getOrganisationUnit('name', organisationLevel)
     var childOrgUnit
-    if(organisationLevel !== organisationUnit.OFFENDER_MANAGER.name) {
-      childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)      
+    if (organisationLevel !== organisationUnit.OFFENDER_MANAGER.name) {
+      childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)
     } else {
       childOrgUnit = orgUnit
     }

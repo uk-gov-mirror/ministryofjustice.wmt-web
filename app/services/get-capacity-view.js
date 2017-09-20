@@ -1,6 +1,6 @@
 const getBreadcrumbs = require('./get-breadcrumbs')
 const getWorkloadReports = require('./data/get-workload-report-views')
-const getCapacityBreakdown = require('./data/get-capacity_breakdown')
+const getCapacityBreakdown = require('./data/get-capacity-breakdown')
 const tableCreator = require('./helpers/table-creator')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const organisationConstant = require('../constants/organisation-unit')
@@ -11,11 +11,6 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
   if (organisationalUnitType === undefined) {
     throw new Error(organisationLevel + ' should be offender-manager, region, team, ldu or hmpps')
   }
-
-  var childOrganisationName
-  try {
-    childOrganisationName = getOrganisationUnit('name', organisationalUnitType.childOrganisationLevel).name
-  } catch (err) {}
 
   var result = {}
   result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
@@ -45,29 +40,29 @@ var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
     workloadReports.forEach(function (workloadReport) {
       capacityBreakdown.push(buildCapacityBreakdownEntry(workloadReport))
     })
-  } else if(organisationLevel !== organisationConstant.OFFENDER_MANAGER.name) {
+  } else if (organisationLevel !== organisationConstant.OFFENDER_MANAGER.name) {
     var organisationMap = new Map()
 
     workloadReports.forEach(function (workloadReport) {
       var valueToAdd
-      
-      if(organisationMap.has(workloadReport.name)){
+
+      if (organisationMap.has(workloadReport.name)) {
         valueToAdd = organisationMap.get(workloadReport.name)
         valueToAdd.push(workloadReport)
       } else {
-        valueToAdd = [workloadReport]  
+        valueToAdd = [workloadReport]
       }
       organisationMap.set(workloadReport.name, valueToAdd)
     })
 
-    organisationMap.forEach(function (reports, orgName){
+    organisationMap.forEach(function (reports, orgName) {
       var newEntry = {
         name: orgName,
         linkId: reports[0].linkId,
         grades: []
       }
 
-      reports.forEach(function (report){
+      reports.forEach(function (report) {
         newEntry.grades.push(buildCapacityBreakdownEntry(report))
       })
 
@@ -78,7 +73,7 @@ var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
   return capacityBreakdown
 }
 
-var buildCapacityBreakdownEntry = function(workloadReport) {
+var buildCapacityBreakdownEntry = function (workloadReport) {
   return {
     name: workloadReport.name,
     grade: workloadReport.grade,
