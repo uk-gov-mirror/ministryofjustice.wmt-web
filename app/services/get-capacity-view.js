@@ -1,6 +1,6 @@
 const getBreadcrumbs = require('./get-breadcrumbs')
 const getWorkloadReports = require('./data/get-workload-report-views')
-const getWorkloadReportsForOrg = require('./data/get-workload-reports-for-org')
+const getCapacityBreakdown = require('./data/get-capacity_breakdown')
 const tableCreator = require('./helpers/table-creator')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const organisationConstant = require('../constants/organisation-unit')
@@ -27,10 +27,10 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
     result.title = result.breadcrumbs[0].title
     result.subTitle = organisationalUnitType.displayText
 
-    if (organisationalUnitType === organisationConstant.TEAM) {
-      return getWorkloadReportsForOrg(id, childOrganisationName)
+    if (organisationalUnitType !== organisationConstant.OFFENDER_MANAGER) {
+      return getCapacityBreakdown(id, organisationLevel)
       .then(function (memberWorkloadReports) {
-        result.capacityBreakdown = getCapacityBreakdown(memberWorkloadReports, organisationLevel)
+        result.capacityBreakdown = parseCapacityBreakdown(memberWorkloadReports, organisationLevel)
         return result
       })
     }
@@ -38,22 +38,53 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
   })
 }
 
-var getCapacityBreakdown = function (workloadReports, organisationLevel) {
+var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
   var capacityBreakdown = []
 
   if (organisationLevel === organisationConstant.TEAM.name) {
     workloadReports.forEach(function (workloadReport) {
-      var newEntry = {
-        name: workloadReport.name,
-        grade: workloadReport.grade,
-        totalCases: workloadReport.totalCases,
-        linkId: workloadReport.linkId,
-        capacityPercentage: percentageCalculator.calculatePercentage(workloadReport.total_points, workloadReport.available_points),
-        cmsPercentage: percentageCalculator.calculatePercentage(workloadReport.cmsReductionHours, workloadReport.contractedHours)
+      capacityBreakdown.push(buildCapacityBreakdownEntry(workloadReport))
+    })
+  } else if(organisationLevel !== organisationConstant.OFFENDER_MANAGER.name) {
+    var organisationMap = new Map()
+
+    workloadReports.forEach(function (workloadReport) {
+      var valueToAdd
+      
+      if(organisationMap.has(workloadReport.name)){
+        valueToAdd = organisationMap.get(workloadReport.name)
+        valueToAdd.push(workloadReport)
+      } else {
+        valueToAdd = [workloadReport]  
       }
+      organisationMap.set(workloadReport.name, valueToAdd)
+    })
+
+    organisationMap.forEach(function (reports, orgName){
+      var newEntry = {
+        name: orgName,
+        linkId: reports[0].linkId,
+        grades: []
+      }
+
+      reports.forEach(function (report){
+        newEntry.grades.push(buildCapacityBreakdownEntry(report))
+      })
+
       capacityBreakdown.push(newEntry)
     })
   }
 
   return capacityBreakdown
+}
+
+var buildCapacityBreakdownEntry = function(workloadReport) {
+  return {
+    name: workloadReport.name,
+    grade: workloadReport.grade,
+    totalCases: workloadReport.totalCases,
+    linkId: workloadReport.linkId,
+    capacityPercentage: percentageCalculator.calculatePercentage(workloadReport.total_points, workloadReport.available_points),
+    cmsPercentage: percentageCalculator.calculatePercentage(workloadReport.cmsReductionHours, workloadReport.contractedHours)
+  }
 }
