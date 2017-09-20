@@ -37,7 +37,8 @@ const getReductionsSuccessTextResult = {
 const getReductionsFailureTextResult = {
   title: 'Title',
   subTitle: 'SubTitle',
-  breadcrumbs: {}
+  breadcrumbs: {},
+  referenceData: {}
 }
 
 const existingReduction = {
@@ -72,8 +73,7 @@ const failureDataToPost = {
   red_end_year: '',
   red_end_month: '',
   red_end_day: '',
-  notes: 'This is a test note',
-  status: 'SCHEDULED'
+  notes: 'This is a test note'
 }
 
 var app
@@ -161,7 +161,7 @@ describe('reductions route', function () {
       reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
-        .send({failureDataToPost})
+        .send(failureDataToPost)
         .expect(400)
     })
   })
