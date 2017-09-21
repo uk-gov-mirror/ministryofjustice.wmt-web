@@ -58,15 +58,15 @@
         <div class="form-date" id="reduction_start_day">
           <div class="form-group form-group-day">
             <label class="form-label" for="start-day">Day</label>
-            <input class="form-control" id="start-day" name="red_start_day" value="{{ reduction.start_day }}" type="number" min="1" pattern="[+-]?[0-9]{1,2}" max="31" onchange="calculateExpiry()">
+            <input class="form-control" id="start-day" name="red_start_day" value="{{ reduction.start_day }}" type="number" onchange="calculateExpiry()">
           </div>
           <div class="form-group form-group-month" id="reduction_start_month">
             <label class="form-label" for="start-month">Month</label>
-            <input class="form-control" id="start-month" name="red_start_month" value="{{ reduction.start_month }}" type="number" min="1" pattern="[+-]?[0-9]{1,2}" max="12" onchange="calculateExpiry()">
+            <input class="form-control" id="start-month" name="red_start_month" value="{{ reduction.start_month }}" type="number" onchange="calculateExpiry()">
           </div>
           <div class="form-group form-group-year" id="reduction_start_year">
             <label class="form-label" for="start-year">Year</label>
-            <input class="form-control" id="start-year" name="red_start_year" value="{{ reduction.start_year }}" type="number" min="0" pattern="[+-]?[0-9]{1,4}" max="2099" onchange="calculateExpiry()">
+            <input class="form-control" id="start-year" name="red_start_year" value="{{ reduction.start_year }}" type="number" onchange="calculateExpiry()">
           </div>
         </div>
       </fieldset>

@@ -25,7 +25,7 @@ class Reduction {
 
     FieldValidator(this.hours, 'reduction-hours', errors)
       .isRequired()
-      .isFloat(0, 37.5)
+      .isFloat(0, 37)
 
     var startDate = dateFormatter.build(this.reductionStartDateFields[0], this.reductionStartDateFields[1], this.reductionStartDateFields[2])
 
@@ -59,9 +59,7 @@ class Reduction {
   setReductionStatus () {
     var currentDate = new Date()
     var status = reductionStatusType.ACTIVE
-    if ((this.reductionStartDate < currentDate) && (this.reductionEndDate > currentDate)) {
-      status = reductionStatusType.ACTIVE
-    } else if ((this.reductionStartDate > currentDate) && (this.reductionEndDate > currentDate)) {
+    if ((this.reductionStartDate > currentDate) && (this.reductionEndDate > currentDate)) {
       status = reductionStatusType.SCHEDULED
     } else if ((this.reductionStartDate < currentDate) && (this.reductionEndDate < currentDate)) {
       status = reductionStatusType.ARCHIVED

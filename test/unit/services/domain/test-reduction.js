@@ -41,8 +41,8 @@ describe('services/domain/reduction', function () {
   })
 
   it('should raise a ValidationError if Start Date is not valid', function () {
-    var activeStartDate = moment().subtract(200, 'years').toDate()
-    var activeEndDate = moment().add(30, 'days').toDate()
+    var activeStartDate = moment().add(200, 'years').toDate()
+    var activeEndDate = moment().add(201, 'years').toDate()
     expect(function () {
       new Reduction('1', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],

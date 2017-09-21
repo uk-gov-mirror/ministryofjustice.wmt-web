@@ -1,7 +1,7 @@
 const moment = require('moment')
 const ERROR_MESSAGES = require('./validation-error-messages')
 const dateFormatter = require('../date-formatter')
-const NUM_YEARS_LIMIT = 120
+const DATE_LIMIT = moment('20990101', 'YYYYMMDD')
 
 class FieldsetValidator {
   /**
@@ -60,9 +60,8 @@ class FieldsetValidator {
 
 function validateDate (date) {
   if (!date) return false
-
   return date instanceof moment && date.isValid() &&
-         dateFormatter.now().diff(date, 'years') < NUM_YEARS_LIMIT
+         date < DATE_LIMIT
 }
 
 function isDateInTheFuture (date) {
