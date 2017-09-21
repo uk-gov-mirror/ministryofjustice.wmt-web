@@ -1,9 +1,10 @@
 module.exports = {
   'hours': 'Contracted hours',
   'reasonForReductionId': 'Reason for reduction',
-  'reduction-hours': 'Reduction hours',
-  'reduction_start_date': 'Reduction start date',
-  'reduction_end_date': 'Reduction end date',
+  'reductionHours': 'Reduction hours',
+  'reductionStartDate': 'Reduction start date',
+  'reductionEndDate': 'Reduction end date',
+  'notes': 'Notes',
   'cusA': 'Cus A',
   'cusB1': 'Cus B1',
   'cusB2': 'Cus B2',

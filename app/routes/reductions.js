@@ -118,13 +118,13 @@ module.exports = function (router) {
               reduction: {
                 id: req.body.reductionId,
                 reasonId: req.body.reasonForReductionId,
-                hours: req.body['reduction-hours'],
-                start_day: req.body.red_start_day,
-                start_month: req.body.red_start_month,
-                start_year: req.body.red_start_year,
-                end_day: req.body.red_end_day,
-                end_month: req.body.red_end_month,
-                end_year: req.body.red_end_year,
+                hours: req.body.reductionHours,
+                start_day: req.body.redStartDay,
+                start_month: req.body.redStartMonth,
+                start_year: req.body.redStartYear,
+                end_day: req.body.redEndDay,
+                end_month: req.body.redEndMonth,
+                end_year: req.body.redEndYear,
                 notes: req.body.notes
               },
               errors: error.validationErrors
@@ -172,13 +172,13 @@ module.exports = function (router) {
             referenceData: result.referenceData,
             reduction: {
               reasonId: req.body.reasonForReductionId,
-              hours: req.body['reduction-hours'],
-              start_day: req.body.red_start_day,
-              start_month: req.body.red_start_month,
-              start_year: req.body.red_start_year,
-              end_day: req.body.red_end_day,
-              end_month: req.body.red_end_month,
-              end_year: req.body.red_end_year,
+              hours: req.body.reductionHours,
+              start_day: req.body.redStartDay,
+              start_month: req.body.redStartMonth,
+              start_year: req.body.redStartYear,
+              end_day: req.body.redEndDay,
+              end_month: req.body.redEndMonth,
+              end_year: req.body.redEndYear,
               notes: req.body.notes
             },
             errors: error.validationErrors
@@ -242,10 +242,10 @@ module.exports = function (router) {
   }
 
   var generateNewReductionFromRequest = function (requestBody) {
-    var reductionStartDate = [ requestBody.red_start_day, requestBody.red_start_month, requestBody.red_start_year ]
-    var reductionEndDate = [ requestBody.red_end_day, requestBody.red_end_month, requestBody.red_end_year ]
+    var reductionStartDate = [ requestBody.redStartDay, requestBody.redStartMonth, requestBody.redStartYear ]
+    var reductionEndDate = [ requestBody.redEndDay, requestBody.redEndMonth, requestBody.redEndYear ]
     var reasonId = !requestBody.reasonForReductionId ? 'select' : requestBody.reasonForReductionId
-    return new Reduction(reasonId, requestBody['reduction-hours'], reductionStartDate, reductionEndDate, requestBody.notes)
+    return new Reduction(reasonId, requestBody.reductionHours, reductionStartDate, reductionEndDate, requestBody.notes)
   }
 
   var requestStatusVerified = function (reductionStatus) {

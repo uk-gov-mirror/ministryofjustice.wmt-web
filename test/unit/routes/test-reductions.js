@@ -52,13 +52,13 @@ const existingReduction = {
 const successDataToPost = {
   id: undefined,
   reasonForReductionId: '1',
-  'reduction-hours': '5',
-  red_start_year: '2018',
-  red_start_month: '1',
-  red_start_day: '1',
-  red_end_year: '2018',
-  red_end_month: '7',
-  red_end_day: '1',
+  reductionHours: '5',
+  redStartYear: '2018',
+  redStartMonth: '1',
+  redStartDay: '1',
+  redEndYear: '2018',
+  redEndMonth: '7',
+  redEndDay: '1',
   notes: 'This is a test note',
   status: 'SCHEDULED'
 }
@@ -66,13 +66,13 @@ const successDataToPost = {
 const failureDataToPost = {
   reductionId: 1,
   reasonForReductionId: 1,
-  'reduction-hours': '5',
-  red_start_year: '',
-  red_start_month: '',
-  red_start_day: '',
-  red_end_year: '',
-  red_end_month: '',
-  red_end_day: '',
+  reductionHours: '5',
+  redStartYear: '',
+  redStartMonth: '',
+  redStartDay: '',
+  redEndYear: '',
+  redEndMonth: '',
+  redEndDay: '',
   notes: 'This is a test note'
 }
 

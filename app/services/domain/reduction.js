@@ -23,7 +23,7 @@ class Reduction {
     FieldValidator(this.reasonForReductionId, 'reasonForReductionId', errors)
       .isRequired()
 
-    FieldValidator(this.hours, 'reduction-hours', errors)
+    FieldValidator(this.hours, 'reductionHours', errors)
       .isRequired()
       .isFloat(0, 37)
 
