@@ -201,4 +201,24 @@ describe('services/validators/field-validator', function () {
       expect(errors).to.equal(false)
     })
   })
+
+  describe('isLessThanLength', function () {
+    it('should return false if passed valid data', function () {
+      FieldValidator('1234567891', FIELD_NAME, errorHandler).isLessThanLength(10)
+      var errors = errorHandler.get()
+      expect(errors).to.equal(false)
+    })
+
+    it('upper boundary + 1: should return an error if passed a value which is equal to boundary', function () {
+      FieldValidator('12345678912', FIELD_NAME, errorHandler).isLessThanLength(10)
+      var errors = errorHandler.get()
+      expect(errors).to.have.property(FIELD_NAME)
+    })
+
+    it('empty string: should return false if passed valid data', function () {
+      FieldValidator('', FIELD_NAME, errorHandler).isLessThanLength(10)
+      var errors = errorHandler.get()
+      expect(errors).to.equal(false)
+    })
+  })
 })
