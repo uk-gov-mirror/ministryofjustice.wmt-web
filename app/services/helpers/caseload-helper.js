@@ -1,3 +1,5 @@
+const caseTypes = require('../../constants/case-type')
+
 module.exports.getOverallCaseload = function (caseloads) {
   // Create a mapping for the linkId to do the aggregation
   var linkIdToCaseloadMap = new Map()
@@ -6,6 +8,18 @@ module.exports.getOverallCaseload = function (caseloads) {
     if (!linkIdToCaseloadMap.has(key)) {
       // Make a copy of the object to ensure the original value isn't affected
       var newValue = Object.assign({}, caseloads[idx])
+      newValue.custodyTotalCases = 0
+      newValue.communityTotalCases = 0
+      newValue.licenseTotalCases = 0
+
+      if(caseloads[idx].caseType === caseTypes.LICENSE){
+        newValue.licenseTotalCases += caseloads[idx].totalCases
+      } else if(caseloads[idx].caseType === caseTypes.COMMUNITY){
+        newValue.communityTotalCases += caseloads[idx].totalCases        
+      } else if(caseloads[idx].caseType === caseTypes.CUSTODY){
+        newValue.custodyTotalCases += caseloads[idx].totalCases        
+      }
+      
       linkIdToCaseloadMap.set(key, newValue)
     } else {
       var existingValue = linkIdToCaseloadMap.get(key)
@@ -18,6 +32,14 @@ module.exports.getOverallCaseload = function (caseloads) {
       existingValue.b1 += caseloads[idx].b1
       existingValue.a += caseloads[idx].a
       existingValue.totalCases += caseloads[idx].totalCases
+
+      if(caseloads[idx].caseType === caseTypes.LICENSE){
+        existingValue.licenseTotalCases += caseloads[idx].totalCases
+      } else if(caseloads[idx].caseType === caseTypes.COMMUNITY){
+        existingValue.communityTotalCases += caseloads[idx].totalCases        
+      } else if(caseloads[idx].caseType === caseTypes.CUSTODY){
+        existingValue.custodyTotalCases += caseloads[idx].totalCases        
+      }
     }
   }
   // Convert the map back to array of object

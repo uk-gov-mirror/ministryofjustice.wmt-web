@@ -31,7 +31,7 @@
 
 {% include "includes/export.html" %}
 
-{% if organisationLevel === 'team'%}
+{% if organisationLevel !== 'offender-manager'%}
 <h2 class="heading-large">Caseload type breakdown</h2>
 <div class="js-tabs">
   <ul class="js-tabs-links">
@@ -39,7 +39,9 @@
 	    <li><a href="#{{ caseType.displayName.toLowerCase() }}" role="dynamic">{{caseType.displayName | title}}</a></li>
     {% endfor %}
   </ul>
-  
+  {% endif %}
+
+  {% if organisationLevel === 'team' %}
   <div class="js-tabs-content">
   {% for caseType in caseloadDetails %}
     <div id="{{caseType.displayName.toLowerCase()}}">
@@ -89,10 +91,86 @@
   {% endfor %}
 
   </div>
-</div>
 
-{% elseif organisationLevel !== 'team'%}
+  {% elseif organisationLevel !== 'team'%}
+  <div class="js-tabs-content">
+    <div id="overall">
+      <h3 class="heading-medium">Caseload by grade</h3>
+      <table class="sln-table-caseload data-table">
+        <thead>
+          <tr>
+            <th colspan="1" id="team">{{ childOrganisationLevelDisplayText }}</th>
+            <th colspan="4" id="totals">Cases totals</th>
+          </tr>
+          <tr>
+            <th id="name">Name</th>
+            <th id="community" >Community Total</th>
+            <th id="license">License Total</th>
+            <th id="custody">Custody Total</th>
+            <th id="total">Total</th>
+          </tr>
+        </thead>
+        <tbody class="">
+        {% for org in overallSummary %}
+          <tr>
+            <td headers="name team"><a href="/{{ childOrganisationLevel }}/{{ org.linkId }}">{{ org.name }}</a></td>
+            <td headers="community total">{{ org.communityTotalCases }}</td>
+            <td headers="license total">{{ org.licenseTotalCases }}</td>
+            <td headers="custody total">{{ org.custodyTotalCases }}</td>
+            <td headers="overall total">{{ org.totalCases }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+      
+    {% for caseType in caseloadDetails %}
+    {% if caseType.displayName !== 'Overall' %}
 
+    <div id="{{caseType.displayName.toLowerCase()}}">
+      <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by tier</h3>
+      <table class="sln-table-caseload data-table">
+        <thead>
+          <tr>
+            <th colspan="2" id="{{caseType.displayName}}_om">{{ childOrganisationLevelDisplayText }}</th>
+            <th colspan="8" id="{{caseType.displayName}}_tiers">Case tiers</th>
+          </tr>
+          <tr>
+            <th id="{{caseType.displayName}}_name">Name</th>
+            <th id="{{caseType.displayName}}_untiered">Untiered</th>
+            <th id="{{caseType.displayName}}_d2">D2</th>
+            <th id="{{caseType.displayName}}_d1">D1</th>
+            <th id="{{caseType.displayName}}_c2">C2</th>
+            <th id="{{caseType.displayName}}_c1">C1</th>
+            <th id="{{caseType.displayName}}_b2">B2</th>
+            <th id="{{caseType.displayName}}_b1">B1</th>
+            <th id="{{caseType.displayName}}_a">A</th>
+            <th id="{{caseType.displayName}}_total">Total</th>
+          </tr>
+        </thead>
+        <tbody class="">
+          {% for member in caseType.array %}
+            <tr>
+              <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ member.untiered }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ member.d2 }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ member.d1 }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ member.c2 }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ member.c1 }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b2">{{ member.b2 }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ member.b1 }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ member.a }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total">{{ member.totalCases }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+{% endfor %}
+  </div>
+
+{% else %}
 <h3 class="heading-medium">Caseload by grade</h3>
   <table class="sln-table-caseload data-table">
     <thead>
@@ -138,7 +216,7 @@
   </table>
 
 {% endif %}
-
+</div>
 </main>
 {% endblock %}
 

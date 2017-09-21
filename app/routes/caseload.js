@@ -29,7 +29,8 @@ module.exports = function (router) {
           organisationLevel: organisationLevel,
           childOrganisationLevel: orgUnit.childOrganisationLevel,
           childOrganisationLevelDisplayText: childOrgUnit.displayText,
-          caseloadDetails: caseloadDetails(organisationLevel, result)
+          caseloadDetails: caseloadDetails(organisationLevel, result),
+          overallSummary: result.caseloadDetails.overallCaseloadDetails
         })
       }).catch(function (error) {
         next(error)
@@ -56,7 +57,7 @@ module.exports = function (router) {
   var caseloadDetails = function (organisationLevel, result) {
     var details
 
-    if (organisationLevel === organisationUnitConstants.TEAM.name) {
+    if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       details = [
         {
           displayName: 'Overall',

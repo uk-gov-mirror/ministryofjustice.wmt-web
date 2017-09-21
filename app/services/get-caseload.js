@@ -21,38 +21,32 @@ module.exports = function (id, organisationLevel) {
         breadcrumbs: breadcrumbs,
         title: title,
         subTitle: subTitle,
-        caseloadDetails: caseloadResults
+        caseloadDetails: caseloadResults,
       }
     })
 }
 
 var parseCaseloadResults = function (organisationLevel, results) {
-  var caseloadResults
+  // Overall cases
+  var overallResults = caseloadHelper.getOverallCaseload(results)
+  // Custody cases
+  var custodyResults = caseloadHelper.getCaseloadByType(results, caseType.CUSTODY)
+  var custodySummary = caseloadHelper.getCaseloadTotalSummary(custodyResults)
+  // Community cases
+  var communityResults = caseloadHelper.getCaseloadByType(results, caseType.COMMUNITY)
+  var communitySummary = caseloadHelper.getCaseloadTotalSummary(communityResults)
+  // License cases
+  var licenseResults = caseloadHelper.getCaseloadByType(results, caseType.LICENSE)
+  var licenseSummary = caseloadHelper.getCaseloadTotalSummary(licenseResults)
 
-  if (organisationLevel !== organisationUnitConstants.TEAM.name) {
-    caseloadResults = percentageCalculator(results)
-  } else {
-    // Overall cases
-    var overallResults = caseloadHelper.getOverallCaseload(results)
-    // Custody cases
-    var custodyResults = caseloadHelper.getCaseloadByType(results, caseType.CUSTODY)
-    var custodySummary = caseloadHelper.getCaseloadTotalSummary(custodyResults)
-    // Community cases
-    var communityResults = caseloadHelper.getCaseloadByType(results, caseType.COMMUNITY)
-    var communitySummary = caseloadHelper.getCaseloadTotalSummary(communityResults)
-    // License cases
-    var licenseResults = caseloadHelper.getCaseloadByType(results, caseType.LICENSE)
-    var licenseSummary = caseloadHelper.getCaseloadTotalSummary(licenseResults)
-
-    caseloadResults = {
-      overallCaseloadDetails: overallResults,
-      communityCaseloadDetails: communityResults,
-      custodyCaseloadDetails: custodyResults,
-      licenseCaseloadDetails: licenseResults,
-      custodyTotalSummary: custodySummary,
-      communityTotalSummary: communitySummary,
-      licenseTotalSummary: licenseSummary
-    }
+  var caseloadResults = {
+    overallCaseloadDetails: overallResults,
+    communityCaseloadDetails: communityResults,
+    custodyCaseloadDetails: custodyResults,
+    licenseCaseloadDetails: licenseResults,
+    custodyTotalSummary: custodySummary,
+    communityTotalSummary: communitySummary,
+    licenseTotalSummary: licenseSummary
   }
 
   return caseloadResults
