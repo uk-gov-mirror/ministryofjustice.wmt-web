@@ -55,7 +55,7 @@ describe('services/validators/fieldset-validator', function () {
         .isRequired(ERROR_MESSAGES.getIsRequired)
       var errors = ERROR_HANDLER.get()
       expect(errors).to.have.property(FIELD_NAME)
-      expect(errors[FIELD_NAME]).to.include(ERROR_MESSAGES.getIsRequired())
+      expect(errors[FIELD_NAME]).to.include(ERROR_MESSAGES.getIsRequiredMessage())
     })
 
     it('should return the fieldsetValidator after being called to allow function chaining.', function () {

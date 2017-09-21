@@ -74,7 +74,7 @@ module.exports = function (router) {
   function isValid (updatedHours, next) {
     var errors = ErrorHandler()
     FieldValidator(updatedHours, 'hours', errors)
-            .isRequired(ERROR_MESSAGES.getIsRequired)
+            .isRequired(ERROR_MESSAGES.getIsRequiredMessage)
             .isFloat(0, 37.5)
 
     var validationErrors = errors.get()

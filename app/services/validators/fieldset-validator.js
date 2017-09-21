@@ -17,7 +17,7 @@ class FieldsetValidator {
   }
 
   isRequired (specificMessage) {
-    var message = (!specificMessage) ? ERROR_MESSAGES.getIsRequired : specificMessage
+    var message = (!specificMessage) ? ERROR_MESSAGES.getIsRequiredMessage : specificMessage
     var self = this
     if (this.data instanceof Array) {
       this.data.forEach(function (data) {

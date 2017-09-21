@@ -6,19 +6,19 @@ const fieldName = 'Name'
 describe('services/validators/validation-error-messages', function () {
   it('should return expected IsRequired validation error message', function () {
     const expected = `${fieldName} is required`
-    var message = ValidationErrorMessages.getIsRequired(fieldName)
+    var message = ValidationErrorMessages.getIsRequiredMessage(fieldName)
     expect(message).to.equal(expected)
   })
 
   it('should return expected IsAlpha validation error message', function () {
     const expected = `${fieldName} must only contain letters`
-    var message = ValidationErrorMessages.getIsAlpha(fieldName)
+    var message = ValidationErrorMessages.getIsAlphaMessage(fieldName)
     expect(message).to.equal(expected)
   })
 
   it('should return expected IsNumeric validation error message', function () {
     const expected = `${fieldName} must only contain numbers`
-    var message = ValidationErrorMessages.getIsNumeric(fieldName)
+    var message = ValidationErrorMessages.getIsNumericMessage(fieldName)
     expect(message).to.equal(expected)
   })
 
