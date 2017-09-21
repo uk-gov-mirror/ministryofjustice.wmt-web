@@ -1,4 +1,5 @@
 const expect = require('chai').expect
+const moment = require('moment')
 const FieldsetValidator = require('../../../../app/services/validators/fieldset-validator')
 const ErrorHandler = require('../../../../app/services/validators/error-handler')
 const ERROR_MESSAGES = require('../../../../app/services/validators/validation-error-messages')
@@ -101,6 +102,7 @@ describe('services/validators/fieldset-validator', function () {
     it('should return the fieldsetValidator after being called to allow function chaining.', function () {
       var result = this.fieldsetValidator.isFutureDate(dateFormatter.now())
       expect(result).to.be.equal(this.fieldsetValidator)
+      console.log(result)
     })
   })
 
@@ -115,30 +117,53 @@ describe('services/validators/fieldset-validator', function () {
       this.fieldsetValidator.isValidDate({})
       var errors = this.error.get()
       expect(errors).to.have.property(FIELD_NAME)
+      expect(errors[FIELD_NAME][0]).to.include('was invalid')
     })
 
     it('should return error object if data is null', function () {
       this.fieldsetValidator.isValidDate(null)
       var errors = this.error.get()
       expect(errors).to.have.property(FIELD_NAME)
+      expect(errors[FIELD_NAME][0]).to.include('was invalid')
     })
 
     it('should return error object if data is undefined', function () {
       this.fieldsetValidator.isValidDate(undefined)
       var errors = this.error.get()
       expect(errors).to.have.property(FIELD_NAME)
+      expect(errors[FIELD_NAME][0]).to.include('was invalid')
     })
 
     it('should return error object if date is outside the valid range', function () {
       this.fieldsetValidator.isValidDate(dateFormatter.now().add(82, 'years'))
       var errors = this.error.get()
       expect(errors).to.have.property(FIELD_NAME)
+      expect(errors[FIELD_NAME][0]).to.include('was invalid')
     })
 
     it('should return false if date is within the valid range', function () {
       this.fieldsetValidator.isValidDate(dateFormatter.now().add(81, 'years'))
       var errors = this.error.get()
       expect(errors).to.equal(false)
+    })
+  })
+
+  describe('isLaterThan', function () {
+    it('should return false if end date is greater than start date', function () {
+      var startDate = moment().add(1, 'days').toDate()
+      var endDate = moment().add(2, 'days').toDate()
+      this.fieldsetValidator.isLaterThan(startDate, endDate)
+      var errors = this.error.get()
+      expect(errors).to.equal(false)
+    })
+
+    it('should return false if end date is greater than start date', function () {
+      var startDate = moment().add(2, 'days').toDate()
+      var endDate = moment().add(1, 'days').toDate()
+      this.fieldsetValidator.isLaterThan(startDate, endDate)
+      var errors = this.error.get()
+      expect(errors).to.have.property(FIELD_NAME)
+      expect(errors[FIELD_NAME][0]).to.include('must be after the start date')
     })
   })
 })
