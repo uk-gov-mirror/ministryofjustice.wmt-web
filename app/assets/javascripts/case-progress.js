@@ -16,6 +16,9 @@ caseProgress.forEach(function (caseInfo) {
   namesY.push(caseInfo.name)
 })
 
+maxLabelLength = Math.max(...(namesY.map(name => name.length)))
+letterWidth = 7
+
 trace1 = {
   x: commLast16WeeksX,
   y: namesY,
@@ -101,7 +104,7 @@ layout = {
     r: 0, 
     t: 0, 
     b: 0, 
-    l: 100, 
+    l: maxLabelLength * letterWidth, 
     pad: 5
   }, 
   plot_bgcolor: 'rgb(255, 255, 255)', 
@@ -142,7 +145,6 @@ layout = {
       family: 'Arial', 
       size: 12
     }, 
-    title: 'Click to enter Y axis title', 
     type: 'category', 
     zeroline: true
   }
