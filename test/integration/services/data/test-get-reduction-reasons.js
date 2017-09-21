@@ -30,7 +30,7 @@ describe('services/data/get-reduction-reasons', function () {
     })
   })
 
-  it('should return an array of reductions reasons ref data, including category', function () {
+  it('should return an array of reductions reasons ref data but not return any cms reasons', function () {
     return getReductionReasons()
       .then(function (results) {
         var reasonIds = []

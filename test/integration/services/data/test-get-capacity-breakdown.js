@@ -5,7 +5,7 @@ const getCapacityBreakdown = require('../../../../app/services/data/get-capacity
 
 var inserts = []
 
-describe('services/data/get-workload-reports-for-org', function () {
+describe('services/data/get-capacity-breakdown', function () {
   before(function () {
     return dataHelper.addWorkloadCapacitiesForOffenderManager()
       .then(function (builtInserts) {
@@ -16,64 +16,79 @@ describe('services/data/get-workload-reports-for-org', function () {
   it('should retrieve all workload_owners workloads within a team', function () {
     return getCapacityBreakdown(inserts.filter((item) => item.table === 'team')[0].id, 'team')
       .then(function (results) {
+        var expectedEntry = {
+          total_points: 50,
+          available_points: 25,
+          reduction_hours: 3,
+          linkId: inserts.filter((item) => item.table === 'workload_owner')[0].id,
+          name: 'Test_Forename Test_Surname',
+          grade: 'PO',
+          totalCases: 5,
+          cmsReductionHours: 0,
+          contractedHours: 37.5
+        }
+
         expect(results.length).to.be.eql(2)
-        expect(results[0].name).to.be.eql('Test_Forename Test_Surname')
-        expect(results[0].grade).to.be.eql('PO')
-        expect(results[0].total_points).to.be.a('Number')
-        expect(results[0].reduction_hours).to.be.a('Number')
-        expect(results[0].linkId).to.be.a('Number')
-        expect(results[0].totalCases).to.be.a('Number')
-        expect(results[0].cmsReductionHours).to.be.a('Number')
-        expect(results[0].contractedHours).to.be.a('Number')
+        expect(results).to.contain(expectedEntry)
       })
   })
 
   it('should retrieve summed capacity breakdown data for teams within ldu', function () {
     return getCapacityBreakdown(inserts.filter((item) => item.table === 'ldu')[0].id, 'ldu')
     .then(function (results) {
+      var expectedEntry = {
+        total_points: 70,
+        available_points: 35,
+        reduction_hours: 6,
+        linkId: inserts.filter((item) => item.table === 'team')[0].id,
+        name: 'Test Team',
+        grade: 'PO',
+        totalCases: 10,
+        cmsReductionHours: 0,
+        contractedHours: 75
+      }
+
       expect(results.length).to.be.eql(1)
-      expect(results[0].name).to.be.eql('Test Team')
-      expect(results[0].grade).to.be.eql('PO')
-      expect(results[0].total_points).to.be.a('Number')
-      expect(results[0].reduction_hours).to.be.a('Number')
-      expect(results[0].linkId).to.be.a('Number')
-      expect(results[0].totalCases).to.be.a('Number')
-      expect(results[0].cmsReductionHours).to.be.a('Number')
-      expect(results[0].contractedHours).to.be.a('Number')
+      expect(results).to.contain(expectedEntry)
     })
   })
 
   it('should retrieve summed capacity breakdown data for ldus within region', function () {
     return getCapacityBreakdown(inserts.filter((item) => item.table === 'region')[0].id, 'region')
     .then(function (results) {
+      var expectedEntry = {
+        total_points: 70,
+        available_points: 35,
+        reduction_hours: 6,
+        linkId: inserts.filter((item) => item.table === 'ldu')[0].id,
+        name: 'Test LDU',
+        grade: 'PO',
+        totalCases: 10,
+        cmsReductionHours: 0,
+        contractedHours: 75
+      }
+
       expect(results.length).to.be.eql(1)
-      expect(results[0].name).to.be.eql('Test LDU')
-      expect(results[0].grade).to.be.eql('PO')
-      expect(results[0].total_points).to.be.a('Number')
-      expect(results[0].reduction_hours).to.be.a('Number')
-      expect(results[0].linkId).to.be.a('Number')
-      expect(results[0].totalCases).to.be.a('Number')
-      expect(results[0].cmsReductionHours).to.be.a('Number')
-      expect(results[0].contractedHours).to.be.a('Number')
+      expect(results).to.contain(expectedEntry)
     })
   })
 
   it('should retrieve summed capacity breakdown data for regions within national', function () {
     return getCapacityBreakdown(undefined, 'hmpps')
     .then(function (results) {
-      var regionNames = []
-      results.forEach(function (results) {
-        regionNames.push(results.name)
-      })
-      expect(regionNames.includes('Test Region')).to.be.eql(true)
-      expect(results[0].name).to.be.a('String')
-      expect(results[0].grade).to.be.a('String')
-      expect(results[0].total_points).to.be.a('Number')
-      expect(results[0].reduction_hours).to.be.a('Number')
-      expect(results[0].linkId).to.be.a('Number')
-      expect(results[0].totalCases).to.be.a('Number')
-      expect(results[0].cmsReductionHours).to.be.a('Number')
-      expect(results[0].contractedHours).to.be.a('Number')
+      var expectedEntry = {
+        total_points: 70,
+        available_points: 35,
+        reduction_hours: 6,
+        linkId: inserts.filter((item) => item.table === 'region')[0].id,
+        name: 'Test Region',
+        grade: 'PO',
+        totalCases: 10,
+        cmsReductionHours: 0,
+        contractedHours: 75
+      }
+
+      expect(results).to.contain(expectedEntry)
     })
   })
 

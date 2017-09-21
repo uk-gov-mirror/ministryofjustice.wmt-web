@@ -15,11 +15,9 @@ module.exports = function (router) {
     }
 
     var orgUnit = getOrganisationUnit('name', organisationLevel)
-    var childOrgUnit
+    var childOrgUnitDisplayText
     if (organisationLevel !== organisationUnit.OFFENDER_MANAGER.name) {
-      childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)
-    } else {
-      childOrgUnit = orgUnit
+      childOrgUnitDisplayText = getOrganisationUnit('name', orgUnit.childOrganisationLevel).displayText
     }
 
     var capacityViewPromise = getCapacityView(id, capacityDateRange, organisationLevel)
@@ -33,7 +31,7 @@ module.exports = function (router) {
         capacity: result.capacityTable,
         capacityBreakdown: result.capacityBreakdown,
         childOrganisationLevel: orgUnit.childOrganisationLevel,
-        childOrganisationLevelDisplayText: childOrgUnit.displayText,
+        childOrganisationLevelDisplayText: childOrgUnitDisplayText,
         organisationLevel: organisationLevel
       })
     }).catch(function (error) {
