@@ -29,13 +29,6 @@ class FieldsetValidator {
     return this
   }
 
-  isEmptyOrValidDate (date) {
-    if (date && !this.validateDate(date)) {
-      this.errors.add(this.fieldName, ERROR_MESSAGES.getInvalidDateFormatMessage)
-    }
-    return this
-  }
-
   isValidDate (date) {
     if (!validateDate(date)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getInvalidDateFormatMessage)

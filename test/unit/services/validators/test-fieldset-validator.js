@@ -92,7 +92,7 @@ describe('services/validators/fieldset-validator', function () {
       expect(errors).to.have.property(FIELD_NAME)
     })
 
-    it('should return false if the date given is in the past', function () {
+    it('should return false if the date given is in the future', function () {
       this.fieldsetValidator.isFutureDate(FUTURE_DATE)
       var errors = this.error.get()
       expect(errors).to.equal(false)
@@ -101,6 +101,44 @@ describe('services/validators/fieldset-validator', function () {
     it('should return the fieldsetValidator after being called to allow function chaining.', function () {
       var result = this.fieldsetValidator.isFutureDate(dateFormatter.now())
       expect(result).to.be.equal(this.fieldsetValidator)
+    })
+  })
+
+  describe('isValidDate', function () {
+    it('should return false if passed a valid date', function () {
+      this.fieldsetValidator.isValidDate(dateFormatter.now())
+      var errors = this.error.get()
+      expect(errors).to.equal(false)
+    })
+
+    it('should return error object if data is not a valid date object', function () {
+      this.fieldsetValidator.isValidDate({})
+      var errors = this.error.get()
+      expect(errors).to.have.property(FIELD_NAME)
+    })
+
+    it('should return error object if data is null', function () {
+      this.fieldsetValidator.isValidDate(null)
+      var errors = this.error.get()
+      expect(errors).to.have.property(FIELD_NAME)
+    })
+
+    it('should return error object if data is undefined', function () {
+      this.fieldsetValidator.isValidDate(undefined)
+      var errors = this.error.get()
+      expect(errors).to.have.property(FIELD_NAME)
+    })
+
+    it('should return error object if date is outside the valid range', function () {
+      this.fieldsetValidator.isValidDate(dateFormatter.now().add(82, 'years'))
+      var errors = this.error.get()
+      expect(errors).to.have.property(FIELD_NAME)
+    })
+
+    it('should return false if date is within the valid range', function () {
+      this.fieldsetValidator.isValidDate(dateFormatter.now().add(81, 'years'))
+      var errors = this.error.get()
+      expect(errors).to.equal(false)
     })
   })
 })
