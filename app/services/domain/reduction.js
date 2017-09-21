@@ -29,13 +29,13 @@ class Reduction {
 
     var startDate = dateFormatter.build(this.reductionStartDateFields[0], this.reductionStartDateFields[1], this.reductionStartDateFields[2])
 
-    FieldSetValidator(this.reductionStartDateFields, 'reduction_start_date', errors)
+    FieldSetValidator(this.reductionStartDateFields, 'reductionStartDate', errors)
       .isRequired(ERROR_MESSAGES.getIsRequiredMessage)
       .isValidDate(startDate)
 
     var endDate = dateFormatter.build(this.reductionEndDateFields[0], this.reductionEndDateFields[1], this.reductionEndDateFields[2])
 
-    FieldSetValidator(this.reductionEndDateFields, 'reduction_end_date', errors)
+    FieldSetValidator(this.reductionEndDateFields, 'reductionEndDate', errors)
       .isRequired(ERROR_MESSAGES.getIsRequiredMessage)
       .isValidDate(endDate)
       .isLaterThan(startDate, endDate)

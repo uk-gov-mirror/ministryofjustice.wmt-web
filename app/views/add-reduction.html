@@ -46,14 +46,14 @@
       <input class="form-control" id="hours" name="reductionHours" style="width: 100px" value="{{reduction.hours}}">
     </div>
 
-    <div class="form-group" id="reduction_start_date">
+    <div class="form-group" id="reductionStartDate">
       <fieldset>
         <legend>
           <span class="form-label-bold">Reduction start date</span>
           <span class="form-hint">For example, 31 3 1980</span>
         </legend>
-        {% if errors['reduction_start_date'][0] %}
-          <span class="error-message">{{ errors['reduction_start_date'][0] }}</span>
+        {% if errors['reductionStartDate'][0] %}
+          <span class="error-message">{{ errors['reductionStartDate'][0] }}</span>
         {% endif %}
         <div class="form-date" id="reduction_start_day">
           <div class="form-group form-group-day">
@@ -72,14 +72,14 @@
       </fieldset>
     </div>
 
-    <div class="form-group" id="reduction_end_date">
+    <div class="form-group" id="reductionEndDate">
       <fieldset>
         <legend>
           <span class="form-label-bold">Reduction end date</span>
           <span class="form-hint">For example, 31 3 1980</span>
         </legend>
-        {% if errors['reduction_end_date'][0] %}
-          <span class="error-message">{{ errors['reduction_end_date'][0] }}</span>
+        {% if errors['reductionEndDate'][0] %}
+          <span class="error-message">{{ errors['reductionEndDate'][0] }}</span>
         {% endif %}
         <div class="form-date" id="reduction_end_day">
           <div class="form-group form-group-day">
