@@ -6,9 +6,9 @@ const getCapacityBreakdown = require('../../../../app/services/data/get-capacity
 var inserts = []
 
 var teamCapacityBreakdown = {
-  total_points: 50,
-  available_points: 25,
-  reduction_hours: 3,
+  totalPoints: 50,
+  availablePoints: 25,
+  reductionHours: 3,
   name: 'Test_Forename Test_Surname',
   grade: 'PO',
   totalCases: 5,
@@ -17,9 +17,9 @@ var teamCapacityBreakdown = {
 }
 
 var lduAndAboveExpectedCapacity = {
-  total_points: 70,
-  available_points: 35,
-  reduction_hours: 6,
+  totalPoints: 70,
+  availablePoints: 35,
+  reductionHours: 6,
   grade: 'PO',
   totalCases: 10,
   cmsReductionHours: 0,

@@ -42,7 +42,7 @@
 
 {% if organisationLevel !== 'offender-manager' %}
   <h3 class="heading-medium">Capacity breakdown</h3>
-  <table id="example" class="data-table dataTable">
+  <table id="capacity-breakdown" class="data-table dataTable">
     <thead>
       <tr>
         <th colspan="2" id="org">{{ childOrganisationLevelDisplayText }}</th>
@@ -67,14 +67,14 @@
         <tr>
           <td headers="name org"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade org">{{ member.grade }}</td>
-          <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}</td>
+          <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
           <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>
           <td headers="paroms breakdown">-</td>
           <td headers="fdrs breakdown">-</td>
           <td headers="sdrs breakdown">-</td>
           <td headers="arms breakdown">-</td>
           <td headers="gs breakdown">-</td>
-          <td headers="cms breakdown">{{ member.cmsPercentage | round(1) }}</td>
+          <td headers="cms breakdown">{{ member.cmsPercentage | round(1) }}%</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -85,17 +85,17 @@
         {% for i in range(0, member.grades.length) %}
           <tr>
             {% if i === 0 %}
-              <td rowspan="{{ member.grades.length }}" headers="name team"><a href="/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
             {% endif %}
-          <td headers="grade team">{{ member.grades[i].grade }}</td>
-          <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage }}</td>
-          <td headers="cases breakdown">{{ member.grades[i].totalCases }}</td>
+          <td headers="grade org">{{ member.grades[i].grade }}</td>
+          <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
+          <td headers="cases breakdown">{{ member.grades[i].totalCases | round(1) }}</td>
           <td headers="paroms breakdown">-</td>
           <td headers="fdrs breakdown">-</td>
           <td headers="sdrs breakdown">-</td>
           <td headers="arms breakdown">-</td>
           <td headers="gs breakdown">-</td>
-          <td headers="cms breakdown">{{ member.grades[i].cmsPercentage | round(1) }}</td>
+          <td headers="cms breakdown">{{ member.grades[i].cmsPercentage | round(1) }}%</td>
         </tr>
         {% endfor %}
       {% endfor %}

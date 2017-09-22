@@ -122,15 +122,15 @@
           <td rowspan="{{ org.grades.length }}" headers="name team"><a href="/{{ childOrganisationLevel }}/{{ org.linkId }}">{{ org.name }}</a></td>
           {% endif %}
           <td headers="grade team">{{ org.grades[i].gradeCode }}</td>
-          <td headers="overall tiers">{{ org.grades[i].totalCases | round(1) }}</td>
-          <td headers="untiered tiers">{{ org.grades[i].untiered | round(1) }}</td>
-          <td headers="d2 tiers">{{ org.grades[i].d2 | round(1) }}</td>
-          <td headers="d1 tiers">{{ org.grades[i].d1 | round(1) }}</td>
-          <td headers="c2 tiers">{{ org.grades[i].c2 | round(1) }}</td>
-          <td headers="c1 tiers">{{ org.grades[i].c1 | round(1) }}</td>
-          <td headers="b2 tiers">{{ org.grades[i].b2 | round(1) }}</td>
-          <td headers="b1 tiers">{{ org.grades[i].b1 | round(1) }}</td>
-          <td headers="a tiers">{{ org.grades[i].a | round(1) }}</td>
+          <td headers="overall tiers">{{ org.grades[i].totalCases | round(1) }}%</td>
+          <td headers="untiered tiers">{{ org.grades[i].untiered | round(1) }}%</td>
+          <td headers="d2 tiers">{{ org.grades[i].d2 | round(1) }}%</td>
+          <td headers="d1 tiers">{{ org.grades[i].d1 | round(1) }}%</td>
+          <td headers="c2 tiers">{{ org.grades[i].c2 | round(1) }}%</td>
+          <td headers="c1 tiers">{{ org.grades[i].c1 | round(1) }}%</td>
+          <td headers="b2 tiers">{{ org.grades[i].b2 | round(1) }}%</td>
+          <td headers="b1 tiers">{{ org.grades[i].b1 | round(1) }}%</td>
+          <td headers="a tiers">{{ org.grades[i].a | round(1) }}%</td>
         </tr>
         {% endfor %}
       {% endfor %}

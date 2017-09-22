@@ -14,9 +14,9 @@ module.exports = function (id, type) {
 
   return knex(table)
     .where(whereObject)
-    .select('total_points',
-            'available_points',
-            'reduction_hours',
+    .select('total_points AS totalPoints',
+            'available_points AS availablePoints',
+            'reduction_hours AS reductionHours',
             'link_id AS linkId',
             'name',
             'grade_code AS grade',

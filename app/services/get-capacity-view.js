@@ -79,7 +79,7 @@ var buildCapacityBreakdownEntry = function (workloadReport) {
     grade: workloadReport.grade,
     totalCases: workloadReport.totalCases,
     linkId: workloadReport.linkId,
-    capacityPercentage: percentageCalculator.calculatePercentage(workloadReport.total_points, workloadReport.available_points),
+    capacityPercentage: percentageCalculator.calculatePercentage(workloadReport.totalPoints, workloadReport.availablePoints),
     cmsPercentage: percentageCalculator.calculatePercentage(workloadReport.cmsReductionHours, workloadReport.contractedHours)
   }
 }

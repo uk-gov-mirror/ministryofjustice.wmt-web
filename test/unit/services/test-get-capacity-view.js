@@ -18,8 +18,8 @@ const TEAM_REULTS = [
     grade: 'Test grade',
     totalCases: 39,
     linkId: 1,
-    total_points: 50,
-    available_points: 100,
+    totalPoints: 50,
+    availablePoints: 100,
     cmsReductionHours: 10,
     contractedHours: 40
   }
@@ -31,8 +31,8 @@ const LDU_RESULTS = [
     grade: 'Test grade 1',
     totalCases: 39,
     linkId: 1,
-    total_points: 50,
-    available_points: 100,
+    totalPoints: 50,
+    availablePoints: 100,
     cmsReductionHours: 10,
     contractedHours: 40
   },
@@ -41,8 +41,8 @@ const LDU_RESULTS = [
     grade: 'Test grade 2',
     totalCases: 40,
     linkId: 1,
-    total_points: 50,
-    available_points: 100,
+    totalPoints: 50,
+    availablePoints: 100,
     cmsReductionHours: 10,
     contractedHours: 40
   }
