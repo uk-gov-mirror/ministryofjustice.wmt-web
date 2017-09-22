@@ -59,9 +59,9 @@ class Reduction {
   setReductionStatus () {
     var currentDate = new Date()
     var status = reductionStatusType.ACTIVE
-    if ((this.reductionStartDate > currentDate) && (this.reductionEndDate > currentDate)) {
+    if (this.reductionStartDate > currentDate) {
       status = reductionStatusType.SCHEDULED
-    } else if ((this.reductionStartDate < currentDate) && (this.reductionEndDate < currentDate)) {
+    } else if (this.reductionEndDate < currentDate) {
       status = reductionStatusType.ARCHIVED
     }
 
