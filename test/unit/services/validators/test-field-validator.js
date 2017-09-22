@@ -34,7 +34,7 @@ describe('services/validators/field-validator', function () {
       FieldValidator({}, FIELD_NAME, errorHandler)
         .isRequired()
       var errors = errorHandler.get()
-      expect(errors).to.equal(false)
+      expect(errors).to.have.property(FIELD_NAME)
     })
 
     it('should return false if passed valid data', function () {
