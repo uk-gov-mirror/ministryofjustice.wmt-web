@@ -2,6 +2,7 @@ const moment = require('moment')
 const expect = require('chai').expect
 const Reduction = require('../../../../app/services/domain/reduction')
 const reductionHelper = require('../../../../app/services/helpers/reduction-helper')
+const reductionStatusType = require('../../../../app/constants/reduction-status-type')
 
 var activeStartDate = moment().subtract(30, 'days').toDate()
 var activeEndDate = moment().add(30, 'days').toDate()
@@ -19,8 +20,11 @@ var SCHEDULED_REDUCTION = new Reduction('2', '12',
 var ARCHIVE_REDUCTION = new Reduction('3', '13',
   [archivedStartDate.getDate(), archivedStartDate.getMonth() + 1, archivedStartDate.getFullYear()],
   [archivedEndDate.getDate(), archivedEndDate.getMonth() + 1, archivedEndDate.getFullYear()], 'archive note')
-
-var REDUCTIONS = [ACTIVE_REDUCTION, SCHEDULED_REDUCTION, ARCHIVE_REDUCTION]
+var DELETED_REDUCTION = new Reduction('4', '10',
+  [archivedStartDate.getDate(), archivedStartDate.getMonth() + 1, archivedStartDate.getFullYear()],
+  [archivedEndDate.getDate(), archivedEndDate.getMonth() + 1, archivedEndDate.getFullYear()], 'deleted note')
+DELETED_REDUCTION.status = reductionStatusType.DELETED
+var REDUCTIONS = [ACTIVE_REDUCTION, SCHEDULED_REDUCTION, ARCHIVE_REDUCTION, DELETED_REDUCTION]
 
 describe('services/helpers/reduction-helper', function () {
   describe('getReductionsByStatus', function () {
