@@ -28,6 +28,8 @@ describe('services/domain/reduction', function () {
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
         [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note')
     }).to.throw(ValidationError)
+      .that.has.a.property('validationErrors')
+      .that.has.a.property('reductionHours')
   })
 
   it('should raise a ValidationError if Reason is not supplied', function () {
@@ -38,6 +40,9 @@ describe('services/domain/reduction', function () {
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
         [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note')
     }).to.throw(ValidationError)
+      .that.has.a.property('validationErrors')
+      .that.has.a.property('reasonForReductionId')
+      .that.contains('Reason for reduction is required')
   })
 
   it('should raise a ValidationError if Start Date is not valid', function () {
@@ -48,6 +53,9 @@ describe('services/domain/reduction', function () {
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
         [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note')
     }).to.throw(ValidationError)
+      .that.has.a.property('validationErrors')
+      .that.has.a.property('reductionStartDate')
+      .that.contains('Reduction start date was invalid')
   })
 
   it('should raise a ValidationError if End Date is before Start Date', function () {
@@ -58,6 +66,9 @@ describe('services/domain/reduction', function () {
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
         [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note')
     }).to.throw(ValidationError)
+      .that.has.a.property('validationErrors')
+      .that.has.a.property('reductionEndDate')
+      .that.contains('Reduction end date must be after the start date')
   })
 
   it('should raise a ValidationError if Notes exceed max length', function () {
@@ -69,6 +80,8 @@ describe('services/domain/reduction', function () {
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
         [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], longNote)
     }).to.throw(ValidationError)
+      .that.has.a.property('validationErrors')
+      .that.has.a.property('notes')
   })
 
   function getLongString () {
