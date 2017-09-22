@@ -10,6 +10,7 @@ module.exports = function (id, type) {
   var selectColumns = [
     'link_id AS linkId',
     'name',
+    'grade_code AS grade',
     'untiered',
     'd2',
     'd1',

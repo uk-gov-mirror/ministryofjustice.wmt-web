@@ -1,8 +1,8 @@
 const caseloadHelper = require('./caseload-helper.js')
 
-module.exports = function (caseloadTotalsByGrade) {
+module.exports = function (caseloadTotalsByGrade, percentage = true) {
   var percentageResults = []
-  var caseloadTotalsByTeam = caseloadHelper.getOverallCaseload(caseloadTotalsByGrade)
+  var caseloadTotalsByTeam = caseloadHelper.getOverallCaseloadByTeam(caseloadTotalsByGrade)
 
   // For each team, create one entry in the new results set with one 'grade' sub-object per grade
   for (var team in caseloadTotalsByTeam) {
@@ -12,7 +12,7 @@ module.exports = function (caseloadTotalsByGrade) {
     var percentageGradeRecords = []
     for (var record in teamGradeRecords) {
       var newGradeRecord = {
-        gradeCode: teamGradeRecords[record].gradeCode,
+        gradeCode: teamGradeRecords[record].grade,
         untiered: calculatePercentage(teamGradeRecords[record].untiered, caseloadTotalsByTeam[team].untiered),
         d2: calculatePercentage(teamGradeRecords[record].d2, caseloadTotalsByTeam[team].d2),
         d1: calculatePercentage(teamGradeRecords[record].d1, caseloadTotalsByTeam[team].d1),
@@ -31,7 +31,7 @@ module.exports = function (caseloadTotalsByGrade) {
   return percentageResults
 }
 
-var calculatePercentage = function (value, total) {
+var calculatePercentage = function (value, total, percentage = false) {
   var result = 0
 
   if (total !== 0) {

@@ -30,7 +30,8 @@ module.exports = function (router) {
           childOrganisationLevel: orgUnit.childOrganisationLevel,
           childOrganisationLevelDisplayText: childOrgUnit.displayText,
           caseloadDetails: caseloadDetails(organisationLevel, result),
-          overallSummary: result.caseloadDetails.overallCaseloadDetails
+          overallByGrade: result.caseloadDetails.overallByGrade,
+          overallSummary: result.caseloadDetails.overallTotalSummary
         })
       }).catch(function (error) {
         next(error)
@@ -62,7 +63,7 @@ module.exports = function (router) {
         {
           displayName: 'Overall',
           array: result.caseloadDetails.overallCaseloadDetails,
-          totalSummary: null
+          totalSummary: result.caseloadDetails.overallTotalSummary
         },
         {
           displayName: 'Custody',
