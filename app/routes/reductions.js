@@ -244,7 +244,7 @@ module.exports = function (router) {
   var generateNewReductionFromRequest = function (requestBody) {
     var reductionStartDate = [ requestBody.redStartDay, requestBody.redStartMonth, requestBody.redStartYear ]
     var reductionEndDate = [ requestBody.redEndDay, requestBody.redEndMonth, requestBody.redEndYear ]
-    var reasonId = !requestBody.reasonForReductionId ? 'select' : requestBody.reasonForReductionId
+    var reasonId = requestBody.reasonForReductionId
     return new Reduction(reasonId, requestBody.reductionHours, reductionStartDate, reductionEndDate, requestBody.notes)
   }
 
