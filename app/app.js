@@ -55,6 +55,7 @@ var app = express()
 
 // Set security headers.
 app.use(helmet())
+app.use(helmet.hsts({ maxAge: 5184000 }))
 
 authentication(app)
 
@@ -81,7 +82,7 @@ app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images'
 // Cookie session
 app.set('trust proxy', 1) // trust first proxy
 app.use(cookieSession({
-  name: 'wmt-start-application',
+  name: 'session',
   keys: [config.APPLICATION_SECRET],
   maxAge: parseInt(config.SESSION_COOKIE_MAXAGE)
 }))
