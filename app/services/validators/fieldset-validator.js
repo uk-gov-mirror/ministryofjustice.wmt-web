@@ -43,6 +43,13 @@ class FieldsetValidator {
     return this
   }
 
+  isPastDate (date) {
+    if (!isDateInThePast(date)) {
+      this.errors.add(this.fieldName, ERROR_MESSAGES.getPastDateMessage)
+    }
+    return this
+  }
+
   isLaterThan (startDate, endDate) {
     if (!isDateAfter(startDate, endDate)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getIsDateLaterThanMessage)
@@ -59,6 +66,10 @@ function validateDate (date) {
 
 function isDateInTheFuture (date) {
   return validateDate(date) && date > dateFormatter.now()
+}
+
+function isDateInThePast (date) {
+  return validateDate(date) && date < dateFormatter.now()
 }
 
 function isDateAfter (startDate, endDate) {
