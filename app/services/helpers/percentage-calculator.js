@@ -32,9 +32,10 @@ module.exports = function (caseloadTotalsByGrade) {
 }
 
 var calculatePercentage = function (value, total) {
-  if (total === 0) {
-    return 0
-  } else {
-    return value / total * 100
+  var result = 0
+
+  if (total !== 0) {
+    result = value / total * 100
   }
+  return result
 }

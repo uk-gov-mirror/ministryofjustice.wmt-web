@@ -70,7 +70,7 @@ module.exports = function (router) {
     var loggedInUser = req.user.username
 
     if (rights === 'Staff') {
-      removeUserRole(username, )
+      removeUserRole(username)
     } else {
       addUpdateUserRole(username, rights, loggedInUser)
     }

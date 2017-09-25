@@ -15,6 +15,7 @@ const routesNoCsrf = require('./routes-no-csrf')
 const getOrganisationalHierarchyTree = require('./services/organisational-hierarchy-tree')
 const bunyan = require('bunyan')
 const PrettyStream = require('bunyan-prettystream')
+const cookieSession = require('cookie-session')
 
 // Add logging
 var prettyStream = new PrettyStream()
@@ -54,6 +55,7 @@ var app = express()
 
 // Set security headers.
 app.use(helmet())
+app.use(helmet.hsts({ maxAge: 5184000 }))
 
 var developmentMode = app.get('env') === 'development'
 
@@ -74,6 +76,19 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_template')))
 app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_frontend_toolkit')))
 app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images', 'favicon.ico')))
+
+// Cookie session
+app.set('trust proxy', 1) // trust first proxy
+app.use(cookieSession({
+  name: 'session',
+  keys: [config.APPLICATION_SECRET],
+  maxAge: parseInt(config.SESSION_COOKIE_MAXAGE)
+}))
+// Update a value in the cookie so that the set-cookie will be sent
+app.use(function (req, res, next) {
+  req.session.nowInMinutes = Date.now() / 60e3
+  next()
+})
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

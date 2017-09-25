@@ -1,6 +1,10 @@
 const contractedHoursService = require('../services/contracted-hours-service')
 const getSubNav = require('../services/get-sub-nav')
 const organisationUnitConstants = require('../constants/organisation-unit')
+const ErrorHandler = require('../services/validators/error-handler')
+const FieldValidator = require('../services/validators/field-validator')
+const ValidationError = require('../services/errors/validation-error')
+const ERROR_MESSAGES = require('../services/validators/validation-error-messages')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/contracted-hours', function (req, res, next) {
@@ -36,6 +40,29 @@ module.exports = function (router) {
       return res.sendStatus(404)
     }
 
+    try {
+      isValid(updatedHours, next)
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        return contractedHoursService.getContractedHours(id, organisationLevel)
+          .then(function (result) {
+            return res.render('contracted-hours', {
+              errors: error.validationErrors,
+              title: result.title,
+              subTitle: result.subTitle,
+              breadcrumbs: result.breadcrumbs,
+              subNav: getSubNav(id, organisationLevel, req.path),
+              contractedHours: updatedHours,
+              woId: id
+            })
+          }).catch(function (error) {
+            next(error)
+          })
+      } else {
+        next(error)
+      }
+    }
+
     return contractedHoursService.updateContractedHours(id, organisationLevel, updatedHours)
     .then(function () {
       return res.redirect('/offender-manager/' + id + '/contracted-hours?hoursUpdatedSuccess=true')
@@ -43,4 +70,16 @@ module.exports = function (router) {
       next(error)
     })
   })
+
+  function isValid (updatedHours, next) {
+    var errors = ErrorHandler()
+    FieldValidator(updatedHours, 'hours', errors)
+            .isRequired(ERROR_MESSAGES.getIsRequiredMessage)
+            .isFloat(0, 37.5)
+
+    var validationErrors = errors.get()
+    if (validationErrors) {
+      throw new ValidationError(validationErrors)
+    }
+  }
 }

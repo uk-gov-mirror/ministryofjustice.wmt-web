@@ -1,6 +1,6 @@
 const config = require('../config')
 
-function isAuthenticated(req) {
+function isAuthenticated (req) {
   if (!req.isAuthenticated() || !req.user) {
     var error = new Error('unauthenticated')
     error.status = 401
@@ -8,7 +8,7 @@ function isAuthenticated(req) {
   }
 }
 
-function isDataAdmin(req) {
+function isDataAdmin (req) {
   if (!config.AUTHENTICATION_ENABLED) {
     return false
   }
@@ -19,7 +19,7 @@ function isDataAdmin(req) {
   return false
 }
 
-function isSystemAdmin(req) {
+function isSystemAdmin (req) {
   if (!config.AUTHENTICATION_ENABLED) {
     return false
   }
@@ -30,7 +30,7 @@ function isSystemAdmin(req) {
   return false
 }
 
-function isManager(req) {
+function isManager (req) {
   if (!config.AUTHENTICATION_ENABLED) {
     return false
   }

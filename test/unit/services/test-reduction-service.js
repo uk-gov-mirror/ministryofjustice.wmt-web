@@ -1,3 +1,4 @@
+const moment = require('moment')
 const expect = require('chai').expect
 const assert = require('chai').assert
 const sinon = require('sinon')
@@ -22,11 +23,16 @@ var reductionService
 var getReductionById
 var getReductions
 var reductionHelper
+var getLatestIdsForWpRecalc
 
 var newReductionId = 9
 var existingReductionId = 10
 var workloadOwnerId = 11
-var reduction = new Reduction(1, 1, new Date(), new Date(), 'This is a test note', reductionStatusType.ACTIVE)
+var activeStartDate = moment().subtract(30, 'days').toDate()
+var activeEndDate = moment().add(30, 'days').toDate()
+var reduction = new Reduction('1', '10',
+  [activeStartDate.getDate(), activeStartDate.getMonth(), activeStartDate.getFullYear()],
+  [activeEndDate.getDate(), activeEndDate.getMonth(), activeEndDate.getFullYear()], 'active note')
 
 var referenceData = [
   {
@@ -74,6 +80,8 @@ var reductionsByStatus = {
   archivedReductions: archivedReductions
 }
 
+var recalcIds = { workloadId: 3, workloadReportId: 2 }
+
 beforeEach(function () {
   addReductionStub = sinon.stub()
   updateReductionStub = sinon.stub()
@@ -87,6 +95,7 @@ beforeEach(function () {
   reductionHelper = {
     getReductionsByStatus: sinon.stub().returns(reductionsByStatus)
   }
+  getLatestIdsForWpRecalc = sinon.stub().resolves(recalcIds)
   reductionService =
     proxyquire('../../../app/services/reductions-service',
       {
@@ -99,6 +108,7 @@ beforeEach(function () {
         './data/get-contracted-hours-for-workload-owner': getContractedHoursForWorkloadOwnerStub,
         './data/get-reduction-reasons': getReferenceDataStub,
         './data/create-calculate-workload-points-task': createCalculateWorkloadTaskStub,
+        './data/get-latest-workload-and-workload-report-id': getLatestIdsForWpRecalc,
         './data/get-reduction-by-id': getReductionById
       })
 })
@@ -139,7 +149,8 @@ describe('services/reductions-service', function () {
       addReductionStub.withArgs(workloadOwnerId, reduction).resolves(newReductionId)
       return reductionService.addReduction(workloadOwnerId, reduction)
         .then(function (result) {
-          expect(createCalculateWorkloadTaskStub.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+          expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+          expect(createCalculateWorkloadTaskStub.calledWith(3, 2)).to.be.true //eslint-disable-line
           expect(addReductionStub.calledWith(workloadOwnerId, reduction)).to.be.true //eslint-disable-line
           expect(result).to.equal(1)
         })
@@ -152,7 +163,8 @@ describe('services/reductions-service', function () {
       updateReductionStub.withArgs(existingReductionId, workloadOwnerId, reduction).resolves(existingReductionId)
       return reductionService.updateReduction(workloadOwnerId, existingReductionId, reduction)
         .then(function (result) {
-          expect(createCalculateWorkloadTaskStub.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+          expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+          expect(createCalculateWorkloadTaskStub.calledWith(3, 2)).to.be.true //eslint-disable-line
           expect(updateReductionStub.calledWith(existingReductionId, workloadOwnerId,reduction)).to.be.true //eslint-disable-line
           expect(result).to.equal(1)
         })
@@ -166,7 +178,8 @@ describe('services/reductions-service', function () {
       updateReductionStatusStub.withArgs(existingReductionId, newReductonStatus).resolves(existingReductionId)
       return reductionService.updateReductionStatus(workloadOwnerId, existingReductionId, newReductonStatus)
         .then(function (result) {
-          expect(createCalculateWorkloadTaskStub.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+          expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+          expect(createCalculateWorkloadTaskStub.calledWith(3, 2)).to.be.true //eslint-disable-line
           expect(updateReductionStatusStub.calledWith(existingReductionId, newReductonStatus)).to.be.true //eslint-disable-line
           expect(result).to.equal(1)
         })
@@ -174,7 +187,7 @@ describe('services/reductions-service', function () {
   })
 
   describe('Get Reduction By reduction Id', function () {
-    it('should cal on to data service with correct reduction id and return reduction', function () {
+    it('should call on to data service with correct reduction id and return reduction', function () {
       getReductionById.resolves(reduction)
       return reductionService.getReductionByReductionId(existingReductionId)
       .then(function (result) {

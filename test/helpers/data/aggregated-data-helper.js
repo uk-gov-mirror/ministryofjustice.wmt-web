@@ -17,40 +17,42 @@ var defaultWorkload = {
   community_last_16_weeks: 10
 }
 
-var defaultWorkloadPoints = {
-  comm_tier_1: 0,
-  comm_tier_2: 0,
-  comm_tier_3: 0,
-  comm_tier_4: 0,
-  comm_tier_5: 0,
-  comm_tier_6: 0,
-  comm_tier_7: 0,
-  cust_tier_1: 0,
-  cust_tier_2: 0,
-  cust_tier_3: 0,
-  cust_tier_4: 0,
-  cust_tier_5: 0,
-  cust_tier_6: 0,
-  cust_tier_7: 0,
-  lic_tier_1: 0,
-  lic_tier_2: 0,
-  lic_tier_3: 0,
-  lic_tier_4: 0,
-  lic_tier_5: 0,
-  lic_tier_6: 0,
-  lic_tier_7: 0,
-  user_id: 0,
-  sdr: 0,
-  sdr_conversion: 0,
-  nominal_target_spo: 0,
-  nominal_target_po: 0,
-  default_contracted_hours_po: 0,
-  default_contracted_hours_pso: 0,
-  weighting_o: 0,
-  weighting_w: 0,
-  weighting_u: 0,
-  paroms_enabled: 0,
-  parom: 0
+module.exports.defaultWorkloadPoints = {
+  comm_tier_1: 11,
+  comm_tier_2: 12,
+  comm_tier_3: 13,
+  comm_tier_4: 14,
+  comm_tier_5: 15,
+  comm_tier_6: 16,
+  comm_tier_7: 17,
+  cust_tier_1: 21,
+  cust_tier_2: 22,
+  cust_tier_3: 23,
+  cust_tier_4: 24,
+  cust_tier_5: 25,
+  cust_tier_6: 26,
+  cust_tier_7: 27,
+  lic_tier_1: 31,
+  lic_tier_2: 32,
+  lic_tier_3: 33,
+  lic_tier_4: 34,
+  lic_tier_5: 35,
+  lic_tier_6: 36,
+  lic_tier_7: 37,
+  user_id: 123,
+  sdr: 4,
+  sdr_conversion: 5,
+  nominal_target_spo: 1234,
+  nominal_target_po: 5678,
+  default_contracted_hours_po: 37,
+  default_contracted_hours_pso: 38,
+  weighting_o: 10,
+  weighting_w: 20,
+  weighting_u: 70,
+  paroms_enabled: 1,
+  parom: 99,
+  effective_from: '2017-04-01',
+  effective_to: null
 }
 
 module.exports.addOrgHierarchyWithPoAndPso = function () {
@@ -94,10 +96,18 @@ module.exports.addCaseProgressDataForAllOrgUnits = function () {
 module.exports.addWorkloadCapacitiesForOffenderManager = function () {
   var inserts = []
 
-  var promise = knex('workload_points').returning('id').insert(defaultWorkloadPoints)
+  var promise = module.exports.addWorkloadPoints(inserts)
+    .then(function (inserts) {
+      var workloadReports = [
+        { effective_from: '2017-01-01', effective_to: '2017-02-01' },
+        { effective_from: '2017-02-01' }
+      ]
+      return knex('workload_report').returning('id').insert(workloadReports)
+    })
     .then(function (ids) {
-      inserts.push({table: 'workload_points', id: ids[0]})
-
+      ids.forEach((id) => {
+        inserts.push({table: 'workload_report', id: id})
+      })
       var offenderManagerTypes = [
         { grade_code: 'PO' },
         { grade_code: 'PSO' }
@@ -111,6 +121,31 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
       return addRegion(inserts)
     })
   return promise
+}
+
+module.exports.addWorkloadPoints = function (inserts) {
+  if (inserts === undefined) {
+    inserts = []
+  }
+
+  var workloadPoints = [
+    module.exports.defaultWorkloadPoints,
+    Object.assign({}, module.exports.defaultWorkloadPoints, {
+      comm_tier_1: 111,
+      comm_tier_2: 112,
+      comm_tier_3: 113,
+      effective_from: '2017-01-01',
+      effective_to: '2017-02-01'
+    })
+  ]
+
+  return knex('workload_points').returning('id').insert(workloadPoints)
+  .then(function (ids) {
+    ids.forEach((id) => {
+      inserts.push({table: 'workload_points', id: id})
+    })
+    return inserts
+  })
 }
 
 var addRegion = function (inserts) {
@@ -201,12 +236,12 @@ var addWorkload = function (inserts) {
     ids.forEach((id) => {
       inserts.push({table: 'workload', id: id})
     })
-    return knex('workload_report').select('id').orderBy('effective_from', 'desc')
-  })
-  .then(function (workloadReports) {
+
     var workloads = inserts.filter((item) => item.table === 'workload')
+    var workloadReports = inserts.filter((item) => item.table === 'workload_report')
+
     var defaultWorkloadPointsCalculations = {
-      workload_report_id: workloadReports[0].id,
+      workload_report_id: workloadReports[1].id,
       workload_points_id: inserts.filter((item) => item.table === 'workload_points')[0].id,
       workload_id: workloads[workloads.length - 1].id,
       total_points: 0,
@@ -226,7 +261,12 @@ var addWorkload = function (inserts) {
     calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
       total_points: 20,
       available_points: 10,
-      workload_report_id: workloadReports[1].id,
+      workload_id: inserts.filter((item) => item.table === 'workload')[0].id
+    }))
+    calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
+      total_points: 20,
+      available_points: 10,
+      workload_report_id: workloadReports[0].id,
       workload_id: inserts.filter((item) => item.table === 'workload')[0].id
     }))
 
@@ -298,6 +338,14 @@ module.exports.getAnyExistingWorkloadOwnerId = function () {
   return promise
 }
 
+module.exports.getAnyExistingWorkloadReportId = function () {
+  return knex('workload_report')
+    .first('id')
+    .then(function (result) {
+      return result.id
+    })
+}
+
 module.exports.getAnyExistingReductionReasonId = function () {
   var promise = knex('reduction_reason')
       .first('id')
@@ -340,7 +388,7 @@ module.exports.getWorkloadReportEffectiveFromDate = function () {
   return knex('workload_report')
       .first('effective_from')
       .whereNull('effective_to')
-      .orderBy('effective_from', 'desc')
+      .orderBy('id', 'desc')
 }
 
 module.exports.getAnyExistingWorkloadOwnerIdWithActiveReduction = function () {
@@ -358,4 +406,52 @@ module.exports.generateNonExistantWorkloadOwnerId = function () {
   .then(function (maxId) {
     return maxId[0].maxId + 1
   })
+}
+
+module.exports.getAllTasks = function () {
+  return knex('tasks')
+    .select('submitting_agent',
+            'type',
+            'additional_data',
+            'workload_report_id',
+            'status'
+    )
+}
+
+module.exports.getAllWorkloadPointsForTest = function () {
+  return knex('workload_points')
+    .select(
+      'comm_tier_1 AS commD2',
+      'comm_tier_2 AS commD1',
+      'comm_tier_3 AS commC2',
+      'comm_tier_4 AS commC1',
+      'comm_tier_5 AS commB2',
+      'comm_tier_6 AS commB1',
+      'comm_tier_7 AS commA',
+      'cust_tier_1 AS cusD2',
+      'cust_tier_2 AS cusD1',
+      'cust_tier_3 AS cusC2',
+      'cust_tier_4 AS cusC1',
+      'cust_tier_5 AS cusB2',
+      'cust_tier_6 AS cusB1',
+      'cust_tier_7 AS cusA',
+      'lic_tier_1 AS licD2',
+      'lic_tier_2 AS licD1',
+      'lic_tier_3 AS licC2',
+      'lic_tier_4 AS licC1',
+      'lic_tier_5 AS licB2',
+      'lic_tier_6 AS licB1',
+      'lic_tier_7 AS licA',
+      'sdr AS sdr',
+      'sdr_conversion AS sdrConversion',
+      'nominal_target_spo AS nominalTargetPso',
+      'nominal_target_po AS nominalTargetPo',
+      'default_contracted_hours_po AS defaultContractedHoursPo',
+      'default_contracted_hours_pso AS defaultContractedHoursPso',
+      'weighting_o AS weightingOverdue',
+      'weighting_w AS weightingWarrants',
+      'weighting_u AS weightingUpw',
+      'parom AS parom',
+      'effective_to AS effectiveTo'
+    )
 }

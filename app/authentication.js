@@ -64,10 +64,10 @@ module.exports = function (app) {
     })
 
   passport.use(samlStrategy)
-  
+
   passport.logout = function (req, res) {
-    if (!req.user){
-      return res.redirect(request)
+    if (!req.user) {
+      return res.redirect('/')
     }
     var saml = {
       nameID: req.user.username + '@' + config.ACTIVE_DIRECTORY_DOMAIN,
