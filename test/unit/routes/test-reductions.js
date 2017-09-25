@@ -38,7 +38,7 @@ const getReductionsFailureTextResult = {
   title: 'Title',
   subTitle: 'SubTitle',
   breadcrumbs: {},
-  failureText: 'Something went wrong. Please try again.'
+  referenceData: {}
 }
 
 const existingReduction = {
@@ -49,31 +49,31 @@ const existingReduction = {
   effective_to: new Date(2000, 9, 1)
 }
 
-const succuessDataToPost = {
+const successDataToPost = {
   id: undefined,
-  reasonForReductionId: 1,
-  hours: 5,
-  red_start_year: '2018',
-  red_start_month: '1',
-  red_start_day: '1',
-  red_end_year: '2018',
-  red_end_month: '7',
-  red_end_day: '1',
+  reasonForReductionId: '1',
+  reductionHours: '5',
+  redStartYear: '2018',
+  redStartMonth: '1',
+  redStartDay: '1',
+  redEndYear: '2018',
+  redEndMonth: '7',
+  redEndDay: '1',
   notes: 'This is a test note',
   status: 'SCHEDULED'
 }
 
 const failureDataToPost = {
+  reductionId: 1,
   reasonForReductionId: 1,
-  hours: 5,
-  red_start_year: '',
-  red_start_month: '',
-  red_start_day: '',
-  red_end_year: '',
-  red_end_month: '',
-  red_end_day: '',
-  notes: 'This is a test note',
-  status: 'SCHEDULED'
+  reductionHours: '5',
+  redStartYear: '',
+  redStartMonth: '',
+  redStartDay: '',
+  redEndYear: '',
+  redEndMonth: '',
+  redEndDay: '',
+  notes: 'This is a test note'
 }
 
 var app
@@ -126,27 +126,26 @@ describe('reductions route', function () {
   })
 
   describe('For the add reductions POST route', function () {
-    it('should post the correct data and respond with 200', function () {
+    it('should post the correct data and respond with 302', function () {
       reductionsService.addReduction.resolves(getReductionsSuccessTextResult)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
-        .send(succuessDataToPost)
+        .send(successDataToPost)
         .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?success=true')
     })
     it('should post the correct data and respond with 200 for existing reduction', function () {
       reductionsService.addReduction.resolves(getReductionsSuccessTextResult)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
-        .send(succuessDataToPost)
+        .send(successDataToPost)
         .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?success=true')
     })
-    it('should post incorrect data and failure text should be populated', function () {
+    it('should post incorrect data and validation errors should be populated', function () {
       reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
         .send(failureDataToPost)
-        // Expect a redirect
-        .expect(302, 'Found. Redirecting to /offender-manager/1/add-reduction?fail=true')
+        .expect(400)
     })
   })
 
@@ -155,16 +154,15 @@ describe('reductions route', function () {
       reductionsService.updateReduction.resolves(getReductionsSuccessTextResult)
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
-        .send(succuessDataToPost)
+        .send(successDataToPost)
         .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?edited=true')
     })
-    it('should post incorrect data and failure text should be populated', function () {
+    it('should post incorrect data and validation errors should be populated', function () {
       reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
-        .send({failureDataToPost})
-        // Expect a redirect
-        .expect(302, 'Found. Redirecting to /offender-manager/1/add-reduction?fail=true')
+        .send(failureDataToPost)
+        .expect(400)
     })
   })
 
@@ -173,7 +171,7 @@ describe('reductions route', function () {
       reductionsService.updateReductionStatus.resolves(getReductionsSuccessTextResult)
       return superTest(app)
         .post(UPDATE_REDUCTION_STATUS_POST_URL)
-        .send(Object.assign({}, succuessDataToPost, {status: 'ARCHIVED'}))
+        .send(Object.assign({}, successDataToPost, {status: 'ARCHIVED'}))
         .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?archived=true')
     })
 
@@ -181,17 +179,16 @@ describe('reductions route', function () {
       reductionsService.updateReductionStatus.resolves(getReductionsSuccessTextResult)
       return superTest(app)
         .post(UPDATE_REDUCTION_STATUS_POST_URL)
-        .send(Object.assign({}, succuessDataToPost, {status: 'DELETED'}))
+        .send(Object.assign({}, successDataToPost, {status: 'DELETED'}))
         .expect(302, 'Found. Redirecting to /offender-manager/1/reductions?deleted=true')
     })
 
-    it('should post incorrect data and failure text should be populated', function () {
+    it('should post incorrect data and validation errors should be populated', function () {
       reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(failureDataToPost)
-        // Expect a redirect
-        .expect(302, 'Found. Redirecting to /offender-manager/1/add-reduction?fail=true')
+        .expect(400)
     })
   })
 })

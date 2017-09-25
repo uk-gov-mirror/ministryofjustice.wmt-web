@@ -41,6 +41,9 @@
                 <tbody>
                   <tr>
                     <th scope="row">
+                      {% if errors['cusA'][0] %}
+                        <span class="error-message">{{ errors['cusA'][0] }}</span>
+                      {% endif %}
                       <label class="form-label-bold" for="cus-a">Cus A</label>
                     </th>
                     <td class="numeric">
@@ -49,6 +52,9 @@
                   </tr>
                   <tr>            
                     <th scope="row">
+                      {% if errors['cusB1'][0] %}
+                        <span class="error-message">{{ errors['cusB1'][0] }}</span>
+                      {% endif %}
                       <label class="form-label-bold" for="cus-b1">Cus B1</label>
                     </th>
                     <td class="numeric">
@@ -57,6 +63,9 @@
                   </tr>
                   <tr>
                     <th scope="row">
+                      {% if errors['cusB2'][0] %}
+                        <span class="error-message">{{ errors['cusB2'][0] }}</span>
+                      {% endif %}
                       <label class="form-label-bold" for="cus-b2">Cus B2</label>
                     </th>
                     <td class="numeric">
@@ -65,6 +74,9 @@
                   </tr>
                   <tr>
                     <th scope="row">
+                      {% if errors['cusC1'][0] %}
+                        <span class="error-message">{{ errors['cusC1'][0] }}</span>
+                      {% endif %}
                       <label class="form-label-bold" for="cus-c1">Cus C1</label>
                     </th>
                     <td class="numeric">
@@ -73,6 +85,9 @@
                   </tr>
                   <tr>
                     <th scope="row">
+                      {% if errors['cusC2'][0] %}
+                        <span class="error-message">{{ errors['cusC2'][0] }}</span>
+                      {% endif %}
                       <label class="form-label-bold" for="cus-c2">Cus C2</label>
                     </th>
                     <td class="numeric">
@@ -81,6 +96,9 @@
                   </tr>
                   <tr>
                     <th scope="row">
+                      {% if errors['cusD1'][0] %}
+                        <span class="error-message">{{ errors['cusD1'][0] }}</span>
+                      {% endif %}
                       <label class="form-label-bold" for="cus-d1">Cus D1</label>
                     </th>
                     <td class="numeric">
@@ -89,6 +107,9 @@
                   </tr>
                   <tr>
                     <th scope="row">
+                      {% if errors['cusD2'][0] %}
+                        <span class="error-message">{{ errors['cusD2'][0] }}</span>
+                      {% endif %}
                       <label class="form-label-bold" for="cus-d2">Cus D2</label>
                     </th>
                     <td class="numeric">
@@ -108,6 +129,9 @@
               <tbody>
                 <tr>
                   <th scope="row">
+                    {% if errors['licA'][0] %}
+                      <span class="error-message">{{ errors['licA'][0] }}</span>
+                    {% endif %}
                     <label class="form-label-bold" for="lic-a">Lic A</label>
                   </th>
                   <td class="numeric">
@@ -116,6 +140,9 @@
                 </tr>
                 <tr>            
                   <th scope="row">
+                    {% if errors['licB1'][0] %}
+                      <span class="error-message">{{ errors['licB1'][0] }}</span>
+                    {% endif %}
                     <label class="form-label-bold" for="lic-b1">Lic B1</label>
                   </th>
                   <td class="numeric">
@@ -124,6 +151,9 @@
                 </tr>
                 <tr>
                   <th scope="row">
+                    {% if errors['licB2'][0] %}
+                      <span class="error-message">{{ errors['licB2'][0] }}</span>
+                    {% endif %}
                     <label class="form-label-bold" for="lic-b2">Lic B2</label>
                   </th>
                   <td class="numeric">
@@ -132,6 +162,9 @@
                 </tr>
                 <tr>
                   <th scope="row">
+                    {% if errors['licC1'][0] %}
+                      <span class="error-message">{{ errors['licC1'][0] }}</span>
+                    {% endif %}
                     <label class="form-label-bold" for="lic-c1">Lic C1</label>
                   </th>
                   <td class="numeric">
@@ -140,6 +173,9 @@
                 </tr>
                 <tr>
                   <th scope="row">
+                    {% if errors['licC2'][0] %}
+                      <span class="error-message">{{ errors['licC2'][0] }}</span>
+                    {% endif %}
                     <label class="form-label-bold" for="lic-c2">Lic C2</label>
                   </th>
                   <td class="numeric">
@@ -148,6 +184,9 @@
                 </tr>
                 <tr>
                   <th scope="row">
+                    {% if errors['licD1'][0] %}
+                      <span class="error-message">{{ errors['licD1'][0] }}</span>
+                    {% endif %}
                     <label class="form-label-bold" for="lic-d1">Lic D1</label>
                   </th>
                   <td class="numeric">
@@ -156,6 +195,9 @@
                 </tr>
                 <tr>
                   <th scope="row">
+                    {% if errors['licD2'][0] %}
+                      <span class="error-message">{{ errors['licD2'][0] }}</span>
+                    {% endif %}
                     <label class="form-label-bold" for="lic-d2">Lic D2</label>
                   </th>
                   <td class="numeric">
@@ -175,46 +217,64 @@
                 <tbody>
                     <tr>
                       <th scope="row">
+                        {% if errors['commA'][0] %}
+                          <span class="error-message">{{ errors['commA'][0] }}</span>
+                        {% endif %}
                         <label class="form-label-bold" for="comm-a">Comm A</label>
                       </th>
                       <td class="numeric">
                         <input class="form-control" id="comm-a" name="commA" type="number" value="{{ wp.commA }}">
                       </td>
                     </tr>
-                    <tr>            
+                    <tr>           
                       <th scope="row">
+                        {% if errors['commB1'][0] %}
+                          <span class="error-message">{{ errors['commB1'][0] }}</span>
+                        {% endif %} 
                         <label class="form-label-bold" for="comm-b1">Comm B1</label>
                       </th>
                       <td class="numeric">
                         <input class="form-control" id="comm-b1" name="commB1" type="number" value="{{ wp.commB1 }}">
                       </td>
                     </tr>
-                    <tr>
+                    <tr>  
                       <th scope="row">
+                        {% if errors['commB2'][0] %}
+                          <span class="error-message">{{ errors['commB2'][0] }}</span>
+                        {% endif %} 
                         <label class="form-label-bold" for="comm-b2">Comm B2</label>
                       </th>
                       <td class="numeric">
                         <input class="form-control" id="comm-b2" name="commB2" type="number" value="{{ wp.commB2 }}">
                       </td>
                     </tr>
-                    <tr>
+                    <tr> 
                       <th scope="row">
+                        {% if errors['commC1'][0] %}
+                          <span class="error-message">{{ errors['commC1'][0] }}</span>
+                        {% endif %}  
                         <label class="form-label-bold" for="comm-c1">Comm C1</label>
                       </th>
                       <td class="numeric">
                         <input class="form-control" id="comm-c1" name="commC1" type="number" value="{{ wp.commC1 }}">
                       </td>
                     </tr>
-                    <tr>
+                    <tr> 
                       <th scope="row">
+                        {% if errors['commC2'][0] %}
+                          <span class="error-message">{{ errors['commC2'][0] }}</span>
+                        {% endif %}  
                         <label class="form-label-bold" for="comm-c2">Comm C2</label>
                       </th>
                       <td class="numeric">
                         <input class="form-control" id="comm-c2" name="commC2" type="number" value="{{ wp.commC2 }}">
                       </td>
                     </tr>
-                    <tr>
+                    <tr> 
                       <th scope="row">
+                        {% if errors['commD1'][0] %}
+                          <span class="error-message">{{ errors['commD1'][0] }}</span>
+                        {% endif %}  
                         <label class="form-label-bold" for="comm-d1">Comm D1</label>
                       </th>
                       <td class="numeric">
@@ -223,6 +283,9 @@
                     </tr>
                     <tr>
                       <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}   
                         <label class="form-label-bold" for="comm-d2">Comm D2</label>
                       </th>
                       <td class="numeric">
@@ -243,6 +306,9 @@
                 <tbody>
                   <tr>
                     <th scope="row">
+                      {% if errors['sdr'][0] %}
+                        <span class="error-message">{{ errors['sdr'][0] }}</span>
+                      {% endif %}   
                       <label class="form-label-bold" for="sdr">SDR</label>
                     </th>
                     <td class="numeric">
@@ -251,14 +317,20 @@
                   </tr>
                   <tr>
                     <th scope="row">
-                      <label class="form-label-bold" for="fdr">FDR (SDR Conversion)</label>
+                      {% if errors['sdrConversion'][0] %}
+                        <span class="error-message">{{ errors['sdrConversion'][0] }}</span>
+                      {% endif %}  
+                      <label class="form-label-bold" for="sdrConversion">FDR (SDR Conversion)</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="fdr" name="fdr" type="number" value="{{ wp.sdrConversion }}">
+                      <input class="form-control" id="sdrConversion" name="sdrConversion" type="number" value="{{ wp.sdrConversion }}">
                     </td>                    
                   </tr>
-                  <tr>
+                  <tr> 
                     <th scope="row">
+                      {% if errors['parom'][0] %}
+                        <span class="error-message">{{ errors['parom'][0] }}</span>
+                      {% endif %} 
                       <label class="form-label-bold" for="parom">PAROM</label>
                     </th>
                     <td class="numeric">
@@ -278,6 +350,9 @@
                 <tbody>
                   <tr>
                     <th scope="row">
+                      {% if errors['weightingOverdue'][0] %}
+                        <span class="error-message">{{ errors['weightingOverdue'][0] }}</span>
+                      {% endif %}  
                       <label class="form-label-bold" for="weightingOverdue">Overdue Terminations</label>
                     </th>
                     <td class="numeric">
@@ -286,6 +361,9 @@
                   </tr>
                   <tr>
                     <th scope="row">
+                      {% if errors['weightingWarrants'][0] %}
+                        <span class="error-message">{{ errors['weightingWarrants'][0] }}</span>
+                      {% endif %}  
                       <label class="form-label-bold" for="weightingWarrants">Active Warrants</label>
                     </th>
                     <td class="numeric">
@@ -294,6 +372,9 @@
                   </tr>
                   <tr>
                     <th scope="row">
+                      {% if errors['weightingUpw'][0] %}
+                        <span class="error-message">{{ errors['weightingUpw'][0] }}</span>
+                      {% endif %}  
                       <label class="form-label-bold" for="weightingUpw">Only UPW Outstanding</label>
                     </th>
                     <td class="numeric">
@@ -313,6 +394,9 @@
                 <tbody>
                   <tr>
                     <th scope="row">
+                      {% if errors['nominalTargetPo'][0] %}
+                        <span class="error-message">{{ errors['nominalTargetPo'][0] }}</span>
+                      {% endif %}  
                       <label class="form-label-bold" for="nominalTargetPo">PO</label>
                     </th>
                     <td class="numeric">
@@ -321,6 +405,9 @@
                   </tr>
                   <tr>
                     <th scope="row">
+                      {% if errors['nominalTargetPso'][0] %}
+                        <span class="error-message">{{ errors['nominalTargetPso'][0] }}</span>
+                      {% endif %}  
                       <label class="form-label-bold" for="nominalTargetPso">PSO</label>
                     </th>
                     <td class="numeric">
@@ -340,6 +427,9 @@
                 <tbody>
                   <tr>
                     <th scope="row">
+                      {% if errors['defaultContractedHoursPo'][0] %}
+                        <span class="error-message">{{ errors['defaultContractedHoursPo'][0] }}</span>
+                      {% endif %}  
                       <label class="form-label-bold" for="defaultContractedHoursPo">PO</label>
                     </th>
                     <td class="numeric">
@@ -348,6 +438,9 @@
                   </tr>
                   <tr>
                     <th scope="row">
+                      {% if errors['defaultContractedHoursPso'][0] %}
+                        <span class="error-message">{{ errors['defaultContractedHoursPso'][0] }}</span>
+                      {% endif %} 
                       <label class="form-label-bold" for="defaultContractedHoursPso">PSO</label>
                     </th>
                     <td class="numeric">
@@ -385,4 +478,7 @@
 <script src="/public/javascripts/vendor/jquery.js"></script>
 <script src="/public/javascripts/jquery.tabs.js"></script>
 <script src="/public/javascripts/workload-points.js"></script>
+{%if errors %}
+<script>edit()</script>
+{% endif %}
 {% endblock %}

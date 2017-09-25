@@ -443,7 +443,7 @@ module.exports.getAllWorkloadPointsForTest = function () {
       'lic_tier_6 AS licB1',
       'lic_tier_7 AS licA',
       'sdr AS sdr',
-      'sdr_conversion AS fdr',
+      'sdr_conversion AS sdrConversion',
       'nominal_target_spo AS nominalTargetPso',
       'nominal_target_po AS nominalTargetPo',
       'default_contracted_hours_po AS defaultContractedHoursPo',
