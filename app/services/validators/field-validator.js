@@ -19,8 +19,6 @@ class FieldValidator {
     var message = (!specificMessage) ? ERROR_MESSAGES.getIsRequiredMessage : specificMessage
     if (!this.data || _.isEmpty(this.data)) {
       this.errors.add(this.fieldName, message)
-    } else if (this.data === 'select') {
-      this.errors.add(this.fieldName, message)
     }
 
     return this

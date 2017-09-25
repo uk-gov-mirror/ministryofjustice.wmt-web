@@ -36,7 +36,7 @@ describe('services/domain/reduction', function () {
     var activeStartDate = moment().subtract(30, 'days').toDate()
     var activeEndDate = moment().add(30, 'days').toDate()
     expect(function () {
-      new Reduction('select', '10',
+      new Reduction('', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
         [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note')
     }).to.throw(ValidationError)
