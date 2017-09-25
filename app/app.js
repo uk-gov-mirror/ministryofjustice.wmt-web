@@ -55,6 +55,7 @@ var app = express()
 
 // Set security headers.
 app.use(helmet())
+app.use(helmet.hsts({ maxAge: 5184000 }))
 
 authentication(app)
 
