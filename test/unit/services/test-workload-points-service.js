@@ -75,7 +75,7 @@ describe('services/workload-points-service', function () {
         expect(updatePreviousWorkloadPointsEffectiveTo.calledWith(123)).to.be.true //eslint-disable-line  
         expect(insertNewWorkloadPoints.calledWith(returnedWorkloadPoints)).to.be.true //eslint-disable-line  
         expect(getWorkloadIdsForWpRecalc.calledWith(123)).to.be.true //eslint-disable-line  
-        expect(createCalculateWorkloadPointsTask.calledWith(recalcIds.minWorkloadId, recalcIds.workloadReportId, 9)).to.be.true //eslint-disable-line        
+        expect(createCalculateWorkloadPointsTask.calledWith(recalcIds.minWorkloadId, recalcIds.workloadReportId, 10)).to.be.true //eslint-disable-line        
       })
     })
   })

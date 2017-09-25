@@ -39,11 +39,11 @@
     "gulp-webdriver": "^2.0.3",
     "mocha": "3.2.x",
     "proxyquire": "1.7.x",
+    "selenium-standalone": "6.5.0",
     "sinon": "^1.17.5",
     "sinon-bluebird": "^3.1.0",
     "standard": "^10.0.2",
     "supertest": "3.0.x",
-    "selenium-standalone": "6.5.0",
     "wdio-mocha-framework": "^0.5.10",
     "wdio-sauce-service": "^0.4.0",
     "webdriverio": "^4.8.0"
@@ -83,7 +83,7 @@
     "serve-favicon": "2.4.x",
     "underscore": "^1.8.3",
     "util": "^0.10.3",
-    "validator": "^7.0.0",
+    "validator": "^8.2.0",
     "wmt-probation-rules": "ministryofjustice/wmt-probation-rules.git#0.1.8"
   }
 }

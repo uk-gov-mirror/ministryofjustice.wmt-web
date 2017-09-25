@@ -81,7 +81,7 @@ app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images'
 // Cookie session
 app.set('trust proxy', 1) // trust first proxy
 app.use(cookieSession({
-  name: 'wmt-start-application',
+  name: 'session',
   keys: [config.APPLICATION_SECRET],
   maxAge: parseInt(config.SESSION_COOKIE_MAXAGE)
 }))

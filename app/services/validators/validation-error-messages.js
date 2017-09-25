@@ -1,6 +1,14 @@
 module.exports = {
-  getIsRequired: function (displayName) { return `${displayName} is required` },
-  getInvalidDateFormatMessage: function (displayName) { return `${displayName} was invalid` },
   getIsOlderThanMaxHistory: function (displayName, options) { return `Date range must be within the past ${options.years} years` },
-  getPastDateMessage: function (displayName) { return `${displayName} must be in the past` }
+  getIsRequiredMessage: function (displayName) { return `${displayName} is required` },
+  getIsAlphaMessage: function (displayName) { return `${displayName} must only contain letters` },
+  getIsNumericMessage: function (displayName) { return `${displayName} must only contain numbers` },
+  getIsRangeMessage: function (displayName, options) { return `${displayName} must be between ${options.min} and ${options.max}` },
+  getIsIntegerMessage: function (displayName, options) { return `${displayName} must be a whole number between ${options.min} and ${options.max}` },
+  getIsFloatMessage: function (displayName, options) { return `${displayName} must be a number between ${options.min} and ${options.max}` },
+  getInvalidDateFormatMessage: function (displayName) { return `${displayName} was invalid` },
+  getPastDateMessage: function (displayName) { return `${displayName} must be in the past` },
+  getFutureDateMessage: function (displayName) { return `${displayName} must be in the future` },
+  getIsDateLaterThanMessage: function (displayName) { return `${displayName} must be after the start date` },
+  getIsLessThanLengthMessage: function (displayName, options) { return `${displayName} must be shorter than ${options.length} characters` }
 }

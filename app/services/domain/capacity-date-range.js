@@ -28,7 +28,7 @@ class CapacityDateRange {
     var errors = ErrorHandler()
 
     if (validator.isRequired(this.fromFields)) {
-      errors.add('capacityFromDate', ERROR_MESSAGES.getIsRequired)
+      errors.add('capacityFromDate', ERROR_MESSAGES.getIsRequiredMessage)
     }
 
     if (!validator.isValidDate(this.capacityFromDate)) {
@@ -44,7 +44,7 @@ class CapacityDateRange {
     }
 
     if (validator.isRequired(this.toFields)) {
-      errors.add('capacityToDate', ERROR_MESSAGES.getIsRequired)
+      errors.add('capacityToDate', ERROR_MESSAGES.getIsRequiredMessage)
     }
 
     if (!validator.isValidDate(this.capacityToDate)) {
