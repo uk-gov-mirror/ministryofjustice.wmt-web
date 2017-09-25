@@ -41,7 +41,8 @@ module.exports.addRoles = function () {
   var inserts = []
 
   var roles = [
-    { role: 'Test_Role' }
+    { role: 'Test_Role1' },
+    { role: 'Test_Role2' }
   ]
 
   return knex('roles').returning('id').insert(roles)

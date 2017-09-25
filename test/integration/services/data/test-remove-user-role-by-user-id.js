@@ -3,7 +3,6 @@ const expect = require('chai').expect
 const removeUserRoleByUserId = require('../../../../app/services/data/remove-user-role-by-user-id')
 const userRoleHelper = require('../../../helpers/data/user-role-helper')
 
-var username
 var insertedData = []
 
 var userId = 1
@@ -22,10 +21,6 @@ describe('/services/data/remove-user-role-by-user-id', function () {
             return userRoleHelper.addUserRoleData(userId, roleId)
               .then(function (ids) {
                 insertedData = insertedData.concat(ids)
-                return userRoleHelper.getAnyExistingUsernameWithExistingRole()
-                  .then(function (id) {
-                    username = id.username
-                  })
               })
           })
       })

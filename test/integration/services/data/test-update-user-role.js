@@ -9,7 +9,7 @@ var insertedData = []
 var userRole = new UserRole(1, 2, new Date(), 1)
 var newRole = 1
 
-describe('/services/data/insert-user-role', function () {
+describe('/services/data/update-user-role', function () {
   before(function () {
     return userRoleHelper.addUsers()
       .then(function (ids) {
@@ -30,7 +30,7 @@ describe('/services/data/insert-user-role', function () {
   })
 
   it('should return an id when a valid user role has been added', function () {
-    return updateUserRole(userRole.userId, newRole)
+    return updateUserRole(userRole.userId, newRole, userRole.userId)
       .then(function (result) {
         expect(result[0]).to.be.a('number')
       })
