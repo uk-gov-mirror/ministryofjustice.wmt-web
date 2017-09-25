@@ -1,0 +1,33 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+<main id="content" role="main">
+    {% include "includes/breadcrumbs.html" %}
+    
+    {% include "includes/validation-error-messages.html" %}
+    
+    {% include "includes/title-subtitle.html" %}
+    
+    {% include "includes/sub-nav.html" %}
+  
+  {% if failureText %}
+  <p class="message message--failure">{{ failureText }}</p>
+  {% endif %}
+
+  <p class="lede">Enter the username you would like to add or amend user rights for</p>
+
+  {% if userRights %}
+    <div class="message message--success">You have successfully assigned <span class="bold">{{userRights.rights}}</span> user rights to <span class="bold">{{userRights.username}}</span></div>
+  {% endif %}
+
+  <form action="/admin/user-rights" method="post">
+    <div class="form-group">
+        <label class="form-label" for="username">Username</label>
+        <input class="form-control" id="username" type="text" name="username">
+    </div>
+    <input class="button" type="submit" value="Continue">
+    {% include "includes/csrf-hidden-input.html"%}
+  </form>
+  
+  </main>
+  {% endblock %}

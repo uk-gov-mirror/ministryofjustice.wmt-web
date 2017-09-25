@@ -12,7 +12,6 @@ const dateFilter = require('nunjucks-date-filter')
 const path = require('path')
 const routes = require('./routes')
 const routesNoCsrf = require('./routes-no-csrf')
-const cookieSession = require('cookie-session')
 const getOrganisationalHierarchyTree = require('./services/organisational-hierarchy-tree')
 const bunyan = require('bunyan')
 const PrettyStream = require('bunyan-prettystream')
@@ -56,8 +55,6 @@ var app = express()
 // Set security headers.
 app.use(helmet())
 
-authentication(app)
-
 var developmentMode = app.get('env') === 'development'
 
 app.set('view engine', 'html')
@@ -78,19 +75,6 @@ app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_t
 app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_frontend_toolkit')))
 app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images', 'favicon.ico')))
 
-// Cookie session
-app.set('trust proxy', 1) // trust first proxy
-app.use(cookieSession({
-  name: 'wmt-start-application',
-  keys: [config.APPLICATION_SECRET],
-  maxAge: parseInt(config.SESSION_COOKIE_MAXAGE)
-}))
-// Update a value in the cookie so that the set-cookie will be sent
-app.use(function (req, res, next) {
-  req.session.nowInMinutes = Date.now() / 60e3
-  next()
-})
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(expressSanitized())
@@ -110,6 +94,8 @@ app.use(function (req, res, next) {
 
 // Use cookie parser middleware (required for csurf)
 app.use(cookieParser(config.APPLICATION_SECRET, { httpOnly: true, secure: config.SECURE_COOKIE === 'true' }))
+
+authentication(app)
 
 // Add routes that are allowed to be accessed from outside the application
 // i.e. authentication-saml
