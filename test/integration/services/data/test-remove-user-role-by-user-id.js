@@ -32,9 +32,9 @@ describe('/services/data/remove-user-role-by-user-id', function () {
   })
 
   it('should remove user role by username', function () {
-    return removeUserRoleByUserId(username)
+    return removeUserRoleByUserId(userId)
       .then(function (result) {
-        expect(result[0]).to.be.greaterThan(0)
+        expect(result).to.be.greaterThan(0)
       })
   })
 

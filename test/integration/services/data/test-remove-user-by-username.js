@@ -15,10 +15,10 @@ describe('/services/data/remove-user-by-username', function () {
       })
   })
 
-  it('should remove user role by username', function () {
+  it('should remove user role by username', function () {    
     return removeUserByUsername(username)
       .then(function (result) {
-        expect(result[0]).to.be.greaterThan(0)
+        expect(result).to.be.greaterThan(0)
       })
   })
 
