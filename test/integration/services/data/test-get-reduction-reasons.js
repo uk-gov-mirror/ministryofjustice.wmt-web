@@ -15,12 +15,14 @@ var reductionReasonsRow = {
 }
 
 var insertedId
+var insertedCmsId
 
 describe('services/data/get-reduction-reasons', function () {
   before(function () {
     return helper.getMaxReductionReasonId()
     .then(function (maxId) {
       insertedId = (maxId + 1)
+      insertedCmsId = (maxId + 2)
       return helper.addReductionsRefData(maxId)
         .then(function (builtInserts) {
           inserts = builtInserts
@@ -28,10 +30,15 @@ describe('services/data/get-reduction-reasons', function () {
     })
   })
 
-  it('should return an array of reductions reasons ref data, including category', function () {
+  it('should return an array of reductions reasons ref data but not return any cms reasons', function () {
     return getReductionReasons()
       .then(function (results) {
+        var reasonIds = []
+        results.forEach(function (reason) {
+          reasonIds.push(reason.id)
+        })
         expect(results).to.contain(Object.assign({}, reductionReasonsRow, { id: insertedId }))
+        expect(reasonIds.includes(insertedCmsId)).to.be.equal(false)
       })
   })
 
