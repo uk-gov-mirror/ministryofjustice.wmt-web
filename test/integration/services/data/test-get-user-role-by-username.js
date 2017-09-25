@@ -4,7 +4,7 @@ const getUserRoleByUsername = require('../../../../app/services/data/get-user-ro
 const userRoleHelper = require('../../../helpers/data/user-role-helper')
 
 var username
-var existingRoles = ['Test_Role1','Test_Role2']
+var existingRoles = ['Test_Role1', 'Test_Role2']
 
 var insertedData = []
 
