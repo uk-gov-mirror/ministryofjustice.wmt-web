@@ -67,12 +67,12 @@ module.exports = function (router) {
   router.post('/admin/user-rights/:username', function (req, res) {
     var rights = req.body.rights
     var username = req.params.username
-    var loggedInUser = req.user.username
+    var loggedInUsername = req.user.username
 
     if (rights === 'Staff') {
       removeUserRole(username)
     } else {
-      addUpdateUserRole(username, rights, loggedInUser)
+      addUpdateUserRole(username, rights, loggedInUsername)
     }
 
     return res.render('user', {
@@ -94,25 +94,29 @@ var removeUserRole = function (username) {
   })
 }
 
-var addUpdateUserRole = function (username, rights, loggedInUser) {
+var addUpdateUserRole = function (username, rights, loggedInUsername) {
+  var loggedInUser
   var user
   var role
-  return userRoleService.getUser(username).then(function (result) {
-    user = result
-    return userRoleService.getRole(rights).then(function (result) {
-      role = result
-      return userRoleService.updateUserRole(user.id, role.id, loggedInUser).then(function (result) {
-        return result
-      })
-    })
-  }).catch(function (noUserExist) {
-    return userRoleService.getRole(rights).then(function (result) {
-      role = result
-      return userRoleService.addUser(username).then(function (result) {
-        var userId = result
-        var newUserRole = new UserRole(userId, role.id, new Date(), loggedInUser)
-        return userRoleService.addUserRole(newUserRole).then(function (result) {
+  return userRoleService.getUser(loggedInUsername).then(function (result) {
+    loggedInUser = result
+    return userRoleService.getUser(username).then(function (result) {
+      user = result
+      return userRoleService.getRole(rights).then(function (result) {
+        role = result
+        return userRoleService.updateUserRole(user.id, role.id, loggedInUser.id).then(function (result) {
           return result
+        })
+      })
+    }).catch(function (noUserExist) {
+      return userRoleService.getRole(rights).then(function (result) {
+        role = result
+        return userRoleService.addUser(username).then(function (result) {
+          var userId = result
+          var newUserRole = new UserRole(userId, role.id, new Date(), loggedInUser.id)
+          return userRoleService.addUserRole(newUserRole).then(function (result) {
+            return result
+          })
         })
       })
     })
