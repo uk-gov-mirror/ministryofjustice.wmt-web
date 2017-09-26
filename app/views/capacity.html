@@ -109,6 +109,71 @@
 
 <div id="plotly-div-line" role="presentation"></div>
 
+{% if organisationLevel !== 'offender-manager' %}
+  <h3 class="heading-medium">Capacity breakdown</h3>
+  <table id="capacity-breakdown" class="data-table dataTable">
+    <thead>
+      <tr>
+        <th colspan="2" id="org">{{ childOrganisationLevelDisplayText }}</th>
+        <th colspan="8" id="breakdown">Capacity breakdown</th>
+      </tr>
+      <tr>
+        <th id="name">Name</th>
+        <th id="grade">Grade</th>
+        <th id="capacity">Capacity(%)</th>
+        <th id="cases">Cases</th>
+        <th id="paroms"><abbr title="Parole Assessment Reports by the Offender Manager">PAROMs</abbr></th>
+        <th id="fdrs"><abbr title="Fast Delivery Reports">FDRs</abbr></th>
+        <th id="sdrs"><abbr title="Standard Delivery Reports">SDRs</abbr></th>
+        <th id="arms"><abbr title="Active Risk Management System">ARMS</abbr></th>
+        <th id="gs"><abbr title="Group Supervision">GS</abbr></th>
+        <th id="cms"><abbr title="Case Management Support">CMS</abbr></th>
+      </tr>
+    </thead>
+    {% if organisationLevel === 'team' %}
+      <tbody>
+        {% for member in capacityBreakdown %}
+        <tr>
+          <td headers="name org"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+          <td headers="grade org">{{ member.grade }}</td>
+          <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
+          <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>
+          <td headers="paroms breakdown">-</td>
+          <td headers="fdrs breakdown">-</td>
+          <td headers="sdrs breakdown">-</td>
+          <td headers="arms breakdown">-</td>
+          <td headers="gs breakdown">-</td>
+          <td headers="cms breakdown">{{ member.cmsPercentage | round(1) }}%</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+      <tbody>
+      {% for member in capacityBreakdown %}
+        {% for i in range(0, member.grades.length) %}
+          <tr>
+            {% if i === 0 %}
+              <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+            {% endif %}
+          <td headers="grade org">{{ member.grades[i].grade }}</td>
+          <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
+          <td headers="cases breakdown">{{ member.grades[i].totalCases | round(1) }}</td>
+          <td headers="paroms breakdown">-</td>
+          <td headers="fdrs breakdown">-</td>
+          <td headers="sdrs breakdown">-</td>
+          <td headers="arms breakdown">-</td>
+          <td headers="gs breakdown">-</td>
+          <td headers="cms breakdown">{{ member.grades[i].cmsPercentage | round(1) }}%</td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endif %}
+  
+  
 </main>
 {% endblock %}
 

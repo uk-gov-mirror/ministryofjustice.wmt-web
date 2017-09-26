@@ -54,7 +54,7 @@ var expectedTitle = breadcrumbs[0].title
 var getCaseload
 var getCaseloadDetail
 var getBreadcrumbs
-var percentageCalculator
+var caseloadPercentageCalculator
 var caseloadHelper
 var teamName
 var lduName
@@ -62,7 +62,7 @@ var lduName
 before(function () {
   getCaseloadDetail = sinon.stub()
   getBreadcrumbs = sinon.stub().returns(breadcrumbs)
-  percentageCalculator = sinon.stub().returns(PERCENTAGE_RESULTS)
+  caseloadPercentageCalculator = sinon.stub().returns(PERCENTAGE_RESULTS)
   caseloadHelper = {
     getOverallCaseload: sinon.stub().returns(OVERALL_CASELOAD),
     getCaseloadByType: sinon.stub().returns(CASELOAD),
@@ -73,7 +73,7 @@ before(function () {
       {
         './data/get-caseload': getCaseloadDetail,
         './get-breadcrumbs': getBreadcrumbs,
-        './helpers/percentage-calculator': percentageCalculator,
+        './helpers/caseload-percentage-calculator': caseloadPercentageCalculator,
         './helpers/caseload-helper': caseloadHelper
       })
   teamName = orgUnitConstant.TEAM.name
@@ -102,7 +102,7 @@ describe('services/get-caseload', function () {
   it('should call percentage-calculator when org unit is LDU', function () {
     getCaseloadDetail.withArgs(id, lduName).resolves(LDU_CASELOAD)
     return getCaseload(id, lduName).then(function (result) {
-      assert(percentageCalculator.called)
+      assert(caseloadPercentageCalculator.called)
     })
   })
 
