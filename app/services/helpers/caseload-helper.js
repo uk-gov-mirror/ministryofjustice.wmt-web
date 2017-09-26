@@ -2,29 +2,7 @@ const percentageCalculator = require('./percentage-calculator')
 const caseTypes = require('../../constants/case-type')
 
 module.exports.getCaseloadTierTotalsByTeamByGrade = function (caseloads) {
-  // Create a mapping for the linkId to do the aggregation
-  var linkIdToCaseloadMap = new Map()
-  for (var idx = 0; idx < caseloads.length; idx++) {
-    var key = caseloads[idx].linkId + caseloads[idx].grade
-    if (!linkIdToCaseloadMap.has(key)) {
-      // Make a copy of the object to ensure the original value isn't affected
-      var newValue = Object.assign({}, caseloads[idx])
-      linkIdToCaseloadMap.set(key, newValue)
-    } else {
-      var existingValue = linkIdToCaseloadMap.get(key)
-      existingValue.untiered += caseloads[idx].untiered
-      existingValue.d2 += caseloads[idx].d2
-      existingValue.d1 += caseloads[idx].d1
-      existingValue.c2 += caseloads[idx].c2
-      existingValue.c1 += caseloads[idx].c1
-      existingValue.b2 += caseloads[idx].b2
-      existingValue.b1 += caseloads[idx].b1
-      existingValue.a += caseloads[idx].a
-      existingValue.totalCases += caseloads[idx].totalCases
-    }
-  }
-
-  return convertMapToArray(linkIdToCaseloadMap)
+  return groupCaseload(caseloads, true)
 }
 
 module.exports.getCaseloadSummaryTotalsByTeam = function (caseloads) {
@@ -52,29 +30,6 @@ module.exports.getCaseloadSummaryTotalsByTeam = function (caseloads) {
   }
 
   return convertMapToArray(linkIdToCaseloadMap)
-}
-
-var updateTotals = function (entryToUpdate, caseload) {
-  entryToUpdate.totalCases += caseload.totalCases
-
-  if (caseload.caseType === caseTypes.LICENSE) {
-    entryToUpdate.licenseTotalCases += caseload.totalCases
-  } else if (caseload.caseType === caseTypes.COMMUNITY) {
-    entryToUpdate.communityTotalCases += caseload.totalCases
-  } else if (caseload.caseType === caseTypes.CUSTODY) {
-    entryToUpdate.custodyTotalCases += caseload.totalCases
-  }
-
-  return entryToUpdate
-}
-
-var convertMapToArray = function (map) {
-  var arrayResult = []
-  map.forEach(function (val, key) {
-    arrayResult.push(val)
-  })
-
-  return arrayResult
 }
 
 /*
@@ -115,6 +70,29 @@ module.exports.getCaseloadTotalSummary = function (caseloads) {
   }
 }
 
+var updateTotals = function (entryToUpdate, caseload) {
+  entryToUpdate.totalCases += caseload.totalCases
+
+  if (caseload.caseType === caseTypes.LICENSE) {
+    entryToUpdate.licenseTotalCases += caseload.totalCases
+  } else if (caseload.caseType === caseTypes.COMMUNITY) {
+    entryToUpdate.communityTotalCases += caseload.totalCases
+  } else if (caseload.caseType === caseTypes.CUSTODY) {
+    entryToUpdate.custodyTotalCases += caseload.totalCases
+  }
+
+  return entryToUpdate
+}
+
+var convertMapToArray = function (map) {
+  var arrayResult = []
+  map.forEach(function (val, key) {
+    arrayResult.push(val)
+  })
+
+  return arrayResult
+}
+
 var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
   var percentageResults = []
   var caseloadTotalsByTeam = groupCaseload(caseloadTotalsByGrade, false)
@@ -129,7 +107,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
       var newGradeRecord
       if (calculatePercentage) {
         newGradeRecord = {
-          gradeCode: teamGradeRecords[record].grade,
+          grade: teamGradeRecords[record].grade,
           untiered: percentageCalculator.calculatePercentage(teamGradeRecords[record].untiered, caseloadTotalsByTeam[team].untiered),
           d2: percentageCalculator.calculatePercentage(teamGradeRecords[record].d2, caseloadTotalsByTeam[team].d2),
           d1: percentageCalculator.calculatePercentage(teamGradeRecords[record].d1, caseloadTotalsByTeam[team].d1),
@@ -142,7 +120,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
         }
       } else {
         newGradeRecord = {
-          gradeCode: teamGradeRecords[record].grade,
+          grade: teamGradeRecords[record].grade,
           untiered: teamGradeRecords[record].untiered,
           d2: teamGradeRecords[record].d2,
           d1: teamGradeRecords[record].d1,
@@ -173,18 +151,6 @@ var groupCaseload = function (caseloads, splitByGrade = false) {
     if (!linkIdToCaseloadMap.has(key)) {
       // Make a copy of the object to ensure the original value isn't affected
       var newValue = Object.assign({}, caseloads[idx])
-      newValue.custodyTotalCases = 0
-      newValue.communityTotalCases = 0
-      newValue.licenseTotalCases = 0
-
-      if (caseloads[idx].caseType === caseTypes.LICENSE) {
-        newValue.licenseTotalCases += caseloads[idx].totalCases
-      } else if (caseloads[idx].caseType === caseTypes.COMMUNITY) {
-        newValue.communityTotalCases += caseloads[idx].totalCases
-      } else if (caseloads[idx].caseType === caseTypes.CUSTODY) {
-        newValue.custodyTotalCases += caseloads[idx].totalCases
-      }
-
       linkIdToCaseloadMap.set(key, newValue)
     } else {
       var existingValue = linkIdToCaseloadMap.get(key)
@@ -197,20 +163,8 @@ var groupCaseload = function (caseloads, splitByGrade = false) {
       existingValue.b1 += caseloads[idx].b1
       existingValue.a += caseloads[idx].a
       existingValue.totalCases += caseloads[idx].totalCases
-
-      if (caseloads[idx].caseType === caseTypes.LICENSE) {
-        existingValue.licenseTotalCases += caseloads[idx].totalCases
-      } else if (caseloads[idx].caseType === caseTypes.COMMUNITY) {
-        existingValue.communityTotalCases += caseloads[idx].totalCases
-      } else if (caseloads[idx].caseType === caseTypes.CUSTODY) {
-        existingValue.custodyTotalCases += caseloads[idx].totalCases
-      }
     }
   }
-  // Convert the map back to array of object
-  var overall = []
-  linkIdToCaseloadMap.forEach(function (val, key) {
-    overall.push(val)
-  })
-  return overall
+
+  return convertMapToArray(linkIdToCaseloadMap)
 }

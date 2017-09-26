@@ -55,5 +55,6 @@ var parseCaseloadResults = function (organisationLevel, results) {
     communityTotalSummary: communitySummary,
     licenseTotalSummary: licenseSummary
   }
+
   return caseloadResults
 }
