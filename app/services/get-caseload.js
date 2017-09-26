@@ -2,7 +2,6 @@ const getBreadcrumbs = require('./get-breadcrumbs')
 const getCaseload = require('./data/get-caseload')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const caseloadHelper = require('./helpers/caseload-helper')
-const percentageCalculator = require('./helpers/percentage-calculator')
 const organistaionUnit = require('../constants/organisation-unit')
 const caseType = require('../constants/case-type')
 
@@ -16,7 +15,6 @@ module.exports = function (id, organisationLevel) {
       var subTitle = organisationUnitType.displayText
 
       var caseloadResults = parseCaseloadResults(organisationLevel, results)
-
       return {
         breadcrumbs: breadcrumbs,
         title: title,
@@ -28,8 +26,8 @@ module.exports = function (id, organisationLevel) {
 
 var parseCaseloadResults = function (organisationLevel, results) {
   // Overall cases
-  var overallResults = caseloadHelper.getOverallCaseloadByTeamByGrade(results)
-  var overallSummary = caseloadHelper.getOverallCaseloadByTeam(results)
+  var overallResults = caseloadHelper.getCaseloadTierTotalsByTeamByGrade(results)
+  var overallSummary = caseloadHelper.getCaseloadSummaryTotalsByTeam(results)
   // Custody cases
   var custodyResults = caseloadHelper.getCaseloadByType(results, caseType.CUSTODY)
   var custodySummary = caseloadHelper.getCaseloadTotalSummary(custodyResults)
@@ -40,13 +38,12 @@ var parseCaseloadResults = function (organisationLevel, results) {
   var licenseResults = caseloadHelper.getCaseloadByType(results, caseType.LICENSE)
   var licenseSummary = caseloadHelper.getCaseloadTotalSummary(licenseResults)
 
-  if(organisationLevel === organistaionUnit.LDU.name){
-    overallResults = percentageCalculator(overallResults)
-    overallSummary.push(caseloadHelper.getOverallTotals(overallSummary))
-    custodyResults = percentageCalculator(custodyResults)
-    communityResults = percentageCalculator(communityResults)
-    licenseResults = percentageCalculator(licenseResults)
-  }  
+  if (organisationLevel !== organistaionUnit.TEAM.name) {
+    overallResults = caseloadHelper.calculateTeamTierPercentages(overallResults)
+    custodyResults = caseloadHelper.aggregateTeamTierTotals(custodyResults)
+    communityResults = caseloadHelper.aggregateTeamTierTotals(communityResults)
+    licenseResults = caseloadHelper.aggregateTeamTierTotals(licenseResults)
+  }
 
   var caseloadResults = {
     overallCaseloadDetails: overallResults,

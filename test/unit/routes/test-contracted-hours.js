@@ -5,6 +5,7 @@ const proxyquire = require('proxyquire')
 const sinon = require('sinon')
 require('sinon-bluebird')
 
+const COOKIES = [ 'session=eyJub3dJbk1pbnV0ZXMiOjI0OTA3MzgxLjEzODEzMzMzMiwiZG9iRW5jb2RlZCI6IjExNDAxNzYwNyIsInJlbGF0aW9uc2hpcCI6InI0IiwiYmVuZWZpdCI6ImIxIiwicmVmZXJlbmNlSWQiOiIzYjI0NzE3YWI5YTI0N2E3MGIiLCJkZWNyeXB0ZWRSZWYiOiIxUjY0RVROIiwiY2xhaW1UeXBlIjoiZmlyc3QtdGltZSIsImFkdmFuY2VPclBhc3QiOiJwYXN0IiwiY2xhaW1JZCI6OH0=' ]
 const OM_CONTRACTED_HOURS_URL = '/offender-manager/1/contracted-hours'
 const LDU_CONTRACTED_HOURS_URL = '/ldu/1/contracted-hours'
 const REGION_CONTRACTED_HOURS_URL = '/region/1/contracted-hours'
@@ -19,7 +20,7 @@ const CONTRACTED_HOURS = {
   contractedHours: 37.5
 }
 
-const UPDATED_CONTRACTED_HOURS = 11.23
+const UPDATED_CONTRACTED_HOURS = '11.23'
 
 var app
 var route
@@ -40,7 +41,7 @@ before(function () {
 describe('contracted-hours route', function () {
   it('should respond with 200 when offender-manager and id included in URL', function () {
     contractedHoursService.getContractedHours.resolves(CONTRACTED_HOURS)
-    return supertest(app).get(OM_CONTRACTED_HOURS_URL).expect(200)
+    return supertest(app).get(OM_CONTRACTED_HOURS_URL).set('Cookie', COOKIES).expect(200)
   })
 
   it('should respond with 404 when ldu and id included in URL', function () {
@@ -68,6 +69,7 @@ describe('contracted-hours route', function () {
     return supertest(app)
         .get(OM_CONTRACTED_HOURS_URL)
         .expect(200)
+        .set('Cookie', COOKIES)
         .then(function () {
           expect(getSubNavStub.calledWith('1', 'offender-manager', OM_CONTRACTED_HOURS_URL)).to.be.true //eslint-disable-line
         })

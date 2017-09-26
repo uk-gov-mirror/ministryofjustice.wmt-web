@@ -2,6 +2,7 @@ const getCapacityView = require('../services/get-capacity-view')
 const dateRangeHelper = require('../services/helpers/date-range-helper')
 const getSubNav = require('../services/get-sub-nav')
 const organisationUnit = require('../constants/organisation-unit')
+const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 
 module.exports = function (router) {
   router.get(`/:organisationLevel/:id/caseload-capacity`, function (req, res, next) {
@@ -13,6 +14,12 @@ module.exports = function (router) {
       id = req.params.id
     }
 
+    var orgUnit = getOrganisationUnit('name', organisationLevel)
+    var childOrgUnitDisplayText
+    if (organisationLevel !== organisationUnit.OFFENDER_MANAGER.name) {
+      childOrgUnitDisplayText = getOrganisationUnit('name', orgUnit.childOrganisationLevel).displayText
+    }
+
     var capacityViewPromise = getCapacityView(id, capacityDateRange, organisationLevel)
 
     return capacityViewPromise.then(function (result) {
@@ -21,7 +28,11 @@ module.exports = function (router) {
         subTitle: result.subTitle,
         subNav: getSubNav(id, organisationLevel, req.path),
         breadcrumbs: result.breadcrumbs,
-        capacity: result.capacityTable
+        capacity: result.capacityTable,
+        capacityBreakdown: result.capacityBreakdown,
+        childOrganisationLevel: orgUnit.childOrganisationLevel,
+        childOrganisationLevelDisplayText: childOrgUnitDisplayText,
+        organisationLevel: organisationLevel
       })
     }).catch(function (error) {
       next(error)
