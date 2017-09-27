@@ -27,26 +27,60 @@ module.exports.TEAM_CASELOAD_CSV = {
 
 module.exports.LDU_CASELOAD_RESULT = {
   title: 'Test LDU',
-  caseloadDetails: [
-    { linkId: 1265,
-      name: 'Test Team 1',
-      grades: [
-        { gradeCode: 'PO', untiered: 0, d2: 50, d1: 25, c2: 10, c1: 0, b2: 50, b1: 50, a: 50, totalCases: 50 },
-        { gradeCode: 'PSO', untiered: 0, d2: 50, d1: 75, c2: 90, c1: 100, b2: 50, b1: 50, a: 50, totalCases: 50 }
-      ]
-    },
-    { linkId: 1266,
-      name: 'Test Team 2',
-      grades: [
-        { gradeCode: 'PO', untiered: 0, d2: 50, d1: 62.5, c2: 10, c1: 70, b2: 75, b1: 80, a: 50, totalCases: 66.66666666666666 }
-      ]
-    }
-  ]
+  caseloadDetails: {
+    overallCaseloadDetails: [
+      { linkId: 1265,
+        name: 'Test Team 1',
+        grades: [
+          { grade: 'PO', untiered: 0, d2: 50, d1: 25, c2: 10, c1: 0, b2: 50, b1: 50, a: 50, totalCases: 50 },
+          { grade: 'PSO', untiered: 0, d2: 50, d1: 75, c2: 90, c1: 100, b2: 50, b1: 50, a: 50, totalCases: 50 }
+        ]
+      },
+      { linkId: 1266,
+        name: 'Test Team 2',
+        grades: [
+          { grade: 'PO', untiered: 0, d2: 50, d1: 62.5, c2: 10, c1: 70, b2: 75, b1: 80, a: 50, totalCases: 66.66666666666666 }
+        ]
+      }
+    ],
+    custodyCaseloadDetails: [],
+    communityCaseloadDetails: [],
+    licenseCaseloadDetails: [],
+    overallTotalSummary: [
+      {
+        name: 'Test Team 1',
+        linkId: 1265,
+        totalCases: 12,
+        custodyTotalCases: 5,
+        commuintyTotalCases: 5,
+        licenseTotalCases: 2
+      },
+      {
+        name: 'Test Team 2',
+        linkId: 1266,
+        totalCases: 12,
+        custodyTotalCases: 5,
+        commuintyTotalCases: 5,
+        licenseTotalCases: 2
+      }
+    ]
+  }
 }
 
 module.exports.LDU_CASELOAD_CSV = {
   filename: 'Test_LDU_Caseload.csv',
-  csv: '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n' +
+  csv: 'OVERALL\n' +
+      '"name","custodyCases","communityCases","licenseCases","totalCases"\n' +
+      '"Test Team 1",5,,2,12\n' +
+      '"Test Team 2",5,,2,12\n\n\n' +
+      'CUSTODY\n' +
+      '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+      'COMMUNITY\n' +
+      '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+      'LICENSE\n' +
+      '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+      'OVERALL BY GRADE\n' +
+      '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n' +
       '"Test Team 1","PO",50,0,50,25,10,0,50,50,50\n' +
       '"Test Team 1","PSO",50,0,50,75,90,100,50,50,50\n' +
       '"Test Team 2","PO",66.66666666666666,0,50,62.5,10,70,75,80,50'
@@ -54,56 +88,124 @@ module.exports.LDU_CASELOAD_CSV = {
 
 module.exports.REGION_CASELOAD_RESULT = {
   title: 'Test Region',
-  caseloadDetails: [
-    { linkId: 1265,
-      name: 'Test LDU 1',
-      grades: [
-        { gradeCode: 'PO', untiered: 0, d2: 50, d1: 25, c2: 10, c1: 0, b2: 50, b1: 50, a: 50, totalCases: 50 },
-        { gradeCode: 'PSO', untiered: 0, d2: 50, d1: 75, c2: 90, c1: 100, b2: 50, b1: 50, a: 50, totalCases: 50 }
-      ]
-    },
-    { linkId: 1266,
-      name: 'Test LDU 2',
-      grades: [
-        { gradeCode: 'PO', untiered: 0, d2: 50, d1: 62.5, c2: 10, c1: 70, b2: 75, b1: 80, a: 50, totalCases: 66.66666666666666 }
-      ]
-    }
-  ]
+  caseloadDetails: {
+    overallCaseloadDetails: [
+      { linkId: 1265,
+        name: 'Test LDU 1',
+        grades: [
+          { grade: 'PO', untiered: 0, d2: 50, d1: 25, c2: 10, c1: 0, b2: 50, b1: 50, a: 50, totalCases: 50 },
+          { grade: 'PSO', untiered: 0, d2: 50, d1: 75, c2: 90, c1: 100, b2: 50, b1: 50, a: 50, totalCases: 50 }
+        ]
+      },
+      { linkId: 1266,
+        name: 'Test LDU 2',
+        grades: [
+          { grade: 'PO', untiered: 0, d2: 50, d1: 62.5, c2: 10, c1: 70, b2: 75, b1: 80, a: 50, totalCases: 66.66666666666666 }
+        ]
+      }
+    ],
+    custodyCaseloadDetails: [],
+    communityCaseloadDetails: [],
+    licenseCaseloadDetails: [],
+    overallTotalSummary: [
+      {
+        name: 'Test LDU 1',
+        linkId: 1265,
+        totalCases: 12,
+        custodyTotalCases: 5,
+        commuintyTotalCases: 5,
+        licenseTotalCases: 2
+      },
+      {
+        name: 'Test LDU 2',
+        linkId: 1266,
+        totalCases: 12,
+        custodyTotalCases: 5,
+        commuintyTotalCases: 5,
+        licenseTotalCases: 2
+      }
+    ]
+  }
 }
 
 module.exports.REGION_CASELOAD_CSV = {
   filename: 'Test_Region_Caseload.csv',
-  csv: '"LDUClusterName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n' +
-      '"Test LDU 1","PO",50,0,50,25,10,0,50,50,50\n' +
-      '"Test LDU 1","PSO",50,0,50,75,90,100,50,50,50\n' +
-      '"Test LDU 2","PO",66.66666666666666,0,50,62.5,10,70,75,80,50'
+  csv: 'OVERALL\n' +
+  '"name","custodyCases","communityCases","licenseCases","totalCases"\n' +
+  '"Test LDU 1",5,,2,12\n' +
+  '"Test LDU 2",5,,2,12\n\n\n' +
+  'CUSTODY\n' +
+  '"LDUClusterName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+  'COMMUNITY\n' +
+  '"LDUClusterName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+  'LICENSE\n' +
+  '"LDUClusterName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+  'OVERALL BY GRADE\n' +
+  '"LDUClusterName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n' +
+  '"Test LDU 1","PO",50,0,50,25,10,0,50,50,50\n' +
+  '"Test LDU 1","PSO",50,0,50,75,90,100,50,50,50\n' +
+  '"Test LDU 2","PO",66.66666666666666,0,50,62.5,10,70,75,80,50'
 }
 
 module.exports.NATIONAL_CASELOAD_RESULT = {
   title: 'Test National',
-  caseloadDetails: [
-    { linkId: 1265,
-      name: 'Test Region 1',
-      grades: [
-        { gradeCode: 'PO', untiered: 0, d2: 50, d1: 25, c2: 10, c1: 0, b2: 50, b1: 50, a: 50, totalCases: 50 },
-        { gradeCode: 'PSO', untiered: 0, d2: 50, d1: 75, c2: 90, c1: 100, b2: 50, b1: 50, a: 50, totalCases: 50 }
-      ]
-    },
-    { linkId: 1266,
-      name: 'Test Region 2',
-      grades: [
-        { gradeCode: 'PO', untiered: 0, d2: 50, d1: 62.5, c2: 10, c1: 70, b2: 75, b1: 80, a: 50, totalCases: 66.66666666666666 }
-      ]
-    }
-  ]
+  caseloadDetails: {
+    overallCaseloadDetails: [
+      { linkId: 1265,
+        name: 'Test Region 1',
+        grades: [
+          { grade: 'PO', untiered: 0, d2: 50, d1: 25, c2: 10, c1: 0, b2: 50, b1: 50, a: 50, totalCases: 50 },
+          { grade: 'PSO', untiered: 0, d2: 50, d1: 75, c2: 90, c1: 100, b2: 50, b1: 50, a: 50, totalCases: 50 }
+        ]
+      },
+      { linkId: 1266,
+        name: 'Test Region 2',
+        grades: [
+          { grade: 'PO', untiered: 0, d2: 50, d1: 62.5, c2: 10, c1: 70, b2: 75, b1: 80, a: 50, totalCases: 66.66666666666666 }
+        ]
+      }
+    ],
+    custodyCaseloadDetails: [],
+    communityCaseloadDetails: [],
+    licenseCaseloadDetails: [],
+    overallTotalSummary: [
+      {
+        name: 'Test Region 1',
+        linkId: 1265,
+        totalCases: 12,
+        custodyTotalCases: 5,
+        commuintyTotalCases: 5,
+        licenseTotalCases: 2
+      },
+      {
+        name: 'Test Region 2',
+        linkId: 1266,
+        totalCases: 12,
+        custodyTotalCases: 5,
+        commuintyTotalCases: 5,
+        licenseTotalCases: 2
+      }
+    ]
+  }
 }
 
 module.exports.NATIONAL_CASELOAD_CSV = {
   filename: 'Test_National_Caseload.csv',
-  csv: '"DivisionName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n' +
-      '"Test Region 1","PO",50,0,50,25,10,0,50,50,50\n' +
-      '"Test Region 1","PSO",50,0,50,75,90,100,50,50,50\n' +
-      '"Test Region 2","PO",66.66666666666666,0,50,62.5,10,70,75,80,50'
+  csv: 'OVERALL\n' +
+  '"name","custodyCases","communityCases","licenseCases","totalCases"\n' +
+  '"Test Region 1",5,,2,12\n' +
+  '"Test Region 2",5,,2,12\n\n\n' +
+  'CUSTODY\n' +
+  '"DivisionName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+  'COMMUNITY\n' +
+  '"DivisionName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+  'LICENSE\n' +
+  '"DivisionName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+  'OVERALL BY GRADE\n' +
+  '"DivisionName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n' +
+  '"Test Region 1","PO",50,0,50,25,10,0,50,50,50\n' +
+  '"Test Region 1","PSO",50,0,50,75,90,100,50,50,50\n' +
+  '"Test Region 2","PO",66.66666666666666,0,50,62.5,10,70,75,80,50'
 }
 
 module.exports.OM_OVERVIEW_RESULT = {
