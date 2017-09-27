@@ -1,5 +1,6 @@
 const config = require('../../../knexfile').web
 const knex = require('knex')(config)
+const Roles = require('../../constants/roles')
 
 module.exports = function (username) {
   if (username === undefined) {
@@ -15,7 +16,7 @@ module.exports = function (username) {
     .then(function (result) {
       var role = result
       if (role.length === 0) {
-        role.push({roleId: 0, role: 'Staff'})
+        role.push({roleId: 0, role: Roles.STAFF})
       }
       return role
     })

@@ -1,6 +1,6 @@
 const config = require('../config')
 
-function isAuthenticated (req) {
+function isAuthenticated(req) {
   if (!req.isAuthenticated() || !req.user) {
     var error = new Error('unauthenticated')
     error.status = 401
@@ -8,40 +8,15 @@ function isAuthenticated (req) {
   }
 }
 
-function isDataAdmin (req) {
+function hasRole(req, role) {
   if (!config.AUTHENTICATION_ENABLED) {
     return false
   }
   isAuthenticated(req)
-  if (req.user.user_role === 'Data Admin') {
+  if (req.user.user_role === role) {
     return true
   }
   return false
 }
 
-function isSystemAdmin (req) {
-  if (!config.AUTHENTICATION_ENABLED) {
-    return false
-  }
-  isAuthenticated(req)
-  if (req.user.user_role === 'System Admin') {
-    return true
-  }
-  return false
-}
-
-function isManager (req) {
-  if (!config.AUTHENTICATION_ENABLED) {
-    return false
-  }
-  isAuthenticated(req)
-  if (req.user.user_role === 'Manager') {
-    return true
-  }
-  return false
-}
-
-module.exports.isAuthenticated = isAuthenticated
-module.exports.isDataAdmin = isDataAdmin
-module.exports.isSystemAdmin = isSystemAdmin
-module.exports.isManager = isManager
+module.exports.hasRole = hasRole

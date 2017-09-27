@@ -2,15 +2,18 @@ const Link = require('../../app/services/domain/link')
 const userRoleService = require('../services/user-role-service')
 const UserRole = require('../services/domain/user-role')
 const Authorisation = require('../authorisation')
+const Roles = require('../constants/roles')
+const FieldValidator = require('../services/validators/field-validator')
+const ErrorHandler = require('../services/validators/error-handler')
 
 module.exports = function (router) {
   router.get('/admin', function (req, res) {
     var userRole
     try {
-      if (Authorisation.isDataAdmin(req)) {
-        userRole = 'DataAdmin'
-      } else if (Authorisation.isSystemAdmin(req)) {
-        userRole = 'SystemAdmin'
+      if (Authorisation.hasRole(req, Roles.DATA_ADMIN)) {
+        userRole = Roles.DATA_ADMIN
+      } else if (Authorisation.hasRole(req, Roles.SYSTEM_ADMIN)) {
+        userRole = Roles.SYSTEM_ADMIN
       }
       return res.render('admin', {
         title: 'Admin',
@@ -29,7 +32,7 @@ module.exports = function (router) {
 
     var fail = req.query.fail
 
-    var failureText = fail ? 'No valid username specified' : null
+    var failureText = fail ? 'Invalid username specified' : null
 
     return res.render('user', {
       title: 'User rights',
@@ -51,16 +54,14 @@ module.exports = function (router) {
     }
 
     return userRoleService.getRoleByUsername(username).then(function (role) {
-      var rights
-      if (role !== undefined) {
-        rights = role.role
-      }
       return res.render('user-rights', {
         title: 'User rights',
         username: username,
-        rights: rights,
+        rights: role.role,
         breadcrumbs: breadcrumbs
       })
+    }).catch(function (error) {
+      next(error)
     })
   })
 
@@ -69,7 +70,7 @@ module.exports = function (router) {
     var username = req.params.username
     var loggedInUsername = req.user.username
 
-    if (rights === 'Staff') {
+    if (rights === Roles.STAFF) {
       removeUserRole(username)
     } else {
       addUpdateUserRole(username, rights, loggedInUsername)
@@ -91,6 +92,8 @@ var removeUserRole = function (username) {
         return userRoleService.removeUserByUsername(user.username)
       })
     }
+  }).catch(function (error) {
+    next(error)
   })
 }
 
@@ -124,9 +127,13 @@ var addUpdateUserRole = function (username, rights, loggedInUsername) {
 }
 
 var isValidUsername = function (username) {
-  var result = true
-  if (username === undefined || username.length === 0) {
-    result = false
+  var errors = ErrorHandler()
+
+  FieldValidator(username, 'username', errors)
+    .isValidUsername(username)
+
+  if (errors.get()) {
+    return false
   }
-  return result
+  return true
 }

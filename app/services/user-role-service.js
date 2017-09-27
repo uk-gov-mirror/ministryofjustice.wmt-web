@@ -8,6 +8,7 @@ const removeUserRoleByUserId = require('./data/remove-user-role-by-user-id')
 const removeUserByUsername = require('./data/remove-user-by-username')
 
 module.exports.getRoleByUsername = function (username) {
+  username = removeDomainFromUsername(username)
   return getRoleByUsername(username).then(function (result) {
     return result[0]
   })
@@ -32,12 +33,15 @@ module.exports.getRole = function (role) {
 }
 
 module.exports.getUser = function (username) {
+  username = removeDomainFromUsername(username)
+  console.log(username)
   return getUserByUsername(username).then(function (result) {
     return result[0]
   })
 }
 
 module.exports.addUser = function (username) {
+  username = removeDomainFromUsername(username)
   return addUser(username).then(function (result) {
     return result[0]
   })
@@ -48,5 +52,14 @@ module.exports.removeUserRoleByUserId = function (userId) {
 }
 
 module.exports.removeUserByUsername = function (username) {
+  username = removeDomainFromUsername(username)
   return removeUserByUsername(username)
+}
+
+var removeDomainFromUsername = function(username){
+  var index = username.lastIndexOf('@')
+  if (index >= 0) {
+    return username.substring(0, index)
+  }
+  return username
 }

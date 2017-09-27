@@ -1,9 +1,11 @@
 const passport = require('passport')
 
 module.exports = function (router) {
-  router.get('/', passport.authenticate('saml'), function (req, res) {
-    return res.render('index', {
-      title: 'WMT Index'
-    })
-   })
+  router.get('/', function (req, res) {
+    if (req.isAuthenticated() && req.user) {
+        return res.redirect('/hmpps/0')
+    } else {
+      return res.redirect('/login')
+    }
+  })
 }

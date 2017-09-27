@@ -3,11 +3,14 @@ const session = require('express-session')
 const passport = require('passport')
 const config = require('../config')
 const SamlStrategy = require('passport-saml').Strategy
+const logger = require('./logger')
 
 const getUserRoleByUsername = require('./services/data/get-user-role-by-username')
 
 module.exports = function (app) {
-  if (!config.AUTHENTICATION_ENABLED) return
+  if (!config.AUTHENTICATION_ENABLED) {
+    return
+  }
 
   passport.serializeUser(function (user, done) {
     var name = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
@@ -75,9 +78,10 @@ module.exports = function (app) {
     }
     req.user.saml = saml
     samlStrategy.logout(req, function (err, request) {
-      if (!err) {
-        return res.redirect(request)
+      if (err) {
+        logger.error({error: err})
       }
+      return res.redirect(request)
     })
   }
 

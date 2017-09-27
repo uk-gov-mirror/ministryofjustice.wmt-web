@@ -10,13 +10,13 @@ class FieldsetValidator {
    * @param fieldName The name of of the HTML element to link the error message to.
    * @param errors An instance of the ErrorHandler class.
    */
-  constructor (data, fieldName, errors) {
+  constructor(data, fieldName, errors) {
     this.data = data || []
     this.fieldName = fieldName
     this.errors = errors
   }
 
-  isRequired (specificMessage) {
+  isRequired(specificMessage) {
     var message = (!specificMessage) ? ERROR_MESSAGES.getIsRequiredMessage : specificMessage
     var self = this
     if (this.data instanceof Array) {
@@ -29,21 +29,21 @@ class FieldsetValidator {
     return this
   }
 
-  isValidDate (date) {
+  isValidDate(date) {
     if (!validateDate(date)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getInvalidDateFormatMessage)
     }
     return this
   }
 
-  isFutureDate (date) {
+  isFutureDate(date) {
     if (!isDateInTheFuture(date)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getFutureDateMessage)
     }
     return this
   }
 
-  isLaterThan (startDate, endDate) {
+  isLaterThan(startDate, endDate) {
     if (!isDateAfter(startDate, endDate)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getIsDateLaterThanMessage)
     }
@@ -51,17 +51,17 @@ class FieldsetValidator {
   }
 }
 
-function validateDate (date) {
+function validateDate(date) {
   if (!date) return false
   return date instanceof moment && date.isValid() &&
-         date < DATE_LIMIT
+    date < DATE_LIMIT
 }
 
-function isDateInTheFuture (date) {
+function isDateInTheFuture(date) {
   return validateDate(date) && date > dateFormatter.now()
 }
 
-function isDateAfter (startDate, endDate) {
+function isDateAfter(startDate, endDate) {
   return endDate > startDate
 }
 
