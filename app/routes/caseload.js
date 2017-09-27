@@ -29,9 +29,7 @@ module.exports = function (router) {
           organisationLevel: organisationLevel,
           childOrganisationLevel: orgUnit.childOrganisationLevel,
           childOrganisationLevelDisplayText: childOrgUnit.displayText,
-          caseloadDetails: caseloadDetails(organisationLevel, result),
-          overallByGrade: result.caseloadDetails.overallByGrade,
-          overallSummary: result.caseloadDetails.overallTotalSummary
+          caseloadDetails: caseloadDetails(organisationLevel, result)
         })
       }).catch(function (error) {
         next(error)
