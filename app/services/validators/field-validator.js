@@ -10,13 +10,13 @@ class FieldValidator {
    * @param fieldName The name of of the HTML element to link the error message to.
    * @param errors An instance of the ErrorHandler class.
    */
-  constructor(data, fieldName, errors) {
+  constructor (data, fieldName, errors) {
     this.data = data
     this.fieldName = fieldName
     this.errors = errors
   }
 
-  isRequired(specificMessage) {
+  isRequired (specificMessage) {
     var message = (!specificMessage) ? ERROR_MESSAGES.getIsRequiredMessage : specificMessage
     if (!this.data || _.isEmpty(this.data)) {
       this.errors.add(this.fieldName, message)
@@ -25,7 +25,7 @@ class FieldValidator {
     return this
   }
 
-  isLessThanLength(length, specificMessage) {
+  isLessThanLength (length, specificMessage) {
     var message = (!specificMessage) ? ERROR_MESSAGES.getIsLessThanLengthMessage : specificMessage
     if (!validator.isLength(this.data, { max: length })) {
       this.errors.add(this.fieldName, message, { length: length })
@@ -33,7 +33,7 @@ class FieldValidator {
     return this
   }
 
-  isInt(min, max) {
+  isInt (min, max) {
     let options = { allow_leading_zeroes: false, min: min, max: max }
     if (!validator.isInt(this.data, options)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getIsIntegerMessage, options)
@@ -41,7 +41,7 @@ class FieldValidator {
     return this
   }
 
-  isFloat(min, max) {
+  isFloat (min, max) {
     let options = { min: min, max: max }
     if (!validator.isFloat(this.data, options)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getIsFloatMessage, options)
@@ -49,7 +49,7 @@ class FieldValidator {
     return this
   }
 
-  isValidUsername(username) {
+  isValidUsername (username) {
     if (!username || !validator.isEmail(username) ||
       !username.endsWith('@' + config.ACTIVE_DIRECTORY_DOMAIN)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getIsValidUsernameMessage)

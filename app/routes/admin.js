@@ -41,7 +41,7 @@ module.exports = function (router) {
     })
   })
 
-  router.post('/admin/user-rights', function (req, res) {
+  router.post('/admin/user-rights', function (req, res, next) {
     var breadcrumbs = [
       new Link('User Rights', '/admin/user-rights'),
       new Link('Admin', '/admin')
@@ -65,13 +65,13 @@ module.exports = function (router) {
     })
   })
 
-  router.post('/admin/user-rights/:username', function (req, res) {
+  router.post('/admin/user-rights/:username', function (req, res, next) {
     var rights = req.body.rights
     var username = req.params.username
     var loggedInUsername = req.user.username
 
     if (rights === Roles.STAFF) {
-      removeUserRole(username)
+      removeUserRole(username, next)
     } else {
       addUpdateUserRole(username, rights, loggedInUsername)
     }
@@ -83,7 +83,7 @@ module.exports = function (router) {
   })
 }
 
-var removeUserRole = function (username) {
+var removeUserRole = function (username, next) {
   var user
   return userRoleService.getUser(username).then(function (result) {
     user = result

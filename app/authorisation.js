@@ -1,6 +1,6 @@
 const config = require('../config')
 
-function isAuthenticated(req) {
+function isAuthenticated (req) {
   if (!req.isAuthenticated() || !req.user) {
     var error = new Error('unauthenticated')
     error.status = 401
@@ -8,7 +8,7 @@ function isAuthenticated(req) {
   }
 }
 
-function hasRole(req, role) {
+function hasRole (req, role) {
   if (!config.AUTHENTICATION_ENABLED) {
     return false
   }

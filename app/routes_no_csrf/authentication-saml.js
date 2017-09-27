@@ -6,7 +6,7 @@ module.exports = function (router) {
     return res.redirect('/hmpps/0')
   })
 
-  router.post('/login', passport.authenticate('saml', {failureRedirect: '/admin' }), function (req, res) {
+  router.post('/login', passport.authenticate('saml'), function (req, res) {
     if (req.user) {
       logger.info(req.user.nameID, 'logged in.')
     }
