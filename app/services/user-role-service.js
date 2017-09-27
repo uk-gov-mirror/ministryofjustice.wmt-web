@@ -34,7 +34,6 @@ module.exports.getRole = function (role) {
 
 module.exports.getUser = function (username) {
   username = removeDomainFromUsername(username)
-  console.log(username)
   return getUserByUsername(username).then(function (result) {
     return result[0]
   })
