@@ -16,7 +16,7 @@ describe('services/data/get-caseload', function () {
   it('should retrieve caseload breakdown for each workload owner on a team', function () {
     return getCaseload(inserts.filter((item) => item.table === 'team')[1].id, 'team')
       .then(function (results) {
-        expect(results[0].gradeCode).to.eql('PO')
+        expect(results[0].grade).to.eql('PO')
         expect(results[0].untiered).to.eql(0)
         expect(results[0].d2).to.eql(1)
         expect(results[0].d1).to.eql(2)

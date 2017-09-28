@@ -1,6 +1,5 @@
 const config = require('../../../knexfile').web
 const knex = require('knex')(config)
-const orgUnitConstants = require('../../constants/organisation-unit')
 const orgUnitFinder = require('../helpers/org-unit-finder')
 
 module.exports = function (id, type) {
@@ -22,10 +21,6 @@ module.exports = function (id, type) {
     'total_cases AS totalCases',
     'case_type AS caseType'
   ]
-
-  if (orgUnit.name === orgUnitConstants.TEAM.name) {
-    selectColumns.push('grade_code AS gradeCode')
-  }
 
   return knex(table)
     .where('id', id)

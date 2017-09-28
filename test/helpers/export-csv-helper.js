@@ -2,8 +2,8 @@ module.exports.TEAM_CASELOAD_RESULT = {
   title: 'Test Team',
   caseloadDetails: {
     overallCaseloadDetails: [
-      { linkId: 2767, name: 'John Smith', gradeCode: 'PO', untiered: 0, d2: 3, d1: 6, c2: 9, c1: 6, b2: 12, b1: 18, a: 9, totalCases: 189, caseType: 'COMMUNITY' },
-      { linkId: 2771, name: 'Tony Test', gradeCode: 'PO', untiered: 0, d2: 3, d1: 6, c2: 9, c1: 6, b2: 12, b1: 18, a: 9, totalCases: 189, caseType: 'COMMUNITY' }
+      { linkId: 2767, name: 'John Smith', gradeCode: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' },
+      { linkId: 2771, name: 'Tony Test', gradeCode: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' }
     ],
     custodyCaseloadDetails: [],
     communityCaseloadDetails: [],
@@ -14,15 +14,15 @@ module.exports.TEAM_CASELOAD_RESULT = {
 module.exports.TEAM_CASELOAD_CSV = {
   filename: 'Test_Team_Caseload.csv',
   csv: 'OVERALL\n' +
-    '"OffenderManagerName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n' +
-    '"John Smith","PO",189,0,3,6,9,6,12,18,9\n' +
-    '"Tony Test","PO",189,0,3,6,9,6,12,18,9\n\n\n' +
+    '"OffenderManagerName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
+    '"John Smith","PO",9,18,12,6,9,6,3,0,189\n' +
+    '"Tony Test","PO",9,18,12,6,9,6,3,0,189\n\n\n' +
     'CUSTODY\n' +
-    '"OffenderManagerName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+    '"OffenderManagerName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
     'COMMUNITY\n' +
-    '"OffenderManagerName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+    '"OffenderManagerName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
     'LICENSE\n' +
-    '"OffenderManagerName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"'
+    '"OffenderManagerName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"'
 }
 
 module.exports.LDU_CASELOAD_RESULT = {
@@ -74,16 +74,16 @@ module.exports.LDU_CASELOAD_CSV = {
       '"Test Team 1",5,,2,12\n' +
       '"Test Team 2",5,,2,12\n\n\n' +
       'CUSTODY\n' +
-      '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+      '"TeamName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
       'COMMUNITY\n' +
-      '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+      '"TeamName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
       'LICENSE\n' +
-      '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
-      'OVERALL BY GRADE\n' +
-      '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n' +
-      '"Test Team 1","PO",50,0,50,25,10,0,50,50,50\n' +
-      '"Test Team 1","PSO",50,0,50,75,90,100,50,50,50\n' +
-      '"Test Team 2","PO",66.66666666666666,0,50,62.5,10,70,75,80,50'
+      '"TeamName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+      'OVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' +
+      '"TeamName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
+      '"Test Team 1","PO",50,50,50,0,10,25,50,0,50\n' +
+      '"Test Team 1","PSO",50,50,50,100,90,75,50,0,50\n' +
+      '"Test Team 2","PO",50,80,75,70,10,62.5,50,0,66.66666666666666'
 }
 
 module.exports.REGION_CASELOAD_RESULT = {
@@ -135,16 +135,16 @@ module.exports.REGION_CASELOAD_CSV = {
   '"Test LDU 1",5,,2,12\n' +
   '"Test LDU 2",5,,2,12\n\n\n' +
   'CUSTODY\n' +
-  '"LDUClusterName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+  '"LDUClusterName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
   'COMMUNITY\n' +
-  '"LDUClusterName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+  '"LDUClusterName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
   'LICENSE\n' +
-  '"LDUClusterName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
-  'OVERALL BY GRADE\n' +
-  '"LDUClusterName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n' +
-  '"Test LDU 1","PO",50,0,50,25,10,0,50,50,50\n' +
-  '"Test LDU 1","PSO",50,0,50,75,90,100,50,50,50\n' +
-  '"Test LDU 2","PO",66.66666666666666,0,50,62.5,10,70,75,80,50'
+  '"LDUClusterName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+  'OVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' +
+  '"LDUClusterName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
+  '"Test LDU 1","PO",50,50,50,0,10,25,50,0,50\n' +
+  '"Test LDU 1","PSO",50,50,50,100,90,75,50,0,50\n' +
+  '"Test LDU 2","PO",50,80,75,70,10,62.5,50,0,66.66666666666666'
 }
 
 module.exports.NATIONAL_CASELOAD_RESULT = {
@@ -196,16 +196,16 @@ module.exports.NATIONAL_CASELOAD_CSV = {
   '"Test Region 1",5,,2,12\n' +
   '"Test Region 2",5,,2,12\n\n\n' +
   'CUSTODY\n' +
-  '"DivisionName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+  '"DivisionName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
   'COMMUNITY\n' +
-  '"DivisionName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
+  '"DivisionName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
   'LICENSE\n' +
-  '"DivisionName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n\n\n' +
-  'OVERALL BY GRADE\n' +
-  '"DivisionName","Grade","Overall","Untiered","D2","D1","C2","C1","B2","B1","A"\n' +
-  '"Test Region 1","PO",50,0,50,25,10,0,50,50,50\n' +
-  '"Test Region 1","PSO",50,0,50,75,90,100,50,50,50\n' +
-  '"Test Region 2","PO",66.66666666666666,0,50,62.5,10,70,75,80,50'
+  '"DivisionName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+  'OVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' +
+  '"DivisionName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
+  '"Test Region 1","PO",50,50,50,0,10,25,50,0,50\n' +
+  '"Test Region 1","PSO",50,50,50,100,90,75,50,0,50\n' +
+  '"Test Region 2","PO",50,80,75,70,10,62.5,50,0,66.66666666666666'
 }
 
 module.exports.OM_OVERVIEW_RESULT = {

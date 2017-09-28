@@ -94,7 +94,7 @@ var convertMapToArray = function (map) {
 }
 
 var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
-  var percentageResults = []
+  var transformedData = []
   var caseloadTotalsByTeam = groupCaseload(caseloadTotalsByGrade, false)
 
   // For each team, create one entry in the new results set with one 'grade' sub-object per grade
@@ -102,42 +102,42 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
     var newTeamEntry = { linkId: caseloadTotalsByTeam[team].linkId, name: caseloadTotalsByTeam[team].name }
     var teamGradeRecords = caseloadTotalsByGrade.filter((row) => row.linkId === caseloadTotalsByTeam[team].linkId)
 
-    var percentageGradeRecords = []
+    var gradeRecords = []
     for (var record in teamGradeRecords) {
       var newGradeRecord
       if (calculatePercentage) {
         newGradeRecord = {
           grade: teamGradeRecords[record].grade,
-          untiered: percentageCalculator.calculatePercentage(teamGradeRecords[record].untiered, caseloadTotalsByTeam[team].untiered),
-          d2: percentageCalculator.calculatePercentage(teamGradeRecords[record].d2, caseloadTotalsByTeam[team].d2),
-          d1: percentageCalculator.calculatePercentage(teamGradeRecords[record].d1, caseloadTotalsByTeam[team].d1),
-          c2: percentageCalculator.calculatePercentage(teamGradeRecords[record].c2, caseloadTotalsByTeam[team].c2),
-          c1: percentageCalculator.calculatePercentage(teamGradeRecords[record].c1, caseloadTotalsByTeam[team].c1),
-          b2: percentageCalculator.calculatePercentage(teamGradeRecords[record].b2, caseloadTotalsByTeam[team].b2),
-          b1: percentageCalculator.calculatePercentage(teamGradeRecords[record].b1, caseloadTotalsByTeam[team].b1),
           a: percentageCalculator.calculatePercentage(teamGradeRecords[record].a, caseloadTotalsByTeam[team].a),
+          b1: percentageCalculator.calculatePercentage(teamGradeRecords[record].b1, caseloadTotalsByTeam[team].b1),
+          b2: percentageCalculator.calculatePercentage(teamGradeRecords[record].b2, caseloadTotalsByTeam[team].b2),
+          c1: percentageCalculator.calculatePercentage(teamGradeRecords[record].c1, caseloadTotalsByTeam[team].c1),
+          c2: percentageCalculator.calculatePercentage(teamGradeRecords[record].c2, caseloadTotalsByTeam[team].c2),
+          d1: percentageCalculator.calculatePercentage(teamGradeRecords[record].d1, caseloadTotalsByTeam[team].d1),
+          d2: percentageCalculator.calculatePercentage(teamGradeRecords[record].d2, caseloadTotalsByTeam[team].d2),
+          untiered: percentageCalculator.calculatePercentage(teamGradeRecords[record].untiered, caseloadTotalsByTeam[team].untiered),
           totalCases: percentageCalculator.calculatePercentage(teamGradeRecords[record].totalCases, caseloadTotalsByTeam[team].totalCases)
         }
       } else {
         newGradeRecord = {
           grade: teamGradeRecords[record].grade,
-          untiered: teamGradeRecords[record].untiered,
-          d2: teamGradeRecords[record].d2,
-          d1: teamGradeRecords[record].d1,
-          c2: teamGradeRecords[record].c2,
-          c1: teamGradeRecords[record].c1,
-          b2: teamGradeRecords[record].b2,
-          b1: teamGradeRecords[record].b1,
           a: teamGradeRecords[record].a,
+          b1: teamGradeRecords[record].b1,
+          b2: teamGradeRecords[record].b2,
+          c1: teamGradeRecords[record].c1,
+          c2: teamGradeRecords[record].c2,
+          d1: teamGradeRecords[record].d1,
+          d2: teamGradeRecords[record].d2,
+          untiered: teamGradeRecords[record].untiered,
           totalCases: teamGradeRecords[record].totalCases
         }
       }
-      percentageGradeRecords.push(newGradeRecord)
+      gradeRecords.push(newGradeRecord)
     }
-    newTeamEntry = Object.assign({}, newTeamEntry, {grades: percentageGradeRecords})
-    percentageResults.push(newTeamEntry)
+    newTeamEntry = Object.assign({}, newTeamEntry, {grades: gradeRecords})
+    transformedData.push(newTeamEntry)
   }
-  return percentageResults
+  return transformedData
 }
 
 var groupCaseload = function (caseloads, splitByGrade = false) {

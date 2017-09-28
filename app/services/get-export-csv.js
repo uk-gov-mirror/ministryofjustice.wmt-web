@@ -3,7 +3,7 @@ const getOrganisationUnit = require('./helpers/org-unit-finder')
 const json2csv = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
 
-const CASELOAD_FIELDS = ['name', 'gradeCode', 'totalCases', 'untiered', 'd2', 'd1', 'c2', 'c1', 'b2', 'b1', 'a']
+const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['grade', 'teamName', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['GradeCode', 'TeamName', 'CapacityPercentage', 'TotalCases', 'ContractedHours', 'ReductionHours']
 const ORG_OVERVIEW_FEILDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
@@ -35,7 +35,7 @@ var getFields = function (organisationLevel, tab) {
     case tabs.CASELOAD:
       childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
       fields = CASELOAD_FIELDS
-      fieldNames = [childOrgForFieldName + 'Name', 'Grade', 'Overall', 'Untiered', 'D2', 'D1', 'C2', 'C1', 'B2', 'B1', 'A']
+      fieldNames = [childOrgForFieldName + 'Name', 'Grade', 'A', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'Untiered', 'Overall']
       break
     case tabs.OVERVIEW:
       if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -85,7 +85,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
 
         csv = ('OVERALL\n' + overallCsv + '\n\n\nCUSTODY\n' + custodyCsv +
         '\n\n\nCOMMUNITY\n' + communityCsv + '\n\n\nLICENSE\n' + licenseCsv +
-        '\n\n\nOVERALL BY GRADE\n' + overallByGradeCsv)
+        '\n\n\nOVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' + overallByGradeCsv)
       }
       break
     case tabs.OVERVIEW:
