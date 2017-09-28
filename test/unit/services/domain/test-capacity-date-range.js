@@ -97,8 +97,8 @@ describe('services/domain/capacity-date-range', function () {
     }).to.throw(ValidationError)
   })
 
-  it('should throw ValidationError if given invalid day for capacity from date', function () {
-    expect(function () {
+  it('should throw ValidationError if given invalid day for capacity from date', function (done) {
+    try {
       return new CapacityDateRange(
         INVALID_DAY,
         VALID_FROM_MONTH,
@@ -107,7 +107,11 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_MONTH,
         VALID_TO_YEAR
       )
-    }).to.throw(ValidationError)
+    } catch (error) {
+      expect(error).to.be.instanceof(ValidationError)
+      expect(error.validationErrors['capacityFromDate'][0]).to.contain('was invalid')
+      done()
+    }
   })
 
   it('should throw ValidationError if given invalid month for capacity from date', function () {

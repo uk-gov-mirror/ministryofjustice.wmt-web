@@ -9,6 +9,6 @@ module.exports = {
   getInvalidDateFormatMessage: function (displayName) { return `${displayName} was invalid` },
   getPastDateMessage: function (displayName) { return `${displayName} must be in the past` },
   getFutureDateMessage: function (displayName) { return `${displayName} must be in the future` },
-  getIsDateLaterThanMessage: function (displayName) { return `${displayName} must be after the start date` },
+  getIsDateLaterThanMessage: function (displayName, options) { return `${displayName} must be after ${options.secondaryDisplayName}` },
   getIsLessThanLengthMessage: function (displayName, options) { return `${displayName} must be shorter than ${options.length} characters` }
 }

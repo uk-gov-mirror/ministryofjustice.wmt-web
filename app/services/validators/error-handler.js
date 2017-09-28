@@ -9,6 +9,9 @@ class ErrorHandler {
     if (!this.errors.hasOwnProperty(fieldName)) {
       this.errors[fieldName] = []
     }
+    if (options !== undefined && options.secondaryFieldName !== undefined) {
+      options.secondaryDisplayName = FIELD_NAMES[options.secondaryFieldName]
+    }
     this.errors[fieldName].push(message(FIELD_NAMES[fieldName], options))
   }
 

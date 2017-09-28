@@ -7,6 +7,7 @@ module.exports = {
   'notes': 'Notes',
   'capacityFromDate': 'Show capacity from',
   'capacityToDate': 'Show capacity to',
+  'maxCapacityHistory': 'The earliest recorded capacity',
   'cusA': 'Cus A',
   'cusB1': 'Cus B1',
   'cusB2': 'Cus B2',
