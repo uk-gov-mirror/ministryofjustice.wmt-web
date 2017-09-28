@@ -43,6 +43,7 @@ describe('View your caseload capacity flow', () => {
       .waitForExist('[href="' + teamDefaultUrl + '/caseload-capacity"]')
       .waitForExist('[href="' + teamDefaultUrl + '/case-progress"]')
       .waitForExist('.plot-container.plotly')
+      .waitForExist('#capacity-breakdown')
       .waitForExist('.sln-page-subtitle')
       .getText('.sln-page-subtitle')
       .then(function (text) {
@@ -57,6 +58,7 @@ describe('View your caseload capacity flow', () => {
       .waitForExist('[href="' + lduDefaultUrl + '/caseload-capacity"]')
       .waitForExist('[href="' + lduDefaultUrl + '/case-progress"]')
       .waitForExist('.plot-container.plotly')
+      .waitForExist('#capacity-breakdown')
       .waitForExist('.sln-page-subtitle')
       .getText('.sln-page-subtitle')
       .then(function (text) {
@@ -71,6 +73,7 @@ describe('View your caseload capacity flow', () => {
     .waitForExist('[href="' + regionDefaultUrl + '/caseload-capacity"]')
     .waitForExist('[href="' + regionDefaultUrl + '/case-progress"]')
     .waitForExist('.plot-container.plotly')
+    .waitForExist('#capacity-breakdown')
     .waitForExist('.sln-page-subtitle')
     .getText('.sln-page-subtitle')
     .then(function (text) {
@@ -84,6 +87,7 @@ describe('View your caseload capacity flow', () => {
       .waitForExist('[href="' + nationalDefaultUrl + '/caseload-capacity"]')
       .waitForExist('[href="' + nationalDefaultUrl + '/case-progress"]')
       .waitForExist('.js-plotly-plot')
+      .waitForExist('#capacity-breakdown')
       .waitForExist('.breadcrumbs', true)
       .waitForExist('.sln-page-subtitle')
       .getText('.sln-page-subtitle')

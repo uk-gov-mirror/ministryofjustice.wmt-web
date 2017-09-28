@@ -51,7 +51,7 @@
       <tr>
         <th id="name">Name</th>
         <th id="grade">Grade</th>
-        <th id="capacity">Capacity(%)</th>
+        <th id="capacity">Capacity (%)</th>
         <th id="cases">Cases</th>
         <th id="paroms"><abbr title="Parole Assessment Reports by the Offender Manager">PAROMs</abbr></th>
         <th id="fdrs"><abbr title="Fast Delivery Reports">FDRs</abbr></th>
@@ -73,7 +73,7 @@
           <td headers="fdrs breakdown">-</td>
           <td headers="sdrs breakdown">-</td>
           <td headers="arms breakdown">-</td>
-          <td headers="gs breakdown">-</td>
+          <td headers="gs breakdown">{{ member.gsPercentage | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.cmsPercentage | round(1) }}%</td>
         </tr>
         {% endfor %}
@@ -94,7 +94,7 @@
           <td headers="fdrs breakdown">-</td>
           <td headers="sdrs breakdown">-</td>
           <td headers="arms breakdown">-</td>
-          <td headers="gs breakdown">-</td>
+          <td headers="gs breakdown">{{ member.grades[i].gsPercentage | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.grades[i].cmsPercentage | round(1) }}%</td>
         </tr>
         {% endfor %}
