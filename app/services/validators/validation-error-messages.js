@@ -1,5 +1,4 @@
 module.exports = {
-  getIsOlderThanMaxHistory: function (displayName, options) { return `Date range must be within the past ${options.years} years` },
   getIsRequiredMessage: function (displayName) { return `${displayName} is required` },
   getIsAlphaMessage: function (displayName) { return `${displayName} must only contain letters` },
   getIsNumericMessage: function (displayName) { return `${displayName} must only contain numbers` },
