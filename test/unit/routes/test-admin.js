@@ -21,7 +21,7 @@ const ROLE = {
   role: 'Manager'
 }
 
-const ADMIN_USER_RIGHT_ROLES_URL = '/admin/user-rights/' + USERNAME.username
+const ADMIN_USER_RIGHT_ROLES_URL = '/admin/user-rights/'
 
 var app
 var route
@@ -42,10 +42,6 @@ describe('admin route', function () {
 
   it('should respond with 200 when user right is called', function () {
     return supertest(app).get(ADMIN_USER_URL).expect(200)
-  })
-
-  it('should respond with 200 when posting a username', function () {
-    return supertest(app).post(ADMIN_USER_RIGHT_URL).send(USERNAME).expect(200)
   })
 
   it('should respond with 302 when posting an invalid username', function () {
