@@ -67,8 +67,8 @@ describe('View your caseload flow', () => {
         .waitForExist('#overall-enhanced')
         .waitForExist('#custody-enhanced')
         .waitForExist('#community-enhanced')
-        .waitForExist('#license-enhanced')        
-        .waitForExist('.sln-table-caseload-overall')        
+        .waitForExist('#license-enhanced')
+        .waitForExist('.sln-table-caseload-overall')
         .waitForExist('[href="' + workloadOwnerDefaultUrl)
         .click('[href="#custody"]')
         .waitForExist('.sln-table-caseload-custody')
@@ -94,20 +94,20 @@ describe('View your caseload flow', () => {
         .waitForExist('#overall-enhanced')
         .waitForExist('#custody-enhanced')
         .waitForExist('#community-enhanced')
-        .waitForExist('#license-enhanced')   
+        .waitForExist('#license-enhanced')
         .waitForExist('.sln-table-caseload-by-grade')
-        .waitForExist('.sln-table-caseload-overall-summary')   
+        .waitForExist('.sln-table-caseload-overall-summary')
         .waitForExist('[href="' + regionDefaultUrl + '"]')
         .click('[href="#custody"]')
         .waitForExist('.sln-table-caseload-custody')
         .click('[href="#community"]')
-        .waitForExist('.sln-table-caseload-community')      
+        .waitForExist('.sln-table-caseload-community')
         .click('[href="#license"]')
-        .waitForExist('.sln-table-caseload-license')      
+        .waitForExist('.sln-table-caseload-license')
     })
 
-  it('should be accessible via the Caseload tab on Team and LDUs default view', () => {
-    return browser.url(nationalDefaultUrl)
+    it('should be accessible via the Caseload tab on Team and LDUs default view', () => {
+      return browser.url(nationalDefaultUrl)
       .click('[href="' + regionDefaultUrl + '"]')
       .click('[href="' + lduDefaultUrl + '"]')
       .click('[href="' + lduDefaultUrl + '/caseload"]')
@@ -118,8 +118,8 @@ describe('View your caseload flow', () => {
       .waitForExist('.sln-table-caseload-overall')
     })
 
-  it('should be accessible via the Case Progress tab when on any other tab', () => {
-    return browser.url(teamDefaultUrl)
+    it('should be accessible via the Case Progress tab when on any other tab', () => {
+      return browser.url(teamDefaultUrl)
       .click('[href="' + teamDefaultUrl + '/caseload"]')
       .waitForExist('.sln-table-caseload-overall')
       .click('[href="' + teamDefaultUrl + '/case-progress"]')

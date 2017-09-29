@@ -13,7 +13,7 @@ module.exports = function (router) {
     if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Not available for offender-manager')
     }
-    
+
     var orgUnit = getOrganisationUnit('name', organisationLevel)
     var childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)
 
