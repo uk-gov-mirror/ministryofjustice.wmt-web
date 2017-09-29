@@ -65,20 +65,23 @@ describe('View your caseload flow', () => {
       return browser.url(teamDefaultUrl + '/caseload')
         .waitForExist('[href="#overall"]')
         .waitForExist('#overall-enhanced')
+        .waitForExist('#custody-enhanced')
+        .waitForExist('#community-enhanced')
+        .waitForExist('#license-enhanced')        
+        .waitForExist('.sln-table-caseload-overall')        
         .waitForExist('[href="' + workloadOwnerDefaultUrl)
         .click('[href="#custody"]')
-        .waitForExist('#custody-enhanced')
+        .waitForExist('.sln-table-caseload-custody')
         .click('[href="#community"]')
-        .waitForExist('#community-enhanced')
+        .waitForExist('.sln-table-caseload-community')
         .click('[href="#license"]')
-        .waitForExist('#license-enhanced')
+        .waitForExist('.sln-table-caseload-license')
     })
   })
 
   describe('should navigate to the LDU caseload screen', () => {
     it('with the correct table, breadcrumbs and export button', () => {
       return browser.url(lduDefaultUrl + '/caseload')
-        .waitForExist('.sln-table-caseload-by-grade')
         .waitForExist('.breadcrumbs')
         .waitForExist('.sln-export')
         .waitForExist('[href="' + lduDefaultUrl + '/caseload/csv"]')
@@ -87,21 +90,21 @@ describe('View your caseload flow', () => {
         .then(function (text) {
           expect(text).to.equal('LDU Cluster')
         })
+        .waitForExist('[href="#overall"]')
+        .waitForExist('#overall-enhanced')
+        .waitForExist('#custody-enhanced')
+        .waitForExist('#community-enhanced')
+        .waitForExist('#license-enhanced')   
+        .waitForExist('.sln-table-caseload-by-grade')
+        .waitForExist('.sln-table-caseload-overall-summary')   
+        .waitForExist('[href="' + regionDefaultUrl + '"]')
+        .click('[href="#custody"]')
+        .waitForExist('.sln-table-caseload-custody')
+        .click('[href="#community"]')
+        .waitForExist('.sln-table-caseload-community')      
+        .click('[href="#license"]')
+        .waitForExist('.sln-table-caseload-license')      
     })
-
-    it('should display correct tables in tabs', () => {
-      return browser.url(lduDefaultUrl + '/caseload')
-      .waitForExist('[href="#overall"]')
-      .waitForExist('#overall-enhanced')
-      .waitForExist('[href="' + regionDefaultUrl + '"]')
-      .click('[href="#custody"]')
-      .waitForExist('#custody-enhanced')
-      .click('[href="#community"]')
-      .waitForExist('#community-enhanced')
-      .click('[href="#license"]')
-      .waitForExist('#license-enhanced')
-    })
-  })
 
   it('should be accessible via the Caseload tab on Team and LDUs default view', () => {
     return browser.url(nationalDefaultUrl)
@@ -113,7 +116,7 @@ describe('View your caseload flow', () => {
       .click('[href="' + teamDefaultUrl + '"]')
       .click('[href="' + teamDefaultUrl + '/caseload"]')
       .waitForExist('.sln-table-caseload-overall')
-  })
+    })
 
   it('should be accessible via the Case Progress tab when on any other tab', () => {
     return browser.url(teamDefaultUrl)
@@ -125,6 +128,7 @@ describe('View your caseload flow', () => {
       .click('[href="' + teamDefaultUrl + '/caseload-capacity"]')
       .click('[href="' + teamDefaultUrl + '/caseload"]')
       .waitForExist('.sln-table-caseload-overall')
+    })
   })
 
   describe('should navigate to the Region caseload screen', () => {
