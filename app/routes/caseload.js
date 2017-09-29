@@ -56,12 +56,12 @@ module.exports = function (router) {
   var caseloadDetails = function (organisationLevel, result) {
     var details
 
-    if (organisationLevel === organisationUnitConstants.TEAM.name) {
+    if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       details = [
         {
           displayName: 'Overall',
           array: result.caseloadDetails.overallCaseloadDetails,
-          totalSummary: null
+          totalSummary: result.caseloadDetails.overallTotalSummary
         },
         {
           displayName: 'Custody',
