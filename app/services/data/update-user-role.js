@@ -17,5 +17,7 @@ module.exports = function (userId, roleId, updatedBy) {
       last_updated: knex.fn.now(),
       last_updated_by: updatedBy
     })
-    .returning('id')
+    .returning('id').then(function (ids) {
+      return ids[0]
+    })
 }

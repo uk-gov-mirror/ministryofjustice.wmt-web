@@ -33,7 +33,7 @@ describe('/services/data/get-user-role-by-username', function () {
   it('should get user role by username', function () {
     return getUserRoleByUsername(username)
       .then(function (result) {
-        expect(result[0].role).to.be.oneOf(existingRoles)
+        expect(result.role).to.be.oneOf(existingRoles)
       })
   })
 

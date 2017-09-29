@@ -8,7 +8,7 @@ const logger = require('./logger')
 const getUserRoleByUsername = require('./services/data/get-user-role-by-username')
 
 module.exports = function (app) {
-  if (!config.AUTHENTICATION_ENABLED) {
+  if (config.AUTHENTICATION_ENABLED !== 'true') {
     return
   }
 
@@ -24,7 +24,7 @@ module.exports = function (app) {
       done(null, {
         name: displayName,
         username: username,
-        user_role: role[0].role,
+        user_role: role.role,
         nameID: nameID,
         nameIDFormat: nameIDFormat
       })

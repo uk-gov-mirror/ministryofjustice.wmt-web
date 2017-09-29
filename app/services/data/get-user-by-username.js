@@ -11,6 +11,6 @@ module.exports = function (username) {
     .select('id',
             'username')
     .then(function (user) {
-      return user
+      return user[0]
     })
 }

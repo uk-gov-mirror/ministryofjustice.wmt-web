@@ -20,7 +20,7 @@
     <div class="message message--success">You have successfully assigned <span class="bold">{{userRights.rights}}</span> user rights to <span class="bold">{{userRights.username}}</span></div>
   {% endif %}
 
-  <form action="/admin/user-rights" method="post">
+  <form action="/admin/user-rights" method="post" id="userForm">
     <div class="form-group">
         <label class="form-label" for="username">Username</label>
         <input class="form-control" id="username" type="text" name="username">

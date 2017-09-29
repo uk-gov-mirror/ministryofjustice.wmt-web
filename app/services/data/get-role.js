@@ -11,6 +11,6 @@ module.exports = function (roleName) {
     .select('id',
             'role')
     .then(function (role) {
-      return role
+      return role[0]
     })
 }

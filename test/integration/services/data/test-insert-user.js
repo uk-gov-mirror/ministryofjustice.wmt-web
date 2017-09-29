@@ -18,12 +18,13 @@ describe('/services/data/insert-user', function () {
 
   it('should return an id when a valid user has been added', function () {
     return insertUser(username)
-      .then(function (ids) {
-        insertedData.id = ids[0]
+      .then(function (id) {
+        insertedData.id = id
         return getUserByUsername(username)
           .then(function (result) {
-            expect(ids[0]).to.be.a('number')
-            expect(result[0].id).to.be.equal(ids[0])
+            expect(id).to.be.a('number')
+            expect(result.id).to.be.equal(id)
+            expect(result.username).to.be.equal(username)
           })
       })
   })

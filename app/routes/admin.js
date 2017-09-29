@@ -1,19 +1,19 @@
 const Link = require('../../app/services/domain/link')
 const userRoleService = require('../services/user-role-service')
 const UserRole = require('../services/domain/user-role')
-const Authorisation = require('../authorisation')
-const Roles = require('../constants/roles')
-const FieldValidator = require('../services/validators/field-validator')
-const ErrorHandler = require('../services/validators/error-handler')
+const authorisation = require('../authorisation')
+const roles = require('../constants/user-roles')
+const fieldValidator = require('../services/validators/field-validator')
+const errorHandler = require('../services/validators/error-handler')
 
 module.exports = function (router) {
   router.get('/admin', function (req, res) {
     var userRole
     try {
-      if (Authorisation.hasRole(req, Roles.DATA_ADMIN)) {
-        userRole = Roles.DATA_ADMIN
-      } else if (Authorisation.hasRole(req, Roles.SYSTEM_ADMIN)) {
-        userRole = Roles.SYSTEM_ADMIN
+      if (authorisation.hasRole(req, roles.DATA_ADMIN)) {
+        userRole = roles.DATA_ADMIN
+      } else if (authorisation.hasRole(req, roles.SYSTEM_ADMIN)) {
+        userRole = roles.SYSTEM_ADMIN
       }
       return res.render('admin', {
         title: 'Admin',
@@ -69,8 +69,7 @@ module.exports = function (router) {
     var rights = req.body.rights
     var username = req.params.username
     var loggedInUsername = req.user.username
-
-    if (rights === Roles.STAFF) {
+    if (rights === roles.STAFF) {
       removeUserRole(username, next)
     } else {
       addUpdateUserRole(username, rights, loggedInUsername)
@@ -84,10 +83,8 @@ module.exports = function (router) {
 }
 
 var removeUserRole = function (username, next) {
-  var user
-  return userRoleService.getUser(username).then(function (result) {
-    user = result
-    if (user !== undefined) {
+  return userRoleService.getUser(username).then(function (user) {
+    if (user) {
       return userRoleService.removeUserRoleByUserId(user.id).then(function () {
         return userRoleService.removeUserByUsername(user.username)
       })
@@ -98,27 +95,27 @@ var removeUserRole = function (username, next) {
 }
 
 var addUpdateUserRole = function (username, rights, loggedInUsername) {
-  var loggedInUser
-  var user
-  var role
   return userRoleService.getUser(loggedInUsername).then(function (result) {
-    loggedInUser = result
+    var loggedInUser = result
     return userRoleService.getUser(username).then(function (result) {
-      user = result
-      return userRoleService.getRole(rights).then(function (result) {
-        role = result
+      var user = result
+      return userRoleService.getRole(rights).then(function (role) {
         return userRoleService.updateUserRole(user.id, role.id, loggedInUser.id).then(function (result) {
           return result
         })
       })
     }).catch(function (noUserExist) {
       return userRoleService.getRole(rights).then(function (result) {
-        role = result
-        return userRoleService.addUser(username).then(function (result) {
-          var userId = result
+        var role = result
+        return userRoleService.addUser(username).then(function (userId) {
           var newUserRole = new UserRole(userId, role.id, new Date(), loggedInUser.id)
           return userRoleService.addUserRole(newUserRole).then(function (result) {
             return result
+          }).catch(function (unableToAddUserRole) {
+            // If its not able to add the user role then the added user needs to be removed
+            return userRoleService.removeUserByUsername(username).then(function (result) {
+              return result
+            })
           })
         })
       })
@@ -127,9 +124,9 @@ var addUpdateUserRole = function (username, rights, loggedInUsername) {
 }
 
 var isValidUsername = function (username) {
-  var errors = ErrorHandler()
+  var errors = errorHandler()
 
-  FieldValidator(username, 'username', errors)
+  fieldValidator(username, 'username', errors)
     .isValidUsername(username)
 
   if (errors.get()) {

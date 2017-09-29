@@ -1,22 +1,24 @@
 const config = require('../config')
 
-function isAuthenticated (req) {
+var isAuthenticated = function (req) {
   if (!req.isAuthenticated() || !req.user) {
-    var error = new Error('unauthenticated')
+    var error = new Error('Unauthorized')
     error.status = 401
     throw error
   }
 }
 
-function hasRole (req, role) {
-  if (!config.AUTHENTICATION_ENABLED) {
-    return false
+var hasRole = function (req, role) {
+  var hasRole = false
+  if (config.AUTHENTICATION_ENABLED !== 'true') {
+    hasRole = false
+  } else {
+    isAuthenticated(req)
+    if (req.user.user_role === role) {
+      hasRole = true
+    }
   }
-  isAuthenticated(req)
-  if (req.user.user_role === role) {
-    return true
-  }
-  return false
+  return hasRole
 }
 
 module.exports.hasRole = hasRole

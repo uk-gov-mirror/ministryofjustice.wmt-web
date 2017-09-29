@@ -6,5 +6,7 @@ module.exports = function (username) {
     .insert({
       username: username
     })
-    .returning('id')
+    .returning('id').then(function (ids) {
+      return ids[0]
+    })
 }
