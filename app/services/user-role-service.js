@@ -46,9 +46,9 @@ module.exports.getUserById = function (userId) {
   })
 }
 
-module.exports.addUser = function (username) {
+module.exports.addUser = function (username, name) {
   username = removeDomainFromUsername(username)
-  return addUser(username).then(function (result) {
+  return addUser(username, name).then(function (result) {
     return result
   })
 }

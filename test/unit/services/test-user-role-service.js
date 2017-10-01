@@ -83,7 +83,7 @@ describe('services/user-role-service', function () {
 
   it('should add a user', function () {
     addUser.resolves(STAFF_ROLE.id)
-    return userRoleService.addUser(STAFF_USER.username)
+    return userRoleService.addUser(STAFF_USER.username, STAFF_ROLE.name)
       .then(function (result) {
         expect(result).to.equal(STAFF_ROLE.id)
       })
