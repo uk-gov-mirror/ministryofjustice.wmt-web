@@ -7,7 +7,7 @@ const config = require('../../../config')
 const userRole = require('../../../app/constants/user-roles.js')
 const UserRole = require('../../../app/services/domain/user-role')
 
-var STAFF_USER = 'Staff.Test@' + config.ACTIVE_DIRECTORY_DOMAIN
+var STAFF_USER = { id: 0, username: 'Staff.Test@' + config.ACTIVE_DIRECTORY_DOMAIN, name: 'Staff Test' }
 
 var STAFF_ROLE = { roleId: 0, role: userRole.STAFF }
 
@@ -16,20 +16,22 @@ var getRoleByUsername
 var updateUserRole
 var addUserRole
 var getRole
-var getUser
+var getUserById
+var getUserByUsername
 var addUser
 var removeUserRoleByUserId
 var removeUserByUsername
 
 beforeEach(function () {
-  getRoleByUsername = sinon.stub().returns({ roleId: 0, role: 'Staff' })
+  getRoleByUsername = sinon.stub()
+  removeUserRoleByUserId = sinon.stub()
+  removeUserByUsername = sinon.stub()
+  getUserByUsername = sinon.stub()
   updateUserRole = sinon.stub()
   addUserRole = sinon.stub()
   getRole = sinon.stub()
-  getUser = sinon.stub()
+  getUserById = sinon.stub()
   addUser = sinon.stub()
-  removeUserRoleByUserId = sinon.stub()
-  removeUserByUsername = sinon.stub()
 
   userRoleService =
     proxyquire('../../../app/services/user-role-service',
@@ -37,9 +39,10 @@ beforeEach(function () {
         './data/remove-user-role-by-user-id': removeUserRoleByUserId,
         './data/remove-user-by-username': removeUserByUsername,
         './data/get-user-role-by-username': getRoleByUsername,
-        './data/get-user-by-username': getUser,
+        './data/get-user-by-username': getUserByUsername,
         './data/update-user-role': updateUserRole,
         './data/insert-user-role': addUserRole,
+        './data/get-user-by-Id': getUserById,
         './data/insert-user': addUser,
         './data/get-role': getRole
       })
@@ -48,10 +51,9 @@ beforeEach(function () {
 describe('services/user-role-service', function () {
   it('should return a user role object with the right information', function () {
     getRoleByUsername.resolves(STAFF_ROLE)
-    return userRoleService.getRoleByUsername(STAFF_USER)
+    return userRoleService.getRoleByUsername(STAFF_USER.username)
       .then(function (result) {
-        expect(result.roleId).to.equal(0)
-        expect(result.role).to.equal(userRole.STAFF)
+        expect(result).to.equal(STAFF_ROLE)
       })
   })
 
@@ -59,30 +61,33 @@ describe('services/user-role-service', function () {
     getRole.resolves(STAFF_ROLE)
     return userRoleService.getRole(userRole.STAFF)
       .then(function (result) {
-        expect(result.roleId).to.be.a('number')
-        expect(result.role).to.equal(userRole.STAFF)
+        expect(result).to.equal(STAFF_ROLE)
       })
   })
 
   it('should return a user object with the right information', function () {
-    getUser.resolves({id: 1, username: STAFF_USER})
-    return userRoleService.getUser(STAFF_USER)
+    getUserByUsername.resolves(STAFF_USER)
+    return userRoleService.getUserByUsername(STAFF_USER.username)
       .then(function (result) {
-        expect(result.id).to.be.a('number')
-        expect(result.username).to.equal(STAFF_USER)
+        expect(result).to.equal(STAFF_USER)
+      })
+  })
+
+  it('should return a user object with the right information', function () {
+    getUserById.resolves(STAFF_USER)
+    return userRoleService.getUserById(STAFF_USER.id)
+      .then(function (result) {
+        expect(result).to.equal(STAFF_USER)
       })
   })
 
   it('should add a user', function () {
-    addUser.resolves(1)
-    return userRoleService.addUser(STAFF_USER)
+    addUser.resolves(STAFF_ROLE.id)
+    return userRoleService.addUser(STAFF_USER.username)
       .then(function (result) {
-        expect(result).to.equal(1)
+        expect(result).to.equal(STAFF_ROLE.id)
       })
   })
-
-  updateUserRole = sinon.stub()
-  addUserRole = sinon.stub()
 
   it('should add a user role', function () {
     addUserRole.resolves(1)
@@ -101,16 +106,16 @@ describe('services/user-role-service', function () {
   })
 
   it('should remove a user role by user id', function () {
-    removeUserRoleByUserId.resolves(1)
-    return userRoleService.removeUserRoleByUserId(1)
+    removeUserRoleByUserId.resolves(STAFF_ROLE.id)
+    return userRoleService.removeUserRoleByUserId(STAFF_ROLE.id)
       .then(function (result) {
-        expect(result).to.equal(1)
+        expect(result).to.equal(STAFF_ROLE.id)
       })
   })
 
   it('should remove a user by username', function () {
     removeUserByUsername.resolves(1)
-    return userRoleService.removeUserByUsername(STAFF_USER)
+    return userRoleService.removeUserByUsername(STAFF_USER.username)
       .then(function (result) {
         expect(result).to.equal(1)
       })

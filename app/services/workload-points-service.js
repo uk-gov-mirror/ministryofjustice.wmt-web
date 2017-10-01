@@ -5,6 +5,7 @@ const getWorkloadIdsForWpRecalc = require('./data/get-ids-for-workload-points-re
 const createCalculateWorkloadPointsTask = require('./data/create-calculate-workload-points-task')
 const Link = require('./domain/link')
 const dateFormatter = require('./date-formatter')
+const userRoleService = require('../services/user-role-service')
 
 module.exports.getWorkloadPoints = function (id, organisationLevel) {
   var result = {}
@@ -19,11 +20,17 @@ module.exports.getWorkloadPoints = function (id, organisationLevel) {
       var formattedUpdateDate = dateFormatter.formatDate(results.effectiveFrom, 'DD/MM/YYYY')
       results.effectiveFrom = formattedUpdateDate
     }
-    result.title = breadcrumbs[0].title
-    result.subTitle = breadcrumbs[1].title
-    result.workloadPoints = results
-    result.breadcrumbs = breadcrumbs
-    return result
+    return userRoleService.getUserById(results.updatedByUserId)
+    .then(function (user) {
+      if (user !== undefined) {
+        results.updatedByUserId = user.name
+      }
+      result.title = breadcrumbs[0].title
+      result.subTitle = breadcrumbs[1].title
+      result.workloadPoints = results
+      result.breadcrumbs = breadcrumbs
+      return result
+    })
   })
 }
 

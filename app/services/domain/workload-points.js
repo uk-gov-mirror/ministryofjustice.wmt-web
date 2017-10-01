@@ -26,7 +26,7 @@ class WorkloadPoints {
     this.licC2 = request.licC2
     this.licD1 = request.licD1
     this.licD2 = request.licD2
-    this.user_id = 35 // TODO request.user_id
+    this.user_id = request.userId
     this.sdr = request.sdr
     this.sdrConversion = request.sdrConversion
     this.nominalTargetPso = request.nominalTargetPso
@@ -43,7 +43,6 @@ class WorkloadPoints {
 
   isValid () {
     var errors = ErrorHandler()
-
     FieldValidator(this.cusA, 'cusA', errors)
       .isRequired()
       .isInt(0, 999)
@@ -110,6 +109,8 @@ class WorkloadPoints {
     FieldValidator(this.sdr, 'sdr', errors)
       .isRequired()
       .isInt(0, 999)
+    FieldValidator(this.user_id, 'user_id', errors)
+      .isRequired()
     FieldValidator(this.sdrConversion, 'sdrConversion', errors)
       .isRequired()
       .isInt(0, 999)
