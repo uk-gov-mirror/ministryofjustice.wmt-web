@@ -102,7 +102,6 @@ describe('services/validators/fieldset-validator', function () {
     it('should return the fieldsetValidator after being called to allow function chaining.', function () {
       var result = this.fieldsetValidator.isFutureDate(dateFormatter.now())
       expect(result).to.be.equal(this.fieldsetValidator)
-      console.log(result)
     })
   })
 
