@@ -8,6 +8,20 @@
 <p>{{'GOV.UK uses cookies to make the site simpler.'}} </p>
 {% endblock %}
 
+{% block proposition_header %}
+<div class="header-proposition">
+  <div class="content">
+    <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+    <nav id="proposition-menu">
+      <a href="/" id="proposition-name">Workload Measurement Tool</a>
+
+      {% include "includes/proposition-links.html" %}
+
+    </nav>
+  </div>
+</div>
+{% endblock %}
+
 {% block header_class %}
   with-proposition
 {% endblock %}
