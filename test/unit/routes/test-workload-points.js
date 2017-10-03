@@ -14,19 +14,33 @@ const WORKLOAD_POINTS = {
   workloadPoints: []
 }
 
-const POSTED_WORKLOAD_POINTS = {}
+const MOCK_USER = {
+  username: 'username'
+}
+
+const POSTED_WORKLOAD_POINTS = {
+  user: MOCK_USER
+}
 
 var app
 var route
 var workloadPointsService
+var mockUserObject = {
+  id: 1
+}
+var mockUserRoleService = {
+  getUserByUsername: sinon.stub().resolves(mockUserObject)
+}
 
 before(function () {
+  debugger
   workloadPointsService = {
     getWorkloadPoints: sinon.stub().resolves(WORKLOAD_POINTS),
     updateWorkloadPoints: sinon.stub().resolves({})
   }
   route = proxyquire('../../../app/routes/workload-points', {
-    '../services/workload-points-service': workloadPointsService
+    '../services/workload-points-service': workloadPointsService,
+    '../services/user-role-service': mockUserRoleService
   })
   app = routeHelper.buildApp(route)
 })
