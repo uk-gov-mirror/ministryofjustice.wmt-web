@@ -27,7 +27,7 @@ describe('/services/data/get-user-by-username', function () {
         expect(result.username).to.be.a('string')
         expect(result.username).to.be.equal(username)
         expect(result.name).to.be.a('string')
-        expect(result.username).to.be.equal(name)
+        expect(result.name).to.be.equal(name)
       })
   })
 

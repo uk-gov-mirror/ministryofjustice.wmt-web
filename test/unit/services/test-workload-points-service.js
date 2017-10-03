@@ -9,6 +9,7 @@ const dataHelper = require('../../helpers/data/aggregated-data-helper')
 
 const WORKLOAD_POINTS_DETAILS = dataHelper.defaultWorkloadPoints
 
+console.log(WORKLOAD_POINTS_DETAILS)
 var WORKLOAD_POINTS_BREADCRUMBS = [
   new Link('Workload Points', '/admin/workload-points'),
   new Link('Admin', '/admin')

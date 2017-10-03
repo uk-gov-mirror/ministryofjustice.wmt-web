@@ -27,7 +27,7 @@ var VALID_WORKLOAD_POINTS = {
   licD1: '44',
   licD2: '43',
   sdr: '101',
-  user_id: '35',
+  userId: '35',
   sdrConversion: '51',
   nominalTargetPso: '2001',
   nominalTargetPo: '2001',
@@ -65,7 +65,7 @@ describe('services/domain/workload-points', function () {
     expect(workloadPoints.licC2).to.equal('54')
     expect(workloadPoints.licD1).to.equal('44')
     expect(workloadPoints.licD2).to.equal('43')
-    expect(workloadPoints.user_id).to.equal('35')
+    expect(workloadPoints.userId).to.equal('35')
     expect(workloadPoints.nominalTargetPo).to.equal('2001')
     expect(workloadPoints.nominalTargetPso).to.equal('2001')
     expect(workloadPoints.parom).to.equal('121')

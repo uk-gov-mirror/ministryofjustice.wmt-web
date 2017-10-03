@@ -1,7 +1,6 @@
 const workloadPointsService = require('../services/workload-points-service')
 const WorkloadPoints = require('../services/domain/workload-points')
 const ValidationError = require('../services/errors/validation-error')
-const userRoleService = require('../services/user-role-service')
 
 module.exports = function (router) {
   router.get('/admin/workload-points', function (req, res) {
@@ -23,32 +22,25 @@ module.exports = function (router) {
   router.post('/admin/workload-points', function (req, res, next) {
     var updatedWorkloadPoints
     try {
-      return userRoleService.getUserByUsername(req.user.username)
-      .then(function (user) {
-        req.body.userId = user.id.toString()
-        updatedWorkloadPoints = new WorkloadPoints(req.body)
-        return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints)
-          .then(function () {
-            return res.redirect(302, '/admin/workload-points?success=true')
-          })
-      }).catch(function (error) {
-        console.log(error)
-        if (error instanceof ValidationError) {
-          return workloadPointsService.getWorkloadPoints()
-            .then(function (result) {
-              return res.status(400).render('workload-points', {
-                title: result.title,
-                subTitle: result.subTitle,
-                breadcrumbs: result.breadcrumbs,
-                wp: req.body,
-                errors: error.validationErrors
-              })
-            })
-        }
-        next(error)
-      })
+      req.body.userId = req.user.userId.toString()
+      updatedWorkloadPoints = new WorkloadPoints(req.body)
+      return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints)
+        .then(function () {
+          return res.redirect(302, '/admin/workload-points?success=true')
+        })
     } catch (error) {
-      console.log(error)
+      if (error instanceof ValidationError) {
+        return workloadPointsService.getWorkloadPoints()
+          .then(function (result) {
+            return res.status(400).render('workload-points', {
+              title: result.title,
+              subTitle: result.subTitle,
+              breadcrumbs: result.breadcrumbs,
+              wp: req.body,
+              errors: error.validationErrors
+            })
+          })
+      }
       next(error)
     }
   })

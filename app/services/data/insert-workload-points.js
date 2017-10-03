@@ -25,7 +25,7 @@ module.exports = function (workloadPoints) {
       lic_tier_5: workloadPoints.licB2,
       lic_tier_6: workloadPoints.licB1,
       lic_tier_7: workloadPoints.licA,
-      user_id: workloadPoints.user_id,
+      user_id: workloadPoints.userId,
       sdr: workloadPoints.sdr,
       sdr_conversion: workloadPoints.sdrConversion,
       nominal_target_spo: workloadPoints.nominalTargetPso,

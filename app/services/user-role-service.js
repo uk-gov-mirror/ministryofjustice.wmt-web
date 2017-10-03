@@ -63,9 +63,11 @@ module.exports.removeUserByUsername = function (username) {
 }
 
 var removeDomainFromUsername = function (username) {
-  var index = username.lastIndexOf('@')
-  if (index >= 0) {
-    return username.substring(0, index)
+  if (username !== undefined) {
+    var index = username.lastIndexOf('@')
+    if (index >= 0) {
+      return username.substring(0, index)
+    }
   }
   return username
 }

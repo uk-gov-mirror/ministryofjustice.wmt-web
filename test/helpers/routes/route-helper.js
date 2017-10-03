@@ -25,7 +25,7 @@ module.exports.buildApp = function (route) {
   // Add mocked user
   app.use(function (req, res, next) {
     req.user = {
-      username: 'mockeduser'
+      userId: 'mockeduser'
     }
     next()
   })
