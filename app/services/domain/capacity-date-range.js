@@ -34,7 +34,7 @@ class CapacityDateRange {
     this.capacityToDate = FieldSetValidator(this.toFields, 'capacityToDate', errors)
       .isRequired()
       .isValidDate(this.capacityToDate)
-      .isPastDate(this.capacityToDate)
+      .isPastOrPresentDate(this.capacityToDate)
       .isLaterThan(this.capacityFromDate, 'capacityFromDate')
       .getFormattedDate()
 

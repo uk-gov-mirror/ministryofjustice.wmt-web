@@ -11,6 +11,12 @@ describe('services/validators/fieldset-validator', function () {
     PAST_DATE.getMonth() + 1,
     PAST_DATE.getFullYear()
   ]
+  const PRESENT_DATE = dateFormatter.now().toDate()
+  const PRESENT_DATE_ARRAY = [
+    PRESENT_DATE.getDate(),
+    PRESENT_DATE.getMonth() + 1,
+    PRESENT_DATE.getFullYear()
+  ]
   const FUTURE_DATE = dateFormatter.now().add(1, 'day').toDate()
   const FUTURE_DATE_ARRAY = [
     FUTURE_DATE.getDate(),
@@ -184,6 +190,37 @@ describe('services/validators/fieldset-validator', function () {
           .isValidDate()
       var errors = errorHandler.get()
       expect(errors).to.equal(false)
+    })
+  })
+
+  describe('isPastOrPresentDate', function () {
+    it('should return error object if the date given is in the future', function () {
+      FieldsetValidator(FUTURE_DATE_ARRAY, FIELD_NAME, errorHandler)
+          .isPastOrPresentDate()
+      var errors = errorHandler.get()
+      expect(errors).to.have.property(FIELD_NAME)
+      .that.contains(ERROR_MESSAGES.getPastOrPresentDateMessage())
+    })
+
+    it('should return false if the date given is in the past', function () {
+      FieldsetValidator(PAST_DATE_ARRAY, FIELD_NAME, errorHandler)
+          .isPastOrPresentDate()
+      var errors = errorHandler.get()
+      expect(errors).to.equal(false)
+    })
+
+    it('should return false if the date given is in the past', function () {
+      FieldsetValidator(PRESENT_DATE_ARRAY, FIELD_NAME, errorHandler)
+          .isPastOrPresentDate()
+      var errors = errorHandler.get()
+      expect(errors).to.equal(false)
+    })
+
+    it('should return the fieldsetValidator after being called to allow function chaining.', function () {
+      var fieldsetValidator = FieldsetValidator(FUTURE_DATE_ARRAY, FIELD_NAME, errorHandler)
+      var result = fieldsetValidator
+          .isPastOrPresentDate()
+      expect(result).to.be.equal(fieldsetValidator)
     })
   })
 

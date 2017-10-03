@@ -56,6 +56,13 @@ class FieldsetValidator {
     return this
   }
 
+  isPastOrPresentDate () {
+    if (isDateInTheFuture(this.formattedDate)) {
+      this.errors.add(this.fieldName, ERROR_MESSAGES.getPastOrPresentDateMessage)
+    }
+    return this
+  }
+
   isLaterThan (dateToCompare, dateToCompareFieldName) {
     if (!isDateAfter(this.formattedDate, dateToCompare)) {
       var options = { secondaryFieldName: dateToCompareFieldName }

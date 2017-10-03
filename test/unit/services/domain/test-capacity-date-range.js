@@ -15,7 +15,7 @@ describe('services/domain/capacity-date-range', function () {
   const VALID_TO_DAY = '31'
   const VALID_TO_MONTH = '03'
   const VALID_TO_YEAR = (new Date()).getFullYear() - 1
-  const VALID_FUTURE_YEAR = '3030'
+  const VALID_FUTURE_YEAR = (new Date()).getFullYear() + 1
 
   const INVALID_DAY = '32'
   const INVALID_MONTH = '13'
@@ -76,7 +76,7 @@ describe('services/domain/capacity-date-range', function () {
     }).to.throw(ValidationError)
     .that.contains.a.property('validationErrors')
     .that.contains.a.property('capacityToDate')
-    .that.contains(ERROR_MESSAGES.getPastDateMessage(FIELD_NAMES['capacityToDate']))
+    .that.contains(ERROR_MESSAGES.getPastOrPresentDateMessage(FIELD_NAMES['capacityToDate']))
   })
 
   it('should throw ValidationError if capacity from date is more than 6 years old', function () {
