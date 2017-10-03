@@ -2,9 +2,7 @@ const ValidationError = require('../errors/validation-error')
 const FieldValidator = require('../validators/field-validator')
 const FieldSetValidator = require('../validators/fieldset-validator')
 const ErrorHandler = require('../validators/error-handler')
-const ERROR_MESSAGES = require('../validators/validation-error-messages')
 const reductionStatusType = require('../../constants/reduction-status-type')
-const dateFormatter = require('../date-formatter')
 
 class Reduction {
   constructor (reasonForReductionId, hours, reductionStartDate, reductionEndDate, notes) {
@@ -27,18 +25,16 @@ class Reduction {
       .isRequired()
       .isFloat(0, 37)
 
-    var startDate = dateFormatter.build(this.reductionStartDateFields[0], this.reductionStartDateFields[1], this.reductionStartDateFields[2])
+    var startDate = FieldSetValidator(this.reductionStartDateFields, 'reductionStartDate', errors)
+      .isRequired()
+      .isValidDate()
+      .getFormattedDate()
 
-    FieldSetValidator(this.reductionStartDateFields, 'reductionStartDate', errors)
-      .isRequired(ERROR_MESSAGES.getIsRequiredMessage)
-      .isValidDate(startDate)
-
-    var endDate = dateFormatter.build(this.reductionEndDateFields[0], this.reductionEndDateFields[1], this.reductionEndDateFields[2])
-
-    FieldSetValidator(this.reductionEndDateFields, 'reductionEndDate', errors)
-      .isRequired(ERROR_MESSAGES.getIsRequiredMessage)
-      .isValidDate(endDate)
-      .isLaterThan(startDate, endDate)
+    var endDate = FieldSetValidator(this.reductionEndDateFields, 'reductionEndDate', errors)
+      .isRequired()
+      .isValidDate()
+      .isLaterThan(startDate, 'reductionStartDate')
+      .getFormattedDate()
 
     if (this.notes) {
       FieldValidator(this.notes, 'notes', errors)
@@ -46,6 +42,7 @@ class Reduction {
     }
 
     var validationErrors = errors.get()
+
     if (validationErrors) {
       throw new ValidationError(validationErrors)
     }

@@ -20,7 +20,7 @@ var app = express()
 
 // Set security headers.
 app.use(helmet())
-app.use(helmet.hsts({ maxAge: 5184000 }))
+app.use(helmet.hsts({ maxAge: 31536000 }))
 
 var developmentMode = app.get('env') === 'development'
 

@@ -59,8 +59,9 @@ describe('services/validators/validation-error-messages', function () {
   })
 
   it('should return expected IsDateLaterThanMessage validation error message', function () {
-    const expected = `${fieldName} must be after the start date`
-    var message = ValidationErrorMessages.getIsDateLaterThanMessage(fieldName)
+    var secondaryDisplayName = 'secondary'
+    const expected = `${fieldName} must be after ${secondaryDisplayName}`
+    var message = ValidationErrorMessages.getIsDateLaterThanMessage(fieldName, { secondaryDisplayName: secondaryDisplayName })
     expect(message).to.equal(expected)
   })
 

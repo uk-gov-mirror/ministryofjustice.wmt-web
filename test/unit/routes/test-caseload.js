@@ -102,23 +102,43 @@ describe('caseload route', function () {
   })
 
   // LDU Level
-  it('should respond with 200 when ldu and id are included in URL', function () {
-    getCaseload.resolves(TEAM_CASELOAD)
-    return supertest(app).get(LDU_CASELOAD_URL).expect(200)
-  })
-
   it('should respond with 500 when ldu, but no id, is included in URL', function () {
     getCaseload.resolves(TEAM_CASELOAD)
     return supertest(app).get(LDU_MISSING_ID_URL).expect(500)
   })
 
   it('should call the getSubNav with the correct parameters for LDU', function () {
-    getCaseload.resolves(TEAM_CASELOAD)
+    getCaseload.resolves(ORG_CASELOAD)
     return supertest(app)
       .get(LDU_CASELOAD_URL)
       .expect(200)
       .then(function () {
         expect(getSubNavStub.calledWith('1', orgUnit.LDU.name, LDU_CASELOAD_URL)).to.be.true //eslint-disable-line
+        expect(getCaseload.calledWith('1', orgUnit.LDU.name)).to.be.eql(true)
+      })
+  })
+
+  // REGION Level
+  it('should call the getSubNav with the correct parameters for REGION', function () {
+    getCaseload.resolves(ORG_CASELOAD)
+    return supertest(app)
+      .get(REGION_CASELOAD_URL)
+      .expect(200)
+      .then(function () {
+        expect(getSubNavStub.calledWith('1', orgUnit.REGION.name, REGION_CASELOAD_URL)).to.be.true //eslint-disable-line
+        expect(getCaseload.calledWith('1', orgUnit.REGION.name)).to.be.eql(true)
+      })
+  })
+
+  // NATIONAL Level
+  it('should call the getSubNav with the correct parameters for NATIONAL', function () {
+    getCaseload.resolves(ORG_CASELOAD)
+    return supertest(app)
+      .get(NATIONAL_CASELOAD_URL)
+      .expect(200)
+      .then(function () {
+        expect(getSubNavStub.calledWith('0', orgUnit.NATIONAL.name, NATIONAL_CASELOAD_URL)).to.be.true //eslint-disable-line
+        expect(getCaseload.calledWith('0', orgUnit.NATIONAL.name)).to.be.eql(true)
       })
   })
 })

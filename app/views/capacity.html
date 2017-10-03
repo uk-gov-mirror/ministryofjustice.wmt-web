@@ -6,11 +6,77 @@
 
 {% include "includes/breadcrumbs.html" %}
 
+{% include "includes/title-subtitle.html" %}
+{% include "includes/sub-nav.html" %}
+
 {% include "includes/validation-error-messages.html" %}
 
-{% include "includes/title-subtitle.html" %}
+<form method="get">
 
-{% include "includes/sub-nav.html" %}
+    <div class="form-group {% if errors['capacityFromDate'][0] %} form-group-error {% endif %}">
+        {% if errors %}
+            <span class="error-message">{{ errors['capacityFromDate'][0] }}</span>
+        {% endif %}
+        <fieldset id="capacityFromDate" >
+            <legend>
+                <span class="form-label-bold">
+                    Show capacity from:
+                </span>
+                <span class="form-hint" id="capacity-from-hint">For example, 30 1 2017</span>
+            </legend>
+            <div class="form-date" aria-describedby="capacity-from-hint">
+                <div class="form-group form-group-day">
+                    <label class="form-label" for="capacity-from-day">Day</label>
+                    <input class="form-control" id="capacity-from-day" name="capacity-from-day"
+                        value={{query['capacity-from-day'] | int}}>
+                </div>
+                <div class="form-group form-group-month">
+                    <label class="form-label" for="capacity-from-month">Month</label>
+                    <input class="form-control" id="capacity-from-month" name="capacity-from-month"
+                        value={{query['capacity-from-month'] | int}}>
+                </div>
+                <div class="form-group form-group-year">
+                    <label class="form-label" for="capacity-from-year">Year</label>
+                    <input class="form-control" id="capacity-from-year" name="capacity-from-year"
+                        value={{query['capacity-from-year'] | int}}>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="form-group {% if errors['capacityToDate'][0] %} form-group-error {% endif %}">
+        {% if errors %}
+            <span class="error-message">{{ errors['capacityToDate'][0] }}</span>
+        {% endif %}
+        <fieldset id="capacityToDate">
+            <legend>
+                <span class="form-label-bold">
+                    Show capacity to:
+                </span>
+                <span class="form-hint" id="capacity-to-hint">For example, 31 3 2017</span>
+            </legend>
+            <div class="form-date" aria-describedby="capacity-to-hint">
+                <div class="form-group form-group-day">
+                    <label class="form-label" for="capacity-to-day">Day</label>
+                    <input class="form-control" id="capacity-to-day" name="capacity-to-day"
+                        value={{query['capacity-to-day'] | int}}>
+                </div>
+                <div class="form-group form-group-month">
+                    <label class="form-label" for="capacity-to-month">Month</label>
+                    <input class="form-control" id="capacity-to-month" name="capacity-to-month"
+                        value={{query['capacity-to-month'] | int}}>
+                </div>
+                <div class="form-group form-group-year">
+                    <label class="form-label" for="capacity-to-year">Year</label>
+                    <input class="form-control" id="capacity-to-year" name="capacity-to-year"
+                        value={{query['capacity-to-year'] | int}}>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <input id="caseload-filter-submit" type="submit" value="Filter" class="button">
+
+<form>
 
 <table class="non-javascript">
     <thead>
@@ -35,11 +101,75 @@
             {% endfor%}
         </tr>
     </tbody>
-
 </table>
 
 <div id="plotly-div-line" role="presentation"></div>
 
+{% if organisationLevel !== 'offender-manager' %}
+  <h3 class="heading-medium">Capacity breakdown</h3>
+  <table id="capacity-breakdown" class="data-table dataTable">
+    <thead>
+      <tr>
+        <th colspan="2" id="org">{{ childOrganisationLevelDisplayText }}</th>
+        <th colspan="8" id="breakdown">Capacity breakdown</th>
+      </tr>
+      <tr>
+        <th id="name">Name</th>
+        <th id="grade">Grade</th>
+        <th id="capacity">Capacity(%)</th>
+        <th id="cases">Cases</th>
+        <th id="paroms"><abbr title="Parole Assessment Reports by the Offender Manager">PAROMs</abbr></th>
+        <th id="fdrs"><abbr title="Fast Delivery Reports">FDRs</abbr></th>
+        <th id="sdrs"><abbr title="Standard Delivery Reports">SDRs</abbr></th>
+        <th id="arms"><abbr title="Active Risk Management System">ARMS</abbr></th>
+        <th id="gs"><abbr title="Group Supervision">GS</abbr></th>
+        <th id="cms"><abbr title="Case Management Support">CMS</abbr></th>
+      </tr>
+    </thead>
+    {% if organisationLevel === 'team' %}
+      <tbody>
+        {% for member in capacityBreakdown %}
+        <tr>
+          <td headers="name org"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+          <td headers="grade org">{{ member.grade }}</td>
+          <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
+          <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>
+          <td headers="paroms breakdown">-</td>
+          <td headers="fdrs breakdown">-</td>
+          <td headers="sdrs breakdown">-</td>
+          <td headers="arms breakdown">-</td>
+          <td headers="gs breakdown">-</td>
+          <td headers="cms breakdown">{{ member.cmsPercentage | round(1) }}%</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+      <tbody>
+      {% for member in capacityBreakdown %}
+        {% for i in range(0, member.grades.length) %}
+          <tr>
+            {% if i === 0 %}
+              <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+            {% endif %}
+          <td headers="grade org">{{ member.grades[i].grade }}</td>
+          <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
+          <td headers="cases breakdown">{{ member.grades[i].totalCases | round(1) }}</td>
+          <td headers="paroms breakdown">-</td>
+          <td headers="fdrs breakdown">-</td>
+          <td headers="sdrs breakdown">-</td>
+          <td headers="arms breakdown">-</td>
+          <td headers="gs breakdown">-</td>
+          <td headers="cms breakdown">{{ member.grades[i].cmsPercentage | round(1) }}%</td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endif %}
+  
+  
 </main>
 {% endblock %}
 
