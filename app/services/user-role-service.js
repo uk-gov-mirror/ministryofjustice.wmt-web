@@ -4,7 +4,7 @@ const getRoleByUsername = require('./data/get-user-role-by-username')
 const getUserByUsername = require('./data/get-user-by-username')
 const updateUserRole = require('./data/update-user-role')
 const addUserRole = require('./data/insert-user-role')
-const getUserById = require('./data/get-user-by-Id')
+const getUserById = require('./data/get-user-by-id')
 const addUser = require('./data/insert-user')
 const getRole = require('./data/get-role')
 

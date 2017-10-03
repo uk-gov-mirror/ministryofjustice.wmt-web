@@ -42,7 +42,7 @@ beforeEach(function () {
         './data/get-user-by-username': getUserByUsername,
         './data/update-user-role': updateUserRole,
         './data/insert-user-role': addUserRole,
-        './data/get-user-by-Id': getUserById,
+        './data/get-user-by-id': getUserById,
         './data/insert-user': addUser,
         './data/get-role': getRole
       })
