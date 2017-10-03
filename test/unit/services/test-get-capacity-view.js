@@ -20,8 +20,8 @@ const TEAM_REULTS = [
     linkId: 1,
     totalPoints: 50,
     availablePoints: 100,
-    cmsReductionHours: 10,
-    gsReductionHours: -5,
+    cmsAdjustmentPoints: 10,
+    gsAdjustmentPoints: -5,
     contractedHours: 40
   }
 ]
@@ -34,8 +34,8 @@ const LDU_RESULTS = [
     linkId: 1,
     totalPoints: 50,
     availablePoints: 100,
-    cmsReductionHours: 10,
-    gsReductionHours: -5,
+    cmsAdjustmentPoints: 10,
+    gsAdjustmentPoints: -5,
     contractedHours: 40
   },
   {
@@ -45,8 +45,8 @@ const LDU_RESULTS = [
     linkId: 1,
     totalPoints: 50,
     availablePoints: 100,
-    cmsReductionHours: 10,
-    gsReductionHours: -5,
+    cmsAdjustmentPoints: 10,
+    gsAdjustmentPoints: -5,
     contractedHours: 40
   }
 ]
