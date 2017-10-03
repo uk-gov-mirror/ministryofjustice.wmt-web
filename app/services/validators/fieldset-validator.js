@@ -79,7 +79,7 @@ class FieldsetValidator {
 function validateDate (date) {
   if (!date) return false
   return date instanceof moment && date.isValid() &&
-         date < DATE_LIMIT
+    date < DATE_LIMIT
 }
 
 function isDateInTheFuture (date) {

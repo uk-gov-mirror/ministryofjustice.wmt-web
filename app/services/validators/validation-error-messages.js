@@ -10,5 +10,6 @@ module.exports = {
   getPastOrPresentDateMessage: function (displayName) { return `${displayName} must not be in the future` },
   getFutureDateMessage: function (displayName) { return `${displayName} must be in the future` },
   getIsDateLaterThanMessage: function (displayName, options) { return `${displayName} must be after ${options.secondaryDisplayName}` },
-  getIsLessThanLengthMessage: function (displayName, options) { return `${displayName} must be shorter than ${options.length} characters` }
+  getIsLessThanLengthMessage: function (displayName, options) { return `${displayName} must be shorter than ${options.length} characters` },
+  getIsValidUsernameMessage: function (displayName) { return `${displayName} is invalid` }
 }

@@ -3,7 +3,7 @@ const getOrganisationUnit = require('./helpers/org-unit-finder')
 const json2csv = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
 
-const CASELOAD_FIELDS = ['name', 'gradeCode', 'totalCases', 'untiered', 'd2', 'd1', 'c2', 'c1', 'b2', 'b1', 'a']
+const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['grade', 'teamName', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['GradeCode', 'TeamName', 'CapacityPercentage', 'TotalCases', 'ContractedHours', 'ReductionHours']
 const ORG_OVERVIEW_FEILDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
@@ -35,7 +35,7 @@ var getFields = function (organisationLevel, tab) {
     case tabs.CASELOAD:
       childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
       fields = CASELOAD_FIELDS
-      fieldNames = [childOrgForFieldName + 'Name', 'Grade', 'Overall', 'Untiered', 'D2', 'D1', 'C2', 'C1', 'B2', 'B1', 'A']
+      fieldNames = [childOrgForFieldName + 'Name', 'Grade', 'A', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'Untiered', 'Overall']
       break
     case tabs.OVERVIEW:
       if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -60,16 +60,32 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
 
   switch (tab) {
     case tabs.CASELOAD:
+      var overallCsv, custodyCsv, communityCsv, licenseCsv
       if (organisationLevel === organisationUnitConstants.TEAM.name) {
-        var overallCsv = generateCsv(result.caseloadDetails.overallCaseloadDetails, fields, fieldNames)
-        var custodyCsv = generateCsv(result.caseloadDetails.custodyCaseloadDetails, fields, fieldNames)
-        var communityCsv = generateCsv(result.caseloadDetails.communityCaseloadDetails, fields, fieldNames)
-        var licenseCsv = generateCsv(result.caseloadDetails.licenseCaseloadDetails, fields, fieldNames)
-        // TODO: Do they want this in one csv file, or four? Currently one
-        csv = ('OVERALL\n' + overallCsv + '\n\n\nCUSTODY\n' + custodyCsv + '\n\n\nCOMMUNITY\n' + communityCsv + '\n\n\nLICENSE\n' + licenseCsv)
+        overallCsv = generateCsv(result.caseloadDetails.overallCaseloadDetails, fields, fieldNames)
+        custodyCsv = generateCsv(result.caseloadDetails.custodyCaseloadDetails, fields, fieldNames)
+        communityCsv = generateCsv(result.caseloadDetails.communityCaseloadDetails, fields, fieldNames)
+        licenseCsv = generateCsv(result.caseloadDetails.licenseCaseloadDetails, fields, fieldNames)
+
+        csv = ('OVERALL\n' + overallCsv + '\n\n\nCUSTODY\n' + custodyCsv +
+        '\n\n\nCOMMUNITY\n' + communityCsv + '\n\n\nLICENSE\n' + licenseCsv)
       } else {
-        var table = generateLduCaseloadTable(result.caseloadDetails)
-        csv = generateCsv(table, fields, fieldNames)
+        var overallTable = parseTotalSummaryTable(result.caseloadDetails.overallTotalSummary)
+        var custodyTable = parseCaseloadDetailsTable(result.caseloadDetails.custodyCaseloadDetails)
+        var communityTable = parseCaseloadDetailsTable(result.caseloadDetails.communityCaseloadDetails)
+        var licenseTable = parseCaseloadDetailsTable(result.caseloadDetails.licenseCaseloadDetails)
+
+        overallCsv = generateCsv(overallTable)
+        custodyCsv = generateCsv(custodyTable, fields, fieldNames)
+        communityCsv = generateCsv(communityTable, fields, fieldNames)
+        licenseCsv = generateCsv(licenseTable, fields, fieldNames)
+
+        var overallByGradeTable = parseCaseloadDetailsTable(result.caseloadDetails.overallCaseloadDetails)
+        var overallByGradeCsv = generateCsv(overallByGradeTable, fields, fieldNames)
+
+        csv = ('OVERALL\n' + overallCsv + '\n\n\nCUSTODY\n' + custodyCsv +
+        '\n\n\nCOMMUNITY\n' + communityCsv + '\n\n\nLICENSE\n' + licenseCsv +
+        '\n\n\nOVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' + overallByGradeCsv)
       }
       break
     case tabs.OVERVIEW:
@@ -88,18 +104,18 @@ var generateCsv = function (data, fields, fieldNames) {
   return json2csv({ data: data, fields: fields, fieldNames: fieldNames })
 }
 
-var generateLduCaseloadTable = function (lduResults) {
-  var lduTable = []
+var parseCaseloadDetailsTable = function (caseloadDetails) {
+  var table = []
   var team
   var teamGrade
 
-  for (var linkId in lduResults) {
-    team = lduResults[linkId]
+  for (var linkId in caseloadDetails) {
+    team = caseloadDetails[linkId]
     for (var grade in team.grades) {
       teamGrade = team.grades[grade]
-      lduTable.push({
+      table.push({
         name: team.name,
-        gradeCode: teamGrade.gradeCode,
+        gradeCode: teamGrade.grade,
         totalCases: teamGrade.totalCases,
         untiered: teamGrade.untiered,
         d2: teamGrade.d2,
@@ -112,5 +128,20 @@ var generateLduCaseloadTable = function (lduResults) {
       })
     }
   }
-  return lduTable
+  return table
+}
+
+var parseTotalSummaryTable = function (totalSummary) {
+  var table = []
+  totalSummary.forEach(function (member) {
+    table.push({
+      name: member.name,
+      custodyCases: member.custodyTotalCases,
+      communityCases: member.communityTotalCases,
+      licenseCases: member.licenseTotalCases,
+      totalCases: member.totalCases
+    })
+  })
+
+  return table
 }

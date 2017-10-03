@@ -1,32 +1,62 @@
 // Configure login mechanism
+const session = require('express-session')
 const passport = require('passport')
 const config = require('../config')
+const SamlStrategy = require('passport-saml').Strategy
+const logger = require('./logger')
 
-var SamlStrategy = require('passport-saml').Strategy
+const getUserRoleByUsername = require('./services/data/get-user-role-by-username')
 
 module.exports = function (app) {
-  if (!config.AUTHENTICATION_ENABLED) return
+  if (config.AUTHENTICATION_ENABLED !== 'true') {
+    return
+  }
 
   passport.serializeUser(function (user, done) {
-    var email = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+    var name = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
     var displayName = user['http://schemas.microsoft.com/identity/claims/displayname']
-    console.log(user)
-    done(null, {
-      name: displayName,
-      email: email
+    var nameID = user.nameID
+    var nameIDFormat = user.nameIDFormat
+    // Remove the domain from the username
+    var username = name.substring(0, name.lastIndexOf('@'))
+    // Get the role for the user
+    getUserRoleByUsername(username).then(function (role) {
+      done(null, {
+        name: displayName,
+        username: username,
+        user_role: role.role,
+        nameID: nameID,
+        nameIDFormat: nameIDFormat
+      })
     })
   })
 
   passport.deserializeUser(function (user, done) {
     done(null, {
       name: user.name,
-      email: user.email
+      username: user.username,
+      user_role: user.user_role,
+      nameID: user.nameID,
+      nameIDFormat: user.nameIDFormat
     })
   })
 
-  app.use(passport.initialize())
+  var sessionOptions = {
+    name: 'wmt-start-application',
+    secret: config.APPLICATION_SECRET,
+    resave: config.RESAVE_SESSION,
+    saveUninitialized: config.SAVE_UNINITIALIZED_SESSION,
+    cookie: {
+      maxAge: parseInt(config.SESSION_COOKIE_MAXAGE),
+      secure: config.SECURE_COOKIE === 'true'
+    }
+  }
 
-  passport.use(new SamlStrategy(
+  app.use(session(sessionOptions))
+  app.use(passport.initialize())
+  app.use(passport.session())
+
+  var samlStrategy = new SamlStrategy(
     {
       path: config.ACTIVE_DIRECTORY_RETURN_ADDRESS,
       entryPoint: config.ACTIVE_DIRECTORY_ENTRY_POINT,
@@ -35,7 +65,25 @@ module.exports = function (app) {
     function (profile, done) {
       return done(null, profile)
     })
-  )
+
+  passport.use(samlStrategy)
+
+  passport.logout = function (req, res) {
+    if (!req.user) {
+      return res.redirect('/')
+    }
+    var saml = {
+      nameID: req.user.username + '@' + config.ACTIVE_DIRECTORY_DOMAIN,
+      nameIDFormat: req.user.nameIDFormat
+    }
+    req.user.saml = saml
+    samlStrategy.logout(req, function (err, request) {
+      if (err) {
+        logger.error({error: err})
+      }
+      return res.redirect(request)
+    })
+  }
 
   app.use(function (req, res, next) {
     if (req.user) {
