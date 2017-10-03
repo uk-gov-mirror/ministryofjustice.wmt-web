@@ -32,6 +32,7 @@ module.exports = function (router) {
             return res.redirect(302, '/admin/workload-points?success=true')
           })
       }).catch(function (error) {
+        console.log(error)
         if (error instanceof ValidationError) {
           return workloadPointsService.getWorkloadPoints()
             .then(function (result) {
@@ -47,6 +48,7 @@ module.exports = function (router) {
         next(error)
       })
     } catch (error) {
+      console.log(error)
       next(error)
     }
   })
