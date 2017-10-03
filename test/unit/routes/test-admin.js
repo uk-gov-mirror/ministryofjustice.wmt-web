@@ -30,14 +30,17 @@ var userRoleService
 before(function () {
   userRoleService = sinon.stub()
   route = proxyquire('../../../app/routes/admin', {
-    '../services/user-role-service': userRoleService
+    '../services/user-role-service': userRoleService,
+    '../../../config': {
+      AUTHENTICATION_ENABLED: true
+    }
   })
   app = routeHelper.buildApp(route)
 })
 
 describe('admin route', function () {
-  it('should respond with 200, redirect to AD login page', function () {
-    return supertest(app).get(ADMIN_URL).expect(200)
+  it('should respond with 302, redirect to AD login page', function () {
+    return supertest(app).get(ADMIN_URL).expect(302)
   })
 
   it('should respond with 200 when user right is called', function () {
