@@ -2,11 +2,25 @@ const getCapacityView = require('../services/get-capacity-view')
 const dateRangeHelper = require('../services/helpers/date-range-helper')
 const getSubNav = require('../services/get-sub-nav')
 const organisationUnit = require('../constants/organisation-unit')
+const ValidationError = require('../services/errors/validation-error')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 
 module.exports = function (router) {
   router.get(`/:organisationLevel/:id/caseload-capacity`, function (req, res, next) {
-    var capacityDateRange = dateRangeHelper.createCapacityDateRange(req.query)
+    var capacityDateRange
+    var errors
+
+    try {
+      capacityDateRange = dateRangeHelper.createCapacityDateRange(req.query)
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        errors = error.validationErrors
+        capacityDateRange = dateRangeHelper.createCapacityDateRange({})
+      } else {
+        throw error
+      }
+    }
+
     var organisationLevel = req.params.organisationLevel
     var id
 
@@ -29,6 +43,8 @@ module.exports = function (router) {
         subNav: getSubNav(id, organisationLevel, req.path),
         breadcrumbs: result.breadcrumbs,
         capacity: result.capacityTable,
+        errors: errors,
+        query: req.query,
         capacityBreakdown: result.capacityBreakdown,
         childOrganisationLevel: orgUnit.childOrganisationLevel,
         childOrganisationLevelDisplayText: childOrgUnitDisplayText,
