@@ -26,21 +26,34 @@ const ADMIN_USER_RIGHT_ROLES_URL = '/admin/user-rights/'
 var app
 var route
 var userRoleService
+var authorisationService
+var hasRoleResult = true
 
-before(function () {
+var initaliseApp = function () {
   userRoleService = sinon.stub()
+  authorisationService = {
+    hasRole: sinon.stub().returns(hasRoleResult)
+  }
   route = proxyquire('../../../app/routes/admin', {
     '../services/user-role-service': userRoleService,
-    '../../../config': {
-      AUTHENTICATION_ENABLED: true
-    }
+    '../authorisation': authorisationService
   })
   app = routeHelper.buildApp(route)
+}
+
+before(function () {
+  initaliseApp()
 })
 
 describe('admin route', function () {
-  it('should respond with 302, redirect to AD login page', function () {
-    return supertest(app).get(ADMIN_URL).expect(302)
+  it('should respond with 200 when the user has the admin role', function () {
+    return supertest(app).get(ADMIN_URL).expect(200)
+  })
+
+  it('should respond with 403 when the user does not have the admin role', function () {
+    hasRoleResult = false
+    initaliseApp()
+    return supertest(app).get(ADMIN_URL).expect(403)
   })
 
   it('should respond with 200 when user right is called', function () {

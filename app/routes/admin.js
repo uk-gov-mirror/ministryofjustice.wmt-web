@@ -7,13 +7,18 @@ const fieldValidator = require('../services/validators/field-validator')
 const errorHandler = require('../services/validators/error-handler')
 
 module.exports = function (router) {
-  router.get('/admin', function (req, res) {
+  router.get('/admin', function (req, res, next) {
     var userRole
     try {
       if (authorisation.hasRole(req, roles.DATA_ADMIN)) {
         userRole = roles.DATA_ADMIN
       } else if (authorisation.hasRole(req, roles.SYSTEM_ADMIN)) {
         userRole = roles.SYSTEM_ADMIN
+      } else {
+        res.status(403)
+        return res.render('includes/error', {
+          error: 'Admin roles required'
+        })
       }
       return res.render('admin', {
         title: 'Admin',
