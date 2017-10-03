@@ -82,7 +82,12 @@ urls+=("$host/$offender_manager/$omId/$add_reductions_url")
 
 # Admin
 admin='admin'
-urls+=("$host/$admin/workload-points")
+add_user='user'
+add_user_rights='user-rights'
+workload_points='workload-points'
+urls+=("$host/$admin/$workload_points")
+urls+=("$host/$admin/$add_user")
+urls+=("$host/$admin/$add_user_rights")
 
 for url in "${urls[@]}"
 do

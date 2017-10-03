@@ -26,25 +26,10 @@ const CASELOAD = {
 }
 
 const OVERALL_CASELOAD = Object.assign({}, CASELOAD, { totalCases: 18, untiered: 3, d2: 3, c1: 3, b1: 3 })
-const CUSTODY_CASELOAD = Object.assign({}, CASELOAD, { caseType: caseType.CUSTODY })
-const COMMUNITY_CASELOAD = Object.assign({}, CASELOAD, { caseType: caseType.COMMUNITY })
-const LICENSE_CASELOAD = Object.assign({}, CASELOAD, { caseType: caseType.LICENSE })
-
-const TEAM_CASELOAD = [CUSTODY_CASELOAD, COMMUNITY_CASELOAD, LICENSE_CASELOAD]
 
 const LDU_CASELOAD = [
   Object.assign({}, CASELOAD, { name: 'Team 1' }),
   Object.assign({}, CASELOAD, { name: 'Team 2' })
-]
-
-const PERCENTAGE_RESULTS = [
-  { linkId: 1,
-    name: 'Team 3',
-    grades: [
-      {},
-      {}
-    ]
-  }
 ]
 
 var id = 1
@@ -54,26 +39,26 @@ var expectedTitle = breadcrumbs[0].title
 var getCaseload
 var getCaseloadDetail
 var getBreadcrumbs
-var caseloadPercentageCalculator
 var caseloadHelper
 var teamName
 var lduName
 
-before(function () {
+beforeEach(function () {
   getCaseloadDetail = sinon.stub()
   getBreadcrumbs = sinon.stub().returns(breadcrumbs)
-  caseloadPercentageCalculator = sinon.stub().returns(PERCENTAGE_RESULTS)
   caseloadHelper = {
-    getOverallCaseload: sinon.stub().returns(OVERALL_CASELOAD),
+    getCaseloadTierTotalsByTeamByGrade: sinon.stub(),
+    getCaseloadSummaryTotalsByTeam: sinon.stub(),
+    aggregateTeamTierTotals: sinon.stub(),
+    calculateTeamTierPercentages: sinon.stub(),
     getCaseloadByType: sinon.stub().returns(CASELOAD),
-    getCaseloadTotalSummary: sinon.stub().returns(999)
+    getCaseloadTotalSummary: sinon.stub()
   }
   getCaseload =
     proxyquire('../../../app/services/get-caseload',
       {
         './data/get-caseload': getCaseloadDetail,
         './get-breadcrumbs': getBreadcrumbs,
-        './helpers/caseload-percentage-calculator': caseloadPercentageCalculator,
         './helpers/caseload-helper': caseloadHelper
       })
   teamName = orgUnitConstant.TEAM.name
@@ -92,54 +77,90 @@ describe('services/get-caseload', function () {
     })
   })
 
-  it('should call get-caseload with the correct parameters', function () {
+  it('should call get-caseload data service with the correct parameters', function () {
     getCaseloadDetail.withArgs(id, lduName).resolves(LDU_CASELOAD)
     return getCaseload(id, lduName).then(function (result) {
       expect(getCaseloadDetail.calledWith(id, lduName)).to.be.true //eslint-disable-line
     })
   })
 
-  it('should call percentage-calculator when org unit is LDU', function () {
+  it('should call expected functions for team and return populated caseloadDetails', function () {
+    getCaseloadDetail.withArgs(id, teamName).resolves(OVERALL_CASELOAD)
+    caseloadHelper.getCaseloadTierTotalsByTeamByGrade.returns('overallCaseloadDetails')
+    caseloadHelper.getCaseloadSummaryTotalsByTeam.returns('overallSummary')
+    caseloadHelper.getCaseloadByType.withArgs(OVERALL_CASELOAD, 'CUSTODY').returns('custodyCaseloads')
+    caseloadHelper.getCaseloadByType.withArgs(OVERALL_CASELOAD, 'COMMUNITY').returns('communityCaseloads')
+    caseloadHelper.getCaseloadByType.withArgs(OVERALL_CASELOAD, 'LICENSE').returns('licenseCaseloads')
+    caseloadHelper.getCaseloadTotalSummary.withArgs('custodyCaseloads').returns('custodySummary')
+    caseloadHelper.getCaseloadTotalSummary.withArgs('communityCaseloads').returns('communitySummary')
+    caseloadHelper.getCaseloadTotalSummary.withArgs('licenseCaseloads').returns('licenseSummary')
+
+    var expectedCaseloadDetails = {
+      overallCaseloadDetails: 'overallCaseloadDetails',
+      communityCaseloadDetails: 'communityCaseloads',
+      custodyCaseloadDetails: 'custodyCaseloads',
+      licenseCaseloadDetails: 'licenseCaseloads',
+      overallTotalSummary: 'overallSummary',
+      custodyTotalSummary: 'custodySummary',
+      communityTotalSummary: 'communitySummary',
+      licenseTotalSummary: 'licenseSummary'
+    }
+    return getCaseload(id, teamName)
+    .then(function (result) {
+      expect(caseloadHelper.getCaseloadTierTotalsByTeamByGrade.calledWith(OVERALL_CASELOAD)).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadSummaryTotalsByTeam.calledWith(OVERALL_CASELOAD)).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadByType.calledWith(OVERALL_CASELOAD, 'CUSTODY')).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadByType.calledWith(OVERALL_CASELOAD, 'COMMUNITY')).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadByType.calledWith(OVERALL_CASELOAD, 'LICENSE')).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadTotalSummary.calledWith('custodyCaseloads')).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadTotalSummary.calledWith('communityCaseloads')).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadTotalSummary.calledWith('licenseCaseloads')).to.be.eql(true)
+
+      expect(result.caseloadDetails).to.be.eql(expectedCaseloadDetails)
+    })
+  })
+
+  it('should call expected functions for LDU and return populated caseloadDetails', function () {
     getCaseloadDetail.withArgs(id, lduName).resolves(LDU_CASELOAD)
-    return getCaseload(id, lduName).then(function (result) {
-      assert(caseloadPercentageCalculator.called)
-    })
-  })
+    caseloadHelper.getCaseloadTierTotalsByTeamByGrade.returns('overallCaseloadDetails')
+    caseloadHelper.getCaseloadSummaryTotalsByTeam.returns('overallSummary')
+    caseloadHelper.getCaseloadByType.withArgs(LDU_CASELOAD, 'CUSTODY').returns('custodyCaseloads')
+    caseloadHelper.getCaseloadByType.withArgs(LDU_CASELOAD, 'COMMUNITY').returns('communityCaseloads')
+    caseloadHelper.getCaseloadByType.withArgs(LDU_CASELOAD, 'LICENSE').returns('licenseCaseloads')
+    caseloadHelper.getCaseloadTotalSummary.withArgs('custodyCaseloads').returns('custodySummary')
+    caseloadHelper.getCaseloadTotalSummary.withArgs('communityCaseloads').returns('communitySummary')
+    caseloadHelper.getCaseloadTotalSummary.withArgs('licenseCaseloads').returns('licenseSummary')
+    caseloadHelper.calculateTeamTierPercentages.withArgs('overallCaseloadDetails').returns('lduOverallCaseloadDetails')
+    caseloadHelper.aggregateTeamTierTotals.withArgs('custodyCaseloads').returns('lduCustodyCaseloads')
+    caseloadHelper.aggregateTeamTierTotals.withArgs('communityCaseloads').returns('lduCommunityCaseloads')
+    caseloadHelper.aggregateTeamTierTotals.withArgs('licenseCaseloads').returns('lduLicenseCaseloads')
 
-  it('should return a results object with lduCaseloadDetails when org unit is LDU', function () {
-    getCaseloadDetail.withArgs(id, lduName).resolves(LDU_CASELOAD)
-    return getCaseload(id, lduName).then(function (result) {
-      expect(result.caseloadDetails).to.eql(PERCENTAGE_RESULTS)
-    })
-  })
+    var expectedCaseloadDetails = {
+      overallCaseloadDetails: 'lduOverallCaseloadDetails',
+      communityCaseloadDetails: 'lduCommunityCaseloads',
+      custodyCaseloadDetails: 'lduCustodyCaseloads',
+      licenseCaseloadDetails: 'lduLicenseCaseloads',
+      overallTotalSummary: 'overallSummary',
+      custodyTotalSummary: 'custodySummary',
+      communityTotalSummary: 'communitySummary',
+      licenseTotalSummary: 'licenseSummary'
+    }
+    return getCaseload(id, lduName)
+    .then(function (result) {
+      expect(caseloadHelper.getCaseloadTierTotalsByTeamByGrade.calledWith(LDU_CASELOAD)).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadSummaryTotalsByTeam.calledWith(LDU_CASELOAD)).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadByType.calledWith(LDU_CASELOAD, 'CUSTODY')).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadByType.calledWith(LDU_CASELOAD, 'COMMUNITY')).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadByType.calledWith(LDU_CASELOAD, 'LICENSE')).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadTotalSummary.calledWith('custodyCaseloads')).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadTotalSummary.calledWith('communityCaseloads')).to.be.eql(true)
+      expect(caseloadHelper.getCaseloadTotalSummary.calledWith('licenseCaseloads')).to.be.eql(true)
+      expect(caseloadHelper.calculateTeamTierPercentages.calledWith('overallCaseloadDetails')).to.be.eql(true)
+      expect(caseloadHelper.aggregateTeamTierTotals.calledWith('custodyCaseloads')).to.be.eql(true)
+      expect(caseloadHelper.aggregateTeamTierTotals.calledWith('communityCaseloads')).to.be.eql(true)
+      expect(caseloadHelper.aggregateTeamTierTotals.calledWith('licenseCaseloads')).to.be.eql(true)
 
-  it('should call getOverallCaseload when org unit is Team', function () {
-    getCaseloadDetail.withArgs(id, teamName).resolves(TEAM_CASELOAD)
-    return getCaseload(id, teamName).then(function (result) {
-      assert(caseloadHelper.getOverallCaseload.called)
-    })
-  })
-
-  it('should call getCaseloadByType and getCaseloadTotalSummary once for each case type when org unit is Team', function () {
-    getCaseloadDetail.withArgs(id, teamName).resolves(TEAM_CASELOAD)
-    return getCaseload(id, teamName).then(function (result) {
-      expect(caseloadHelper.getCaseloadByType.calledWith(TEAM_CASELOAD, caseType.COMMUNITY)).to.be.true //eslint-disable-line
-      expect(caseloadHelper.getCaseloadByType.calledWith(TEAM_CASELOAD, caseType.CUSTODY)).to.be.true //eslint-disable-line
-      expect(caseloadHelper.getCaseloadByType.calledWith(TEAM_CASELOAD, caseType.LICENSE)).to.be.true //eslint-disable-line
-      assert(caseloadHelper.getCaseloadTotalSummary.called)
-    })
-  })
-
-  it('should return a results object with all necessary results when org unit is Team', function () {
-    getCaseloadDetail.withArgs(id, teamName).resolves(TEAM_CASELOAD)
-    return getCaseload(id, teamName).then(function (result) {
-      expect(result.caseloadDetails.overallCaseloadDetails).to.eql(OVERALL_CASELOAD)
-      expect(result.caseloadDetails.communityCaseloadDetails).to.eql(CASELOAD)
-      expect(result.caseloadDetails.custodyCaseloadDetails).to.eql(CASELOAD)
-      expect(result.caseloadDetails.licenseCaseloadDetails).to.eql(CASELOAD)
-      expect(result.caseloadDetails.custodyTotalSummary).to.eql(999)
-      expect(result.caseloadDetails.communityTotalSummary).to.eql(999)
-      expect(result.caseloadDetails.licenseTotalSummary).to.eql(999)
+      expect(result.caseloadDetails).to.be.eql(expectedCaseloadDetails)
     })
   })
 })

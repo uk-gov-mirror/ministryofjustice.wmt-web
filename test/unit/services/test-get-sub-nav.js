@@ -7,14 +7,14 @@ describe('services/get-sub-nav', function () {
   var organisationalUnitName = 'name'
   var omOrganisationalUnitName = 'offender-manager'
 
-  it('returns a list which has four elements', function () {
+  it('returns a list which has four elements for non offender manager', function () {
     var subNav = getSubNav(id, organisationalUnitName)
     expect(subNav.length).to.eql(4)
   })
 
   it('returns a list which has five elements for offender-manager', function () {
     var subNav = getSubNav(id, omOrganisationalUnitName)
-    expect(subNav.length).to.eql(6)
+    expect(subNav.length).to.eql(5)
   })
 
   it('returns a list of Link objects', function () {
@@ -28,10 +28,9 @@ describe('services/get-sub-nav', function () {
     var subNav = getSubNav(id, omOrganisationalUnitName)
     expect(subNav[0].title).to.eql('Overview')
     expect(subNav[1].title).to.eql('Capacity')
-    expect(subNav[2].title).to.eql('Caseload')
-    expect(subNav[3].title).to.eql('Contracted Hours')
-    expect(subNav[4].title).to.eql('Case Progress')
-    expect(subNav[5].title).to.eql('Reductions')
+    expect(subNav[2].title).to.eql('Contracted Hours')
+    expect(subNav[3].title).to.eql('Case Progress')
+    expect(subNav[4].title).to.eql('Reductions')
   })
 
   it('returns the correct titles for non offender-manager', function () {
@@ -46,9 +45,9 @@ describe('services/get-sub-nav', function () {
     var subNav = getSubNav(id, omOrganisationalUnitName)
     expect(subNav[0].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'overview')
     expect(subNav[1].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'caseload-capacity')
-    expect(subNav[2].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'caseload')
-    expect(subNav[3].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'contracted-hours')
-    expect(subNav[4].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'case-progress')
+    expect(subNav[2].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'contracted-hours')
+    expect(subNav[3].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'case-progress')
+    expect(subNav[4].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'reductions')
   })
 
   it('marks the current link as active', function () {
