@@ -11,7 +11,7 @@ module.exports = function (router) {
     var userRole
     var noAuth = false
     try {
-      if (!authorisation.isAuthenticationEnabled()){
+      if (!authorisation.isAuthenticationEnabled()) {
         noAuth = true
       } else if (authorisation.hasRole(req, roles.DATA_ADMIN)) {
         userRole = roles.DATA_ADMIN

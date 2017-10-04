@@ -19,8 +19,7 @@ var hasRole = function (req, role) {
   return hasRole
 }
 
-
-var isAuthenticationEnabled = function() {
+var isAuthenticationEnabled = function () {
   return (config.AUTHENTICATION_ENABLED === 'true')
 }
 
