@@ -32,7 +32,8 @@ var hasRoleResult = true
 var initaliseApp = function () {
   userRoleService = sinon.stub()
   authorisationService = {
-    hasRole: sinon.stub().returns(hasRoleResult)
+    hasRole: sinon.stub().returns(hasRoleResult),
+    isAuthenticationEnabled: sinon.stub().returns(config.AUTHENTICATION_ENABLED)
   }
   route = proxyquire('../../../app/routes/admin', {
     '../services/user-role-service': userRoleService,
