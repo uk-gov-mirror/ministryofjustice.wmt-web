@@ -395,16 +395,12 @@
                   <tr>
                     <th scope="row">
                       {% if errors['weightingArmsLicense'][0] %}
-                        <span class="error-message">{{
-                            errors['weightingArmsLicense'][0] }}</span>
+                        <span class="error-message">{{ errors['weightingArmsLicense'][0] }}</span>
                       {% endif %}  
-                      <label class="form-label-bold"
-                          for="weightingArmsLicense">ARMS License Cases</label>
+                      <label class="form-label-bold" for="weightingArmsLicense">ARMS License Cases</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="weightingArmsLicense"
-                      name="weightingArmsLicense" type="number" value="{{
-                      wp.weightingArmsLicense }}">
+                      <input class="form-control" id="weightingArmsLicense" name="weightingArmsLicense" type="number" value="{{ wp.weightingArmsLicense }}">
                     </td>   
                   </tr>
                 </tbody>
