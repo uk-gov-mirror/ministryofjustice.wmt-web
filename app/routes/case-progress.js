@@ -1,9 +1,13 @@
 const getCaseProgress = require('../services/get-case-progress')
 const getSubNav = require('../services/get-sub-nav')
 const organisationUnit = require('../constants/organisation-unit')
+const authorisation = require('../authorisation')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/case-progress', function (req, res, next) {
+    if (!authorisation.isUserAuthenticated(req)) {
+      return res.redirect('/login')
+    }
     var organisationLevel = req.params.organisationLevel
     var id
 

@@ -1,9 +1,13 @@
 const workloadPointsService = require('../services/workload-points-service')
 const WorkloadPoints = require('../services/domain/workload-points')
 const ValidationError = require('../services/errors/validation-error')
+const authorisation = require('../authorisation')
 
 module.exports = function (router) {
   router.get('/admin/workload-points', function (req, res) {
+    if (!authorisation.isUserAuthenticated(req)) {
+      return res.redirect('/login')
+    }
     var success = req.query.success
     var successText = success ? 'You have successfully updated the workload points!' : null
 
@@ -20,6 +24,9 @@ module.exports = function (router) {
   })
 
   router.post('/admin/workload-points', function (req, res, next) {
+    if (!authorisation.isUserAuthenticated(req)) {
+      return res.redirect('/login')
+    }
     var updatedWorkloadPoints
     try {
       updatedWorkloadPoints = new WorkloadPoints(req.body)

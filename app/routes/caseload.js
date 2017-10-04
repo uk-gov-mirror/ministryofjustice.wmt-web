@@ -4,9 +4,13 @@ const organisationUnitConstants = require('../constants/organisation-unit')
 const getCaseload = require('../services/get-caseload')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
+const authorisation = require('../authorisation')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/caseload', function (req, res, next) {
+    if (!authorisation.isUserAuthenticated(req)) {
+      return res.redirect('/login')
+    }
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 
@@ -37,6 +41,9 @@ module.exports = function (router) {
   })
 
   router.get('/:organisationLevel/:id/caseload/csv', function (req, res, next) {
+    if (!authorisation.isUserAuthenticated(req)) {
+      return res.redirect('/login')
+    }
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 

@@ -19,14 +19,21 @@ const POSTED_WORKLOAD_POINTS = {}
 var app
 var route
 var workloadPointsService
+var authorisationService
+var hasRoleResult = true
 
 before(function () {
+  authorisationService = {
+    hasRole: sinon.stub().returns(hasRoleResult),
+    isUserAuthenticated: sinon.stub().returns(true)
+  }
   workloadPointsService = {
     getWorkloadPoints: sinon.stub().resolves(WORKLOAD_POINTS),
     updateWorkloadPoints: sinon.stub().resolves({})
   }
   route = proxyquire('../../../app/routes/workload-points', {
-    '../services/workload-points-service': workloadPointsService
+    '../services/workload-points-service': workloadPointsService,
+    '../authorisation': authorisationService
   })
   app = routeHelper.buildApp(route)
 })

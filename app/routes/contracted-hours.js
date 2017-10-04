@@ -5,9 +5,16 @@ const ErrorHandler = require('../services/validators/error-handler')
 const FieldValidator = require('../services/validators/field-validator')
 const ValidationError = require('../services/errors/validation-error')
 const ERROR_MESSAGES = require('../services/validators/validation-error-messages')
+const authorisation = require('../authorisation')
+const messages = require('../constants/messages')
+const roles = require('../constants/user-roles')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/contracted-hours', function (req, res, next) {
+    if (!authorisation.isUserAuthenticated(req)) {
+      return res.redirect('/login')
+    }
+    if (!validRole(req)) { return denieAccess(res) }
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 
@@ -32,6 +39,10 @@ module.exports = function (router) {
   })
 
   router.post('/:organisationLevel/:id/contracted-hours', function (req, res, next) {
+    if (!authorisation.isUserAuthenticated(req)) {
+      return res.redirect('/login')
+    }
+    if (!validRole(req)) { return denieAccess(res) }
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
     var updatedHours = req.body.hours
@@ -82,4 +93,14 @@ module.exports = function (router) {
       throw new ValidationError(validationErrors)
     }
   }
+}
+
+const validRole = function (req) {
+  return authorisation.hasRole(req, roles.OFFENDER_MANAGER)
+}
+
+const denieAccess = function (res) {
+  return authorisation.accessDenied(res,
+    messages.ACCESS_DENIED,
+    messages.MANAGER_ROLES_REQUIRED)
 }

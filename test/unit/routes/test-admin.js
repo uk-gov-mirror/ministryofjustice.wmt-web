@@ -35,7 +35,7 @@ var initaliseApp = function () {
   userRoleService = sinon.stub()
   authorisationService = {
     hasRole: sinon.stub().returns(hasRoleResult),
-    isAuthenticationEnabled: sinon.stub().returns(mockConfig)
+    isAuthenticationEnabled: sinon.stub().returns(mockConfig.AUTHENTICATION_ENABLED)
   }
   route = proxyquire('../../../app/routes/admin', {
     '../services/user-role-service': userRoleService,
@@ -60,6 +60,8 @@ describe('admin route', function () {
   })
 
   it('should respond with 200 when user right is called', function () {
+    hasRoleResult = true
+    initaliseApp()
     return supertest(app).get(ADMIN_USER_URL).expect(200)
   })
 

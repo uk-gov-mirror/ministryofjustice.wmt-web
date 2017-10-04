@@ -4,9 +4,13 @@ const getSubNav = require('../services/get-sub-nav')
 const organisationUnit = require('../constants/organisation-unit')
 const ValidationError = require('../services/errors/validation-error')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
+const authorisation = require('../authorisation')
 
 module.exports = function (router) {
   router.get(`/:organisationLevel/:id/caseload-capacity`, function (req, res, next) {
+    if (!authorisation.isUserAuthenticated(req)) {
+      return res.redirect('/login')
+    }
     var capacityDateRange
     var errors
 

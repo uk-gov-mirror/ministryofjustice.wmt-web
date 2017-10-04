@@ -1,27 +1,25 @@
 const Link = require('../../app/services/domain/link')
 const userRoleService = require('../services/user-role-service')
 const UserRole = require('../services/domain/user-role')
-const authorisation = require('../authorisation')
-const roles = require('../constants/user-roles')
 const fieldValidator = require('../services/validators/field-validator')
 const errorHandler = require('../services/validators/error-handler')
+const authorisation = require('../authorisation')
+const messages = require('../constants/messages')
+const roles = require('../constants/user-roles')
 
 module.exports = function (router) {
   router.get('/admin', function (req, res, next) {
-    var userRole
-    var noAuth = false
     try {
-      if (authorisation.isAuthenticationEnabled() === false) {
-        noAuth = true
-      } else if (authorisation.hasRole(req, roles.DATA_ADMIN)) {
-        userRole = roles.DATA_ADMIN
-      } else if (authorisation.hasRole(req, roles.SYSTEM_ADMIN)) {
-        userRole = roles.SYSTEM_ADMIN
+      var userRole
+      var noAuth = false
+      if (!validRole(req)) {
+        return denieAccess(res)
       } else {
-        res.status(403)
-        return res.render('includes/error', {
-          error: 'Admin roles required'
-        })
+        if (!req.user) {
+          noAuth = true
+        } else {
+          userRole = req.user.user_role
+        }
       }
       return res.render('admin', {
         title: 'Admin',
@@ -34,6 +32,9 @@ module.exports = function (router) {
   })
 
   router.get('/admin/user', function (req, res) {
+    if (!validRole(req)) {
+      return denieAccess(res)
+    }
     var breadcrumbs = [
       new Link('User Rights', '/admin/user'),
       new Link('Admin', '/admin')
@@ -51,6 +52,7 @@ module.exports = function (router) {
   })
 
   router.post('/admin/user-rights', function (req, res, next) {
+    if (!validRole(req)) { return denieAccess(res) }
     var breadcrumbs = [
       new Link('User Rights', '/admin/user-rights'),
       new Link('Admin', '/admin')
@@ -75,6 +77,7 @@ module.exports = function (router) {
   })
 
   router.post('/admin/user-rights/:username', function (req, res, next) {
+    if (!validRole(req)) { return denieAccess(res) }
     var rights = req.body.rights
     var username = req.params.username
     var loggedInUsername = req.user.username
@@ -142,4 +145,17 @@ var isValidUsername = function (username) {
     return false
   }
   return true
+}
+
+const validRole = function (req) {
+  if (authorisation.hasRole(req, roles.DATA_ADMIN) || authorisation.hasRole(req, roles.SYSTEM_ADMIN)) {
+    return true
+  }
+  return false
+}
+
+const denieAccess = function (res) {
+  return authorisation.accessDenied(res,
+    messages.ACCESS_DENIED,
+    messages.ADMIN_ROLES_REQUIRED)
 }

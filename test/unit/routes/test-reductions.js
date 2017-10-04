@@ -80,8 +80,14 @@ var app
 var route
 var reductionsService
 var getSubNavStub
+var authorisationService
+var hasRoleResult = true
 
 beforeEach(function () {
+  authorisationService = {
+    hasRole: sinon.stub().returns(hasRoleResult),
+    isUserAuthenticated: sinon.stub().returns(true)
+  }
   getSubNavStub = sinon.stub()
   reductionsService = sinon.stub()
   reductionsService.getReductions = sinon.stub()
@@ -92,6 +98,7 @@ beforeEach(function () {
   reductionsService.getReductionByReductionId = sinon.stub()
   route = proxyquire('../../../app/routes/reductions', {
     '../services/reductions-service': reductionsService,
+    '../authorisation': authorisationService,
     '../services/get-sub-nav': getSubNavStub
   })
   app = routeHelper.buildApp(route)

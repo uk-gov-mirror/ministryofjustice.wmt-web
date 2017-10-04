@@ -21,12 +21,17 @@ var app
 var route
 var getCaseProgress
 var getSubNavStub
+var authorisationService
 
 before(function () {
+  authorisationService = {
+    isUserAuthenticated: sinon.stub().returns(true)
+  }
   getSubNavStub = sinon.stub()
   getCaseProgress = sinon.stub()
   route = proxyquire('../../../app/routes/case-progress', {
     '../services/get-case-progress': getCaseProgress,
+    '../authorisation': authorisationService,
     '../services/get-sub-nav': getSubNavStub})
   app = routeHelper.buildApp(route)
 })

@@ -39,14 +39,19 @@ var route
 var getOverview
 var getSubNavStub
 var getExportCsv
+var authorisationService
 
 before(function () {
+  authorisationService = {
+    isUserAuthenticated: sinon.stub().returns(true)
+  }
   getSubNavStub = sinon.stub()
   getOverview = sinon.stub()
   getExportCsv = sinon.stub().returns({ filename: EXPORT_CSV_FILENAME, csv: EXPORT_CSV })
   route = proxyquire('../../../app/routes/overview', {
     '../services/get-overview': getOverview,
     '../services/get-sub-nav': getSubNavStub,
+    '../authorisation': authorisationService,
     '../services/get-export-csv': getExportCsv
   })
   app = routeHelper.buildApp(route)
