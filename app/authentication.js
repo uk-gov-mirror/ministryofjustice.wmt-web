@@ -9,6 +9,7 @@ const getUserRoleByUsername = require('./services/data/get-user-role-by-username
 
 module.exports = function (app) {
   if (config.AUTHENTICATION_ENABLED !== 'true') {
+    passport.logout = function (req, res) { return res.status(501).redirect('/') }
     return
   }
 
