@@ -28,12 +28,14 @@ var route
 var userRoleService
 var authorisationService
 var hasRoleResult = true
-
+var mockConfig = {
+  AUTHENTICATION_ENABLED: false
+}
 var initaliseApp = function () {
   userRoleService = sinon.stub()
   authorisationService = {
     hasRole: sinon.stub().returns(hasRoleResult),
-    isAuthenticationEnabled: sinon.stub().returns(config.AUTHENTICATION_ENABLED)
+    isAuthenticationEnabled: sinon.stub().returns(mockConfig)
   }
   route = proxyquire('../../../app/routes/admin', {
     '../services/user-role-service': userRoleService,
