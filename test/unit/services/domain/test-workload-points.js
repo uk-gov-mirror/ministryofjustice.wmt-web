@@ -33,6 +33,8 @@ var VALID_WORKLOAD_POINTS = {
   weightingOverdue: '0.0',
   weightingWarrants: '0.0',
   weightingUpw: '100.0',
+  weightingArmsCommunity: '10.1',
+  weightingArmsLicense: '10.2',
   defaultContractedHoursPo: '37',
   defaultContractedHoursPso: '37',
   parom: '121'
@@ -70,6 +72,8 @@ describe('services/domain/workload-points', function () {
     expect(workloadPoints.sdr).to.equal('101')
     expect(workloadPoints.weightingOverdue).to.equal('0.0')
     expect(workloadPoints.weightingUpw).to.equal('100.0')
+    expect(workloadPoints.weightingArmsCommunity).to.equal('10.1')
+    expect(workloadPoints.weightingArmsLicense).to.equal('10.2')
     expect(workloadPoints.weightingWarrants).to.equal('0.0')
   })
 
