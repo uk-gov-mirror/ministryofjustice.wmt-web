@@ -12,52 +12,15 @@ const dateFilter = require('nunjucks-date-filter')
 const path = require('path')
 const routes = require('./routes')
 const routesNoCsrf = require('./routes-no-csrf')
-const cookieSession = require('cookie-session')
 const getOrganisationalHierarchyTree = require('./services/organisational-hierarchy-tree')
-const bunyan = require('bunyan')
-const PrettyStream = require('bunyan-prettystream')
-
-// Add logging
-var prettyStream = new PrettyStream()
-prettyStream.pipe(process.stdout)
-
-var log = bunyan.createLogger({
-  name: 'wmt-web',
-  streams: [],
-  serializers: {
-    'error': errorSerializer
-  }
-})
-
-log.addStream({
-  level: 'DEBUG',
-  stream: prettyStream
-})
-
-// Add file stream.
-log.addStream({
-  type: 'rotating-file',
-  level: config.LOGGING_LEVEL,
-  path: config.LOGGING_PATH,
-  period: '1d',
-  count: 7
-})
-
-function errorSerializer (error) {
-  return {
-    message: error.message,
-    name: error.name,
-    stack: error.stack
-  }
-}
+const cookieSession = require('cookie-session')
+const logger = require('./logger')
 
 var app = express()
 
 // Set security headers.
 app.use(helmet())
-app.use(helmet.hsts({ maxAge: 15552000 }))
-
-authentication(app)
+app.use(helmet.hsts({ maxAge: 31536000 }))
 
 var developmentMode = app.get('env') === 'development'
 
@@ -105,12 +68,14 @@ app.use(function (req, res, next) {
 // Log each HTML request and it's response.
 app.use(function (req, res, next) {
   // Log response started.
-  log.info(req.method, req.path, 'called.')
+  logger.info(req.method, req.path, 'called.')
   next()
 })
 
 // Use cookie parser middleware (required for csurf)
 app.use(cookieParser(config.APPLICATION_SECRET, { httpOnly: true, secure: config.SECURE_COOKIE === 'true' }))
+
+authentication(app)
 
 // Add routes that are allowed to be accessed from outside the application
 // i.e. authentication-saml
@@ -154,7 +119,7 @@ app.use(function (err, req, res, next) {
 
 // Development error handler.
 app.use(function (err, req, res, next) {
-  log.error({error: err})
+  logger.error({error: err})
   res.status(err.status || 500)
   if (err.status === 404) {
     res.render('includes/error-404')

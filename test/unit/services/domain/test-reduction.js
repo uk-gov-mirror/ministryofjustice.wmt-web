@@ -68,7 +68,7 @@ describe('services/domain/reduction', function () {
     }).to.throw(ValidationError)
       .that.has.a.property('validationErrors')
       .that.has.a.property('reductionEndDate')
-      .that.contains('Reduction end date must be after the start date')
+      .that.contains('Reduction end date must be after Reduction start date')
   })
 
   it('should raise a ValidationError if Notes exceed max length', function () {

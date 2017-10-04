@@ -1,20 +1,40 @@
 const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const INDEX_URI = '/'
-const route = require('../../../app/routes/index')
+const proxyquire = require('proxyquire')
 
 describe(`${INDEX_URI}`, function () {
   var app
+  var passport = {}
+  var mockConfig = {
+    AUTHENTICATION_ENABLED: false
+  }
+
+  passport.authenticate = function (req, res, next) {
+    return (strategy) => next()
+  }
 
   beforeEach(function () {
+    var route = proxyquire(
+      '../../../app/routes/index', {
+        'passport': passport,
+        '../../config': mockConfig
+      })
     app = routeHelper.buildApp(route)
   })
 
-  describe(`GET ${INDEX_URI}`, function () {
+  describe(`POST ${INDEX_URI}`, function () {
     it('should respond with a 200', function () {
       return supertest(app)
         .get(INDEX_URI)
-        .expect(200)
+        .expect(302)
+    })
+  })
+  describe(`GET ${INDEX_URI + '?HPP&TRUE=1/0'}`, function () {
+    it('should respond with an error', function () {
+      return supertest(app)
+        .get(INDEX_URI + '?HPP=TRUE/0')
+        .expect(500)
     })
   })
 })
