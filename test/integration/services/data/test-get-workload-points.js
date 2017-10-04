@@ -44,6 +44,8 @@ var getExistingActiveWorkloadPoints = function () {
           'weighting_o AS weightingOverdue',
           'weighting_w AS weightingWarrants',
           'weighting_u AS weightingUpw',
+          'weighting_arms_comm AS weightingArmsCommunity',
+          'weighting_arms_lic AS weightingArmsLicense',
           'parom AS parom')
   .whereNotNull('effective_from')
   .whereNull('effective_to')

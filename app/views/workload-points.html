@@ -381,6 +381,32 @@
                       <input class="form-control" id="weightingUpw" name="weightingUpw" type="number" value="{{ wp.weightingUpw }}">
                     </td>   
                   </tr>
+                  <tr>
+                    <th scope="row">
+                      {% if errors['weightingArmsCommunity'][0] %}
+                        <span class="error-message">{{ errors['weightingArmsCommunity'][0] }}</span>
+                      {% endif %}  
+                      <label class="form-label-bold" for="weightingArmsCommunity">ARMS Community Cases</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="weightingArmsCommunity" name="weightingArmsCommunity" type="number" value="{{ wp.weightingArmsCommunity }}">
+                    </td>   
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% if errors['weightingArmsLicense'][0] %}
+                        <span class="error-message">{{
+                            errors['weightingArmsLicense'][0] }}</span>
+                      {% endif %}  
+                      <label class="form-label-bold"
+                          for="weightingArmsLicense">ARMS License Cases</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="weightingArmsLicense"
+                      name="weightingArmsLicense" type="number" value="{{
+                      wp.weightingArmsLicense }}">
+                    </td>   
+                  </tr>
                 </tbody>
               </table>
             </div>
