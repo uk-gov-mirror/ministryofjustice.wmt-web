@@ -3,6 +3,8 @@ const knex = require('knex')(config)
 var Promise = require('bluebird').Promise
 const _ = require('lodash')
 
+module.exports.maxStagingId = null
+
 var defaultWorkload = {
   total_cases: 5,
   total_community_cases: 0,
@@ -226,9 +228,15 @@ var addWorkload = function (inserts) {
       contracted_hours: 37.5})
   .then(function (ids) {
     inserts.push({table: 'workload_owner', id: ids[0]})
+    return getMaxStagingId()
+  })
+  .then(function (upToDateMaxStagingId) {
+    module.exports.maxStagingId = upToDateMaxStagingId
+    var workloadOwners = inserts.filter((item) => item.table === 'workload_owner')
+    var currentWorkloadOwnerId = workloadOwners[workloadOwners.length - 1].id
     var workloads = [
-      Object.assign({}, defaultWorkload, {workload_owner_id: ids[0]}),
-      Object.assign({}, defaultWorkload, {workload_owner_id: ids[0]})
+      Object.assign({}, defaultWorkload, { workload_owner_id: currentWorkloadOwnerId, staging_id: upToDateMaxStagingId + 1 }),
+      Object.assign({}, defaultWorkload, { workload_owner_id: currentWorkloadOwnerId, staging_id: upToDateMaxStagingId + 2 })
     ]
     return knex('workload').returning('id').insert(workloads)
   })
@@ -454,4 +462,12 @@ module.exports.getAllWorkloadPointsForTest = function () {
       'parom AS parom',
       'effective_to AS effectiveTo'
     )
+}
+
+var getMaxStagingId = function () {
+  return knex('workload')
+    .max('staging_id AS maxStagingId')
+    .then(function (results) {
+      return results[0].maxStagingId
+    })
 }
