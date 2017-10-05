@@ -25,13 +25,13 @@ module.exports.addUsers = function () {
   var inserts = []
 
   var users = [
-    { username: 'testusername' }
+    { username: 'testusername', name: 'Test User' }
   ]
 
-  return knex('users').returning(['id', 'username']).insert(users)
+  return knex('users').returning(['id', 'username', 'name']).insert(users)
     .then(function (result) {
       result.forEach((user) => {
-        inserts.push({ table: 'users', id: user.id, username: user.username })
+        inserts.push({ table: 'users', id: user.id, username: user.username, name: user.name })
       })
       return inserts
     })

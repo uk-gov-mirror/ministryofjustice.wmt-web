@@ -22,6 +22,14 @@ module.exports.buildApp = function (route) {
     signed: false
   }))
 
+  // Add mocked user
+  app.use(function (req, res, next) {
+    req.user = {
+      userId: 'mockeduser'
+    }
+    next()
+  })
+
   route(app)
   mockViewEngine(app, VIEWS_DIRECTORY)
 

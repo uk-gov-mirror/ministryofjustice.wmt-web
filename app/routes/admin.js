@@ -92,7 +92,7 @@ module.exports = function (router) {
 }
 
 var removeUserRole = function (username, next) {
-  return userRoleService.getUser(username).then(function (user) {
+  return userRoleService.getUserByUsername(username).then(function (user) {
     if (user) {
       return userRoleService.removeUserRoleByUserId(user.id).then(function () {
         return userRoleService.removeUserByUsername(user.username)
@@ -104,9 +104,9 @@ var removeUserRole = function (username, next) {
 }
 
 var addUpdateUserRole = function (username, rights, loggedInUsername) {
-  return userRoleService.getUser(loggedInUsername).then(function (result) {
+  return userRoleService.getUserByUsername(loggedInUsername).then(function (result) {
     var loggedInUser = result
-    return userRoleService.getUser(username).then(function (result) {
+    return userRoleService.getUserByUsername(username).then(function (result) {
       var user = result
       return userRoleService.getRole(rights).then(function (role) {
         return userRoleService.updateUserRole(user.id, role.id, loggedInUser.id).then(function (result) {

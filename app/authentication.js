@@ -5,7 +5,7 @@ const config = require('../config')
 const SamlStrategy = require('passport-saml').Strategy
 const logger = require('./logger')
 
-const getUserRoleByUsername = require('./services/data/get-user-role-by-username')
+const userRoleService = require('./services/user-role-service')
 
 module.exports = function (app) {
   if (config.AUTHENTICATION_ENABLED !== 'true') {
@@ -19,21 +19,25 @@ module.exports = function (app) {
     var nameID = user.nameID
     var nameIDFormat = user.nameIDFormat
     // Remove the domain from the username
-    var username = name.substring(0, name.lastIndexOf('@'))
+    var username = userRoleService.removeDomainFromUsername(name)
     // Get the role for the user
-    getUserRoleByUsername(username).then(function (role) {
-      done(null, {
-        name: displayName,
-        username: username,
-        user_role: role.role,
-        nameID: nameID,
-        nameIDFormat: nameIDFormat
+    return userRoleService.getUserByUsername(username).then(function (user) {
+      return userRoleService.getRoleByUsername(username).then(function (role) {
+        done(null, {
+          userId: user.id,
+          name: displayName,
+          username: username,
+          user_role: role.role,
+          nameID: nameID,
+          nameIDFormat: nameIDFormat
+        })
       })
     })
   })
 
   passport.deserializeUser(function (user, done) {
     done(null, {
+      userId: user.userId,
       name: user.name,
       username: user.username,
       user_role: user.user_role,
@@ -80,7 +84,7 @@ module.exports = function (app) {
     req.user.saml = saml
     samlStrategy.logout(req, function (err, request) {
       if (err) {
-        logger.error({error: err})
+        logger.error({ error: err })
       }
       return res.redirect(request)
     })
