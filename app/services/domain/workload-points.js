@@ -34,6 +34,8 @@ class WorkloadPoints {
     this.weightingOverdue = request.weightingOverdue
     this.weightingWarrants = request.weightingWarrants
     this.weightingUpw = request.weightingUpw
+    this.weightingArmsCommunity = request.weightingArmsCommunity
+    this.weightingArmsLicense = request.weightingArmsLicense
     this.defaultContractedHoursPo = request.defaultContractedHoursPo
     this.defaultContractedHoursPso = request.defaultContractedHoursPso
     this.parom = request.parom
@@ -127,6 +129,12 @@ class WorkloadPoints {
       .isRequired()
       .isFloat(0, 100.0)
     FieldValidator(this.weightingWarrants, 'weightingWarrants', errors)
+      .isRequired()
+      .isFloat(0, 100.0)
+    FieldValidator(this.weightingArmsCommunity, 'weightingArmsCommunity', errors)
+      .isRequired()
+      .isFloat(0, 100.0)
+    FieldValidator(this.weightingArmsLicense, 'weightingArmsLicense', errors)
       .isRequired()
       .isFloat(0, 100.0)
     FieldValidator(this.defaultContractedHoursPo, 'defaultContractedHoursPo', errors)

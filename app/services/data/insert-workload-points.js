@@ -33,6 +33,8 @@ module.exports = function (workloadPoints) {
       weighting_o: workloadPoints.weightingOverdue,
       weighting_w: workloadPoints.weightingWarrants,
       weighting_u: workloadPoints.weightingUpw,
+      weighting_arms_comm: workloadPoints.weightingArmsCommunity,
+      weighting_arms_lic: workloadPoints.weightingArmsLicense,
       default_contracted_hours_po: workloadPoints.defaultContractedHoursPo,
       default_contracted_hours_pso: workloadPoints.defaultContractedHoursPso,
       parom: workloadPoints.parom,

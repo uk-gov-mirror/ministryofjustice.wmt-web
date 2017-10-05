@@ -6,7 +6,6 @@ module.exports = function (workloadOwnerId) {
   if (workloadOwnerId !== undefined) {
     whereObject.workload_owner_id = workloadOwnerId
   }
-  whereObject.contact_id = null
 
   return knex('reductions')
     .join('reduction_reason', 'reductions.reduction_reason_id', 'reduction_reason.id')

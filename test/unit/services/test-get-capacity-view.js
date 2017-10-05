@@ -20,7 +20,7 @@ const TEAM_REULTS = [
     linkId: 1,
     totalPoints: 50,
     availablePoints: 100,
-    cmsReductionHours: 10,
+    cmsAdjustmentPoints: 10,
     contractedHours: 40
   }
 ]
@@ -33,7 +33,7 @@ const LDU_RESULTS = [
     linkId: 1,
     totalPoints: 50,
     availablePoints: 100,
-    cmsReductionHours: 10,
+    cmsAdjustmentPoints: 10,
     contractedHours: 40
   },
   {
@@ -43,7 +43,7 @@ const LDU_RESULTS = [
     linkId: 1,
     totalPoints: 50,
     availablePoints: 100,
-    cmsReductionHours: 10,
+    cmsAdjustmentPoints: 10,
     contractedHours: 40
   }
 ]
@@ -54,7 +54,7 @@ const EXPECTED_TEAM_BREAKDOWN = [
     totalCases: 39,
     linkId: 1,
     capacityPercentage: 50,
-    cmsPercentage: 25
+    cmsPercentage: 20
   }
 ]
 
@@ -69,7 +69,7 @@ const EXPECTED_LDU_BREAKDOWN = [
         totalCases: 39,
         linkId: 1,
         capacityPercentage: 50,
-        cmsPercentage: 25
+        cmsPercentage: 20
       },
       {
         name: 'Test ldu 1',
@@ -77,7 +77,7 @@ const EXPECTED_LDU_BREAKDOWN = [
         totalCases: 40,
         linkId: 1,
         capacityPercentage: 50,
-        cmsPercentage: 25
+        cmsPercentage: 20
       }
     ]
   }

@@ -4,7 +4,6 @@ const knex = require('knex')(config)
 module.exports = function () {
   return knex('reduction_reason')
     .join('reduction_category', 'reduction_reason.category_id', 'reduction_category.id')
-    .where('reduction_reason.is_cms', false)
     .select('reduction_reason.id',
             'category',
             'reason',

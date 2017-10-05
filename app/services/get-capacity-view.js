@@ -74,12 +74,18 @@ var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
 }
 
 var buildCapacityBreakdownEntry = function (workloadReport) {
+  var cmsPercentageValue = null
+
+  if (workloadReport.cmsAdjustmentPoints > 0) {
+    cmsPercentageValue = percentageCalculator.calculatePercentage(workloadReport.cmsAdjustmentPoints, workloadReport.totalPoints)
+  }
+
   return {
     name: workloadReport.name,
     grade: workloadReport.grade,
     totalCases: workloadReport.totalCases,
     linkId: workloadReport.linkId,
     capacityPercentage: percentageCalculator.calculatePercentage(workloadReport.totalPoints, workloadReport.availablePoints),
-    cmsPercentage: percentageCalculator.calculatePercentage(workloadReport.cmsReductionHours, workloadReport.contractedHours)
+    cmsPercentage: cmsPercentageValue
   }
 }

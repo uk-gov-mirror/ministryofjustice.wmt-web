@@ -9,6 +9,7 @@ const userRoleService = require('./services/user-role-service')
 
 module.exports = function (app) {
   if (config.AUTHENTICATION_ENABLED !== 'true') {
+    passport.logout = function (req, res) { return res.status(501).redirect('/') }
     return
   }
 

@@ -9,8 +9,11 @@ const errorHandler = require('../services/validators/error-handler')
 module.exports = function (router) {
   router.get('/admin', function (req, res, next) {
     var userRole
+    var noAuth = false
     try {
-      if (authorisation.hasRole(req, roles.DATA_ADMIN)) {
+      if (authorisation.isAuthenticationEnabled() === false) {
+        noAuth = true
+      } else if (authorisation.hasRole(req, roles.DATA_ADMIN)) {
         userRole = roles.DATA_ADMIN
       } else if (authorisation.hasRole(req, roles.SYSTEM_ADMIN)) {
         userRole = roles.SYSTEM_ADMIN
@@ -22,7 +25,8 @@ module.exports = function (router) {
       }
       return res.render('admin', {
         title: 'Admin',
-        userRole: userRole
+        userRole: userRole,
+        noAuth: noAuth
       })
     } catch (error) {
       res.status(401).redirect('/')

@@ -6,7 +6,7 @@ const orgUnitConstants = require('../../../../app/constants/organisation-unit')
 
 var inserts = []
 
-describe('services/data/get-organsiation-overview', function () {
+describe('services/data/get-organisation-overview', function () {
   before(function () {
     return workloadCapacityHelper.addCaseProgressDataForAllOrgUnits()
     .then(function (builtInserts) {

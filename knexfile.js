@@ -12,7 +12,10 @@ module.exports = {
         encrypt: true
       }
     },
-    debug: false
+    debug: false,
+    pool: {
+      max: 500
+    }
   },
   integrationTests: {
     client: 'mssql',
