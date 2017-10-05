@@ -14,6 +14,7 @@ module.exports = function (router) {
           subTitle: result.subTitle,
           breadcrumbs: result.breadcrumbs,
           wp: result.workloadPoints,
+          updatedBy: result.updatedBy,
           successText: successText
         })
       })

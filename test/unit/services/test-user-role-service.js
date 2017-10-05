@@ -6,8 +6,10 @@ const proxyquire = require('proxyquire')
 const config = require('../../../config')
 const userRole = require('../../../app/constants/user-roles.js')
 const UserRole = require('../../../app/services/domain/user-role')
+const removeDomainFromUsername = require('../../../app/services/user-role-service').removeDomainFromUsername
 
-var STAFF_USER = { id: 0, username: 'Staff.Test@' + config.ACTIVE_DIRECTORY_DOMAIN, name: 'Staff Test' }
+var DOMAIN_USERNAME = 'Staff.Test@' + config.ACTIVE_DIRECTORY_DOMAIN
+var STAFF_USER = { id: 0, username: 'Staff.Test', name: 'Staff Test' }
 
 var STAFF_ROLE = { roleId: 0, role: userRole.STAFF }
 
@@ -32,7 +34,6 @@ beforeEach(function () {
   getRole = sinon.stub()
   getUserById = sinon.stub()
   addUser = sinon.stub()
-
   userRoleService =
     proxyquire('../../../app/services/user-role-service',
       {
@@ -119,5 +120,10 @@ describe('services/user-role-service', function () {
       .then(function (result) {
         expect(result).to.equal(1)
       })
+  })
+
+  it('should return the username without the domain name', function () {
+    var result = removeDomainFromUsername(DOMAIN_USERNAME)
+    expect(result).to.equal(STAFF_USER.username)
   })
 })

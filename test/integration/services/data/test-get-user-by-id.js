@@ -22,8 +22,6 @@ describe('/services/data/get-user-by-id', function () {
   it('should get user by the id', function () {
     return getUserById(userId)
       .then(function (result) {
-        expect(result.id).to.be.a('number')
-        expect(result.id).to.be.equal(userId)
         expect(result.username).to.be.a('string')
         expect(result.username).to.be.equal(username)
         expect(result.name).to.be.a('string')

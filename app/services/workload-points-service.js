@@ -15,19 +15,24 @@ module.exports.getWorkloadPoints = function (id, organisationLevel) {
     new Link('Admin', '/admin')
   ]
 
-  return getWorkloadPoints().then(function (results) {
-    if (results !== undefined) {
-      var formattedUpdateDate = dateFormatter.formatDate(results.effectiveFrom, 'DD/MM/YYYY')
-      results.effectiveFrom = formattedUpdateDate
+  return getWorkloadPoints().then(function (workloadPoints) {
+    if (workloadPoints !== undefined) {
+      var formattedUpdateDate = dateFormatter.formatDate(workloadPoints.effectiveFrom, 'DD/MM/YYYY')
+      workloadPoints.effectiveFrom = formattedUpdateDate
     }
-    return userRoleService.getUserById(results.updatedByUserId)
+    return userRoleService.getUserById(workloadPoints.updatedByUserId)
     .then(function (user) {
-      if (user !== undefined) {
-        results.updatedByUserId = user.name
+      var updatedBy = workloadPoints.updatedByUserId // Default to the user id
+      if (user) {
+        if (user.name) { // If there is a valid use that
+          updatedBy = user.name
+        }
+        updatedBy = user.username
       }
       result.title = breadcrumbs[0].title
       result.subTitle = breadcrumbs[1].title
-      result.workloadPoints = results
+      result.workloadPoints = workloadPoints
+      result.updatedBy = updatedBy
       result.breadcrumbs = breadcrumbs
       return result
     })

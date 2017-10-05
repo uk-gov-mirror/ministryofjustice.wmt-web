@@ -21,12 +21,19 @@ var recalcIds = {
   workloadReportId: 99
 }
 
+var mockUserObject = {
+  name: 'name'
+}
+
 var workloadPointsService
 var getWorkloadPointsData
 var updatePreviousWorkloadPointsEffectiveTo
 var insertNewWorkloadPoints
 var getWorkloadIdsForWpRecalc
 var createCalculateWorkloadPointsTask
+var mockUserRoleService = {
+  getUserById: sinon.stub().resolves(mockUserObject)
+}
 
 before(function () {
   getWorkloadPointsData = sinon.stub().resolves(WORKLOAD_POINTS_DETAILS)
@@ -34,16 +41,17 @@ before(function () {
   insertNewWorkloadPoints = sinon.stub().resolves()
   getWorkloadIdsForWpRecalc = sinon.stub().resolves(recalcIds)
   createCalculateWorkloadPointsTask = sinon.stub().resolves()
-  workloadPointsService =
-    proxyquire('../../../app/services/workload-points-service',
-      {
-        './data/get-workload-points': getWorkloadPointsData,
-        './data/update-workload-points-effective-to': updatePreviousWorkloadPointsEffectiveTo,
-        './data/insert-workload-points': insertNewWorkloadPoints,
-        './data/get-ids-for-workload-points-recalc': getWorkloadIdsForWpRecalc,
-        './data/create-calculate-workload-points-task': createCalculateWorkloadPointsTask
-      }
-    )
+
+  workloadPointsService = proxyquire('../../../app/services/workload-points-service',
+    {
+      './data/get-workload-points': getWorkloadPointsData,
+      './data/update-workload-points-effective-to': updatePreviousWorkloadPointsEffectiveTo,
+      './data/insert-workload-points': insertNewWorkloadPoints,
+      './data/get-ids-for-workload-points-recalc': getWorkloadIdsForWpRecalc,
+      './data/create-calculate-workload-points-task': createCalculateWorkloadPointsTask,
+      '../services/user-role-service': mockUserRoleService
+    }
+  )
 })
 
 describe('services/workload-points-service', function () {

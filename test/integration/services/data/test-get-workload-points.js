@@ -54,7 +54,6 @@ describe('services/data/get-workload-points', function () {
     return getExistingActiveWorkloadPoints().then(function (results) {
       expectedWorkloadPoints = results
       if (results === undefined) {
-        console.log('----------')
         return dataHelper.addWorkloadPoints()
           .then(function (builtInserts) {
             inserts = builtInserts

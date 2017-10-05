@@ -5,8 +5,7 @@ const config = require('../config')
 const SamlStrategy = require('passport-saml').Strategy
 const logger = require('./logger')
 
-const getUserRoleByUsername = require('./services/data/get-user-role-by-username')
-const getUserByUsername = require('./services/data/get-user-by-username')
+const userRoleService = require('./services/user-role-service')
 
 module.exports = function (app) {
   if (config.AUTHENTICATION_ENABLED !== 'true') {
@@ -19,10 +18,10 @@ module.exports = function (app) {
     var nameID = user.nameID
     var nameIDFormat = user.nameIDFormat
     // Remove the domain from the username
-    var username = name.substring(0, name.lastIndexOf('@'))
+    var username = userRoleService.removeDomainFromUsername(name)
     // Get the role for the user
-    getUserByUsername(username).then(function (user) {
-      getUserRoleByUsername(username).then(function (role) {
+    return userRoleService.getUserByUsername(username).then(function (user) {
+      return userRoleService.getRoleByUsername(username).then(function (role) {
         done(null, {
           userId: user.id,
           name: displayName,
