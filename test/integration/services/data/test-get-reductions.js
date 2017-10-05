@@ -1,6 +1,4 @@
 const expect = require('chai').expect
-const config = require('../../../../knexfile').integrationTests
-const knex = require('knex')(config)
 const moment = require('moment')
 const Reduction = require('../../../../app/services/domain/reduction')
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
@@ -42,22 +40,11 @@ describe('services/data/get-reductions', function () {
     })
   })
 
-  it('should return a reduction record for a given workload id only if reduction is not cms', function () {
+  it('should return a reduction record for a given workload id', function () {
     return getReductions(workloadOwnerId)
     .then(function (results) {
       expect(results[results.length - 1].id).to.eql(insertedReduction.id[0])
       expect(results[results.length - 1].workloadOwnerId).to.eql(workloadOwnerId)
-      return knex('reductions').update({contact_id: 1234}).where('id', insertedReduction.id[0])
-      .then(function () {
-        return getReductions(workloadOwnerId)
-        .then(function (newResults) {
-          var redIds = []
-          newResults.forEach(function (reduction) {
-            redIds.push(reduction.id)
-          })
-          expect(redIds.includes(insertedReduction.id[0])).to.be.equal(false)
-        })
-      })
     })
   })
 
