@@ -26,8 +26,9 @@ module.exports.getWorkloadPoints = function (id, organisationLevel) {
       if (user) {
         if (user.name) { // If there is a valid use that
           updatedBy = user.name
+        } else {
+          updatedBy = user.username
         }
-        updatedBy = user.username
       }
       result.title = breadcrumbs[0].title
       result.subTitle = breadcrumbs[1].title
