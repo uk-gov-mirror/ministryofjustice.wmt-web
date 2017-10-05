@@ -1,6 +1,6 @@
 module.exports = {
   UNAUTHORIZED: 'Unauthorized',
-  FORBIDDEN: 'Forbiden',
+  FORBIDDEN: 'Forbidden',
   ERROR: 'Error',
   ACCESS_DENIED: 'Access is denied',
   MANAGER_ROLES_REQUIRED: 'Manager roles required',

@@ -8,9 +8,8 @@ const authorisation = require('../authorisation')
 
 module.exports = function (router) {
   router.get(`/:organisationLevel/:id/caseload-capacity`, function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
+    authorisation.assertUserAuthenticated(req, res)
+
     var capacityDateRange
     var errors
 

@@ -8,9 +8,8 @@ const authorisation = require('../authorisation')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/overview', function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
+    authorisation.assertUserAuthenticated(req, res)
+    
     var organisationLevel = req.params.organisationLevel
     var organisationUnit = getOrganisationUnit('name', organisationLevel)
     var id
@@ -47,9 +46,8 @@ module.exports = function (router) {
   })
 
   router.get('/:organisationLevel/:id/overview/csv', function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
+    iauthorisation.assertUserAuthenticated(req, res)
+    
     var organisationLevel = req.params.organisationLevel
     var id
     if (organisationLevel !== organisationUnitConstants.NATIONAL.name) {

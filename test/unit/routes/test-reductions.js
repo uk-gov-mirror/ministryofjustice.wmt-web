@@ -1,6 +1,8 @@
 const routeHelper = require('../../helpers/routes/route-helper')
 const superTest = require('supertest')
-const proxyquire = require('proxyquire')
+const proxyquire = require('proxyquire').noPreserveCache()
+const roles = require('../../..//app/constants/user-roles')
+
 const sinon = require('sinon')
 require('sinon-bluebird')
 
@@ -80,12 +82,13 @@ var app
 var route
 var reductionsService
 var getSubNavStub
-var authorisationService
 var hasRoleResult = true
+var authorisationService
+var hasRoleStub = sinon.stub()
 
-beforeEach(function () {
+var initaliseApp = function () {
   authorisationService = {
-    hasRole: sinon.stub().returns(hasRoleResult),
+    hasRole: hasRoleStub,
     isUserAuthenticated: sinon.stub().returns(true)
   }
   getSubNavStub = sinon.stub()
@@ -102,9 +105,24 @@ beforeEach(function () {
     '../services/get-sub-nav': getSubNavStub
   })
   app = routeHelper.buildApp(route)
+}
+
+before(function () {
+  initaliseApp()
 })
 
 describe('reductions route', function () {
+  describe('For the get reductions route', function () {
+    it('should respond with 200 and the correct data', function () {
+      hasRoleStub.resolves(true)
+      initaliseApp()
+      reductionsService.getReductions.resolves(getReductionNoTextResult)
+      return superTest(app)
+        .get(GET_REDUCTIONS_URL)
+        .expect(200)
+    })
+  })
+
   describe('For the get reductions route', function () {
     it('should respond with 200 and the correct data', function () {
       reductionsService.getReductions.resolves(getReductionNoTextResult)

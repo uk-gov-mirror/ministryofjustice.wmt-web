@@ -1,43 +1,25 @@
 const config = require('../config')
+const messages = require('./constants/messages')
 
-var isUserAuthenticated = function (req) {
-  var result = false
+var assertUserAuthenticated = function (req, res) {
   if (isAuthenticationEnabled()) {
-    if (!req.isAuthenticated() || !req.user) {
-      result = false
-    } else {
-      result = true
+    if (!req.user) {
+      return res.redirect('/login')
     }
-  } else {
-    result = true
-  }
-  return result
-}
-
-var isUserAuthorised = function (req) {
-  if (!req.isAuthenticated() || !req.user) {
-    var error = new Error('Unauthorized')
-    error.status = 401
-    throw error
   }
 }
 
-var hasRole = function (req, role) {
-  var hasRole = false
-  if (isAuthenticationEnabled()) {
-    isUserAuthorised(req)
-    if (req.user.user_role === role) {
-      hasRole = true
+var hasRole = function (req, res, roles, message) {
+  // Check if role exists
+  if (roles instanceof Array){
+    if (roles.includes(req.user.user_role)) {
+      // return as role exists
+      return
     }
-  } else {
-    hasRole = true
   }
-  return hasRole
-}
-
-var accessDenied = function (res, heading, message) {
+  // no role exist; deny access
   return res.status(403).render('includes/message', {
-    heading: heading,
+    heading: messages.ACCESS_DENIED,
     message: message
   })
 }
@@ -47,5 +29,5 @@ var isAuthenticationEnabled = function () {
 }
 
 module.exports.hasRole = hasRole
-module.exports.accessDenied = accessDenied
-module.exports.isUserAuthenticated = isUserAuthenticated
+module.exports.assertUserAuthenticated = assertUserAuthenticated
+module.exports.isAuthenticationEnabled = isAuthenticationEnabled

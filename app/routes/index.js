@@ -5,9 +5,8 @@ module.exports = function (router) {
     if (Object.keys(req.query).length !== 0) {
       return next()
     }
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
+    authorisation.assertUserAuthenticated(req, res)
+    
     return res.redirect('/hmpps/0')
   })
 }

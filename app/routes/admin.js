@@ -12,14 +12,11 @@ module.exports = function (router) {
     try {
       var userRole
       var noAuth = false
-      if (!validRole(req)) {
-        return denieAccess(res)
+      authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN], messages.ADMIN_ROLES_REQUIRED)
+      if (!req.user) {
+        noAuth = true
       } else {
-        if (!req.user) {
-          noAuth = true
-        } else {
-          userRole = req.user.user_role
-        }
+        userRole = req.user.user_role
       }
       return res.render('admin', {
         title: 'Admin',
@@ -32,9 +29,8 @@ module.exports = function (router) {
   })
 
   router.get('/admin/user', function (req, res) {
-    if (!validRole(req)) {
-      return denieAccess(res)
-    }
+    authorisation.hasRole(req, [roles.SYSTEM_ADMIN], messages.ADMIN_ROLES_REQUIRED)
+
     var breadcrumbs = [
       new Link('User Rights', '/admin/user'),
       new Link('Admin', '/admin')
@@ -52,7 +48,8 @@ module.exports = function (router) {
   })
 
   router.post('/admin/user-rights', function (req, res, next) {
-    if (!validRole(req)) { return denieAccess(res) }
+    authorisation.hasRole(req, [roles.SYSTEM_ADMIN], messages.ADMIN_ROLES_REQUIRED)
+
     var breadcrumbs = [
       new Link('User Rights', '/admin/user-rights'),
       new Link('Admin', '/admin')
@@ -77,7 +74,7 @@ module.exports = function (router) {
   })
 
   router.post('/admin/user-rights/:username', function (req, res, next) {
-    if (!validRole(req)) { return denieAccess(res) }
+    authorisation.hasRole(req, [roles.SYSTEM_ADMIN], messages.ADMIN_ROLES_REQUIRED)
     var rights = req.body.rights
     var username = req.params.username
     var loggedInUsername = req.user.username
@@ -145,17 +142,4 @@ var isValidUsername = function (username) {
     return false
   }
   return true
-}
-
-const validRole = function (req) {
-  if (authorisation.hasRole(req, roles.DATA_ADMIN) || authorisation.hasRole(req, roles.SYSTEM_ADMIN)) {
-    return true
-  }
-  return false
-}
-
-const denieAccess = function (res) {
-  return authorisation.accessDenied(res,
-    messages.ACCESS_DENIED,
-    messages.ADMIN_ROLES_REQUIRED)
 }

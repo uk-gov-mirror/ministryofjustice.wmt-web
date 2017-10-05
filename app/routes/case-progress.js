@@ -5,9 +5,7 @@ const authorisation = require('../authorisation')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/case-progress', function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
+    authorisation.assertUserAuthenticated(req, res)
     var organisationLevel = req.params.organisationLevel
     var id
 

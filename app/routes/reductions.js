@@ -10,10 +10,11 @@ const roles = require('../constants/user-roles')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/reductions', function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
-    if (!validRole(req)) { return denieAccess(res) }
+    debugger
+    authorisation.assertUserAuthenticated(req, res)
+    
+    authorisation.hasRole(req, [roles.MANAGER], messages.MANAGER_ROLES_REQUIRED)
+    
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 
@@ -42,10 +43,10 @@ module.exports = function (router) {
   })
 
   router.get('/:organisationLevel/:id/add-reduction', function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
-    if (!validRole(req)) { return denieAccess(res) }
+    authorisation.assertUserAuthenticated(req, res)
+    
+    authorisation.hasRole(req, [roles.OFFENDER_MANAGER], messages.MANAGER_ROLES_REQUIRED)
+    
     var organisationLevel = req.params.organisationLevel
     var id = parseInt(req.params.id)
 
@@ -74,10 +75,10 @@ module.exports = function (router) {
   })
 
   router.get('/:organisationLevel/:id/edit-reduction', function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
-    if (!validRole(req)) { return denieAccess(res) }
+    authorisation.assertUserAuthenticated(req, res)
+    
+    authorisation.hasRole(req, [roles.OFFENDER_MANAGER], messages.MANAGER_ROLES_REQUIRED)
+    
     var organisationLevel = req.params.organisationLevel
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -109,10 +110,10 @@ module.exports = function (router) {
   })
 
   router.post('/:organisationLevel/:id/add-reduction', function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
-    if (!validRole(req)) { return denieAccess(res) }
+    authorisation.assertUserAuthenticated(req, res)
+    
+    authorisation.hasRole(req, [roles.OFFENDER_MANAGER], messages.MANAGER_ROLES_REQUIRED)
+    
     var organisationLevel = req.params.organisationLevel
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -166,10 +167,10 @@ module.exports = function (router) {
   })
 
   router.post('/:organisationLevel/:id/edit-reduction', function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
-    if (!validRole(req)) { return denieAccess(res) }
+    authorisation.assertUserAuthenticated(req, res)
+    
+    authorisation.hasRole(req, [roles.OFFENDER_MANAGER], messages.MANAGER_ROLES_REQUIRED)
+    
     var organisationLevel = req.params.organisationLevel
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -221,10 +222,10 @@ module.exports = function (router) {
   })
 
   router.post('/:organisationLevel/:id/update-reduction-status', function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
-    if (!validRole(req)) { return denieAccess(res) }
+    authorisation.assertUserAuthenticated(req, res)
+    
+    authorisation.hasRole(req, [roles.OFFENDER_MANAGER], messages.MANAGER_ROLES_REQUIRED)
+    
     var organisationLevel = req.params.organisationLevel
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -310,14 +311,4 @@ module.exports = function (router) {
     }
     return viewModel
   }
-}
-
-const validRole = function (req) {
-  return authorisation.hasRole(req, roles.MANAGER)
-}
-
-const denieAccess = function (res) {
-  return authorisation.accessDenied(res,
-    messages.ACCESS_DENIED,
-    messages.MANAGER_ROLES_REQUIRED)
 }

@@ -5,9 +5,8 @@ const authorisation = require('../authorisation')
 
 module.exports = function (router) {
   router.get('/admin/workload-points', function (req, res) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
+    authorisation.assertUserAuthenticated(req, res)
+    
     var success = req.query.success
     var successText = success ? 'You have successfully updated the workload points!' : null
 
@@ -24,9 +23,8 @@ module.exports = function (router) {
   })
 
   router.post('/admin/workload-points', function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
+    authorisation.assertUserAuthenticated(req, res)
+    
     var updatedWorkloadPoints
     try {
       updatedWorkloadPoints = new WorkloadPoints(req.body)

@@ -8,9 +8,8 @@ const authorisation = require('../authorisation')
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/caseload', function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
+    authorisation.assertUserAuthenticated(req, res)
+
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 
@@ -41,9 +40,8 @@ module.exports = function (router) {
   })
 
   router.get('/:organisationLevel/:id/caseload/csv', function (req, res, next) {
-    if (!authorisation.isUserAuthenticated(req)) {
-      return res.redirect('/login')
-    }
+    authorisation.assertUserAuthenticated(req, res)
+    
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 
