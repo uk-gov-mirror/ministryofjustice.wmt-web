@@ -6,30 +6,52 @@ const errorHandler = require('../services/validators/error-handler')
 const authorisation = require('../authorisation')
 const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
+const Unathorized = require('../services/errors/authentication-error').Unauthorized
+const Forbidden = require('../services/errors/authentication-error').Forbidden
 
 module.exports = function (router) {
   router.get('/admin', function (req, res, next) {
     try {
-      var userRole
-      var noAuth = false
-      authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN], messages.ADMIN_ROLES_REQUIRED)
-      if (!req.user) {
-        noAuth = true
-      } else {
-        userRole = req.user.user_role
-      }
-      return res.render('admin', {
-        title: 'Admin',
-        userRole: userRole,
-        noAuth: noAuth
-      })
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
     } catch (error) {
-      res.status(401).redirect('/')
+      if (error.statusCode instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
     }
+    var userRole
+    var noAuth = false
+    if (!req.user) {
+      noAuth = true
+    } else {
+      userRole = req.user.user_role
+    }
+    return res.render('admin', {
+      title: 'Admin',
+      userRole: userRole,
+      noAuth: noAuth
+    })
   })
 
   router.get('/admin/user', function (req, res) {
-    authorisation.hasRole(req, [roles.SYSTEM_ADMIN], messages.ADMIN_ROLES_REQUIRED)
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
 
     var breadcrumbs = [
       new Link('User Rights', '/admin/user'),
@@ -48,7 +70,19 @@ module.exports = function (router) {
   })
 
   router.post('/admin/user-rights', function (req, res, next) {
-    authorisation.hasRole(req, [roles.SYSTEM_ADMIN], messages.ADMIN_ROLES_REQUIRED)
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
 
     var breadcrumbs = [
       new Link('User Rights', '/admin/user-rights'),
@@ -74,7 +108,19 @@ module.exports = function (router) {
   })
 
   router.post('/admin/user-rights/:username', function (req, res, next) {
-    authorisation.hasRole(req, [roles.SYSTEM_ADMIN], messages.ADMIN_ROLES_REQUIRED)
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
     var rights = req.body.rights
     var username = req.params.username
     var loggedInUsername = req.user.username

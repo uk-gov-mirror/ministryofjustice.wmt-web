@@ -2,11 +2,26 @@ const workloadPointsService = require('../services/workload-points-service')
 const WorkloadPoints = require('../services/domain/workload-points')
 const ValidationError = require('../services/errors/validation-error')
 const authorisation = require('../authorisation')
+const messages = require('../constants/messages')
+const roles = require('../constants/user-roles')
+const Unathorized = require('../services/errors/authentication-error').Unauthorized
+const Forbidden = require('../services/errors/authentication-error').Forbidden
 
 module.exports = function (router) {
   router.get('/admin/workload-points', function (req, res) {
-    authorisation.assertUserAuthenticated(req, res)
-    
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
     var success = req.query.success
     var successText = success ? 'You have successfully updated the workload points!' : null
 
@@ -23,8 +38,19 @@ module.exports = function (router) {
   })
 
   router.post('/admin/workload-points', function (req, res, next) {
-    authorisation.assertUserAuthenticated(req, res)
-    
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
     var updatedWorkloadPoints
     try {
       updatedWorkloadPoints = new WorkloadPoints(req.body)

@@ -3,7 +3,6 @@ const logger = require('../logger')
 
 module.exports = function (router) {
   router.get('/login', passport.authenticate('saml'), function (req, res) {
-    console.log('----------')
     return res.redirect('/hmpps/0')
   })
 

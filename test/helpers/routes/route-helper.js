@@ -7,7 +7,7 @@ const csurf = require('csurf')
 
 const VIEWS_DIRECTORY = '../../../app/views'
 
-module.exports.buildApp = function (route) {
+module.exports.buildApp = function (route, middleware) {
   var app = express()
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: false }))
@@ -21,6 +21,10 @@ module.exports.buildApp = function (route) {
     expires: new Date(2050, 1),
     signed: false
   }))
+
+  if (middleware) {
+    app.use(middleware)
+  }
 
   route(app)
   mockViewEngine(app, VIEWS_DIRECTORY)

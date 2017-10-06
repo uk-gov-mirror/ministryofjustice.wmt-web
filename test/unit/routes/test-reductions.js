@@ -2,6 +2,7 @@ const routeHelper = require('../../helpers/routes/route-helper')
 const superTest = require('supertest')
 const proxyquire = require('proxyquire').noPreserveCache()
 const roles = require('../../..//app/constants/user-roles')
+const hasRoleFunction = require('../../../app/authorisation').hasRole
 
 const sinon = require('sinon')
 require('sinon-bluebird')
@@ -82,13 +83,21 @@ var app
 var route
 var reductionsService
 var getSubNavStub
-var hasRoleResult = true
 var authorisationService
-var hasRoleStub = sinon.stub()
+var validRole = roles.MANAGER
 
-var initaliseApp = function () {
+var createMiddleWare = function () {
+  return function (req, res, next) {
+    req.user = {
+      user_role: validRole
+    }
+    next()
+  }
+}
+
+var initaliseApp = function (middleware) {
   authorisationService = {
-    hasRole: hasRoleStub,
+    hasRole: hasRoleFunction,
     isUserAuthenticated: sinon.stub().returns(true)
   }
   getSubNavStub = sinon.stub()
@@ -104,18 +113,16 @@ var initaliseApp = function () {
     '../authorisation': authorisationService,
     '../services/get-sub-nav': getSubNavStub
   })
-  app = routeHelper.buildApp(route)
+  app = routeHelper.buildApp(route, middleware)
 }
 
-before(function () {
-  initaliseApp()
+beforeEach(function () {
+  initaliseApp(createMiddleWare())
 })
 
 describe('reductions route', function () {
   describe('For the get reductions route', function () {
-    it('should respond with 200 and the correct data', function () {
-      hasRoleStub.resolves(true)
-      initaliseApp()
+    it('should respond with 200 when correct role is passed', function () {
       reductionsService.getReductions.resolves(getReductionNoTextResult)
       return superTest(app)
         .get(GET_REDUCTIONS_URL)
@@ -131,6 +138,7 @@ describe('reductions route', function () {
         .expect(200)
     })
   })
+
   describe('For the add reductions page route', function () {
     it('should respond with 200 and the correct data and no existing reduction', function () {
       reductionsService.getAddReductionsRefData.resolves(addReduction)

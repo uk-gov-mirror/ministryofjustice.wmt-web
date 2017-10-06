@@ -5,10 +5,17 @@ const getCaseload = require('../services/get-caseload')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const authorisation = require('../authorisation')
+const Unathorized = require('../services/errors/authentication-error').Unauthorized
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/caseload', function (req, res, next) {
-    authorisation.assertUserAuthenticated(req, res)
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
 
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
@@ -40,8 +47,13 @@ module.exports = function (router) {
   })
 
   router.get('/:organisationLevel/:id/caseload/csv', function (req, res, next) {
-    authorisation.assertUserAuthenticated(req, res)
-    
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 

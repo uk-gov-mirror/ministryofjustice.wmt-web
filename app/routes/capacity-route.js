@@ -5,10 +5,17 @@ const organisationUnit = require('../constants/organisation-unit')
 const ValidationError = require('../services/errors/validation-error')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const authorisation = require('../authorisation')
+const Unathorized = require('../services/errors/authentication-error').Unauthorized
 
 module.exports = function (router) {
   router.get(`/:organisationLevel/:id/caseload-capacity`, function (req, res, next) {
-    authorisation.assertUserAuthenticated(req, res)
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
 
     var capacityDateRange
     var errors

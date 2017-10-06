@@ -1,27 +1,25 @@
 const config = require('../config')
-const messages = require('./constants/messages')
+const Unauthorized = require('./services/errors/authentication-error').Unauthorized
+const Forbidden = require('./services/errors/authentication-error').Forbidden
 
-var assertUserAuthenticated = function (req, res) {
+var assertUserAuthenticated = function (req) {
   if (isAuthenticationEnabled()) {
     if (!req.user) {
-      return res.redirect('/login')
+      throw new Unauthorized('Unauthorized', '/login')
     }
   }
 }
 
-var hasRole = function (req, res, roles, message) {
-  // Check if role exists
-  if (roles instanceof Array){
-    if (roles.includes(req.user.user_role)) {
-      // return as role exists
-      return
+var hasRole = function (req, roles) {
+  if (isAuthenticationEnabled()) {
+    if (roles instanceof Array) {
+      if (!roles.includes(req.user.user_role)) {
+        throw new Forbidden('Unauthorized', 'includes/message')
+      }
+    } else {
+      throw new Forbidden('Unauthorized', 'includes/message')
     }
   }
-  // no role exist; deny access
-  return res.status(403).render('includes/message', {
-    heading: messages.ACCESS_DENIED,
-    message: message
-  })
 }
 
 var isAuthenticationEnabled = function () {
