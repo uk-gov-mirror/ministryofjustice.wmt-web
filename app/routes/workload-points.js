@@ -32,6 +32,7 @@ module.exports = function (router) {
           subTitle: result.subTitle,
           breadcrumbs: result.breadcrumbs,
           wp: result.workloadPoints,
+          updatedBy: result.updatedBy,
           successText: successText
         })
       })
@@ -53,7 +54,14 @@ module.exports = function (router) {
     }
     var updatedWorkloadPoints
     try {
+      if (req.user) {
+        req.body.userId = req.user.userId.toString()
+      }
       updatedWorkloadPoints = new WorkloadPoints(req.body)
+      return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints)
+        .then(function () {
+          return res.redirect(302, '/admin/workload-points?success=true')
+        })
     } catch (error) {
       if (error instanceof ValidationError) {
         return workloadPointsService.getWorkloadPoints()
@@ -67,13 +75,7 @@ module.exports = function (router) {
             })
           })
       }
+      next(error)
     }
-
-    return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints)
-      .then(function () {
-        return res.redirect(302, '/admin/workload-points?success=true')
-      }).catch(function (error) {
-        next(error)
-      })
   })
 }

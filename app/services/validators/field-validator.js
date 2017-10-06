@@ -27,7 +27,7 @@ class FieldValidator {
 
   isLessThanLength (length, specificMessage) {
     var message = (!specificMessage) ? ERROR_MESSAGES.getIsLessThanLengthMessage : specificMessage
-    if (!validator.isLength(this.data, { max: length })) {
+    if (this.data && !validator.isLength(this.data, { max: length })) {
       this.errors.add(this.fieldName, message, { length: length })
     }
     return this
@@ -35,7 +35,7 @@ class FieldValidator {
 
   isInt (min, max) {
     let options = { allow_leading_zeroes: false, min: min, max: max }
-    if (!validator.isInt(this.data, options)) {
+    if (this.data && !validator.isInt(this.data.toString(), options)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getIsIntegerMessage, options)
     }
     return this
@@ -43,7 +43,7 @@ class FieldValidator {
 
   isFloat (min, max) {
     let options = { min: min, max: max }
-    if (!validator.isFloat(this.data, options)) {
+    if (this.data && !validator.isFloat(this.data, options)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getIsFloatMessage, options)
     }
     return this
