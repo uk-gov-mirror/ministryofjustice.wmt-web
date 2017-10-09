@@ -5,7 +5,7 @@ const getReductions = require('./data/get-reductions')
 const getReductionReasons = require('./data/get-reduction-reasons')
 const getContractedHoursForWorkloadOwner = require('./data/get-contracted-hours-for-workload-owner')
 const createWorkloadPointsRecalculationTask = require('./data/create-calculate-workload-points-task')
-const getLatestIdsForWorkloadPointsRecalc = require('./data/get-latest-workload-and-workload-report-id')
+const getLatestIdsForWorkloadPointsRecalc = require('./data/get-latest-workload-staging-id-and-workload-report-id')
 const reductionsCalculator = require('./helpers/reduction-hours-calculator')
 const getReductionById = require('./data/get-reduction-by-id')
 const getBreadcrumbs = require('./get-breadcrumbs')
@@ -53,7 +53,7 @@ module.exports.addReduction = function (id, reduction) {
   .then(function () {
     return getLatestIdsForWorkloadPointsRecalc(id)
     .then(function (ids) {
-      return createWorkloadPointsRecalculationTask(ids.workloadId, ids.workloadReportId, 1)
+      return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
       .then(function (result) {
         return result
       })
@@ -66,7 +66,7 @@ module.exports.updateReduction = function (id, reductionId, reduction) {
   .then(function (result) {
     return getLatestIdsForWorkloadPointsRecalc(id)
     .then(function (ids) {
-      return createWorkloadPointsRecalculationTask(ids.workloadId, ids.workloadReportId, 1)
+      return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
       .then(function (result) {
         return result
       })
@@ -79,7 +79,7 @@ module.exports.updateReductionStatus = function (id, reductionId, reductionStatu
   .then(function (result) {
     return getLatestIdsForWorkloadPointsRecalc(id)
     .then(function (ids) {
-      return createWorkloadPointsRecalculationTask(ids.workloadId, ids.workloadReportId, 1)
+      return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
       .then(function (result) {
         return result
       })

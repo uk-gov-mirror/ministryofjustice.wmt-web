@@ -22,7 +22,7 @@ var updateContractedHoursForWorkloadOwner
 var createWorkloadPointsRecalculationTask
 var getLatestIdsForWpRecalc
 
-var recalcIds = { workloadId: 3, workloadReportId: 2 }
+var recalcIds = { workloadStagingId: 3, workloadReportId: 2 }
 
 beforeEach(function () {
   getContractedHoursForWorkloadOwner = sinon.stub()
@@ -36,7 +36,7 @@ beforeEach(function () {
         './data/get-contracted-hours-for-workload-owner': getContractedHoursForWorkloadOwner,
         './data/update-contracted-hours-for-workload-owner': updateContractedHoursForWorkloadOwner,
         './data/create-calculate-workload-points-task': createWorkloadPointsRecalculationTask,
-        './data/get-latest-workload-and-workload-report-id': getLatestIdsForWpRecalc,
+        './data/get-latest-workload-staging-id-and-workload-report-id': getLatestIdsForWpRecalc,
         './get-breadcrumbs': getBreadcrumbs
       })
 })
@@ -72,7 +72,6 @@ describe('services/contracted-hours-service', function () {
   describe('updateContracedHours', function () {
     it('should call update-contracted-hours-for-workload-owner with correct parameters', function () {
       updateContractedHoursForWorkloadOwner.withArgs(id, UPDATED_CONTRACTED_HOURS).resolves(1)
-      createWorkloadPointsRecalculationTask.withArgs(id).resolves(1)
       return contractedHoursService.updateContractedHours(id, orgUnitConstant.OFFENDER_MANAGER.name, UPDATED_CONTRACTED_HOURS)
       .then(function (result) {
         expect(updateContractedHoursForWorkloadOwner.calledWith(id, UPDATED_CONTRACTED_HOURS)).to.be.true //eslint-disable-line

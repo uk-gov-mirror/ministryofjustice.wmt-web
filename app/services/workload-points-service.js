@@ -44,7 +44,7 @@ module.exports.updateWorkloadPoints = function (workloadPoints) {
   return updatePreviousWorkloadPointsEffectiveTo(workloadPoints.previousWpId).then(function (updateResults) {
     return insertNewWorkloadPoints(workloadPoints).then(function (insertResults) {
       return getWorkloadIdsForWpRecalc(workloadPoints.previousWpId).then(function (ids) {
-        return createCalculateWorkloadPointsTask(ids.minWorkloadId, ids.workloadReportId, (ids.maxWorkloadId - ids.minWorkloadId + 1))
+        return createCalculateWorkloadPointsTask(ids.minWorkloadStagingId, ids.workloadReportId, (ids.maxWorkloadStagingId - ids.minWorkloadStagingId + 1))
         .then(function (taskResults) {
           return taskResults
         })
