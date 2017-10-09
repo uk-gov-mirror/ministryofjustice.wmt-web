@@ -15,7 +15,8 @@ module.exports = function (router) {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
     } catch (error) {
-      if (error.statusCode instanceof Unathorized) {
+      if (error instanceof Unathorized) {
+        console.log(error)
         return res.status(error.statusCode).redirect(error.redirect)
       } else if (error instanceof Forbidden) {
         return res.status(error.statusCode).render(error.redirect, {
