@@ -4,9 +4,19 @@ const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
+const authorisation = require('../authorisation')
+const Unathorized = require('../services/errors/authentication-error').Unauthorized
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/overview', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
+
     var organisationLevel = req.params.organisationLevel
     var organisationUnit = getOrganisationUnit('name', organisationLevel)
     var id
@@ -43,6 +53,14 @@ module.exports = function (router) {
   })
 
   router.get('/:organisationLevel/:id/overview/csv', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
+
     var organisationLevel = req.params.organisationLevel
     var id
     if (organisationLevel !== organisationUnitConstants.NATIONAL.name) {

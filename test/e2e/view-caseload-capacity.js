@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-
+const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const workloadCapacityHelper = require('../helpers/data/aggregated-data-helper')
 
 var workloadOwnerIds = []
@@ -11,6 +11,7 @@ var nationalDefaultUrl
 
 describe('View your caseload capacity flow', () => {
   before(function () {
+    authenticationHerlp.login(authenticationHerlp.users.Staff)
     return workloadCapacityHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
@@ -19,6 +20,8 @@ describe('View your caseload capacity flow', () => {
         lduDefaultUrl = '/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
         regionDefaultUrl = '/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
         nationalDefaultUrl = '/hmpps/0'
+      }).then(function () {
+        return browser.url(workloadOwnerDefaultUrl).waitForExist('.breadcrumbs')
       })
   })
 
@@ -124,5 +127,9 @@ describe('View your caseload capacity flow', () => {
       .click('[href="' + teamDefaultUrl + '/caseload"]')
       .click('[href="' + teamDefaultUrl + '/caseload-capacity"]')
       .waitForExist('#plotly-div-line')
+  })
+
+  after(function () {
+    authenticationHerlp.logout()
   })
 })

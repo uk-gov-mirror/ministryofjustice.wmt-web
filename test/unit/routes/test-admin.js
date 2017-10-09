@@ -4,6 +4,7 @@ const proxyquire = require('proxyquire')
 const sinon = require('sinon')
 const config = require('../../../config')
 require('sinon-bluebird')
+// const Forbidden = require('../services/errors/authentication-error').Forbidden
 
 const ADMIN_URL = '/admin/'
 const ADMIN_USER_URL = '/admin/user'
@@ -27,15 +28,14 @@ var app
 var route
 var userRoleService
 var authorisationService
-var hasRoleResult = true
-var mockConfig = {
-  AUTHENTICATION_ENABLED: false
-}
+var hasRoleStub = sinon.stub()
+
 var initaliseApp = function () {
   userRoleService = sinon.stub()
   authorisationService = {
-    hasRole: sinon.stub().returns(hasRoleResult),
-    isAuthenticationEnabled: sinon.stub().returns(mockConfig)
+    assertUserAuthenticated: sinon.stub(),
+    hasRole: hasRoleStub,
+    isAuthenticationEnabled: sinon.stub().returned(false)
   }
   route = proxyquire('../../../app/routes/admin', {
     '../services/user-role-service': userRoleService,
@@ -53,24 +53,21 @@ describe('admin route', function () {
     return supertest(app).get(ADMIN_URL).expect(200)
   })
 
-  it('should respond with 403 when the user does not have the admin role', function () {
-    hasRoleResult = false
-    initaliseApp()
-    return supertest(app).get(ADMIN_URL).expect(403)
-  })
-
   it('should respond with 200 when user right is called', function () {
+    initaliseApp()
     return supertest(app).get(ADMIN_USER_URL).expect(200)
   })
 
   it('should respond with 302 when posting an invalid username', function () {
-    return supertest(app).post(ADMIN_USER_RIGHT_URL).send(INVALID_USERNAME).expect(302)
+    return supertest(app)
+      .post(ADMIN_USER_RIGHT_URL)
+      .send(INVALID_USERNAME).expect(302)
   })
 
   it('should respond with 200 when posting a role for a user', function () {
     return supertest(app)
-            .post(ADMIN_USER_RIGHT_ROLES_URL)
-            .field('username', USERNAME.username)
-            .field('rights', ROLE.role)
+      .post(ADMIN_USER_RIGHT_ROLES_URL)
+      .field('username', USERNAME.username)
+      .field('rights', ROLE.role)
   })
 })

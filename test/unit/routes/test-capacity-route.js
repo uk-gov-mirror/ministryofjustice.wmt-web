@@ -25,13 +25,17 @@ describe('/caseload-capacity', function () {
   var getCapacityStub
   var getSubNavStub
   var capacityStubResult = {title: 'Test', capacityTable: {}, subNav: [{}]}
-
+  var authorisationService
+  authorisationService = {
+    isUserAuthenticated: sinon.stub().returns(true)
+  }
   beforeEach(function () {
     getCapacityStub = sinon.stub()
     getSubNavStub = sinon.stub()
     var route = proxyquire(
       '../../../app/routes/capacity-route', {
         '../services/get-capacity-view': getCapacityStub,
+        '../authorisation': authorisationService,
         '../services/get-sub-nav': getSubNavStub
       })
     app = routeHelper.buildApp(route)

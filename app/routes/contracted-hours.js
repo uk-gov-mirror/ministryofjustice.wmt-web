@@ -5,9 +5,27 @@ const ErrorHandler = require('../services/validators/error-handler')
 const FieldValidator = require('../services/validators/field-validator')
 const ValidationError = require('../services/errors/validation-error')
 const ERROR_MESSAGES = require('../services/validators/validation-error-messages')
+const authorisation = require('../authorisation')
+const messages = require('../constants/messages')
+const roles = require('../constants/user-roles')
+const Unathorized = require('../services/errors/authentication-error').Unauthorized
+const Forbidden = require('../services/errors/authentication-error').Forbidden
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/contracted-hours', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.MANAGER])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.MANAGER_ROLES_REQUIRED
+        })
+      }
+    }
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 
@@ -16,22 +34,35 @@ module.exports = function (router) {
     }
 
     return contractedHoursService.getContractedHours(id, organisationLevel)
-    .then(function (result) {
-      return res.render('contracted-hours', {
-        title: result.title,
-        subTitle: result.subTitle,
-        breadcrumbs: result.breadcrumbs,
-        subNav: getSubNav(id, organisationLevel, req.path),
-        contractedHours: result.contractedHours,
-        woId: id,
-        hoursUpdatedSuccess: req.query.hoursUpdatedSuccess
+      .then(function (result) {
+        return res.render('contracted-hours', {
+          title: result.title,
+          subTitle: result.subTitle,
+          breadcrumbs: result.breadcrumbs,
+          subNav: getSubNav(id, organisationLevel, req.path),
+          contractedHours: result.contractedHours,
+          woId: id,
+          hoursUpdatedSuccess: req.query.hoursUpdatedSuccess
+        })
+      }).catch(function (error) {
+        next(error)
       })
-    }).catch(function (error) {
-      next(error)
-    })
   })
 
   router.post('/:organisationLevel/:id/contracted-hours', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.MANAGER])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.MANAGER_ROLES_REQUIRED
+        })
+      }
+    }
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
     var updatedHours = req.body.hours
@@ -64,18 +95,18 @@ module.exports = function (router) {
     }
 
     return contractedHoursService.updateContractedHours(id, organisationLevel, updatedHours)
-    .then(function () {
-      return res.redirect('/offender-manager/' + id + '/contracted-hours?hoursUpdatedSuccess=true')
-    }).catch(function (error) {
-      next(error)
-    })
+      .then(function () {
+        return res.redirect('/offender-manager/' + id + '/contracted-hours?hoursUpdatedSuccess=true')
+      }).catch(function (error) {
+        next(error)
+      })
   })
 
   function isValid (updatedHours, next) {
     var errors = ErrorHandler()
     FieldValidator(updatedHours, 'hours', errors)
-            .isRequired(ERROR_MESSAGES.getIsRequiredMessage)
-            .isFloat(0, 37.5)
+      .isRequired(ERROR_MESSAGES.getIsRequiredMessage)
+      .isFloat(0, 37.5)
 
     var validationErrors = errors.get()
     if (validationErrors) {

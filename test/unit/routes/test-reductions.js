@@ -1,6 +1,9 @@
 const routeHelper = require('../../helpers/routes/route-helper')
 const superTest = require('supertest')
-const proxyquire = require('proxyquire')
+const proxyquire = require('proxyquire').noPreserveCache()
+const roles = require('../../..//app/constants/user-roles')
+const hasRoleFunction = require('../../../app/authorisation').hasRole
+
 const sinon = require('sinon')
 require('sinon-bluebird')
 
@@ -80,8 +83,23 @@ var app
 var route
 var reductionsService
 var getSubNavStub
+var authorisationService
+var validRole = roles.MANAGER
 
-beforeEach(function () {
+var createMiddleWare = function () {
+  return function (req, res, next) {
+    req.user = {
+      user_role: validRole
+    }
+    next()
+  }
+}
+
+var initaliseApp = function (middleware) {
+  authorisationService = {
+    hasRole: hasRoleFunction,
+    isUserAuthenticated: sinon.stub().returns(true)
+  }
   getSubNavStub = sinon.stub()
   reductionsService = sinon.stub()
   reductionsService.getReductions = sinon.stub()
@@ -92,12 +110,26 @@ beforeEach(function () {
   reductionsService.getReductionByReductionId = sinon.stub()
   route = proxyquire('../../../app/routes/reductions', {
     '../services/reductions-service': reductionsService,
+    '../authorisation': authorisationService,
     '../services/get-sub-nav': getSubNavStub
   })
-  app = routeHelper.buildApp(route)
+  app = routeHelper.buildApp(route, middleware)
+}
+
+beforeEach(function () {
+  initaliseApp(createMiddleWare())
 })
 
 describe('reductions route', function () {
+  describe('For the get reductions route', function () {
+    it('should respond with 200 when correct role is passed', function () {
+      reductionsService.getReductions.resolves(getReductionNoTextResult)
+      return superTest(app)
+        .get(GET_REDUCTIONS_URL)
+        .expect(200)
+    })
+  })
+
   describe('For the get reductions route', function () {
     it('should respond with 200 and the correct data', function () {
       reductionsService.getReductions.resolves(getReductionNoTextResult)
@@ -106,6 +138,7 @@ describe('reductions route', function () {
         .expect(200)
     })
   })
+
   describe('For the add reductions page route', function () {
     it('should respond with 200 and the correct data and no existing reduction', function () {
       reductionsService.getAddReductionsRefData.resolves(addReduction)

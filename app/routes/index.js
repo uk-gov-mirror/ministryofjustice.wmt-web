@@ -1,18 +1,19 @@
-const config = require('../../config')
+const authorisation = require('../authorisation')
+const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 
 module.exports = function (router) {
   router.get('/', function (req, res, next) {
     if (Object.keys(req.query).length !== 0) {
       return next()
     }
-    if (config.AUTHENTICATION_ENABLED === 'true') {
-      if (req.isAuthenticated() && req.user) {
-        return res.redirect('/hmpps/0')
-      } else {
-        return res.redirect('/login')
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
       }
-    } else {
-      return res.redirect('/hmpps/0')
     }
+
+    return res.redirect('/hmpps/0')
   })
 }

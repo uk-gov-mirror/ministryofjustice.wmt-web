@@ -2,12 +2,16 @@ const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const INDEX_URI = '/'
 const proxyquire = require('proxyquire')
+const sinon = require('sinon')
 
 describe(`${INDEX_URI}`, function () {
   var app
   var passport = {}
   var mockConfig = {
     AUTHENTICATION_ENABLED: false
+  }
+  var authorisationService = {
+    isUserAuthenticated: sinon.stub().returns(true)
   }
 
   passport.authenticate = function (req, res, next) {
@@ -18,6 +22,7 @@ describe(`${INDEX_URI}`, function () {
     var route = proxyquire(
       '../../../app/routes/index', {
         'passport': passport,
+        '../authorisation': authorisationService,
         '../../config': mockConfig
       })
     app = routeHelper.buildApp(route)
