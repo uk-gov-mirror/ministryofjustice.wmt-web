@@ -53,7 +53,7 @@ module.exports = function (app) {
   })
 
   var sessionOptions = {
-    name: 'wmt-start-application',
+    name: 'wmt-application',
     secret: config.APPLICATION_SECRET,
     resave: config.RESAVE_SESSION,
     saveUninitialized: config.SAVE_UNINITIALIZED_SESSION,

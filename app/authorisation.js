@@ -5,6 +5,10 @@ const Forbidden = require('./services/errors/authentication-error').Forbidden
 var assertUserAuthenticated = function (req) {
   if (isAuthenticationEnabled()) {
     if (!req.user) {
+      // To handle bookmarks we need to store unauthenticated requests only
+      if ((req.path !== '/') && (req.path !== '/login')) {
+        req.session.redirectTo = req.path
+      }
       throw new Unauthorized('Unauthorized', '/login')
     }
   }
