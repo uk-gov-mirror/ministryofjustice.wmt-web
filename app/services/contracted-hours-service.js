@@ -5,13 +5,14 @@ const getLatestIdsForWorkloadPointsRecalc = require('./data/get-latest-workload-
 const getBreadcrumbs = require('./get-breadcrumbs')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
+const workloadTypes = require('../constants/workload-type')
 
-module.exports.getContractedHours = function (id, organisationLevel) {
+module.exports.getContractedHours = function (id, organisationLevel, workloadType) {
   if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
     throw new Error('Can only get contracted hours for an offender manager')
   }
 
-  var breadcrumbs = getBreadcrumbs(id, organisationLevel)
+  var breadcrumbs = getBreadcrumbs(id, organisationLevel, workloadType)
   var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
 
   return getContractedHoursForWorkloadOwner(id)
@@ -25,7 +26,7 @@ module.exports.getContractedHours = function (id, organisationLevel) {
     })
 }
 
-module.exports.updateContractedHours = function (id, organisationLevel, hours) {
+module.exports.updateContractedHours = function (id, organisationLevel, hours, workloadType) {
   if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
     throw new Error('Can only update contracted hours for an offender manager')
   }
@@ -35,10 +36,13 @@ module.exports.updateContractedHours = function (id, organisationLevel, hours) {
     if (count === 0) {
       throw new Error('Offender manager with id: ' + id + ' has not had contracted hours updated')
     }
-    return getLatestIdsForWorkloadPointsRecalc(id)
-    .then(function (ids) {
-      return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
-    })
+    if(workloadType === workloadTypes.STANDARD) {
+      return getLatestIdsForWorkloadPointsRecalc(id)
+      .then(function (ids) {
+      })
+    } else {
+      // TODO: kick off recalc of court-report-workload-points
+    }
   }).catch(function (err) {
     throw err
   })

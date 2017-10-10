@@ -2,6 +2,7 @@ const getCourtReportOverview = require('../services/get-court-report-overview')
 const getSubNav = require('../services/get-sub-nav')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
+const workloadTypeConstants = require('../constants/workload-type')
 
 module.exports = function (router) {
   router.get('/court-reports/:organisationLevel/:id/overview', function (req, res, next) {
@@ -30,7 +31,7 @@ module.exports = function (router) {
         organisationLevel: organisationLevel,
         childOrganisationLevel: childOrganisationLevel,
         childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
-        subNav: getSubNav(id, organisationLevel, req.path, true),
+        subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS ),
         overviewDetails: result.overviewDetails
       })
     }).catch(function (error) {
