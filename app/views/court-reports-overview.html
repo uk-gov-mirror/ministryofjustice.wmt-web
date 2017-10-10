@@ -1,0 +1,51 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/breadcrumbs.html" %}
+
+{% include "includes/validation-error-messages.html" %}
+
+{% include "includes/title-subtitle.html" %}
+
+{% include "includes/sub-nav.html" %}
+
+{% include "includes/export.html" %}
+
+{% if organisationLevel === "offender-manager" %}
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <table>
+    <tbody>
+        <tr>
+        <th scope="row">Grade</th>
+        <td class="sln-grade numeric">{{ overviewDetails[0].grade }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Team</th>
+        <td class="numeric"><a href="/team/{{ overviewDetails[0].teamId }}">{{ overviewDetails[0].teamName }}</a></td>
+        </tr>
+        <tr>
+        <th scope="row">Contracted hours</th>
+        <td class="numeric">{{ overviewDetails[0].contractedHours }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Reduction</th>
+        <td class="numeric">{{ overviewDetails[0].reduction }}</td>
+        </tr>
+    </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+
+{% block page_specific_scripts %}
+  {% if organisationLevel === 'team' %}
+    <script src="{{ asset_path }}javascripts/vendor/jquery.js"></script>
+    <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
+  {% endif %}    
+{% endblock %}
+</main>
+{% endblock %}

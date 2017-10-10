@@ -4,7 +4,8 @@ module.exports = {
     ref: 'I',
     displayText: 'Offender Manager',
     capacityView: 'individual_capacity_view',
-    caseProgressView: 'individual_case_progress_view'
+    caseProgressView: 'individual_case_progress_view',
+    courtReporterOverview: 'individual_court_reporter_overview'
   },
   TEAM: {
     name: 'team',
@@ -15,6 +16,7 @@ module.exports = {
     caseProgressView: 'team_case_progress_view',
     overviewView: 'team_case_overview',
     caseloadView: 'team_caseload_view',
+    courtReporterOverview: 'team_court_reporter_overview',
     childOrganisationLevel: 'offender-manager' },
   LDU: {
     name: 'ldu',
