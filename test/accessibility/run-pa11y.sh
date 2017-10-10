@@ -14,7 +14,7 @@ lduId=$2
 teamId=$3
 omId=$4
 
-pa11yCommand="""pa11y --standard WCAG2AA --ignore "warning\;notice" --hide-elements "div[role=presentation],a[role=dynamic],a[role=anchor-div]" """
+pa11yCommand="""pa11y --standard WCAG2AA --ignore "warning\;notice" --hide-elements "div[aria-hidden=true],a[role=dynamic],a[role=anchor-div]" """
 
 if [ $WMT_BASE_URL ]
 then 
