@@ -1,3 +1,4 @@
+const authentication = require('../../../app/authentication')
 const mockViewEngine = require('../../unit/routes/mock-view-engine')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -7,7 +8,7 @@ const csurf = require('csurf')
 
 const VIEWS_DIRECTORY = '../../../app/views'
 
-module.exports.buildApp = function (route) {
+module.exports.buildApp = function (route, middleware) {
   var app = express()
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: false }))
@@ -15,12 +16,18 @@ module.exports.buildApp = function (route) {
   // Use cookie parser middleware (required for csurf)
   app.use(cookieParser('secret', { httpOnly: true, secure: false }))
 
+  authentication(app)
+
   app.use(cookieSession({
     name: 'session',
     keys: ['test-secret'],
     expires: new Date(2050, 1),
     signed: false
   }))
+
+  if (middleware) {
+    app.use(middleware)
+  }
 
   route(app)
   mockViewEngine(app, VIEWS_DIRECTORY)

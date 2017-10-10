@@ -1,10 +1,12 @@
 const expect = require('chai').expect
-
+const authenticationHerlp = require('../helpers/routes/authentication-helper')
 var adminUserURL
 
 describe('View adding a new user role', () => {
   before(function () {
+    authenticationHerlp.login(authenticationHerlp.users.SystemAdmin)
     adminUserURL = '/admin/user'
+    return browser.url(adminUserURL).waitForExist('.breadcrumbs')
   })
 
   describe('should navigate to the user page', () => {
@@ -27,5 +29,9 @@ describe('View adding a new user role', () => {
       browser.setValue('#rights', 'Manager')
       browser.submitForm('#userRightForm')
     })
+  })
+
+  after(function () {
+    authenticationHerlp.logout()
   })
 })

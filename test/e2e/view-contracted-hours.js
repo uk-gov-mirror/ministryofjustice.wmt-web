@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-
+const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 
 var workloadOwnerIds = []
@@ -8,11 +8,14 @@ var workloadOwnerDefaultUrl
 
 describe('View contracted hours', function () {
   before(function () {
+    authenticationHerlp.login(authenticationHerlp.users.Manager)
     return dataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
         workloadOwnerId = workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
         workloadOwnerDefaultUrl = '/offender-manager/' + workloadOwnerId
+      }).then(function () {
+        return browser.url(workloadOwnerDefaultUrl + '/contracted-hours').waitForExist('.breadcrumbs')
       })
   })
 
@@ -42,5 +45,9 @@ describe('View contracted hours', function () {
       .waitForExist('.sln-subnav')
       .click('[href="' + workloadOwnerDefaultUrl + '/contracted-hours"]')
       .waitForExist('.sln-form-action')
+  })
+
+  after(function () {
+    authenticationHerlp.logout()
   })
 })

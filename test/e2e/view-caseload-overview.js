@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-
+const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 
 var workloadOwnerIds = []
@@ -13,6 +13,7 @@ var nationalDefaultUrl
 
 describe('View overview', function () {
   before(function () {
+    authenticationHerlp.login(authenticationHerlp.users.Staff)
     return dataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
@@ -29,6 +30,8 @@ describe('View overview', function () {
         .then(function (gradeResult) {
           workloadOwnerGrade = gradeResult
         })
+      }).then(function () {
+        return browser.url(workloadOwnerDefaultUrl + '/overview').waitForExist('.breadcrumbs')
       })
   })
 
@@ -155,5 +158,9 @@ describe('View overview', function () {
       .then(function (text) {
         expect(text).to.equal('National')
       })
+  })
+
+  after(function () {
+    authenticationHerlp.logout()
   })
 })

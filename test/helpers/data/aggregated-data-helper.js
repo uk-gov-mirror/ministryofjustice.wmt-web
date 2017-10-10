@@ -3,6 +3,8 @@ const knex = require('knex')(config)
 var Promise = require('bluebird').Promise
 const _ = require('lodash')
 
+module.exports.maxStagingId = null
+
 var defaultWorkload = {
   total_cases: 5,
   total_community_cases: 0,
@@ -226,9 +228,15 @@ var addWorkload = function (inserts) {
       contracted_hours: 37.5})
   .then(function (ids) {
     inserts.push({table: 'workload_owner', id: ids[0]})
+    return getMaxStagingId()
+  })
+  .then(function (upToDateMaxStagingId) {
+    module.exports.maxStagingId = upToDateMaxStagingId
+    var workloadOwners = inserts.filter((item) => item.table === 'workload_owner')
+    var currentWorkloadOwnerId = workloadOwners[workloadOwners.length - 1].id
     var workloads = [
-      Object.assign({}, defaultWorkload, {workload_owner_id: ids[0]}),
-      Object.assign({}, defaultWorkload, {workload_owner_id: ids[0]})
+      Object.assign({}, defaultWorkload, { workload_owner_id: currentWorkloadOwnerId, staging_id: upToDateMaxStagingId + 1 }),
+      Object.assign({}, defaultWorkload, { workload_owner_id: currentWorkloadOwnerId, staging_id: upToDateMaxStagingId + 2 })
     ]
     return knex('workload').returning('id').insert(workloads)
   })
@@ -423,28 +431,29 @@ module.exports.getAllTasks = function () {
 module.exports.getAllWorkloadPointsForTest = function () {
   return knex('workload_points')
     .select(
-      'comm_tier_1 AS commD2',
-      'comm_tier_2 AS commD1',
-      'comm_tier_3 AS commC2',
-      'comm_tier_4 AS commC1',
-      'comm_tier_5 AS commB2',
-      'comm_tier_6 AS commB1',
       'comm_tier_7 AS commA',
-      'cust_tier_1 AS cusD2',
-      'cust_tier_2 AS cusD1',
-      'cust_tier_3 AS cusC2',
-      'cust_tier_4 AS cusC1',
-      'cust_tier_5 AS cusB2',
-      'cust_tier_6 AS cusB1',
+      'comm_tier_6 AS commB1',
+      'comm_tier_5 AS commB2',
+      'comm_tier_4 AS commC1',
+      'comm_tier_3 AS commC2',
+      'comm_tier_2 AS commD1',
+      'comm_tier_1 AS commD2',
       'cust_tier_7 AS cusA',
-      'lic_tier_1 AS licD2',
-      'lic_tier_2 AS licD1',
-      'lic_tier_3 AS licC2',
-      'lic_tier_4 AS licC1',
-      'lic_tier_5 AS licB2',
-      'lic_tier_6 AS licB1',
+      'cust_tier_6 AS cusB1',
+      'cust_tier_5 AS cusB2',
+      'cust_tier_4 AS cusC1',
+      'cust_tier_3 AS cusC2',
+      'cust_tier_2 AS cusD1',
+      'cust_tier_1 AS cusD2',
       'lic_tier_7 AS licA',
+      'lic_tier_6 AS licB1',
+      'lic_tier_5 AS licB2',
+      'lic_tier_4 AS licC1',
+      'lic_tier_3 AS licC2',
+      'lic_tier_2 AS licD1',
+      'lic_tier_1 AS licD2',
       'sdr AS sdr',
+      'user_id AS userId',
       'sdr_conversion AS sdrConversion',
       'nominal_target_spo AS nominalTargetPso',
       'nominal_target_po AS nominalTargetPo',
@@ -456,4 +465,12 @@ module.exports.getAllWorkloadPointsForTest = function () {
       'parom AS parom',
       'effective_to AS effectiveTo'
     )
+}
+
+var getMaxStagingId = function () {
+  return knex('workload')
+    .max('staging_id AS maxStagingId')
+    .then(function (results) {
+      return results[0].maxStagingId
+    })
 }

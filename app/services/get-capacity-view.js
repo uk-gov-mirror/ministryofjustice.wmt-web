@@ -81,6 +81,7 @@ var buildCapacityBreakdownEntry = function (workloadReport) {
     cmsPercentageValue = percentageCalculator.calculatePercentage(workloadReport.cmsAdjustmentPoints, workloadReport.totalPoints)
   }
 
+  // TODO: This will always be negative. What do they want to see?
   if (workloadReport.gsAdjustmentPoints > 0) {
     gsPercentageValue = percentageCalculator.calculatePercentage(workloadReport.gsAdjustmentPoints, workloadReport.totalPoints)
   }

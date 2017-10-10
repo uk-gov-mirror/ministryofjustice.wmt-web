@@ -1,10 +1,13 @@
 const expect = require('chai').expect
+const authenticationHerlp = require('../helpers/routes/authentication-helper')
 
 var adminURL
 
 describe('View admin role', () => {
   before(function () {
+    authenticationHerlp.login(authenticationHerlp.users.DataAdmin)
     adminURL = '/admin'
+    return browser.url(adminURL).waitForExist('.breadcrumbs')
   })
 
   describe('should navigate to the admin page', () => {
@@ -17,5 +20,9 @@ describe('View admin role', () => {
           expect(text).to.equal('Admin')
         })
     })
+  })
+
+  after(function () {
+    authenticationHerlp.logout()
   })
 })

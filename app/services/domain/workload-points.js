@@ -26,7 +26,7 @@ class WorkloadPoints {
     this.licC2 = request.licC2
     this.licD1 = request.licD1
     this.licD2 = request.licD2
-    this.user_id = 35 // TODO request.user_id
+    this.userId = request.userId
     this.sdr = request.sdr
     this.sdrConversion = request.sdrConversion
     this.nominalTargetPso = request.nominalTargetPso
@@ -34,6 +34,8 @@ class WorkloadPoints {
     this.weightingOverdue = request.weightingOverdue
     this.weightingWarrants = request.weightingWarrants
     this.weightingUpw = request.weightingUpw
+    this.weightingArmsCommunity = request.weightingArmsCommunity
+    this.weightingArmsLicense = request.weightingArmsLicense
     this.defaultContractedHoursPo = request.defaultContractedHoursPo
     this.defaultContractedHoursPso = request.defaultContractedHoursPso
     this.parom = request.parom
@@ -43,7 +45,6 @@ class WorkloadPoints {
 
   isValid () {
     var errors = ErrorHandler()
-
     FieldValidator(this.cusA, 'cusA', errors)
       .isRequired()
       .isInt(0, 999)
@@ -110,6 +111,8 @@ class WorkloadPoints {
     FieldValidator(this.sdr, 'sdr', errors)
       .isRequired()
       .isInt(0, 999)
+    FieldValidator(this.userId, 'userId', errors)
+      .isRequired()
     FieldValidator(this.sdrConversion, 'sdrConversion', errors)
       .isRequired()
       .isInt(0, 999)
@@ -126,6 +129,12 @@ class WorkloadPoints {
       .isRequired()
       .isFloat(0, 100.0)
     FieldValidator(this.weightingWarrants, 'weightingWarrants', errors)
+      .isRequired()
+      .isFloat(0, 100.0)
+    FieldValidator(this.weightingArmsCommunity, 'weightingArmsCommunity', errors)
+      .isRequired()
+      .isFloat(0, 100.0)
+    FieldValidator(this.weightingArmsLicense, 'weightingArmsLicense', errors)
       .isRequired()
       .isFloat(0, 100.0)
     FieldValidator(this.defaultContractedHoursPo, 'defaultContractedHoursPo', errors)

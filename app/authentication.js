@@ -5,10 +5,11 @@ const config = require('../config')
 const SamlStrategy = require('passport-saml').Strategy
 const logger = require('./logger')
 
-const getUserRoleByUsername = require('./services/data/get-user-role-by-username')
+const userRoleService = require('./services/user-role-service')
 
 module.exports = function (app) {
   if (config.AUTHENTICATION_ENABLED !== 'true') {
+    passport.logout = function (req, res) { return res.status(501).redirect('/') }
     return
   }
 
@@ -18,21 +19,31 @@ module.exports = function (app) {
     var nameID = user.nameID
     var nameIDFormat = user.nameIDFormat
     // Remove the domain from the username
-    var username = name.substring(0, name.lastIndexOf('@'))
+    var username = userRoleService.removeDomainFromUsername(name)
     // Get the role for the user
-    getUserRoleByUsername(username).then(function (role) {
-      done(null, {
-        name: displayName,
-        username: username,
-        user_role: role.role,
-        nameID: nameID,
-        nameIDFormat: nameIDFormat
+    return userRoleService.getUserByUsername(username).then(function (result) {
+      var user = {
+        id: 0  // assume its a Staff user
+      }
+      if (result) {
+        user.id = result.id // actual user exists
+      }
+      return userRoleService.getRoleByUsername(username).then(function (role) {
+        done(null, {
+          userId: user.id,
+          name: displayName,
+          username: username,
+          user_role: role.role,
+          nameID: nameID,
+          nameIDFormat: nameIDFormat
+        })
       })
     })
   })
 
   passport.deserializeUser(function (user, done) {
     done(null, {
+      userId: user.userId,
       name: user.name,
       username: user.username,
       user_role: user.user_role,
@@ -42,7 +53,7 @@ module.exports = function (app) {
   })
 
   var sessionOptions = {
-    name: 'wmt-start-application',
+    name: 'wmt-application',
     secret: config.APPLICATION_SECRET,
     resave: config.RESAVE_SESSION,
     saveUninitialized: config.SAVE_UNINITIALIZED_SESSION,
@@ -79,7 +90,7 @@ module.exports = function (app) {
     req.user.saml = saml
     samlStrategy.logout(req, function (err, request) {
       if (err) {
-        logger.error({error: err})
+        logger.error({ error: err })
       }
       return res.redirect(request)
     })

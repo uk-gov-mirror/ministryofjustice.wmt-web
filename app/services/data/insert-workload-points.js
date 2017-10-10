@@ -25,8 +25,7 @@ module.exports = function (workloadPoints) {
       lic_tier_5: workloadPoints.licB2,
       lic_tier_6: workloadPoints.licB1,
       lic_tier_7: workloadPoints.licA,
-      // TODO: Insert the actual id of the logged in user who changed the points
-      user_id: 35,
+      user_id: workloadPoints.userId,
       sdr: workloadPoints.sdr,
       sdr_conversion: workloadPoints.sdrConversion,
       nominal_target_spo: workloadPoints.nominalTargetPso,
@@ -34,6 +33,8 @@ module.exports = function (workloadPoints) {
       weighting_o: workloadPoints.weightingOverdue,
       weighting_w: workloadPoints.weightingWarrants,
       weighting_u: workloadPoints.weightingUpw,
+      weighting_arms_comm: workloadPoints.weightingArmsCommunity,
+      weighting_arms_lic: workloadPoints.weightingArmsLicense,
       default_contracted_hours_po: workloadPoints.defaultContractedHoursPo,
       default_contracted_hours_pso: workloadPoints.defaultContractedHoursPso,
       parom: workloadPoints.parom,

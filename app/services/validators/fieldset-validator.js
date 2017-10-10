@@ -14,40 +14,65 @@ class FieldsetValidator {
     this.data = data || []
     this.fieldName = fieldName
     this.errors = errors
+
+    if (this.data.length === 3) {
+      this.formattedDate = dateFormatter.build(this.data[0], this.data[1], this.data[2])
+    }
   }
 
   isRequired (specificMessage) {
     var message = (!specificMessage) ? ERROR_MESSAGES.getIsRequiredMessage : specificMessage
     var self = this
-    if (this.data instanceof Array) {
+    if (this.data instanceof Array && this.data.length === 3) {
       this.data.forEach(function (data) {
         if (!data) {
           self.errors.add(self.fieldName, message)
         }
       })
+    } else {
+      self.errors.add(self.fieldName, message)
     }
     return this
   }
 
-  isValidDate (date) {
-    if (!validateDate(date)) {
+  isValidDate () {
+    if (!validateDate(this.formattedDate)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getInvalidDateFormatMessage)
     }
     return this
   }
 
-  isFutureDate (date) {
-    if (!isDateInTheFuture(date)) {
+  isFutureDate () {
+    if (!isDateInTheFuture(this.formattedDate)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getFutureDateMessage)
     }
     return this
   }
 
-  isLaterThan (startDate, endDate) {
-    if (!isDateAfter(startDate, endDate)) {
-      this.errors.add(this.fieldName, ERROR_MESSAGES.getIsDateLaterThanMessage)
+  isPastDate () {
+    if (!isDateInThePast(this.formattedDate)) {
+      this.errors.add(this.fieldName, ERROR_MESSAGES.getPastDateMessage)
     }
     return this
+  }
+
+  isPastOrPresentDate () {
+    if (isDateInTheFuture(this.formattedDate)) {
+      this.errors.add(this.fieldName, ERROR_MESSAGES.getPastOrPresentDateMessage)
+    }
+    return this
+  }
+
+  isLaterThan (dateToCompare, dateToCompareFieldName) {
+    if (!isDateAfter(this.formattedDate, dateToCompare)) {
+      var options = { secondaryFieldName: dateToCompareFieldName }
+      this.errors.add(this.fieldName, ERROR_MESSAGES.getIsDateLaterThanMessage, options)
+    }
+    return this
+  }
+
+  getFormattedDate () {
+    return this.formattedDate
   }
 }
 
@@ -61,7 +86,11 @@ function isDateInTheFuture (date) {
   return validateDate(date) && date > dateFormatter.now()
 }
 
-function isDateAfter (startDate, endDate) {
+function isDateInThePast (date) {
+  return validateDate(date) && date < dateFormatter.now()
+}
+
+function isDateAfter (endDate, startDate) {
   return endDate > startDate
 }
 

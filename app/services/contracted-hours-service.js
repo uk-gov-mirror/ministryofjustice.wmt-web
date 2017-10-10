@@ -1,7 +1,7 @@
 const getContractedHoursForWorkloadOwner = require('./data/get-contracted-hours-for-workload-owner')
 const updateContractedHoursForWorkloadOwner = require('./data/update-contracted-hours-for-workload-owner')
 const createWorkloadPointsRecalculationTask = require('./data/create-calculate-workload-points-task')
-const getLatestIdsForWorkloadPointsRecalc = require('./data/get-latest-workload-and-workload-report-id')
+const getLatestIdsForWorkloadPointsRecalc = require('./data/get-latest-workload-staging-id-and-workload-report-id')
 const getBreadcrumbs = require('./get-breadcrumbs')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
@@ -37,7 +37,7 @@ module.exports.updateContractedHours = function (id, organisationLevel, hours) {
     }
     return getLatestIdsForWorkloadPointsRecalc(id)
     .then(function (ids) {
-      return createWorkloadPointsRecalculationTask(ids.workloadId, ids.workloadReportId, 1)
+      return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
     })
   }).catch(function (err) {
     throw err

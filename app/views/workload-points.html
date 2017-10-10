@@ -16,9 +16,7 @@
 
 <p>Workload points are set here and are used to calculate capacity points for all Offender Managers throughout the Workload Management Tool.</p>
 
-<!-- TODO: Include user. -->
-
-<p>Current Workload Points created by <span class="bold">test user</span> on <span class="bold">{{ wp.effectiveFrom }}</span></p> 
+<p>Current Workload Points created by <span class="bold">{{ updatedBy }}</span> on <span class="bold">{{ wp.effectiveFrom }}</span></p> 
 
 <form action="/admin/workload-points" method=POST id="workloadPointsForm">
 
@@ -379,6 +377,28 @@
                     </th>
                     <td class="numeric">
                       <input class="form-control" id="weightingUpw" name="weightingUpw" type="number" value="{{ wp.weightingUpw }}">
+                    </td>   
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% if errors['weightingArmsCommunity'][0] %}
+                        <span class="error-message">{{ errors['weightingArmsCommunity'][0] }}</span>
+                      {% endif %}  
+                      <label class="form-label-bold" for="weightingArmsCommunity">ARMS Community Cases</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="weightingArmsCommunity" name="weightingArmsCommunity" type="number" value="{{ wp.weightingArmsCommunity }}">
+                    </td>   
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% if errors['weightingArmsLicense'][0] %}
+                        <span class="error-message">{{ errors['weightingArmsLicense'][0] }}</span>
+                      {% endif %}  
+                      <label class="form-label-bold" for="weightingArmsLicense">ARMS License Cases</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="weightingArmsLicense" name="weightingArmsLicense" type="number" value="{{ wp.weightingArmsLicense }}">
                     </td>   
                   </tr>
                 </tbody>

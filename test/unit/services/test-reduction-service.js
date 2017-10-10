@@ -80,7 +80,9 @@ var reductionsByStatus = {
   archivedReductions: archivedReductions
 }
 
-var recalcIds = { workloadId: 3, workloadReportId: 2 }
+var latestWorkloadStagingId = 3
+var latestWorkloadReportId = 2
+var recalcIds = { workloadStagingId: latestWorkloadStagingId, workloadReportId: latestWorkloadReportId }
 
 beforeEach(function () {
   addReductionStub = sinon.stub()
@@ -108,7 +110,7 @@ beforeEach(function () {
         './data/get-contracted-hours-for-workload-owner': getContractedHoursForWorkloadOwnerStub,
         './data/get-reduction-reasons': getReferenceDataStub,
         './data/create-calculate-workload-points-task': createCalculateWorkloadTaskStub,
-        './data/get-latest-workload-and-workload-report-id': getLatestIdsForWpRecalc,
+        './data/get-latest-workload-staging-id-and-workload-report-id': getLatestIdsForWpRecalc,
         './data/get-reduction-by-id': getReductionById
       })
 })
@@ -150,7 +152,7 @@ describe('services/reductions-service', function () {
       return reductionService.addReduction(workloadOwnerId, reduction)
         .then(function (result) {
           expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
-          expect(createCalculateWorkloadTaskStub.calledWith(3, 2)).to.be.true //eslint-disable-line
+          expect(createCalculateWorkloadTaskStub.calledWith(latestWorkloadStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
           expect(addReductionStub.calledWith(workloadOwnerId, reduction)).to.be.true //eslint-disable-line
           expect(result).to.equal(1)
         })
@@ -164,7 +166,7 @@ describe('services/reductions-service', function () {
       return reductionService.updateReduction(workloadOwnerId, existingReductionId, reduction)
         .then(function (result) {
           expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
-          expect(createCalculateWorkloadTaskStub.calledWith(3, 2)).to.be.true //eslint-disable-line
+          expect(createCalculateWorkloadTaskStub.calledWith(latestWorkloadStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
           expect(updateReductionStub.calledWith(existingReductionId, workloadOwnerId,reduction)).to.be.true //eslint-disable-line
           expect(result).to.equal(1)
         })
@@ -179,7 +181,7 @@ describe('services/reductions-service', function () {
       return reductionService.updateReductionStatus(workloadOwnerId, existingReductionId, newReductonStatus)
         .then(function (result) {
           expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
-          expect(createCalculateWorkloadTaskStub.calledWith(3, 2)).to.be.true //eslint-disable-line
+          expect(createCalculateWorkloadTaskStub.calledWith(latestWorkloadStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
           expect(updateReductionStatusStub.calledWith(existingReductionId, newReductonStatus)).to.be.true //eslint-disable-line
           expect(result).to.equal(1)
         })
