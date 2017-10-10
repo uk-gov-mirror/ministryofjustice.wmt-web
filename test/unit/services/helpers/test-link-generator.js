@@ -1,5 +1,6 @@
 const expect = require('chai').expect
 const linkGenerator = require('../../../../app/services/helpers/link-generator')
+const workloadType = require('../../../../app/constants/workload-type')
 
 describe('services/helpers/link-generator', function () {
   describe('fromReference', function () {
@@ -9,8 +10,18 @@ describe('services/helpers/link-generator', function () {
       expect(linkGenerator.fromReference('T178')).to.eql('/team/178')
     })
 
+    it('should return the correct link for each organisational unit, including ID for court-reports', function () {
+      expect(linkGenerator.fromReference('R1', workloadType.COURT_REPORTS)).to.eql('/court-reports/region/1')
+      expect(linkGenerator.fromReference('L34', workloadType.COURT_REPORTS)).to.eql('/court-reports/ldu/34')
+      expect(linkGenerator.fromReference('T178', workloadType.COURT_REPORTS)).to.eql('/court-reports/team/178')
+    })
+
     it('should return the correct link for national level (no ID)', function () {
       expect(linkGenerator.fromReference('N')).to.eql('/hmpps/0')
+    })
+
+    it('should return the correct link for national level (no ID) for court-reports', function () {
+      expect(linkGenerator.fromReference('N', workloadType.COURT_REPORTS)).to.eql('/court-reports/hmpps/0')
     })
 
     it('should throw an error when passed undefined reference', function () {
@@ -31,6 +42,10 @@ describe('services/helpers/link-generator', function () {
   describe('fromIdAndName', function () {
     it('should generate a link based on the id and name supplied', function () {
       expect(linkGenerator.fromIdAndName(1, 'offender-manager')).to.eql('/offender-manager/1')
+    })
+
+    it('should generate a link based on the id and name supplied for court-reports', function () {
+      expect(linkGenerator.fromIdAndName(1, 'offender-manager', workloadType.COURT_REPORTS)).to.eql('/court-reports/offender-manager/1')
     })
 
     it('should return no trailing slashes when an empty id is supplied', function () {
