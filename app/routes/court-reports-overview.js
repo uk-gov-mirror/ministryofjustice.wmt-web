@@ -8,14 +8,10 @@ module.exports = function (router) {
   router.get('/court-reports/:organisationLevel/:id/overview', function (req, res, next) {
     var organisationLevel = req.params.organisationLevel
     var organisationUnit = getOrganisationUnit('name', organisationLevel)
-    var id
+    var id = req.params.id
+    
     var childOrganisationLevel
     var childOrganisationLevelDisplayText
-
-    if (organisationLevel !== organisationUnitConstants.NATIONAL.name) {
-      id = req.params.id
-    }
-
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       childOrganisationLevel = organisationUnit.childOrganisationLevel
       childOrganisationLevelDisplayText = getOrganisationUnit('name', childOrganisationLevel).displayText
@@ -23,7 +19,6 @@ module.exports = function (router) {
 
     return getCourtReportOverview(id, organisationLevel)
     .then(function (result) {
-      console.log(result.overviewDetails)
       return res.render('court-reports-overview', {
         title: result.title,
         subTitle: result.subTitle,
