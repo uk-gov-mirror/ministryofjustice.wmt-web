@@ -12,8 +12,8 @@ module.exports = function (router) {
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
     var workloadType = req.params.workloadType
-    
-    if(workloadType !== undefined && workloadType !== workloadTypeContants.COURT_REPORTS) {
+
+    if (workloadType !== undefined && workloadType !== workloadTypeContants.COURT_REPORTS) {
       return res.sendStatus(404)
     } else if (workloadType === undefined) {
       workloadType = workloadTypeContants.STANDARD
@@ -45,8 +45,8 @@ module.exports = function (router) {
     var id = req.params.id
     var updatedHours = req.body.hours
     var workloadType = req.params.workloadType
-    
-    if(workloadType !== undefined && workloadType !== workloadTypeContants.COURT_REPORTS) {
+
+    if (workloadType !== undefined && workloadType !== workloadTypeContants.COURT_REPORTS) {
       return res.sendStatus(404)
     } else if (workloadType === undefined) {
       workloadType = workloadTypeContants.STANDARD
@@ -82,7 +82,7 @@ module.exports = function (router) {
     return contractedHoursService.updateContractedHours(id, organisationLevel, updatedHours)
     .then(function () {
       var linkPrefix = ''
-      if(workloadType === workloadTypeContants.COURT_REPORTS) {
+      if (workloadType === workloadTypeContants.COURT_REPORTS) {
         linkPrefix = '/court-reports'
       }
       return res.redirect(linkPrefix + '/offender-manager/' + id + '/contracted-hours?hoursUpdatedSuccess=true')

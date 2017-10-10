@@ -40,7 +40,7 @@ module.exports.fromIdAndName = function (id, name, workloadType = workloadTypes.
     link = '/' + name + '/' + id
   }
 
-  if(workloadType === workloadTypes.COURT_REPORTS) {
+  if (workloadType === workloadTypes.COURT_REPORTS) {
     link = '/court-reports' + link
   }
 

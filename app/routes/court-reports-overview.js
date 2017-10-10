@@ -9,7 +9,7 @@ module.exports = function (router) {
     var organisationLevel = req.params.organisationLevel
     var organisationUnit = getOrganisationUnit('name', organisationLevel)
     var id = req.params.id
-    
+
     var childOrganisationLevel
     var childOrganisationLevelDisplayText
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -26,7 +26,7 @@ module.exports = function (router) {
         organisationLevel: organisationLevel,
         childOrganisationLevel: childOrganisationLevel,
         childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
-        subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS ),
+        subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS),
         overviewDetails: result.overviewDetails
       })
     }).catch(function (error) {

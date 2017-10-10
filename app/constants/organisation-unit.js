@@ -27,7 +27,7 @@ module.exports = {
     caseProgressView: 'ldu_case_progress_view',
     overviewView: 'ldu_case_overview',
     caseloadView: 'ldu_caseload_view',
-    courtReporterOverview: 'ldu_court_reporter_overview',    
+    courtReporterOverview: 'ldu_court_reporter_overview',
     childOrganisationLevel: 'team' },
   REGION: {
     name: 'region',
@@ -38,7 +38,7 @@ module.exports = {
     caseProgressView: 'region_case_progress_view',
     overviewView: 'region_case_overview',
     caseloadView: 'region_caseload_view',
-    courtReporterOverview: 'region_court_reporter_overview',    
+    courtReporterOverview: 'region_court_reporter_overview',
     childOrganisationLevel: 'ldu' },
   NATIONAL: {
     name: 'hmpps',
@@ -49,6 +49,6 @@ module.exports = {
     caseProgressView: 'national_case_progress_view',
     overviewView: 'national_case_overview',
     caseloadView: 'national_caseload_view',
-    courtReporterOverview: 'national_court_reporter_overview',    
+    courtReporterOverview: 'national_court_reporter_overview',
     childOrganisationLevel: 'region' }
 }

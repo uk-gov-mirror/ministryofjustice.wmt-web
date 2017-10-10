@@ -4,8 +4,8 @@ const getOrganisationUnit = require('./helpers/org-unit-finder')
 const orgUnit = require('../constants/organisation-unit')
 const workloadTypeConst = require('../constants/workload-type')
 
-module.exports = function(id, organisationLevel) {
-  var result = {}  
+module.exports = function (id, organisationLevel) {
+  var result = {}
   var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
 
   return getCourtReportOverview(id, organisationLevel)

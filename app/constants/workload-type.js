@@ -1,4 +1,4 @@
 module.exports = {
-    STANDARD: "standard",
-    COURT_REPORTS:'court-reports'
+  STANDARD: 'standard',
+  COURT_REPORTS: 'court-reports'
 }

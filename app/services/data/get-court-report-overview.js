@@ -3,7 +3,7 @@ const knex = require('knex')(config)
 const orgUnitFinder = require('../helpers/org-unit-finder')
 const orgUnits = require('../../constants/organisation-unit')
 
-module.exports = function(id, type) {
+module.exports = function (id, type) {
   var orgUnit = orgUnitFinder('name', type)
   var table = orgUnit.courtReporterOverview
   var whereObject = {}
@@ -21,10 +21,10 @@ module.exports = function(id, type) {
     'reduction_hours AS reduction',
     'total_cases_sdrs AS totalCasesSdrs',
     'total_cases_fdrs AS totalCasesFdrs',
-    'total_cases_oral_reports AS totalCasesOralReports' 
+    'total_cases_oral_reports AS totalCasesOralReports'
   ]
-  
+
   return knex(table)
-  .where(whereObject)    
+  .where(whereObject)
   .select(selectColumns)
 }

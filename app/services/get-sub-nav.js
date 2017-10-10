@@ -7,32 +7,29 @@ module.exports = function (id, organisationalUnitName, currentPath, workloadType
   var baseLink = linkGenerator.fromIdAndName(id, organisationalUnitName, workloadType)
   var navigation = []
 
-  if(workloadType === workloadConstants.COURT_REPORTS 
-    && organisationalUnitName === organisationUnitConstants.OFFENDER_MANAGER.name) {
+  if (workloadType === workloadConstants.COURT_REPORTS &&
+    organisationalUnitName === organisationUnitConstants.OFFENDER_MANAGER.name) {
     navigation.push(new Link('Overview', baseLink + '/overview'))
     navigation.push(new Link('Contracted Hours', baseLink + '/contracted-hours'))
-    navigation.push(new Link('Reductions', baseLink + '/reductions'))    
-  }
-  else if(workloadType === workloadConstants.STANDARD 
-    && organisationalUnitName === organisationUnitConstants.OFFENDER_MANAGER.name) {
+    navigation.push(new Link('Reductions', baseLink + '/reductions'))
+  } else if (workloadType === workloadConstants.STANDARD &&
+    organisationalUnitName === organisationUnitConstants.OFFENDER_MANAGER.name) {
     navigation.push(new Link('Overview', baseLink + '/overview'))
     navigation.push(new Link('Capacity', baseLink + '/caseload-capacity'))
     navigation.push(new Link('Contracted Hours', baseLink + '/contracted-hours'))
-    navigation.push(new Link('Case Progress', baseLink + '/case-progress'))    
-    navigation.push(new Link('Reductions', baseLink + '/reductions'))    
-  }
-  else if(workloadType === workloadConstants.COURT_REPORTS
-     && organisationalUnitName !== organisationUnitConstants.OFFENDER_MANAGER.name) {
-    navigation.push(new Link('Court Reports Overview', baseLink + '/overview'))    
-  }
-  else if(workloadType === workloadConstants.STANDARD 
-     && organisationalUnitName !== organisationUnitConstants.OFFENDER_MANAGER.name) {
+    navigation.push(new Link('Case Progress', baseLink + '/case-progress'))
+    navigation.push(new Link('Reductions', baseLink + '/reductions'))
+  } else if (workloadType === workloadConstants.COURT_REPORTS &&
+     organisationalUnitName !== organisationUnitConstants.OFFENDER_MANAGER.name) {
+    navigation.push(new Link('Court Reports Overview', baseLink + '/overview'))
+  } else if (workloadType === workloadConstants.STANDARD &&
+     organisationalUnitName !== organisationUnitConstants.OFFENDER_MANAGER.name) {
     navigation.push(new Link('Overview', baseLink + '/overview'))
     navigation.push(new Link('Capacity', baseLink + '/caseload-capacity'))
     navigation.push(new Link('Caseload', baseLink + '/caseload'))
-    navigation.push(new Link('Case Progress', baseLink + '/case-progress'))    
+    navigation.push(new Link('Case Progress', baseLink + '/case-progress'))
   }
-  
+
   navigation.forEach(function (item) {
     if (item.link === currentPath) {
       item.active = true
