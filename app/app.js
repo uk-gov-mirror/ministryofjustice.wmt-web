@@ -41,7 +41,6 @@ app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_t
 app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_frontend_toolkit')))
 app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images', 'favicon.ico')))
 
-// Cookie session
 app.set('trust proxy', 1) // trust first proxy
 
 app.use(bodyParser.json())
