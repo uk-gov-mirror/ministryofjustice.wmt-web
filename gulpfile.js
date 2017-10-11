@@ -23,8 +23,8 @@ gulp.task('templates', function () {
 
 gulp.task('vendorJS', function () {
   const vendorJSFiles = [
-    'node_modules/jquery/dist/jquery.js',
-    'node_modules/plotly.js/dist/plotly.js'
+    'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/plotly.js/dist/plotly.min.js'
   ]
 
   gulp.src(vendorJSFiles)

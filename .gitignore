@@ -17,5 +17,5 @@ app/govuk_modules
 errorShots/*
 .DS_Store
 
-# Ignore vendor JS files
+# Ignore vendor JS files created by gulp
 app/assets/javascripts/vendor
