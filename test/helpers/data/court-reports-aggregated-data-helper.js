@@ -45,6 +45,31 @@ module.exports.removeInsertedData = function (inserts) {
   })
 }
 
+module.exports.selectIdsForCourtReporterWorkloadOwner = function(inserts) {
+  var results = []
+  
+  var promise = knex('workload_owner')
+  .join('court_reports_workload', 'court_reports_workload.workload_owner_id', 'workload_owner.id')
+  .join('court_reports_workload_points_calculation', 'court_reports_workload_points_calculation.court_reports_workload_id', 'court_reports_workload.id')
+  .join('workload_report', 'court_reports_workload_points_calculation.workload_report_id', 'workload_report.id')
+  .whereNull('workload_report.effective_to')
+  .orderBy('workload_report.effective_from', 'desc')
+  .first('workload_owner.id', 'team_id')
+    .then(function (result) {
+      results.push({ table: 'workload_owner', id: result.id }, { table: 'team', id: result.team_id })
+      return knex('team').select('ldu_id').where('id', '=', result.team_id)
+    })
+    .then(function (result) {
+      results.push({ table: 'ldu', id: result[0].ldu_id })
+      return knex('ldu').select('region_id').where('id', '=', result[0].ldu_id)
+    })
+    .then(function (result) {
+      results.push({ table: 'region', id: result[0].region_id })
+      return results
+    })
+  return promise
+}
+
 var addCrWorkloadPointsCalculation = function(inserts) {
   //Add workload points calc
   var crWorkloadIdFrist = inserts.filter((item) => item.table === 'court_reports_workload')[0].id
