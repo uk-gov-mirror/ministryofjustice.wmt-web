@@ -39,6 +39,7 @@ module.exports.updateContractedHours = function (id, organisationLevel, hours, w
     if (workloadType === workloadTypes.STANDARD) {
       return getLatestIdsForWorkloadPointsRecalc(id)
       .then(function (ids) {
+        return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
       })
     } else {
       // TODO: kick off recalc of court-report-workload-points

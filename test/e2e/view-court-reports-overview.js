@@ -92,6 +92,13 @@ describe('View court-reports overview', function () {
       })
   })
 
+  it('should navigate to overview page from any other tab', function () {
+    return browser.url(workloadOwnerDefaultUrl + '/contracted-hours')
+      .waitForExist('.sln-subnav')
+      .click('[href="' + workloadOwnerDefaultUrl + '/overview"]')
+      .waitForExist('.sln-form-action')
+  })
+
   it('should allow the user to navigate down the org hierarchy from the national page', function () {
     return browser.url(nationalDefaultUrl + '/overview')
       .getText('.sln-page-subtitle')

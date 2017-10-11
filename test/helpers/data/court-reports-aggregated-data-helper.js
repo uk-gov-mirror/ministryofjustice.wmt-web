@@ -4,8 +4,8 @@ var Promise = require('bluebird').Promise
 
 module.exports.addCourtReportWorkloadsForOffenderManager = function () {
   var inserts = []
-  
-  //Add workload_owners and cr workloads
+
+  // Add workload_owners and cr workloads
   var offenderManagerTypes = [
     { grade_code: 'PO' },
     { grade_code: 'PSO' }
@@ -17,13 +17,13 @@ module.exports.addCourtReportWorkloadsForOffenderManager = function () {
     ids.forEach((id) => {
       inserts.push({table: 'offender_manager_type', id: id})
     })
-    
+
     return addRegion(inserts)
     .then(function (inserts) {
       var workloadReports = [
         { effective_from: '2017-02-01' }
       ]
-      
+
       return knex('workload_report').returning('id').insert(workloadReports)
       .then(function (ids) {
         ids.forEach((id) => {
@@ -45,9 +45,9 @@ module.exports.removeInsertedData = function (inserts) {
   })
 }
 
-module.exports.selectIdsForCourtReporterWorkloadOwner = function(inserts) {
+module.exports.selectIdsForCourtReporterWorkloadOwner = function (inserts) {
   var results = []
-  
+
   var promise = knex('workload_owner')
   .join('court_reports_workload', 'court_reports_workload.workload_owner_id', 'workload_owner.id')
   .join('court_reports_workload_points_calculation', 'court_reports_workload_points_calculation.court_reports_workload_id', 'court_reports_workload.id')
@@ -70,16 +70,16 @@ module.exports.selectIdsForCourtReporterWorkloadOwner = function(inserts) {
   return promise
 }
 
-var addCrWorkloadPointsCalculation = function(inserts) {
-  //Add workload points calc
+var addCrWorkloadPointsCalculation = function (inserts) {
+  // Add workload points calc
   var crWorkloadIdFrist = inserts.filter((item) => item.table === 'court_reports_workload')[0].id
   var crWorkloadIdSecond = inserts.filter((item) => item.table === 'court_reports_workload')[1].id
 
   var crWorkloadPointsIdFirst = inserts.filter((item) => item.table === 'court_reports_workload_points')[0].id
   var crWorkloadPointsIdSecond = inserts.filter((item) => item.table === 'court_reports_workload_points')[1].id
-     
+
   var workloadReportId = inserts.filter((item) => item.table === 'workload_report')[0].id
-     
+
   var crWPCEntries = [
     {
       workload_report_id: workloadReportId,
@@ -94,7 +94,7 @@ var addCrWorkloadPointsCalculation = function(inserts) {
       court_reports_workload_points_id: crWorkloadPointsIdSecond,
       reduction_hours: 5,
       contracted_hours: 38
-    },
+    }
   ]
 
   return knex('court_reports_workload_points_calculation').returning('id')
@@ -107,7 +107,7 @@ var addCrWorkloadPointsCalculation = function(inserts) {
   })
 }
 
-var addCourtReportWorkloadPoints = function(inserts) {
+var addCourtReportWorkloadPoints = function (inserts) {
   if (inserts === undefined) {
     inserts = []
   }
@@ -115,7 +115,7 @@ var addCourtReportWorkloadPoints = function(inserts) {
     {default_contracted_hours: 37.5},
     {default_contracted_hours: 38.5}
   ]
-  
+
   return knex('court_reports_workload_points').returning('id')
   .insert(crWorkloadPoints)
   .then(function (ids) {
@@ -125,7 +125,7 @@ var addCourtReportWorkloadPoints = function(inserts) {
     return inserts
   })
 }
-  
+
 var addRegion = function (inserts) {
   return knex('region').returning('id').insert({description: 'Test Region'})
   .then(function (ids) {
@@ -148,7 +148,7 @@ var addLdu = function (inserts) {
     return addTeam(inserts)
   })
 }
-  
+
 var addTeam = function (inserts) {
   var ldus = inserts.filter((item) => item.table === 'ldu')
   return knex('team').returning('id').insert({ldu_id: ldus[ldus.length - 1].id, description: 'Test Team'})
@@ -163,7 +163,7 @@ var addTeam = function (inserts) {
     return addPOOffenderManager(inserts)
   })
 }
-  
+
 var addPOOffenderManager = function (inserts) {
   var poOmType = inserts.filter((item) => item.table === 'offender_manager_type')[0]
   return knex('offender_manager').returning('id').insert(
@@ -181,24 +181,24 @@ var addPOOffenderManager = function (inserts) {
   })
 }
 
-var addCrWorkload = function(inserts) {
-  //Add the workload_owner
+var addCrWorkload = function (inserts) {
+  // Add the workload_owner
   var numberOfOffenderManagers = inserts.filter((item) => item.table === 'offender_manager').length
   var workloadOwner = {
     team_id: inserts.filter((item) => item.table === 'team')[0].id,
-    offender_manager_id: inserts.filter((item) => item.table === 'offender_manager')[numberOfOffenderManagers-1].id
+    offender_manager_id: inserts.filter((item) => item.table === 'offender_manager')[numberOfOffenderManagers - 1].id
   }
 
   return knex('workload_owner').returning('id').insert(workloadOwner)
-  .then(function (ids){
-    inserts.push({table: 'workload_owner', id:ids[0]})
+  .then(function (ids) {
+    inserts.push({table: 'workload_owner', id: ids[0]})
     return inserts
   })
   .then(function () {
-    //new crworkload
+    // new crworkload
     var numberOfWorkloadOwners = inserts.filter((item) => item.table === 'workload_owner').length
     var crWorkload = {
-      workload_owner_id: inserts.filter((item) => item.table === 'workload_owner')[numberOfWorkloadOwners-1].id,
+      workload_owner_id: inserts.filter((item) => item.table === 'workload_owner')[numberOfWorkloadOwners - 1].id,
       total_cases_sdr: 12,
       total_cases_fdr: 13,
       total_cases_oral_reports: 14
@@ -206,7 +206,7 @@ var addCrWorkload = function(inserts) {
 
     return knex('court_reports_workload').returning('id').insert(crWorkload)
     .then(function (ids) {
-      inserts.push({table: 'court_reports_workload', id:ids[0]})
+      inserts.push({table: 'court_reports_workload', id: ids[0]})
       return inserts
     })
   })
