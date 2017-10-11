@@ -9,12 +9,12 @@ const ERROR_MESSAGES = require('../services/validators/validation-error-messages
 
 module.exports = function (router) {
   router.get('/:workloadType?/:organisationLevel/:id/contracted-hours', function (req, res, next) {
-    if(req.params.workloadType === undefined) {
-      if(isNaN(parseInt(req.params.id, 10))) {
+    if (req.params.workloadType === undefined) {
+      if (isNaN(parseInt(req.params.id, 10))) {
         return res.sendStatus(500)
       }
     }
-    
+
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
     var workloadType = req.params.workloadType
@@ -25,7 +25,7 @@ module.exports = function (router) {
       workloadType = workloadTypeContants.STANDARD
     }
 
-    if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) { 
+    if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       return res.sendStatus(404)
     }
 

@@ -10,10 +10,10 @@ describe('View contracted hours', function () {
   before(function () {
     return crDataHelper.selectIdsForCourtReporterWorkloadOwner()
     .then(function (results) {
-        workloadOwnerIds = results
-        workloadOwnerId = workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
-        workloadOwnerDefaultUrl = '/court-reports/offender-manager/' + workloadOwnerId
-      })
+      workloadOwnerIds = results
+      workloadOwnerId = workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
+      workloadOwnerDefaultUrl = '/court-reports/offender-manager/' + workloadOwnerId
+    })
   })
 
   it('should navigate to the workload owner contracted-hours page', function () {

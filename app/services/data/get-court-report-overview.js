@@ -1,7 +1,6 @@
 const config = require('../../../knexfile').web
 const knex = require('knex')(config)
 const orgUnitFinder = require('../helpers/org-unit-finder')
-const orgUnits = require('../../constants/organisation-unit')
 
 module.exports = function (id, type) {
   var orgUnit = orgUnitFinder('name', type)

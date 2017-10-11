@@ -1,7 +1,6 @@
 const getCourtReportOverview = require('./data/get-court-report-overview')
 const getBreadcrumbs = require('./get-breadcrumbs')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
-const orgUnit = require('../constants/organisation-unit')
 const workloadTypeConst = require('../constants/workload-type')
 
 module.exports = function (id, organisationLevel) {

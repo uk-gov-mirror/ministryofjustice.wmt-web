@@ -3,7 +3,6 @@ const expect = require('chai').expect
 const crDataHelper = require('../helpers/data/court-reports-aggregated-data-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 
-var workloadOwnerIds = []
 var workloadOwnerId
 var workloadOwnerGrade
 var workloadOwnerDefaultUrl
@@ -16,7 +15,6 @@ describe('View court-reports overview', function () {
   before(function () {
     return crDataHelper.selectIdsForCourtReporterWorkloadOwner()
       .then(function (results) {
-        workloadOwnerIds = results
         workloadOwnerId = results.filter((item) => item.table === 'workload_owner')[0].id
         workloadOwnerDefaultUrl = '/court-reports/offender-manager/' + workloadOwnerId
         teamDefaultUrl = '/court-reports/team/' + results.filter((item) => item.table === 'team')[0].id
