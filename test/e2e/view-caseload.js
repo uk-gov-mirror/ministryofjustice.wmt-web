@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-
+const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 
 var workloadOwnerIds = []
@@ -11,6 +11,7 @@ var nationalDefaultUrl
 
 describe('View your caseload flow', () => {
   before(function () {
+    authenticationHerlp.login(authenticationHerlp.users.Staff)
     return dataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
@@ -19,6 +20,8 @@ describe('View your caseload flow', () => {
         lduDefaultUrl = '/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
         regionDefaultUrl = '/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
         nationalDefaultUrl = '/hmpps/0'
+      }).then(function () {
+        return browser.url(teamDefaultUrl + '/caseload').waitForExist('.breadcrumbs')
       })
   })
 
@@ -108,26 +111,26 @@ describe('View your caseload flow', () => {
 
     it('should be accessible via the Caseload tab on Team and LDUs default view', () => {
       return browser.url(nationalDefaultUrl)
-      .click('[href="' + regionDefaultUrl + '"]')
-      .click('[href="' + lduDefaultUrl + '"]')
-      .click('[href="' + lduDefaultUrl + '/caseload"]')
-      .waitForExist('.sln-table-caseload-by-grade')
-      .click('[href="' + lduDefaultUrl + '/overview"]')
-      .click('[href="' + teamDefaultUrl + '"]')
-      .click('[href="' + teamDefaultUrl + '/caseload"]')
-      .waitForExist('.sln-table-caseload-overall')
+        .click('[href="' + regionDefaultUrl + '"]')
+        .click('[href="' + lduDefaultUrl + '"]')
+        .click('[href="' + lduDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload-by-grade')
+        .click('[href="' + lduDefaultUrl + '/overview"]')
+        .click('[href="' + teamDefaultUrl + '"]')
+        .click('[href="' + teamDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload-overall')
     })
 
     it('should be accessible via the Case Progress tab when on any other tab', () => {
       return browser.url(teamDefaultUrl)
-      .click('[href="' + teamDefaultUrl + '/caseload"]')
-      .waitForExist('.sln-table-caseload-overall')
-      .click('[href="' + teamDefaultUrl + '/case-progress"]')
-      .click('[href="' + teamDefaultUrl + '/caseload"]')
-      .waitForExist('.sln-table-caseload-overall')
-      .click('[href="' + teamDefaultUrl + '/caseload-capacity"]')
-      .click('[href="' + teamDefaultUrl + '/caseload"]')
-      .waitForExist('.sln-table-caseload-overall')
+        .click('[href="' + teamDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload-overall')
+        .click('[href="' + teamDefaultUrl + '/case-progress"]')
+        .click('[href="' + teamDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload-overall')
+        .click('[href="' + teamDefaultUrl + '/caseload-capacity"]')
+        .click('[href="' + teamDefaultUrl + '/caseload"]')
+        .waitForExist('.sln-table-caseload-overall')
     })
   })
 
@@ -196,5 +199,9 @@ describe('View your caseload flow', () => {
         .click('[href="' + nationalDefaultUrl + '/caseload"]')
         .waitForExist('.sln-table-caseload-by-grade')
     })
+  })
+
+  after(function () {
+    authenticationHerlp.logout()
   })
 })

@@ -13,7 +13,6 @@ const path = require('path')
 const routes = require('./routes')
 const routesNoCsrf = require('./routes-no-csrf')
 const getOrganisationalHierarchyTree = require('./services/organisational-hierarchy-tree')
-const cookieSession = require('cookie-session')
 const logger = require('./logger')
 
 var app = express()
@@ -42,18 +41,7 @@ app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_t
 app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_frontend_toolkit')))
 app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images', 'favicon.ico')))
 
-// Cookie session
 app.set('trust proxy', 1) // trust first proxy
-app.use(cookieSession({
-  name: 'session',
-  keys: [config.APPLICATION_SECRET],
-  maxAge: parseInt(config.SESSION_COOKIE_MAXAGE)
-}))
-// Update a value in the cookie so that the set-cookie will be sent
-app.use(function (req, res, next) {
-  req.session.nowInMinutes = Date.now() / 60e3
-  next()
-})
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

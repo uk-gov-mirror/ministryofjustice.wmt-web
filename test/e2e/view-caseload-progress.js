@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-
+const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const caseProgressDataHelper = require('../helpers/data/aggregated-data-helper')
 
 var workloadOwnerIds = []
@@ -11,6 +11,7 @@ var nationalDefaultUrl
 
 describe('View caseload progress flow', () => {
   before(function () {
+    authenticationHerlp.login(authenticationHerlp.users.Staff)
     return caseProgressDataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
@@ -19,6 +20,8 @@ describe('View caseload progress flow', () => {
         lduDefaultUrl = '/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
         regionDefaultUrl = '/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
         nationalDefaultUrl = '/hmpps/0'
+      }).then(function () {
+        return browser.url(workloadOwnerDefaultUrl + '/caseload-capacity').waitForExist('.breadcrumbs')
       })
   })
 
@@ -120,5 +123,9 @@ describe('View caseload progress flow', () => {
       .click('[href="' + teamDefaultUrl + '/caseload-capacity"]')
       .click('[href="' + teamDefaultUrl + '/case-progress"]')
       .waitForExist('#plotly-div-cases')
+  })
+
+  after(function () {
+    authenticationHerlp.logout()
   })
 })

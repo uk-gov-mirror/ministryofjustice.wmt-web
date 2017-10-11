@@ -4,9 +4,27 @@ const getSubNav = require('../services/get-sub-nav')
 const Reduction = require('../services/domain/reduction')
 const reductionStatusType = require('../constants/reduction-status-type')
 const ValidationError = require('../services/errors/validation-error')
+const authorisation = require('../authorisation')
+const messages = require('../constants/messages')
+const roles = require('../constants/user-roles')
+const Unathorized = require('../services/errors/authentication-error').Unauthorized
+const Forbidden = require('../services/errors/authentication-error').Forbidden
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/reductions', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.MANAGER])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.MANAGER_ROLES_REQUIRED
+        })
+      }
+    }
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 
@@ -35,6 +53,19 @@ module.exports = function (router) {
   })
 
   router.get('/:organisationLevel/:id/add-reduction', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.MANAGER])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.MANAGER_ROLES_REQUIRED
+        })
+      }
+    }
     var organisationLevel = req.params.organisationLevel
     var id = parseInt(req.params.id)
 
@@ -63,6 +94,19 @@ module.exports = function (router) {
   })
 
   router.get('/:organisationLevel/:id/edit-reduction', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.MANAGER])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.MANAGER_ROLES_REQUIRED
+        })
+      }
+    }
     var organisationLevel = req.params.organisationLevel
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -94,6 +138,19 @@ module.exports = function (router) {
   })
 
   router.post('/:organisationLevel/:id/add-reduction', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.MANAGER])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.MANAGER_ROLES_REQUIRED
+        })
+      }
+    }
     var organisationLevel = req.params.organisationLevel
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -147,6 +204,19 @@ module.exports = function (router) {
   })
 
   router.post('/:organisationLevel/:id/edit-reduction', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.MANAGER])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.MANAGER_ROLES_REQUIRED
+        })
+      }
+    }
     var organisationLevel = req.params.organisationLevel
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -162,30 +232,30 @@ module.exports = function (router) {
     } catch (error) {
       if (error instanceof ValidationError) {
         return reductionsService.getAddReductionsRefData(id, organisationLevel)
-        .then(function (result) {
-          return res.status(400).render('add-reduction', {
-            breadcrumbs: result.breadcrumbs,
-            linkId: id,
-            title: result.title,
-            subTitle: result.subTitle,
-            subNav: getSubNav(id, organisationLevel, req.path),
-            referenceData: result.referenceData,
-            reduction: {
-              reasonId: req.body.reasonForReductionId,
-              hours: req.body.reductionHours,
-              start_day: req.body.redStartDay,
-              start_month: req.body.redStartMonth,
-              start_year: req.body.redStartYear,
-              end_day: req.body.redEndDay,
-              end_month: req.body.redEndMonth,
-              end_year: req.body.redEndYear,
-              notes: req.body.notes
-            },
-            errors: error.validationErrors
+          .then(function (result) {
+            return res.status(400).render('add-reduction', {
+              breadcrumbs: result.breadcrumbs,
+              linkId: id,
+              title: result.title,
+              subTitle: result.subTitle,
+              subNav: getSubNav(id, organisationLevel, req.path),
+              referenceData: result.referenceData,
+              reduction: {
+                reasonId: req.body.reasonForReductionId,
+                hours: req.body.reductionHours,
+                start_day: req.body.redStartDay,
+                start_month: req.body.redStartMonth,
+                start_year: req.body.redStartYear,
+                end_day: req.body.redEndDay,
+                end_month: req.body.redEndMonth,
+                end_year: req.body.redEndYear,
+                notes: req.body.notes
+              },
+              errors: error.validationErrors
+            })
+          }).catch(function (error) {
+            next(error)
           })
-        }).catch(function (error) {
-          next(error)
-        })
       }
     }
 
@@ -198,6 +268,19 @@ module.exports = function (router) {
   })
 
   router.post('/:organisationLevel/:id/update-reduction-status', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.MANAGER])
+    } catch (error) {
+      if (error instanceof Unathorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.MANAGER_ROLES_REQUIRED
+        })
+      }
+    }
     var organisationLevel = req.params.organisationLevel
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -242,8 +325,8 @@ module.exports = function (router) {
   }
 
   var generateNewReductionFromRequest = function (requestBody) {
-    var reductionStartDate = [ requestBody.redStartDay, requestBody.redStartMonth, requestBody.redStartYear ]
-    var reductionEndDate = [ requestBody.redEndDay, requestBody.redEndMonth, requestBody.redEndYear ]
+    var reductionStartDate = [requestBody.redStartDay, requestBody.redStartMonth, requestBody.redStartYear]
+    var reductionEndDate = [requestBody.redEndDay, requestBody.redEndMonth, requestBody.redEndYear]
     var reasonId = requestBody.reasonForReductionId
     return new Reduction(reasonId, requestBody.reductionHours, reductionStartDate, reductionEndDate, requestBody.notes)
   }

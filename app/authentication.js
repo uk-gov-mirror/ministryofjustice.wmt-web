@@ -21,7 +21,13 @@ module.exports = function (app) {
     // Remove the domain from the username
     var username = userRoleService.removeDomainFromUsername(name)
     // Get the role for the user
-    return userRoleService.getUserByUsername(username).then(function (user) {
+    return userRoleService.getUserByUsername(username).then(function (result) {
+      var user = {
+        id: 0  // assume its a Staff user
+      }
+      if (result) {
+        user.id = result.id // actual user exists
+      }
       return userRoleService.getRoleByUsername(username).then(function (role) {
         done(null, {
           userId: user.id,
@@ -47,7 +53,7 @@ module.exports = function (app) {
   })
 
   var sessionOptions = {
-    name: 'wmt-start-application',
+    name: 'wmt-application',
     secret: config.APPLICATION_SECRET,
     resave: config.RESAVE_SESSION,
     saveUninitialized: config.SAVE_UNINITIALIZED_SESSION,

@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-
+const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 
 var offenderManagerId
@@ -7,10 +7,13 @@ var offenderManagerUrl
 
 describe('View adding a new reduction', () => {
   before(function () {
+    authenticationHerlp.login(authenticationHerlp.users.Manager)
     return dataHelper.getAnyExistingWorkloadOwnerId()
         .then(function (results) {
           offenderManagerId = results
           offenderManagerUrl = '/offender-manager/' + offenderManagerId + '/add-reduction'
+        }).then(function () {
+          return browser.url(offenderManagerUrl).waitForExist('.breadcrumbs')
         })
   })
 
@@ -37,5 +40,9 @@ describe('View adding a new reduction', () => {
       browser.setValue('#notes', 'New note')
       browser.submitForm('#reductionForm')
     })
+  })
+
+  after(function () {
+    authenticationHerlp.logout()
   })
 })

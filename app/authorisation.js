@@ -1,22 +1,29 @@
 const config = require('../config')
+const Unauthorized = require('./services/errors/authentication-error').Unauthorized
+const Forbidden = require('./services/errors/authentication-error').Forbidden
 
-var isAuthenticated = function (req) {
-  if (!req.isAuthenticated() || !req.user) {
-    var error = new Error('Unauthorized')
-    error.status = 401
-    throw error
+var assertUserAuthenticated = function (req) {
+  if (isAuthenticationEnabled()) {
+    if (!req.user) {
+      // To handle bookmarks we need to store unauthenticated requests only
+      if ((req.path !== '/') && (req.path !== '/login')) {
+        req.session.redirectTo = req.path
+      }
+      throw new Unauthorized('Unauthorized', '/login')
+    }
   }
 }
 
-var hasRole = function (req, role) {
-  var hasRole = false
+var hasRole = function (req, roles) {
   if (isAuthenticationEnabled()) {
-    isAuthenticated(req)
-    if (req.user.user_role === role) {
-      hasRole = true
+    if (roles instanceof Array) {
+      if (!roles.includes(req.user.user_role)) {
+        throw new Forbidden('Unauthorized', 'includes/message')
+      }
+    } else {
+      throw new Forbidden('Unauthorized', 'includes/message')
     }
   }
-  return hasRole
 }
 
 var isAuthenticationEnabled = function () {
@@ -24,4 +31,5 @@ var isAuthenticationEnabled = function () {
 }
 
 module.exports.hasRole = hasRole
+module.exports.assertUserAuthenticated = assertUserAuthenticated
 module.exports.isAuthenticationEnabled = isAuthenticationEnabled
