@@ -74,16 +74,10 @@ var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
 }
 
 var buildCapacityBreakdownEntry = function (workloadReport) {
-  var cmsPercentageValue = null
-  var gsPercentageValue = null
-  
+  var cmsPercentageValue = 0
+
   if (workloadReport.cmsAdjustmentPoints > 0) {
     cmsPercentageValue = percentageCalculator.calculatePercentage(workloadReport.cmsAdjustmentPoints, workloadReport.totalPoints)
-  }
-
-  // TODO: This will always be negative. What do they want to see?
-  if (workloadReport.gsAdjustmentPoints > 0) {
-    gsPercentageValue = percentageCalculator.calculatePercentage(workloadReport.gsAdjustmentPoints, workloadReport.totalPoints)
   }
 
   return {
@@ -93,6 +87,6 @@ var buildCapacityBreakdownEntry = function (workloadReport) {
     linkId: workloadReport.linkId,
     capacityPercentage: percentageCalculator.calculatePercentage(workloadReport.totalPoints, workloadReport.availablePoints),
     cmsPercentage: cmsPercentageValue,
-    gsPercentage: gsPercentageValue
+    gsPercentage: percentageCalculator.calculatePercentage(-workloadReport.gsAdjustmentPoints, (workloadReport.totalPoints - workloadReport.gsAdjustmentPoints))
   }
 }
