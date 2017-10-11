@@ -9,6 +9,7 @@ const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 const orgUnitConstant = require('../../../app/constants/organisation-unit.js')
 const Reduction = require('../../../app/services/domain/reduction')
 const reductionStatusType = require('../../../app/constants/reduction-status-type')
+const workloadTypes = require('../../../app/constants/workload-type')
 
 var breadcrumbs = breadcrumbHelper.OFFENDER_MANAGER_BREADCRUMBS
 
@@ -117,53 +118,91 @@ beforeEach(function () {
 
 describe('services/reductions-service', function () {
   describe('Get reductions', function () {
-    it('should create the result object with the right information', function () {
+    it('should create the result object with the right information for standard OM', function () {
       getReductions.resolves([])
-      return reductionService.getReductions(1, orgUnitConstant.OFFENDER_MANAGER.name)
-        .then(function (result) {
-          assert(getReductions.called)
-          assert(getBreadcrumbsStub.called)
-          expect(result.title).to.equal('John Doe')
-          expect(result.subTitle).to.equal('Offender Manager')
-          expect(result.activeReductions).to.eql(activeReductions)
-          expect(result.scheduledReductions).to.eql([])
-          expect(result.archivedReductions).to.eql(archivedReductions)
-        })
+      return reductionService.getReductions(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.STANDARD)
+      .then(function (result) {
+        expect(getReductions.calledWith(1)).to.be.eql(true)
+        expect(getBreadcrumbsStub.calledWith(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.STANDARD)).to.be.eql(true)
+        expect(result.title).to.equal('John Doe')
+        expect(result.subTitle).to.equal('Offender Manager')
+        expect(result.activeReductions).to.eql(activeReductions)
+        expect(result.scheduledReductions).to.eql([])
+        expect(result.archivedReductions).to.eql(archivedReductions)
+      })
+    })
+
+    it('should create the result object with the right information for court-reporter', function () {
+      getReductions.resolves([])
+      return reductionService.getReductions(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS)
+      .then(function (result) {
+        expect(getReductions.calledWith(1)).to.be.eql(true)
+        expect(getBreadcrumbsStub.calledWith(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS)).to.be.eql(true)
+        expect(result.title).to.equal('John Doe')
+        expect(result.subTitle).to.equal('Offender Manager')
+        expect(result.activeReductions).to.eql(activeReductions)
+        expect(result.scheduledReductions).to.eql([])
+        expect(result.archivedReductions).to.eql(archivedReductions)
+      })
     })
   })
+
   describe('Get reductions reference data', function () {
-    it('should get the reference data with the hours already worked out for each reduction reason', function () {
-      return reductionService.getAddReductionsRefData(1, orgUnitConstant.OFFENDER_MANAGER.name)
-        .then(function (result) {
-          expect(result.referenceData).to.be.an('array')
-          expect(result.title).to.equal('John Doe')
-          expect(result.subTitle).to.equal('Offender Manager')
-          expect(getContractedHoursForWorkloadOwnerStub.calledWith(1)).to.be.true //eslint-disable-line
-          assert(getBreadcrumbsStub.called)
-          assert(getReferenceDataStub.called)
-        })
+    it('should get the reference data with the hours already worked out for each reduction reason for standard OM', function () {
+      return reductionService.getAddReductionsRefData(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.STANDARD)
+      .then(function (result) {
+        expect(result.referenceData).to.be.an('array')
+        expect(result.title).to.equal('John Doe')
+        expect(result.subTitle).to.equal('Offender Manager')
+        expect(getContractedHoursForWorkloadOwnerStub.calledWith(1)).to.be.true //eslint-disable-line
+        expect(getBreadcrumbsStub.calledWith(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.STANDARD)).to.be.eql(true)
+        assert(getReferenceDataStub.called)
+      })
+    })
+
+    it('should get the reference data with the hours already worked out for each reduction reason for court-reporter', function () {
+      return reductionService.getAddReductionsRefData(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS)
+      .then(function (result) {
+        expect(result.referenceData).to.be.an('array')
+        expect(result.title).to.equal('John Doe')
+        expect(result.subTitle).to.equal('Offender Manager')
+        expect(getContractedHoursForWorkloadOwnerStub.calledWith(1)).to.be.true //eslint-disable-line
+        expect(getBreadcrumbsStub.calledWith(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS)).to.be.eql(true)
+        assert(getReferenceDataStub.called)
+      })
     })
   })
 
   describe('Add reduction', function () {
-    it('should add a new reduction when no valid reduction Id given', function () {
+    it('should add a new reduction when no valid reduction Id given and call create wpc task for standard OM', function () {
       createCalculateWorkloadTaskStub.resolves(1)
       addReductionStub.withArgs(workloadOwnerId, reduction).resolves(newReductionId)
-      return reductionService.addReduction(workloadOwnerId, reduction)
-        .then(function (result) {
-          expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
-          expect(createCalculateWorkloadTaskStub.calledWith(latestWorkloadStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
-          expect(addReductionStub.calledWith(workloadOwnerId, reduction)).to.be.true //eslint-disable-line
-          expect(result).to.equal(1)
-        })
+      return reductionService.addReduction(workloadOwnerId, reduction, workloadTypes.STANDARD)
+      .then(function (result) {
+        expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+        expect(createCalculateWorkloadTaskStub.calledWith(latestWorkloadStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
+        expect(addReductionStub.calledWith(workloadOwnerId, reduction)).to.be.true //eslint-disable-line
+        expect(result).to.equal(1)
+      })
+    })
+
+    it('should add a new reduction when no valid reduction Id given and call create wpc task for court-reporter OM', function () {
+      addReductionStub.withArgs(workloadOwnerId, reduction).resolves(newReductionId)
+      return reductionService.addReduction(workloadOwnerId, reduction, workloadTypes.COURT_REPORTS)
+      .then(function (result) {
+        expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.false //eslint-disable-line
+        expect(createCalculateWorkloadTaskStub.calledWith(latestWorkloadStagingId, latestWorkloadReportId, 1)).to.be.false //eslint-disable-line
+        expect(addReductionStub.calledWith(workloadOwnerId, reduction)).to.be.true //eslint-disable-line
+        expect(result).to.equal(undefined)
+      })
     })
   })
 
   describe('Update reduction', function () {
-    it('should update reduction when reduction Id given', function () {
+    it('should update reduction and create worker task when reduction Id given for standard OM', function () {
       createCalculateWorkloadTaskStub.resolves(1)
       updateReductionStub.withArgs(existingReductionId, workloadOwnerId, reduction).resolves(existingReductionId)
-      return reductionService.updateReduction(workloadOwnerId, existingReductionId, reduction)
+      return reductionService.updateReduction(workloadOwnerId, existingReductionId, reduction, workloadTypes.STANDARD)
         .then(function (result) {
           expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
           expect(createCalculateWorkloadTaskStub.calledWith(latestWorkloadStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
@@ -171,20 +210,45 @@ describe('services/reductions-service', function () {
           expect(result).to.equal(1)
         })
     })
+
+    it('should update reduction and not create worker task when reduction Id given for court-reporter', function () {
+      createCalculateWorkloadTaskStub.resolves(1)
+      updateReductionStub.withArgs(existingReductionId, workloadOwnerId, reduction).resolves(existingReductionId)
+      return reductionService.updateReduction(workloadOwnerId, existingReductionId, reduction, workloadTypes.COURT_REPORTS)
+        .then(function (result) {
+          expect(getLatestIdsForWpRecalc.called).to.be.false //eslint-disable-line
+          expect(createCalculateWorkloadTaskStub.called).to.be.false //eslint-disable-line
+          expect(updateReductionStub.calledWith(existingReductionId, workloadOwnerId,reduction)).to.be.true //eslint-disable-line
+          expect(result).to.equal(undefined)
+        })
+    })
   })
 
   describe('Update reduction status', function () {
-    it('should update reduction status when reduction Id given', function () {
+    it('should update reduction status and create worker task when reduction Id given for standard OM', function () {
       var newReductonStatus = reductionStatusType.ARCHIVED
       createCalculateWorkloadTaskStub.resolves(1)
       updateReductionStatusStub.withArgs(existingReductionId, newReductonStatus).resolves(existingReductionId)
-      return reductionService.updateReductionStatus(workloadOwnerId, existingReductionId, newReductonStatus)
-        .then(function (result) {
-          expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
-          expect(createCalculateWorkloadTaskStub.calledWith(latestWorkloadStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
-          expect(updateReductionStatusStub.calledWith(existingReductionId, newReductonStatus)).to.be.true //eslint-disable-line
-          expect(result).to.equal(1)
-        })
+      return reductionService.updateReductionStatus(workloadOwnerId, existingReductionId, newReductonStatus, workloadTypes.STANDARD)
+      .then(function (result) {
+        expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+        expect(createCalculateWorkloadTaskStub.calledWith(latestWorkloadStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
+        expect(updateReductionStatusStub.calledWith(existingReductionId, newReductonStatus)).to.be.true //eslint-disable-line
+        expect(result).to.equal(1)
+      })
+    })
+
+    it('should update reduction status and create worker task when reduction Id given for court-reporter', function () {
+      var newReductonStatus = reductionStatusType.ARCHIVED
+      createCalculateWorkloadTaskStub.resolves(1)
+      updateReductionStatusStub.withArgs(existingReductionId, newReductonStatus).resolves(existingReductionId)
+      return reductionService.updateReductionStatus(workloadOwnerId, existingReductionId, newReductonStatus, workloadTypes.COURT_REPORTS)
+      .then(function (result) {
+        expect(getLatestIdsForWpRecalc.called).to.be.false //eslint-disable-line
+        expect(createCalculateWorkloadTaskStub.called).to.be.false //eslint-disable-line
+        expect(updateReductionStatusStub.calledWith(existingReductionId, newReductonStatus)).to.be.true //eslint-disable-line
+        expect(result).to.equal(undefined)
+      })
     })
   })
 

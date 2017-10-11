@@ -9,9 +9,10 @@ const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
 const Unathorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
+const workloadTypeConstants = require('../constants/workload-type')
 
 module.exports = function (router) {
-  router.get('/:organisationLevel/:id/reductions', function (req, res, next) {
+  router.get('/:workloadType?/:organisationLevel/:id/reductions', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER])
@@ -25,15 +26,29 @@ module.exports = function (router) {
         })
       }
     }
+
+    if (req.params.workloadType === undefined) {
+      if (isNaN(parseInt(req.params.id, 10))) {
+        return res.sendStatus(500)
+      }
+    }
+
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
+    var workloadType = req.params.workloadType
+
+    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS) {
+      return res.sendStatus(404)
+    } else if (workloadType === undefined) {
+      workloadType = workloadTypeConstants.STANDARD
+    }
 
     var successText = getStatusText(req)
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
     }
-    var getReductionsPromise = reductionsService.getReductions(id, organisationLevel)
+    var getReductionsPromise = reductionsService.getReductions(id, organisationLevel, workloadType)
 
     return getReductionsPromise.then(function (result) {
       return res.render('reductions', {
@@ -41,18 +56,19 @@ module.exports = function (router) {
         linkId: id,
         title: result.title,
         subTitle: result.subTitle,
-        subNav: getSubNav(id, organisationLevel, req.path),
+        subNav: getSubNav(id, organisationLevel, req.path, workloadType),
         activeReductions: result.activeReductions,
         scheduledReductions: result.scheduledReductions,
         archivedReductions: result.archivedReductions,
-        successText: successText
+        successText: successText,
+        workloadType: workloadType
       })
     }).catch(function (error) {
       next(error)
     })
   })
 
-  router.get('/:organisationLevel/:id/add-reduction', function (req, res, next) {
+  router.get('/:workloadType?/:organisationLevel/:id/add-reduction', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER])
@@ -66,16 +82,28 @@ module.exports = function (router) {
         })
       }
     }
+
+    if (req.params.workloadType === undefined) {
+      if (isNaN(parseInt(req.params.id, 10))) {
+        return res.sendStatus(500)
+      }
+    }
+
     var organisationLevel = req.params.organisationLevel
     var id = parseInt(req.params.id)
+    var workloadType = req.params.workloadType
+
+    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS) {
+      return res.sendStatus(404)
+    } else if (workloadType === undefined) {
+      workloadType = workloadTypeConstants.STANDARD
+    }
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
     }
 
-    var getAddReductionsReferenceDataPromise = reductionsService.getAddReductionsRefData(id, organisationLevel)
-
-    return getAddReductionsReferenceDataPromise
+    return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
       .then(function (result) {
         var errors = req.session.addReductionErrors
         delete req.session.addReductionErrors
@@ -84,16 +112,17 @@ module.exports = function (router) {
           linkId: id,
           title: result.title,
           subTitle: result.subTitle,
-          subNav: getSubNav(id, organisationLevel, req.path),
+          subNav: getSubNav(id, organisationLevel, req.path, workloadType),
           referenceData: result.referenceData,
-          errors: errors
+          errors: errors,
+          workloadType: workloadType
         })
       }).catch(function (error) {
         next(error)
       })
   })
 
-  router.get('/:organisationLevel/:id/edit-reduction', function (req, res, next) {
+  router.get('/:workloadType?/:organisationLevel/:id/edit-reduction', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER])
@@ -107,6 +136,13 @@ module.exports = function (router) {
         })
       }
     }
+
+    if (req.params.workloadType === undefined) {
+      if (isNaN(parseInt(req.params.id, 10))) {
+        return res.sendStatus(500)
+      }
+    }
+
     var organisationLevel = req.params.organisationLevel
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -114,8 +150,15 @@ module.exports = function (router) {
 
     var id = parseInt(req.params.id)
     var reductionId = parseInt(req.query.reductionId)
+    var workloadType = req.params.workloadType
 
-    reductionsService.getAddReductionsRefData(id, organisationLevel)
+    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS) {
+      return res.sendStatus(404)
+    } else if (workloadType === undefined) {
+      workloadType = workloadTypeConstants.STANDARD
+    }
+
+    reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
       .then(function (result) {
         return reductionsService.getReductionByReductionId(reductionId)
           .then(function (reduction) {
@@ -127,9 +170,10 @@ module.exports = function (router) {
               linkId: id,
               title: result.title,
               subTitle: result.subTitle,
-              subNav: getSubNav(id, organisationLevel, req.path),
+              subNav: getSubNav(id, organisationLevel, req.path, workloadType),
               referenceData: result.referenceData,
-              reduction: mapReductionToViewModel(reduction)
+              reduction: mapReductionToViewModel(reduction),
+              workloadType: workloadType
             })
           }).catch(function (error) {
             next(error)
@@ -158,19 +202,20 @@ module.exports = function (router) {
     }
 
     var id = req.params.id
+    var workloadType = req.body.workloadType
     var reduction
     try {
       reduction = generateNewReductionFromRequest(req.body)
     } catch (error) {
       if (error instanceof ValidationError) {
-        return reductionsService.getAddReductionsRefData(id, organisationLevel)
+        return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
           .then(function (result) {
             return res.status(400).render('add-reduction', {
               breadcrumbs: result.breadcrumbs,
               linkId: id,
               title: result.title,
               subTitle: result.subTitle,
-              subNav: getSubNav(id, organisationLevel, req.path),
+              subNav: getSubNav(id, organisationLevel, req.path, workloadType),
               referenceData: result.referenceData,
               reduction: {
                 id: req.body.reductionId,
@@ -184,7 +229,8 @@ module.exports = function (router) {
                 end_year: req.body.redEndYear,
                 notes: req.body.notes
               },
-              errors: error.validationErrors
+              errors: error.validationErrors,
+              workloadType: workloadType
             })
           }).catch(function (error) {
             next(error)
@@ -194,10 +240,14 @@ module.exports = function (router) {
       }
     }
 
-    var addReductionsPromise = reductionsService.addReduction(id, reduction)
+    var addReductionsPromise = reductionsService.addReduction(id, reduction, workloadType)
 
     return addReductionsPromise.then(function () {
-      return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
+      var linkPrefix = ''
+      if (workloadType === workloadTypeConstants.COURT_REPORTS) {
+        linkPrefix += '/court-reports'
+      }
+      return res.redirect(302, linkPrefix + '/' + organisationLevel + '/' + id + '/reductions?success=true')
     }).catch(function (error) {
       next(error)
     })
@@ -225,20 +275,20 @@ module.exports = function (router) {
 
     var id = req.params.id
     var reductionId = req.body.reductionId
-
+    var workloadType = req.body.workloadType
     var reduction
     try {
       reduction = generateNewReductionFromRequest(req.body)
     } catch (error) {
       if (error instanceof ValidationError) {
-        return reductionsService.getAddReductionsRefData(id, organisationLevel)
+        return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
           .then(function (result) {
             return res.status(400).render('add-reduction', {
               breadcrumbs: result.breadcrumbs,
               linkId: id,
               title: result.title,
               subTitle: result.subTitle,
-              subNav: getSubNav(id, organisationLevel, req.path),
+              subNav: getSubNav(id, organisationLevel, req.path, workloadType),
               referenceData: result.referenceData,
               reduction: {
                 reasonId: req.body.reasonForReductionId,
@@ -259,9 +309,13 @@ module.exports = function (router) {
       }
     }
 
-    return reductionsService.updateReduction(id, reductionId, reduction)
+    return reductionsService.updateReduction(id, reductionId, reduction, workloadType)
       .then(function () {
-        return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?edited=true')
+        var linkPrefix = ''
+        if (workloadType === workloadTypeConstants.COURT_REPORTS) {
+          linkPrefix += '/court-reports'
+        }
+        return res.redirect(302, linkPrefix + '/' + organisationLevel + '/' + id + '/reductions?edited=true')
       }).catch(function (error) {
         next(error)
       })
@@ -290,6 +344,7 @@ module.exports = function (router) {
     var reductionStatus = req.body.status
     var id = req.params.id
     var reductionId = req.body.reductionId
+    var workloadType = req.body.workloadType
 
     if (!requestStatusVerified(reductionStatus)) {
       return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions')
@@ -302,12 +357,16 @@ module.exports = function (router) {
       successType = '?deleted=true'
     }
 
-    return reductionsService.updateReductionStatus(id, reductionId, reductionStatus)
-      .then(function () {
-        return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions' + successType)
-      }).catch(function (error) {
-        next(error)
-      })
+    return reductionsService.updateReductionStatus(id, reductionId, reductionStatus, workloadType)
+    .then(function () {
+      var linkPrefix = ''
+      if (workloadType === workloadTypeConstants.COURT_REPORTS) {
+        linkPrefix += '/court-reports'
+      }
+      return res.redirect(302, linkPrefix + '/' + organisationLevel + '/' + id + '/reductions' + successType)
+    }).catch(function (error) {
+      next(error)
+    })
   })
 
   var getStatusText = function (request) {

@@ -2,6 +2,13 @@
 
 {% block content %}
 <main id="content" role="main">
+
+    {% if workloadType === 'court-reports' %}
+      {% set linkPrefix='/court-reports' %}
+    {% else %}
+      {% set linkPrefix='' %}
+    {% endif %}
+
     {% include "includes/breadcrumbs.html" %}
     
     {% include "includes/validation-error-messages.html" %} 
@@ -19,7 +26,7 @@
     {% set columnNameStartDate='Start date' %}
     {% set columnNameEndDate='End date' %}
 
-    <a href="/offender-manager/{{ linkId }}/add-reduction" class="button">Add a reduction</a>
+    <a href="{{ linkPrefix }}/offender-manager/{{ linkId }}/add-reduction" class="button">Add a reduction</a>
     
     <h2 id="headingActive" class="heading-large">Active<span class="visuallyhidden"> reductions</span></h2>
     
@@ -44,7 +51,7 @@
                 <td headers="active_hours">{{ newReduction.hours }}</td>
                 <td headers="active_start_date">{{ newReduction.reductionStartDate }}</td>
                 <td headers="active_end_date">{{ newReduction.reductionEndDate }}</td>
-                <td><a href="/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ newReduction.id }}">View</a></td>
+                <td><a href="{{ linkPrefix }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ newReduction.id }}">View</a></td>
             </tr>
             {% endif %}
             {% for active in activeReductions %}
@@ -53,7 +60,7 @@
                 <td headers="active_hours">{{ active.hours }}</td>
                 <td headers="active_start_date">{{ active.reductionStartDate }}</td>
                 <td headers="active_end_date">{{ active.reductionEndDate }}</td>
-                <td><a href="/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ active.id }}">View</a></td>
+                <td><a href="{{ linkPrefix }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ active.id }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -81,7 +88,7 @@
                 <td headers="scheduled_hours">{{ scheduled.hours }}</td>
                 <td headers="scheduled_start_date">{{ scheduled.reductionStartDate }}</td>
                 <td headers="scheduled_end_date">{{ scheduled.reductionEndDate }}</td>                
-                <td><a href="/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ scheduled.id }}">View</a></td>
+                <td><a href="{{ linkPrefix }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ scheduled.id }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -109,7 +116,7 @@
                 <td headers="archived_hours">{{ archived.hours }}</td>
                 <td headers="archived_start_date">{{ archived.reductionStartDate }}</td>
                 <td headers="archived_end_date">{{ archived.reductionEndDate }}</td>
-                <td><a href="/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ archived.id }}">View</a></td>
+                <td><a href="{{ linkPrefix }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ archived.id }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
