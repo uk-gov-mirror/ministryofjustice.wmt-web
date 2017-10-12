@@ -29,9 +29,18 @@ describe('accessibility/pa11y', function () {
           return knex('region').select('id').first()
           .then(function (region) {
             regionId = region.id
-
-            var cmd = pathToScript + ' ' + regionId + ' ' + lduId + ' ' + teamId + ' ' + offenderManagerId
-            expect(shelljs.exec(cmd).code).to.eql(0)
+            return knex('workload_owner')
+            .join('court_reports_workload', 'court_reports_workload.workload_owner_id', 'workload_owner.id')
+            .join('court_reports_workload_points_calculation', 'court_reports_workload_points_calculation.court_reports_workload_id', 'court_reports_workload.id')
+            .join('workload_report', 'court_reports_workload_points_calculation.workload_report_id', 'workload_report.id')
+            .whereNull('workload_report.effective_to')
+            .orderBy('workload_report.effective_from', 'desc')
+            .select('workload_owner.id').first()
+            .then(function (workloadOwnerCr) {
+              courtReporterId = workloadOwnerCr.id
+              var cmd = pathToScript + ' ' + regionId + ' ' + lduId + ' ' + teamId + ' ' + offenderManagerId + ' ' + courtReporterId
+              expect(shelljs.exec(cmd).code).to.eql(0)
+            })
           })
         })
       })

@@ -4,8 +4,8 @@
 # requires pa11y installed globally `npm install -g pa11y`
 # requires existing workload data in the application so screens load correctly
 
-if [ $# -ne 4 ]; then
-  echo $0: usage: ./run-pa11y regionId lduId teamId omId
+if [ $# -ne 5 ]; then
+  echo $0: usage: ./run-pa11y regionId lduId teamId omId crId
   exit 1
 fi
 
@@ -13,6 +13,7 @@ regionId=$1
 lduId=$2
 teamId=$3
 omId=$4
+crId=$5
 
 pa11yCommand="""pa11y --standard WCAG2AA --ignore "warning\;notice" --hide-elements "div[aria-hidden=true],a[role=dynamic],a[role=anchor-div]" """
 
@@ -41,6 +42,8 @@ ldu='ldu'
 region='region'
 national='hmpps/0'
 
+court_reports='court-reports'
+
 # Capacity
 capacity_url='caseload-capacity'
 urls+=("$host/$offender_manager/$omId/$capacity_url")
@@ -57,11 +60,18 @@ urls+=("$host/$region/$regionId/$case_progress_url")
 
 # Overview
 overview_url='overview'
-urls+=("$host/$offender_manager/$omId/$overview_url")
+urls+=("$host/$offender_manager/$crId/$overview_url")
 urls+=("$host/$team/$teamId/$overview_url")
 urls+=("$host/$ldu/$lduId/$overview_url")
 urls+=("$host/$region/$regionId/$overview_url")
 urls+=("$host/$national/$overview_url")
+
+# Court Reports Overview
+urls+=("$host/$court_reports/$offender_manager/$crId/$overview_url")
+urls+=("$host/$court_reports/$team/$teamId/$overview_url")
+urls+=("$host/$court_reports/$ldu/$lduId/$overview_url")
+urls+=("$host/$court_reports/$region/$regionId/$overview_url")
+urls+=("$host/$court_reports/$national/$overview_url")
 
 # Caseload
 caseload_url='caseload'
@@ -73,12 +83,15 @@ urls+=("$host/$national/$caseload_url")
 # Contracted hours
 contracted_hours_url='contracted-hours'
 urls+=("$host/$offender_manager/$omId/$contracted_hours_url")
+urls+=("$host/$court_reports/$offender_manager/$crId/$contracted_hours_url")
 
 # Reduction
 reductions_url='reductions'
 add_reductions_url='add-reduction'
 urls+=("$host/$offender_manager/$omId/$reductions_url")
 urls+=("$host/$offender_manager/$omId/$add_reductions_url")
+urls+=("$host/$court_reports/$offender_manager/$crId/$reductions_url")
+urls+=("$host/$court_reports/$offender_manager/$crId/$add_reductions_url")
 
 # Admin
 admin='admin'
