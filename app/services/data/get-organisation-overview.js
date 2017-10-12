@@ -1,5 +1,4 @@
-const config = require('../../../knexfile').web
-const knex = require('knex')(config)
+const knex = require('../../../knex').web
 const orgUnitFinder = require('../helpers/org-unit-finder')
 const orgUnitConstants = require('../../constants/organisation-unit')
 

@@ -1,5 +1,4 @@
-const config = require('../../../knexfile').web
-const knex = require('knex')(config)
+const knex = require('../../../knex').web
 
 module.exports = function (id, hours) {
   return knex('workload_owner').where('id', id)

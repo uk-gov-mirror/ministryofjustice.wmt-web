@@ -1,5 +1,4 @@
-const config = require('../../../knexfile').web
-const knex = require('knex')(config)
+const knex = require('../../../knex').web
 
 module.exports = function (reductionId, reductionStatus) {
   return knex('reductions')
