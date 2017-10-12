@@ -70,6 +70,16 @@ module.exports.selectIdsForCourtReporterWorkloadOwner = function (inserts) {
   return promise
 }
 
+module.exports.getAnyExistingWorkloadOwnerIdWithActiveReduction = function () {
+  return knex('workload_owner')
+      .join('reductions', 'workload_owner.id', 'workload_owner_id')
+      .join('court_reports_workload', 'court_reports_workload.workload_owner_id', 'workload_owner.id')
+      .where('reductions.effective_to', '>', knex.raw('GETDATE()'))
+      .andWhereNot('status', 'DELETED')
+      .first('workload_owner.id AS workloadOwnerId',
+       'reductions.id AS reductionId')
+}
+
 var addCrWorkloadPointsCalculation = function (inserts) {
   // Add workload points calc
   var crWorkloadIdFrist = inserts.filter((item) => item.table === 'court_reports_workload')[0].id

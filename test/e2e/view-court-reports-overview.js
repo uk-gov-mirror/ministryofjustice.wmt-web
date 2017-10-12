@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-
+const authenticationHelper = require('../helpers/routes/authentication-helper')
 const crDataHelper = require('../helpers/data/court-reports-aggregated-data-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 
@@ -13,6 +13,7 @@ var nationalDefaultUrl
 
 describe('View court-reports overview', function () {
   before(function () {
+    authenticationHelper.login(authenticationHelper.users.Manager)    
     return crDataHelper.selectIdsForCourtReporterWorkloadOwner()
       .then(function (results) {
         workloadOwnerId = results.filter((item) => item.table === 'workload_owner')[0].id
@@ -94,7 +95,12 @@ describe('View court-reports overview', function () {
     return browser.url(workloadOwnerDefaultUrl + '/contracted-hours')
       .waitForExist('.sln-subnav')
       .click('[href="' + workloadOwnerDefaultUrl + '/overview"]')
-      .waitForExist('.sln-form-action')
+      .waitForExist('.sln-grade')      
+      .waitForExist('.sln-subnav')
+      .click('[href="' + workloadOwnerDefaultUrl + '/reductions"]')
+      .waitForExist('.sln-subnav')
+      .click('[href="' + workloadOwnerDefaultUrl + '/overview"]')
+      .waitForExist('.sln-grade')
   })
 
   it('should allow the user to navigate down the org hierarchy from the national page', function () {
@@ -127,33 +133,37 @@ describe('View court-reports overview', function () {
 
   it('should contain breadcrumbs which allow the user to navigate up the org hierarchy', function () {
     return browser.url(workloadOwnerDefaultUrl)
-      .getText('.sln-page-subtitle')
-      .then(function (text) {
-        expect(text).to.equal('Offender Manager')
-      })
-      .waitForExist('[href="' + teamDefaultUrl + '"]')
-      .waitForExist('[href="' + lduDefaultUrl + '"]')
-      .waitForExist('[href="' + regionDefaultUrl + '"]')
-      .waitForExist('[href="' + nationalDefaultUrl + '"]')
-      .click('[href="' + teamDefaultUrl + '"]')
-      .getText('.sln-page-subtitle')
-      .then(function (text) {
-        expect(text).to.equal('Team')
-      })
-      .click('[href="' + lduDefaultUrl + '"]')
-      .getText('.sln-page-subtitle')
-      .then(function (text) {
-        expect(text).to.equal('LDU Cluster')
-      })
-      .click('[href="' + regionDefaultUrl + '"]')
-      .getText('.sln-page-subtitle')
-      .then(function (text) {
-        expect(text).to.equal('Division')
-      })
-      .click('[href="' + nationalDefaultUrl + '"]')
-      .getText('.sln-page-subtitle')
-      .then(function (text) {
-        expect(text).to.equal('National')
-      })
+    .getText('.sln-page-subtitle')
+    .then(function (text) {
+      expect(text).to.equal('Offender Manager')
+    })
+    .waitForExist('[href="' + teamDefaultUrl + '"]')
+    .waitForExist('[href="' + lduDefaultUrl + '"]')
+    .waitForExist('[href="' + regionDefaultUrl + '"]')
+    .waitForExist('[href="' + nationalDefaultUrl + '"]')
+    .click('[href="' + teamDefaultUrl + '"]')
+    .getText('.sln-page-subtitle')
+    .then(function (text) {
+      expect(text).to.equal('Team')
+    })
+    .click('[href="' + lduDefaultUrl + '"]')
+    .getText('.sln-page-subtitle')
+    .then(function (text) {
+      expect(text).to.equal('LDU Cluster')
+    })
+    .click('[href="' + regionDefaultUrl + '"]')
+    .getText('.sln-page-subtitle')
+    .then(function (text) {
+      expect(text).to.equal('Division')
+    })
+    .click('[href="' + nationalDefaultUrl + '"]')
+    .getText('.sln-page-subtitle')
+    .then(function (text) {
+      expect(text).to.equal('National')
+    })
+  })
+
+  after(function () {
+    authenticationHelper.logout()
   })
 })

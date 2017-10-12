@@ -1,13 +1,14 @@
 const expect = require('chai').expect
-
+const authenticationHelper = require('../helpers/routes/authentication-helper')
 const crDataHelper = require('../helpers/data/court-reports-aggregated-data-helper')
 
 var workloadOwnerIds = []
 var workloadOwnerId
 var workloadOwnerDefaultUrl
 
-describe('View contracted hours', function () {
+describe('View contracted hours for court reporter', function () {
   before(function () {
+    authenticationHelper.login(authenticationHelper.users.Manager)    
     return crDataHelper.selectIdsForCourtReporterWorkloadOwner()
     .then(function (results) {
       workloadOwnerIds = results
@@ -34,5 +35,9 @@ describe('View contracted hours', function () {
       .waitForExist('.sln-subnav')
       .click('[href="' + workloadOwnerDefaultUrl + '/contracted-hours"]')
       .waitForExist('.sln-form-action')
+  })
+
+  after(function () {
+    authenticationHelper.logout()
   })
 })
