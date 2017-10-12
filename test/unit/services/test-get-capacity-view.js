@@ -18,9 +18,10 @@ const TEAM_REULTS = [
     grade: 'Test grade',
     totalCases: 39,
     linkId: 1,
-    totalPoints: 50,
+    totalPoints: 40,
     availablePoints: 100,
     cmsAdjustmentPoints: 10,
+    gsAdjustmentPoints: -10,
     contractedHours: 40
   }
 ]
@@ -31,9 +32,10 @@ const LDU_RESULTS = [
     grade: 'Test grade 1',
     totalCases: 39,
     linkId: 1,
-    totalPoints: 50,
+    totalPoints: 90,
     availablePoints: 100,
-    cmsAdjustmentPoints: 10,
+    cmsAdjustmentPoints: 9,
+    gsAdjustmentPoints: -10,
     contractedHours: 40
   },
   {
@@ -41,9 +43,10 @@ const LDU_RESULTS = [
     grade: 'Test grade 2',
     totalCases: 40,
     linkId: 1,
-    totalPoints: 50,
-    availablePoints: 100,
-    cmsAdjustmentPoints: 10,
+    totalPoints: 35,
+    availablePoints: 70,
+    cmsAdjustmentPoints: 7,
+    gsAdjustmentPoints: -5,
     contractedHours: 40
   }
 ]
@@ -53,8 +56,9 @@ const EXPECTED_TEAM_BREAKDOWN = [
     grade: 'Test grade',
     totalCases: 39,
     linkId: 1,
-    capacityPercentage: 50,
-    cmsPercentage: 20
+    capacityPercentage: 40,
+    cmsPercentage: 25,
+    gsPercentage: 20
   }
 ]
 
@@ -68,8 +72,9 @@ const EXPECTED_LDU_BREAKDOWN = [
         grade: 'Test grade 1',
         totalCases: 39,
         linkId: 1,
-        capacityPercentage: 50,
-        cmsPercentage: 20
+        capacityPercentage: 90,
+        cmsPercentage: 10,
+        gsPercentage: 10
       },
       {
         name: 'Test ldu 1',
@@ -77,7 +82,8 @@ const EXPECTED_LDU_BREAKDOWN = [
         totalCases: 40,
         linkId: 1,
         capacityPercentage: 50,
-        cmsPercentage: 20
+        cmsPercentage: 20,
+        gsPercentage: 12.5
       }
     ]
   }

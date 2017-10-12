@@ -13,6 +13,7 @@ var teamCapacityBreakdown = {
   grade: 'PO',
   totalCases: 5,
   cmsAdjustmentPoints: 0,
+  gsAdjustmentPoints: -2,
   contractedHours: 37.5
 }
 
@@ -23,6 +24,7 @@ var lduAndAboveExpectedCapacity = {
   grade: 'PO',
   totalCases: 10,
   cmsAdjustmentPoints: 0,
+  gsAdjustmentPoints: -4,
   contractedHours: 75
 }
 

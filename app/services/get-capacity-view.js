@@ -24,8 +24,8 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
 
     if (organisationalUnitType !== organisationConstant.OFFENDER_MANAGER) {
       return getCapacityBreakdown(id, organisationLevel)
-      .then(function (memberWorkloadReports) {
-        result.capacityBreakdown = parseCapacityBreakdown(memberWorkloadReports, organisationLevel)
+      .then(function (memberCapacityBreakdown) {
+        result.capacityBreakdown = parseCapacityBreakdown(memberCapacityBreakdown, organisationLevel)
         return result
       })
     }
@@ -74,7 +74,7 @@ var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
 }
 
 var buildCapacityBreakdownEntry = function (workloadReport) {
-  var cmsPercentageValue = null
+  var cmsPercentageValue = 0
 
   if (workloadReport.cmsAdjustmentPoints > 0) {
     cmsPercentageValue = percentageCalculator.calculatePercentage(workloadReport.cmsAdjustmentPoints, workloadReport.totalPoints)
@@ -86,6 +86,7 @@ var buildCapacityBreakdownEntry = function (workloadReport) {
     totalCases: workloadReport.totalCases,
     linkId: workloadReport.linkId,
     capacityPercentage: percentageCalculator.calculatePercentage(workloadReport.totalPoints, workloadReport.availablePoints),
-    cmsPercentage: cmsPercentageValue
+    cmsPercentage: cmsPercentageValue,
+    gsPercentage: percentageCalculator.calculatePercentage(-workloadReport.gsAdjustmentPoints, (workloadReport.totalPoints - workloadReport.gsAdjustmentPoints))
   }
 }
