@@ -110,7 +110,7 @@
   </form>
   {% if reduction %}
   <h2 class="heading-small">Other options</h2>
-  <form name="archiveReduction" method="POST" action="/{{ worklaodType }}/offender-manager/{{ linkId }}/update-reduction-status">
+  <form name="archiveReduction" method="POST" action="/{{ workloadType }}/offender-manager/{{ linkId }}/update-reduction-status">
     <!-- Including the csrf-hidden-input.html hides the links -->
     <input type="hidden"  name="_csrf"  value="{{ csrfToken }}">
     <input type="hidden" name="reductionId" value="{{reduction.id}}">
