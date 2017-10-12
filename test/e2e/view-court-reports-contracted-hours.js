@@ -8,7 +8,7 @@ var workloadOwnerDefaultUrl
 
 describe('View contracted hours for court reporter', function () {
   before(function () {
-    authenticationHelper.login(authenticationHelper.users.Manager)    
+    authenticationHelper.login(authenticationHelper.users.Manager)
     return crDataHelper.selectIdsForCourtReporterWorkloadOwner()
     .then(function (results) {
       workloadOwnerIds = results

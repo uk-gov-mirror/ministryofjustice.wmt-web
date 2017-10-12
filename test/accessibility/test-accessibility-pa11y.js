@@ -10,6 +10,7 @@ describe('accessibility/pa11y', function () {
     var teamId
     var lduId
     var regionId
+    var courtReporterId
 
     return knex('workload_owner')
     .join('workload', 'workload.workload_owner_id', 'workload_owner.id')

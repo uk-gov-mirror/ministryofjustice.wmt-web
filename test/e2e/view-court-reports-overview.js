@@ -13,7 +13,7 @@ var nationalDefaultUrl
 
 describe('View court-reports overview', function () {
   before(function () {
-    authenticationHelper.login(authenticationHelper.users.Manager)    
+    authenticationHelper.login(authenticationHelper.users.Manager)
     return crDataHelper.selectIdsForCourtReporterWorkloadOwner()
       .then(function (results) {
         workloadOwnerId = results.filter((item) => item.table === 'workload_owner')[0].id
@@ -95,7 +95,7 @@ describe('View court-reports overview', function () {
     return browser.url(workloadOwnerDefaultUrl + '/contracted-hours')
       .waitForExist('.sln-subnav')
       .click('[href="' + workloadOwnerDefaultUrl + '/overview"]')
-      .waitForExist('.sln-grade')      
+      .waitForExist('.sln-grade')
       .waitForExist('.sln-subnav')
       .click('[href="' + workloadOwnerDefaultUrl + '/reductions"]')
       .waitForExist('.sln-subnav')
