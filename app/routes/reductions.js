@@ -77,8 +77,9 @@ module.exports = function (router) {
 
     return getAddReductionsReferenceDataPromise
       .then(function (result) {
-        var errors = req.session.addReductionErrors
-        delete req.session.addReductionErrors
+        var errors = null
+        // req.session.addReductionErrors
+        // delete req.session.addReductionErrors
         return res.render('add-reduction', {
           breadcrumbs: result.breadcrumbs,
           linkId: id,
@@ -151,6 +152,7 @@ module.exports = function (router) {
         })
       }
     }
+
     var organisationLevel = req.params.organisationLevel
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -159,46 +161,49 @@ module.exports = function (router) {
 
     var id = req.params.id
     var reduction
-    try {
-      reduction = generateNewReductionFromRequest(req.body)
-    } catch (error) {
-      if (error instanceof ValidationError) {
-        return reductionsService.getAddReductionsRefData(id, organisationLevel)
-          .then(function (result) {
-            return res.status(400).render('add-reduction', {
-              breadcrumbs: result.breadcrumbs,
-              linkId: id,
-              title: result.title,
-              subTitle: result.subTitle,
-              subNav: getSubNav(id, organisationLevel, req.path),
-              referenceData: result.referenceData,
-              reduction: {
-                id: req.body.reductionId,
-                reasonId: req.body.reasonForReductionId,
-                hours: req.body.reductionHours,
-                start_day: req.body.redStartDay,
-                start_month: req.body.redStartMonth,
-                start_year: req.body.redStartYear,
-                end_day: req.body.redEndDay,
-                end_month: req.body.redEndMonth,
-                end_year: req.body.redEndYear,
-                notes: req.body.notes
-              },
-              errors: error.validationErrors
-            })
-          }).catch(function (error) {
-            next(error)
+    var reductionReason
+
+    return reductionsService.getAddReductionsRefData(id, organisationLevel)
+    .then(function (result) {
+      try {
+        // Dummy option in dropdown means array is offset by one
+        reductionReason = result.referenceData[req.body.reasonForReductionId - 1]
+        reduction = generateNewReductionFromRequest(req.body, reductionReason)
+      } catch (error) {
+        if (error instanceof ValidationError) {
+          return res.status(400).render('add-reduction', {
+            breadcrumbs: result.breadcrumbs,
+            linkId: id,
+            title: result.title,
+            subTitle: result.subTitle,
+            subNav: getSubNav(id, organisationLevel, req.path),
+            referenceData: result.referenceData,
+            reduction: {
+              id: req.body.reductionId,
+              reasonId: req.body.reasonForReductionId,
+              hours: req.body.reductionHours,
+              start_day: req.body.redStartDay,
+              start_month: req.body.redStartMonth,
+              start_year: req.body.redStartYear,
+              end_day: req.body.redEndDay,
+              end_month: req.body.redEndMonth,
+              end_year: req.body.redEndYear,
+              notes: req.body.notes
+            },
+            errors: error.validationErrors
           })
-      } else {
-        next(error)
+        } else {
+          next(error)
+        }
       }
-    }
 
-    var addReductionsPromise = reductionsService.addReduction(id, reduction)
-
-    return addReductionsPromise.then(function () {
-      return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
-    }).catch(function (error) {
+      return reductionsService.addReduction(id, reduction).then(function () {
+        return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?success=true')
+      }).catch(function (error) {
+        next(error)
+      })
+    })
+    .catch(function (error) {
       next(error)
     })
   })
@@ -225,46 +230,55 @@ module.exports = function (router) {
 
     var id = req.params.id
     var reductionId = req.body.reductionId
-
     var reduction
-    try {
-      reduction = generateNewReductionFromRequest(req.body)
-    } catch (error) {
-      if (error instanceof ValidationError) {
-        return reductionsService.getAddReductionsRefData(id, organisationLevel)
-          .then(function (result) {
-            return res.status(400).render('add-reduction', {
-              breadcrumbs: result.breadcrumbs,
-              linkId: id,
-              title: result.title,
-              subTitle: result.subTitle,
-              subNav: getSubNav(id, organisationLevel, req.path),
-              referenceData: result.referenceData,
-              reduction: {
-                reasonId: req.body.reasonForReductionId,
-                hours: req.body.reductionHours,
-                start_day: req.body.redStartDay,
-                start_month: req.body.redStartMonth,
-                start_year: req.body.redStartYear,
-                end_day: req.body.redEndDay,
-                end_month: req.body.redEndMonth,
-                end_year: req.body.redEndYear,
-                notes: req.body.notes
-              },
-              errors: error.validationErrors
-            })
-          }).catch(function (error) {
-            next(error)
-          })
-      }
-    }
+    var reductionReason
 
-    return reductionsService.updateReduction(id, reductionId, reduction)
+    return reductionsService.getAddReductionsRefData(id, organisationLevel)
+    .then(function (result) {
+      try {
+        // Dummy option in dropdown means array is offset by one
+        reductionReason = result.referenceData[req.body.reasonForReductionId - 1]
+        reduction = generateNewReductionFromRequest(req.body, reductionReason)
+      } catch (error) {
+        if (error instanceof ValidationError) {
+          return res.status(400).render('add-reduction', {
+            breadcrumbs: result.breadcrumbs,
+            linkId: id,
+            title: result.title,
+            subTitle: result.subTitle,
+            subNav: getSubNav(id, organisationLevel, req.path),
+            referenceData: result.referenceData,
+            reduction: {
+              id: req.body.reductionId,
+              reasonId: req.body.reasonForReductionId,
+              hours: req.body.reductionHours,
+              start_day: req.body.redStartDay,
+              start_month: req.body.redStartMonth,
+              start_year: req.body.redStartYear,
+              end_day: req.body.redEndDay,
+              end_month: req.body.redEndMonth,
+              end_year: req.body.redEndYear,
+              notes: req.body.notes
+            },
+            errors: error.validationErrors
+          })
+        } else {
+          next(error)
+        }
+      }
+
+      var updateReductionPromise = reductionsService.updateReduction(id, reductionId, reduction)
+
+      return updateReductionPromise
       .then(function () {
         return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions?edited=true')
       }).catch(function (error) {
         next(error)
       })
+    })
+    .catch(function (error) {
+      next(error)
+    })
   })
 
   router.post('/:organisationLevel/:id/update-reduction-status', function (req, res, next) {
@@ -324,11 +338,11 @@ module.exports = function (router) {
     return successText
   }
 
-  var generateNewReductionFromRequest = function (requestBody) {
+  var generateNewReductionFromRequest = function (requestBody, reductionReason) {
     var reductionStartDate = [requestBody.redStartDay, requestBody.redStartMonth, requestBody.redStartYear]
     var reductionEndDate = [requestBody.redEndDay, requestBody.redEndMonth, requestBody.redEndYear]
     var reasonId = requestBody.reasonForReductionId
-    return new Reduction(reasonId, requestBody.reductionHours, reductionStartDate, reductionEndDate, requestBody.notes)
+    return new Reduction(reasonId, requestBody.reductionHours, reductionStartDate, reductionEndDate, requestBody.notes, reductionReason)
   }
 
   var requestStatusVerified = function (reductionStatus) {

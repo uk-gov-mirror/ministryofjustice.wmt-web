@@ -15,5 +15,3 @@ module.exports = function (id) {
       return result[0]
     })
 }
-
-// TODO: Rename

@@ -5,13 +5,17 @@ const Reduction = require('../../../../app/services/domain/reduction')
 const ValidationError = require('../../../../app/services/errors/validation-error')
 const reductionStatusType = require('../../../../app/constants/reduction-status-type')
 
+var reductionReason = {
+  maxAllowanceHours: 0
+}
+
 describe('services/domain/reduction', function () {
   it('should construct a new-reduction object with the correct values', function () {
     var activeStartDate = moment().subtract(30, 'days').toDate()
     var activeEndDate = moment().add(30, 'days').toDate()
     var reduction = new Reduction('1', '10',
       [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
-      [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note')
+      [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
     expect(reduction.hours).to.equal(10)
     expect(reduction.reasonForReductionId).to.equal(1)
     expect(reduction.reductionStartDate).to.be.a('date')
@@ -26,7 +30,7 @@ describe('services/domain/reduction', function () {
     expect(function () {
       new Reduction('1', '',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
-        [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note')
+        [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
     }).to.throw(ValidationError)
       .that.has.a.property('validationErrors')
       .that.has.a.property('reductionHours')
@@ -38,7 +42,7 @@ describe('services/domain/reduction', function () {
     expect(function () {
       new Reduction('', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
-        [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note')
+        [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
     }).to.throw(ValidationError)
       .that.has.a.property('validationErrors')
       .that.has.a.property('reasonForReductionId')
@@ -51,7 +55,7 @@ describe('services/domain/reduction', function () {
     expect(function () {
       new Reduction('1', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
-        [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note')
+        [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
     }).to.throw(ValidationError)
       .that.has.a.property('validationErrors')
       .that.has.a.property('reductionStartDate')
@@ -64,7 +68,7 @@ describe('services/domain/reduction', function () {
     expect(function () {
       new Reduction('1', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
-        [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note')
+        [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
     }).to.throw(ValidationError)
       .that.has.a.property('validationErrors')
       .that.has.a.property('reductionEndDate')
@@ -78,7 +82,7 @@ describe('services/domain/reduction', function () {
       var longNote = getLongString()
       new Reduction('1', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
-        [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], longNote)
+        [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], longNote, reductionReason)
     }).to.throw(ValidationError)
       .that.has.a.property('validationErrors')
       .that.has.a.property('notes')
@@ -88,3 +92,5 @@ describe('services/domain/reduction', function () {
     return '*'.repeat(4001)
   }
 })
+
+// TODO: Add in for new max check

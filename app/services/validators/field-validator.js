@@ -33,6 +33,14 @@ class FieldValidator {
     return this
   }
 
+  // isLessThanMax (max, specificMessage) {
+  //   var message = (!specificMessage) ? ERROR_MESSAGES.getIsLessThanMaxMessage : specificMessage
+  //   if (this.data && !validator.isLength(this.data, { max: length })) {
+  //     this.errors.add(this.fieldName, message, { max: max })
+  //   }
+  //   return this
+  // }
+
   isInt (min, max) {
     let options = { allow_leading_zeroes: false, min: min, max: max }
     if (this.data && !validator.isInt(this.data.toString(), options)) {
