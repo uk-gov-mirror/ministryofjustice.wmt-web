@@ -1,5 +1,4 @@
-const config = require('../../../knexfile').integrationTests
-const knex = require('knex')(config)
+const knex = require('../../knex').integrationTests
 var Promise = require('bluebird').Promise
 
 module.exports.addOrganisationalHierachy = function () {

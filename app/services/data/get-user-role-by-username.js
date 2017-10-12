@@ -1,5 +1,4 @@
-const config = require('../../../knexfile').web
-const knex = require('knex')(config)
+const knex = require('../../../knex').web
 const Roles = require('../../constants/user-roles')
 
 module.exports = function (username) {
