@@ -3,7 +3,7 @@ const linkGenerator = require('./helpers/link-generator')
 const organisationUnitConstants = require('../constants/organisation-unit')
 const workloadConstants = require('../constants/workload-type')
 
-module.exports = function (id, organisationalUnitName, currentPath, workloadType = workloadConstants.STANDARD) {
+module.exports = function (id, organisationalUnitName, currentPath, workloadType = workloadConstants.PROBATION) {
   var baseLink = linkGenerator.fromIdAndName(id, organisationalUnitName, workloadType)
   var navigation = []
 
@@ -12,7 +12,7 @@ module.exports = function (id, organisationalUnitName, currentPath, workloadType
     navigation.push(new Link('Overview', baseLink + '/overview'))
     navigation.push(new Link('Contracted Hours', baseLink + '/contracted-hours'))
     navigation.push(new Link('Reductions', baseLink + '/reductions'))
-  } else if (workloadType === workloadConstants.STANDARD &&
+  } else if (workloadType === workloadConstants.PROBATION &&
     organisationalUnitName === organisationUnitConstants.OFFENDER_MANAGER.name) {
     navigation.push(new Link('Overview', baseLink + '/overview'))
     navigation.push(new Link('Capacity', baseLink + '/caseload-capacity'))
@@ -22,7 +22,7 @@ module.exports = function (id, organisationalUnitName, currentPath, workloadType
   } else if (workloadType === workloadConstants.COURT_REPORTS &&
      organisationalUnitName !== organisationUnitConstants.OFFENDER_MANAGER.name) {
     navigation.push(new Link('Court Reports Overview', baseLink + '/overview'))
-  } else if (workloadType === workloadConstants.STANDARD &&
+  } else if (workloadType === workloadConstants.PROBATION &&
      organisationalUnitName !== organisationUnitConstants.OFFENDER_MANAGER.name) {
     navigation.push(new Link('Overview', baseLink + '/overview'))
     navigation.push(new Link('Capacity', baseLink + '/caseload-capacity'))

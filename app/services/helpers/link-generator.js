@@ -1,7 +1,7 @@
 const orgUnitFinder = require('./org-unit-finder')
 const workloadTypes = require('../../constants/workload-type')
 
-module.exports.fromReference = function (reference, workloadType = workloadTypes.STANDARD) {
+module.exports.fromReference = function (reference, workloadType = workloadTypes.PROBATION) {
   var referenceRegex = /^[A-Z]{1}[0-9]*$/
 
   if (reference === undefined) {
@@ -23,7 +23,7 @@ module.exports.fromReference = function (reference, workloadType = workloadTypes
   return module.exports.fromIdAndName(organisationId, organisationUnit.name, workloadType)
 }
 
-module.exports.fromIdAndName = function (id, name, workloadType = workloadTypes.STANDARD) {
+module.exports.fromIdAndName = function (id, name, workloadType = workloadTypes.PROBATION) {
   if (name === undefined) {
     throw new TypeError('Organisational unit name is undefined')
   }
@@ -40,9 +40,7 @@ module.exports.fromIdAndName = function (id, name, workloadType = workloadTypes.
     link = '/' + name + '/' + id
   }
 
-  if (workloadType === workloadTypes.COURT_REPORTS) {
-    link = '/court-reports' + link
-  }
+  link = '/' + workloadType + link
 
   return link
 }

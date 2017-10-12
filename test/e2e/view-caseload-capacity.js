@@ -15,11 +15,11 @@ describe('View your caseload capacity flow', () => {
     return workloadCapacityHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
-        workloadOwnerDefaultUrl = '/offender-manager/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
-        teamDefaultUrl = '/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id
-        lduDefaultUrl = '/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
-        regionDefaultUrl = '/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
-        nationalDefaultUrl = '/hmpps/0'
+        workloadOwnerDefaultUrl = '/probation/offender-manager/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
+        teamDefaultUrl = '/probation/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id
+        lduDefaultUrl = '/probation/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
+        regionDefaultUrl = '/probation/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
+        nationalDefaultUrl = '/probation/hmpps/0'
       }).then(function () {
         return browser.url(workloadOwnerDefaultUrl).waitForExist('.breadcrumbs')
       })

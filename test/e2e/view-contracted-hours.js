@@ -13,7 +13,7 @@ describe('View contracted hours', function () {
       .then(function (results) {
         workloadOwnerIds = results
         workloadOwnerId = workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
-        workloadOwnerDefaultUrl = '/offender-manager/' + workloadOwnerId
+        workloadOwnerDefaultUrl = '/probation/offender-manager/' + workloadOwnerId
       }).then(function () {
         return browser.url(workloadOwnerDefaultUrl + '/contracted-hours').waitForExist('.breadcrumbs')
       })

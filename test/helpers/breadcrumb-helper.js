@@ -1,10 +1,10 @@
 const Link = require('../../app/services/domain/link')
 
-var offenderManagerBreadcrumb = new Link('John Doe', '/offender-manager/1')
-var teamBreadcrumb = new Link('Team 1', '/team/1')
-var lduBreadcrumb = new Link('LDU 1', '/ldu/1')
-var regionBreadcrumb = new Link('Region 1', '/region/1')
-var nationalBreadcrumb = new Link('HMPPS', '/hmpps/0')
+var offenderManagerBreadcrumb = new Link('John Doe', '/probation/offender-manager/1')
+var teamBreadcrumb = new Link('Team 1', '/probation/team/1')
+var lduBreadcrumb = new Link('LDU 1', '/probation/ldu/1')
+var regionBreadcrumb = new Link('Region 1', '/probation/region/1')
+var nationalBreadcrumb = new Link('HMPPS', '/probation/hmpps/0')
 
 var crOffenderManagerBreadcrumb = new Link('John Doe', '/court-reports/offender-manager/1')
 var crTeamBreadcrumb = new Link('Team 1', '/court-reports/team/1')

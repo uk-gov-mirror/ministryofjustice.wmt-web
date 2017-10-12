@@ -9,12 +9,12 @@
     {% set headerText='Reduction' %}
     {% set reductionText='Showing reduction for ' %}
     {% set submitButtonText='Save changes' %}
-    {% set formAction='/offender-manager/' +  linkId  + '/edit-reduction' %}
+    {% set formAction='/' + workloadType + '/offender-manager/' +  linkId  + '/edit-reduction' %}
   {% else %}
     {% set headerText='New reduction' %}
     {% set reductionText='Add a new reduction for' %}
     {% set submitButtonText='Add reduction' %}
-    {% set formAction='/offender-manager/' + linkId +'/add-reduction' %}    
+    {% set formAction='/' + workloadType + '/offender-manager/' + linkId +'/add-reduction' %}    
   {% endif %}
 
   {% include "includes/validation-error-messages.html" %}
@@ -110,19 +110,17 @@
   </form>
   {% if reduction %}
   <h2 class="heading-small">Other options</h2>
-  <form name="archiveReduction" method="POST" action="/offender-manager/{{ linkId }}/update-reduction-status">
+  <form name="archiveReduction" method="POST" action="/{{ worklaodType }}/offender-manager/{{ linkId }}/update-reduction-status">
     <!-- Including the csrf-hidden-input.html hides the links -->
     <input type="hidden"  name="_csrf"  value="{{ csrfToken }}">
     <input type="hidden" name="reductionId" value="{{reduction.id}}">
     <input type="hidden" name="status" value="ARCHIVED">
-    <input type="hidden" name="workloadType" value="{{ workloadType }}">
   </form>
-  <form name="deleteReduction" method="POST" action="/offender-manager/{{ linkId }}/update-reduction-status">
+  <form name="deleteReduction" method="POST" action="/{{ workloadType }}/offender-manager/{{ linkId }}/update-reduction-status">
     <!-- Including the csrf-hidden-input.html hides the links -->
     <input type="hidden"  name="_csrf"  value="{{ csrfToken }}">
     <input type="hidden" name="reductionId" value="{{ reduction.id }}">
     <input type="hidden" name="status" value="DELETED">
-    <input type="hidden" name="workloadType" value="{{ workloadType }}">    
   </form>
   <div>
   <ul>

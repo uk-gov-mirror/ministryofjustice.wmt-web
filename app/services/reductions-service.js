@@ -52,7 +52,7 @@ module.exports.getAddReductionsRefData = function (id, organisationLevel, worklo
 module.exports.addReduction = function (id, reduction, workloadType) {
   return addReduction(id, reduction)
   .then(function () {
-    if (workloadType === workloadTypes.STANDARD) {
+    if (workloadType === workloadTypes.PROBATION) {
       return getLatestIdsForWorkloadPointsRecalc(id)
       .then(function (ids) {
         return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
@@ -70,7 +70,7 @@ module.exports.addReduction = function (id, reduction, workloadType) {
 module.exports.updateReduction = function (id, reductionId, reduction, workloadType) {
   return updateReduction(reductionId, id, reduction)
   .then(function (result) {
-    if (workloadType === workloadTypes.STANDARD) {
+    if (workloadType === workloadTypes.PROBATION) {
       return getLatestIdsForWorkloadPointsRecalc(id)
       .then(function (ids) {
         return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
@@ -88,7 +88,7 @@ module.exports.updateReduction = function (id, reductionId, reduction, workloadT
 module.exports.updateReductionStatus = function (id, reductionId, reductionStatus, workloadType) {
   return updateReductionStatus(reductionId, reductionStatus)
   .then(function (result) {
-    if (workloadType === workloadTypes.STANDARD) {
+    if (workloadType === workloadTypes.PROBATION) {
       return getLatestIdsForWorkloadPointsRecalc(id)
       .then(function (ids) {
         return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)

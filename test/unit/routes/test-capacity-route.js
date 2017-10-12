@@ -6,11 +6,11 @@ const sinon = require('sinon')
 require('sinon-bluebird')
 
 // test data
-const OFFENDER_MANAGER_CAPACITY_URI = '/offender-manager/1/caseload-capacity'
-const REGION_CAPACITY_URI = '/region/1/caseload-capacity'
-const REGION_CAPACITY_URI_MISSING_ID = '/region/caseload-capacity'
-const TEAM_CAPACITY_URI = '/team/1/caseload-capacity'
-const LDU_CAPACITY_URI = '/ldu/1/caseload-capacity'
+const OFFENDER_MANAGER_CAPACITY_URI = '/probation/offender-manager/1/caseload-capacity'
+const REGION_CAPACITY_URI = '/probation/region/1/caseload-capacity'
+const REGION_CAPACITY_URI_MISSING_ID = '/probation/region/caseload-capacity'
+const TEAM_CAPACITY_URI = '/probation/team/1/caseload-capacity'
+const LDU_CAPACITY_URI = '/probation/ldu/1/caseload-capacity'
 
 const CAPACITY_FROM_DAY = 'capacity-from-day='
 const CAPACITY_FROM_MONTH = 'capacity-from-month='
@@ -41,7 +41,7 @@ describe('/caseload-capacity', function () {
     app = routeHelper.buildApp(route)
   })
 
-  describe('/ldu/{id}/caseload-capacity', function () {
+  describe('/probation/ldu/{id}/caseload-capacity', function () {
     it('should respond with 200 when ldu and id is used with date parameters', function () {
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
@@ -73,7 +73,7 @@ describe('/caseload-capacity', function () {
     })
   })
 
-  describe('/region/{id}/caseload-capacity', function () {
+  describe('/probation/region/{id}/caseload-capacity', function () {
     it('should respond with 200 when region and id is used', function () {
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
@@ -88,7 +88,7 @@ describe('/caseload-capacity', function () {
     })
   })
 
-  describe('/team/{id}/caseload-capacity', function () {
+  describe('/probation/team/{id}/caseload-capacity', function () {
     it('should respond with 200 when team and id is used', function () {
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
@@ -97,7 +97,7 @@ describe('/caseload-capacity', function () {
     })
   })
 
-  describe('/offender-manager/{id}/caseload-capacity', function () {
+  describe('/probation/offender-manager/{id}/caseload-capacity', function () {
     it('should respond with 200 when team and id is used', function () {
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)

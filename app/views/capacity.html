@@ -130,7 +130,7 @@
       <tbody>
         {% for member in capacityBreakdown %}
         <tr>
-          <td headers="name org"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+          <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade org">{{ member.grade }}</td>
           <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
           <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>

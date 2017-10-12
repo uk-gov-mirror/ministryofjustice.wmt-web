@@ -16,11 +16,11 @@ const INVALID_GET_REDUCTIONS_URL = '/court-reports/offender-manager/reductions'
 const ADD_REDUCTION_PAGE_URL = '/court-reports/offender-manager/1/add-reduction'
 const TEAM_ADD_REDUCTION_PAGE_URL = '/court-reports/team/1/add-reduction'
 const INVALID_ADD_REDUCTION_PAGE_URL = '/court-reports/offender-manager/add-reduction'
-const ADD_REDUCTION_POST_URL = '/offender-manager/1/add-reduction'
+const ADD_REDUCTION_POST_URL = '/court-reports/offender-manager/1/add-reduction'
 const EDIT_REDUCTION_PAGE_URL = '/court-reports/offender-manager/1/edit-reduction'
 const TEAM_EDIT_REDUCTION_PAGE_URL = '/court-reports/team/1/edit-reduction?reductionId=123'
 const INVALID_EDIT_REDUCTION_PAGE_URL = '/court-reports/team//edit-reduction?reductionId=123'
-const EDIT_REDUCTION_POST_URL = '/offender-manager/1/edit-reduction'
+const EDIT_REDUCTION_POST_URL = '/court-reports/offender-manager/1/edit-reduction'
 
 const getReductionNoTextResult = {
   title: 'Title',

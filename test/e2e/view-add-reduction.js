@@ -11,7 +11,7 @@ describe('View adding a new reduction', () => {
     return dataHelper.getAnyExistingWorkloadOwnerId()
         .then(function (results) {
           offenderManagerId = results
-          offenderManagerUrl = '/offender-manager/' + offenderManagerId + '/add-reduction'
+          offenderManagerUrl = '/probation/offender-manager/' + offenderManagerId + '/add-reduction'
         }).then(function () {
           return browser.url(offenderManagerUrl).waitForExist('.breadcrumbs')
         })

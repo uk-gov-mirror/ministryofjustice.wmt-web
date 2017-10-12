@@ -13,7 +13,7 @@ const Unathorized = require('../services/errors/authentication-error').Unauthori
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 
 module.exports = function (router) {
-  router.get('/:workloadType?/:organisationLevel/:id/contracted-hours', function (req, res, next) {
+  router.get('/:workloadType/:organisationLevel/:id/contracted-hours', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER])
@@ -28,20 +28,12 @@ module.exports = function (router) {
       }
     }
 
-    if (req.params.workloadType === undefined) {
-      if (isNaN(parseInt(req.params.id, 10))) {
-        return res.sendStatus(500)
-      }
-    }
-
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeContants.COURT_REPORTS) {
+    if (workloadType !== undefined && workloadType !== workloadTypeContants.COURT_REPORTS && workloadType !== workloadTypeContants.PROBATION) {
       return res.sendStatus(404)
-    } else if (workloadType === undefined) {
-      workloadType = workloadTypeContants.STANDARD
     }
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -65,7 +57,7 @@ module.exports = function (router) {
     })
   })
 
-  router.post('/:workloadType?/:organisationLevel/:id/contracted-hours', function (req, res, next) {
+  router.post('/:workloadType/:organisationLevel/:id/contracted-hours', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER])
@@ -80,21 +72,13 @@ module.exports = function (router) {
       }
     }
 
-    if (req.params.workloadType === undefined) {
-      if (isNaN(parseInt(req.params.id, 10))) {
-        return res.sendStatus(500)
-      }
-    }
-
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
     var updatedHours = req.body.hours
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeContants.COURT_REPORTS) {
+    if (workloadType !== undefined && workloadType !== workloadTypeContants.COURT_REPORTS && workloadType !== workloadTypeContants.PROBATION) {
       return res.sendStatus(404)
-    } else if (workloadType === undefined) {
-      workloadType = workloadTypeContants.STANDARD
     }
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {

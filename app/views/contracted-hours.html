@@ -4,12 +4,6 @@
 
 <main id="content" role="main">
 
-{% if workloadType === 'court-reports' %}
-  {% set linkPrefix='/court-reports' %}
-{% else %}
-  {% set linkPrefix='' %}
-{% endif %}
-
 {% include "includes/breadcrumbs.html" %}
 
 {% include "includes/validation-error-messages.html" %}
@@ -30,7 +24,7 @@
   <span class="error-message">{{ errors['hours'][0] }}</span>
 {% endif %}
 
-<form action="{{ linkPrefix }}/offender-manager/{{woId}}/contracted-hours" method="post" class="sln-form-action">
+<form action="/{{ workloadType }}/offender-manager/{{woId}}/contracted-hours" method="post" class="sln-form-action">
   <input type="hidden" name="sub_page" value="true">
   <div class="form-group">
     <label class="form-label-bold" for="contracted-hours">Contracted hours</label>
@@ -41,7 +35,7 @@
   <div class="form-group">
     <input class="button" type="submit" value="Save changes">
     <div class="u-space-t10">
-      or <a href="{{ linkPrefix }}/offender-manager/{{woId}}">cancel and return to overview</a>
+      or <a href="/{{ workloadType }}/offender-manager/{{woId}}">cancel and return to overview</a>
     </div>
   </div>
 

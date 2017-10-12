@@ -4,7 +4,7 @@ const Link = require('./domain/link')
 const orgUnitFinder = require('../services/helpers/org-unit-finder')
 const workloadTypeConstant = require('../constants/workload-type')
 
-module.exports = function (id, organisationLevel, workloadType = workloadTypeConstant.STANDARD) {
+module.exports = function (id, organisationLevel, workloadType = workloadTypeConstant.PROBATION) {
   if (organisationLevel === undefined) {
     throw new TypeError('Organisation level is undefined')
   }

@@ -18,11 +18,11 @@ describe('View overview', function () {
       .then(function (results) {
         workloadOwnerIds = results
         workloadOwnerId = workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
-        workloadOwnerDefaultUrl = '/offender-manager/' + workloadOwnerId
-        teamDefaultUrl = '/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id
-        lduDefaultUrl = '/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
-        regionDefaultUrl = '/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
-        nationalDefaultUrl = '/hmpps/0'
+        workloadOwnerDefaultUrl = '/probation/offender-manager/' + workloadOwnerId
+        teamDefaultUrl = '/probation/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id
+        lduDefaultUrl = '/probation/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
+        regionDefaultUrl = '/probation/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
+        nationalDefaultUrl = '/probation/hmpps/0'
         return results
       })
       .then(function (builtInserts) {

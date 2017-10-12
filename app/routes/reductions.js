@@ -12,7 +12,7 @@ const Forbidden = require('../services/errors/authentication-error').Forbidden
 const workloadTypeConstants = require('../constants/workload-type')
 
 module.exports = function (router) {
-  router.get('/:workloadType?/:organisationLevel/:id/reductions', function (req, res, next) {
+  router.get('/:workloadType/:organisationLevel/:id/reductions', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER])
@@ -27,20 +27,12 @@ module.exports = function (router) {
       }
     }
 
-    if (req.params.workloadType === undefined) {
-      if (isNaN(parseInt(req.params.id, 10))) {
-        return res.sendStatus(500)
-      }
-    }
-
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS) {
+    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS && workloadType !== workloadTypeConstants.PROBATION) {
       return res.sendStatus(404)
-    } else if (workloadType === undefined) {
-      workloadType = workloadTypeConstants.STANDARD
     }
 
     var successText = getStatusText(req)
@@ -68,7 +60,7 @@ module.exports = function (router) {
     })
   })
 
-  router.get('/:workloadType?/:organisationLevel/:id/add-reduction', function (req, res, next) {
+  router.get('/:workloadType/:organisationLevel/:id/add-reduction', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER])
@@ -83,20 +75,12 @@ module.exports = function (router) {
       }
     }
 
-    if (req.params.workloadType === undefined) {
-      if (isNaN(parseInt(req.params.id, 10))) {
-        return res.sendStatus(500)
-      }
-    }
-
     var organisationLevel = req.params.organisationLevel
     var id = parseInt(req.params.id)
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS) {
+    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS && workloadType !== workloadTypeConstants.PROBATION) {
       return res.sendStatus(404)
-    } else if (workloadType === undefined) {
-      workloadType = workloadTypeConstants.STANDARD
     }
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -122,7 +106,7 @@ module.exports = function (router) {
       })
   })
 
-  router.get('/:workloadType?/:organisationLevel/:id/edit-reduction', function (req, res, next) {
+  router.get('/:workloadType/:organisationLevel/:id/edit-reduction', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER])
@@ -137,12 +121,6 @@ module.exports = function (router) {
       }
     }
 
-    if (req.params.workloadType === undefined) {
-      if (isNaN(parseInt(req.params.id, 10))) {
-        return res.sendStatus(500)
-      }
-    }
-
     var organisationLevel = req.params.organisationLevel
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -152,10 +130,8 @@ module.exports = function (router) {
     var reductionId = parseInt(req.query.reductionId)
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS) {
+    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS && workloadType !== workloadTypeConstants.PROBATION) {
       return res.sendStatus(404)
-    } else if (workloadType === undefined) {
-      workloadType = workloadTypeConstants.STANDARD
     }
 
     reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
@@ -181,7 +157,7 @@ module.exports = function (router) {
       })
   })
 
-  router.post('/:organisationLevel/:id/add-reduction', function (req, res, next) {
+  router.post('/:workloadType/:organisationLevel/:id/add-reduction', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER])
@@ -196,13 +172,17 @@ module.exports = function (router) {
       }
     }
     var organisationLevel = req.params.organisationLevel
+    var workloadType = req.params.workloadType
+
+    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS && workloadType !== workloadTypeConstants.PROBATION) {
+      return res.sendStatus(404)
+    }
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
     }
 
     var id = req.params.id
-    var workloadType = req.body.workloadType
     var reduction
     try {
       reduction = generateNewReductionFromRequest(req.body)
@@ -243,17 +223,13 @@ module.exports = function (router) {
     var addReductionsPromise = reductionsService.addReduction(id, reduction, workloadType)
 
     return addReductionsPromise.then(function () {
-      var linkPrefix = ''
-      if (workloadType === workloadTypeConstants.COURT_REPORTS) {
-        linkPrefix += '/court-reports'
-      }
-      return res.redirect(302, linkPrefix + '/' + organisationLevel + '/' + id + '/reductions?success=true')
+      return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions?success=true')
     }).catch(function (error) {
       next(error)
     })
   })
 
-  router.post('/:organisationLevel/:id/edit-reduction', function (req, res, next) {
+  router.post('/:workloadType/:organisationLevel/:id/edit-reduction', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER])
@@ -268,6 +244,11 @@ module.exports = function (router) {
       }
     }
     var organisationLevel = req.params.organisationLevel
+    var workloadType = req.params.workloadType
+
+    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS && workloadType !== workloadTypeConstants.PROBATION) {
+      return res.sendStatus(404)
+    }
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -275,7 +256,7 @@ module.exports = function (router) {
 
     var id = req.params.id
     var reductionId = req.body.reductionId
-    var workloadType = req.body.workloadType
+
     var reduction
     try {
       reduction = generateNewReductionFromRequest(req.body)
@@ -311,17 +292,13 @@ module.exports = function (router) {
 
     return reductionsService.updateReduction(id, reductionId, reduction, workloadType)
       .then(function () {
-        var linkPrefix = ''
-        if (workloadType === workloadTypeConstants.COURT_REPORTS) {
-          linkPrefix += '/court-reports'
-        }
-        return res.redirect(302, linkPrefix + '/' + organisationLevel + '/' + id + '/reductions?edited=true')
+        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions?edited=true')
       }).catch(function (error) {
         next(error)
       })
   })
 
-  router.post('/:organisationLevel/:id/update-reduction-status', function (req, res, next) {
+  router.post('/:workloadType/:organisationLevel/:id/update-reduction-status', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER])
@@ -336,6 +313,11 @@ module.exports = function (router) {
       }
     }
     var organisationLevel = req.params.organisationLevel
+    var workloadType = req.params.workloadType
+
+    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS && workloadType !== workloadTypeConstants.PROBATION) {
+      return res.sendStatus(404)
+    }
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -344,7 +326,6 @@ module.exports = function (router) {
     var reductionStatus = req.body.status
     var id = req.params.id
     var reductionId = req.body.reductionId
-    var workloadType = req.body.workloadType
 
     if (!requestStatusVerified(reductionStatus)) {
       return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions')
@@ -359,11 +340,7 @@ module.exports = function (router) {
 
     return reductionsService.updateReductionStatus(id, reductionId, reductionStatus, workloadType)
     .then(function () {
-      var linkPrefix = ''
-      if (workloadType === workloadTypeConstants.COURT_REPORTS) {
-        linkPrefix += '/court-reports'
-      }
-      return res.redirect(302, linkPrefix + '/' + organisationLevel + '/' + id + '/reductions' + successType)
+      return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions' + successType)
     }).catch(function (error) {
       next(error)
     })

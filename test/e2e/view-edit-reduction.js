@@ -13,7 +13,7 @@ describe('View adding a new reduction', () => {
       .then(function (results) {
         offenderManagerId = results.workloadOwnerId
         reductionId = results.reductionId
-        reductionUrl = '/offender-manager/' + offenderManagerId + '/edit-reduction?reductionId=' + reductionId
+        reductionUrl = '/probation/offender-manager/' + offenderManagerId + '/edit-reduction?reductionId=' + reductionId
       }).then(function () {
         return browser.url(reductionUrl).waitForExist('.breadcrumbs')
       })

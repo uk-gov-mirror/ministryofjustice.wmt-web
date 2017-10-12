@@ -2,7 +2,7 @@ const authorisation = require('../authorisation')
 const Unathorized = require('../services/errors/authentication-error').Unauthorized
 
 module.exports = function (router) {
-  router.get('/:organisationLevel/:id/', function (req, res) {
+  router.get('/probation/:organisationLevel/:id/', function (req, res) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -11,7 +11,7 @@ module.exports = function (router) {
       }
     }
 
-    return res.redirect('/' + req.params.organisationLevel + '/' + req.params.id + '/overview')
+    return res.redirect('/probation/' + req.params.organisationLevel + '/' + req.params.id + '/overview')
   })
 
   router.get('/court-reports/:organisationLevel/:id/', function (req, res) {

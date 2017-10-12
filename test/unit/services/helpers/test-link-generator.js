@@ -5,9 +5,9 @@ const workloadType = require('../../../../app/constants/workload-type')
 describe('services/helpers/link-generator', function () {
   describe('fromReference', function () {
     it('should return the correct link for each organisational unit, including ID', function () {
-      expect(linkGenerator.fromReference('R1')).to.eql('/region/1')
-      expect(linkGenerator.fromReference('L34')).to.eql('/ldu/34')
-      expect(linkGenerator.fromReference('T178')).to.eql('/team/178')
+      expect(linkGenerator.fromReference('R1')).to.eql('/probation/region/1')
+      expect(linkGenerator.fromReference('L34')).to.eql('/probation/ldu/34')
+      expect(linkGenerator.fromReference('T178')).to.eql('/probation/team/178')
     })
 
     it('should return the correct link for each organisational unit, including ID for court-reports', function () {
@@ -17,7 +17,7 @@ describe('services/helpers/link-generator', function () {
     })
 
     it('should return the correct link for national level (no ID)', function () {
-      expect(linkGenerator.fromReference('N')).to.eql('/hmpps/0')
+      expect(linkGenerator.fromReference('N')).to.eql('/probation/hmpps/0')
     })
 
     it('should return the correct link for national level (no ID) for court-reports', function () {
@@ -41,7 +41,7 @@ describe('services/helpers/link-generator', function () {
   })
   describe('fromIdAndName', function () {
     it('should generate a link based on the id and name supplied', function () {
-      expect(linkGenerator.fromIdAndName(1, 'offender-manager')).to.eql('/offender-manager/1')
+      expect(linkGenerator.fromIdAndName(1, 'offender-manager')).to.eql('/probation/offender-manager/1')
     })
 
     it('should generate a link based on the id and name supplied for court-reports', function () {
@@ -49,8 +49,8 @@ describe('services/helpers/link-generator', function () {
     })
 
     it('should return no trailing slashes when an empty id is supplied', function () {
-      expect(linkGenerator.fromIdAndName(undefined, 'hmpps')).to.eql('/hmpps/0')
-      expect(linkGenerator.fromIdAndName('', 'hmpps')).to.eql('/hmpps/0')
+      expect(linkGenerator.fromIdAndName(undefined, 'hmpps')).to.eql('/probation/hmpps/0')
+      expect(linkGenerator.fromIdAndName('', 'hmpps')).to.eql('/probation/hmpps/0')
     })
 
     it('should throw an error when passed an invalid name', function () {

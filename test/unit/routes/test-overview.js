@@ -7,18 +7,18 @@ require('sinon-bluebird')
 const orgUnit = require('../../../app/constants/organisation-unit')
 const tabs = require('../../../app/constants/wmt-tabs')
 
-const OM_OVERVIEW_URL = '/offender-manager/1/overview'
-const LDU_OVERVIEW_URL = '/ldu/1/overview'
-const REGION_OVERVIEW_URL = '/region/1/overview'
-const HMPPS_OVERVIEW_URL = '/hmpps/0/overview'
+const OM_OVERVIEW_URL = '/probation/offender-manager/1/overview'
+const LDU_OVERVIEW_URL = '/probation/ldu/1/overview'
+const REGION_OVERVIEW_URL = '/probation/region/1/overview'
+const HMPPS_OVERVIEW_URL = '/probation/hmpps/0/overview'
 
-const OM_MISSING_ID_URL = '/offender-manager/overview'
+const OM_MISSING_ID_URL = '/probation/offender-manager/overview'
 
-const OM_OVERVIEW_CSV_URL = '/offender-manager/1/overview/csv'
-const TEAM_OVERVIEW_CSV_URL = '/team/1/overview/csv'
-const LDU_OVERVIEW_CSV_URL = '/ldu/1/overview/csv'
-const REGION_OVERVIEW_CSV_URL = '/region/1/overview/csv'
-const HMPPS_OVERVIEW_CSV_URL = '/hmpps/0/overview/csv'
+const OM_OVERVIEW_CSV_URL = '/probation/offender-manager/1/overview/csv'
+const TEAM_OVERVIEW_CSV_URL = '/probation/team/1/overview/csv'
+const LDU_OVERVIEW_CSV_URL = '/probation/ldu/1/overview/csv'
+const REGION_OVERVIEW_CSV_URL = '/probation/region/1/overview/csv'
+const HMPPS_OVERVIEW_CSV_URL = '/probation/hmpps/0/overview/csv'
 
 const OVERVIEW = {
   title: 'Title',

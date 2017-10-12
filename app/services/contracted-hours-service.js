@@ -36,7 +36,7 @@ module.exports.updateContractedHours = function (id, organisationLevel, hours, w
     if (count === 0) {
       throw new Error('Offender manager with id: ' + id + ' has not had contracted hours updated')
     }
-    if (workloadType === workloadTypes.STANDARD) {
+    if (workloadType === workloadTypes.PROBATION) {
       return getLatestIdsForWorkloadPointsRecalc(id)
       .then(function (ids) {
         return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)

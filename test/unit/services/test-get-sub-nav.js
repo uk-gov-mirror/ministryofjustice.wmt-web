@@ -7,7 +7,7 @@ describe('services/get-sub-nav', function () {
   var id = 1
   var organisationalUnitName = 'name'
   var omOrganisationalUnitName = 'offender-manager'
-  var currentLink = '/' + omOrganisationalUnitName + '/' + id + '/' + 'overview'
+  var currentLink = '/probation/' + omOrganisationalUnitName + '/' + id + '/' + 'overview'
 
   it('returns a list which has five elements for offender-manager', function () {
     var subNav = getSubNav(id, omOrganisationalUnitName, currentLink)
@@ -67,11 +67,11 @@ describe('services/get-sub-nav', function () {
 
   it('returns the correct links for offender-manager', function () {
     var subNav = getSubNav(id, omOrganisationalUnitName, currentLink)
-    expect(subNav[0].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'overview')
-    expect(subNav[1].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'caseload-capacity')
-    expect(subNav[2].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'contracted-hours')
-    expect(subNav[3].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'case-progress')
-    expect(subNav[4].link).to.eql('/' + omOrganisationalUnitName + '/' + id + '/' + 'reductions')
+    expect(subNav[0].link).to.eql('/probation/' + omOrganisationalUnitName + '/' + id + '/' + 'overview')
+    expect(subNav[1].link).to.eql('/probation/' + omOrganisationalUnitName + '/' + id + '/' + 'caseload-capacity')
+    expect(subNav[2].link).to.eql('/probation/' + omOrganisationalUnitName + '/' + id + '/' + 'contracted-hours')
+    expect(subNav[3].link).to.eql('/probation/' + omOrganisationalUnitName + '/' + id + '/' + 'case-progress')
+    expect(subNav[4].link).to.eql('/probation/' + omOrganisationalUnitName + '/' + id + '/' + 'reductions')
   })
 
   it('returns the correct links for court-reporter', function () {

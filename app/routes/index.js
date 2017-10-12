@@ -14,6 +14,6 @@ module.exports = function (router) {
       }
     }
 
-    return res.redirect('/hmpps/0')
+    return res.redirect('/probation/hmpps/0')
   })
 }

@@ -27,6 +27,9 @@ fi
 urls=()
 errors=false
 
+court_reports_base="$host/court-reports"
+probation_base="$host/probation"
+
 offender_manager='offender-manager'
 team='team'
 ldu='ldu'
@@ -42,56 +45,54 @@ ldu='ldu'
 region='region'
 national='hmpps/0'
 
-court_reports='court-reports'
-
 # Capacity
 capacity_url='caseload-capacity'
-urls+=("$host/$offender_manager/$omId/$capacity_url")
-urls+=("$host/$team/$teamId/$capacity_url")
-urls+=("$host/$ldu/$lduId/$capacity_url")
-urls+=("$host/$region/$regionId/$capacity_url")
+urls+=("$probation_base/$offender_manager/$omId/$capacity_url")
+urls+=("$probation_base/$team/$teamId/$capacity_url")
+urls+=("$probation_base/$ldu/$lduId/$capacity_url")
+urls+=("$probation_base/$region/$regionId/$capacity_url")
 
 # Case Progress
 case_progress_url='case-progress'
-urls+=("$host/$offender_manager/$omId/$case_progress_url")
-urls+=("$host/$team/$teamId/$case_progress_url")
-urls+=("$host/$ldu/$lduId/$case_progress_url")
-urls+=("$host/$region/$regionId/$case_progress_url")
+urls+=("$probation_base/$offender_manager/$omId/$case_progress_url")
+urls+=("$probation_base/$team/$teamId/$case_progress_url")
+urls+=("$probation_base/$ldu/$lduId/$case_progress_url")
+urls+=("$probation_base/$region/$regionId/$case_progress_url")
 
 # Overview
 overview_url='overview'
-urls+=("$host/$offender_manager/$crId/$overview_url")
-urls+=("$host/$team/$teamId/$overview_url")
-urls+=("$host/$ldu/$lduId/$overview_url")
-urls+=("$host/$region/$regionId/$overview_url")
-urls+=("$host/$national/$overview_url")
+urls+=("$probation_base/$offender_manager/$crId/$overview_url")
+urls+=("$probation_base/$team/$teamId/$overview_url")
+urls+=("$probation_base/$ldu/$lduId/$overview_url")
+urls+=("$probation_base/$region/$regionId/$overview_url")
+urls+=("$probation_base/$national/$overview_url")
 
 # Court Reports Overview
-urls+=("$host/$court_reports/$offender_manager/$crId/$overview_url")
-urls+=("$host/$court_reports/$team/$teamId/$overview_url")
-urls+=("$host/$court_reports/$ldu/$lduId/$overview_url")
-urls+=("$host/$court_reports/$region/$regionId/$overview_url")
-urls+=("$host/$court_reports/$national/$overview_url")
+urls+=("$court_reports_base/$offender_manager/$crId/$overview_url")
+urls+=("$court_reports_base/$team/$teamId/$overview_url")
+urls+=("$court_reports_base/$ldu/$lduId/$overview_url")
+urls+=("$court_reports_base/$region/$regionId/$overview_url")
+urls+=("$court_reports_base/$national/$overview_url")
 
 # Caseload
 caseload_url='caseload'
-urls+=("$host/$team/$teamId/$caseload_url")
-urls+=("$host/$ldu/$lduId/$caseload_url")
-urls+=("$host/$region/$regionId/$caseload_url")
-urls+=("$host/$national/$caseload_url")
+urls+=("$probation_base/$team/$teamId/$caseload_url")
+urls+=("$probation_base/$ldu/$lduId/$caseload_url")
+urls+=("$probation_base/$region/$regionId/$caseload_url")
+urls+=("$probation_base/$national/$caseload_url")
 
 # Contracted hours
 contracted_hours_url='contracted-hours'
-urls+=("$host/$offender_manager/$omId/$contracted_hours_url")
-urls+=("$host/$court_reports/$offender_manager/$crId/$contracted_hours_url")
+urls+=("$probation_base/$offender_manager/$omId/$contracted_hours_url")
+urls+=("$probation_base/$court_reports/$offender_manager/$crId/$contracted_hours_url")
 
 # Reduction
 reductions_url='reductions'
 add_reductions_url='add-reduction'
-urls+=("$host/$offender_manager/$omId/$reductions_url")
-urls+=("$host/$offender_manager/$omId/$add_reductions_url")
-urls+=("$host/$court_reports/$offender_manager/$crId/$reductions_url")
-urls+=("$host/$court_reports/$offender_manager/$crId/$add_reductions_url")
+urls+=("$probation_base/$offender_manager/$omId/$reductions_url")
+urls+=("$probation_base/$offender_manager/$omId/$add_reductions_url")
+urls+=("$court_reports_base/$offender_manager/$crId/$reductions_url")
+urls+=("$court_reports_base/$offender_manager/$crId/$add_reductions_url")
 
 # Admin
 admin='admin'
