@@ -5,14 +5,14 @@ const Reduction = require('../../../../app/services/domain/reduction')
 const ValidationError = require('../../../../app/services/errors/validation-error')
 const reductionStatusType = require('../../../../app/constants/reduction-status-type')
 
+var activeStartDate = moment().subtract(30, 'days').toDate()
+var activeEndDate = moment().add(30, 'days').toDate()
 var reductionReason = {
-  maxAllowanceHours: 0
+  maxAllowanceHours: 11
 }
 
 describe('services/domain/reduction', function () {
   it('should construct a new-reduction object with the correct values', function () {
-    var activeStartDate = moment().subtract(30, 'days').toDate()
-    var activeEndDate = moment().add(30, 'days').toDate()
     var reduction = new Reduction('1', '10',
       [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
       [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
@@ -25,8 +25,6 @@ describe('services/domain/reduction', function () {
   })
 
   it('should raise a ValidationError if Hours is not supplied', function () {
-    var activeStartDate = moment().subtract(30, 'days').toDate()
-    var activeEndDate = moment().add(30, 'days').toDate()
     expect(function () {
       new Reduction('1', '',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
@@ -37,8 +35,6 @@ describe('services/domain/reduction', function () {
   })
 
   it('should raise a ValidationError if Reason is not supplied', function () {
-    var activeStartDate = moment().subtract(30, 'days').toDate()
-    var activeEndDate = moment().add(30, 'days').toDate()
     expect(function () {
       new Reduction('', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
@@ -50,8 +46,8 @@ describe('services/domain/reduction', function () {
   })
 
   it('should raise a ValidationError if Start Date is not valid', function () {
-    var activeStartDate = moment().add(200, 'years').toDate()
-    var activeEndDate = moment().add(201, 'years').toDate()
+    activeStartDate = moment().add(200, 'years').toDate()
+    activeEndDate = moment().add(201, 'years').toDate()
     expect(function () {
       new Reduction('1', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
@@ -63,8 +59,8 @@ describe('services/domain/reduction', function () {
   })
 
   it('should raise a ValidationError if End Date is before Start Date', function () {
-    var activeStartDate = moment().subtract(30, 'days').toDate()
-    var activeEndDate = moment().subtract(2, 'months').toDate()
+    activeStartDate = moment().subtract(30, 'days').toDate()
+    activeEndDate = moment().subtract(2, 'months').toDate()
     expect(function () {
       new Reduction('1', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
@@ -76,8 +72,6 @@ describe('services/domain/reduction', function () {
   })
 
   it('should raise a ValidationError if Notes exceed max length', function () {
-    var activeStartDate = moment().subtract(30, 'days').toDate()
-    var activeEndDate = moment().add(30, 'days').toDate()
     expect(function () {
       var longNote = getLongString()
       new Reduction('1', '10',
@@ -88,9 +82,19 @@ describe('services/domain/reduction', function () {
       .that.has.a.property('notes')
   })
 
+  it('should raise a ValidationError if the hours are outside the range permitted for the reduction reason', function () {
+    var hours = '20'
+    expect(function () {
+      new Reduction('1', hours,
+        [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
+        [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
+    }).to.throw(ValidationError)
+      .that.has.a.property('validationErrors')
+      .that.has.a.property('reductionHours')
+      .that.contains('Reduction hours must be a number between 0 and ' + reductionReason.maxAllowanceHours)
+  })
+
   function getLongString () {
     return '*'.repeat(4001)
   }
 })
-
-// TODO: Add in for new max check
