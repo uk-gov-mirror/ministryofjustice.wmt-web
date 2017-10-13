@@ -5,9 +5,12 @@ const orgUnitConstants = require('../../constants/organisation-unit')
 module.exports = function (id, type) {
   var orgUnit = orgUnitFinder('name', type)
   var table = orgUnit.overviewView
-  var whereObject = {}
+  var whereClause = ''
+  var params = []
+
   if (id !== undefined) {
-    whereObject.id = id
+    whereClause = ' WHERE id = ? '
+    params.push(id)
   }
 
   var selectColumns = [
@@ -23,9 +26,9 @@ module.exports = function (id, type) {
     selectColumns.push('grade_code AS gradeCode')
   }
 
-  return knex(table)
-    .where(whereObject)
-    .select(selectColumns)
+  return knex.raw('SELECT ' + selectColumns.join(', ') +
+           ' FROM ' + table + whereClause +
+           ' WITH(NOEXPAND)', params)
     .then(function (results) {
       return results
     })
