@@ -9,8 +9,6 @@ module.exports = function (id) {
            'total_points AS totalPoints',
            'total_cases AS cases',
            'contracted_hours AS contractedHours',
-           'reduction_hours AS reduction',
-           'default_contracted_hours_po AS defaultContractedHoursPo',
-           'default_contracted_hours_pso AS defaultContractedHoursPso')
+           'reduction_hours AS reduction')
     .where('workload_owner_id', id)
 }
