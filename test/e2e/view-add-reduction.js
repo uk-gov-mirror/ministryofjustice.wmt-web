@@ -6,7 +6,7 @@ const workloadTypes = require('../../app/constants/workload-type')
 var offenderManagerId
 var offenderManagerUrl
 
-describe('View adding a new reduction', () => {
+describe('View adding a new reduction - court reports', () => {
   before(function () {
     authenticationHerlp.login(authenticationHerlp.users.Manager)
     return dataHelper.getAnyExistingWorkloadOwnerId()
