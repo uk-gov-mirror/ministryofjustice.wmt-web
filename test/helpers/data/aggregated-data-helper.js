@@ -98,13 +98,7 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
   var inserts = []
 
   var promise = module.exports.addWorkloadPoints(inserts)
-    .then(function (inserts) {
-      var workloadReports = [
-        { effective_from: '2017-01-01', effective_to: '2017-02-01' },
-        { effective_from: '2017-02-01' }
-      ]
-      return knex('workload_report').returning('id').insert(workloadReports)
-    })
+    .then(addWorkloadReports(inserts))
     .then(function (ids) {
       ids.forEach((id) => {
         inserts.push({table: 'workload_report', id: id})
@@ -221,10 +215,19 @@ var addPSOOffenderManager = function (inserts) {
 var addWorkload = function (inserts) {
   var teams = inserts.filter((item) => item.table === 'team')
   var offenderManagers = inserts.filter((item) => item.table === 'offender_manager')
-  return knex('workload_owner').returning('id').insert(
-    {team_id: teams[teams.length - 1].id,
+
+  return addWorkloadReports(inserts)
+  .then(function(ids) {
+    if (ids) {
+      ids.forEach((id) => {
+        inserts.push({table: 'workload_report', id: id})
+      })
+    }
+    return knex('workload_owner').returning('id').insert(
+      {team_id: teams[teams.length - 1].id,
       offender_manager_id: offenderManagers[offenderManagers.length - 1].id,
       contracted_hours: 37.5})
+  })
   .then(function (ids) {
     inserts.push({table: 'workload_owner', id: ids[0]})
     return getMaxStagingId()
@@ -232,11 +235,18 @@ var addWorkload = function (inserts) {
   .then(function (upToDateMaxStagingId) {
     module.exports.maxStagingId = upToDateMaxStagingId
     var workloadOwners = inserts.filter((item) => item.table === 'workload_owner')
+    var workloadReports = inserts.filter((item) => item.table === 'workload_report')
     var currentWorkloadOwnerId = workloadOwners[workloadOwners.length - 1].id
-    var workloads = [
-      Object.assign({}, defaultWorkload, { workload_owner_id: currentWorkloadOwnerId, staging_id: upToDateMaxStagingId + 1 }),
-      Object.assign({}, defaultWorkload, { workload_owner_id: currentWorkloadOwnerId, staging_id: upToDateMaxStagingId + 2 })
-    ]
+
+    var workloads = []
+
+    var i = 1
+    workloadReports.forEach(function (report) {
+      workloads.push(Object.assign({}, defaultWorkload, {
+          workload_owner_id: currentWorkloadOwnerId,
+          staging_id: upToDateMaxStagingId + (i++),
+          workload_report_id: report.id }))
+    })
     return knex('workload').returning('id').insert(workloads)
   })
   .then(function (ids) {
@@ -278,6 +288,8 @@ var addWorkload = function (inserts) {
       workload_report_id: workloadReports[0].id,
       workload_id: inserts.filter((item) => item.table === 'workload')[0].id
     }))
+
+    calculations.forEach((calc) => console.log(calc))
 
     return knex('workload_points_calculations').returning('id').insert(calculations)
   })
@@ -464,6 +476,18 @@ module.exports.getAllWorkloadPointsForTest = function () {
       'parom AS parom',
       'effective_to AS effectiveTo'
     )
+}
+
+var addWorkloadReports = function (inserts) {
+  var existingWorkloadReports = inserts.filter((item) => item.table === 'workload_report')
+  var workloadReports = []
+  if (existingWorkloadReports.length < 2) {
+    workloadReports = [
+      { effective_from: '2017-01-01', effective_to: '2017-02-01' },
+      { effective_from: '2017-02-01' }
+    ]
+  }
+  return knex('workload_report').returning('id').insert(workloadReports)
 }
 
 var getMaxStagingId = function () {
