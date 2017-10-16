@@ -68,8 +68,8 @@ var hasRoleResult = true
 
 before(function () {
   authorisationService = {
-    hasRole: sinon.stub().returns(hasRoleResult),
-    isUserAuthenticated: sinon.stub().returns(true)
+    assertUserAuthenticated: sinon.stub(),
+    hasRole: sinon.stub().returns(hasRoleResult)
   }
   workloadPointsService = {
     getWorkloadPoints: sinon.stub().resolves(WORKLOAD_POINTS),

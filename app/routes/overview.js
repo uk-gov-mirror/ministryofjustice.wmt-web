@@ -5,14 +5,14 @@ const organisationUnitConstants = require('../constants/organisation-unit')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const authorisation = require('../authorisation')
-const Unathorized = require('../services/errors/authentication-error').Unauthorized
+const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 
 module.exports = function (router) {
   router.get('/:organisationLevel/:id/overview', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
-      if (error instanceof Unathorized) {
+      if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
@@ -56,7 +56,7 @@ module.exports = function (router) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
-      if (error instanceof Unathorized) {
+      if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
