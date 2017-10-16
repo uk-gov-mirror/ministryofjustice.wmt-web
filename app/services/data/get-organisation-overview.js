@@ -6,11 +6,9 @@ module.exports = function (id, type) {
   var orgUnit = orgUnitFinder('name', type)
   var table = orgUnit.overviewView
   var whereClause = ''
-  var params = []
 
   if (id !== undefined) {
-    whereClause = ' WHERE id = ? '
-    params.push(id)
+    whereClause = ' WHERE id = ' + id
   }
 
   var selectColumns = [
@@ -26,9 +24,10 @@ module.exports = function (id, type) {
     selectColumns.push('grade_code AS gradeCode')
   }
 
-  return knex.raw('SELECT ' + selectColumns.join(', ') +
-           ' FROM ' + table + whereClause +
-           ' WITH(NOEXPAND)', params)
+  return knex.raw(
+      'SELECT ' + selectColumns.join(', ') +
+      ' FROM ' + table + ' WITH (NOEXPAND)' +
+      whereClause)
     .then(function (results) {
       return results
     })

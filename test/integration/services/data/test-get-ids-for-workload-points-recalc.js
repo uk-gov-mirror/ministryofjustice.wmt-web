@@ -14,11 +14,14 @@ describe('/services/data/get-ids-for-workload-points-recalc', function () {
   before(function () {
     return dataHelper.addWorkloadCapacitiesForOffenderManager()
     .then(function (builtInserts) {
-      inserts = builtInserts
-      previousWpId = inserts.filter((item) => item.table === 'workload_points')[0].id
-      expectedWorkloadReportId = inserts.filter((item) => item.table === 'workload_report')[1].id
-      expectedMinWorkloadStagingId = dataHelper.maxStagingId + 1
-      expectedMaxWorkloadStagingId = dataHelper.maxStagingId + 2
+      return dataHelper.addPoOffenderManager(builtInserts)
+      .then(function (insertsWithTwoWo) {
+        inserts = insertsWithTwoWo
+        previousWpId = inserts.filter((item) => item.table === 'workload_points')[0].id
+        expectedWorkloadReportId = inserts.filter((item) => item.table === 'workload_report')[1].id
+        expectedMinWorkloadStagingId = dataHelper.maxStagingId
+        expectedMaxWorkloadStagingId = dataHelper.maxStagingId + 2
+      })
     })
   })
 

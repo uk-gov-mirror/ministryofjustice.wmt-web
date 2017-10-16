@@ -59,29 +59,29 @@ module.exports.defaultWorkloadPoints = {
 module.exports.addOrgHierarchyWithPoAndPso = function () {
   return module.exports.addCaseProgressDataForAllOrgUnits()
   .then(function (inserts) {
-    return addPOOffenderManager(inserts)
+    return module.exports.addPoOffenderManager(inserts)
   })
   .then(function (inserts) {
-    return addPSOOffenderManager(inserts)
+    return addPsoOffenderManager(inserts)
   })
   .then(function (inserts) {
-    return addPSOOffenderManager(inserts)
+    return addPsoOffenderManager(inserts)
   })
   .then(function (inserts) {
     return addTeam(inserts)
   })
   .then(function (inserts) {
-    return addPOOffenderManager(inserts)
+    return module.exports.addPoOffenderManager(inserts)
   })
   .then(function (inserts) {
-    return addPSOOffenderManager(inserts)
+    return addPsoOffenderManager(inserts)
   })
 }
 
 module.exports.addCaseProgressDataForAllOrgUnits = function () {
   return module.exports.addWorkloadCapacitiesForOffenderManager()
   .then(function (inserts) {
-    return addPOOffenderManager(inserts)
+    return module.exports.addPoOffenderManager(inserts)
   })
   .then(function (inserts) {
     return addTeam(inserts)
@@ -98,11 +98,10 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
   var inserts = []
 
   var promise = module.exports.addWorkloadPoints(inserts)
-    .then(addWorkloadReports(inserts))
-    .then(function (ids) {
-      ids.forEach((id) => {
-        inserts.push({table: 'workload_report', id: id})
-      })
+    .then(function (inserts) {
+      return addWorkloadReports(inserts)
+    })
+    .then(function () {
       var offenderManagerTypes = [
         { grade_code: 'PO' },
         { grade_code: 'PSO' }
@@ -143,6 +142,25 @@ module.exports.addWorkloadPoints = function (inserts) {
   })
 }
 
+var addWorkloadReports = function (inserts) {
+  return getCurrentActiveWorkloadReportId()
+  .then(function (activeId) {
+    var workloadReports = [
+      { effective_from: '2017-01-01', effective_to: '2017-02-01' }
+    ]
+    if (activeId === undefined) {
+      workloadReports.push({ effective_from: '2017-02-01' })
+    }
+    return knex('workload_report').returning('id').insert(workloadReports)
+  })
+  .then(function (ids) {
+    ids.forEach((id) => {
+      inserts.push({table: 'workload_report', id: id})
+    })
+    return inserts
+  })
+}
+
 var addRegion = function (inserts) {
   return knex('region').returning('id').insert({description: 'Test Region'})
   .then(function (ids) {
@@ -162,7 +180,7 @@ var addTeam = function (inserts) {
     return inserts
   })
   .then(function (inserts) {
-    return addPOOffenderManager(inserts)
+    return module.exports.addPoOffenderManager(inserts)
   })
 }
 
@@ -178,7 +196,7 @@ var addLdu = function (inserts) {
   })
 }
 
-var addPOOffenderManager = function (inserts) {
+module.exports.addPoOffenderManager = function (inserts) {
   var poOmType = inserts.filter((item) => item.table === 'offender_manager_type')[0]
   return knex('offender_manager').returning('id').insert(
     {
@@ -191,11 +209,11 @@ var addPOOffenderManager = function (inserts) {
     return inserts
   })
   .then(function () {
-    return addWorkload(inserts)
+    return addWorkloadOwner(inserts)
   })
 }
 
-var addPSOOffenderManager = function (inserts) {
+var addPsoOffenderManager = function (inserts) {
   var psoOmType = inserts.filter((item) => item.table === 'offender_manager_type')[1]
   return knex('offender_manager').returning('id').insert(
     {
@@ -208,30 +226,30 @@ var addPSOOffenderManager = function (inserts) {
     return inserts
   })
   .then(function () {
-    return addWorkload(inserts)
+    return addWorkloadOwner(inserts)
   })
 }
 
-var addWorkload = function (inserts) {
+var addWorkloadOwner = function (inserts) {
   var teams = inserts.filter((item) => item.table === 'team')
   var offenderManagers = inserts.filter((item) => item.table === 'offender_manager')
 
-  return addWorkloadReports(inserts)
-  .then(function(ids) {
-    if (ids) {
-      ids.forEach((id) => {
-        inserts.push({table: 'workload_report', id: id})
-      })
-    }
-    return knex('workload_owner').returning('id').insert(
-      {team_id: teams[teams.length - 1].id,
+  return knex('workload_owner').returning('id').insert(
+    {team_id: teams[teams.length - 1].id,
       offender_manager_id: offenderManagers[offenderManagers.length - 1].id,
       contracted_hours: 37.5})
-  })
+
   .then(function (ids) {
     inserts.push({table: 'workload_owner', id: ids[0]})
-    return getMaxStagingId()
+    return inserts
   })
+  .then(function (inserts) {
+    return addWorkloads(inserts)
+  })
+}
+
+var addWorkloads = function (inserts) {
+  return getMaxStagingId()
   .then(function (upToDateMaxStagingId) {
     module.exports.maxStagingId = upToDateMaxStagingId
     var workloadOwners = inserts.filter((item) => item.table === 'workload_owner')
@@ -243,9 +261,9 @@ var addWorkload = function (inserts) {
     var i = 1
     workloadReports.forEach(function (report) {
       workloads.push(Object.assign({}, defaultWorkload, {
-          workload_owner_id: currentWorkloadOwnerId,
-          staging_id: upToDateMaxStagingId + (i++),
-          workload_report_id: report.id }))
+        workload_owner_id: currentWorkloadOwnerId,
+        staging_id: upToDateMaxStagingId + (i++),
+        workload_report_id: report.id }))
     })
     return knex('workload').returning('id').insert(workloads)
   })
@@ -258,9 +276,7 @@ var addWorkload = function (inserts) {
     var workloadReports = inserts.filter((item) => item.table === 'workload_report')
 
     var defaultWorkloadPointsCalculations = {
-      workload_report_id: workloadReports[1].id,
       workload_points_id: inserts.filter((item) => item.table === 'workload_points')[0].id,
-      workload_id: workloads[workloads.length - 1].id,
       total_points: 0,
       sdr_points: 0,
       sdr_conversion_points: 0,
@@ -275,21 +291,17 @@ var addWorkload = function (inserts) {
 
     var calculations = []
     calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
-      total_points: 50, available_points: 25
-    }))
-    calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
-      total_points: 20,
-      available_points: 10,
-      workload_id: inserts.filter((item) => item.table === 'workload')[0].id
-    }))
-    calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
       total_points: 20,
       available_points: 10,
       workload_report_id: workloadReports[0].id,
-      workload_id: inserts.filter((item) => item.table === 'workload')[0].id
+      workload_id: workloads[workloads.length - 2].id
     }))
-
-    calculations.forEach((calc) => console.log(calc))
+    calculations.push(Object.assign({}, defaultWorkloadPointsCalculations, {
+      workload_report_id: workloadReports[workloadReports.length - 1].id,
+      workload_id: workloads[workloads.length - 1].id,
+      total_points: 50,
+      available_points: 25
+    }))
 
     return knex('workload_points_calculations').returning('id').insert(calculations)
   })
@@ -478,22 +490,26 @@ module.exports.getAllWorkloadPointsForTest = function () {
     )
 }
 
-var addWorkloadReports = function (inserts) {
-  var existingWorkloadReports = inserts.filter((item) => item.table === 'workload_report')
-  var workloadReports = []
-  if (existingWorkloadReports.length < 2) {
-    workloadReports = [
-      { effective_from: '2017-01-01', effective_to: '2017-02-01' },
-      { effective_from: '2017-02-01' }
-    ]
-  }
-  return knex('workload_report').returning('id').insert(workloadReports)
-}
-
 var getMaxStagingId = function () {
   return knex('workload')
     .max('staging_id AS maxStagingId')
     .then(function (results) {
       return results[0].maxStagingId
+    })
+}
+
+// TODO: Think about using this - update!
+var getCurrentActiveWorkloadReportId = function () {
+  return knex('workload_report')
+    .select('id')
+    .whereNotNull('effective_from')
+    .whereNull('effective_to')
+    .where('id', 123456)
+    .then(function (results) {
+      if (results === undefined || results[0] === undefined) {
+        return undefined
+      } else {
+        return results[0].id
+      }
     })
 }
