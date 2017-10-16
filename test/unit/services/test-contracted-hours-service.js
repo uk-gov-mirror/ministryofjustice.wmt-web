@@ -22,8 +22,11 @@ var getContractedHoursForWorkloadOwner
 var updateContractedHoursForWorkloadOwner
 var createWorkloadPointsRecalculationTask
 var getLatestIdsForWpRecalc
+var createCourtReportsCalculationTask
+var getLatestIdsForCourtReportsCalc
 
 var recalcIds = { workloadStagingId: 3, workloadReportId: 2 }
+var crReCalcIds = { courtReportsStagingId: 3, workloadReportId: 1 }
 
 beforeEach(function () {
   getContractedHoursForWorkloadOwner = sinon.stub()
@@ -31,6 +34,8 @@ beforeEach(function () {
   createWorkloadPointsRecalculationTask = sinon.stub()
   getBreadcrumbs = sinon.stub().returns(breadcrumbs)
   getLatestIdsForWpRecalc = sinon.stub().resolves(recalcIds)
+  createCourtReportsCalculationTask = sinon.stub()
+  getLatestIdsForCourtReportsCalc = sinon.stub().resolves(crReCalcIds)
   contractedHoursService =
     proxyquire('../../../app/services/contracted-hours-service',
       {
@@ -38,7 +43,9 @@ beforeEach(function () {
         './data/update-contracted-hours-for-workload-owner': updateContractedHoursForWorkloadOwner,
         './data/create-calculate-workload-points-task': createWorkloadPointsRecalculationTask,
         './data/get-latest-workload-staging-id-and-workload-report-id': getLatestIdsForWpRecalc,
-        './get-breadcrumbs': getBreadcrumbs
+        './get-breadcrumbs': getBreadcrumbs,
+        './data/create-court-reports-calculation-task': createCourtReportsCalculationTask,
+        './data/get-latest-court-reports-staging-id-and-workload-report-id': getLatestIdsForCourtReportsCalc
       })
 })
 
@@ -131,8 +138,8 @@ describe('services/contracted-hours-service', function () {
       return contractedHoursService.updateContractedHours(id, orgUnitConstant.OFFENDER_MANAGER.name, UPDATED_CONTRACTED_HOURS, workloadTypes.COURT_REPORTS)
       .then(function (result) {
         expect(updateContractedHoursForWorkloadOwner.calledWith(id, UPDATED_CONTRACTED_HOURS)).to.be.true //eslint-disable-line
-        expect(getLatestIdsForWpRecalc.calledWith(id)).to.be.false //eslint-disable-line
-        expect(createWorkloadPointsRecalculationTask.calledWith(3, 2)).to.be.false //eslint-disable-line
+        expect(getLatestIdsForCourtReportsCalc.calledWith(id)).to.be.true //eslint-disable-line
+        expect(createCourtReportsCalculationTask.calledWith(3, 1)).to.be.true //eslint-disable-line
       })
     })
 

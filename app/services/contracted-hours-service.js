@@ -1,7 +1,9 @@
 const getContractedHoursForWorkloadOwner = require('./data/get-contracted-hours-for-workload-owner')
 const updateContractedHoursForWorkloadOwner = require('./data/update-contracted-hours-for-workload-owner')
 const createWorkloadPointsRecalculationTask = require('./data/create-calculate-workload-points-task')
+const createCourtReportsCalculationTask = require('./data/create-court-reports-calculation-task')
 const getLatestIdsForWorkloadPointsRecalc = require('./data/get-latest-workload-staging-id-and-workload-report-id')
+const getLatestIdsForCourtReportsCalc = require('./data/get-latest-court-reports-staging-id-and-workload-report-id')
 const getBreadcrumbs = require('./get-breadcrumbs')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
@@ -42,7 +44,10 @@ module.exports.updateContractedHours = function (id, organisationLevel, hours, w
         return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
       })
     } else {
-      // TODO: kick off recalc of court-report-workload-points
+      return getLatestIdsForCourtReportsCalc(id)
+      .then(function (ids) {
+        return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
+      })
     }
   }).catch(function (err) {
     throw err

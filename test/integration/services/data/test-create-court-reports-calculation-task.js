@@ -16,23 +16,23 @@ var workloadReportId
 var batchSize = 3
 var task
 
-describe('/services/data/create-calculate-workload-points-task', function () {
+describe('/services/data/test-court-reports-calculation-task', function () {
   before(function () {
     return crDataHelper.addCourtReportWorkloadsForOffenderManager()
     .then(function (result) {
       inserts = result
       workloadReportId = inserts.filter((item) => item.table === 'workload_report')[0].id
-     
-          task = {
-            submitting_agent: 'WEB',
-            type: 'COURT-REPORTS-CALCULATION',
-            additional_data: JSON.stringify({
-              workloadBatch: { startingId: workloadId, batchSize: batchSize },
-              operationType: 'UPDATE'
-            }),
-            workload_report_id: workloadReportId,
-            status: 'PENDING'
-          }
+
+      task = {
+        submitting_agent: 'WEB',
+        type: 'COURT-REPORTS-CALCULATION',
+        additional_data: JSON.stringify({
+          workloadBatch: { startingId: workloadId, batchSize: batchSize },
+          operationType: 'UPDATE'
+        }),
+        workload_report_id: workloadReportId,
+        status: 'PENDING'
+      }
     })
   })
 
