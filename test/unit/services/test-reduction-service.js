@@ -25,6 +25,8 @@ var getReductionById
 var getReductions
 var reductionHelper
 var getLatestIdsForWpRecalc
+var createCourtReportsCalculationTask
+var getLatestIdsForCourtReportsCalc
 
 var newReductionId = 9
 var existingReductionId = 10
@@ -82,8 +84,10 @@ var reductionsByStatus = {
 }
 
 var latestWorkloadStagingId = 3
+var latestCourtReportsStagingId = 1
 var latestWorkloadReportId = 2
 var recalcIds = { workloadStagingId: latestWorkloadStagingId, workloadReportId: latestWorkloadReportId }
+var crRecalcIds = { courtReportsStagingId: latestCourtReportsStagingId, workloadReportId: latestWorkloadReportId }
 
 beforeEach(function () {
   addReductionStub = sinon.stub()
@@ -99,6 +103,8 @@ beforeEach(function () {
     getReductionsByStatus: sinon.stub().returns(reductionsByStatus)
   }
   getLatestIdsForWpRecalc = sinon.stub().resolves(recalcIds)
+  createCourtReportsCalculationTask = sinon.stub()
+  getLatestIdsForCourtReportsCalc = sinon.stub().resolves(crRecalcIds)
   reductionService =
     proxyquire('../../../app/services/reductions-service',
       {
@@ -112,7 +118,9 @@ beforeEach(function () {
         './data/get-reduction-reasons': getReferenceDataStub,
         './data/create-calculate-workload-points-task': createCalculateWorkloadTaskStub,
         './data/get-latest-workload-staging-id-and-workload-report-id': getLatestIdsForWpRecalc,
-        './data/get-reduction-by-id': getReductionById
+        './data/get-reduction-by-id': getReductionById,
+        './data/create-court-reports-calculation-task': createCourtReportsCalculationTask,
+        './data/get-latest-court-reports-staging-id-and-workload-report-id': getLatestIdsForCourtReportsCalc
       })
 })
 
@@ -187,13 +195,14 @@ describe('services/reductions-service', function () {
     })
 
     it('should add a new reduction when no valid reduction Id given and call create wpc task for court-reporter OM', function () {
+      createCourtReportsCalculationTask.resolves(1)
       addReductionStub.withArgs(workloadOwnerId, reduction).resolves(newReductionId)
       return reductionService.addReduction(workloadOwnerId, reduction, workloadTypes.COURT_REPORTS)
       .then(function (result) {
-        expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.false //eslint-disable-line
-        expect(createCalculateWorkloadTaskStub.calledWith(latestWorkloadStagingId, latestWorkloadReportId, 1)).to.be.false //eslint-disable-line
+        expect(getLatestIdsForCourtReportsCalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+        expect(createCourtReportsCalculationTask.calledWith(latestCourtReportsStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
         expect(addReductionStub.calledWith(workloadOwnerId, reduction)).to.be.true //eslint-disable-line
-        expect(result).to.equal(undefined)
+        expect(result).to.equal(1)
       })
     })
   })
@@ -211,15 +220,15 @@ describe('services/reductions-service', function () {
         })
     })
 
-    it('should update reduction and not create worker task when reduction Id given for court-reporter', function () {
-      createCalculateWorkloadTaskStub.resolves(1)
+    it('should update reduction and create worker task when reduction Id given for court-reporter', function () {
+      createCourtReportsCalculationTask.resolves(1)
       updateReductionStub.withArgs(existingReductionId, workloadOwnerId, reduction).resolves(existingReductionId)
       return reductionService.updateReduction(workloadOwnerId, existingReductionId, reduction, workloadTypes.COURT_REPORTS)
         .then(function (result) {
-          expect(getLatestIdsForWpRecalc.called).to.be.false //eslint-disable-line
-          expect(createCalculateWorkloadTaskStub.called).to.be.false //eslint-disable-line
+          expect(getLatestIdsForCourtReportsCalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+          expect(createCourtReportsCalculationTask.calledWith(latestCourtReportsStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
           expect(updateReductionStub.calledWith(existingReductionId, workloadOwnerId,reduction)).to.be.true //eslint-disable-line
-          expect(result).to.equal(undefined)
+          expect(result).to.equal(1)
         })
     })
   })
@@ -240,14 +249,14 @@ describe('services/reductions-service', function () {
 
     it('should update reduction status and create worker task when reduction Id given for court-reporter', function () {
       var newReductonStatus = reductionStatusType.ARCHIVED
-      createCalculateWorkloadTaskStub.resolves(1)
+      createCourtReportsCalculationTask.resolves(1)
       updateReductionStatusStub.withArgs(existingReductionId, newReductonStatus).resolves(existingReductionId)
       return reductionService.updateReductionStatus(workloadOwnerId, existingReductionId, newReductonStatus, workloadTypes.COURT_REPORTS)
       .then(function (result) {
-        expect(getLatestIdsForWpRecalc.called).to.be.false //eslint-disable-line
-        expect(createCalculateWorkloadTaskStub.called).to.be.false //eslint-disable-line
+        expect(getLatestIdsForCourtReportsCalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
+        expect(createCourtReportsCalculationTask.calledWith(latestCourtReportsStagingId, latestWorkloadReportId)).to.be.true //eslint-disable-line
         expect(updateReductionStatusStub.calledWith(existingReductionId, newReductonStatus)).to.be.true //eslint-disable-line
-        expect(result).to.equal(undefined)
+        expect(result).to.equal(1)
       })
     })
   })

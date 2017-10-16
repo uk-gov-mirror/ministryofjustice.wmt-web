@@ -12,6 +12,8 @@ const getBreadcrumbs = require('./get-breadcrumbs')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const reductionHelper = require('./helpers/reduction-helper')
 const workloadTypes = require('../../app/constants/workload-type')
+const createCourtReportsCalculationTask = require('./data/create-court-reports-calculation-task')
+const getLatestIdsForCourtReportsCalc = require('./data/get-latest-court-reports-staging-id-and-workload-report-id')
 
 module.exports.getReductions = function (id, organisationLevel, workloadType) {
   var result = {}
@@ -56,13 +58,12 @@ module.exports.addReduction = function (id, reduction, workloadType) {
       return getLatestIdsForWorkloadPointsRecalc(id)
       .then(function (ids) {
         return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
-        .then(function (result) {
-          return result
-        })
       })
     } else {
-
-      // TODO kick off new court reports workload task
+      return getLatestIdsForCourtReportsCalc(id)
+      .then(function (ids) {
+        return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
+      })
     }
   })
 }
@@ -74,13 +75,12 @@ module.exports.updateReduction = function (id, reductionId, reduction, workloadT
       return getLatestIdsForWorkloadPointsRecalc(id)
       .then(function (ids) {
         return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
-        .then(function (result) {
-          return result
-        })
       })
     } else {
-
-      // TODO kick off new court reports workload task
+      return getLatestIdsForCourtReportsCalc(id)
+      .then(function (ids) {
+        return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
+      })
     }
   })
 }
@@ -92,9 +92,11 @@ module.exports.updateReductionStatus = function (id, reductionId, reductionStatu
       return getLatestIdsForWorkloadPointsRecalc(id)
       .then(function (ids) {
         return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
-        .then(function (result) {
-          return result
-        })
+      })
+    } else {
+      return getLatestIdsForCourtReportsCalc(id)
+      .then(function (ids) {
+        return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
       })
     }
   })
