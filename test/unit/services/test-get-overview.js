@@ -17,30 +17,14 @@ const OVERVIEW = {
   cases: '2',
   hours: '3',
   reduction: '4',
-  contractedHours: 37,
-  defaultContractedHoursPo: 3,
-  defaultContractedHoursPso: 0
+  contractedHours: 37
 }
 const ORGANISATION_OVERVIEWS = [
   Object.assign({}, OVERVIEW, {capacityPercentage: 80}), Object.assign({}, OVERVIEW, {capacityPercentage: 80})
 ]
 
-var ZERO_AVAILABLE_POINTS_OVERVIEW = {
-  grade: 'PO',
-  teamId: '1',
-  teamName: 'Medway',
-  availablePoints: 0,
-  totalPoints: 40,
-  cases: '2',
-  hours: '3',
-  reduction: '4',
-  contractedHours: 37,
-  defaultContractedHoursPo: 3,
-  defaultContractedHoursPso: 0
-}
-
 const ZERO_AVAILABLE_POINTS_OVERVIEWS = [
-  Object.assign({}, ZERO_AVAILABLE_POINTS_OVERVIEW, {capacity: 0})
+  Object.assign({}, OVERVIEW, {capacity: 0, availablePoints: 0})
 ]
 
 var expectedOverview = Object.assign({}, OVERVIEW, {capacity: 80})
@@ -142,6 +126,16 @@ describe('services/get-overview', function () {
       assert(!getIndividualOverview.called)
       assert(getOrganisationOverview.called)
       expect(result.overviewDetails).to.eql(ZERO_AVAILABLE_POINTS_OVERVIEWS)
+    })
+  })
+
+  it('should 0 contracted hours if there are indeed 0 contracted hours', function () {
+    var orgName = orgUnitConstant.REGION.name
+    var zeroContractedHours = Object.assign({}, OVERVIEW, {contractedHours: 0})
+    getOrganisationOverview.withArgs(id, orgName).resolves([zeroContractedHours])
+
+    return getOverview(id, orgName).then(function (result) {
+      expect(result.overviewDetails).to.eql([zeroContractedHours])
     })
   })
 })
