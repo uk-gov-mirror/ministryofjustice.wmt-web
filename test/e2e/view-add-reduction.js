@@ -38,7 +38,6 @@ describe('View adding a new reduction', () => {
       browser.setValue('#redStartMonth', '2')
       browser.setValue('#redStartYear', '2018')
       browser.setValue('#notes', 'New note')
-      browser.submitForm('#reductionForm')
     })
   })
 

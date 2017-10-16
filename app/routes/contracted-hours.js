@@ -1,7 +1,6 @@
 const contractedHoursService = require('../services/contracted-hours-service')
 const getSubNav = require('../services/get-sub-nav')
 const organisationUnitConstants = require('../constants/organisation-unit')
-const workloadTypeContants = require('../constants/workload-type')
 const ErrorHandler = require('../services/validators/error-handler')
 const FieldValidator = require('../services/validators/field-validator')
 const ValidationError = require('../services/errors/validation-error')
@@ -9,6 +8,7 @@ const ERROR_MESSAGES = require('../services/validators/validation-error-messages
 const authorisation = require('../authorisation')
 const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
+const workloadTypeValidator = require('../services/validators/workload-type-validator')
 const Unathorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 
@@ -32,9 +32,7 @@ module.exports = function (router) {
     var id = req.params.id
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeContants.COURT_REPORTS && workloadType !== workloadTypeContants.PROBATION) {
-      return res.sendStatus(404)
-    }
+    workloadTypeValidator.validate(workloadType)
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       return res.sendStatus(404)
@@ -77,9 +75,7 @@ module.exports = function (router) {
     var updatedHours = req.body.hours
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeContants.COURT_REPORTS && workloadType !== workloadTypeContants.PROBATION) {
-      return res.sendStatus(404)
-    }
+    workloadTypeValidator.validate(workloadType)
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       return res.sendStatus(404)
@@ -110,11 +106,7 @@ module.exports = function (router) {
 
     return contractedHoursService.updateContractedHours(id, organisationLevel, updatedHours, workloadType)
     .then(function () {
-      var linkPrefix = ''
-      if (workloadType === workloadTypeContants.COURT_REPORTS) {
-        linkPrefix = '/court-reports'
-      }
-      return res.redirect(linkPrefix + '/offender-manager/' + id + '/contracted-hours?hoursUpdatedSuccess=true')
+      return res.redirect('/' + workloadType + '/offender-manager/' + id + '/contracted-hours?hoursUpdatedSuccess=true')
     }).catch(function (error) {
       next(error)
     })

@@ -70,7 +70,7 @@ describe('services/contracted-hours-service', function () {
     })
   })
 
-  describe('updateContracedHours - standard OM', function () {
+  describe('updateContractedHours - standard OM', function () {
     it('should call update-contracted-hours-for-workload-owner with correct parameters', function () {
       updateContractedHoursForWorkloadOwner.withArgs(id, UPDATED_CONTRACTED_HOURS).resolves(1)
       return contractedHoursService.updateContractedHours(id, orgUnitConstant.OFFENDER_MANAGER.name, UPDATED_CONTRACTED_HOURS, workloadTypes.PROBATION)

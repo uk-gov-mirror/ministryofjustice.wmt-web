@@ -18,7 +18,7 @@ module.exports = function (id, organisationLevel, workloadType = workloadTypeCon
   }
 
   do {
-    breadcrumbs.push(new Link(tree[reference].name, linkGenerator.fromReference(reference, workloadType)))
+    breadcrumbs.push(new Link(tree[reference].name, linkGenerator.fromReferenceAndWorkloadType(reference, workloadType)))
     reference = tree[reference].parent
   } while (reference !== undefined)
 

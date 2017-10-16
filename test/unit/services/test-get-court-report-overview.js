@@ -14,9 +14,9 @@ const OVERVIEW = {
   teamName: 'Medway',
   reduction: '4',
   contractedHours: 37,
-  totalCasesSdrs: 11,
-  totalCasesFdrs: 12,
-  totalCasesOralReports: 13
+  totalSdrs: 11,
+  totalFdrs: 12,
+  totalOralReports: 13
 }
 
 const ORGANISATION_OVERVIEW = [

@@ -17,7 +17,7 @@ describe('View contracted hours for court reporter', function () {
     })
   })
 
-  it('should navigate to the workload owner contracted-hours page', function () {
+  it('should navigate to the court reporter contracted-hours page', function () {
     return browser.url(workloadOwnerDefaultUrl + '/contracted-hours')
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')

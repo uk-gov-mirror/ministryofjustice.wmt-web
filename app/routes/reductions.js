@@ -9,7 +9,7 @@ const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
 const Unathorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
-const workloadTypeConstants = require('../constants/workload-type')
+const workloadTypeValidator = require('../services/validators/workload-type-validator')
 
 module.exports = function (router) {
   router.get('/:workloadType/:organisationLevel/:id/reductions', function (req, res, next) {
@@ -31,9 +31,7 @@ module.exports = function (router) {
     var id = req.params.id
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS && workloadType !== workloadTypeConstants.PROBATION) {
-      return res.sendStatus(404)
-    }
+    workloadTypeValidator.validate(workloadType)
 
     var successText = getStatusText(req)
 
@@ -79,9 +77,7 @@ module.exports = function (router) {
     var id = parseInt(req.params.id)
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS && workloadType !== workloadTypeConstants.PROBATION) {
-      return res.sendStatus(404)
-    }
+    workloadTypeValidator.validate(workloadType)
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -130,9 +126,7 @@ module.exports = function (router) {
     var reductionId = parseInt(req.query.reductionId)
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS && workloadType !== workloadTypeConstants.PROBATION) {
-      return res.sendStatus(404)
-    }
+    workloadTypeValidator.validate(workloadType)
 
     reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
       .then(function (result) {
@@ -174,9 +168,7 @@ module.exports = function (router) {
     var organisationLevel = req.params.organisationLevel
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS && workloadType !== workloadTypeConstants.PROBATION) {
-      return res.sendStatus(404)
-    }
+    workloadTypeValidator.validate(workloadType)
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -246,9 +238,7 @@ module.exports = function (router) {
     var organisationLevel = req.params.organisationLevel
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS && workloadType !== workloadTypeConstants.PROBATION) {
-      return res.sendStatus(404)
-    }
+    workloadTypeValidator.validate(workloadType)
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
@@ -315,9 +305,7 @@ module.exports = function (router) {
     var organisationLevel = req.params.organisationLevel
     var workloadType = req.params.workloadType
 
-    if (workloadType !== undefined && workloadType !== workloadTypeConstants.COURT_REPORTS && workloadType !== workloadTypeConstants.PROBATION) {
-      return res.sendStatus(404)
-    }
+    workloadTypeValidator.validate(workloadType)
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')

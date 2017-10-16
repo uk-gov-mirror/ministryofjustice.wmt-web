@@ -17,22 +17,22 @@
   <div class="column-two-thirds">
     <table>
     <tbody>
-        <tr>
+      <tr>
         <th scope="row">Grade</th>
         <td class="sln-grade numeric">{{ overviewDetails[0].grade }}</td>
-        </tr>
-        <tr>
+      </tr>
+      <tr>
         <th scope="row">Team</th>
         <td class="numeric"><a href="/court-reports/team/{{ overviewDetails[0].linkId }}">{{ overviewDetails[0].name }}</a></td>
-        </tr>
-        <tr>
+      </tr>
+      <tr>
         <th scope="row">Contracted hours</th>
         <td class="numeric">{{ overviewDetails[0].contractedHours }}</td>
-        </tr>
-        <tr>
+      </tr>
+      <tr>
         <th scope="row">Reduction</th>
         <td class="numeric">{{ overviewDetails[0].reduction }}</td>
-        </tr>
+      </tr>
     </tbody>
     </table>
   </div>
@@ -47,7 +47,7 @@
           <th id="grade">Grade</th>
           <th id="total_sdrs">Standard Delivery Reports</th>
           <th id="total_fdrs">Fast Delivery Reports</th>
-          <th id="total_oral_reports">Fast Delivery Reports</th>
+          <th id="total_oral_reports">Oral Reports</th>
           <th id="contracted_hours">Contracted Hours</th>
         </tr>
       </thead>
@@ -56,9 +56,9 @@
         <tr>
           <td headers="name"><a href="/court-reports/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade">{{ member.grade }}</td>
-          <td headers="total_sdrs">{{ member.totalCasesSdrs }}</td>
-          <td headers="total_fdrs">{{ member.totalCasesFdrs }}</td>
-          <td headers="total_oral_reports">{{ member.totalCasesOralReports }}</td>
+          <td headers="total_sdrs">{{ member.totalSdrs }}</td>
+          <td headers="total_fdrs">{{ member.totalFdrs }}</td>
+          <td headers="total_oral_reports">{{ member.totalOralReports }}</td>
           <td headers="contracted_hours">{{ member.contractedHours }}</td>
         </tr> 
         {% endfor %}

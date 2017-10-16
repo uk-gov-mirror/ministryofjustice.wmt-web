@@ -38,33 +38,31 @@ before(function () {
 })
 
 describe('court reports overview route', function () {
-  it('should respond with 200 when offender-manager and id included in URL', function () {
+  before(function () {
     getCourtReportOverview.resolves(OVERVIEW)
+  })
+
+  it('should respond with 200 when offender-manager and id included in URL', function () {
     return supertest(app).get(OM_OVERVIEW_URL).expect(200)
   })
 
   it('should respond with 200 when ldu and id included in URL', function () {
-    getCourtReportOverview.resolves(OVERVIEW)
     return supertest(app).get(LDU_OVERVIEW_URL).expect(200)
   })
 
   it('should respond with 200 when region and id included in URL', function () {
-    getCourtReportOverview.resolves(OVERVIEW)
     return supertest(app).get(REGION_OVERVIEW_URL).expect(200)
   })
 
   it('should respond with 200 when national and id included in URL', function () {
-    getCourtReportOverview.resolves(OVERVIEW)
     return supertest(app).get(HMPPS_OVERVIEW_URL).expect(200)
   })
 
   it('should respond with 500 when offender-manager, but no id, included in URL', function () {
-    getCourtReportOverview.resolves(OVERVIEW)
     return supertest(app).get(OM_MISSING_ID_URL).expect(500)
   })
 
   it('should call the getSubNav and getCourtReportOverview with the correct parameters', function () {
-    getCourtReportOverview.resolves(OVERVIEW)
     return supertest(app)
         .get(OM_OVERVIEW_URL)
         .expect(200)

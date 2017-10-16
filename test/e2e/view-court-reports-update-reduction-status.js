@@ -1,14 +1,14 @@
 const expect = require('chai').expect
-const authenticationHerlp = require('../helpers/routes/authentication-helper')
+const authenticationHelper = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/court-reports-aggregated-data-helper')
 
 var offenderManagerId
 var reductionId
 var reductionUrl
 
-describe('View adding a new reduction court-reports', () => {
+describe('View update status of reduction court-reports', () => {
   before(function () {
-    authenticationHerlp.login(authenticationHerlp.users.Manager)
+    authenticationHelper.login(authenticationHelper.users.Manager)
     return dataHelper.getAnyExistingWorkloadOwnerIdWithActiveReduction()
       .then(function (results) {
         offenderManagerId = results.workloadOwnerId
@@ -58,6 +58,6 @@ describe('View adding a new reduction court-reports', () => {
   })
 
   after(function () {
-    authenticationHerlp.logout()
+    authenticationHelper.logout()
   })
 })

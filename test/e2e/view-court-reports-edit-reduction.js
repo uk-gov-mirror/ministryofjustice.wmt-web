@@ -6,7 +6,7 @@ var offenderManagerId
 var reductionId
 var reductionUrl
 
-describe('View adding a new reduction for court-reporters', () => {
+describe('View editing a new reduction for court-reporters', () => {
   before(function () {
     authenticationHelper.login(authenticationHelper.users.Manager)
     return dataHelper.getAnyExistingWorkloadOwnerIdWithActiveReduction()
