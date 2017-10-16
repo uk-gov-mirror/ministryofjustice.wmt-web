@@ -146,11 +146,9 @@ var addWorkloadReports = function (inserts) {
   return getCurrentActiveWorkloadReportId()
   .then(function (activeId) {
     var workloadReports = [
-      { effective_from: '2017-01-01', effective_to: '2017-02-01' }
+      { effective_from: '2017-01-01', effective_to: '2017-02-01' },
+      { effective_from: '2017-02-01' }
     ]
-    if (activeId === undefined) {
-      workloadReports.push({ effective_from: '2017-02-01' })
-    }
     return knex('workload_report').returning('id').insert(workloadReports)
   })
   .then(function (ids) {
@@ -498,18 +496,3 @@ var getMaxStagingId = function () {
     })
 }
 
-// TODO: Think about using this - update!
-var getCurrentActiveWorkloadReportId = function () {
-  return knex('workload_report')
-    .select('id')
-    .whereNotNull('effective_from')
-    .whereNull('effective_to')
-    .where('id', 123456)
-    .then(function (results) {
-      if (results === undefined || results[0] === undefined) {
-        return undefined
-      } else {
-        return results[0].id
-      }
-    })
-}

@@ -25,7 +25,6 @@ describe('services/data/get-capacity-breakdown', function () {
       })
   })
 
-  // TODO: Could be worth showing it selecting for more than one WO
   it('should retrieve all workload owners\' active workloads for a given team', function () {
     return getCapacityBreakdown(inserts.filter((item) => item.table === 'team')[0].id, 'team')
       .then(function (results) {
