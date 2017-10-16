@@ -74,9 +74,8 @@ module.exports = function (router) {
 
     return reductionsService.getAddReductionsRefData(id, organisationLevel)
       .then(function (result) {
-        var errors = null
-        //req.session.addReductionErrors
-        //delete req.session.addReductionErrors
+        var errors = req.session.addReductionErrors
+        delete req.session.addReductionErrors
         return res.render('add-reduction', {
           breadcrumbs: result.breadcrumbs,
           linkId: id,
