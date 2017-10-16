@@ -5,12 +5,14 @@ const expect = require('chai').expect
 const sinon = require('sinon')
 require('sinon-bluebird')
 
+const workloadTypes = require('../../../app/constants/workload-type')
+
 // test data
-const OFFENDER_MANAGER_CAPACITY_URI = '/probation/offender-manager/1/caseload-capacity'
-const REGION_CAPACITY_URI = '/probation/region/1/caseload-capacity'
-const REGION_CAPACITY_URI_MISSING_ID = '/probation/region/caseload-capacity'
-const TEAM_CAPACITY_URI = '/probation/team/1/caseload-capacity'
-const LDU_CAPACITY_URI = '/probation/ldu/1/caseload-capacity'
+const OFFENDER_MANAGER_CAPACITY_URI = '/' + workloadTypes.PROBATION + '/offender-manager/1/caseload-capacity'
+const REGION_CAPACITY_URI = '/' + workloadTypes.PROBATION + '/region/1/caseload-capacity'
+const REGION_CAPACITY_URI_MISSING_ID = '/' + workloadTypes.PROBATION + '/region/caseload-capacity'
+const TEAM_CAPACITY_URI = '/' + workloadTypes.PROBATION + '/team/1/caseload-capacity'
+const LDU_CAPACITY_URI = '/' + workloadTypes.PROBATION + '/ldu/1/caseload-capacity'
 
 const CAPACITY_FROM_DAY = 'capacity-from-day='
 const CAPACITY_FROM_MONTH = 'capacity-from-month='

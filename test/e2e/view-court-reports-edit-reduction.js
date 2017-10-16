@@ -1,6 +1,7 @@
 const expect = require('chai').expect
 const authenticationHelper = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/court-reports-aggregated-data-helper')
+const workloadTypes = require('../../app/constants/workload-type')
 
 var offenderManagerId
 var reductionId
@@ -13,7 +14,7 @@ describe('View editing a new reduction for court-reporters', () => {
       .then(function (results) {
         offenderManagerId = results.workloadOwnerId
         reductionId = results.reductionId
-        reductionUrl = '/court-reports/offender-manager/' + offenderManagerId + '/edit-reduction?reductionId=' + reductionId
+        reductionUrl = '/' + workloadTypes.COURT_REPORTS + '/offender-manager/' + offenderManagerId + '/edit-reduction?reductionId=' + reductionId
       }).then(function () {
         return browser.url(reductionUrl).waitForExist('.breadcrumbs')
       })

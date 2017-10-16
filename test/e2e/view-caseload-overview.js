@@ -1,6 +1,7 @@
 const expect = require('chai').expect
 const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
+const workloadTypes = require('../../app/constants/workload-type')
 
 var workloadOwnerIds = []
 var workloadOwnerId
@@ -18,11 +19,11 @@ describe('View overview', function () {
       .then(function (results) {
         workloadOwnerIds = results
         workloadOwnerId = workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
-        workloadOwnerDefaultUrl = '/probation/offender-manager/' + workloadOwnerId
-        teamDefaultUrl = '/probation/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id
-        lduDefaultUrl = '/probation/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
-        regionDefaultUrl = '/probation/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
-        nationalDefaultUrl = '/probation/hmpps/0'
+        workloadOwnerDefaultUrl = '/' + workloadTypes.PROBATION + '/offender-manager/' + workloadOwnerId
+        teamDefaultUrl = '/' + workloadTypes.PROBATION + '/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id
+        lduDefaultUrl = '/' + workloadTypes.PROBATION + '/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
+        regionDefaultUrl = '/' + workloadTypes.PROBATION + '/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
+        nationalDefaultUrl = '/' + workloadTypes.PROBATION + '/hmpps/0'
         return results
       })
       .then(function (builtInserts) {

@@ -1,6 +1,7 @@
 const expect = require('chai').expect
 const authenticationHelper = require('../helpers/routes/authentication-helper')
 const crDataHelper = require('../helpers/data/court-reports-aggregated-data-helper')
+const workloadTypes = require('../../app/constants/workload-type')
 
 var workloadOwnerIds = []
 var workloadOwnerId
@@ -13,7 +14,7 @@ describe('View contracted hours for court reporter', function () {
     .then(function (results) {
       workloadOwnerIds = results
       workloadOwnerId = workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
-      workloadOwnerDefaultUrl = '/court-reports/offender-manager/' + workloadOwnerId
+      workloadOwnerDefaultUrl = '/' + workloadTypes.COURT_REPORTS + '/offender-manager/' + workloadOwnerId
     })
   })
 

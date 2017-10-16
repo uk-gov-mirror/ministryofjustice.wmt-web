@@ -8,12 +8,12 @@ require('sinon-bluebird')
 const workloadType = require('../../../app/constants/workload-type')
 
 const COOKIES = [ 'session=eyJub3dJbk1pbnV0ZXMiOjI0OTA3MzgxLjEzODEzMzMzMiwiZG9iRW5jb2RlZCI6IjExNDAxNzYwNyIsInJlbGF0aW9uc2hpcCI6InI0IiwiYmVuZWZpdCI6ImIxIiwicmVmZXJlbmNlSWQiOiIzYjI0NzE3YWI5YTI0N2E3MGIiLCJkZWNyeXB0ZWRSZWYiOiIxUjY0RVROIiwiY2xhaW1UeXBlIjoiZmlyc3QtdGltZSIsImFkdmFuY2VPclBhc3QiOiJwYXN0IiwiY2xhaW1JZCI6OH0=' ]
-const OM_CONTRACTED_HOURS_URL = '/probation/offender-manager/1/contracted-hours'
-const LDU_CONTRACTED_HOURS_URL = '/probation/ldu/1/contracted-hours'
-const REGION_CONTRACTED_HOURS_URL = '/probation/region/1/contracted-hours'
-const HMPPS_CONTRACTED_HOURS_URL = '/probation/hmpps/1/contracted-hours'
+const OM_CONTRACTED_HOURS_URL = '/' + workloadType.PROBATION + '/offender-manager/1/contracted-hours'
+const LDU_CONTRACTED_HOURS_URL = '/' + workloadType.PROBATION + '/ldu/1/contracted-hours'
+const REGION_CONTRACTED_HOURS_URL = '/' + workloadType.PROBATION + '/region/1/contracted-hours'
+const HMPPS_CONTRACTED_HOURS_URL = '/' + workloadType.PROBATION + '/hmpps/1/contracted-hours'
 
-const OM_MISSING_ID_URL = '/probation/offender-manager/contracted-hours'
+const OM_MISSING_ID_URL = '/' + workloadType.PROBATION + '/offender-manager/contracted-hours'
 
 const CONTRACTED_HOURS = {
   title: 'Title',

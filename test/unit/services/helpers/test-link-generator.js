@@ -5,23 +5,23 @@ const workloadType = require('../../../../app/constants/workload-type')
 describe('services/helpers/link-generator', function () {
   describe('fromReferenceAndWorkloadType', function () {
     it('should return the correct link for each organisational unit, including ID', function () {
-      expect(linkGenerator.fromReferenceAndWorkloadType('R1', workloadType.PROBATION)).to.eql('/probation/region/1')
-      expect(linkGenerator.fromReferenceAndWorkloadType('L34', workloadType.PROBATION)).to.eql('/probation/ldu/34')
-      expect(linkGenerator.fromReferenceAndWorkloadType('T178', workloadType.PROBATION)).to.eql('/probation/team/178')
+      expect(linkGenerator.fromReferenceAndWorkloadType('R1', workloadType.PROBATION)).to.eql('/' + workloadType.PROBATION + '/region/1')
+      expect(linkGenerator.fromReferenceAndWorkloadType('L34', workloadType.PROBATION)).to.eql('/' + workloadType.PROBATION + '/ldu/34')
+      expect(linkGenerator.fromReferenceAndWorkloadType('T178', workloadType.PROBATION)).to.eql('/' + workloadType.PROBATION + '/team/178')
     })
 
     it('should return the correct link for each organisational unit, including ID for court-reports', function () {
-      expect(linkGenerator.fromReferenceAndWorkloadType('R1', workloadType.COURT_REPORTS)).to.eql('/court-reports/region/1')
-      expect(linkGenerator.fromReferenceAndWorkloadType('L34', workloadType.COURT_REPORTS)).to.eql('/court-reports/ldu/34')
-      expect(linkGenerator.fromReferenceAndWorkloadType('T178', workloadType.COURT_REPORTS)).to.eql('/court-reports/team/178')
+      expect(linkGenerator.fromReferenceAndWorkloadType('R1', workloadType.COURT_REPORTS)).to.eql('/' + workloadType.COURT_REPORTS + '/region/1')
+      expect(linkGenerator.fromReferenceAndWorkloadType('L34', workloadType.COURT_REPORTS)).to.eql('/' + workloadType.COURT_REPORTS + '/ldu/34')
+      expect(linkGenerator.fromReferenceAndWorkloadType('T178', workloadType.COURT_REPORTS)).to.eql('/' + workloadType.COURT_REPORTS + '/team/178')
     })
 
     it('should return the correct link for national level (no ID)', function () {
-      expect(linkGenerator.fromReferenceAndWorkloadType('N', workloadType.PROBATION)).to.eql('/probation/hmpps/0')
+      expect(linkGenerator.fromReferenceAndWorkloadType('N', workloadType.PROBATION)).to.eql('/' + workloadType.PROBATION + '/hmpps/0')
     })
 
     it('should return the correct link for national level (no ID) for court-reports', function () {
-      expect(linkGenerator.fromReferenceAndWorkloadType('N', workloadType.COURT_REPORTS)).to.eql('/court-reports/hmpps/0')
+      expect(linkGenerator.fromReferenceAndWorkloadType('N', workloadType.COURT_REPORTS)).to.eql('/' + workloadType.COURT_REPORTS + '/hmpps/0')
     })
 
     it('should throw an error when passed undefined reference', function () {
@@ -45,16 +45,16 @@ describe('services/helpers/link-generator', function () {
   })
   describe('fromIdAndNameAndWorkloadType', function () {
     it('should generate a link based on the id and name supplied', function () {
-      expect(linkGenerator.fromIdAndNameAndWorkloadType(1, 'offender-manager', workloadType.PROBATION)).to.eql('/probation/offender-manager/1')
+      expect(linkGenerator.fromIdAndNameAndWorkloadType(1, 'offender-manager', workloadType.PROBATION)).to.eql('/' + workloadType.PROBATION + '/offender-manager/1')
     })
 
     it('should generate a link based on the id and name supplied for court-reports', function () {
-      expect(linkGenerator.fromIdAndNameAndWorkloadType(1, 'offender-manager', workloadType.COURT_REPORTS)).to.eql('/court-reports/offender-manager/1')
+      expect(linkGenerator.fromIdAndNameAndWorkloadType(1, 'offender-manager', workloadType.COURT_REPORTS)).to.eql('/' + workloadType.COURT_REPORTS + '/offender-manager/1')
     })
 
     it('should return no trailing slashes when an empty id is supplied', function () {
-      expect(linkGenerator.fromIdAndNameAndWorkloadType(undefined, 'hmpps', workloadType.PROBATION)).to.eql('/probation/hmpps/0')
-      expect(linkGenerator.fromIdAndNameAndWorkloadType('', 'hmpps', workloadType.PROBATION)).to.eql('/probation/hmpps/0')
+      expect(linkGenerator.fromIdAndNameAndWorkloadType(undefined, 'hmpps', workloadType.PROBATION)).to.eql('/' + workloadType.PROBATION + '/hmpps/0')
+      expect(linkGenerator.fromIdAndNameAndWorkloadType('', 'hmpps', workloadType.PROBATION)).to.eql('/' + workloadType.PROBATION + '/hmpps/0')
     })
 
     it('should throw an error when passed an invalid name', function () {

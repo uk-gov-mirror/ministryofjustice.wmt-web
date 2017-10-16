@@ -1,6 +1,7 @@
 const expect = require('chai').expect
 const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
+const workloadTypes = require('../../app/constants/workload-type')
 
 var offenderManagerId
 var offenderManagerUrl
@@ -13,9 +14,9 @@ describe('View adding a new reduction', () => {
     return dataHelper.getAnyExistingWorkloadOwnerIdWithActiveReduction()
       .then(function (results) {
         offenderManagerId = results.workloadOwnerId
-        offenderManagerUrl = '/probation/offender-manager/' + offenderManagerId + '/reductions'
+        offenderManagerUrl = '/' + workloadTypes.PROBATION + '/offender-manager/' + offenderManagerId + '/reductions'
         reductionId = results.reductionId
-        reductionUrl = '/probation/offender-manager/' + offenderManagerId + '/edit-reduction?reductionId=' + reductionId
+        reductionUrl = '/' + workloadTypes.PROBATION + '/offender-manager/' + offenderManagerId + '/edit-reduction?reductionId=' + reductionId
       }).then(function () {
         return browser.url(offenderManagerUrl).waitForExist('.breadcrumbs')
       })

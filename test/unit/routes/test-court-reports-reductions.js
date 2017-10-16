@@ -10,17 +10,17 @@ const workloadType = require('../../../app/constants/workload-type')
 const sinon = require('sinon')
 require('sinon-bluebird')
 
-const GET_REDUCTIONS_URL = '/court-reports/offender-manager/1/reductions'
-const TEAM_GET_REDUCTIONS_URL = '/court-reports/team/1/reductions'
-const INVALID_GET_REDUCTIONS_URL = '/court-reports/offender-manager/reductions'
-const ADD_REDUCTION_PAGE_URL = '/court-reports/offender-manager/1/add-reduction'
-const TEAM_ADD_REDUCTION_PAGE_URL = '/court-reports/team/1/add-reduction'
-const INVALID_ADD_REDUCTION_PAGE_URL = '/court-reports/offender-manager/add-reduction'
-const ADD_REDUCTION_POST_URL = '/court-reports/offender-manager/1/add-reduction'
-const EDIT_REDUCTION_PAGE_URL = '/court-reports/offender-manager/1/edit-reduction'
-const TEAM_EDIT_REDUCTION_PAGE_URL = '/court-reports/team/1/edit-reduction?reductionId=123'
-const INVALID_EDIT_REDUCTION_PAGE_URL = '/court-reports/team//edit-reduction?reductionId=123'
-const EDIT_REDUCTION_POST_URL = '/court-reports/offender-manager/1/edit-reduction'
+const GET_REDUCTIONS_URL = '/' + workloadType.COURT_REPORTS + '/offender-manager/1/reductions'
+const TEAM_GET_REDUCTIONS_URL = '/' + workloadType.COURT_REPORTS + '/team/1/reductions'
+const INVALID_GET_REDUCTIONS_URL = '/' + workloadType.COURT_REPORTS + '/offender-manager/reductions'
+const ADD_REDUCTION_PAGE_URL = '/' + workloadType.COURT_REPORTS + '/offender-manager/1/add-reduction'
+const TEAM_ADD_REDUCTION_PAGE_URL = '/' + workloadType.COURT_REPORTS + '/team/1/add-reduction'
+const INVALID_ADD_REDUCTION_PAGE_URL = '/' + workloadType.COURT_REPORTS + '/offender-manager/add-reduction'
+const ADD_REDUCTION_POST_URL = '/' + workloadType.COURT_REPORTS + '/offender-manager/1/add-reduction'
+const EDIT_REDUCTION_PAGE_URL = '/' + workloadType.COURT_REPORTS + '/offender-manager/1/edit-reduction'
+const TEAM_EDIT_REDUCTION_PAGE_URL = '/' + workloadType.COURT_REPORTS + '/team/1/edit-reduction?reductionId=123'
+const INVALID_EDIT_REDUCTION_PAGE_URL = '/' + workloadType.COURT_REPORTS + '/team//edit-reduction?reductionId=123'
+const EDIT_REDUCTION_POST_URL = '/' + workloadType.COURT_REPORTS + '/offender-manager/1/edit-reduction'
 
 const getReductionNoTextResult = {
   title: 'Title',
@@ -221,7 +221,7 @@ describe('court-reports reductions route', function () {
       return superTest(app)
       .post(ADD_REDUCTION_POST_URL)
       .send(successDataToPost)
-      .expect(302, 'Found. Redirecting to /court-reports/offender-manager/1/reductions?success=true')
+      .expect(302, 'Found. Redirecting to /' + workloadType.COURT_REPORTS + '/offender-manager/1/reductions?success=true')
       .then(function (results) {
         expect(reductionsService.addReduction.called).to.be.eql(true)
       })
@@ -246,7 +246,7 @@ describe('court-reports reductions route', function () {
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(successDataToPost)
-        .expect(302, 'Found. Redirecting to /court-reports/offender-manager/1/reductions?edited=true')
+        .expect(302, 'Found. Redirecting to /' + workloadType.COURT_REPORTS + '/offender-manager/1/reductions?edited=true')
         .then(function (results) {
           expect(reductionsService.updateReduction.called).to.be.eql(true)
         })

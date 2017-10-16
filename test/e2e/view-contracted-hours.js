@@ -1,6 +1,7 @@
 const expect = require('chai').expect
 const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
+const workloadTypes = require('../../app/constants/workload-type')
 
 var workloadOwnerIds = []
 var workloadOwnerId
@@ -13,7 +14,7 @@ describe('View contracted hours', function () {
       .then(function (results) {
         workloadOwnerIds = results
         workloadOwnerId = workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
-        workloadOwnerDefaultUrl = '/probation/offender-manager/' + workloadOwnerId
+        workloadOwnerDefaultUrl = '/' + workloadTypes.PROBATION + '/offender-manager/' + workloadOwnerId
       }).then(function () {
         return browser.url(workloadOwnerDefaultUrl + '/contracted-hours').waitForExist('.breadcrumbs')
       })

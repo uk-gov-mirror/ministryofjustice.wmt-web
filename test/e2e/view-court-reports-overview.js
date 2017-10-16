@@ -2,6 +2,7 @@ const expect = require('chai').expect
 const authenticationHelper = require('../helpers/routes/authentication-helper')
 const crDataHelper = require('../helpers/data/court-reports-aggregated-data-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
+const workloadTypes = require('../../app/constants/workload-type')
 
 var workloadOwnerId
 var workloadOwnerGrade
@@ -17,11 +18,11 @@ describe('View court-reports overview', function () {
     return crDataHelper.selectIdsForCourtReporterWorkloadOwner()
       .then(function (results) {
         workloadOwnerId = results.filter((item) => item.table === 'workload_owner')[0].id
-        workloadOwnerDefaultUrl = '/court-reports/offender-manager/' + workloadOwnerId
-        teamDefaultUrl = '/court-reports/team/' + results.filter((item) => item.table === 'team')[0].id
-        lduDefaultUrl = '/court-reports/ldu/' + results.filter((item) => item.table === 'ldu')[0].id
-        regionDefaultUrl = '/court-reports/region/' + results.filter((item) => item.table === 'region')[0].id
-        nationalDefaultUrl = '/court-reports/hmpps/0'
+        workloadOwnerDefaultUrl = '/' + workloadTypes.COURT_REPORTS + '/offender-manager/' + workloadOwnerId
+        teamDefaultUrl = '/' + workloadTypes.COURT_REPORTS + '/team/' + results.filter((item) => item.table === 'team')[0].id
+        lduDefaultUrl = '/' + workloadTypes.COURT_REPORTS + '/ldu/' + results.filter((item) => item.table === 'ldu')[0].id
+        regionDefaultUrl = '/' + workloadTypes.COURT_REPORTS + '/region/' + results.filter((item) => item.table === 'region')[0].id
+        nationalDefaultUrl = '/' + workloadTypes.COURT_REPORTS + '/hmpps/0'
         return results
       })
       .then(function (builtInserts) {

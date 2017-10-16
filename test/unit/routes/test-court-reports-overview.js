@@ -7,10 +7,10 @@ require('sinon-bluebird')
 const orgUnit = require('../../../app/constants/organisation-unit')
 const workloadType = require('../../../app/constants/workload-type')
 
-const OM_OVERVIEW_URL = '/court-reports/offender-manager/1/overview'
-const LDU_OVERVIEW_URL = '/court-reports/ldu/1/overview'
-const REGION_OVERVIEW_URL = '/court-reports/region/1/overview'
-const HMPPS_OVERVIEW_URL = '/court-reports/hmpps/0/overview'
+const OM_OVERVIEW_URL = '/' + workloadType.COURT_REPORTS + '/offender-manager/1/overview'
+const LDU_OVERVIEW_URL = '/' + workloadType.COURT_REPORTS + '/ldu/1/overview'
+const REGION_OVERVIEW_URL = '/' + workloadType.COURT_REPORTS + '/region/1/overview'
+const HMPPS_OVERVIEW_URL = '/' + workloadType.COURT_REPORTS + '/hmpps/0/overview'
 
 const OM_MISSING_ID_URL = '/court-report/offender-manager/overview'
 
