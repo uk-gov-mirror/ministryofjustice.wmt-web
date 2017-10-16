@@ -6,9 +6,10 @@ const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const authorisation = require('../authorisation')
 const Unathorized = require('../services/errors/authentication-error').Unauthorized
+const workloadTypes = require('../../app/constants/workload-type')
 
 module.exports = function (router) {
-  router.get('/probation/:organisationLevel/:id/caseload', function (req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -46,7 +47,7 @@ module.exports = function (router) {
       })
   })
 
-  router.get('/probation/:organisationLevel/:id/caseload/csv', function (req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload/csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {

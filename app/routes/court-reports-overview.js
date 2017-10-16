@@ -3,9 +3,10 @@ const getSubNav = require('../services/get-sub-nav')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
 const workloadTypeConstants = require('../constants/workload-type')
+const workloadTypes = require('../../app/constants/workload-type')
 
 module.exports = function (router) {
-  router.get('/court-reports/:organisationLevel/:id/overview', function (req, res, next) {
+  router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id/overview', function (req, res, next) {
     var organisationLevel = req.params.organisationLevel
     var organisationUnit = getOrganisationUnit('name', organisationLevel)
     var id = req.params.id

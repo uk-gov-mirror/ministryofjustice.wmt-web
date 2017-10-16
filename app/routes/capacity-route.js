@@ -6,9 +6,10 @@ const ValidationError = require('../services/errors/validation-error')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const authorisation = require('../authorisation')
 const Unathorized = require('../services/errors/authentication-error').Unauthorized
+const workloadTypes = require('../../app/constants/workload-type')
 
 module.exports = function (router) {
-  router.get(`/probation/:organisationLevel/:id/caseload-capacity`, function (req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload-capacity', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
