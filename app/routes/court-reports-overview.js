@@ -16,7 +16,7 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-    
+
     var organisationLevel = req.params.organisationLevel
     var organisationUnit = getOrganisationUnit('name', organisationLevel)
     var id = req.params.id
