@@ -1,4 +1,3 @@
-const authentication = require('../../../app/authentication')
 const mockViewEngine = require('../../unit/routes/mock-view-engine')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -15,8 +14,6 @@ module.exports.buildApp = function (route, middleware) {
 
   // Use cookie parser middleware (required for csurf)
   app.use(cookieParser('secret', { httpOnly: true, secure: false }))
-
-  authentication(app)
 
   app.use(cookieSession({
     name: 'session',

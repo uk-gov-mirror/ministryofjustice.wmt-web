@@ -6,7 +6,7 @@ const errorHandler = require('../services/validators/error-handler')
 const authorisation = require('../authorisation')
 const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
-const Unathorized = require('../services/errors/authentication-error').Unauthorized
+const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 
 module.exports = function (router) {
@@ -15,7 +15,7 @@ module.exports = function (router) {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
     } catch (error) {
-      if (error instanceof Unathorized) {
+      if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
       } else if (error instanceof Forbidden) {
         return res.status(error.statusCode).render(error.redirect, {
@@ -43,7 +43,7 @@ module.exports = function (router) {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
     } catch (error) {
-      if (error instanceof Unathorized) {
+      if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
       } else if (error instanceof Forbidden) {
         return res.status(error.statusCode).render(error.redirect, {
@@ -74,7 +74,7 @@ module.exports = function (router) {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
     } catch (error) {
-      if (error instanceof Unathorized) {
+      if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
       } else if (error instanceof Forbidden) {
         return res.status(error.statusCode).render(error.redirect, {
@@ -112,7 +112,7 @@ module.exports = function (router) {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
     } catch (error) {
-      if (error instanceof Unathorized) {
+      if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
       } else if (error instanceof Forbidden) {
         return res.status(error.statusCode).render(error.redirect, {

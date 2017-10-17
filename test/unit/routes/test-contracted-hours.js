@@ -31,8 +31,8 @@ var hasRoleResult = true
 
 var initaliseApp = function () {
   authorisationService = {
-    hasRole: sinon.stub().returns(hasRoleResult),
-    isUserAuthenticated: sinon.stub().returns(true)
+    assertUserAuthenticated: sinon.stub(),
+    hasRole: sinon.stub().returns(hasRoleResult)
   }
   getSubNavStub = sinon.stub()
   contractedHoursService = sinon.stub()
