@@ -8,12 +8,12 @@ var reductionResult = {
   table: 'reductions',
   id: 0
 }
-
+var reductionReason = { maxAllowanceHours: 0 }
 var activeStartDate = moment().subtract(30, 'days').toDate()
 var activeEndDate = moment().add(30, 'days').toDate()
 var testReduction = new Reduction('1', '5',
   [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
-  [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'Test Note')
+  [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'Test Note', reductionReason)
 var workloadOwnerId
 var inserts = []
 

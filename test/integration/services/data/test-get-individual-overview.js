@@ -12,8 +12,6 @@ var overview = {
   totalPoints: 50,
   cases: 5,
   contractedHours: 37.5,
-  defaultContractedHoursPo: 37,
-  defaultContractedHoursPso: 38,
   reduction: 3
 }
 

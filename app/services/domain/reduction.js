@@ -5,17 +5,17 @@ const ErrorHandler = require('../validators/error-handler')
 const reductionStatusType = require('../../constants/reduction-status-type')
 
 class Reduction {
-  constructor (reasonForReductionId, hours, reductionStartDate, reductionEndDate, notes) {
+  constructor (reasonForReductionId, hours, reductionStartDate, reductionEndDate, notes, reductionReason) {
     this.reasonForReductionId = reasonForReductionId
     this.hours = hours
     this.reductionStartDateFields = reductionStartDate
     this.reductionEndDateFields = reductionEndDate
     this.notes = notes
-    this.isValid()
+    this.isValid(reductionReason)
     this.status = this.setReductionStatus()
   }
 
-  isValid () {
+  isValid (reductionReason) {
     var errors = ErrorHandler()
 
     FieldValidator(this.reasonForReductionId, 'reasonForReductionId', errors)
@@ -24,6 +24,11 @@ class Reduction {
     FieldValidator(this.hours, 'reductionHours', errors)
       .isRequired()
       .isFloat(0, 37)
+
+    if (reductionReason.maxAllowanceHours !== 0) {
+      FieldValidator(this.hours, 'reductionHours', errors)
+      .isFloat(0, reductionReason.maxAllowanceHours)
+    }
 
     var startDate = FieldSetValidator(this.reductionStartDateFields, 'reductionStartDate', errors)
       .isRequired()

@@ -33,9 +33,14 @@ var existingReductionId = 10
 var workloadOwnerId = 11
 var activeStartDate = moment().subtract(30, 'days').toDate()
 var activeEndDate = moment().add(30, 'days').toDate()
+
+var reductionReason = {
+  maxAllowanceHours: 0
+}
+
 var reduction = new Reduction('1', '10',
   [activeStartDate.getDate(), activeStartDate.getMonth(), activeStartDate.getFullYear()],
-  [activeEndDate.getDate(), activeEndDate.getMonth(), activeEndDate.getFullYear()], 'active note')
+  [activeEndDate.getDate(), activeEndDate.getMonth(), activeEndDate.getFullYear()], 'active note', reductionReason)
 
 var referenceData = [
   {

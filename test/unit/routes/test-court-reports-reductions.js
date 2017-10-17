@@ -29,6 +29,13 @@ const getReductionNoTextResult = {
   subNav: {}
 }
 
+const addReductionsRefData = {
+  title: 'Title',
+  subTitle: 'SubTitle',
+  breadcrumbs: [],
+  referenceData: [{ maxAllowanceHours: 0 }]
+}
+
 const addReduction = {
   title: 'Title',
   subTitle: 'SubTitle',
@@ -75,19 +82,7 @@ const failureDataToPost = {
   workloadType: workloadType.COURT_REPORTS
 }
 
-const getReductionsSuccessTextResult = {
-  title: 'Title',
-  subTitle: 'SubTitle',
-  breadcrumbs: {},
-  successText: 'You have successfully added a new reduction'
-}
-
-const getReductionsFailureTextResult = {
-  title: 'Title',
-  subTitle: 'SubTitle',
-  breadcrumbs: {},
-  referenceData: {}
-}
+const returnedId = 1
 
 var app
 var route
@@ -217,7 +212,8 @@ describe('court-reports reductions route', function () {
 
   describe('For the add reductions POST route', function () {
     it('should post the correct data and respond with 302', function () {
-      reductionsService.addReduction.resolves(getReductionsSuccessTextResult)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
+      reductionsService.addReduction.resolves(returnedId)
       return superTest(app)
       .post(ADD_REDUCTION_POST_URL)
       .send(successDataToPost)
@@ -228,7 +224,8 @@ describe('court-reports reductions route', function () {
     })
 
     it('should post incorrect data and validation errors should be populated', function () {
-      reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
+      reductionsService.addReduction.resolves(returnedId)
       return superTest(app)
       .post(ADD_REDUCTION_POST_URL)
       .send(failureDataToPost)
@@ -242,7 +239,8 @@ describe('court-reports reductions route', function () {
 
   describe('For the edit reductions POST route', function () {
     it('should post the correct data and respond with 200 for existing reduction', function () {
-      reductionsService.updateReduction.resolves(getReductionsSuccessTextResult)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
+      reductionsService.updateReduction.resolves(returnedId)
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(successDataToPost)
@@ -252,7 +250,8 @@ describe('court-reports reductions route', function () {
         })
     })
     it('should post incorrect data and validation errors should be populated', function () {
-      reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
+      reductionsService.updateReduction.resolves(returnedId)
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(failureDataToPost)

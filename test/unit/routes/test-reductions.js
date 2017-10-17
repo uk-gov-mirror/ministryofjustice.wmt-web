@@ -3,7 +3,6 @@ const superTest = require('supertest')
 const proxyquire = require('proxyquire').noPreserveCache()
 const roles = require('../../..//app/constants/user-roles')
 const hasRoleFunction = require('../../../app/authorisation').hasRole
-
 const sinon = require('sinon')
 require('sinon-bluebird')
 const workloadTypes = require('../../../app/constants/workload-type')
@@ -15,34 +14,11 @@ const EDIT_REDUCTION_PAGE_URL = '/' + workloadTypes.PROBATION + '/offender-manag
 const EDIT_REDUCTION_POST_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/edit-reduction'
 const UPDATE_REDUCTION_STATUS_POST_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/update-reduction-status'
 
-const addReduction = {
+const addReductionsRefData = {
   title: 'Title',
   subTitle: 'SubTitle',
-  breadcrumbs: {},
-  subNav: {},
-  linkId: 1,
-  referenceData: {}
-}
-
-const getReductionNoTextResult = {
-  title: 'Title',
-  subTitle: 'SubTitle',
-  breadcrumbs: {},
-  subNav: {}
-}
-
-const getReductionsSuccessTextResult = {
-  title: 'Title',
-  subTitle: 'SubTitle',
-  breadcrumbs: {},
-  successText: 'You have successfully added a new reduction'
-}
-
-const getReductionsFailureTextResult = {
-  title: 'Title',
-  subTitle: 'SubTitle',
-  breadcrumbs: {},
-  referenceData: {}
+  breadcrumbs: [],
+  referenceData: [{ maxAllowanceHours: 0 }]
 }
 
 const existingReduction = {
@@ -64,7 +40,8 @@ const successDataToPost = {
   redEndMonth: '7',
   redEndDay: '1',
   notes: 'This is a test note',
-  status: 'SCHEDULED'
+  status: 'SCHEDULED',
+  reductionReason: { maxAllowanceHours: 0 }
 }
 
 const failureDataToPost = {
@@ -79,6 +56,8 @@ const failureDataToPost = {
   redEndDay: '',
   notes: 'This is a test note'
 }
+
+const returnedId = 1
 
 var app
 var route
@@ -124,7 +103,7 @@ beforeEach(function () {
 describe('reductions route', function () {
   describe('For the get reductions route', function () {
     it('should respond with 200 when correct role is passed', function () {
-      reductionsService.getReductions.resolves(getReductionNoTextResult)
+      reductionsService.getReductions.resolves(addReductionsRefData)
       return superTest(app)
         .get(GET_REDUCTIONS_URL)
         .expect(200)
@@ -133,7 +112,7 @@ describe('reductions route', function () {
 
   describe('For the get reductions route', function () {
     it('should respond with 200 and the correct data', function () {
-      reductionsService.getReductions.resolves(getReductionNoTextResult)
+      reductionsService.getReductions.resolves(addReductionsRefData)
       return superTest(app)
         .get(GET_REDUCTIONS_URL)
         .expect(200)
@@ -142,7 +121,7 @@ describe('reductions route', function () {
 
   describe('For the add reductions page route', function () {
     it('should respond with 200 and the correct data and no existing reduction', function () {
-      reductionsService.getAddReductionsRefData.resolves(addReduction)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
       return superTest(app)
         .get(ADD_REDUCTION_PAGE_URL)
         .expect(200)
@@ -151,7 +130,7 @@ describe('reductions route', function () {
 
   describe('For the edit reductions page route', function () {
     it('should respond with 200 and the correct data and an existing reduction', function () {
-      reductionsService.getAddReductionsRefData.resolves(addReduction)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
       reductionsService.getReductionByReductionId.resolves(existingReduction)
       return superTest(app)
         .get(EDIT_REDUCTION_PAGE_URL + '?reductionId=' + existingReduction.id)
@@ -161,21 +140,25 @@ describe('reductions route', function () {
 
   describe('For the add reductions POST route', function () {
     it('should post the correct data and respond with 302', function () {
-      reductionsService.addReduction.resolves(getReductionsSuccessTextResult)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
+      reductionsService.addReduction.resolves()
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
         .send(successDataToPost)
         .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions?success=true')
     })
+
     it('should post the correct data and respond with 200 for existing reduction', function () {
-      reductionsService.addReduction.resolves(getReductionsSuccessTextResult)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
+      reductionsService.addReduction.resolves(returnedId)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
         .send(successDataToPost)
         .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions?success=true')
     })
+
     it('should post incorrect data and validation errors should be populated', function () {
-      reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
         .send(failureDataToPost)
@@ -185,14 +168,16 @@ describe('reductions route', function () {
 
   describe('For the edit reductions POST route', function () {
     it('should post the correct data and respond with 200 for existing reduction', function () {
-      reductionsService.updateReduction.resolves(getReductionsSuccessTextResult)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
+      reductionsService.updateReduction.resolves()
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(successDataToPost)
         .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions?edited=true')
     })
+
     it('should post incorrect data and validation errors should be populated', function () {
-      reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(failureDataToPost)
@@ -202,7 +187,8 @@ describe('reductions route', function () {
 
   describe('For the update reduction status POST route', function () {
     it('should post the correct data with archived status and respond with 200 for existing reduction', function () {
-      reductionsService.updateReductionStatus.resolves(getReductionsSuccessTextResult)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
+      reductionsService.updateReductionStatus.resolves(returnedId)
       return superTest(app)
         .post(UPDATE_REDUCTION_STATUS_POST_URL)
         .send(Object.assign({}, successDataToPost, {status: 'ARCHIVED'}))
@@ -210,7 +196,8 @@ describe('reductions route', function () {
     })
 
     it('should post the correct data with deleted status and respond with 200 for existing reduction', function () {
-      reductionsService.updateReductionStatus.resolves(getReductionsSuccessTextResult)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
+      reductionsService.updateReductionStatus.resolves(returnedId)
       return superTest(app)
         .post(UPDATE_REDUCTION_STATUS_POST_URL)
         .send(Object.assign({}, successDataToPost, {status: 'DELETED'}))
@@ -218,7 +205,8 @@ describe('reductions route', function () {
     })
 
     it('should post incorrect data and validation errors should be populated', function () {
-      reductionsService.getAddReductionsRefData.resolves(getReductionsFailureTextResult)
+      reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
+      reductionsService.updateReductionStatus.resolves(returnedId)
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(failureDataToPost)

@@ -1,6 +1,5 @@
 const expect = require('chai').expect
-const config = require('../../../../knexfile').integrationTests
-const knex = require('knex')(config)
+const knex = require('../../../knex').integrationTests
 
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 const getWorkloadReportsViews = require('../../../../app/services/data/get-workload-report-views')

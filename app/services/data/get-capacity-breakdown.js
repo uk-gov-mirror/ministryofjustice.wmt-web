@@ -1,5 +1,4 @@
-const config = require('../../../knexfile').web
-const knex = require('knex')(config)
+const knex = require('../../../knex').web
 const orgUnitFinder = require('../helpers/org-unit-finder')
 
 module.exports = function (id, type) {
@@ -22,6 +21,7 @@ module.exports = function (id, type) {
             'grade_code AS grade',
             'total_cases AS totalCases',
             'cms_adjustment_points AS cmsAdjustmentPoints',
+            'gs_adjustment_points AS gsAdjustmentPoints',
             'contracted_hours AS contractedHours')
     .then(function (results) {
       return results
