@@ -400,8 +400,15 @@ module.exports.selectGradeForWorkloadOwner = function (workloadOwnerId) {
 
 module.exports.removeInsertedData = function (inserts) {
   inserts = inserts.reverse()
-  return Promise.each(inserts, (insert) => {
-    return knex(insert.table).where('id', insert.id).del()
+  var deleteMap = {}
+  inserts.forEach(function (insert) {
+    if (deleteMap[insert.table] === undefined) {
+      deleteMap[insert.table] = []
+    }
+    deleteMap[insert.table].push(insert.id)
+  })
+  return Promise.each(Object.keys(deleteMap), (tableName) => {
+    return knex(tableName).whereIn('id', deleteMap[tableName]).del()
   })
 }
 
