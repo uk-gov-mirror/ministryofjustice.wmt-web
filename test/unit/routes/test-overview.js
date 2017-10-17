@@ -43,7 +43,7 @@ var authorisationService
 
 before(function () {
   authorisationService = {
-    isUserAuthenticated: sinon.stub().returns(true)
+    assertUserAuthenticated: sinon.stub()
   }
   getSubNavStub = sinon.stub()
   getOverview = sinon.stub()
