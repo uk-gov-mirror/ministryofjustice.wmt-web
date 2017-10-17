@@ -176,7 +176,6 @@ module.exports = function (router) {
 
     var id = req.params.id
     var reduction
-
     var reductionReason
 
     return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
