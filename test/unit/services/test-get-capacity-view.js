@@ -10,7 +10,9 @@ const CAPACITY_RESULTS = [
   { effective_from: '2017-01-01',
     total_points: 100,
     available_points: 100,
-    reduction_hours: 6}
+    reduction_hours: 6,
+    armsTotalCases: 5
+  }
 ]
 
 const TEAM_REULTS = [
@@ -22,7 +24,8 @@ const TEAM_REULTS = [
     availablePoints: 100,
     cmsAdjustmentPoints: 10,
     gsAdjustmentPoints: -10,
-    contractedHours: 40
+    contractedHours: 40,
+    armsTotalCases: 20
   }
 ]
 
@@ -36,7 +39,8 @@ const LDU_RESULTS = [
     availablePoints: 100,
     cmsAdjustmentPoints: 9,
     gsAdjustmentPoints: -10,
-    contractedHours: 40
+    contractedHours: 40,
+    armsTotalCases: 20
   },
   {
     name: 'Test ldu 1',
@@ -47,7 +51,8 @@ const LDU_RESULTS = [
     availablePoints: 70,
     cmsAdjustmentPoints: 7,
     gsAdjustmentPoints: -5,
-    contractedHours: 40
+    contractedHours: 40,
+    armsTotalCases: 20
   }
 ]
 
@@ -58,7 +63,8 @@ const EXPECTED_TEAM_BREAKDOWN = [
     linkId: 1,
     capacityPercentage: 40,
     cmsPercentage: 25,
-    gsPercentage: 20
+    gsPercentage: 20,
+    armsTotalCases: 20
   }
 ]
 
@@ -74,7 +80,8 @@ const EXPECTED_LDU_BREAKDOWN = [
         linkId: 1,
         capacityPercentage: 90,
         cmsPercentage: 10,
-        gsPercentage: 10
+        gsPercentage: 10,
+        armsTotalCases: 20
       },
       {
         name: 'Test ldu 1',
@@ -83,7 +90,8 @@ const EXPECTED_LDU_BREAKDOWN = [
         linkId: 1,
         capacityPercentage: 50,
         cmsPercentage: 20,
-        gsPercentage: 12.5
+        gsPercentage: 12.5,
+        armsTotalCases: 20
       }
     ]
   }
