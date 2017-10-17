@@ -4,9 +4,19 @@ const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
 const workloadTypeConstants = require('../constants/workload-type')
 const workloadTypes = require('../../app/constants/workload-type')
+const authorisation = require('../authorisation')
+const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id/overview', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
+    
     var organisationLevel = req.params.organisationLevel
     var organisationUnit = getOrganisationUnit('name', organisationLevel)
     var id = req.params.id
