@@ -284,7 +284,8 @@ var addWorkloads = function (inserts) {
       contracted_hours: 37.5,
       reduction_hours: 3,
       cms_adjustment_points: 0,
-      gs_adjustment_points: -2
+      gs_adjustment_points: -2,
+      arms_total_cases: 5
     }
 
     var calculations = []

@@ -14,7 +14,8 @@ var capacityBreakdown = {
   totalCases: 5,
   cmsAdjustmentPoints: 0,
   gsAdjustmentPoints: -2,
-  contractedHours: 37.5
+  contractedHours: 37.5,
+  armsTotalCases: 5
 }
 
 describe('services/data/get-capacity-breakdown', function () {
