@@ -11,7 +11,7 @@ describe(`${INDEX_URI}`, function () {
     AUTHENTICATION_ENABLED: false
   }
   var authorisationService = {
-    isUserAuthenticated: sinon.stub().returns(true)
+    assertUserAuthenticated: sinon.stub()
   }
 
   passport.authenticate = function (req, res, next) {

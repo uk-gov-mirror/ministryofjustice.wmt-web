@@ -77,8 +77,8 @@ var createMiddleWare = function () {
 
 var initaliseApp = function (middleware) {
   authorisationService = {
-    hasRole: hasRoleFunction,
-    isUserAuthenticated: sinon.stub().returns(true)
+    assertUserAuthenticated: sinon.stub(),
+    hasRole: hasRoleFunction
   }
   getSubNavStub = sinon.stub()
   reductionsService = sinon.stub()

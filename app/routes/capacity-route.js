@@ -5,7 +5,7 @@ const organisationUnit = require('../constants/organisation-unit')
 const ValidationError = require('../services/errors/validation-error')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const authorisation = require('../authorisation')
-const Unathorized = require('../services/errors/authentication-error').Unauthorized
+const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const workloadTypes = require('../../app/constants/workload-type')
 
 module.exports = function (router) {
@@ -13,7 +13,7 @@ module.exports = function (router) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
-      if (error instanceof Unathorized) {
+      if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }

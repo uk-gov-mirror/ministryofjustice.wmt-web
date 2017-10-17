@@ -4,7 +4,6 @@ const proxyquire = require('proxyquire')
 const sinon = require('sinon')
 const config = require('../../../config')
 require('sinon-bluebird')
-// const Forbidden = require('../services/errors/authentication-error').Forbidden
 
 const ADMIN_URL = '/admin/'
 const ADMIN_USER_URL = '/admin/user'
@@ -34,8 +33,7 @@ var initaliseApp = function () {
   userRoleService = sinon.stub()
   authorisationService = {
     assertUserAuthenticated: sinon.stub(),
-    hasRole: hasRoleStub,
-    isAuthenticationEnabled: sinon.stub().returned(false)
+    hasRole: hasRoleStub
   }
   route = proxyquire('../../../app/routes/admin', {
     '../services/user-role-service': userRoleService,

@@ -2,7 +2,7 @@ const getCaseProgress = require('../services/get-case-progress')
 const getSubNav = require('../services/get-sub-nav')
 const organisationUnit = require('../constants/organisation-unit')
 const authorisation = require('../authorisation')
-const Unathorized = require('../services/errors/authentication-error').Unauthorized
+const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const workloadTypes = require('../../app/constants/workload-type')
 
 module.exports = function (router) {
@@ -10,7 +10,7 @@ module.exports = function (router) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
-      if (error instanceof Unathorized) {
+      if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }

@@ -39,9 +39,9 @@ describe('services/data/get-workload-report-views', function () {
         expectedResults = [
           {
             effective_from: startDate,
-            total_points: 70,
-            available_points: 35,
-            reduction_hours: 6
+            total_points: 50,
+            available_points: 25,
+            reduction_hours: 3
           }
         ]
       })
@@ -83,12 +83,8 @@ describe('services/data/get-workload-report-views', function () {
   it('should retrieve all the workloads within the date range for an OM', function () {
     return getWorkloadReportsViews(inserts.filter((item) => item.table === 'workload_owner')[0].id, startDate, endDate, 'offender-manager')
     .then(function (results) {
-      expect(results.length).to.equal(2)
-      var omExpectedResults = [
-        { effective_from: startDate, total_points: 50, available_points: 25, reduction_hours: 3 },
-        { effective_from: startDate, total_points: 20, available_points: 10, reduction_hours: 3 }
-      ]
-      expect(results).to.eql(omExpectedResults)
+      expect(results.length).to.equal(1)
+      expect(results).to.eql(expectedResults)
     })
   })
 

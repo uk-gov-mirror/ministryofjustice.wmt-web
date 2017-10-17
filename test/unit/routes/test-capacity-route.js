@@ -29,7 +29,7 @@ describe('/caseload-capacity', function () {
   var capacityStubResult = {title: 'Test', capacityTable: {}, subNav: [{}]}
   var authorisationService
   authorisationService = {
-    isUserAuthenticated: sinon.stub().returns(true)
+    assertUserAuthenticated: sinon.stub()
   }
   beforeEach(function () {
     getCapacityStub = sinon.stub()
