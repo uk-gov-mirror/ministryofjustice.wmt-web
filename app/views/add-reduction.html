@@ -24,7 +24,6 @@
   {% set first = true %}
   <form action="{{ formAction }}" method=POST id="reductionForm">
     <input type="hidden" name="reductionId" value="{{reduction.id}}"/>
-    <input type="hidden" name="workloadType" value="{{ workloadType }}">
     <div class="form-group" id="reduction_reason_selection">
       <label class="form-label-bold" for="select-box">Reason for reduction</label>
       {% if errors['reasonForReductionId'][0] %}

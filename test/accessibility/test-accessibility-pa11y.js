@@ -30,9 +30,9 @@ describe('accessibility/pa11y', function () {
           .then(function (region) {
             regionId = region.id
             return knex('workload_owner')
-            .join('court_reports_workload', 'court_reports_workload.workload_owner_id', 'workload_owner.id')
-            .join('court_reports_workload_points_calculation', 'court_reports_workload_points_calculation.court_reports_workload_id', 'court_reports_workload.id')
-            .join('workload_report', 'court_reports_workload_points_calculation.workload_report_id', 'workload_report.id')
+            .join('court_reports', 'court_reports.workload_owner_id', 'workload_owner.id')
+            .join('court_reports_calculations', 'court_reports_calculations.court_reports_id', 'court_reports.id')
+            .join('workload_report', 'court_reports_calculations.workload_report_id', 'workload_report.id')
             .whereNull('workload_report.effective_to')
             .orderBy('workload_report.effective_from', 'desc')
             .select('workload_owner.id').first()

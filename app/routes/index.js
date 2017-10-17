@@ -1,5 +1,6 @@
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
+const workloadTypes = require('../constants/workload-type')
 
 module.exports = function (router) {
   router.get('/', function (req, res, next) {
@@ -14,6 +15,6 @@ module.exports = function (router) {
       }
     }
 
-    return res.redirect('/probation/hmpps/0')
+    return res.redirect('/' + workloadTypes.PROBATION + '/hmpps/0')
   })
 }
