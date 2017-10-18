@@ -26,13 +26,21 @@ var app
 var route
 var getCourtReportOverview
 var getSubNavStub
+var authorisationService
+var hasRoleResult = true
 
 before(function () {
+  authorisationService = {
+    assertUserAuthenticated: sinon.stub(),
+    hasRole: sinon.stub().returns(hasRoleResult)
+  }
+
   getSubNavStub = sinon.stub()
   getCourtReportOverview = sinon.stub()
   route = proxyquire('../../../app/routes/court-reports-overview', {
     '../services/get-court-report-overview': getCourtReportOverview,
-    '../services/get-sub-nav': getSubNavStub
+    '../services/get-sub-nav': getSubNavStub,
+    '../authorisation': authorisationService
   })
   app = routeHelper.buildApp(route)
 })
