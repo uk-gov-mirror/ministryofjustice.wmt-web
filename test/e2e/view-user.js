@@ -1,9 +1,7 @@
 const expect = require('chai').expect
 const authenticationHerlp = require('../helpers/routes/authentication-helper')
-const config = require('../../config')
 
 var adminUserURL
-var username = 'John.Doe@' + config.ACTIVE_DIRECTORY_DOMAIN
 
 describe('View adding a new user role', () => {
   before(function () {
@@ -12,25 +10,20 @@ describe('View adding a new user role', () => {
     return browser.url(adminUserURL).waitForExist('.breadcrumbs')
   })
 
-  describe('should navigate to the user rights page', () => {
-    it('with the correct breadcrumbs, heading title and roles to select from', () => {
+  describe('should navigate to the user page', () => {
+    it('with the correct breadcrumbs and heading title', () => {
       return browser.url(adminUserURL)
         .waitForExist('.breadcrumbs')
-        .setValue('#username', username)
-        .submitForm('#userForm')
         .waitForExist('.sln-page-title')
         .getText('.sln-page-title')
         .then(function (text) {
           expect(text).to.equal('User Rights')
         })
-        .isSelected('#dataAdminRadio')
-        .click('#systemAdminRadio')
-        .isSelected('#systemAdminRadio')
-        .click('#managerRadio')
-        .isSelected('#managerRadio')
-        .click('#staffRadio')
-        .isSelected('#staffRadio')
-        .submitForm('#userRightForm')
+    })
+
+    it('and submit a form with a valid username', () => {
+      browser.setValue('#username', 'John.Doe')
+      browser.submitForm('#userForm')
     })
   })
 
