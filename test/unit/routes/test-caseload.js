@@ -6,16 +6,17 @@ const sinon = require('sinon')
 require('sinon-bluebird')
 const orgUnit = require('../../../app/constants/organisation-unit')
 const tabs = require('../../../app/constants/wmt-tabs')
+const workloadTypes = require('../../../app/constants/workload-type')
 
-const REGION_CASELOAD_URL = '/region/1/caseload'
-const NATIONAL_CASELOAD_URL = '/hmpps/0/caseload'
-const LDU_CASELOAD_URL = '/ldu/1/caseload'
-const LDU_MISSING_ID_URL = '/ldu/caseload'
-const TEAM_CASELOAD_URL = '/team/1/caseload'
-const TEAM_MISSING_ID_URL = '/team/caseload'
+const REGION_CASELOAD_URL = '/' + workloadTypes.PROBATION + '/region/1/caseload'
+const NATIONAL_CASELOAD_URL = '/' + workloadTypes.PROBATION + '/hmpps/0/caseload'
+const LDU_CASELOAD_URL = '/' + workloadTypes.PROBATION + '/ldu/1/caseload'
+const LDU_MISSING_ID_URL = '/' + workloadTypes.PROBATION + '/ldu/caseload'
+const TEAM_CASELOAD_URL = '/' + workloadTypes.PROBATION + '/team/1/caseload'
+const TEAM_MISSING_ID_URL = '/' + workloadTypes.PROBATION + '/team/caseload'
 
-const TEAM_CASELOAD_CSV_URL = '/team/1/caseload/csv'
-const LDU_CASELOAD_CSV_URL = '/ldu/1/caseload/csv'
+const TEAM_CASELOAD_CSV_URL = '/' + workloadTypes.PROBATION + '/team/1/caseload/csv'
+const LDU_CASELOAD_CSV_URL = '/' + workloadTypes.PROBATION + '/ldu/1/caseload/csv'
 
 const TEAM_CASELOAD = {
   title: 'Title',

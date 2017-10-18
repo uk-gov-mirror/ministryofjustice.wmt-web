@@ -2,8 +2,9 @@ const linkGenerator = require('./helpers/link-generator')
 const organisationalHierarchyTree = require('./organisational-hierarchy-tree')
 const Link = require('./domain/link')
 const orgUnitFinder = require('../services/helpers/org-unit-finder')
+const workloadTypeConstant = require('../constants/workload-type')
 
-module.exports = function (id, organisationLevel) {
+module.exports = function (id, organisationLevel, workloadType = workloadTypeConstant.PROBATION) {
   if (organisationLevel === undefined) {
     throw new TypeError('Organisation level is undefined')
   }
@@ -17,7 +18,7 @@ module.exports = function (id, organisationLevel) {
   }
 
   do {
-    breadcrumbs.push(new Link(tree[reference].name, linkGenerator.fromReference(reference)))
+    breadcrumbs.push(new Link(tree[reference].name, linkGenerator.fromReferenceAndWorkloadType(reference, workloadType)))
     reference = tree[reference].parent
   } while (reference !== undefined)
 
