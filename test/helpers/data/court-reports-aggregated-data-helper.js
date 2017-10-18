@@ -206,7 +206,8 @@ var addCrWorkload = function (inserts) {
       workload_owner_id: inserts.filter((item) => item.table === 'workload_owner')[numberOfWorkloadOwners - 1].id,
       total_sdrs: 12,
       total_fdrs: 13,
-      total_oral_reports: 14
+      total_oral_reports: 14,
+      staging_id: 1
     }
 
     return knex('court_reports').returning('id').insert(crWorkload)
