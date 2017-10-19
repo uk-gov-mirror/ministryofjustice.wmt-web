@@ -54,7 +54,7 @@ describe('services/data/get-workload-report-views', function () {
     .then(function (results) {
       queryResults = results
       return getExpectedNationalCapacity(startDate, endDate).then(function (capacityResults) {
-        expect(queryResults).to.eql(capacityResults)
+        expect(queryResults).to.have.deep.members(capacityResults)
       })
     })
   })
