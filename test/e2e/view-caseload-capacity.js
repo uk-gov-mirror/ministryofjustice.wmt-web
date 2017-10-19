@@ -1,6 +1,7 @@
 const expect = require('chai').expect
 const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const workloadCapacityHelper = require('../helpers/data/aggregated-data-helper')
+const workloadTypes = require('../../app/constants/workload-type')
 
 var workloadOwnerIds = []
 var workloadOwnerDefaultUrl
@@ -15,11 +16,11 @@ describe('View your caseload capacity flow', () => {
     return workloadCapacityHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
-        workloadOwnerDefaultUrl = '/offender-manager/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
-        teamDefaultUrl = '/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id
-        lduDefaultUrl = '/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
-        regionDefaultUrl = '/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
-        nationalDefaultUrl = '/hmpps/0'
+        workloadOwnerDefaultUrl = '/' + workloadTypes.PROBATION + '/offender-manager/' + workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
+        teamDefaultUrl = '/' + workloadTypes.PROBATION + '/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id
+        lduDefaultUrl = '/' + workloadTypes.PROBATION + '/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
+        regionDefaultUrl = '/' + workloadTypes.PROBATION + '/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
+        nationalDefaultUrl = '/' + workloadTypes.PROBATION + '/hmpps/0'
       }).then(function () {
         return browser.url(workloadOwnerDefaultUrl).waitForExist('.breadcrumbs')
       })
