@@ -8,40 +8,48 @@ const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 
 module.exports = function (router) {
+  router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id/', function (req, res, next) {
+    return renderOverview(req, res, next)
+  })
+
   router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id/overview', function (req, res, next) {
-    try {
-      authorisation.assertUserAuthenticated(req)
-    } catch (error) {
-      if (error instanceof Unauthorized) {
-        return res.status(error.statusCode).redirect(error.redirect)
-      }
+    return renderOverview(req, res, next)
+  })
+}
+
+var renderOverview = function (req, res, next) {
+  try {
+    authorisation.assertUserAuthenticated(req)
+  } catch (error) {
+    if (error instanceof Unauthorized) {
+      return res.status(error.statusCode).redirect(error.redirect)
     }
+  }
 
-    var organisationLevel = req.params.organisationLevel
-    var organisationUnit = getOrganisationUnit('name', organisationLevel)
-    var id = req.params.id
+  var organisationLevel = req.params.organisationLevel
+  var organisationUnit = getOrganisationUnit('name', organisationLevel)
+  var id = req.params.id
 
-    var childOrganisationLevel
-    var childOrganisationLevelDisplayText
-    if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
-      childOrganisationLevel = organisationUnit.childOrganisationLevel
-      childOrganisationLevelDisplayText = getOrganisationUnit('name', childOrganisationLevel).displayText
-    }
+  var childOrganisationLevel
+  var childOrganisationLevelDisplayText
+  if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
+    childOrganisationLevel = organisationUnit.childOrganisationLevel
+    childOrganisationLevelDisplayText = getOrganisationUnit('name', childOrganisationLevel).displayText
+  }
 
-    return getCourtReportOverview(id, organisationLevel)
-    .then(function (result) {
-      return res.render('court-reports-overview', {
-        title: result.title,
-        subTitle: result.subTitle,
-        breadcrumbs: result.breadcrumbs,
-        organisationLevel: organisationLevel,
-        childOrganisationLevel: childOrganisationLevel,
-        childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
-        subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS),
-        overviewDetails: result.overviewDetails
-      })
-    }).catch(function (error) {
-      next(error)
+  return getCourtReportOverview(id, organisationLevel)
+  .then(function (result) {
+    return res.render('court-reports-overview', {
+      title: result.title,
+      subTitle: result.subTitle,
+      breadcrumbs: result.breadcrumbs,
+      organisationLevel: organisationLevel,
+      childOrganisationLevel: childOrganisationLevel,
+      childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
+      subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS),
+      overviewDetails: result.overviewDetails
     })
+  }).catch(function (error) {
+    next(error)
   })
 }
