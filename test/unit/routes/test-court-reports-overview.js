@@ -14,6 +14,8 @@ const HMPPS_OVERVIEW_URL = '/' + workloadType.COURT_REPORTS + '/hmpps/0/overview
 
 const OM_MISSING_ID_URL = '/court-report/offender-manager/overview'
 
+const VALID_URL_OVERVIEW_OMITTED = '/' + workloadType.COURT_REPORTS + '/offender-manager/1'
+
 const OVERVIEW = {
   title: 'Title',
   subTitle: 'SubTitle',
@@ -64,6 +66,10 @@ describe('court reports overview route', function () {
 
   it('should respond with 200 when national and id included in URL', function () {
     return supertest(app).get(HMPPS_OVERVIEW_URL).expect(200)
+  })
+
+  it('should respond with 200 when /overview is omitted', function () {
+    return supertest(app).get(VALID_URL_OVERVIEW_OMITTED).expect(200)
   })
 
   it('should respond with 500 when offender-manager, but no id, included in URL', function () {
