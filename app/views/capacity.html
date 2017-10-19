@@ -150,7 +150,7 @@
         {% for i in range(0, member.grades.length) %}
           <tr>
             {% if i === 0 %}
-              <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
             {% endif %}
           <td headers="grade org">{{ member.grades[i].grade }}</td>
           <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
