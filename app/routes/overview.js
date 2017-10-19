@@ -18,11 +18,11 @@ module.exports = function (router) {
     return renderOverview(req, res, next)
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/', function (req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview', function (req, res, next) {
     return renderOverview(req, res, next)
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview', function (req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/', function (req, res, next) {
     return renderOverview(req, res, next)
   })
 
@@ -67,7 +67,11 @@ var renderOverview = function (req, res, next) {
   var childOrganisationLevelDisplayText
 
   if (organisationLevel !== organisationUnitConstants.NATIONAL.name) {
-    id = req.params.id
+    if (req.params.id !== undefined && !isNaN(parseInt(req.params.id, 10))) {
+      id = req.params.id
+    } else {
+      return next()
+    }
   }
 
   if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
