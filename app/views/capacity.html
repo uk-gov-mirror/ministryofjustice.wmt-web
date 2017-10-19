@@ -133,7 +133,7 @@
           <td headers="name org"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade org">{{ member.grade }}</td>
           {% if member.capacityPercentage > 110 %}
-            <td class="capacityRed" headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
+            <td class="capacity-red" headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
           {% else %}
             <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
           {% endif %}
@@ -158,7 +158,7 @@
             {% endif %}
           <td headers="grade org">{{ member.grades[i].grade }}</td>
           {% if member.grades[i].capacityPercentage > 110 %}
-            <td class="capacityRed" headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
+            <td class="capacity-red" headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
           {% else %}
             <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
           {% endif %}
