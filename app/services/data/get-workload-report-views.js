@@ -13,21 +13,21 @@ module.exports = function (id, fromDate, toDate, type) {
     'contracted_hours'
   ]
 
-  var whereString = " WHERE effective_from >= " + fromDate
-  whereString += " AND effective_from <= " + toDate
+  var whereString = ' WHERE effective_from >= \'' + fromDate.toISOString() + '\''
+  whereString += ' AND effective_from <= \'' + toDate.toISOString() + '\''
 
-  if (id !== undefined && (NaN !== parseInt(id, 10))) {
-    whereString += " AND id = " + id
+  if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
+    whereString += ' AND id = ' + id
   }
 
-  var noExpandHint = " WITH (NOEXPAND)"
-  var orderBy = " ORDER BY effective_from"
+  var noExpandHint = ' WITH (NOEXPAND)'
+  var orderBy = ' ORDER BY effective_from'
 
-  return knex.schema.raw("SELECT " + selectList.join(', ')
-          + " FROM " + table
-          + noExpandHint
-          + whereString
-          + orderBy)
+  return knex.schema.raw('SELECT ' + selectList.join(', ') +
+          ' FROM ' + table +
+          noExpandHint +
+          whereString +
+          orderBy)
     .then(function (results) {
       return results
     })
