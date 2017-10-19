@@ -19,7 +19,7 @@ var getExpectedNationalCapacity = function (fromDate, toDate) {
     .select('total_points',
             'available_points',
             'effective_from',
-            'reduction_hours', 
+            'reduction_hours',
             'contracted_hours')
     .then(function (results) {
       return results
