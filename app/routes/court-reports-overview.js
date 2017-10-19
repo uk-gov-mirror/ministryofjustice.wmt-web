@@ -8,11 +8,11 @@ const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 
 module.exports = function (router) {
-  router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id/', function (req, res, next) {
+  router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id/overview', function (req, res, next) {
     return renderOverview(req, res, next)
   })
 
-  router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id/overview', function (req, res, next) {
+  router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id', function (req, res, next) {
     return renderOverview(req, res, next)
   })
 }
