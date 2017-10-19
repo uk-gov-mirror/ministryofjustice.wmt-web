@@ -4,18 +4,29 @@ const capacityCalculator = require('../helpers/capacity-calculator')
 module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, workloadReports) {
   var headings = []
   var rows = []
-  var row = { label: rowLabel + id, values: [] }
-  var reductionRow = {label: rowLabel + 'Reduction Hours' + id, values: []}
+  var orgLabel
+
+  if (id !== undefined) {
+    orgLabel = rowLabel + ' ' + id
+  } else {
+    orgLabel = rowLabel
+  }
+
+  var capacityPercentageRow = { label: orgLabel + ' Capacity', values: [] }
+  var reductionRow = { label: orgLabel + ' Reduction Hours', values: [] }
+  var reductionPercentageRow = { label: orgLabel + ' Reduction Hours Percentage', values: [] }
 
   var capacityResults = capacityCalculator.calculate(workloadReports)
   capacityResults.forEach(function (capacity) {
     headings.push(capacity['workload_report_date'])
-    row.values.push(capacity['capacity_percentage'])
+    capacityPercentageRow.values.push(capacity['capacity_percentage'])
     reductionRow.values.push(capacity['reductions'])
+    reductionPercentageRow.values.push(capacity['reduction_percentage'])
   })
 
-  rows.push(row)
+  rows.push(capacityPercentageRow)
   rows.push(reductionRow)
+  rows.push(reductionPercentageRow)
 
   return new DisplayTable(headings, rows)
 }

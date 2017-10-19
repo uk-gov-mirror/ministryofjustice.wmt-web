@@ -18,7 +18,8 @@ module.exports = function (id, fromDate, toDate, type) {
     .select('total_points',
             'available_points',
             'effective_from',
-            'reduction_hours')
+            'reduction_hours',
+            'contracted_hours')
     .orderBy('effective_from')
     .then(function (results) {
       return results
