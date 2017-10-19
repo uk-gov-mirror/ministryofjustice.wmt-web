@@ -132,7 +132,11 @@
         <tr>
           <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade org">{{ member.grade }}</td>
-          <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
+          {% if member.capacityPercentage > 110 %}
+            <td class="capacity-red" headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
+          {% else %}
+            <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
+          {% endif %}
           <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>
           <td headers="arms breakdown">{{ member.armsTotalCases }}</td>
           <td headers="paroms breakdown">-</td>
@@ -153,7 +157,11 @@
               <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
             {% endif %}
           <td headers="grade org">{{ member.grades[i].grade }}</td>
-          <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
+          {% if member.grades[i].capacityPercentage > 110 %}
+            <td class="capacity-red" headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
+          {% else %}
+            <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
+          {% endif %}
           <td headers="cases breakdown">{{ member.grades[i].totalCases | round(1) }}</td>
           <td headers="arms breakdown">{{ member.grades[i].armsTotalCases }}</td>
           <td headers="paroms breakdown">-</td>

@@ -13,7 +13,11 @@
         </tr>
         <tr>
         <th scope="row">Capacity</th>
+        {% if overviewDetails.capacity > 110 %}
+        <td class="numeric capacity-red"> {{ overviewDetails.capacity | round }}%</td>
+        {% else %}
         <td class="numeric"> {{ overviewDetails.capacity | round }}%</td>
+        {% endif %}
         </tr>
         <tr>
         <th scope="row">Cases</th>
@@ -64,7 +68,11 @@
         {% if organisationLevel === 'team' %}  
           <td headers="grade om">{{ member.gradeCode }}</td>
         {% endif %}
-        <td headers="current cap">{{ member.capacityPercentage | round }}%</td>
+        {% if member.capacityPercentage > 110 %}
+          <td class="capacity-red" headers="current cap">{{ member.capacityPercentage | round }}%</td>
+        {% else %}
+          <td headers="current cap">{{ member.capacityPercentage | round }}%</td>
+        {% endif %}
         <td headers="points cap">{{ member.availablePoints }}</td>
         <td headers="hrs contracted">{{ member.contractedHours }}</td>
         <td headers="hrs reduction">{{ member.reductionHours }}</td>
