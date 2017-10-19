@@ -91,7 +91,11 @@
         <tr>
             <th scope="row">Capacity</th>
             {% for i in range(0, capacity.rows[0].values.length)%}
-                <td> {{capacity.rows[0].values[i] | round}}% </td>
+                {% if capacity.rows[0].values[i] >= 110 %}
+                    <td color="#ff0000"> {{capacity.rows[0].values[i] | round}}% </td>
+                {% else %}
+                    <td> {{capacity.rows[0].values[i] | round}}% </td>
+                {% endif %}
             {% endfor%}
         </tr>
         <tr>
@@ -153,7 +157,11 @@
               <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
             {% endif %}
           <td headers="grade org">{{ member.grades[i].grade }}</td>
+          {% if member.grades[i].capacityPercentage >= 110 %}
+            <td color="#ff0000" headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
+          {% else %}
           <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
+          {% endif %}
           <td headers="cases breakdown">{{ member.grades[i].totalCases | round(1) }}</td>
           <td headers="paroms breakdown">-</td>
           <td headers="fdrs breakdown">-</td>
