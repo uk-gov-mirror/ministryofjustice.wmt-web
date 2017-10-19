@@ -5,7 +5,7 @@ $(document).ready(function() {
         info: false,
         "aaSorting": [],
         columnDefs: [{
-          targets: [0,1,2,3,5,6],
+          targets: [],
           orderable: false
         }
         ]

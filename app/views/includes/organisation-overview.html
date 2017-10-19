@@ -38,7 +38,7 @@
         {% if organisationLevel === 'team' %}
           <th class="sln-table-org-level" id="om" colspan="2">{{ childOrganisationLevelDisplayText }}</th>
         {% else %}
-          <th class="sln-table-org-level" id="om" >{{ childOrganisationLevelDisplayText }}</th>
+          <th class="sln-table-org-level" id="om">{{ childOrganisationLevelDisplayText }}</th>
         {% endif %}
         <th id="cap" colspan="2">Capacity</th>
         <th id="hrs" colspan="2">Hours</th>
@@ -46,7 +46,7 @@
       </tr>
 
       <tr>
-        <th headers="om" id="name" >Name</th>
+        <th headers="om" id="name">Name</th>
         {% if organisationLevel === 'team' %}
           <th headers="om" id="grade" >Grade</th>
         {% endif %}
@@ -76,9 +76,9 @@
 {% endif %}
 
 {% block page_specific_scripts %}
-  {% if organisationLevel === 'team' %}
+
     <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
     <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
     <script src="{{ asset_path }}javascripts/case-overview.js"></script>
-  {% endif %}    
+   
 {% endblock %}
