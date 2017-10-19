@@ -19,7 +19,8 @@ var getExpectedNationalCapacity = function (fromDate, toDate) {
     .select('total_points',
             'available_points',
             'effective_from',
-            'reduction_hours')
+            'reduction_hours',
+            'contracted_hours')
     .then(function (results) {
       return results
     })
@@ -41,7 +42,8 @@ describe('services/data/get-workload-report-views', function () {
             effective_from: startDate,
             total_points: 50,
             available_points: 25,
-            reduction_hours: 3
+            reduction_hours: 3,
+            contracted_hours: 37.5
           }
         ]
       })

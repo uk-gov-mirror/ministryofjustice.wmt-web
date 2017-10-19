@@ -9,7 +9,8 @@ module.exports = function (id, fromDate, toDate, type) {
     'total_points',
     'available_points',
     'effective_from',
-    'reduction_hours'
+    'reduction_hours',
+    'contracted_hours'
   ]
 
   var whereString = " WHERE effective_from >= " + fromDate

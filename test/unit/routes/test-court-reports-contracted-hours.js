@@ -28,15 +28,23 @@ const UPDATED_CONTRACTED_HOURS = '11.23'
 var app
 var route
 var contractedHoursService
+var authorisationService
+var hasRoleResult = true
 var getSubNavStub
 
 before(function () {
+  authorisationService = {
+    assertUserAuthenticated: sinon.stub(),
+    hasRole: sinon.stub().returns(hasRoleResult)
+  }
+
   getSubNavStub = sinon.stub()
   contractedHoursService = sinon.stub()
   contractedHoursService.getContractedHours = sinon.stub()
   contractedHoursService.updateContractedHours = sinon.stub()
   route = proxyquire('../../../app/routes/contracted-hours', {
     '../services/contracted-hours-service': contractedHoursService,
+    '../authorisation': authorisationService,
     '../services/get-sub-nav': getSubNavStub })
   app = routeHelper.buildApp(route)
   contractedHoursService.getContractedHours.resolves(CONTRACTED_HOURS)
