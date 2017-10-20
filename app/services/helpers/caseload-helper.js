@@ -70,6 +70,37 @@ module.exports.getCaseloadTotalSummary = function (caseloads) {
   }
 }
 
+/*
+  Used to create the bottom most row in the table
+*/
+module.exports.calculateTotalsRow = function (caseloads) {
+  var totals = {a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, untiered: 0, overall: 0}
+  caseloads.forEach(function (val, key) {
+    totals.a += val.a
+    totals.b1 += val.b1
+    totals.b2 += val.b2
+    totals.c1 += val.c1
+    totals.c2 += val.c2
+    totals.d1 += val.d1
+    totals.d2 += val.d2
+    totals.untiered += val.untiered
+    totals.overall += val.totalCases
+  })
+  return totals
+}
+
+module.exports.calculateTotalTiersRow = function (summary) {
+  var totals = {totalCommunity: 0, totalLicense: 0, totalCustody: 0, totalTotalCases: 0}
+  console.log(summary)
+  summary.forEach(function (val, key) {
+    totals.totalCommunity += val.communityTotalCases
+    totals.totalLicense += val.licenseTotalCases
+    totals.totalCustody += val.custodyTotalCases
+    totals.totalTotalCases += val.totalCases
+  })
+  return totals
+}
+
 var updateTotals = function (entryToUpdate, caseload) {
   entryToUpdate.totalCases += caseload.totalCases
 

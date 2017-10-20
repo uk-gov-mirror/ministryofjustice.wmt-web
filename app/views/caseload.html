@@ -79,6 +79,18 @@
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total">{{ member.totalCases }}</td>
               </tr>
             {% endfor %}
+            <tr>
+              <td colspan="2" headers="{{caseType.displayName}}_om">Total</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ caseType.array.totals.a | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ caseType.array.totals.b1 | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b2">{{ caseType.array.totals.b2 | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ caseType.array.totals.c1 | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ caseType.array.totals.c2 | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ caseType.array.totals.d1 | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ caseType.array.totals.d2 | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ caseType.array.totals.untiered | round(1) }}</td>   
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total" >{{ caseType.array.totals.overall | round(1) }}</td>   
+            </tr>
           </tbody>
         </table>
       </div>
@@ -119,6 +131,13 @@
               <td headers="total totals">{{ org.totalCases }}</td>
             </tr>
           {% endfor %}
+          <tr>
+            <td headers="name org">Total</td>
+            <td headers="community totals">{{caseType.totalSummary[0].totals.totalCommunity}}</td>
+            <td headers="license totals">{{caseType.totalSummary[0].totals.totalLicense}}</td>
+            <td headers="custody totals">{{caseType.totalSummary[0].totals.totalCustody}}</td>
+            <td headers="total totals">{{caseType.totalSummary[0].totals.totalTotalCases}}</td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -165,6 +184,17 @@
               </tr>
             {% endfor %}
             {% endfor %}
+            <tr>
+              <td headers="{{caseType.displayName}}_grade">Total</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ caseType.totalA | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ caseType.totalB1 | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b2">{{ caseType.totalB2 | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ caseType.totalC1 | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ caseType.totalC2 | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ caseType.totalD1 | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ caseType.totalUntiered | round(1) }}</td>   
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_overall" >{{ caseType.totalOverall | round(1) }}</td>   
+            </tr>
           </tbody>
         </table>
       </div>
@@ -216,6 +246,18 @@
           </tr>
           {% endfor %}
         {% endfor %}
+        <tr>
+          <td colspan="2" headers="{{caseType.displayName}}_om">Total</td>
+          <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ caseType.totalA | round(1) }}</td>
+          <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ caseType.totalB1 | round(1) }}</td>
+          <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b2">{{ caseType.totalB2 | round(1) }}</td>
+          <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ caseType.totalC1 | round(1) }}</td>
+          <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ caseType.totalC2 | round(1) }}</td>
+          <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ caseType.totalD1 | round(1) }}</td>
+          <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ caseType.totalD2 | round(1) }}</td>
+          <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ caseType.totalUntiered | round(1) }}</td>   
+          <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total" >{{ caseType.totalOverall | round(1) }}</td>   
+        </tr>
       </tbody>
     </table>
   {% endif %}
