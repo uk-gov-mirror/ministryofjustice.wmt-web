@@ -6,16 +6,22 @@ const tabs = require('../constants/wmt-tabs')
 const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['grade', 'teamName', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['GradeCode', 'TeamName', 'CapacityPercentage', 'TotalCases', 'ContractedHours', 'ReductionHours']
-const ORG_OVERVIEW_FEILDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
+const ORG_OVERVIEW_FIELDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
+var teamName;
+var lduName;
 
 module.exports = function (organisationLevel, result, tab) {
+  teamName = result.breadcrumbs[0].title;
+  lduName = result.breadcrumbs[1].title;
+  console.log(teamName)
+  console.log(lduName)
   var filename = getFilename(result.title, tab)
-
   var fieldsObject = getFields(organisationLevel, tab)
   var fields = fieldsObject.fields
   var fieldNames = fieldsObject.fieldNames
 
   var csv = getCsv(organisationLevel, result, tab, fields, fieldNames)
+  console.log("FILEDS: "+ fields)
 
   return { filename: filename, csv: csv }
 }
@@ -43,12 +49,13 @@ var getFields = function (organisationLevel, tab) {
         fieldNames = OM_OVERVIEW_FIELD_NAMES
       } else {
         childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
-        fields = Object.assign([], ORG_OVERVIEW_FEILDS)
+        fields = Object.assign([], ORG_OVERVIEW_FIELDS)
         fieldNames = [childOrgForFieldName + 'Name', 'CapacityPercentage', 'CapacityPoints', 'ContractedHours', 'ReductionHours', 'TotalCases']
 
         if (organisationLevel === organisationUnitConstants.TEAM.name) {
           fields.push('gradeCode')
           fieldNames.push('GradeCode')
+        
         }
       }
   }
