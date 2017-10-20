@@ -1,3 +1,12 @@
+function roundEach(array) {
+    for(var i = 0; i < array.length; i++) {
+        array[i] = Math.round(array[i]);
+    }
+    return array;
+}
+
+var roundedValues = roundEach(capacityTable.rows[0].values);
+
 
 trace1 = {
     x: capacityTable.headings,
@@ -63,7 +72,7 @@ layout = {
         showline: true,
         side: 'bottom',
         ticks: 'outside',
-        title: '2016',
+        title: 'Time',
         titlefont: {size: 15},
         type: 'date',
         zeroline: false,

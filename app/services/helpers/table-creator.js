@@ -19,9 +19,9 @@ module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, 
   var capacityResults = capacityCalculator.calculate(workloadReports)
   capacityResults.forEach(function (capacity) {
     headings.push(capacity['workload_report_date'])
-    capacityPercentageRow.values.push(capacity['capacity_percentage'])
+    capacityPercentageRow.values.push(Math.round(capacity['capacity_percentage']))
     reductionRow.values.push(capacity['reductions'])
-    reductionPercentageRow.values.push(capacity['reduction_percentage'])
+    reductionPercentageRow.values.push(Math.round(capacity['reduction_percentage']))
   })
 
   rows.push(capacityPercentageRow)
