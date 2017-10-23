@@ -1,30 +1,54 @@
 const knex = require('../../../knex').web
 const orgUnitFinder = require('../helpers/org-unit-finder')
+const ORGANISATION_UNIT = require('../../constants/organisation-unit')
 
 module.exports = function (id, type) {
   var orgUnit = orgUnitFinder('name', type)
 
   var table = orgUnit.capacityBreakdownView
-  var whereObject = {}
 
-  if (id !== undefined) {
-    whereObject.id = id
+  var selectList = [
+    'total_points AS totalPoints',
+    'available_points AS availablePoints',
+    'reduction_hours AS reductionHours',
+    'link_id AS linkId',
+    'grade_code AS grade',
+    'total_cases AS totalCases',
+    'cms_adjustment_points AS cmsAdjustmentPoints',
+    'gs_adjustment_points AS gsAdjustmentPoints',
+    'arms_total_cases AS armsTotalCases',
+    'contracted_hours AS contractedHours'
+  ]
+
+  var requiresWorkloadOwnerName = (type === ORGANISATION_UNIT.TEAM.name)
+
+  if (requiresWorkloadOwnerName) {
+    selectList.push('forename')
+    selectList.push('surname')
+  } else {
+    selectList.push('name')
   }
 
-  return knex(table)
-    .where(whereObject)
-    .select('total_points AS totalPoints',
-            'available_points AS availablePoints',
-            'reduction_hours AS reductionHours',
-            'link_id AS linkId',
-            'name',
-            'grade_code AS grade',
-            'total_cases AS totalCases',
-            'cms_adjustment_points AS cmsAdjustmentPoints',
-            'gs_adjustment_points AS gsAdjustmentPoints',
-            'arms_total_cases AS armsTotalCases',
-            'contracted_hours AS contractedHours')
+  var whereString = ''
+
+  if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
+    whereString += ' WHERE id = ' + id
+  }
+
+  var noExpandHint = ' WITH (NOEXPAND)'
+
+  return knex.schema.raw('SELECT ' + selectList.join(', ') +
+      ' FROM ' + table +
+      noExpandHint +
+      whereString)
     .then(function (results) {
+      if (requiresWorkloadOwnerName) {
+        results.forEach(function (result) {
+          result.name = result.forename + ' ' + result.surname
+          delete result.forename
+          delete result.surname
+        })
+      }
       return results
     })
 }
