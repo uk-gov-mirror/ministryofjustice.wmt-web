@@ -266,7 +266,7 @@ module.exports.TEAM_OVERVIEW_RESULT = {
 
 module.exports.TEAM_OVERVIEW_CSV = {
   filename: 'Test_Team_Overview.csv',
-  csv: '"LDUCluster","OffenderManagerName","CapacityPercentage","CapacityPoints","ContractedHours","ReductionHours","TotalCases","GradeCode"\n' +
+  csv: '"LDU Cluster","OffenderManagerName","CapacityPercentage","CapacityPoints","ContractedHours","ReductionHours","TotalCases","GradeCode"\n' +
   '"Test Cluster","John Smith",107.36842105263158,190,37.5,6,63,"PO"\n' +
   '"Test Cluster","Tony Test",106.84210526315789,190,36.5,6,63,"PO"'
 }

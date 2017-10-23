@@ -49,7 +49,7 @@ var getFields = function (organisationLevel, tab) {
           fields.push('gradeCode')
           fieldNames.push('GradeCode')
           fields.unshift('lduCluster')
-          fieldNames.unshift('LDUCluster')
+          fieldNames.unshift('LDU Cluster')
         }
       }
   }
