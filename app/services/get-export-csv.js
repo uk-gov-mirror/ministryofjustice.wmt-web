@@ -4,8 +4,8 @@ const json2csv = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
 
 const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
-const OM_OVERVIEW_FIELDS = ['lduCluster', 'grade', 'teamName', 'capacity', 'cases', 'contractedHours', 'reduction']
-const OM_OVERVIEW_FIELD_NAMES = ['LDU Cluster', 'GradeCode', 'TeamName', 'CapacityPercentage', 'TotalCases', 'ContractedHours', 'ReductionHours']
+const OM_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
+const OM_OVERVIEW_FIELD_NAMES = ['LDU Cluster', 'TeamName', 'GradeCode', 'CapacityPercentage', 'TotalCases', 'ContractedHours', 'ReductionHours']
 const ORG_OVERVIEW_FIELDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
 
 module.exports = function (organisationLevel, result, tab) {
@@ -95,9 +95,11 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
        team.lduCluster = result.breadcrumbs[1].title
       })
        csv = generateCsv(result.overviewDetails, fields, fieldNames)
-    }else{
+    }else if(organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
       result.overviewDetails.lduCluster = result.breadcrumbs[2].title
       csv = generateCsv(result.overviewDetails, fields, fieldNames)
+    }else{
+        csv = generateCsv(result.overviewDetails, fields, fieldNames)
     }
       break
   }
