@@ -1,13 +1,3 @@
-function roundEach(array) {
-    for(var i = 0; i < array.length; i++) {
-        array[i] = Math.round(array[i]);
-    }
-    return array;
-}
-
-var roundedValues = roundEach(capacityTable.rows[0].values);
-
-
 trace1 = {
     x: capacityTable.headings,
     y: capacityTable.rows[0].values,
