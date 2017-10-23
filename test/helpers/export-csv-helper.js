@@ -211,9 +211,9 @@ module.exports.NATIONAL_CASELOAD_CSV = {
 module.exports.OM_OVERVIEW_RESULT = {
   breadcrumbs:
   [{ title: 'John Smith'},
-   { title: 'Team 1'} ,
+   { title: 'Team 1'},
     {title: 'Test Cluster'}],
-    title: 'John Smith',
+  title: 'John Smith',
   overviewDetails: {
     grade: 'PO',
     teamId: 1611,
@@ -227,7 +227,7 @@ module.exports.OM_OVERVIEW_RESULT = {
     defaultContractedHoursPso: 37,
     capacity: 105,
     lduCluster: 'Test Cluster'
- }
+  }
 }
 
 module.exports.OM_OVERVIEW_CSV = {
