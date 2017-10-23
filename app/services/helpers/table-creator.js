@@ -31,12 +31,12 @@ module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, 
   return new DisplayTable(headings, rows)
 }
 
-function customRound(number) {
-	let decimal = number % 1;
-	if(decimal < 0.6 && decimal >= 0.5) {
-		number = Math.floor(number);
-	} else {
-		number = Math.round(number);
-	}
-	return number;
+function customRound (number) {
+  let decimal = number % 1
+  if (decimal < 0.6 && decimal >= 0.5) {
+    number = Math.floor(number)
+  } else {
+    number = Math.round(number)
+  }
+  return number
 }
