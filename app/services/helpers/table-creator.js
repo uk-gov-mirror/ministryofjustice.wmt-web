@@ -32,11 +32,17 @@ module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, 
 }
 
 function customRound (number) {
-  let decimal = number % 1
-  if (decimal < 0.6 && decimal >= 0.5) {
-    number = Math.floor(number)
+  if (number || number === 0) {
+    let decimal = number % 1
+    if (decimal < 0.6 && decimal >= 0.5) {
+      number = Math.floor(number)
+      console.log('Floored: ', number)
+    } else {
+      number = Math.round(number)
+      console.log('Rounded: ', number)
+    }
+    return number
   } else {
-    number = Math.round(number)
+    return undefined
   }
-  return number
 }
