@@ -1,5 +1,7 @@
 <ul id="proposition-links">
+  {% if noAuth===true or userRole==='Data Admin' or userRole==='System Admin' %}
   <li><a href="/admin">Admin</a></li>
+  {% endif %}
   <li><a href="/probation/hmpps/0">Offender Managers</a></li>
   <li><a href="/court-reports/hmpps/0">Court Reporters</a></li>   
   <li><a href="/logout">Sign out</a></li>
