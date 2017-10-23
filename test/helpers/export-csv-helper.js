@@ -210,9 +210,9 @@ module.exports.NATIONAL_CASELOAD_CSV = {
 
 module.exports.OM_OVERVIEW_RESULT = {
   breadcrumbs:
-  [{ title: 'John Smith'},
-   { title: 'Team 1'},
-    {title: 'Test Cluster'}],
+  [{title: 'John Smith'},
+  {title: 'Team 1'},
+  {title: 'Test Cluster'}],
   title: 'John Smith',
   overviewDetails: {
     grade: 'PO',
@@ -238,8 +238,8 @@ module.exports.OM_OVERVIEW_CSV = {
 
 module.exports.TEAM_OVERVIEW_RESULT = {
   breadcrumbs:
-  [{ title: 'Test Team'},
-   { title: 'Test Cluster'}],
+  [{title: 'Test Team'},
+   {title: 'Test Cluster'}],
   overviewDetails:
   [ { name: 'John Smith',
     totalCases: 63,
