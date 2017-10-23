@@ -90,17 +90,17 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       }
       break
     case tabs.OVERVIEW:
-     if (organisationLevel === organisationUnitConstants.TEAM.name) {
-       result.overviewDetails.forEach(function (team) {
-       team.lduCluster = result.breadcrumbs[1].title
-      })
-       csv = generateCsv(result.overviewDetails, fields, fieldNames)
-    }else if(organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
-      result.overviewDetails.lduCluster = result.breadcrumbs[2].title
-      csv = generateCsv(result.overviewDetails, fields, fieldNames)
-    }else{
+      if (organisationLevel === organisationUnitConstants.TEAM.name) {
+        result.overviewDetails.forEach(function (team) {
+          team.lduCluster = result.breadcrumbs[1].title
+        })
         csv = generateCsv(result.overviewDetails, fields, fieldNames)
-    }
+      } else if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
+        result.overviewDetails.lduCluster = result.breadcrumbs[2].title
+        csv = generateCsv(result.overviewDetails, fields, fieldNames)
+      } else {
+        csv = generateCsv(result.overviewDetails, fields, fieldNames)
+      }
       break
   }
   return csv
