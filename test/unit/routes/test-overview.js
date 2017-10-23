@@ -6,19 +6,23 @@ const sinon = require('sinon')
 require('sinon-bluebird')
 const orgUnit = require('../../../app/constants/organisation-unit')
 const tabs = require('../../../app/constants/wmt-tabs')
+const workloadTypes = require('../../../app/constants/workload-type')
 
-const OM_OVERVIEW_URL = '/offender-manager/1/overview'
-const LDU_OVERVIEW_URL = '/ldu/1/overview'
-const REGION_OVERVIEW_URL = '/region/1/overview'
-const HMPPS_OVERVIEW_URL = '/hmpps/0/overview'
+const INDEX_URI = '/'
+const OM_OVERVIEW_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/overview'
+const LDU_OVERVIEW_URL = '/' + workloadTypes.PROBATION + '/ldu/1/overview'
+const REGION_OVERVIEW_URL = '/' + workloadTypes.PROBATION + '/region/1/overview'
+const HMPPS_OVERVIEW_URL = '/' + workloadTypes.PROBATION + '/hmpps/0/overview'
 
-const OM_MISSING_ID_URL = '/offender-manager/overview'
+const VALID_URL_WITHOUT_OVERVIEW = '/' + workloadTypes.PROBATION + '/offender-manager/1'
 
-const OM_OVERVIEW_CSV_URL = '/offender-manager/1/overview/csv'
-const TEAM_OVERVIEW_CSV_URL = '/team/1/overview/csv'
-const LDU_OVERVIEW_CSV_URL = '/ldu/1/overview/csv'
-const REGION_OVERVIEW_CSV_URL = '/region/1/overview/csv'
-const HMPPS_OVERVIEW_CSV_URL = '/hmpps/0/overview/csv'
+const OM_MISSING_ID_URL = '/' + workloadTypes.PROBATION + '/offender-manager/overview'
+
+const OM_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/overview/csv'
+const TEAM_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/team/1/overview/csv'
+const LDU_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/ldu/1/overview/csv'
+const REGION_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/region/1/overview/csv'
+const HMPPS_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/hmpps/0/overview/csv'
 
 const OVERVIEW = {
   title: 'Title',
@@ -189,5 +193,28 @@ describe('Overview csv export route', function () {
         expect(response.header['content-disposition']).to.contain('attachment; filename="' + EXPORT_CSV_FILENAME + '"')
         expect(response.text).to.contain(EXPORT_CSV)
       })
+  })
+})
+describe(`GET ${INDEX_URI}`, function () {
+  it('should respond with a 200', function () {
+    return supertest(app)
+      .get(INDEX_URI)
+      .expect(200)
+  })
+})
+
+describe(`GET ${INDEX_URI + '?HPP&TRUE=1/0'}`, function () {
+  it('should respond with an error', function () {
+    return supertest(app)
+      .get(INDEX_URI + '?HPP=TRUE/0')
+      .expect(500)
+  })
+})
+
+describe('/overview can be omitted', function () {
+  it('should respond with 200 when overview is omitted from the URL', function () {
+    return supertest(app)
+      .get(VALID_URL_WITHOUT_OVERVIEW)
+      .expect(200)
   })
 })

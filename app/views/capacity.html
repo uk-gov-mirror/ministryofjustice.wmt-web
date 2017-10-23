@@ -111,17 +111,17 @@
     <thead>
       <tr>
         <th colspan="2" id="org">{{ childOrganisationLevelDisplayText }}</th>
-        <th colspan="8" id="breakdown">Capacity breakdown</th>
+        <th colspan="8" id="breakdown">Workload breakdown</th>
       </tr>
       <tr>
         <th id="name">Name</th>
         <th id="grade">Grade</th>
         <th id="capacity">Capacity (%)</th>
         <th id="cases">Cases</th>
+        <th id="arms"><abbr title="Active Risk Management System">ARMS</abbr></th>
         <th id="paroms"><abbr title="Parole Assessment Reports by the Offender Manager">PAROMs</abbr></th>
         <th id="fdrs"><abbr title="Fast Delivery Reports">FDRs</abbr></th>
         <th id="sdrs"><abbr title="Standard Delivery Reports">SDRs</abbr></th>
-        <th id="arms"><abbr title="Active Risk Management System">ARMS</abbr></th>
         <th id="gs"><abbr title="Group Supervision">GS</abbr></th>
         <th id="cms"><abbr title="Case Management Support">CMS</abbr></th>
       </tr>
@@ -130,14 +130,18 @@
       <tbody>
         {% for member in capacityBreakdown %}
         <tr>
-          <td headers="name org"><a href="/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+          <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade org">{{ member.grade }}</td>
-          <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
+          {% if member.capacityPercentage > 110 %}
+            <td class="capacity-red" headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
+          {% else %}
+            <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
+          {% endif %}
           <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>
+          <td headers="arms breakdown">{{ member.armsTotalCases }}</td>
           <td headers="paroms breakdown">-</td>
           <td headers="fdrs breakdown">-</td>
           <td headers="sdrs breakdown">-</td>
-          <td headers="arms breakdown">-</td>
           <td headers="gs breakdown">{{ member.gsPercentage | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.cmsPercentage | round(1) }}%</td>
         </tr>
@@ -150,15 +154,19 @@
         {% for i in range(0, member.grades.length) %}
           <tr>
             {% if i === 0 %}
-              <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
             {% endif %}
           <td headers="grade org">{{ member.grades[i].grade }}</td>
-          <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
+          {% if member.grades[i].capacityPercentage > 110 %}
+            <td class="capacity-red" headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
+          {% else %}
+            <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
+          {% endif %}
           <td headers="cases breakdown">{{ member.grades[i].totalCases | round(1) }}</td>
+          <td headers="arms breakdown">{{ member.grades[i].armsTotalCases }}</td>
           <td headers="paroms breakdown">-</td>
           <td headers="fdrs breakdown">-</td>
           <td headers="sdrs breakdown">-</td>
-          <td headers="arms breakdown">-</td>
           <td headers="gs breakdown">{{ member.grades[i].gsPercentage | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.grades[i].cmsPercentage | round(1) }}%</td>
         </tr>

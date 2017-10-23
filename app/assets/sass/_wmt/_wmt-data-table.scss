@@ -54,6 +54,10 @@ table.data-table tr.data-sub-header td:nth-child(7) {
     font-weight: bold;
 }
 
+table td.capacity-red {
+  color: #ff0000 !important;
+}
+
 ul.sub-tier-header {
     width: 369px;
     display: block;

@@ -4,7 +4,8 @@ module.exports = {
     ref: 'I',
     displayText: 'Offender Manager',
     capacityView: 'individual_capacity_view',
-    caseProgressView: 'individual_case_progress_view'
+    caseProgressView: 'individual_case_progress_view',
+    courtReporterOverview: 'individual_court_reporter_overview'
   },
   TEAM: {
     name: 'team',
@@ -15,6 +16,7 @@ module.exports = {
     caseProgressView: 'team_case_progress_view',
     overviewView: 'team_case_overview',
     caseloadView: 'team_caseload_view',
+    courtReporterOverview: 'team_court_reporter_overview',
     childOrganisationLevel: 'offender-manager' },
   LDU: {
     name: 'ldu',
@@ -25,6 +27,7 @@ module.exports = {
     caseProgressView: 'ldu_case_progress_view',
     overviewView: 'ldu_case_overview',
     caseloadView: 'ldu_caseload_view',
+    courtReporterOverview: 'ldu_court_reporter_overview',
     childOrganisationLevel: 'team' },
   REGION: {
     name: 'region',
@@ -35,6 +38,7 @@ module.exports = {
     caseProgressView: 'region_case_progress_view',
     overviewView: 'region_case_overview',
     caseloadView: 'region_caseload_view',
+    courtReporterOverview: 'region_court_reporter_overview',
     childOrganisationLevel: 'ldu' },
   NATIONAL: {
     name: 'hmpps',
@@ -45,5 +49,6 @@ module.exports = {
     caseProgressView: 'national_case_progress_view',
     overviewView: 'national_case_overview',
     caseloadView: 'national_caseload_view',
+    courtReporterOverview: 'national_court_reporter_overview',
     childOrganisationLevel: 'region' }
 }

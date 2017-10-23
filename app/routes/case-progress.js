@@ -3,9 +3,10 @@ const getSubNav = require('../services/get-sub-nav')
 const organisationUnit = require('../constants/organisation-unit')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
+const workloadTypes = require('../../app/constants/workload-type')
 
 module.exports = function (router) {
-  router.get('/:organisationLevel/:id/case-progress', function (req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/case-progress', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {

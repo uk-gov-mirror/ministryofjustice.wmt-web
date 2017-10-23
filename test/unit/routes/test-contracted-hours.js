@@ -5,13 +5,15 @@ const proxyquire = require('proxyquire')
 const sinon = require('sinon')
 require('sinon-bluebird')
 
-const COOKIES = [ 'session=eyJub3dJbk1pbnV0ZXMiOjI0OTA3MzgxLjEzODEzMzMzMiwiZG9iRW5jb2RlZCI6IjExNDAxNzYwNyIsInJlbGF0aW9uc2hpcCI6InI0IiwiYmVuZWZpdCI6ImIxIiwicmVmZXJlbmNlSWQiOiIzYjI0NzE3YWI5YTI0N2E3MGIiLCJkZWNyeXB0ZWRSZWYiOiIxUjY0RVROIiwiY2xhaW1UeXBlIjoiZmlyc3QtdGltZSIsImFkdmFuY2VPclBhc3QiOiJwYXN0IiwiY2xhaW1JZCI6OH0=' ]
-const OM_CONTRACTED_HOURS_URL = '/offender-manager/1/contracted-hours'
-const LDU_CONTRACTED_HOURS_URL = '/ldu/1/contracted-hours'
-const REGION_CONTRACTED_HOURS_URL = '/region/1/contracted-hours'
-const HMPPS_CONTRACTED_HOURS_URL = '/hmpps/1/contracted-hours'
+const workloadType = require('../../../app/constants/workload-type')
 
-const OM_MISSING_ID_URL = '/offender-manager/contracted-hours'
+const COOKIES = [ 'session=eyJub3dJbk1pbnV0ZXMiOjI0OTA3MzgxLjEzODEzMzMzMiwiZG9iRW5jb2RlZCI6IjExNDAxNzYwNyIsInJlbGF0aW9uc2hpcCI6InI0IiwiYmVuZWZpdCI6ImIxIiwicmVmZXJlbmNlSWQiOiIzYjI0NzE3YWI5YTI0N2E3MGIiLCJkZWNyeXB0ZWRSZWYiOiIxUjY0RVROIiwiY2xhaW1UeXBlIjoiZmlyc3QtdGltZSIsImFkdmFuY2VPclBhc3QiOiJwYXN0IiwiY2xhaW1JZCI6OH0=' ]
+const OM_CONTRACTED_HOURS_URL = '/' + workloadType.PROBATION + '/offender-manager/1/contracted-hours'
+const LDU_CONTRACTED_HOURS_URL = '/' + workloadType.PROBATION + '/ldu/1/contracted-hours'
+const REGION_CONTRACTED_HOURS_URL = '/' + workloadType.PROBATION + '/region/1/contracted-hours'
+const HMPPS_CONTRACTED_HOURS_URL = '/' + workloadType.PROBATION + '/hmpps/1/contracted-hours'
+
+const OM_MISSING_ID_URL = '/' + workloadType.PROBATION + '/offender-manager/contracted-hours'
 
 const CONTRACTED_HOURS = {
   title: 'Title',
@@ -75,7 +77,7 @@ describe('contracted-hours route', function () {
     return supertest(app).get(OM_MISSING_ID_URL).expect(500)
   })
 
-  it('should call the getSubNav with the correct parameters', function () {
+  it('should call the getSubNav and getContractedHours with the correct parameters', function () {
     contractedHoursService.getContractedHours.resolves(CONTRACTED_HOURS)
     return supertest(app)
         .get(OM_CONTRACTED_HOURS_URL)
@@ -83,6 +85,7 @@ describe('contracted-hours route', function () {
         .set('Cookie', COOKIES)
         .then(function () {
           expect(getSubNavStub.calledWith('1', 'offender-manager', OM_CONTRACTED_HOURS_URL)).to.be.true //eslint-disable-line
+          expect(contractedHoursService.getContractedHours.calledWith('1', 'offender-manager', workloadType.PROBATION))
         })
   })
 
@@ -93,7 +96,7 @@ describe('contracted-hours route', function () {
     .send({hours: UPDATED_CONTRACTED_HOURS})
     .expect(302)
     .then(function (response) {
-      expect(contractedHoursService.updateContractedHours.calledWith('1','offender-manager', UPDATED_CONTRACTED_HOURS)).to.be.true //eslint-disable-line
+      expect(contractedHoursService.updateContractedHours.calledWith('1','offender-manager', UPDATED_CONTRACTED_HOURS, workloadType.PROBATION)).to.be.true //eslint-disable-line
     })
   })
 

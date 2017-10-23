@@ -18,7 +18,7 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
   return getWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString(), organisationLevel)
   .then(function (results) {
     result.capacityBreakdown = []
-    result.capacityTable = tableCreator.createCapacityTable(id, organisationalUnitType, capacityDateRange, results)
+    result.capacityTable = tableCreator.createCapacityTable(id, organisationalUnitType.displayText, capacityDateRange, results)
     result.title = result.breadcrumbs[0].title
     result.subTitle = organisationalUnitType.displayText
 
@@ -87,6 +87,7 @@ var buildCapacityBreakdownEntry = function (workloadReport) {
     linkId: workloadReport.linkId,
     capacityPercentage: percentageCalculator.calculatePercentage(workloadReport.totalPoints, workloadReport.availablePoints),
     cmsPercentage: cmsPercentageValue,
-    gsPercentage: percentageCalculator.calculatePercentage(-workloadReport.gsAdjustmentPoints, (workloadReport.totalPoints - workloadReport.gsAdjustmentPoints))
+    gsPercentage: percentageCalculator.calculatePercentage(-workloadReport.gsAdjustmentPoints, (workloadReport.totalPoints - workloadReport.gsAdjustmentPoints)),
+    armsTotalCases: workloadReport.armsTotalCases
   }
 }

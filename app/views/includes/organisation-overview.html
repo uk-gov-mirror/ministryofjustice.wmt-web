@@ -9,11 +9,15 @@
         </tr>
         <tr>
         <th scope="row">Team</th>
-        <td class="numeric"><a href="/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
+        <td class="numeric"><a href="/probation/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
         </tr>
         <tr>
         <th scope="row">Capacity</th>
+        {% if overviewDetails.capacity > 110 %}
+        <td class="numeric capacity-red"> {{ overviewDetails.capacity | round }}%</td>
+        {% else %}
         <td class="numeric"> {{ overviewDetails.capacity | round }}%</td>
+        {% endif %}
         </tr>
         <tr>
         <th scope="row">Cases</th>
@@ -38,7 +42,7 @@
         {% if organisationLevel === 'team' %}
           <th class="sln-table-org-level" id="om" colspan="2">{{ childOrganisationLevelDisplayText }}</th>
         {% else %}
-          <th class="sln-table-org-level" id="om" >{{ childOrganisationLevelDisplayText }}</th>
+          <th class="sln-table-org-level" id="om">{{ childOrganisationLevelDisplayText }}</th>
         {% endif %}
         <th id="cap" colspan="2">Capacity</th>
         <th id="hrs" colspan="2">Hours</th>
@@ -46,7 +50,7 @@
       </tr>
 
       <tr>
-        <th headers="om" id="name" >Name</th>
+        <th headers="om" id="name">Name</th>
         {% if organisationLevel === 'team' %}
           <th headers="om" id="grade" >Grade</th>
         {% endif %}
@@ -60,11 +64,15 @@
     <tbody>
     {% for member in overviewDetails %}
       <tr >
-        <td headers="name om"><a href="/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
+        <td headers="name om"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
         {% if organisationLevel === 'team' %}  
           <td headers="grade om">{{ member.gradeCode }}</td>
         {% endif %}
-        <td headers="current cap">{{ member.capacityPercentage | round }}%</td>
+        {% if member.capacityPercentage > 110 %}
+          <td class="capacity-red" headers="current cap">{{ member.capacityPercentage | round }}%</td>
+        {% else %}
+          <td headers="current cap">{{ member.capacityPercentage | round }}%</td>
+        {% endif %}
         <td headers="points cap">{{ member.availablePoints }}</td>
         <td headers="hrs contracted">{{ member.contractedHours }}</td>
         <td headers="hrs reduction">{{ member.reductionHours }}</td>
@@ -76,9 +84,9 @@
 {% endif %}
 
 {% block page_specific_scripts %}
-  {% if organisationLevel === 'team' %}
+
     <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
     <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
     <script src="{{ asset_path }}javascripts/case-overview.js"></script>
-  {% endif %}    
+   
 {% endblock %}

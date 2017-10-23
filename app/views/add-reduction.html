@@ -4,23 +4,22 @@
 
 <main id="content" role="main">
   {% include "includes/breadcrumbs.html" %} 
-  
+
   {% if reduction %}
     {% set headerText='Reduction' %}
     {% set reductionText='Showing reduction for ' %}
     {% set submitButtonText='Save changes' %}
-    {% set fromAction='/offender-manager/{{ linkId }}/edit-reduction' %}
+    {% set formAction='/' + workloadType + '/offender-manager/' +  linkId  + '/edit-reduction' %}
   {% else %}
     {% set headerText='New reduction' %}
     {% set reductionText='Add a new reduction for' %}
     {% set submitButtonText='Add reduction' %}
-    {% set fromAction='/offender-manager/{{ linkId }}/add-reduction' %}    
+    {% set formAction='/' + workloadType + '/offender-manager/' + linkId +'/add-reduction' %}    
   {% endif %}
 
   {% include "includes/validation-error-messages.html" %}
 
   <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">{{ headerText }}</header>
-
   <p class="lede">{{ reductionText }}<span class="bold">{{ title }}</span></p>
   {% set first = true %}
   <form action="{{ formAction }}" method=POST id="reductionForm">
@@ -110,13 +109,13 @@
   </form>
   {% if reduction %}
   <h2 class="heading-small">Other options</h2>
-  <form name="archiveReduction" method="POST" action="/offender-manager/{{ linkId }}/update-reduction-status">
+  <form name="archiveReduction" method="POST" action="/{{ workloadType }}/offender-manager/{{ linkId }}/update-reduction-status">
     <!-- Including the csrf-hidden-input.html hides the links -->
     <input type="hidden"  name="_csrf"  value="{{ csrfToken }}">
     <input type="hidden" name="reductionId" value="{{reduction.id}}">
     <input type="hidden" name="status" value="ARCHIVED">
   </form>
-  <form name="deleteReduction" method="POST" action="/offender-manager/{{ linkId }}/update-reduction-status">
+  <form name="deleteReduction" method="POST" action="/{{ workloadType }}/offender-manager/{{ linkId }}/update-reduction-status">
     <!-- Including the csrf-hidden-input.html hides the links -->
     <input type="hidden"  name="_csrf"  value="{{ csrfToken }}">
     <input type="hidden" name="reductionId" value="{{ reduction.id }}">

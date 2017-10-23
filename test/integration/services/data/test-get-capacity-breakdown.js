@@ -14,7 +14,8 @@ var capacityBreakdown = {
   totalCases: 5,
   cmsAdjustmentPoints: 0,
   gsAdjustmentPoints: -2,
-  contractedHours: 37.5
+  contractedHours: 37.5,
+  armsTotalCases: 5
 }
 
 describe('services/data/get-capacity-breakdown', function () {
@@ -30,7 +31,7 @@ describe('services/data/get-capacity-breakdown', function () {
       .then(function (results) {
         var expectedEntry = Object.assign(capacityBreakdown, { linkId: inserts.filter((item) => item.table === 'workload_owner')[0].id })
         expect(results.length).to.be.eql(1)
-        expect(results).to.contain(expectedEntry)
+        expect(results[0]).to.eql(expectedEntry)
       })
   })
 

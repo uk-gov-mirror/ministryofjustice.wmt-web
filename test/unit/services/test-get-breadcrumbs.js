@@ -4,6 +4,7 @@ require('sinon-bluebird')
 const proxyquire = require('proxyquire')
 const ohDataHelper = require('../../helpers/organisational-hierarchy-helper')
 const breadcrumbDataHelper = require('../../helpers/breadcrumb-helper')
+const workloadTypes = require('../../../app/constants/workload-type')
 
 var getTree
 var getBreadcrumbs
@@ -58,5 +59,30 @@ describe('services/get-breadcrumbs', function () {
 
   it('should throw an error when passed an id which does not exist in the organisational tree', function () {
     expect(() => getBreadcrumbs('7', 'team')).to.throw(/does not exist in the organisational tree/)
+  })
+
+  it('should return the correct breadcrumbs for court-reporter-offender managers', function () {
+    expect(getBreadcrumbs(1, 'offender-manager', workloadTypes.COURT_REPORTS).length).to.eql(5)
+    expect(getBreadcrumbs(1, 'offender-manager', workloadTypes.COURT_REPORTS)).to.eql(breadcrumbDataHelper.COURT_REPORTER_OFFENDER_MANAGER_BREADCRUMBS)
+  })
+
+  it('should return the correct breadcrumbs for court-reporter teams', function () {
+    expect(getBreadcrumbs(1, 'team', workloadTypes.COURT_REPORTS).length).to.eql(4)
+    expect(getBreadcrumbs(1, 'team', workloadTypes.COURT_REPORTS)).to.eql(breadcrumbDataHelper.COURT_REPORTER_TEAM_BREADCRUMBS)
+  })
+
+  it('should return the correct breadcrumbs for court-reporter LDUs', function () {
+    expect(getBreadcrumbs(1, 'ldu', workloadTypes.COURT_REPORTS).length).to.eql(3)
+    expect(getBreadcrumbs(1, 'ldu', workloadTypes.COURT_REPORTS)).to.eql(breadcrumbDataHelper.COURT_REPORTER_LDU_BREADCRUMBS)
+  })
+
+  it('should return the correct breadcrumbs for court-reporter regions', function () {
+    expect(getBreadcrumbs(1, 'region', workloadTypes.COURT_REPORTS).length).to.eql(2)
+    expect(getBreadcrumbs(1, 'region', workloadTypes.COURT_REPORTS)).to.eql(breadcrumbDataHelper.COURT_REPORTER_REGION_BREADCRUMBS)
+  })
+
+  it('should return the correct breadcrumbs for court-reporter national level', function () {
+    expect(getBreadcrumbs(1, 'hmpps', workloadTypes.COURT_REPORTS).length).to.eql(1)
+    expect(getBreadcrumbs(1, 'hmpps', workloadTypes.COURT_REPORTS)).to.eql(breadcrumbDataHelper.COURT_REPORTER_NATIONAL_BREADCRUMBS)
   })
 })
