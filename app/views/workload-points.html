@@ -21,6 +21,7 @@
 <form action="/admin/workload-points" method=POST id="workloadPointsForm">
 
   <input class="form-control" id="previousWpId" name="previousWpId" type="hidden" value="{{ wp.workloadPointsId }}">
+  <input class="form-control" id="isT2A" name="isT2A" type="hidden" value="{{ wp.isT2A }}">
 
   <div class="js-tabs">
     <ul class="js-tabs-links">
@@ -298,6 +299,7 @@
 
       <div id="other">
           <p><span class="bold">Delivery Report Workload Points</span></p>
+          {% if not wp.isT2A %}
           <div class="grid-row">
             <div class="column-two-thirds">
               <table>
@@ -339,7 +341,7 @@
               </table>
             </div>
           </div>
-          
+          {% endif %}
           <br>
           <p><span class="bold">Weighting</span></p>
           <div class="grid-row">
@@ -379,6 +381,7 @@
                       <input class="form-control" id="weightingUpw" name="weightingUpw" type="number" value="{{ wp.weightingUpw }}">
                     </td>   
                   </tr>
+                  {% if not wp.isT2A %}
                   <tr>
                     <th scope="row">
                       {% if errors['weightingArmsCommunity'][0] %}
@@ -401,11 +404,12 @@
                       <input class="form-control" id="weightingArmsLicense" name="weightingArmsLicense" type="number" value="{{ wp.weightingArmsLicense }}">
                     </td>   
                   </tr>
+                  {% endif %}
                 </tbody>
               </table>
             </div>
           </div>
-          
+          {% if not wp.isT2A %}
           <br>
           <p><span class="bold">Nominal Target (Points)</span></p>
           <div class="grid-row">
@@ -471,6 +475,18 @@
               </table>
             </div>
           </div>
+          {% endif %}
+          {% if wp.isT2A %}
+          <input class="form-control" id="sdr" name="sdr" type="hidden" value="{{ wp.sdr }}">
+          <input class="form-control" id="sdrConversion" name="sdrConversion" type="hidden" value="{{ wp.sdrConversion }}">
+          <input class="form-control" id="parom" name="parom" type="hidden" value="{{ wp.parom }}">
+          <input class="form-control" id="weightingArmsCommunity" name="weightingArmsCommunity" type="hidden" value="{{ wp.weightingArmsCommunity }}">
+          <input class="form-control" id="weightingArmsLicense" name="weightingArmsLicense" type="hidden" value="{{ wp.weightingArmsLicense }}">
+          <input class="form-control" id="nominalTargetPo" name="nominalTargetPo" type="hidden" value="{{ wp.nominalTargetPo }}">
+          <input class="form-control" id="nominalTargetPso" name="nominalTargetPso" type="hidden" value="{{ wp.nominalTargetPso }}">
+          <input class="form-control" id="defaultContractedHoursPo" name="defaultContractedHoursPo" type="hidden" value="{{ wp.defaultContractedHoursPo }}">
+          <input class="form-control" id="defaultContractedHoursPso" name="defaultContractedHoursPso" type="hidden" value="{{ wp.defaultContractedHoursPso }}">
+          {% endif %}
       </div> 
 
     </div>

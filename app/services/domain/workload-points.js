@@ -40,6 +40,7 @@ class WorkloadPoints {
     this.defaultContractedHoursPso = request.defaultContractedHoursPso
     this.parom = request.parom
     this.paroms_enabled = 1
+    this.isT2A = request.isT2A
     this.isValid()
   }
 
@@ -146,6 +147,9 @@ class WorkloadPoints {
     FieldValidator(this.parom, 'parom', errors)
       .isRequired()
       .isInt(0, 999)
+    FieldValidator(this.isT2A, 'isT2A', errors)
+      .isRequired()
+      .isBoolean()
 
     var validationErrors = errors.get()
     if (validationErrors) {

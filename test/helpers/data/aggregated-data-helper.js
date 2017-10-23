@@ -9,6 +9,10 @@ var defaultWorkload = {
   total_community_cases: 0,
   total_custody_cases: 0,
   total_license_cases: 0,
+  total_t2a_cases: 3,
+  total_t2a_community_cases: 0,
+  total_t2a_custody_cases: 0,
+  total_t2a_license_cases: 0,
   monthly_sdrs: 0,
   sdr_due_next_30_days: 0,
   sdr_conversions_last_30_days: 0,
@@ -53,7 +57,8 @@ module.exports.defaultWorkloadPoints = {
   paroms_enabled: 1,
   parom: 99,
   effective_from: '2017-04-01',
-  effective_to: null
+  effective_to: null,
+  is_t2a: false
 }
 
 module.exports.addOrgHierarchyWithPoAndPso = function () {

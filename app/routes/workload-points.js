@@ -6,6 +6,7 @@ const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
+const logger = require('../logger')
 
 module.exports = function (router) {
   router.get('/admin/workload-points', function (req, res) {
@@ -33,7 +34,39 @@ module.exports = function (router) {
           breadcrumbs: result.breadcrumbs,
           wp: result.workloadPoints,
           updatedBy: result.updatedBy,
-          successText: successText
+          successText: successText,
+          isT2A: false
+        })
+      })
+  })
+
+  router.get('/admin/workload-points/t2a', function (req, res) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
+    var success = req.query.success
+    var successText = success ? 'You have successfully updated the workload points for transition to adulthood cases!' : null
+    var isT2A = true
+    return workloadPointsService.getWorkloadPoints(isT2A)
+      .then(function (result) {
+        return res.render('workload-points', {
+          title: result.title,
+          subTitle: result.subTitle,
+          breadcrumbs: result.breadcrumbs,
+          wp: result.workloadPoints,
+          updatedBy: result.updatedBy,
+          successText: successText,
+          isT2A: true
         })
       })
   })
@@ -60,11 +93,17 @@ module.exports = function (router) {
       updatedWorkloadPoints = new WorkloadPoints(req.body)
       return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints)
         .then(function () {
-          return res.redirect(302, '/admin/workload-points?success=true')
+          var workloadPointRoute = '/admin/workload-points?success=true'
+          if (updatedWorkloadPoints.isT2A === 'true') {
+            workloadPointRoute = '/admin/workload-points/t2a?success=true'
+          }
+          return res.redirect(302, workloadPointRoute)
         })
     } catch (error) {
+      logger.error(error)
       if (error instanceof ValidationError) {
-        return workloadPointsService.getWorkloadPoints()
+        var isT2A = (req.body.isT2A === 'true')
+        return workloadPointsService.getWorkloadPoints(isT2A)
           .then(function (result) {
             return res.status(400).render('workload-points', {
               title: result.title,

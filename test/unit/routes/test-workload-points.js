@@ -4,6 +4,7 @@ const proxyquire = require('proxyquire')
 const sinon = require('sinon')
 require('sinon-bluebird')
 
+const WORKLOAD_POINTS_T2A_URL = '/admin/workload-points/t2a'
 const WORKLOAD_POINTS_URL = '/admin/workload-points'
 const WORKLOAD_POINTS_URL_TYPO = '/admin/workload-pnts'
 
@@ -49,7 +50,8 @@ var WORKLOAD_POINTS_TO_POST = {
   defaultContractedHoursPso: '37',
   parom: '121',
   weightingArmsCommunity: '15',
-  weightingArmsLicense: '10'
+  weightingArmsLicense: '10',
+  isT2A: 'false'
 }
 
 const MOCK_USER = {
@@ -85,6 +87,10 @@ before(function () {
 describe('Admin Workload Points route', function () {
   it('should respond with 200 when the correct admin/workload-points url is called', function () {
     return supertest(app).get(WORKLOAD_POINTS_URL).expect(200)
+  })
+
+  it('should respond with 200 when the correct admin/workload-points/t2s url is called', function () {
+    return supertest(app).get(WORKLOAD_POINTS_T2A_URL).expect(200)
   })
 
   it('should respond with 500 when an incorrect url is called', function () {

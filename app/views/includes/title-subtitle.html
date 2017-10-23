@@ -3,7 +3,7 @@
       {{ subTitle }}
   </span>
 
-  {% if organisationLevel === 'hmpps' %}
+  {% if organisationLevel === 'hmpps' or not organisationLevel  %}
     <span class="sln-page-title">
       {{ title }}
     </span>

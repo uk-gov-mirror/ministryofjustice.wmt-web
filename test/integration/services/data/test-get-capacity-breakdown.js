@@ -12,6 +12,7 @@ var capacityBreakdown = {
   name: 'Test_Forename Test_Surname',
   grade: 'PO',
   totalCases: 5,
+  totalT2aCases: 3,
   cmsAdjustmentPoints: 0,
   gsAdjustmentPoints: -2,
   contractedHours: 37.5,
