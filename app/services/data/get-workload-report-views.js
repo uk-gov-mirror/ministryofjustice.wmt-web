@@ -13,8 +13,8 @@ module.exports = function (id, fromDate, toDate, type) {
     'contracted_hours'
   ]
 
-  var whereString = ' WHERE effective_from >= \'' + fromDate.toISOString() + '\''
-  whereString += ' AND effective_from <= \'' + toDate.toISOString() + '\''
+  var whereString = ' WHERE effective_from >= \'' + fromDate + '\''
+  whereString += ' AND effective_from <= \'' + toDate + '\''
 
   if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
     whereString += ' AND id = ' + id
