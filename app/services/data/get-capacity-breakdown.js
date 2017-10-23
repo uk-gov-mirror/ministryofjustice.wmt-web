@@ -23,8 +23,7 @@ module.exports = function (id, type) {
   var requiresWorkloadOwnerName = (type === ORGANISATION_UNIT.TEAM.name)
 
   if (requiresWorkloadOwnerName) {
-    selectList.push('forename')
-    selectList.push('surname')
+    selectList.push('CONCAT(forename, \' \', surname) AS name')
   } else {
     selectList.push('name')
   }
@@ -42,13 +41,6 @@ module.exports = function (id, type) {
       noExpandHint +
       whereString)
     .then(function (results) {
-      if (requiresWorkloadOwnerName) {
-        results.forEach(function (result) {
-          result.name = result.forename + ' ' + result.surname
-          delete result.forename
-          delete result.surname
-        })
-      }
       return results
     })
 }
