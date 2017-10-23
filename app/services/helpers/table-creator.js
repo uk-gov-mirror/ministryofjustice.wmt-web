@@ -19,9 +19,9 @@ module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, 
   var capacityResults = capacityCalculator.calculate(workloadReports)
   capacityResults.forEach(function (capacity) {
     headings.push(capacity['workload_report_date'])
-    capacityPercentageRow.values.push(Math.round(capacity['capacity_percentage']))
+    capacityPercentageRow.values.push(customRound(capacity['capacity_percentage']))
     reductionRow.values.push(capacity['reductions'])
-    reductionPercentageRow.values.push(Math.round(capacity['reduction_percentage']))
+    reductionPercentageRow.values.push(customRound(capacity['reduction_percentage']))
   })
 
   rows.push(capacityPercentageRow)
@@ -29,4 +29,14 @@ module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, 
   rows.push(reductionPercentageRow)
 
   return new DisplayTable(headings, rows)
+}
+
+function customRound(number) {
+	let decimal = number % 1;
+	if(decimal < 0.6 && decimal >= 0.5) {
+		number = Math.floor(number);
+	} else {
+		number = Math.round(number);
+	}
+	return number;
 }
