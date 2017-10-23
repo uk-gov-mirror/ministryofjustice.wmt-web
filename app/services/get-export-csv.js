@@ -90,10 +90,15 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       }
       break
     case tabs.OVERVIEW:
-      result.overviewDetails.forEach(function (offernderManager) {
-        offernderManager.lduCluster = result.breadcrumbs[1].title
+     if (organisationLevel === organisationUnitConstants.TEAM.name) {
+       result.overviewDetails.forEach(function (team) {
+       team.lduCluster = result.breadcrumbs[1].title
       })
+       csv = generateCsv(result.overviewDetails, fields, fieldNames)
+    }else{
+      result.overviewDetails.lduCluster = result.breadcrumbs[2].title
       csv = generateCsv(result.overviewDetails, fields, fieldNames)
+    }
       break
   }
   return csv
