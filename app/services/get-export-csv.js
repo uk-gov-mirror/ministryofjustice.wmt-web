@@ -89,6 +89,9 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       }
       break
     case tabs.OVERVIEW:
+      for(var i = 0; i < result.overviewDetails.length; i++) {
+        result.overviewDetails[i].capacityPercentage = result.overviewDetails[i].capacityPercentage.toFixed(2) + '%'
+      }
       csv = generateCsv(result.overviewDetails, fields, fieldNames)
       break
   }
