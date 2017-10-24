@@ -5,7 +5,7 @@ const tabs = require('../constants/wmt-tabs')
 
 const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
-const OM_OVERVIEW_FIELD_NAMES = ['LDU Cluster', 'TeamName', 'GradeCode', 'CapacityPercentage', 'TotalCases', 'ContractedHours', 'ReductionHours']
+const OM_OVERVIEW_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
 const ORG_OVERVIEW_FIELDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
 
 module.exports = function (organisationLevel, result, tab) {
@@ -43,7 +43,7 @@ var getFields = function (organisationLevel, tab) {
       } else {
         childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
         fields = Object.assign([], ORG_OVERVIEW_FIELDS)
-        fieldNames = [childOrgForFieldName + 'Name', 'CapacityPercentage', 'CapacityPoints', 'ContractedHours', 'ReductionHours', 'TotalCases']
+        fieldNames = [childOrgForFieldName + ' Name', 'Capacity Percentage', 'Capacity Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases']
 
         if (organisationLevel === organisationUnitConstants.TEAM.name) {
           fields.push('gradeCode')
@@ -108,7 +108,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
 
 var getChildOrgForFieldName = function (organisationLevel) {
   var organisationUnit = getOrganisationUnit('name', organisationLevel)
-  return (getOrganisationUnit('name', organisationUnit.childOrganisationLevel).displayText).replace(/ /g, '')
+  return (getOrganisationUnit('name', organisationUnit.childOrganisationLevel).displayText)
 }
 
 var generateCsv = function (data, fields, fieldNames) {
