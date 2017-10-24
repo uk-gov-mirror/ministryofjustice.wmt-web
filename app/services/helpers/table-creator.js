@@ -29,20 +29,37 @@ module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, 
   rows.push(reductionPercentageRow)
 
   return new DisplayTable(headings, rows)
+  /** 
+  function customRound (number) {
+    if (number || number === 0) {
+      let decimal = number % 1
+      if (decimal < 0.6 && decimal >= 0.5) {
+        number = Math.floor(number)
+        console.log('Floored: ', number)
+      } else {
+        number = Math.round(number)
+        console.log('Rounded: ', number)
+      }
+      return number
+    } else {
+      return undefined
+    }
+  }
+  **/
 }
 
-function customRound (number) {
+module.exports.customRound = function(number) {
   if (number || number === 0) {
     let decimal = number % 1
     if (decimal < 0.6 && decimal >= 0.5) {
       number = Math.floor(number)
-      console.log('Floored: ', number)
     } else {
       number = Math.round(number)
-      console.log('Rounded: ', number)
     }
     return number
   } else {
     return undefined
   }
 }
+
+
