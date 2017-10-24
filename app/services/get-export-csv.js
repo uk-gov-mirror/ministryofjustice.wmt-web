@@ -89,8 +89,8 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       }
       break
     case tabs.OVERVIEW:
-      if(Array.isArray(result.overviewDetails)) {
-        result.overviewDetails.forEach(function(item) {
+      if (Array.isArray(result.overviewDetails)) {
+        result.overviewDetails.forEach(function (item) {
           item.capacityPercentage = formatCapacityValue(item.capacityPercentage)
         })
       } else {
