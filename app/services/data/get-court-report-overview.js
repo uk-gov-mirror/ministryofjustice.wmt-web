@@ -21,7 +21,7 @@ module.exports = function (id, type) {
     'total_oral_reports AS totalOralReports'
   ]
 
-  if (ORGANISATION_UNIT.NATIONAL.name !== orgUnit) {
+  if (ORGANISATION_UNIT.NATIONAL.name !== orgUnit.name) {
     selectList.push('id')
   }
 
