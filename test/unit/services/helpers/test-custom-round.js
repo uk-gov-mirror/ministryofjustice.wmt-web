@@ -1,7 +1,7 @@
 const expect = require('chai').expect
-const tableCreator = require('../../../../app/services/helpers/table-creator')
+const tableCreator = require('../../../../app/services/helpers/custom-round')
 
-describe('services/helpers/table-creator custom round', function () {
+describe('services/helpers/custom round', function () {
   it('should return undefined when passed an undefined value', function () {
     var empty
     expect(tableCreator.customRound(empty)).to.eql(undefined)

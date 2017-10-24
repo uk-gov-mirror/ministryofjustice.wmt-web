@@ -1,5 +1,6 @@
 const DisplayTable = require('../domain/display-table')
 const capacityCalculator = require('../helpers/capacity-calculator')
+const customRounder = require('./custom-round')
 
 module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, workloadReports) {
   var headings = []
@@ -19,9 +20,9 @@ module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, 
   var capacityResults = capacityCalculator.calculate(workloadReports)
   capacityResults.forEach(function (capacity) {
     headings.push(capacity['workload_report_date'])
-    capacityPercentageRow.values.push(customRound(capacity['capacity_percentage']))
+    capacityPercentageRow.values.push(customRounder.customRound(capacity['capacity_percentage']))
     reductionRow.values.push(capacity['reductions'])
-    reductionPercentageRow.values.push(customRound(capacity['reduction_percentage']))
+    reductionPercentageRow.values.push(customRounder.customRound(capacity['reduction_percentage']))
   })
 
   rows.push(capacityPercentageRow)
@@ -30,21 +31,3 @@ module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, 
 
   return new DisplayTable(headings, rows)
 }
-
-module.exports.customRound = function(number) {
-  if(number || number === 0) {
-		if ((number % 1) != 0) {
-			let decimal = number % 1;
-			if(decimal < 0.5999999999999943 && decimal >= 0.5) {
-				number = Math.floor(number);
-			} else {
-				number = Math.round(number);
-			}
-		}
-		return number;
-	} else {
-		return undefined;
-	}
-}
-
-
