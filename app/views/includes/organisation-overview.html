@@ -9,7 +9,7 @@
         </tr>
         <tr>
         <th scope="row">Team</th>
-        <td class="numeric"><a href="/probation/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
+        <td class="numeric blue-link"><a href="/probation/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
         </tr>
         <tr>
         <th scope="row">Capacity</th>
@@ -64,7 +64,7 @@
     <tbody>
     {% for member in overviewDetails %}
       <tr >
-        <td headers="name om"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
+        <td class="blue-link" headers="name om"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
         {% if organisationLevel === 'team' %}  
           <td headers="grade om">{{ member.gradeCode }}</td>
         {% endif %}
