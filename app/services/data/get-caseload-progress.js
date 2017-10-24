@@ -8,7 +8,7 @@ module.exports = function (id, type) {
   var whereString = ''
 
   if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
-    whereString += ' WHERE id = ' + id
+    whereString = ' WHERE id = ' + id
   }
 
   var selectList = [
