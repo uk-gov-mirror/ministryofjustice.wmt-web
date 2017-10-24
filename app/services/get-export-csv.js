@@ -89,9 +89,13 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       }
       break
     case tabs.OVERVIEW:
-      result.overviewDetails.forEach(function(item) {
-        item.capacityPercentage = parseFloat(item.capacityPercentage).toFixed(2) + '%'
-      })
+      if(Array.isArray(result.overviewDetails)) {
+        result.overviewDetails.forEach(function(item) {
+          item.capacityPercentage = formatCapacityValue(item.capacityPercentage)
+        })
+      } else {
+        result.overviewDetails.capacity = formatCapacityValue(result.overviewDetails.capacity)
+      }
       csv = generateCsv(result.overviewDetails, fields, fieldNames)
       break
   }
@@ -147,4 +151,8 @@ var parseTotalSummaryTable = function (totalSummary) {
   })
 
   return table
+}
+
+var formatCapacityValue = function (capacity) {
+  return parseFloat(capacity).toFixed(2) + '%'
 }
