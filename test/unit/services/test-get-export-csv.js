@@ -47,10 +47,9 @@ describe('services/get-export-csv', function () {
       expect(capacityExport).to.include('107.37%')
       expect(capacityExport).to.include('106.84%')
     })
-    it('should be appended with a percentage symbol with LDU', function() {
-      var capacityExport = getExportCsv(orgUnit.LDU.name, helper.LDU_OVERVIEW_RESULT, tabs.OVERVIEW).csv
-      expect(capacityExport).to.include('106.74%')
-      expect(capacityExport).to.include('106.74%')
+    it('should also format capacity when exporting individual OM overview', function() {
+      var capacityExport = getExportCsv(orgUnit.OFFENDER_MANAGER.name, helper.OM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
+      expect(capacityExport).to.include('105.00%')
     })
   })
 })
