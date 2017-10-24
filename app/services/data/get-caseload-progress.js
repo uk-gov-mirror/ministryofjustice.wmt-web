@@ -1,7 +1,6 @@
 const knex = require('../../../knex').web
 const orgUnitFinder = require('../helpers/org-unit-finder')
 const ORGANISATION_UNIT = require('../../constants/organisation-unit')
-const Promise = require('bluebird').Promise
 
 module.exports = function (id, type) {
   var orgUnit = orgUnitFinder('name', type)
