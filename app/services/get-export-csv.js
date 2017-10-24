@@ -46,8 +46,10 @@ var getFields = function (organisationLevel, tab) {
         fieldNames = [childOrgForFieldName + ' Name', 'Capacity Percentage', 'Capacity Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases']
 
         if (organisationLevel === organisationUnitConstants.TEAM.name) {
-          fields.push('gradeCode')
-          fieldNames.push('GradeCode')
+          fields.unshift('gradeCode')
+          fieldNames.unshift('GradeCode')
+          fields.unshift('teamName')
+          fieldNames.unshift('Team Name')
           fields.unshift('lduCluster')
           fieldNames.unshift('LDU Cluster')
         }
@@ -92,6 +94,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
     case tabs.OVERVIEW:
       if (organisationLevel === organisationUnitConstants.TEAM.name) {
         result.overviewDetails.forEach(function (team) {
+          team.teamName = result.breadcrumbs[0].title
           team.lduCluster = result.breadcrumbs[1].title
         })
         csv = generateCsv(result.overviewDetails, fields, fieldNames)
