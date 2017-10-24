@@ -40,7 +40,4 @@ module.exports = function (id, type) {
       ' FROM ' + table +
       noExpandHint +
       whereString)
-    .then(function (results) {
-      return results
-    })
 }
