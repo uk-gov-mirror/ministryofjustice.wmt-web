@@ -36,4 +36,21 @@ describe('services/get-export-csv', function () {
       expect(getExportCsv(orgUnit.NATIONAL.name, helper.LDU_OVERVIEW_RESULT, tabs.OVERVIEW).csv).to.include(helper.NATIONAL_OVERVIEW_HEADINGS)
     })
   })
+  describe('should format the capacity when exporting overviews', function() {
+    it('should be formatted to two decimal figures', function() {
+      var capacityExport = getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
+      expect(capacityExport).to.include('107.37')
+      expect(capacityExport).to.include('106.84')
+    })
+    it('should be appended with a percentage symbol', function() {
+      var capacityExport = getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
+      expect(capacityExport).to.include('107.37%')
+      expect(capacityExport).to.include('106.84%')
+    })
+    it('should be appended with a percentage symbol with LDU', function() {
+      var capacityExport = getExportCsv(orgUnit.LDU.name, helper.LDU_OVERVIEW_RESULT, tabs.OVERVIEW).csv
+      expect(capacityExport).to.include('106.74%')
+      expect(capacityExport).to.include('106.74%')
+    })
+  })
 })
