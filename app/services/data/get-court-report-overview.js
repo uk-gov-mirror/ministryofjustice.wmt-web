@@ -8,10 +8,6 @@ module.exports = function (id, type) {
 
   var whereString = ''
 
-  if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
-    whereString += ' WHERE id = ' + id
-  }
-
   var selectList = [
     'link_id AS linkId',
     'contracted_hours AS contractedHours',
@@ -23,6 +19,7 @@ module.exports = function (id, type) {
 
   if (ORGANISATION_UNIT.NATIONAL.name !== orgUnit) {
     selectList.push('id')
+    whereString = ' WHERE id = ' + id
   }
 
   if (ORGANISATION_UNIT.TEAM.name === type) {
