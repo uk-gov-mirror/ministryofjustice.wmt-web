@@ -1,3 +1,4 @@
+const expect = require('chai').expect
 const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
@@ -118,6 +119,9 @@ before(function () {
 describe('Admin Workload Points route', function () {
   it('should respond with 200 when the correct admin/workload-points url is called', function () {
     return supertest(app).get(WORKLOAD_POINTS_URL).expect(200)
+    .then(function () {
+      expect(workloadPointsService.getWorkloadPoints.calledWith(false)).to.be.true //eslint-disable-line
+    })
   })
 
   it('should respond with 500 when an incorrect url is called', function () {
@@ -136,6 +140,9 @@ describe('Admin Workload Points route', function () {
 describe('Admin Workload Points T2A route', function () {
   it('should respond with 200 when the correct admin/workload-points/t2a url is called', function () {
     return supertest(app).get(WORKLOAD_POINTS_T2A_URL).expect(200)
+    .then(function () {
+      expect(workloadPointsService.getWorkloadPoints.calledWith(true)).to.be.true //eslint-disable-line
+    })
   })
 
   it('should respond with 500 when an incorrect url is called for t2a', function () {

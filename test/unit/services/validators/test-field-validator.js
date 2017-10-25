@@ -235,10 +235,10 @@ describe('services/validators/field-validator', function () {
       expect(errors).to.equal(false)
     })
 
-    it('should not return false if passed in invalid true or false value', function () {
+    it('should return an error if passed in invalid true or false value', function () {
       FieldValidator('xxxx', FIELD_NAME, errorHandler).isBoolean()
       var errors = errorHandler.get()
-      expect(errors).to.not.equal(true)
+      expect(errors).to.have.property(FIELD_NAME)
     })
   })
 })

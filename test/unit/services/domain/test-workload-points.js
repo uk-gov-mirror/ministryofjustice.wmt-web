@@ -81,55 +81,6 @@ describe('services/domain/workload-points', function () {
     expect(workloadPoints.isT2A).to.equal('false')
   })
 
-  it('should create a valid T2A workload points object', function () {
-    var t2aWorkloadPoints = new WorkloadPoints(Object.assign({}, VALID_WORKLOAD_POINTS))
-    t2aWorkloadPoints.isT2A = 'true'
-    t2aWorkloadPoints.defaultContractedHoursPo = '0'
-    t2aWorkloadPoints.defaultContractedHoursPso = '0'
-    t2aWorkloadPoints.sdrConversion = '0'
-    t2aWorkloadPoints.nominalTargetPo = '0'
-    t2aWorkloadPoints.nominalTargetPso = '0'
-    t2aWorkloadPoints.parom = '0'
-    t2aWorkloadPoints.sdr = '0'
-    t2aWorkloadPoints.weightingArmsCommunity = '0'
-    t2aWorkloadPoints.weightingArmsLicense = '0'
-
-    expect(t2aWorkloadPoints.commA).to.equal('111')
-    expect(t2aWorkloadPoints.commB1).to.equal('101')
-    expect(t2aWorkloadPoints.commB2).to.equal('99')
-    expect(t2aWorkloadPoints.commC1).to.equal('55')
-    expect(t2aWorkloadPoints.commC2).to.equal('44')
-    expect(t2aWorkloadPoints.commD1).to.equal('22')
-    expect(t2aWorkloadPoints.cusA).to.equal('44')
-    expect(t2aWorkloadPoints.cusB1).to.equal('34')
-    expect(t2aWorkloadPoints.cusB2).to.equal('33')
-    expect(t2aWorkloadPoints.cusC1).to.equal('22')
-    expect(t2aWorkloadPoints.cusC2).to.equal('21')
-    expect(t2aWorkloadPoints.cusD1).to.equal('11')
-    expect(t2aWorkloadPoints.cusD2).to.equal('10')
-    expect(t2aWorkloadPoints.defaultContractedHoursPo).to.equal('0')
-    expect(t2aWorkloadPoints.defaultContractedHoursPso).to.equal('0')
-    expect(t2aWorkloadPoints.sdrConversion).to.equal('0')
-    expect(t2aWorkloadPoints.licA).to.equal('150')
-    expect(t2aWorkloadPoints.licB1).to.equal('110')
-    expect(t2aWorkloadPoints.licB2).to.equal('99')
-    expect(t2aWorkloadPoints.licC1).to.equal('55')
-    expect(t2aWorkloadPoints.licC2).to.equal('54')
-    expect(t2aWorkloadPoints.licD1).to.equal('44')
-    expect(t2aWorkloadPoints.licD2).to.equal('43')
-    expect(t2aWorkloadPoints.userId).to.equal('35')
-    expect(t2aWorkloadPoints.nominalTargetPo).to.equal('0')
-    expect(t2aWorkloadPoints.nominalTargetPso).to.equal('0')
-    expect(t2aWorkloadPoints.parom).to.equal('0')
-    expect(t2aWorkloadPoints.sdr).to.equal('0')
-    expect(t2aWorkloadPoints.weightingOverdue).to.equal('0.0')
-    expect(t2aWorkloadPoints.weightingUpw).to.equal('100.0')
-    expect(t2aWorkloadPoints.weightingArmsCommunity).to.equal('0')
-    expect(t2aWorkloadPoints.weightingArmsLicense).to.equal('0')
-    expect(t2aWorkloadPoints.weightingWarrants).to.equal('0.0')
-    expect(t2aWorkloadPoints.isT2A).to.equal('true')
-  })
-
   it('should raise a ValidationError if a Community Weighting field is out of range', function () {
     var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.commA = '1000'
