@@ -232,7 +232,7 @@ module.exports.OM_OVERVIEW_RESULT = {
 
 module.exports.OM_OVERVIEW_CSV = {
   filename: 'John_Smith_Overview.csv',
-  csv: '"LDU Cluster","TeamName","GradeCode","CapacityPercentage","TotalCases","ContractedHours","ReductionHours"\n' +
+  csv: '"LDU Cluster","Team Name","Grade Code","Capacity Percentage","Total Cases","Contracted Hours","Reduction Hours"\n' +
   '"Test Cluster","Team 1","PO",105,60,37,4'
 }
 
@@ -260,15 +260,16 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     linkId: 2771,
     gradeCode: 'PO',
     capacityPercentage: 106.84210526315789,
+    teamName: 'Test Team',
     lduCluster: 'Test Cluster' }],
   title: 'Test Team'
 }
 
 module.exports.TEAM_OVERVIEW_CSV = {
   filename: 'Test_Team_Overview.csv',
-  csv: '"LDU Cluster","OffenderManagerName","CapacityPercentage","CapacityPoints","ContractedHours","ReductionHours","TotalCases","GradeCode"\n' +
-  '"Test Cluster","John Smith",107.36842105263158,190,37.5,6,63,"PO"\n' +
-  '"Test Cluster","Tony Test",106.84210526315789,190,36.5,6,63,"PO"'
+  csv: '"LDU Cluster", "Team Name", "Offender Manager Name","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases","Grade Code"\n' +
+  '"Test Cluster","Test Team","John Smith",107.36842105263158,190,37.5,6,63,"PO"\n' +
+  '"Test Cluster","Test Team","Tony Test",106.84210526315789,190,36.5,6,63,"PO"'
 }
 
 module.exports.LDU_OVERVIEW_RESULT = {
@@ -280,7 +281,8 @@ module.exports.LDU_OVERVIEW_RESULT = {
     contractedHours: 175.5,
     reductionHours: 30,
     linkId: 1611,
-    capacityPercentage: 106.73684210526315 },
+    capacityPercentage: 106.73684210526315,
+    lduCluster: 'Test Cluster' },
   { name: 'Team 4',
     totalCases: 315,
     availablePoints: 950,
@@ -288,17 +290,18 @@ module.exports.LDU_OVERVIEW_RESULT = {
     contractedHours: 175.5,
     reductionHours: 28,
     linkId: 1614,
-    capacityPercentage: 106.73684210526315 } ],
+    capacityPercentage: 106.73684210526315,
+    lduCluster: 'Test Cluster' } ],
   title: 'Test LDU'
 }
 
 module.exports.LDU_OVERVIEW_CSV = {
   filename: 'Test_LDU_Overview.csv',
-  csv: '"TeamName","CapacityPercentage","CapacityPoints","ContractedHours","ReductionHours","TotalCases"\n' +
-  '"Team 1",106.73684210526315,950,175.5,30,315\n' +
-  '"Team 4",106.73684210526315,950,175.5,28,315'
+  csv: '"LDU Cluster","Team Name","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"\n' +
+  '"Test Cluster","Team 1",106.73684210526315,950,175.5,30,315\n' +
+  '"Test Cluster","Team 4",106.73684210526315,950,175.5,28,315'
 }
 
-module.exports.REGION_OVERVIEW_HEADINGS = '"LDUClusterName","CapacityPercentage","CapacityPoints","ContractedHours","ReductionHours","TotalCases"'
+module.exports.REGION_OVERVIEW_HEADINGS = '"LDU Cluster","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"'
 
-module.exports.NATIONAL_OVERVIEW_HEADINGS = '"DivisionName","CapacityPercentage","CapacityPoints","ContractedHours","ReductionHours","TotalCases"'
+module.exports.NATIONAL_OVERVIEW_HEADINGS = '"Division Name","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"'
