@@ -56,7 +56,7 @@
         {% endif %}
         <th headers="cap" id="current">Current (%)</th>
         <th headers="cap" id="points">Points</th>
-        <th headers="cap" id="utilisation">Utilisation</th>
+        <th headers="cap" id="remaining">Remaining Points</th>
         <th headers="hrs" id="contracted">Contracted</th>
         <th headers="hrs" id="reduction">Reduction</th>
         <th headers="cases" id="total">Total</th>
@@ -75,7 +75,7 @@
           <td headers="current cap">{{ member.capacityPercentage | round }}%</td>
         {% endif %}
         <td headers="points cap">{{ member.availablePoints }}</td>
-        <td headers="utilisation cap">{{ member.availablePoints - member.totalPoints}}</td>
+        <td headers="remaining cap">{{ member.availablePoints - member.totalPoints}}</td>
         <td headers="hrs contracted">{{ member.contractedHours }}</td>
         <td headers="hrs reduction">{{ member.reductionHours }}</td>
         <td headers="cases total">{{ member.totalCases }}</td>
