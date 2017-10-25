@@ -105,7 +105,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
         result.overviewDetails.lduCluster = result.breadcrumbs[2].title
         csv = generateCsv(result.overviewDetails, fields, fieldNames)
       } else {
-        result.overviewDetails.forEach(function(team) {
+        result.overviewDetails.forEach(function (team) {
           team.lduCluster = result.breadcrumbs[0].title
         })
         csv = generateCsv(result.overviewDetails, fields, fieldNames)
