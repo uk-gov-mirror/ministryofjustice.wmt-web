@@ -46,6 +46,18 @@ class WorkloadPoints {
 
   isValid () {
     var errors = ErrorHandler()
+    this.isValidCommonPoints(errors)
+    if (this.isT2A === 'true') {
+      this.initializeStandardPoints()
+    }
+    this.isValidStandardPoints(errors)
+    var validationErrors = errors.get()
+    if (validationErrors) {
+      throw new ValidationError(validationErrors)
+    }
+  }
+
+  isValidCommonPoints (errors) {
     FieldValidator(this.cusA, 'cusA', errors)
       .isRequired()
       .isInt(0, 999)
@@ -109,20 +121,6 @@ class WorkloadPoints {
     FieldValidator(this.licD2, 'licD2', errors)
       .isRequired()
       .isInt(0, 999)
-    FieldValidator(this.sdr, 'sdr', errors)
-      .isRequired()
-      .isInt(0, 999)
-    FieldValidator(this.userId, 'userId', errors)
-      .isRequired()
-    FieldValidator(this.sdrConversion, 'sdrConversion', errors)
-      .isRequired()
-      .isInt(0, 999)
-    FieldValidator(this.nominalTargetPso, 'nominalTargetPso', errors)
-      .isRequired()
-      .isInt(0, 9999)
-    FieldValidator(this.nominalTargetPo, 'nominalTargetPo', errors)
-      .isRequired()
-      .isInt(0, 9999)
     FieldValidator(this.weightingOverdue, 'weightingOverdue', errors)
       .isRequired()
       .isFloat(0, 100.0)
@@ -132,6 +130,26 @@ class WorkloadPoints {
     FieldValidator(this.weightingWarrants, 'weightingWarrants', errors)
       .isRequired()
       .isFloat(0, 100.0)
+    FieldValidator(this.userId, 'userId', errors)
+      .isRequired()
+    FieldValidator(this.isT2A, 'isT2A', errors)
+      .isRequired()
+      .isBoolean()
+  }
+
+  isValidStandardPoints (errors) {
+    FieldValidator(this.sdr, 'sdr', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.sdrConversion, 'sdrConversion', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.nominalTargetPso, 'nominalTargetPso', errors)
+      .isRequired()
+      .isInt(0, 9999)
+    FieldValidator(this.nominalTargetPo, 'nominalTargetPo', errors)
+      .isRequired()
+      .isInt(0, 9999)
     FieldValidator(this.weightingArmsCommunity, 'weightingArmsCommunity', errors)
       .isRequired()
       .isFloat(0, 100.0)
@@ -147,14 +165,22 @@ class WorkloadPoints {
     FieldValidator(this.parom, 'parom', errors)
       .isRequired()
       .isInt(0, 999)
-    FieldValidator(this.isT2A, 'isT2A', errors)
-      .isRequired()
-      .isBoolean()
+  }
 
-    var validationErrors = errors.get()
-    if (validationErrors) {
-      throw new ValidationError(validationErrors)
-    }
+  initializeStandardPoints () {
+    this.sdr = '0'
+    this.sdrConversion = '0'
+    this.nominalTargetPso = '0'
+    this.nominalTargetPo = '0'
+    this.weightingOverdue = '0'
+    this.weightingWarrants = '0'
+    this.weightingUpw = '0'
+    this.weightingArmsCommunity = '0'
+    this.weightingArmsLicense = '0'
+    this.defaultContractedHoursPo = '0'
+    this.defaultContractedHoursPso = '0'
+    this.parom = '0'
+    this.paroms_enabled = '0'
   }
 }
 

@@ -1,10 +1,7 @@
 const knex = require('../../../knex').web
 
 module.exports = function (isT2A = false) {
-  var whereObject = {}
-  if (isT2A === true) {
-    whereObject.is_t2a = true
-  }
+  isT2A = (isT2A === true)
 
   return knex('workload_points')
     .first('id AS workloadPointsId',
@@ -46,5 +43,5 @@ module.exports = function (isT2A = false) {
             'is_t2a AS isT2A')
     .whereNotNull('effective_from')
     .whereNull('effective_to')
-    .where(whereObject)
+    .where('is_t2a', isT2A)
 }

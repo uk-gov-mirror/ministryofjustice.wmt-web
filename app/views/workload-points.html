@@ -18,7 +18,13 @@
 
 <p>Current Workload Points created by <span class="bold">{{ updatedBy }}</span> on <span class="bold">{{ wp.effectiveFrom }}</span></p> 
 
-<form action="/admin/workload-points" method=POST id="workloadPointsForm">
+{% if wp.isT2A %}
+{% set formAction='/admin/workload-points/t2a' %}
+{% else %}
+{% set formAction='/admin/workload-points' %}
+{% endif %}
+
+<form action="{{ formAction }}" method=POST id="workloadPointsForm">
 
   <input class="form-control" id="previousWpId" name="previousWpId" type="hidden" value="{{ wp.workloadPointsId }}">
   <input class="form-control" id="isT2A" name="isT2A" type="hidden" value="{{ wp.isT2A }}">
@@ -475,17 +481,6 @@
               </table>
             </div>
           </div>
-          {% endif %}
-          {% if wp.isT2A %}
-          <input class="form-control" id="sdr" name="sdr" type="hidden" value="{{ wp.sdr }}">
-          <input class="form-control" id="sdrConversion" name="sdrConversion" type="hidden" value="{{ wp.sdrConversion }}">
-          <input class="form-control" id="parom" name="parom" type="hidden" value="{{ wp.parom }}">
-          <input class="form-control" id="weightingArmsCommunity" name="weightingArmsCommunity" type="hidden" value="{{ wp.weightingArmsCommunity }}">
-          <input class="form-control" id="weightingArmsLicense" name="weightingArmsLicense" type="hidden" value="{{ wp.weightingArmsLicense }}">
-          <input class="form-control" id="nominalTargetPo" name="nominalTargetPo" type="hidden" value="{{ wp.nominalTargetPo }}">
-          <input class="form-control" id="nominalTargetPso" name="nominalTargetPso" type="hidden" value="{{ wp.nominalTargetPso }}">
-          <input class="form-control" id="defaultContractedHoursPo" name="defaultContractedHoursPo" type="hidden" value="{{ wp.defaultContractedHoursPo }}">
-          <input class="form-control" id="defaultContractedHoursPso" name="defaultContractedHoursPso" type="hidden" value="{{ wp.defaultContractedHoursPso }}">
           {% endif %}
       </div> 
 
