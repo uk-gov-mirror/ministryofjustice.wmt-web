@@ -304,6 +304,6 @@ module.exports.LDU_OVERVIEW_CSV = {
   '"Test Cluster","Team 4",106.73684210526315,950,175.5,28,315'
 }
 
-module.exports.REGION_OVERVIEW_HEADINGS = '"LDU Cluster","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"'
+module.exports.REGION_OVERVIEW_HEADINGS = '"LDU Cluster Name","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"'
 
 module.exports.NATIONAL_OVERVIEW_HEADINGS = '"Division Name","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"'
