@@ -35,6 +35,7 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
 
 var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
   var capacityBreakdown = []
+  var totals = { name: 'Total/Average', capacity: 0, totalCases: 0, totalARMS: 0, totalGs: 0, totalCMS: 0 }
 
   if (organisationLevel === organisationConstant.TEAM.name) {
     workloadReports.forEach(function (workloadReport) {
@@ -70,6 +71,17 @@ var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
     })
   }
 
+  capacityBreakdown.forEach(function (val, key) {
+    totals.capacity += val.capacityPercentage
+    totals.totalCases += val.totalCases
+    totals.totalARMS += val.armsTotalCases
+    totals.totalGs += val.gsPercentage
+    totals.totalCMS += val.cmsPercentage
+  })
+  totals.capacity = totals.capacity / capacityBreakdown.length
+  totals.totalGs = totals.totalGs / capacityBreakdown.length
+  totals.totalCMS = totals.totalCMS / capacityBreakdown.length
+  capacityBreakdown.push(totals)
   return capacityBreakdown
 }
 

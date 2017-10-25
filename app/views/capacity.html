@@ -130,6 +130,17 @@
       <tbody>
         {% for member in capacityBreakdown %}
         <tr>
+          {% if member.name === 'Total/Average' %}
+          <td colspan="2" headers="name org">{{ member.name }}</td>
+          <td headers="capacity breakdown">{{ member.capacity | round(1) }}%</td>
+          <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>
+          <td headers="paroms breakdown">-</td>
+          <td headers="fdrs breakdown">-</td>
+          <td headers="sdrs breakdown">-</td>
+          <td headers="arms breakdown">{{ member.totalARMS }}</td>
+          <td headers="gs breakdown">{{ member.totalGs | round(1) }}%</td>
+          <td headers="cms breakdown">{{ member.totalCMS | round(1) }}%</td>
+          {% else %}
           <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade org">{{ member.grade }}</td>
           <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
@@ -140,6 +151,7 @@
           <td headers="arms breakdown">{{ member.armsTotalCases }}</td>
           <td headers="gs breakdown">{{ member.gsPercentage | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.cmsPercentage | round(1) }}%</td>
+          {% endif %}
         </tr>
         {% endfor %}
       </tbody>

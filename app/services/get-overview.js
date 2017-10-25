@@ -25,6 +25,8 @@ module.exports = function (id, organisationLevel) {
 }
 
 var calculateValues = function (results) {
+  var totals = { name: 'Total/Average', totalPercentage: 0, totalPoints: 0, totalContractedHours: 0, totalReduction: 0, totalTotalCases: 0 }
+  var thingToReturn = {}
   if (results.length !== undefined) {
     results.forEach(function (result) {
       result.capacityPercentage = 0
@@ -32,9 +34,19 @@ var calculateValues = function (results) {
         result.capacityPercentage = (result.totalPoints / result.availablePoints) * 100
       }
     })
-    return results
+    thingToReturn = results
+    thingToReturn.forEach(function (val, key) {
+      totals.totalPercentage += val.capacityPercentage
+      totals.totalPoints += val.totalPoints
+      totals.totalContractedHours += val.contractedHours
+      totals.totalReduction += val.reductionHours
+      totals.totalTotalCases += val.totalCases
+    })
+    totals.totalPercentage = totals.totalPercentage / thingToReturn.length - 1
+    thingToReturn.push(totals)
   } else {
     var capacityPercentage = (results.totalPoints / results.availablePoints) * 100
-    return Object.assign({}, results, {capacity: capacityPercentage})
+    thingToReturn = Object.assign({}, results, {capacity: capacityPercentage})
   }
+  return thingToReturn
 }

@@ -31,7 +31,6 @@ module.exports = function (router) {
     return getCaseload(id, organisationLevel)
       .then(function (result) {
         var caseloadDetailsResult = caseloadDetails(organisationLevel, result)
-        console.log(caseloadDetailsResult)
         return res.render('caseload', {
           screen: 'caseload',
           linkId: req.params.id,

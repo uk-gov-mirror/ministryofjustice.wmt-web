@@ -64,7 +64,7 @@
           </thead>
 
           <tbody class="">
-            {% for member in caseType.array.details %}
+            {% for member in caseType.array %}
               <tr>
                 <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
                 <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grade }}</td>

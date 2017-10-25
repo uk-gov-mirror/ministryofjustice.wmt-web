@@ -60,6 +60,17 @@
     <tbody>
     {% for member in overviewDetails %}
       <tr >
+        {% if member.name === 'Total/Average' %}
+        <td headers="name om">{{ member.name }}</td>
+        {% if organisationLevel === 'team' %}  
+          <td headers="grade om">{{ member.gradeCode }}</td>
+        {% endif %}
+        <td headers="current cap">{{ member.totalPercentage | round }}%</td>
+        <td headers="points cap">{{ member.totalPoints }}</td>
+        <td headers="hrs contracted">{{ member.totalContractedHours }}</td>
+        <td headers="hrs reduction">{{ member.totalReduction }}</td>
+        <td headers="cases total">{{ member.totalTotalCases }}</td>  
+        {% else %}
         <td headers="name om"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
         {% if organisationLevel === 'team' %}  
           <td headers="grade om">{{ member.gradeCode }}</td>
@@ -69,6 +80,7 @@
         <td headers="hrs contracted">{{ member.contractedHours }}</td>
         <td headers="hrs reduction">{{ member.reductionHours }}</td>
         <td headers="cases total">{{ member.totalCases }}</td>
+        {% endif%}
       </tr>
     {% endfor%}
     </tbody>

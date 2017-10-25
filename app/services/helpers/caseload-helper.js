@@ -166,21 +166,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
           untiered: percentageCalculator.calculatePercentage(teamGradeRecords[record].untiered, caseloadTotalsByTeam[team].untiered),
           totalCases: percentageCalculator.calculatePercentage(teamGradeRecords[record].totalCases, caseloadTotalsByTeam[team].totalCases)
         }
-        if (gradeTotals[newGradeRecord.grade] !== undefined) {
-          gradeTotals[newGradeRecord.grade].a += newGradeRecord.a
-          gradeTotals[newGradeRecord.grade].b1 += newGradeRecord.b1
-          gradeTotals[newGradeRecord.grade].b2 += newGradeRecord.b2
-          gradeTotals[newGradeRecord.grade].c1 += newGradeRecord.c1
-          gradeTotals[newGradeRecord.grade].c2 += newGradeRecord.c2
-          gradeTotals[newGradeRecord.grade].d1 += newGradeRecord.d1
-          gradeTotals[newGradeRecord.grade].d2 += newGradeRecord.d2
-          gradeTotals[newGradeRecord.grade].untiered += newGradeRecord.untiered
-          gradeTotals[newGradeRecord.grade].totalCases += newGradeRecord.totalCases
-          gradeTotals[newGradeRecord.grade].numberOfType++
-        } else {
-          gradeTotals[newGradeRecord.grade] = newGradeRecord
-          gradeTotals[newGradeRecord.grade].numberOfType = 1
-        }
+        gradeTotals = createAndTotalValues(gradeTotals, newGradeRecord)
       } else {
         newGradeRecord = {
           grade: teamGradeRecords[record].grade,
@@ -194,19 +180,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
           untiered: teamGradeRecords[record].untiered,
           totalCases: teamGradeRecords[record].totalCases
         }
-        if (gradeTotals[newGradeRecord.grade] !== undefined) {
-          gradeTotals[newGradeRecord.grade].a += newGradeRecord.a
-          gradeTotals[newGradeRecord.grade].b1 += newGradeRecord.b1
-          gradeTotals[newGradeRecord.grade].b2 += newGradeRecord.b2
-          gradeTotals[newGradeRecord.grade].c1 += newGradeRecord.c1
-          gradeTotals[newGradeRecord.grade].c2 += newGradeRecord.c2
-          gradeTotals[newGradeRecord.grade].d1 += newGradeRecord.d1
-          gradeTotals[newGradeRecord.grade].d2 += newGradeRecord.d2
-          gradeTotals[newGradeRecord.grade].untiered += newGradeRecord.untiered
-          gradeTotals[newGradeRecord.grade].totalCases += newGradeRecord.totalCases
-        } else {
-          gradeTotals[newGradeRecord.grade] = Object.assign({}, newGradeRecord)
-        }
+        gradeTotals = createAndTotalValues(gradeTotals, newGradeRecord)
       }
       gradeRecords.push(newGradeRecord)
     }
@@ -226,10 +200,26 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
       gradeTotals[key].totalCases = gradeTotals[key].totalCases / gradeTotals[key].numberOfType
     }
   }
-  // if (!calculatePercentage) {
-  //   console.log(gradeTotals)
-  // }
   return { details: transformedData, totals: gradeTotals }
+}
+
+var createAndTotalValues = function (gradeTotals, newGradeRecord) {
+  if (gradeTotals[newGradeRecord.grade] !== undefined) {
+    gradeTotals[newGradeRecord.grade].a += newGradeRecord.a
+    gradeTotals[newGradeRecord.grade].b1 += newGradeRecord.b1
+    gradeTotals[newGradeRecord.grade].b2 += newGradeRecord.b2
+    gradeTotals[newGradeRecord.grade].c1 += newGradeRecord.c1
+    gradeTotals[newGradeRecord.grade].c2 += newGradeRecord.c2
+    gradeTotals[newGradeRecord.grade].d1 += newGradeRecord.d1
+    gradeTotals[newGradeRecord.grade].d2 += newGradeRecord.d2
+    gradeTotals[newGradeRecord.grade].untiered += newGradeRecord.untiered
+    gradeTotals[newGradeRecord.grade].totalCases += newGradeRecord.totalCases
+    gradeTotals[newGradeRecord.grade].numberOfType++
+  } else {
+    gradeTotals[newGradeRecord.grade] = Object.assign({}, newGradeRecord)
+    gradeTotals[newGradeRecord.grade].numberOfType = 1
+  }
+  return gradeTotals
 }
 
 var groupCaseload = function (caseloads, splitByGrade = false) {
