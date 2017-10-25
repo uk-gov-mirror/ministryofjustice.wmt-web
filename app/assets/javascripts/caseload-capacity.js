@@ -11,13 +11,13 @@ trace1 = {
 };
 trace2 = {
     x: capacityTable.headings,
-    y: capacityTable.rows[1].values,
+    y: capacityTable.rows[2].values,
     line: {width: 3.5},
     marker: {
         line: {width: -0.5},
         size: 9
     },
-    name: 'Reduction Hours',
+    name: 'Reduction Hours %',
 };
 data = [trace1, trace2];
 layout = {
@@ -65,32 +65,6 @@ layout = {
         ticks: 'outside',
         title: '2016',
         titlefont: {size: 15},
-        rangeselector: {buttons: [
-        {
-          count: 1,
-          label: '1 Month',
-          step: 'month',
-          stepmode: 'backward'
-        },
-        {
-          count: 6,
-          label: '6 Months',
-          step: 'month',
-          stepmode: 'backward'
-        },
-        {
-          count: 12,
-          label: '12 Months',
-          step: 'month',
-          stepmode: 'backward'
-        },
-        {
-          count: 18,
-          label: '18 Months',
-          step: 'month',
-          stepmode: 'backward'
-        }
-      ]},
         type: 'date',
         zeroline: false,
         zerolinewidth: 11

@@ -6,16 +6,17 @@ const sinon = require('sinon')
 require('sinon-bluebird')
 const orgUnit = require('../../../app/constants/organisation-unit')
 const tabs = require('../../../app/constants/wmt-tabs')
+const workloadTypes = require('../../../app/constants/workload-type')
 
-const REGION_CASELOAD_URL = '/region/1/caseload'
-const NATIONAL_CASELOAD_URL = '/hmpps/0/caseload'
-const LDU_CASELOAD_URL = '/ldu/1/caseload'
-const LDU_MISSING_ID_URL = '/ldu/caseload'
-const TEAM_CASELOAD_URL = '/team/1/caseload'
-const TEAM_MISSING_ID_URL = '/team/caseload'
+const REGION_CASELOAD_URL = '/' + workloadTypes.PROBATION + '/region/1/caseload'
+const NATIONAL_CASELOAD_URL = '/' + workloadTypes.PROBATION + '/hmpps/0/caseload'
+const LDU_CASELOAD_URL = '/' + workloadTypes.PROBATION + '/ldu/1/caseload'
+const LDU_MISSING_ID_URL = '/' + workloadTypes.PROBATION + '/ldu/caseload'
+const TEAM_CASELOAD_URL = '/' + workloadTypes.PROBATION + '/team/1/caseload'
+const TEAM_MISSING_ID_URL = '/' + workloadTypes.PROBATION + '/team/caseload'
 
-const TEAM_CASELOAD_CSV_URL = '/team/1/caseload/csv'
-const LDU_CASELOAD_CSV_URL = '/ldu/1/caseload/csv'
+const TEAM_CASELOAD_CSV_URL = '/' + workloadTypes.PROBATION + '/team/1/caseload/csv'
+const LDU_CASELOAD_CSV_URL = '/' + workloadTypes.PROBATION + '/ldu/1/caseload/csv'
 
 const TEAM_CASELOAD = {
   title: 'Title',
@@ -52,14 +53,19 @@ var route
 var getCaseload
 var getSubNavStub
 var getExportCsv
+var authorisationService
 
 before(function () {
+  authorisationService = {
+    assertUserAuthenticated: sinon.stub()
+  }
   getSubNavStub = sinon.stub()
   getCaseload = sinon.stub()
   getExportCsv = sinon.stub().returns({ filename: EXPORT_CSV_FILENAME, csv: EXPORT_CSV })
   route = proxyquire('../../../app/routes/caseload', {
     '../services/get-caseload': getCaseload,
     '../services/get-sub-nav': getSubNavStub,
+    '../authorisation': authorisationService,
     '../services/get-export-csv': getExportCsv
   })
   app = routeHelper.buildApp(route)
@@ -102,23 +108,43 @@ describe('caseload route', function () {
   })
 
   // LDU Level
-  it('should respond with 200 when ldu and id are included in URL', function () {
-    getCaseload.resolves(TEAM_CASELOAD)
-    return supertest(app).get(LDU_CASELOAD_URL).expect(200)
-  })
-
   it('should respond with 500 when ldu, but no id, is included in URL', function () {
     getCaseload.resolves(TEAM_CASELOAD)
     return supertest(app).get(LDU_MISSING_ID_URL).expect(500)
   })
 
   it('should call the getSubNav with the correct parameters for LDU', function () {
-    getCaseload.resolves(TEAM_CASELOAD)
+    getCaseload.resolves(ORG_CASELOAD)
     return supertest(app)
       .get(LDU_CASELOAD_URL)
       .expect(200)
       .then(function () {
         expect(getSubNavStub.calledWith('1', orgUnit.LDU.name, LDU_CASELOAD_URL)).to.be.true //eslint-disable-line
+        expect(getCaseload.calledWith('1', orgUnit.LDU.name)).to.be.eql(true)
+      })
+  })
+
+  // REGION Level
+  it('should call the getSubNav with the correct parameters for REGION', function () {
+    getCaseload.resolves(ORG_CASELOAD)
+    return supertest(app)
+      .get(REGION_CASELOAD_URL)
+      .expect(200)
+      .then(function () {
+        expect(getSubNavStub.calledWith('1', orgUnit.REGION.name, REGION_CASELOAD_URL)).to.be.true //eslint-disable-line
+        expect(getCaseload.calledWith('1', orgUnit.REGION.name)).to.be.eql(true)
+      })
+  })
+
+  // NATIONAL Level
+  it('should call the getSubNav with the correct parameters for NATIONAL', function () {
+    getCaseload.resolves(ORG_CASELOAD)
+    return supertest(app)
+      .get(NATIONAL_CASELOAD_URL)
+      .expect(200)
+      .then(function () {
+        expect(getSubNavStub.calledWith('0', orgUnit.NATIONAL.name, NATIONAL_CASELOAD_URL)).to.be.true //eslint-disable-line
+        expect(getCaseload.calledWith('0', orgUnit.NATIONAL.name)).to.be.eql(true)
       })
   })
 })

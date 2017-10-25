@@ -1,5 +1,4 @@
-const config = require('../../../knexfile').web
-const knex = require('knex')(config)
+const knex = require('../../../knex').web
 
 module.exports = function () {
   return knex('workload_points')
@@ -35,6 +34,8 @@ module.exports = function () {
             'weighting_o AS weightingOverdue',
             'weighting_w AS weightingWarrants',
             'weighting_u AS weightingUpw',
+            'weighting_arms_comm AS weightingArmsCommunity',
+            'weighting_arms_lic AS weightingArmsLicense',
             'parom AS parom',
             'effective_from AS effectiveFrom')
     .whereNotNull('effective_from')

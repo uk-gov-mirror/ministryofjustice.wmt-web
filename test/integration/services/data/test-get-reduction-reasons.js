@@ -28,9 +28,13 @@ describe('services/data/get-reduction-reasons', function () {
     })
   })
 
-  it('should return an array of reductions reasons ref data, including category', function () {
+  it('should return an array of reductions reasons ref data', function () {
     return getReductionReasons()
       .then(function (results) {
+        var reasonIds = []
+        results.forEach(function (reason) {
+          reasonIds.push(reason.id)
+        })
         expect(results).to.contain(Object.assign({}, reductionReasonsRow, { id: insertedId }))
       })
   })

@@ -4,8 +4,8 @@
 # requires pa11y installed globally `npm install -g pa11y`
 # requires existing workload data in the application so screens load correctly
 
-if [ $# -ne 4 ]; then
-  echo $0: usage: ./run-pa11y regionId lduId teamId omId
+if [ $# -ne 5 ]; then
+  echo $0: usage: ./run-pa11y regionId lduId teamId omId crId
   exit 1
 fi
 
@@ -13,8 +13,9 @@ regionId=$1
 lduId=$2
 teamId=$3
 omId=$4
+crId=$5
 
-pa11yCommand="""pa11y --standard WCAG2AA --ignore "warning\;notice" --hide-elements "div[role=presentation],a[role=dynamic],a[role=anchor-div]" """
+pa11yCommand="""pa11y --standard WCAG2AA --ignore "warning\;notice" --hide-elements "div[aria-hidden=true],a[role=dynamic],a[role=anchor-div]" """
 
 if [ $WMT_BASE_URL ]
 then 
@@ -25,6 +26,9 @@ fi
 
 urls=()
 errors=false
+
+court_reports_base="$host/court-reports"
+probation_base="$host/probation"
 
 offender_manager='offender-manager'
 team='team'
@@ -43,46 +47,61 @@ national='hmpps/0'
 
 # Capacity
 capacity_url='caseload-capacity'
-urls+=("$host/$offender_manager/$omId/$capacity_url")
-urls+=("$host/$team/$teamId/$capacity_url")
-urls+=("$host/$ldu/$lduId/$capacity_url")
-urls+=("$host/$region/$regionId/$capacity_url")
+urls+=("$probation_base/$offender_manager/$omId/$capacity_url")
+urls+=("$probation_base/$team/$teamId/$capacity_url")
+urls+=("$probation_base/$ldu/$lduId/$capacity_url")
+urls+=("$probation_base/$region/$regionId/$capacity_url")
 
 # Case Progress
 case_progress_url='case-progress'
-urls+=("$host/$offender_manager/$omId/$case_progress_url")
-urls+=("$host/$team/$teamId/$case_progress_url")
-urls+=("$host/$ldu/$lduId/$case_progress_url")
-urls+=("$host/$region/$regionId/$case_progress_url")
+urls+=("$probation_base/$offender_manager/$omId/$case_progress_url")
+urls+=("$probation_base/$team/$teamId/$case_progress_url")
+urls+=("$probation_base/$ldu/$lduId/$case_progress_url")
+urls+=("$probation_base/$region/$regionId/$case_progress_url")
 
 # Overview
 overview_url='overview'
-urls+=("$host/$offender_manager/$omId/$overview_url")
-urls+=("$host/$team/$teamId/$overview_url")
-urls+=("$host/$ldu/$lduId/$overview_url")
-urls+=("$host/$region/$regionId/$overview_url")
-urls+=("$host/$national/$overview_url")
+urls+=("$probation_base/$offender_manager/$crId/$overview_url")
+urls+=("$probation_base/$team/$teamId/$overview_url")
+urls+=("$probation_base/$ldu/$lduId/$overview_url")
+urls+=("$probation_base/$region/$regionId/$overview_url")
+urls+=("$probation_base/$national/$overview_url")
+
+# Court Reports Overview
+urls+=("$court_reports_base/$offender_manager/$crId/$overview_url")
+urls+=("$court_reports_base/$team/$teamId/$overview_url")
+urls+=("$court_reports_base/$ldu/$lduId/$overview_url")
+urls+=("$court_reports_base/$region/$regionId/$overview_url")
+urls+=("$court_reports_base/$national/$overview_url")
 
 # Caseload
 caseload_url='caseload'
-urls+=("$host/$team/$teamId/$caseload_url")
-urls+=("$host/$ldu/$lduId/$caseload_url")
-urls+=("$host/$region/$regionId/$caseload_url")
-urls+=("$host/$national/$caseload_url")
+urls+=("$probation_base/$team/$teamId/$caseload_url")
+urls+=("$probation_base/$ldu/$lduId/$caseload_url")
+urls+=("$probation_base/$region/$regionId/$caseload_url")
+urls+=("$probation_base/$national/$caseload_url")
 
 # Contracted hours
 contracted_hours_url='contracted-hours'
-urls+=("$host/$offender_manager/$omId/$contracted_hours_url")
+urls+=("$probation_base/$offender_manager/$omId/$contracted_hours_url")
+urls+=("$probation_base/$court_reports/$offender_manager/$crId/$contracted_hours_url")
 
 # Reduction
 reductions_url='reductions'
 add_reductions_url='add-reduction'
-urls+=("$host/$offender_manager/$omId/$reductions_url")
-urls+=("$host/$offender_manager/$omId/$add_reductions_url")
+urls+=("$probation_base/$offender_manager/$omId/$reductions_url")
+urls+=("$probation_base/$offender_manager/$omId/$add_reductions_url")
+urls+=("$court_reports_base/$offender_manager/$crId/$reductions_url")
+urls+=("$court_reports_base/$offender_manager/$crId/$add_reductions_url")
 
 # Admin
 admin='admin'
-urls+=("$host/$admin/workload-points")
+add_user='user'
+add_user_rights='user-rights'
+workload_points='workload-points'
+urls+=("$host/$admin/$workload_points")
+urls+=("$host/$admin/$add_user")
+urls+=("$host/$admin/$add_user_rights")
 
 for url in "${urls[@]}"
 do

@@ -1,0 +1,32 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/breadcrumbs.html" %}
+   
+  {% include "includes/title-subtitle.html" %}
+  <div>
+    <div class="column-one-half">
+      <h2 class="heading-medium">
+        {% if noAuth === true or userRole === 'Data Admin'%}
+        <a href="/admin/workload-points">Workload points</a>
+        {% else %}
+        Workload points
+        {% endif %}
+      </h2>
+      <p>Set workload points</p>
+    </div>
+    <div class="column-one-half">
+      <h2 class="heading-medium">
+        {% if noAuth === true or userRole === 'System Admin' %}
+        <a href="/admin/user">User rights</a>
+        {% else %}
+        User rights
+        {% endif %}
+      </h2>
+      <p>Manage user rights</p>
+    </div>
+  </div>
+
+</main>
+{% endblock %}

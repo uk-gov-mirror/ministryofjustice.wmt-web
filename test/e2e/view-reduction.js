@@ -1,6 +1,7 @@
 const expect = require('chai').expect
-
+const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
+const workloadTypes = require('../../app/constants/workload-type')
 
 var offenderManagerId
 var offenderManagerUrl
@@ -9,12 +10,15 @@ var reductionUrl
 
 describe('View adding a new reduction', () => {
   before(function () {
+    authenticationHerlp.login(authenticationHerlp.users.Manager)
     return dataHelper.getAnyExistingWorkloadOwnerIdWithActiveReduction()
       .then(function (results) {
         offenderManagerId = results.workloadOwnerId
-        offenderManagerUrl = '/offender-manager/' + offenderManagerId + '/reductions'
+        offenderManagerUrl = '/' + workloadTypes.PROBATION + '/offender-manager/' + offenderManagerId + '/reductions'
         reductionId = results.reductionId
-        reductionUrl = '/offender-manager/' + offenderManagerId + '/edit-reduction?reductionId=' + reductionId
+        reductionUrl = '/' + workloadTypes.PROBATION + '/offender-manager/' + offenderManagerId + '/edit-reduction?reductionId=' + reductionId
+      }).then(function () {
+        return browser.url(offenderManagerUrl).waitForExist('.breadcrumbs')
       })
   })
 
@@ -114,5 +118,9 @@ describe('View adding a new reduction', () => {
           expect(text).to.equal('Reduction')
         })
     })
+  })
+
+  after(function () {
+    authenticationHerlp.logout()
   })
 })

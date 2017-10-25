@@ -19,6 +19,10 @@
     text-decoration: none;
   }
 
+  a:visited {
+    color:$black;
+  }
+
   .wmt-sub-nav__link.is-active {
     color: $govuk-blue;
 
@@ -36,3 +40,4 @@
       text-decoration:none;
     }
   }
+  

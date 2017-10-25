@@ -1,6 +1,5 @@
 const expect = require('chai').expect
-const config = require('../../../../knexfile').integrationTests
-const knex = require('knex')(config)
+const knex = require('../../../knex').integrationTests
 
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 const getWorkloadPoints = require('../../../../app/services/data/get-workload-points')
@@ -44,6 +43,8 @@ var getExistingActiveWorkloadPoints = function () {
           'weighting_o AS weightingOverdue',
           'weighting_w AS weightingWarrants',
           'weighting_u AS weightingUpw',
+          'weighting_arms_comm AS weightingArmsCommunity',
+          'weighting_arms_lic AS weightingArmsLicense',
           'parom AS parom')
   .whereNotNull('effective_from')
   .whereNull('effective_to')

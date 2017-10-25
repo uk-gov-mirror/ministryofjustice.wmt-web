@@ -1,8 +1,14 @@
 const expect = require('chai').expect
+const authenticationHerlp = require('../helpers/routes/authentication-helper')
 
 var workloadPointsUrl = '/admin/workload-points'
 
 describe('View / edit Workload Points', () => {
+  before(function () {
+    authenticationHerlp.login(authenticationHerlp.users.DataAdmin)
+    return browser.url(workloadPointsUrl).waitForExist('.breadcrumbs')
+  })
+
   describe('should navigate to the admin workload points screen', () => {
     it('with the correct breadcrumbs and headings', () => {
       return browser.url(workloadPointsUrl)
@@ -92,5 +98,8 @@ describe('View / edit Workload Points', () => {
           expect(readonly).to.not.contain('false')
         })
     })
+  })
+  after(function () {
+    authenticationHerlp.logout()
   })
 })

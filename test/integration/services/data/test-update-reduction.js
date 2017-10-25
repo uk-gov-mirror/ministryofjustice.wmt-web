@@ -1,17 +1,20 @@
 const expect = require('chai').expect
-
+const moment = require('moment')
 const insertReduction = require('../../../../app/services/data/insert-reduction')
 const Reduction = require('../../../../app/services/domain/reduction')
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 const updateReduction = require('../../../../app/services/data/update-reduction')
-const reductionStatusType = require('../../../../app/constants/reduction-status-type')
 
 var reductionResult = {
   table: 'reductions',
   id: 0
 }
-
-var testReduction = new Reduction(1, 5, new Date(), new Date(), 'Test Note', reductionStatusType.ACTIVE)
+var reductionReason = { maxAllowanceHours: 0 }
+var activeStartDate = moment().subtract(30, 'days').toDate()
+var activeEndDate = moment().add(30, 'days').toDate()
+var testReduction = new Reduction('1', '5',
+  [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
+  [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'Test Note', reductionReason)
 const updatedReductionNote = 'New test note'
 var workloadOwnerId
 var addedReductionId
@@ -38,15 +41,8 @@ describe('/services/data/update-reduction', function () {
   })
 
   it('should update a reduction and return an id ', function () {
-    var updatedReduction = new Reduction(
-      testReduction.reasonForReductionId,
-      testReduction.hours,
-      testReduction.reductionStartDate,
-      testReduction.reductionEndDate,
-      testReduction.reasonForReductionId,
-      updatedReductionNote,
-      testReduction.status
-    )
+    var updatedReduction = Object.assign({}, testReduction)
+    updatedReduction.notes = updatedReductionNote
 
     return updateReduction(addedReductionId, workloadOwnerId, updatedReduction)
       .then(function (result) {

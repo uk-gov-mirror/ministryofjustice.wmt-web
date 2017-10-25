@@ -1,5 +1,4 @@
-const config = require('../../knexfile').web
-const knex = require('knex')(config)
+const knex = require('../../knex').web
 const shelljs = require('shelljs')
 const expect = require('chai').expect
 
@@ -10,6 +9,7 @@ describe('accessibility/pa11y', function () {
     var teamId
     var lduId
     var regionId
+    var courtReporterId
 
     return knex('workload_owner')
     .join('workload', 'workload.workload_owner_id', 'workload_owner.id')
@@ -29,9 +29,18 @@ describe('accessibility/pa11y', function () {
           return knex('region').select('id').first()
           .then(function (region) {
             regionId = region.id
-
-            var cmd = pathToScript + ' ' + regionId + ' ' + lduId + ' ' + teamId + ' ' + offenderManagerId
-            expect(shelljs.exec(cmd).code).to.eql(0)
+            return knex('workload_owner')
+            .join('court_reports', 'court_reports.workload_owner_id', 'workload_owner.id')
+            .join('court_reports_calculations', 'court_reports_calculations.court_reports_id', 'court_reports.id')
+            .join('workload_report', 'court_reports_calculations.workload_report_id', 'workload_report.id')
+            .whereNull('workload_report.effective_to')
+            .orderBy('workload_report.effective_from', 'desc')
+            .select('workload_owner.id').first()
+            .then(function (workloadOwnerCr) {
+              courtReporterId = workloadOwnerCr.id
+              var cmd = pathToScript + ' ' + regionId + ' ' + lduId + ' ' + teamId + ' ' + offenderManagerId + ' ' + courtReporterId
+              expect(shelljs.exec(cmd).code).to.eql(0)
+            })
           })
         })
       })

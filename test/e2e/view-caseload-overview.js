@@ -1,6 +1,7 @@
 const expect = require('chai').expect
-
+const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
+const workloadTypes = require('../../app/constants/workload-type')
 
 var workloadOwnerIds = []
 var workloadOwnerId
@@ -13,15 +14,16 @@ var nationalDefaultUrl
 
 describe('View overview', function () {
   before(function () {
+    authenticationHerlp.login(authenticationHerlp.users.Staff)
     return dataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
         workloadOwnerId = workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
-        workloadOwnerDefaultUrl = '/offender-manager/' + workloadOwnerId
-        teamDefaultUrl = '/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id
-        lduDefaultUrl = '/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
-        regionDefaultUrl = '/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
-        nationalDefaultUrl = '/hmpps/0'
+        workloadOwnerDefaultUrl = '/' + workloadTypes.PROBATION + '/offender-manager/' + workloadOwnerId
+        teamDefaultUrl = '/' + workloadTypes.PROBATION + '/team/' + workloadOwnerIds.filter((item) => item.table === 'team')[0].id
+        lduDefaultUrl = '/' + workloadTypes.PROBATION + '/ldu/' + workloadOwnerIds.filter((item) => item.table === 'ldu')[0].id
+        regionDefaultUrl = '/' + workloadTypes.PROBATION + '/region/' + workloadOwnerIds.filter((item) => item.table === 'region')[0].id
+        nationalDefaultUrl = '/' + workloadTypes.PROBATION + '/hmpps/0'
         return results
       })
       .then(function (builtInserts) {
@@ -29,6 +31,8 @@ describe('View overview', function () {
         .then(function (gradeResult) {
           workloadOwnerGrade = gradeResult
         })
+      }).then(function () {
+        return browser.url(workloadOwnerDefaultUrl + '/overview').waitForExist('.breadcrumbs')
       })
   })
 
@@ -155,5 +159,9 @@ describe('View overview', function () {
       .then(function (text) {
         expect(text).to.equal('National')
       })
+  })
+
+  after(function () {
+    authenticationHerlp.logout()
   })
 })

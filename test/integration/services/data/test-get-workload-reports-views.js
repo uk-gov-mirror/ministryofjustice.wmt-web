@@ -1,6 +1,5 @@
 const expect = require('chai').expect
-const config = require('../../../../knexfile').integrationTests
-const knex = require('knex')(config)
+const knex = require('../../../knex').integrationTests
 
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 const getWorkloadReportsViews = require('../../../../app/services/data/get-workload-report-views')
@@ -20,7 +19,8 @@ var getExpectedNationalCapacity = function (fromDate, toDate) {
     .select('total_points',
             'available_points',
             'effective_from',
-            'reduction_hours')
+            'reduction_hours',
+            'contracted_hours')
     .then(function (results) {
       return results
     })
@@ -35,14 +35,15 @@ describe('services/data/get-workload-report-views', function () {
     .then(function () {
       return dataHelper.getWorkloadReportEffectiveFromDate()
       .then(function (result) {
-        startDate = result.effective_from
-        endDate = new Date((startDate.getTime() + 360 * ONE_DAY_IN_MS))
+        startDate = result.effective_from.toISOString()
+        endDate = new Date((result.effective_from.getTime() + 360 * ONE_DAY_IN_MS)).toISOString()
         expectedResults = [
           {
-            effective_from: startDate,
-            total_points: 70,
-            available_points: 35,
-            reduction_hours: 6
+            effective_from: new Date(startDate),
+            total_points: 50,
+            available_points: 25,
+            reduction_hours: 3,
+            contracted_hours: 37.5
           }
         ]
       })
@@ -55,7 +56,7 @@ describe('services/data/get-workload-report-views', function () {
     .then(function (results) {
       queryResults = results
       return getExpectedNationalCapacity(startDate, endDate).then(function (capacityResults) {
-        expect(queryResults).to.eql(capacityResults)
+        expect(queryResults).to.have.deep.members(capacityResults)
       })
     })
   })
@@ -84,12 +85,8 @@ describe('services/data/get-workload-report-views', function () {
   it('should retrieve all the workloads within the date range for an OM', function () {
     return getWorkloadReportsViews(inserts.filter((item) => item.table === 'workload_owner')[0].id, startDate, endDate, 'offender-manager')
     .then(function (results) {
-      expect(results.length).to.equal(2)
-      var omExpectedResults = [
-        { effective_from: startDate, total_points: 50, available_points: 25, reduction_hours: 3 },
-        { effective_from: startDate, total_points: 20, available_points: 10, reduction_hours: 3 }
-      ]
-      expect(results).to.eql(omExpectedResults)
+      expect(results.length).to.equal(1)
+      expect(results).to.eql(expectedResults)
     })
   })
 

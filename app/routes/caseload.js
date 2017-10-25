@@ -4,9 +4,20 @@ const organisationUnitConstants = require('../constants/organisation-unit')
 const getCaseload = require('../services/get-caseload')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
+const authorisation = require('../authorisation')
+const Unauthorized = require('../services/errors/authentication-error').Unauthorized
+const workloadTypes = require('../../app/constants/workload-type')
 
 module.exports = function (router) {
-  router.get('/:organisationLevel/:id/caseload', function (req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
+
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 
@@ -36,7 +47,14 @@ module.exports = function (router) {
       })
   })
 
-  router.get('/:organisationLevel/:id/caseload/csv', function (req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload/csv', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
 
@@ -56,12 +74,12 @@ module.exports = function (router) {
   var caseloadDetails = function (organisationLevel, result) {
     var details
 
-    if (organisationLevel === organisationUnitConstants.TEAM.name) {
+    if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       details = [
         {
           displayName: 'Overall',
           array: result.caseloadDetails.overallCaseloadDetails,
-          totalSummary: null
+          totalSummary: result.caseloadDetails.overallTotalSummary
         },
         {
           displayName: 'Custody',

@@ -1,5 +1,4 @@
-const config = require('../../../knexfile').integrationTests
-const knex = require('knex')(config)
+const knex = require('../../knex').integrationTests
 var Promise = require('bluebird').Promise
 
 module.exports.addReductionsRefData = function (maxId) {
@@ -19,14 +18,9 @@ module.exports.addReductionsRefData = function (maxId) {
     var sql = 'SET IDENTITY_INSERT app.' + tableName + ' ON;' +
       insertStatement + '(' + (maxId + 1) + ',\'Test Reason 1\',1,' + ids[0] + ',20,null,6)'
     return knex.raw(sql).then(function () {
-      return knex('reduction_reason')
-        .select('id')
-        .where('id', (maxId + 1))
+      inserts.push({table: 'reduction_reason', id: (maxId + 1)})
+      return inserts
     })
-  })
-  .then(function (ids) {
-    inserts.push({table: 'reduction_reason', id: ids[0].id})
-    return inserts
   })
 }
 
