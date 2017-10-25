@@ -43,20 +43,14 @@ var parseCaseloadResults = function (organisationLevel, results) {
     custodyResults = caseloadHelper.aggregateTeamTierTotals(custodyResults)
     communityResults = caseloadHelper.aggregateTeamTierTotals(communityResults)
     licenseResults = caseloadHelper.aggregateTeamTierTotals(licenseResults)
-
-    // overallResults.totals = caseloadHelper.calculateTotalsRow(overallResults)
-    // custodyResults.totals = caseloadHelper.calculateTotalsRow(custodyResults)
-    // licenseResults.totals = caseloadHelper.calculateTotalsRow(licenseResults)
   } else {
     overallResults.totals = caseloadHelper.calculateTotalsRow(overallResults)
     communityResults.totals = caseloadHelper.calculateTotalsRow(communityResults)
     custodyResults.totals = caseloadHelper.calculateTotalsRow(custodyResults)
     licenseResults.totals = caseloadHelper.calculateTotalsRow(licenseResults)
   }
-
   overallSummary[0].totals = caseloadHelper.calculateTotalTiersRow(overallSummary)
 
-  console.log(overallSummary)
   var caseloadResults = {
     overallCaseloadDetails: overallResults,
     communityCaseloadDetails: communityResults,

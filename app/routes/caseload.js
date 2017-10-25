@@ -30,6 +30,8 @@ module.exports = function (router) {
 
     return getCaseload(id, organisationLevel)
       .then(function (result) {
+        var caseloadDetailsResult = caseloadDetails(organisationLevel, result)
+        console.log(caseloadDetailsResult)
         return res.render('caseload', {
           screen: 'caseload',
           linkId: req.params.id,
@@ -40,7 +42,7 @@ module.exports = function (router) {
           organisationLevel: organisationLevel,
           childOrganisationLevel: orgUnit.childOrganisationLevel,
           childOrganisationLevelDisplayText: childOrgUnit.displayText,
-          caseloadDetails: caseloadDetails(organisationLevel, result)
+          caseloadDetails: caseloadDetailsResult
         })
       }).catch(function (error) {
         next(error)
