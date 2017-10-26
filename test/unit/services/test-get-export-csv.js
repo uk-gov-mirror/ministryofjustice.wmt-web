@@ -37,17 +37,17 @@ describe('services/get-export-csv', function () {
     })
   })
   describe('should format the capacity when exporting overviews', function () {
-    it('should be formatted to two decimal figures', function () {
+    it('to two decimal figures', function () {
       var capacityExport = getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
       expect(capacityExport).to.include('107.37')
       expect(capacityExport).to.include('106.84')
     })
-    it('should be appended with a percentage symbol', function () {
+    it('with a percentage symbol', function () {
       var capacityExport = getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
       expect(capacityExport).to.include('107.37%')
       expect(capacityExport).to.include('106.84%')
     })
-    it('should also format capacity when exporting individual OM overview', function () {
+    it('for Offender Manager overview', function () {
       var capacityExport = getExportCsv(orgUnit.OFFENDER_MANAGER.name, helper.OM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
       expect(capacityExport).to.include('105.00%')
     })
