@@ -27,7 +27,7 @@ var reductionWithHoursResults = [
 var woContractedHours = 37
 
 describe('services/helpers/reduction-hours-calculator', function () {
-  it('should popluate absolute values of reduction allowance hours, for each reason, for the particular offender manager', function () {
+  it('should populate absolute values of reduction allowance hours, for each reason, for the particular offender manager', function () {
     expect(reductionHoursCalculator(reductionQueryResults, woContractedHours)).to.eql(reductionWithHoursResults)
   })
 })
