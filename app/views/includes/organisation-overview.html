@@ -76,9 +76,9 @@
         {% endif %}
         <td headers="points cap">{{ member.availablePoints }}</td>
         {% if member.capacityPercentage > 110 %}
-          <td class="capacity-red" headers="remaining cap">{{ member.availablePoints - member.totalPoints}}</td>
+          <td class="capacity-red" headers="remaining cap">{{ member.availablePoints - member.totalPoints }}</td>
         {% else %}
-          <td headers="remaining cap">{{ member.availablePoints - member.totalPoints}}</td>
+          <td headers="remaining cap">{{ member.availablePoints - member.totalPoints }}</td>
         {% endif %}
         <td headers="hrs contracted">{{ member.contractedHours }}</td>
         <td headers="hrs reduction">{{ member.reductionHours }}</td>
