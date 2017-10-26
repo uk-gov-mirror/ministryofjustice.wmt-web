@@ -6,6 +6,7 @@ const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
+const logger = require('../logger')
 
 module.exports = function (router) {
   router.get('/admin/workload-points', function (req, res) {
@@ -24,8 +25,36 @@ module.exports = function (router) {
     }
     var success = req.query.success
     var successText = success ? 'You have successfully updated the workload points!' : null
+    return workloadPointsService.getWorkloadPoints(false)
+      .then(function (result) {
+        return res.render('workload-points', {
+          title: result.title,
+          subTitle: result.subTitle,
+          breadcrumbs: result.breadcrumbs,
+          wp: result.workloadPoints,
+          updatedBy: result.updatedBy,
+          successText: successText
+        })
+      })
+  })
 
-    return workloadPointsService.getWorkloadPoints()
+  router.get('/admin/workload-points/t2a', function (req, res) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
+    var success = req.query.success
+    var successText = success ? 'You have successfully updated the workload points for transition to adulthood cases!' : null
+    return workloadPointsService.getWorkloadPoints(true)
       .then(function (result) {
         return res.render('workload-points', {
           title: result.title,
@@ -52,25 +81,68 @@ module.exports = function (router) {
         })
       }
     }
-    var updatedWorkloadPoints
     try {
       if (req.user) {
         req.body.userId = req.user.userId.toString()
       }
-      updatedWorkloadPoints = new WorkloadPoints(req.body)
+      var updatedWorkloadPoints = new WorkloadPoints(req.body)
       return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints)
         .then(function () {
           return res.redirect(302, '/admin/workload-points?success=true')
         })
     } catch (error) {
+      logger.error(error)
       if (error instanceof ValidationError) {
-        return workloadPointsService.getWorkloadPoints()
+        return workloadPointsService.getWorkloadPoints(false)
           .then(function (result) {
             return res.status(400).render('workload-points', {
               title: result.title,
               subTitle: result.subTitle,
               breadcrumbs: result.breadcrumbs,
               wp: req.body,
+              updatedBy: result.updatedBy,
+              errors: error.validationErrors
+            })
+          })
+      }
+      next(error)
+    }
+  })
+
+  router.post('/admin/workload-points/t2a', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
+    try {
+      if (req.user) {
+        req.body.userId = req.user.userId.toString()
+      }
+      var updatedT2aWorkloadPoints = new WorkloadPoints(req.body)
+      return workloadPointsService.updateWorkloadPoints(updatedT2aWorkloadPoints)
+        .then(function () {
+          return res.redirect(302, '/admin/workload-points/t2a?success=true')
+        })
+    } catch (error) {
+      logger.error(error)
+      if (error instanceof ValidationError) {
+        return workloadPointsService.getWorkloadPoints(true)
+          .then(function (result) {
+            return res.status(400).render('workload-points', {
+              title: result.title,
+              subTitle: result.subTitle,
+              breadcrumbs: result.breadcrumbs,
+              wp: req.body,
+              updatedBy: result.updatedBy,
               errors: error.validationErrors
             })
           })

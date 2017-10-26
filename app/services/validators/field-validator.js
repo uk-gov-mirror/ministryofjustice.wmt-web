@@ -56,6 +56,13 @@ class FieldValidator {
     }
     return this
   }
+
+  isBoolean () {
+    if (this.data && !validator.isBoolean(this.data.toString())) {
+      this.errors.add(this.fieldName, ERROR_MESSAGES.getIsBooleanMessage)
+    }
+    return this
+  }
 }
 
 module.exports = function (data, fieldName, errors) {

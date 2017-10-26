@@ -221,4 +221,24 @@ describe('services/validators/field-validator', function () {
       expect(errors).to.equal(false)
     })
   })
+
+  describe('isBoolean', function () {
+    it('should return false if passed in a valid true value', function () {
+      FieldValidator('true', FIELD_NAME, errorHandler).isBoolean()
+      var errors = errorHandler.get()
+      expect(errors).to.equal(false)
+    })
+
+    it('should return false if passed in a valid false value', function () {
+      FieldValidator('false', FIELD_NAME, errorHandler).isBoolean()
+      var errors = errorHandler.get()
+      expect(errors).to.equal(false)
+    })
+
+    it('should return an error if passed in invalid true or false value', function () {
+      FieldValidator('xxxx', FIELD_NAME, errorHandler).isBoolean()
+      var errors = errorHandler.get()
+      expect(errors).to.have.property(FIELD_NAME)
+    })
+  })
 })
