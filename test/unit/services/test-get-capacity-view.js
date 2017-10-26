@@ -65,6 +65,14 @@ const EXPECTED_TEAM_BREAKDOWN = [
     cmsPercentage: 25,
     gsPercentage: 20,
     armsTotalCases: 20
+  },
+  {
+    capacity: 40,
+    name: 'Total/Average',
+    totalARMS: 20,
+    totalCMS: 25,
+    totalCases: 39,
+    totalGs: 20
   }
 ]
 

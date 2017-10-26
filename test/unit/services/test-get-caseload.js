@@ -52,7 +52,9 @@ beforeEach(function () {
     aggregateTeamTierTotals: sinon.stub(),
     calculateTeamTierPercentages: sinon.stub(),
     getCaseloadByType: sinon.stub().returns(CASELOAD),
-    getCaseloadTotalSummary: sinon.stub()
+    getCaseloadTotalSummary: sinon.stub(),
+    calculateTotalTiersRow: sinon.stub(),
+    calculateTotalsRow: sinon.stub()
   }
   getCaseload =
     proxyquire('../../../app/services/get-caseload',
@@ -68,6 +70,12 @@ beforeEach(function () {
 describe('services/get-caseload', function () {
   it('should call get-breadcrumbs and return a results object with breadcrumbs, title and subtitle', function () {
     getCaseloadDetail.withArgs(id, teamName).resolves(OVERALL_CASELOAD)
+    caseloadHelper.getCaseloadTierTotalsByTeamByGrade.returns([{}])
+    caseloadHelper.getCaseloadSummaryTotalsByTeam.returns([{}])
+    caseloadHelper.getCaseloadByType.withArgs(OVERALL_CASELOAD, 'CUSTODY').returns({})
+    caseloadHelper.getCaseloadByType.withArgs(OVERALL_CASELOAD, 'COMMUNITY').returns({})
+    caseloadHelper.getCaseloadByType.withArgs(OVERALL_CASELOAD, 'LICENSE').returns({})
+    caseloadHelper.calculateTotalTiersRow.withArgs([{}]).returns({})
     return getCaseload(id, teamName).then(function (result) {
       var teamSubtitle = orgUnitFinder('name', teamName).displayText
       assert(getBreadcrumbs.called)
@@ -79,6 +87,9 @@ describe('services/get-caseload', function () {
 
   it('should call get-caseload data service with the correct parameters', function () {
     getCaseloadDetail.withArgs(id, lduName).resolves(LDU_CASELOAD)
+    caseloadHelper.getCaseloadTierTotalsByTeamByGrade.returns([{}])
+    caseloadHelper.calculateTotalTiersRow.withArgs([{}]).returns({})
+    caseloadHelper.getCaseloadSummaryTotalsByTeam.returns([{}])
     return getCaseload(id, lduName).then(function (result) {
       expect(getCaseloadDetail.calledWith(id, lduName)).to.be.true //eslint-disable-line
     })
@@ -87,20 +98,25 @@ describe('services/get-caseload', function () {
   it('should call expected functions for team and return populated caseloadDetails', function () {
     getCaseloadDetail.withArgs(id, teamName).resolves(OVERALL_CASELOAD)
     caseloadHelper.getCaseloadTierTotalsByTeamByGrade.returns('overallCaseloadDetails')
-    caseloadHelper.getCaseloadSummaryTotalsByTeam.returns('overallSummary')
+    caseloadHelper.getCaseloadSummaryTotalsByTeam.returns([{}])
     caseloadHelper.getCaseloadByType.withArgs(OVERALL_CASELOAD, 'CUSTODY').returns('custodyCaseloads')
     caseloadHelper.getCaseloadByType.withArgs(OVERALL_CASELOAD, 'COMMUNITY').returns('communityCaseloads')
     caseloadHelper.getCaseloadByType.withArgs(OVERALL_CASELOAD, 'LICENSE').returns('licenseCaseloads')
     caseloadHelper.getCaseloadTotalSummary.withArgs('custodyCaseloads').returns('custodySummary')
     caseloadHelper.getCaseloadTotalSummary.withArgs('communityCaseloads').returns('communitySummary')
     caseloadHelper.getCaseloadTotalSummary.withArgs('licenseCaseloads').returns('licenseSummary')
+    caseloadHelper.calculateTotalTiersRow.withArgs([{}]).returns({})
 
     var expectedCaseloadDetails = {
       overallCaseloadDetails: 'overallCaseloadDetails',
       communityCaseloadDetails: 'communityCaseloads',
       custodyCaseloadDetails: 'custodyCaseloads',
       licenseCaseloadDetails: 'licenseCaseloads',
-      overallTotalSummary: 'overallSummary',
+      overallTotalSummary: [
+        {
+          totals: {}
+        }
+      ],
       custodyTotalSummary: 'custodySummary',
       communityTotalSummary: 'communitySummary',
       licenseTotalSummary: 'licenseSummary'
@@ -123,7 +139,7 @@ describe('services/get-caseload', function () {
   it('should call expected functions for LDU and return populated caseloadDetails', function () {
     getCaseloadDetail.withArgs(id, lduName).resolves(LDU_CASELOAD)
     caseloadHelper.getCaseloadTierTotalsByTeamByGrade.returns('overallCaseloadDetails')
-    caseloadHelper.getCaseloadSummaryTotalsByTeam.returns('overallSummary')
+    caseloadHelper.getCaseloadSummaryTotalsByTeam.returns([{}])
     caseloadHelper.getCaseloadByType.withArgs(LDU_CASELOAD, 'CUSTODY').returns('custodyCaseloads')
     caseloadHelper.getCaseloadByType.withArgs(LDU_CASELOAD, 'COMMUNITY').returns('communityCaseloads')
     caseloadHelper.getCaseloadByType.withArgs(LDU_CASELOAD, 'LICENSE').returns('licenseCaseloads')
@@ -134,14 +150,18 @@ describe('services/get-caseload', function () {
     caseloadHelper.aggregateTeamTierTotals.withArgs('custodyCaseloads').returns('lduCustodyCaseloads')
     caseloadHelper.aggregateTeamTierTotals.withArgs('communityCaseloads').returns('lduCommunityCaseloads')
     caseloadHelper.aggregateTeamTierTotals.withArgs('licenseCaseloads').returns('lduLicenseCaseloads')
-    caseloadHelper.calculateTotalTiersRow.withArgs('licenseCaseloads').returns('totals')
+    caseloadHelper.calculateTotalTiersRow.withArgs([{}]).returns({})
 
     var expectedCaseloadDetails = {
       overallCaseloadDetails: 'lduOverallCaseloadDetails',
       communityCaseloadDetails: 'lduCommunityCaseloads',
       custodyCaseloadDetails: 'lduCustodyCaseloads',
       licenseCaseloadDetails: 'lduLicenseCaseloads',
-      overallTotalSummary: 'overallSummary',
+      overallTotalSummary: [
+        {
+          totals: {}
+        }
+      ],
       custodyTotalSummary: 'custodySummary',
       communityTotalSummary: 'communitySummary',
       licenseTotalSummary: 'licenseSummary'

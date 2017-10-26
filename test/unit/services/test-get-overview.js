@@ -10,13 +10,13 @@ const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 
 const OVERVIEW = {
   grade: 'PO',
-  teamId: '1',
+  teamId: 1,
   teamName: 'Medway',
   availablePoints: 50,
   totalPoints: 40,
-  cases: '2',
-  hours: '3',
-  reduction: '4',
+  totalCases: 2,
+  hours: 3,
+  reductionHours: 3,
   contractedHours: 37
 }
 const ORGANISATION_OVERVIEWS = [
@@ -131,11 +131,12 @@ describe('services/get-overview', function () {
 
   it('should return 0 contracted hours if there are indeed 0 contracted hours', function () {
     var orgName = orgUnitConstant.REGION.name
-    var zeroContractedHours = Object.assign({}, OVERVIEW, {contractedHours: 0}, { name: 'Total/Average', totalContractedHours: 0, totalPercentage: 79, totalPoints: 40, totalReduction: 0, totalTotalCases: 0 })
+    var totals = { name: 'Total/Average', totalContractedHours: 0, totalPercentage: 79, totalPoints: 40, totalReduction: 3, totalTotalCases: 2 }
+    var zeroContractedHours = Object.assign({}, OVERVIEW, {contractedHours: 0})
     getOrganisationOverview.withArgs(id, orgName).resolves([zeroContractedHours])
 
     return getOverview(id, orgName).then(function (result) {
-      expect(result.overviewDetails).to.eql([zeroContractedHours])
+      expect(result.overviewDetails).to.eql([zeroContractedHours, totals])
     })
   })
 })
