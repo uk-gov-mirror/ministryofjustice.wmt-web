@@ -23,16 +23,20 @@ module.exports = function (id, type) {
 
   var requiresWorkloadOwnerName = (type === ORGANISATION_UNIT.TEAM.name)
 
+  var whereString = ''
+
   if (requiresWorkloadOwnerName) {
     selectList.push('CONCAT(forename, \' \', surname) AS name')
   } else {
     selectList.push('name')
   }
 
-  var whereString = ''
+  var displayAllRecords = (type === ORGANISATION_UNIT.NATIONAL.name)
 
-  if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
-    whereString += ' WHERE id = ' + id
+  if (!displayAllRecords) {
+    if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
+      whereString += ' WHERE id = ' + id
+    }
   }
 
   var noExpandHint = ' WITH (NOEXPAND)'
