@@ -25,7 +25,8 @@ module.exports = {
       password: config.MIGRATION_APP_DATABASE_PASSWORD,
       database: config.DATABASE,
       options: {
-        encrypt: true
+        encrypt: true,
+        requestTimeout: 60000
       }
     },
     debug: false

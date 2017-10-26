@@ -25,7 +25,7 @@ describe('services/data/get-caseload', function () {
         expect(results[0].b2).to.eql(5)
         expect(results[0].b1).to.eql(6)
         expect(results[0].a).to.eql(7)
-        expect(results[0].totalCases).to.eql(0)
+        expect(results[0].totalCases).to.eql(28)
       })
   })
 
@@ -65,7 +65,7 @@ describe('services/data/get-caseload', function () {
         expect(results[0].b2).to.eql(10)
         expect(results[0].b1).to.eql(12)
         expect(results[0].a).to.eql(14)
-        expect(results[0].totalCases).to.eql(0)
+        expect(results[0].totalCases).to.eql(56)
       })
   })
 
