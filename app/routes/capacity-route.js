@@ -45,9 +45,7 @@ module.exports = function (router) {
       childOrgUnitDisplayText = getOrganisationUnit('name', orgUnit.childOrganisationLevel).displayText
     }
 
-    var capacityViewPromise = getCapacityView(id, capacityDateRange, organisationLevel)
-
-    return capacityViewPromise.then(function (result) {
+    return getCapacityView(id, capacityDateRange, organisationLevel).then(function (result) {
       return res.render('capacity', {
         title: result.title,
         subTitle: result.subTitle,
