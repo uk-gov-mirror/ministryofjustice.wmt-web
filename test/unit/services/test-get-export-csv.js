@@ -39,8 +39,8 @@ describe('services/get-export-csv', function () {
   describe('should format the capacity when exporting overviews', function () {
     it('to two decimal figures', function () {
       var capacityExport = getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
-      expect(capacityExport).to.include('107.37')
-      expect(capacityExport).to.include('106.84')
+      expect(capacityExport).to.include('107.37%')
+      expect(capacityExport).to.include('106.84%')
     })
     it('with a percentage symbol', function () {
       var capacityExport = getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
