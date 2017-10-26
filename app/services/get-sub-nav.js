@@ -34,8 +34,11 @@ module.exports = function (id, organisationalUnitName, currentPath, workloadType
       }
   }
 
+  navigation[0].active = true
+
   navigation.forEach(function (item) {
     if (item.link === currentPath) {
+      navigation[0].active = false
       item.active = true
     }
   })

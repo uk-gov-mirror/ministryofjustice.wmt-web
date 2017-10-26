@@ -8,10 +8,13 @@ const orgUnit = require('../../../app/constants/organisation-unit')
 const tabs = require('../../../app/constants/wmt-tabs')
 const workloadTypes = require('../../../app/constants/workload-type')
 
+const INDEX_URI = '/'
 const OM_OVERVIEW_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/overview'
 const LDU_OVERVIEW_URL = '/' + workloadTypes.PROBATION + '/ldu/1/overview'
 const REGION_OVERVIEW_URL = '/' + workloadTypes.PROBATION + '/region/1/overview'
 const HMPPS_OVERVIEW_URL = '/' + workloadTypes.PROBATION + '/hmpps/0/overview'
+
+const VALID_URL_WITHOUT_OVERVIEW = '/' + workloadTypes.PROBATION + '/offender-manager/1'
 
 const OM_MISSING_ID_URL = '/' + workloadTypes.PROBATION + '/offender-manager/overview'
 
@@ -190,5 +193,28 @@ describe('Overview csv export route', function () {
         expect(response.header['content-disposition']).to.contain('attachment; filename="' + EXPORT_CSV_FILENAME + '"')
         expect(response.text).to.contain(EXPORT_CSV)
       })
+  })
+})
+describe(`GET ${INDEX_URI}`, function () {
+  it('should respond with a 200', function () {
+    return supertest(app)
+      .get(INDEX_URI)
+      .expect(200)
+  })
+})
+
+describe(`GET ${INDEX_URI + '?HPP&TRUE=1/0'}`, function () {
+  it('should respond with an error', function () {
+    return supertest(app)
+      .get(INDEX_URI + '?HPP=TRUE/0')
+      .expect(500)
+  })
+})
+
+describe('/overview can be omitted', function () {
+  it('should respond with 200 when overview is omitted from the URL', function () {
+    return supertest(app)
+      .get(VALID_URL_WITHOUT_OVERVIEW)
+      .expect(200)
   })
 })

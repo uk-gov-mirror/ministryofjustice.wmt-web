@@ -49,6 +49,7 @@
           <th id="total_fdrs">Fast Delivery Reports</th>
           <th id="total_oral_reports">Oral Reports</th>
           <th id="contracted_hours">Contracted Hours</th>
+          <th id="reduction_hours">Reduction Hours</th>
         </tr>
       </thead>
       <tbody>
@@ -60,6 +61,7 @@
           <td headers="total_fdrs">{{ member.totalFdrs }}</td>
           <td headers="total_oral_reports">{{ member.totalOralReports }}</td>
           <td headers="contracted_hours">{{ member.contractedHours }}</td>
+          <td headers="reduction_hours">{{ member.reduction }}</td>
         </tr> 
         {% endfor %}
       </tbody>

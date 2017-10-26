@@ -1,20 +1,19 @@
-const config = require('../../../knexfile').web
-const knex = require('knex')(config)
+const knex = require('../../../knex').web
 const orgUnitFinder = require('../helpers/org-unit-finder')
+const ORGANISATION_UNIT = require('../../constants/organisation-unit')
 
 module.exports = function (id, type) {
   var orgUnit = orgUnitFinder('name', type)
   var table = orgUnit.courtReporterOverview
-  var whereObject = {}
-  if (id !== undefined) {
-    whereObject.id = id
+
+  var whereString = ''
+
+  if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
+    whereString += ' WHERE id = ' + id
   }
 
-  var selectColumns = [
-    'id',
-    'grade_code AS grade',
+  var selectList = [
     'link_id AS linkId',
-    'name AS name',
     'contracted_hours AS contractedHours',
     'reduction_hours AS reduction',
     'total_sdrs AS totalSdrs',
@@ -22,7 +21,21 @@ module.exports = function (id, type) {
     'total_oral_reports AS totalOralReports'
   ]
 
-  return knex(table)
-  .where(whereObject)
-  .select(selectColumns)
+  if (ORGANISATION_UNIT.NATIONAL.name !== orgUnit.name) {
+    selectList.push('id')
+  }
+
+  if (ORGANISATION_UNIT.TEAM.name === type) {
+    selectList.push('CONCAT(forename, \' \', surname) AS name')
+    selectList.push('grade_code AS grade')
+  } else {
+    selectList.push('name')
+  }
+
+  var noExpandHint = ' WITH (NOEXPAND)'
+
+  return knex.schema.raw('SELECT ' + selectList.join(', ') +
+      ' FROM ' + table +
+      noExpandHint +
+      whereString)
 }
