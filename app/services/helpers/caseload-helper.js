@@ -89,24 +89,6 @@ module.exports.calculateTotalsRow = function (caseloads) {
   return totals
 }
 
-var calculateTotalsRow = function (caseloads) {
-  var totals = {a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, untiered: 0, overall: 0}
-  caseloads.forEach(function (team, key) {
-    team.grades.forEach(function (grade, key) {
-      totals.a += grade.a
-      totals.b1 += grade.b1
-      totals.b2 += grade.b2
-      totals.c1 += grade.c1
-      totals.c2 += grade.c2
-      totals.d1 += grade.d1
-      totals.d2 += grade.d2
-      totals.untiered += grade.untiered
-      totals.overall += grade.totalCases
-    })
-  })
-  return totals
-}
-
 module.exports.calculateTotalTiersRow = function (summary) {
   var totals = {totalCommunity: 0, totalLicense: 0, totalCustody: 0, totalTotalCases: 0}
   summary.forEach(function (val, key) {
@@ -166,7 +148,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
           untiered: percentageCalculator.calculatePercentage(teamGradeRecords[record].untiered, caseloadTotalsByTeam[team].untiered),
           totalCases: percentageCalculator.calculatePercentage(teamGradeRecords[record].totalCases, caseloadTotalsByTeam[team].totalCases)
         }
-        gradeTotals = createAndTotalValues(gradeTotals, newGradeRecord)
+        gradeTotals = addGradeTotals(gradeTotals, newGradeRecord)
       } else {
         newGradeRecord = {
           grade: teamGradeRecords[record].grade,
@@ -180,7 +162,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
           untiered: teamGradeRecords[record].untiered,
           totalCases: teamGradeRecords[record].totalCases
         }
-        gradeTotals = createAndTotalValues(gradeTotals, newGradeRecord)
+        gradeTotals = addGradeTotals(gradeTotals, newGradeRecord)
       }
       gradeRecords.push(newGradeRecord)
     }
@@ -203,7 +185,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
   return { details: transformedData, totals: gradeTotals }
 }
 
-var createAndTotalValues = function (gradeTotals, newGradeRecord) {
+var addGradeTotals = function (gradeTotals, newGradeRecord) {
   if (gradeTotals[newGradeRecord.grade] !== undefined) {
     gradeTotals[newGradeRecord.grade].a += newGradeRecord.a
     gradeTotals[newGradeRecord.grade].b1 += newGradeRecord.b1

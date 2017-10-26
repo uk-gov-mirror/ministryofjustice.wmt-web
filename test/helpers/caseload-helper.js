@@ -79,8 +79,8 @@ module.exports.LDU_CASELOAD = [CUSTODY_CASELOAD_PO_0, CUSTODY_CASELOAD_PO_1, CUS
 module.exports.LDU_CUSTODY_RESULTS = [CUSTODY_CASELOAD_PO_0, CUSTODY_CASELOAD_PO_1, CUSTODY_CASELOAD_PO_2,
   CUSTODY_CASELOAD_PSO_0, CUSTODY_CASELOAD_PSO_1, CUSTODY_CASELOAD_PSO_2]
 
-module.exports.LDU_CUSTODY_AGGREGATED_RESULTS = [
-  {linkId: 2,
+module.exports.LDU_CUSTODY_AGGREGATED_RESULTS = {
+  details: [{linkId: 2,
     name: 'Todd Umptious',
     grades: [
       {grade: CUSTODY_CASELOAD_PO_0.grade,
@@ -151,8 +151,36 @@ module.exports.LDU_CUSTODY_AGGREGATED_RESULTS = [
         b2: CUSTODY_CASELOAD_PSO_1.b2,
         b1: CUSTODY_CASELOAD_PSO_1.b1,
         a: CUSTODY_CASELOAD_PSO_1.a}
-    ]}
-]
+    ]}],
+  totals: {
+    PO: {
+      a: 0,
+      b1: 3,
+      b2: 0,
+      c1: 3,
+      c2: 0,
+      d1: 0,
+      d2: 3,
+      grade: 'PO',
+      numberOfType: 3,
+      totalCases: 9,
+      untiered: 3
+    },
+    PSO: {
+      a: 0,
+      b1: 3,
+      b2: 0,
+      c1: 3,
+      c2: 0,
+      d1: 0,
+      d2: 3,
+      grade: 'PSO',
+      numberOfType: 3,
+      totalCases: 9,
+      untiered: 3
+    }
+  }
+}
 
 module.exports.LDU_CUSTODY_PERCENTAGE_RESULTS = [
   {linkId: 2,

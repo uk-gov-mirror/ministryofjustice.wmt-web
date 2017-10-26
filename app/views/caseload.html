@@ -185,7 +185,7 @@
             {% endfor %}
             {% endfor %}
             <tr>
-                <td rowspan="2" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name">Total</td>
+                <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name">Total</td>
                 {% for grade, total in caseType.array.totals %}
                 <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ total.a  | round(1) }}</td>
@@ -252,7 +252,7 @@
           {% endfor %}
         {% endfor %}
         <tr>
-          <td rowspan="2" headers="{{caseType.displayName}}_om">Average</td>
+          <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om">Average</td>
           {% for grade, total in caseType.array.totals %}
           <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
           <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ total.a  | round(1) }}%</td>

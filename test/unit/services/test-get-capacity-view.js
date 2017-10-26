@@ -92,6 +92,14 @@ const EXPECTED_LDU_BREAKDOWN = [
         cmsPercentage: 20,
         gsPercentage: 12.5,
         armsTotalCases: 20
+      },
+      {
+        capacity: 70,
+        name: 'Total/Average',
+        totalARMS: 40,
+        totalCMS: 15,
+        totalCases: 79,
+        totalGs: 11.5
       }
     ]
   }

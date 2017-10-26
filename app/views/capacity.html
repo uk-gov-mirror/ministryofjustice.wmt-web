@@ -130,14 +130,14 @@
       <tbody>
         {% for member in capacityBreakdown %}
         <tr>
-          {% if member.name === 'Total/Average' %}
+          {% if loop.last %}
           <td colspan="2" headers="name org">{{ member.name }}</td>
           <td headers="capacity breakdown">{{ member.capacity | round(1) }}%</td>
           <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>
+          <td headers="arms breakdown">{{ member.totalARMS }}</td>
           <td headers="paroms breakdown">-</td>
           <td headers="fdrs breakdown">-</td>
           <td headers="sdrs breakdown">-</td>
-          <td headers="arms breakdown">{{ member.totalARMS }}</td>
           <td headers="gs breakdown">{{ member.totalGs | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.totalCMS | round(1) }}%</td>
           {% else %}

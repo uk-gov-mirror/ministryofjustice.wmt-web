@@ -134,6 +134,7 @@ describe('services/get-caseload', function () {
     caseloadHelper.aggregateTeamTierTotals.withArgs('custodyCaseloads').returns('lduCustodyCaseloads')
     caseloadHelper.aggregateTeamTierTotals.withArgs('communityCaseloads').returns('lduCommunityCaseloads')
     caseloadHelper.aggregateTeamTierTotals.withArgs('licenseCaseloads').returns('lduLicenseCaseloads')
+    caseloadHelper.calculateTotalTiersRow.withArgs('licenseCaseloads').returns('totals')
 
     var expectedCaseloadDetails = {
       overallCaseloadDetails: 'lduOverallCaseloadDetails',

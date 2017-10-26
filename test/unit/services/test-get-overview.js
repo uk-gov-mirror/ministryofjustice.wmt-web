@@ -131,7 +131,7 @@ describe('services/get-overview', function () {
 
   it('should return 0 contracted hours if there are indeed 0 contracted hours', function () {
     var orgName = orgUnitConstant.REGION.name
-    var zeroContractedHours = Object.assign({}, OVERVIEW, {contractedHours: 0})
+    var zeroContractedHours = Object.assign({}, OVERVIEW, {contractedHours: 0}, { name: 'Total/Average', totalContractedHours: 0, totalPercentage: 79, totalPoints: 40, totalReduction: 0, totalTotalCases: 0 })
     getOrganisationOverview.withArgs(id, orgName).resolves([zeroContractedHours])
 
     return getOverview(id, orgName).then(function (result) {
