@@ -28,7 +28,12 @@ var renderOverview = function (req, res, next) {
 
   var organisationLevel = req.params.organisationLevel
   var organisationUnit = getOrganisationUnit('name', organisationLevel)
-  var id = req.params.id
+  var id
+  if (organisationLevel !== organisationUnitConstants.NATIONAL.name) {
+    if (req.params.id !== undefined && !isNaN(parseInt(req.params.id, 10))) {
+      id = req.params.id
+    }
+  }
 
   var childOrganisationLevel
   var childOrganisationLevelDisplayText

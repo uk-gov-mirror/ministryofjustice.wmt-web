@@ -99,17 +99,18 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
         result.overviewDetails.forEach(function (team) {
           team.teamName = result.breadcrumbs[0].title
           team.lduCluster = result.breadcrumbs[1].title
+          team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
         })
-        csv = generateCsv(result.overviewDetails, fields, fieldNames)
       } else if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
         result.overviewDetails.lduCluster = result.breadcrumbs[2].title
-        csv = generateCsv(result.overviewDetails, fields, fieldNames)
+        result.overviewDetails.capacity = formatCapacityValue(result.overviewDetails.capacity)
       } else {
         result.overviewDetails.forEach(function (team) {
           team.lduCluster = result.breadcrumbs[0].title
+          team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
         })
-        csv = generateCsv(result.overviewDetails, fields, fieldNames)
       }
+      csv = generateCsv(result.overviewDetails, fields, fieldNames)
       break
   }
   return csv
@@ -164,4 +165,8 @@ var parseTotalSummaryTable = function (totalSummary) {
   })
 
   return table
+}
+
+var formatCapacityValue = function (capacity) {
+  return parseFloat(capacity).toFixed(2) + '%'
 }

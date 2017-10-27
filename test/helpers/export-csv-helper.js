@@ -233,7 +233,7 @@ module.exports.OM_OVERVIEW_RESULT = {
 module.exports.OM_OVERVIEW_CSV = {
   filename: 'John_Smith_Overview.csv',
   csv: '"LDU Cluster","Team Name","Grade Code","Capacity Percentage","Total Cases","Contracted Hours","Reduction Hours"\n' +
-  '"Test Cluster","Team 1","PO",105,60,37,4'
+  '"Test Cluster","Team 1","PO","105.00%",60,37,4'
 }
 
 module.exports.TEAM_OVERVIEW_RESULT = {
@@ -268,8 +268,8 @@ module.exports.TEAM_OVERVIEW_RESULT = {
 module.exports.TEAM_OVERVIEW_CSV = {
   filename: 'Test_Team_Overview.csv',
   csv: '"LDU Cluster","Team Name","Offender Manager Name","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases","Grade Code"\n' +
-  '"Test Cluster","Test Team","John Smith",107.36842105263158,190,37.5,6,63,"PO"\n' +
-  '"Test Cluster","Test Team","Tony Test",106.84210526315789,190,36.5,6,63,"PO"'
+  '"Test Cluster","Test Team","John Smith","107.37%",190,37.5,6,63,"PO"\n' +
+  '"Test Cluster","Test Team","Tony Test","106.84%",190,36.5,6,63,"PO"'
 }
 
 module.exports.LDU_OVERVIEW_RESULT = {
@@ -300,8 +300,8 @@ module.exports.LDU_OVERVIEW_RESULT = {
 module.exports.LDU_OVERVIEW_CSV = {
   filename: 'Test_LDU_Overview.csv',
   csv: '"LDU Cluster","Team Name","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"\n' +
-  '"Test Cluster","Team 1",106.73684210526315,950,175.5,30,315\n' +
-  '"Test Cluster","Team 4",106.73684210526315,950,175.5,28,315'
+  '"Test Cluster","Team 1","106.74%",950,175.5,30,315\n' +
+  '"Test Cluster","Team 4","106.74%",950,175.5,28,315'
 }
 
 module.exports.REGION_OVERVIEW_HEADINGS = '"LDU Cluster Name","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"'

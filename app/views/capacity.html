@@ -91,13 +91,13 @@
         <tr>
             <th scope="row">Capacity</th>
             {% for i in range(0, capacity.rows[0].values.length)%}
-                <td> {{capacity.rows[0].values[i] | round}}% </td>
+                <td> {{capacity.rows[0].values[i]}}% </td>
             {% endfor%}
         </tr>
         <tr>
             <th scope="row">Reductions</th>
             {% for i in range(0, capacity.rows[0].values.length)%}
-                <td> {{capacity.rows[1].values[i] }}</td>
+                <td> {{capacity.rows[1].values[i]}}</td>
             {% endfor%}
         </tr>
     </tbody>
@@ -118,6 +118,7 @@
         <th id="grade">Grade</th>
         <th id="capacity">Capacity (%)</th>
         <th id="cases">Cases</th>
+        <th id="t2aCases">T2A</th>
         <th id="arms"><abbr title="Active Risk Management System">ARMS</abbr></th>
         <th id="paroms"><abbr title="Parole Assessment Reports by the Offender Manager">PAROMs</abbr></th>
         <th id="fdrs"><abbr title="Fast Delivery Reports">FDRs</abbr></th>
@@ -138,6 +139,7 @@
             <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
           {% endif %}
           <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>
+          <td headers="t2a cases breakdown">{{ member.totalT2aCases | round(1) }}</td>
           <td headers="arms breakdown">{{ member.armsTotalCases }}</td>
           <td headers="paroms breakdown">-</td>
           <td headers="fdrs breakdown">-</td>
@@ -163,6 +165,7 @@
             <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
           {% endif %}
           <td headers="cases breakdown">{{ member.grades[i].totalCases | round(1) }}</td>
+          <td headers="t2a cases breakdown">{{ member.grades[i].totalT2aCases | round(1) }}</td>
           <td headers="arms breakdown">{{ member.grades[i].armsTotalCases }}</td>
           <td headers="paroms breakdown">-</td>
           <td headers="fdrs breakdown">-</td>
@@ -185,6 +188,6 @@
     <script type="text/javascript">
         var capacityTable = {{ capacity | dump | safe }}
     </script>
-    <script src="/public/javascripts/plotly.js"></script>
+    <script src="/public/javascripts/plotly-latest.min.js"></script>
     <script src="/public/javascripts/caseload-capacity.js"></script>
 {% endblock %}
