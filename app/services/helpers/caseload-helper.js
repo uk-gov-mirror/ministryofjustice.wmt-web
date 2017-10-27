@@ -70,6 +70,36 @@ module.exports.getCaseloadTotalSummary = function (caseloads) {
   }
 }
 
+/*
+  Used to create the bottom most row in the table
+*/
+module.exports.calculateTotalsRow = function (caseloads) {
+  var totals = {a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, untiered: 0, overall: 0}
+  caseloads.forEach(function (val, key) {
+    totals.a += val.a
+    totals.b1 += val.b1
+    totals.b2 += val.b2
+    totals.c1 += val.c1
+    totals.c2 += val.c2
+    totals.d1 += val.d1
+    totals.d2 += val.d2
+    totals.untiered += val.untiered
+    totals.overall += val.totalCases
+  })
+  return totals
+}
+
+module.exports.calculateTotalTiersRow = function (summary) {
+  var totals = {totalCommunity: 0, totalLicense: 0, totalCustody: 0, totalTotalCases: 0}
+  summary.forEach(function (val, key) {
+    totals.totalCommunity += val.communityTotalCases
+    totals.totalLicense += val.licenseTotalCases
+    totals.totalCustody += val.custodyTotalCases
+    totals.totalTotalCases += val.totalCases
+  })
+  return totals
+}
+
 var updateTotals = function (entryToUpdate, caseload) {
   entryToUpdate.totalCases += caseload.totalCases
 
@@ -96,12 +126,12 @@ var convertMapToArray = function (map) {
 var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
   var transformedData = []
   var caseloadTotalsByTeam = groupCaseload(caseloadTotalsByGrade, false)
+  var gradeTotals = {}
 
   // For each team, create one entry in the new results set with one 'grade' sub-object per grade
   for (var team in caseloadTotalsByTeam) {
     var newTeamEntry = { linkId: caseloadTotalsByTeam[team].linkId, name: caseloadTotalsByTeam[team].name }
     var teamGradeRecords = caseloadTotalsByGrade.filter((row) => row.linkId === caseloadTotalsByTeam[team].linkId)
-
     var gradeRecords = []
     for (var record in teamGradeRecords) {
       var newGradeRecord
@@ -118,6 +148,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
           untiered: percentageCalculator.calculatePercentage(teamGradeRecords[record].untiered, caseloadTotalsByTeam[team].untiered),
           totalCases: percentageCalculator.calculatePercentage(teamGradeRecords[record].totalCases, caseloadTotalsByTeam[team].totalCases)
         }
+        gradeTotals = addGradeTotals(gradeTotals, newGradeRecord)
       } else {
         newGradeRecord = {
           grade: teamGradeRecords[record].grade,
@@ -131,13 +162,46 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
           untiered: teamGradeRecords[record].untiered,
           totalCases: teamGradeRecords[record].totalCases
         }
+        gradeTotals = addGradeTotals(gradeTotals, newGradeRecord)
       }
       gradeRecords.push(newGradeRecord)
     }
     newTeamEntry = Object.assign({}, newTeamEntry, {grades: gradeRecords})
     transformedData.push(newTeamEntry)
   }
-  return transformedData
+  if (calculatePercentage) {
+    for (var key in gradeTotals) {
+      gradeTotals[key].a = gradeTotals[key].a / gradeTotals[key].numberOfType
+      gradeTotals[key].b1 = gradeTotals[key].b1 / gradeTotals[key].numberOfType
+      gradeTotals[key].b2 = gradeTotals[key].b2 / gradeTotals[key].numberOfType
+      gradeTotals[key].c1 = gradeTotals[key].c1 / gradeTotals[key].numberOfType
+      gradeTotals[key].c2 = gradeTotals[key].c2 / gradeTotals[key].numberOfType
+      gradeTotals[key].d1 = gradeTotals[key].d1 / gradeTotals[key].numberOfType
+      gradeTotals[key].d2 = gradeTotals[key].d2 / gradeTotals[key].numberOfType
+      gradeTotals[key].untiered = gradeTotals[key].untiered / gradeTotals[key].numberOfType
+      gradeTotals[key].totalCases = gradeTotals[key].totalCases / gradeTotals[key].numberOfType
+    }
+  }
+  return { details: transformedData, totals: gradeTotals }
+}
+
+var addGradeTotals = function (gradeTotals, newGradeRecord) {
+  if (gradeTotals[newGradeRecord.grade] !== undefined) {
+    gradeTotals[newGradeRecord.grade].a += newGradeRecord.a
+    gradeTotals[newGradeRecord.grade].b1 += newGradeRecord.b1
+    gradeTotals[newGradeRecord.grade].b2 += newGradeRecord.b2
+    gradeTotals[newGradeRecord.grade].c1 += newGradeRecord.c1
+    gradeTotals[newGradeRecord.grade].c2 += newGradeRecord.c2
+    gradeTotals[newGradeRecord.grade].d1 += newGradeRecord.d1
+    gradeTotals[newGradeRecord.grade].d2 += newGradeRecord.d2
+    gradeTotals[newGradeRecord.grade].untiered += newGradeRecord.untiered
+    gradeTotals[newGradeRecord.grade].totalCases += newGradeRecord.totalCases
+    gradeTotals[newGradeRecord.grade].numberOfType++
+  } else {
+    gradeTotals[newGradeRecord.grade] = Object.assign({}, newGradeRecord)
+    gradeTotals[newGradeRecord.grade].numberOfType = 1
+  }
+  return gradeTotals
 }
 
 var groupCaseload = function (caseloads, splitByGrade = false) {

@@ -86,6 +86,18 @@ const EXPECTED_TEAM_BREAKDOWN = [
     sdrs: 10,
     sdrConversions: 9,
     paroms: 8
+  },
+  {
+    capacity: 40,
+    name: 'Total / Average',
+    totalARMS: 20,
+    totalCMS: 25,
+    totalCases: 39,
+    totalGs: 20,
+    totalSDRs: 10,
+    totalParoms: 8,
+    totalSdrConversions: 9,
+    totalTotalT2aCases: 29
   }
 ]
 
@@ -123,6 +135,18 @@ const EXPECTED_LDU_BREAKDOWN = [
         paroms: 3
       }
     ]
+  },
+  {
+    name: 'Total / Average',
+    capacity: 70,
+    totalCases: 79,
+    totalARMS: 40,
+    totalGs: 11.25,
+    totalCMS: 15,
+    totalSDRs: 11,
+    totalParoms: 11,
+    totalSdrConversions: 10,
+    totalTotalT2aCases: 59
   }
 ]
 

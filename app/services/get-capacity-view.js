@@ -35,11 +35,17 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
 
 var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
   var capacityBreakdown = []
+  var totals = { name: 'Total / Average', capacity: 0, totalCases: 0, totalARMS: 0, totalGs: 0, totalCMS: 0, totalSDRs: 0, totalParoms: 0, totalSdrConversions: 0, totalTotalT2aCases: 0 }
+  var totalNumberOfGrades = 0
 
   if (organisationLevel === organisationConstant.TEAM.name) {
     workloadReports.forEach(function (workloadReport) {
+      var capacityBreakdownRow = buildCapacityBreakdownEntry(workloadReport)
+      totals = addTotals(totals, capacityBreakdownRow)
       capacityBreakdown.push(buildCapacityBreakdownEntry(workloadReport))
     })
+    totals = averageTotals(totals, capacityBreakdown.length)
+    capacityBreakdown.push(totals)
   } else if (organisationLevel !== organisationConstant.OFFENDER_MANAGER.name) {
     var organisationMap = new Map()
 
@@ -61,16 +67,38 @@ var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
         linkId: reports[0].linkId,
         grades: []
       }
-
       reports.forEach(function (report) {
-        newEntry.grades.push(buildCapacityBreakdownEntry(report))
+        var capacityBreakdownRow = buildCapacityBreakdownEntry(report)
+        totals = addTotals(totals, capacityBreakdownRow)
+        newEntry.grades.push(capacityBreakdownRow)
+        totalNumberOfGrades++
       })
-
       capacityBreakdown.push(newEntry)
     })
+    totals = averageTotals(totals, totalNumberOfGrades)
+    capacityBreakdown.push(totals)
   }
-
   return capacityBreakdown
+}
+
+var addTotals = function (totals, capacityBreakdown) {
+  totals.capacity += capacityBreakdown.capacityPercentage
+  totals.totalCases += capacityBreakdown.totalCases
+  totals.totalARMS += capacityBreakdown.armsTotalCases
+  totals.totalGs += capacityBreakdown.gsPercentage
+  totals.totalCMS += capacityBreakdown.cmsPercentage
+  totals.totalSDRs += capacityBreakdown.sdrs
+  totals.totalParoms += capacityBreakdown.paroms
+  totals.totalSdrConversions += capacityBreakdown.sdrConversions
+  totals.totalTotalT2aCases += capacityBreakdown.totalT2aCases
+  return totals
+}
+
+var averageTotals = function (totals, totalNumberOfGrades) {
+  totals.capacity = totals.capacity / totalNumberOfGrades
+  totals.totalGs = totals.totalGs / totalNumberOfGrades
+  totals.totalCMS = totals.totalCMS / totalNumberOfGrades
+  return totals
 }
 
 var buildCapacityBreakdownEntry = function (workloadReport) {
