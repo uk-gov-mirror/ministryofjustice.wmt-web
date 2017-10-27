@@ -30,9 +30,9 @@ var calculateValues = function (results, isCSV) {
   if (results.length !== undefined) {
     results.forEach(function (result) {
       result.capacityPercentage = 0
+      result.remainingPoints = result.availablePoints - result.totalPoints
       if (result.availablePoints > 0) {
         result.capacityPercentage = (result.totalPoints / result.availablePoints) * 100
-        result.remainingPoints = result.availablePoints - result.totalPoints
       }
     })
     totalsToReturn = results
