@@ -72,6 +72,7 @@
         {% endif %}
         <td headers="current cap">{{ member.totalPercentage | round }}%</td>
         <td headers="points cap">{{ member.totalPoints }}</td>
+        <td headers="remaining cap">{{ member.totalRemainingPoints}}</td>
         <td headers="hrs contracted">{{ member.totalContractedHours }}</td>
         <td headers="hrs reduction">{{ member.totalReduction }}</td>
         <td headers="cases total">{{ member.totalTotalCases }}</td>  
@@ -87,9 +88,9 @@
         {% endif %}
         <td headers="points cap">{{ member.availablePoints }}</td>
         {% if member.capacityPercentage > 110 %}
-          <td class="capacity-red" headers="remaining cap">{{ member.availablePoints - member.totalPoints }}</td>
+          <td class="capacity-red" headers="remaining cap">{{ member.remainingPoints }}</td>
         {% else %}
-          <td headers="remaining cap">{{ member.availablePoints - member.totalPoints }}</td>
+          <td headers="remaining cap">{{ member.remainingPoints}}</td>
         {% endif %}
         <td headers="hrs contracted">{{ member.contractedHours }}</td>
         <td headers="hrs reduction">{{ member.reductionHours }}</td>

@@ -66,7 +66,8 @@ module.exports = function (router) {
       throw new Error('Not available for offender-manager')
     }
 
-    return getCaseload(id, organisationLevel).then(function (result) {
+    var isCSV = true
+    return getCaseload(id, organisationLevel, isCSV).then(function (result) {
       var exportCsv = getExportCsv(organisationLevel, result, tabs.CASELOAD)
       res.attachment(exportCsv.filename)
       return res.send(exportCsv.csv)
