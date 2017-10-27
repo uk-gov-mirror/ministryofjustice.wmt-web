@@ -187,7 +187,7 @@
             <tr>
                 <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name">Total</td>
                 {% for grade, total in caseType.array.totals %}
-                <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
+                <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ total.a  | round(1) }}</td>
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ total.b1 | round(1) }}</td>
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b2">{{ total.b2 | round(1) }}</td>
@@ -254,7 +254,7 @@
         <tr>
           <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om">Average</td>
           {% for grade, total in caseType.array.totals %}
-          <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
+          <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
           <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ total.a  | round(1) }}%</td>
           <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ total.b1 | round(1) }}%</td>
           <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b2">{{ total.b2 | round(1) }}%</td>
