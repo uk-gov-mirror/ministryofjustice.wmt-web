@@ -92,7 +92,7 @@ module.exports = function (router) {
         req.body.userId = req.user.userId.toString()
       }
       var updatedWorkloadPoints = new WorkloadPoints(req.body)
-      return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints)
+      return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints, false)
         .then(function () {
           return res.redirect(302, '/admin/workload-points?success=true')
         })
@@ -137,7 +137,7 @@ module.exports = function (router) {
         req.body.userId = req.user.userId.toString()
       }
       var updatedT2aWorkloadPoints = new WorkloadPoints(req.body)
-      return workloadPointsService.updateWorkloadPoints(updatedT2aWorkloadPoints)
+      return workloadPointsService.updateWorkloadPoints(updatedT2aWorkloadPoints, true)
         .then(function () {
           return res.redirect(302, '/admin/workload-points/t2a?success=true')
         })
