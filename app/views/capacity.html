@@ -139,7 +139,7 @@
             <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
           {% endif %}
           <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>
-          <td headers="t2a cases breakdown">{{ member.totalT2aCases | round(1) }}</td>
+          <td headers="t2aCases breakdown">{{ member.totalT2aCases | round(1) }}</td>
           <td headers="arms breakdown">{{ member.armsTotalCases }}</td>
           <td headers="paroms breakdown">{{ member.paroms }}</td>
           <td headers="fdrs breakdown">{{ member.sdrConversions }}</td>
@@ -165,7 +165,7 @@
             <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
           {% endif %}
           <td headers="cases breakdown">{{ member.grades[i].totalCases | round(1) }}</td>
-          <td headers="t2a cases breakdown">{{ member.grades[i].totalT2aCases | round(1) }}</td>
+          <td headers="t2aCases breakdown">{{ member.grades[i].totalT2aCases | round(1) }}</td>
           <td headers="arms breakdown">{{ member.grades[i].armsTotalCases }}</td>
           <td headers="paroms breakdown">{{ member.grades[i].paroms }}</td>
           <td headers="fdrs breakdown">{{ member.grades[i].sdrConversions }}</td>
