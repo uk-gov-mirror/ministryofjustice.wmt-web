@@ -123,7 +123,7 @@ var convertMapToArray = function (map) {
   return arrayResult
 }
 
-var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
+var transform = function (caseloadTotalsByGrade, calculatePercentage = false, isCSV = false) {
   var transformedData = []
   var caseloadTotalsByTeam = groupCaseload(caseloadTotalsByGrade, false)
   var gradeTotals = {}
@@ -148,7 +148,9 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
           untiered: percentageCalculator.calculatePercentage(teamGradeRecords[record].untiered, caseloadTotalsByTeam[team].untiered),
           totalCases: percentageCalculator.calculatePercentage(teamGradeRecords[record].totalCases, caseloadTotalsByTeam[team].totalCases)
         }
-        gradeTotals = addGradeTotals(gradeTotals, newGradeRecord)
+        if (!isCSV) {
+          gradeTotals = addGradeTotals(gradeTotals, newGradeRecord)
+        }
       } else {
         newGradeRecord = {
           grade: teamGradeRecords[record].grade,
@@ -162,7 +164,9 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false) {
           untiered: teamGradeRecords[record].untiered,
           totalCases: teamGradeRecords[record].totalCases
         }
-        gradeTotals = addGradeTotals(gradeTotals, newGradeRecord)
+        if (!isCSV) {
+          gradeTotals = addGradeTotals(gradeTotals, newGradeRecord)
+        }
       }
       gradeRecords.push(newGradeRecord)
     }

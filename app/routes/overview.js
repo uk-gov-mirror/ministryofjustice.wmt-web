@@ -61,7 +61,8 @@ module.exports = function (router) {
       id = req.params.id
     }
 
-    return getOverview(id, organisationLevel).then(function (result) {
+    var isCSV = true
+    return getOverview(id, organisationLevel, isCSV).then(function (result) {
       var exportCsv = getExportCsv(organisationLevel, result, tabs.OVERVIEW)
       res.attachment(exportCsv.filename)
       res.send(exportCsv.csv)

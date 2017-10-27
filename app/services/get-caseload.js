@@ -5,7 +5,7 @@ const caseloadHelper = require('./helpers/caseload-helper')
 const organistaionUnit = require('../constants/organisation-unit')
 const caseType = require('../constants/case-type')
 
-module.exports = function (id, organisationLevel) {
+module.exports = function (id, organisationLevel, isCSV = false) {
   var organisationUnitType = getOrganisationUnit('name', organisationLevel)
 
   return getCaseload(id, organisationLevel)
@@ -14,7 +14,7 @@ module.exports = function (id, organisationLevel) {
       var title = breadcrumbs[0].title
       var subTitle = organisationUnitType.displayText
 
-      var caseloadResults = parseCaseloadResults(organisationLevel, results)
+      var caseloadResults = parseCaseloadResults(organisationLevel, results, isCSV)
       return {
         breadcrumbs: breadcrumbs,
         title: title,
@@ -24,7 +24,7 @@ module.exports = function (id, organisationLevel) {
     })
 }
 
-var parseCaseloadResults = function (organisationLevel, results) {
+var parseCaseloadResults = function (organisationLevel, results, isCSV) {
   // Overall cases
   var overallResults = caseloadHelper.getCaseloadTierTotalsByTeamByGrade(results)
   var overallSummary = caseloadHelper.getCaseloadSummaryTotalsByTeam(results)
@@ -43,13 +43,15 @@ var parseCaseloadResults = function (organisationLevel, results) {
     custodyResults = caseloadHelper.aggregateTeamTierTotals(custodyResults)
     communityResults = caseloadHelper.aggregateTeamTierTotals(communityResults)
     licenseResults = caseloadHelper.aggregateTeamTierTotals(licenseResults)
-  } else {
+  } else if (!isCSV) {
     overallResults.totals = caseloadHelper.calculateTotalsRow(overallResults)
     communityResults.totals = caseloadHelper.calculateTotalsRow(communityResults)
     custodyResults.totals = caseloadHelper.calculateTotalsRow(custodyResults)
     licenseResults.totals = caseloadHelper.calculateTotalsRow(licenseResults)
   }
-  overallSummary[0].totals = caseloadHelper.calculateTotalTiersRow(overallSummary)
+  if (!isCSV) {
+    overallSummary[0].totals = caseloadHelper.calculateTotalTiersRow(overallSummary)
+  }
 
   var caseloadResults = {
     overallCaseloadDetails: overallResults,
