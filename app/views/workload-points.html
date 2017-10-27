@@ -18,9 +18,16 @@
 
 <p>Current Workload Points created by <span class="bold">{{ updatedBy }}</span> on <span class="bold">{{ wp.effectiveFrom }}</span></p> 
 
-<form action="/admin/workload-points" method=POST id="workloadPointsForm">
+{% if wp.isT2A %}
+{% set formAction='/admin/workload-points/t2a' %}
+{% else %}
+{% set formAction='/admin/workload-points' %}
+{% endif %}
+
+<form action="{{ formAction }}" method=POST id="workloadPointsForm">
 
   <input class="form-control" id="previousWpId" name="previousWpId" type="hidden" value="{{ wp.workloadPointsId }}">
+  <input class="form-control" id="isT2A" name="isT2A" type="hidden" value="{{ wp.isT2A }}">
 
   <div class="js-tabs">
     <ul class="js-tabs-links">
@@ -298,6 +305,7 @@
 
       <div id="other">
           <p><span class="bold">Delivery Report Workload Points</span></p>
+          {% if not wp.isT2A %}
           <div class="grid-row">
             <div class="column-two-thirds">
               <table>
@@ -339,7 +347,7 @@
               </table>
             </div>
           </div>
-          
+          {% endif %}
           <br>
           <p><span class="bold">Weighting</span></p>
           <div class="grid-row">
@@ -379,6 +387,7 @@
                       <input class="form-control" id="weightingUpw" name="weightingUpw" type="number" value="{{ wp.weightingUpw }}">
                     </td>   
                   </tr>
+                  {% if not wp.isT2A %}
                   <tr>
                     <th scope="row">
                       {% if errors['weightingArmsCommunity'][0] %}
@@ -401,11 +410,12 @@
                       <input class="form-control" id="weightingArmsLicense" name="weightingArmsLicense" type="number" value="{{ wp.weightingArmsLicense }}">
                     </td>   
                   </tr>
+                  {% endif %}
                 </tbody>
               </table>
             </div>
           </div>
-          
+          {% if not wp.isT2A %}
           <br>
           <p><span class="bold">Nominal Target (Points)</span></p>
           <div class="grid-row">
@@ -471,6 +481,7 @@
               </table>
             </div>
           </div>
+          {% endif %}
       </div> 
 
     </div>

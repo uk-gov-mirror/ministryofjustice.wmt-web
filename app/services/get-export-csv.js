@@ -89,6 +89,13 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       }
       break
     case tabs.OVERVIEW:
+      if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
+        result.overviewDetails.capacity = formatCapacityValue(result.overviewDetails.capacity)
+      } else {
+        result.overviewDetails.forEach(function (item) {
+          item.capacityPercentage = formatCapacityValue(item.capacityPercentage)
+        })
+      }
       csv = generateCsv(result.overviewDetails, fields, fieldNames)
       break
   }
@@ -144,4 +151,8 @@ var parseTotalSummaryTable = function (totalSummary) {
   })
 
   return table
+}
+
+var formatCapacityValue = function (capacity) {
+  return parseFloat(capacity).toFixed(2) + '%'
 }

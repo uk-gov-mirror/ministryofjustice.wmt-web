@@ -44,7 +44,9 @@
       <thead>
         <tr>
           <th class="sln-table-org-level" id="name">{{ childOrganisationLevelDisplayText }}</th>
-          <th id="grade">Grade</th>
+          {% if organisationLevel === "team" %}
+            <th id="grade">Grade</th>
+          {% endif %}
           <th id="total_sdrs">Standard Delivery Reports</th>
           <th id="total_fdrs">Fast Delivery Reports</th>
           <th id="total_oral_reports">Oral Reports</th>
@@ -56,7 +58,9 @@
         {% for member in overviewDetails %}
         <tr>
           <td headers="name"><a href="/court-reports/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
-          <td headers="grade">{{ member.grade }}</td>
+          {% if organisationLevel === "team" %}
+            <td headers="grade">{{ member.grade }}</td>
+          {% endif %}
           <td headers="total_sdrs">{{ member.totalSdrs }}</td>
           <td headers="total_fdrs">{{ member.totalFdrs }}</td>
           <td headers="total_oral_reports">{{ member.totalOralReports }}</td>

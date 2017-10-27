@@ -7,25 +7,34 @@ const CapacityDateRange = require('../../../app/services/domain/capacity-date-ra
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 
 const CAPACITY_RESULTS = [
-  { effective_from: '2017-01-01',
-    total_points: 100,
-    available_points: 100,
-    reduction_hours: 6,
-    armsTotalCases: 5
+  { effectiveFrom: '2017-01-01',
+    totalPoints: 100,
+    availablePoints: 100,
+    reductionHours: 6,
+    armsTotalCases: 5,
+    sdrs: 10,
+    sdrConversions: 9,
+    paroms: 8,
+    oralReports: 7
   }
 ]
 
-const TEAM_REULTS = [
+const TEAM_RESULTS = [
   { name: 'Test name',
     grade: 'Test grade',
     totalCases: 39,
+    totalT2aCases: 29,
     linkId: 1,
     totalPoints: 40,
     availablePoints: 100,
     cmsAdjustmentPoints: 10,
     gsAdjustmentPoints: -10,
     contractedHours: 40,
-    armsTotalCases: 20
+    armsTotalCases: 20,
+    sdrs: 10,
+    sdrConversions: 9,
+    paroms: 8,
+    oralReports: 7
   }
 ]
 
@@ -34,25 +43,33 @@ const LDU_RESULTS = [
     name: 'Test ldu 1',
     grade: 'Test grade 1',
     totalCases: 39,
+    totalT2aCases: 29,
     linkId: 1,
     totalPoints: 90,
     availablePoints: 100,
     cmsAdjustmentPoints: 9,
     gsAdjustmentPoints: -10,
     contractedHours: 40,
-    armsTotalCases: 20
+    armsTotalCases: 20,
+    sdrs: 10,
+    sdrConversions: 9,
+    paroms: 8
   },
   {
     name: 'Test ldu 1',
     grade: 'Test grade 2',
     totalCases: 40,
+    totalT2aCases: 30,
     linkId: 1,
     totalPoints: 35,
     availablePoints: 70,
     cmsAdjustmentPoints: 7,
     gsAdjustmentPoints: -5,
     contractedHours: 40,
-    armsTotalCases: 20
+    armsTotalCases: 20,
+    sdrs: 1,
+    sdrConversions: 1,
+    paroms: 3
   }
 ]
 
@@ -60,11 +77,15 @@ const EXPECTED_TEAM_BREAKDOWN = [
   { name: 'Test name',
     grade: 'Test grade',
     totalCases: 39,
+    totalT2aCases: 29,
     linkId: 1,
     capacityPercentage: 40,
     cmsPercentage: 25,
     gsPercentage: 20,
-    armsTotalCases: 20
+    armsTotalCases: 20,
+    sdrs: 10,
+    sdrConversions: 9,
+    paroms: 8
   },
   {
     capacity: 40,
@@ -72,7 +93,10 @@ const EXPECTED_TEAM_BREAKDOWN = [
     totalARMS: 20,
     totalCMS: 25,
     totalCases: 39,
-    totalGs: 20
+    totalGs: 20,
+    totalSDRs: 10,
+    totalParoms: 8,
+    totalSdrConversions: 9
   }
 ]
 
@@ -85,21 +109,29 @@ const EXPECTED_LDU_BREAKDOWN = [
         name: 'Test ldu 1',
         grade: 'Test grade 1',
         totalCases: 39,
+        totalT2aCases: 29,
         linkId: 1,
         capacityPercentage: 90,
         cmsPercentage: 10,
         gsPercentage: 10,
-        armsTotalCases: 20
+        armsTotalCases: 20,
+        sdrs: 10,
+        sdrConversions: 9,
+        paroms: 8
       },
       {
         name: 'Test ldu 1',
         grade: 'Test grade 2',
         totalCases: 40,
+        totalT2aCases: 30,
         linkId: 1,
         capacityPercentage: 50,
         cmsPercentage: 20,
         gsPercentage: 12.5,
-        armsTotalCases: 20
+        armsTotalCases: 20,
+        sdrs: 1,
+        sdrConversions: 1,
+        paroms: 3
       }
     ]
   },
@@ -109,7 +141,10 @@ const EXPECTED_LDU_BREAKDOWN = [
     totalCases: 79,
     totalARMS: 40,
     totalGs: 11.25,
-    totalCMS: 15
+    totalCMS: 15,
+    totalSDRs: 10,
+    totalParoms: 8,
+    totalSdrConversions: 9
   }
 ]
 
@@ -155,7 +190,7 @@ describe('services/get-capacity-view', function () {
 
   it('should return a result object with a table, title and breadcrumbs object for team', function () {
     getWorkloadReports.resolves(CAPACITY_RESULTS)
-    getCapacityBreakdown.resolves(TEAM_REULTS)
+    getCapacityBreakdown.resolves(TEAM_RESULTS)
 
     return getCapacityView(callingId, capacityDateRange, 'team').then((result) => {
       expect(result.capacityTable).to.be.an('object')
