@@ -1,5 +1,6 @@
 const DisplayTable = require('../domain/display-table')
 const capacityCalculator = require('../helpers/capacity-calculator')
+const customRound = require('./custom-round')
 
 module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, workloadReports) {
   var headings = []
@@ -19,9 +20,9 @@ module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, 
   var capacityResults = capacityCalculator.calculate(workloadReports)
   capacityResults.forEach(function (capacity) {
     headings.push(capacity['workload_report_date'])
-    capacityPercentageRow.values.push(capacity['capacity_percentage'])
+    capacityPercentageRow.values.push(customRound(capacity['capacity_percentage']))
     reductionRow.values.push(capacity['reductions'])
-    reductionPercentageRow.values.push(capacity['reduction_percentage'])
+    reductionPercentageRow.values.push(customRound(capacity['reduction_percentage']))
   })
 
   rows.push(capacityPercentageRow)

@@ -7,7 +7,7 @@ const Link = require('./domain/link')
 const dateFormatter = require('./date-formatter')
 const userRoleService = require('../services/user-role-service')
 
-module.exports.getWorkloadPoints = function (id, organisationLevel) {
+module.exports.getWorkloadPoints = function (isT2A) {
   var result = {}
 
   var breadcrumbs = [
@@ -15,22 +15,21 @@ module.exports.getWorkloadPoints = function (id, organisationLevel) {
     new Link('Admin', '/admin')
   ]
 
-  return getWorkloadPoints().then(function (workloadPoints) {
+  return getWorkloadPoints(isT2A).then(function (workloadPoints) {
+    var userId = null
     if (workloadPoints !== undefined) {
       var formattedUpdateDate = dateFormatter.formatDate(workloadPoints.effectiveFrom, 'DD/MM/YYYY')
       workloadPoints.effectiveFrom = formattedUpdateDate
+      userId = workloadPoints.updatedByUserId
     }
-    return userRoleService.getUserById(workloadPoints.updatedByUserId)
+    return userRoleService.getUserById(userId)
     .then(function (user) {
-      var updatedBy = workloadPoints.updatedByUserId // Default to the user id
+      var updatedBy = userId // Default to the user id
+      var title = (isT2A) ? breadcrumbs[0].title + ' (T2A)' : breadcrumbs[0].title
       if (user) {
-        if (user.name) { // If there is a valid use that
-          updatedBy = user.name
-        } else {
-          updatedBy = user.username
-        }
+        updatedBy = (user.name) ? user.name : user.username
       }
-      result.title = breadcrumbs[0].title
+      result.title = title
       result.subTitle = breadcrumbs[1].title
       result.workloadPoints = workloadPoints
       result.updatedBy = updatedBy

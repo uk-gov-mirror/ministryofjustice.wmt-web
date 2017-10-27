@@ -14,6 +14,7 @@ module.exports = function (id, type) {
     'link_id AS linkId',
     'grade_code AS grade',
     'total_cases AS totalCases',
+    'total_t2a_cases AS totalT2aCases',
     'cms_adjustment_points AS cmsAdjustmentPoints',
     'gs_adjustment_points AS gsAdjustmentPoints',
     'arms_total_cases AS armsTotalCases',
