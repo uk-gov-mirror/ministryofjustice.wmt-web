@@ -25,7 +25,7 @@ module.exports = function (router) {
     }
     var success = req.query.success
     var successText = success ? 'You have successfully updated the workload points!' : null
-    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return workloadPointsService.getWorkloadPoints(false)
       .then(function (result) {
         return res.render('workload-points', {
@@ -57,7 +57,7 @@ module.exports = function (router) {
     }
     var success = req.query.success
     var successText = success ? 'You have successfully updated the workload points for transition to adulthood cases!' : null
-    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return workloadPointsService.getWorkloadPoints(true)
       .then(function (result) {
         return res.render('workload-points', {
@@ -99,7 +99,7 @@ module.exports = function (router) {
     } catch (error) {
       logger.error(error)
       if (error instanceof ValidationError) {
-        var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+        var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
         return workloadPointsService.getWorkloadPoints(false)
           .then(function (result) {
             return res.status(400).render('workload-points', {
@@ -144,7 +144,7 @@ module.exports = function (router) {
     } catch (error) {
       logger.error(error)
       if (error instanceof ValidationError) {
-        var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+        var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
         return workloadPointsService.getWorkloadPoints(true)
           .then(function (result) {
             return res.status(400).render('workload-points', {

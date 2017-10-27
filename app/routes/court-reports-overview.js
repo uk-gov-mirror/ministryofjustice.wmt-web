@@ -48,7 +48,7 @@ var renderOverview = function (req, res, next) {
     childOrganisationLevelDisplayText = getOrganisationUnit('name', childOrganisationLevel).displayText
   }
 
-  var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+  var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
   return getCourtReportOverview(id, organisationLevel)
   .then(function (result) {

@@ -25,7 +25,7 @@ module.exports = function (router) {
       throw new Error('Not available for offender-manager')
     }
 
-    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     var orgUnit = getOrganisationUnit('name', organisationLevel)
     var childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)

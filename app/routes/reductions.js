@@ -39,7 +39,7 @@ module.exports = function (router) {
       throw new Error('Only available for offender manager')
     }
 
-    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return reductionsService.getReductions(id, organisationLevel, workloadType).then(function (result) {
       return res.render('reductions', {
@@ -86,7 +86,7 @@ module.exports = function (router) {
       throw new Error('Only available for offender manager')
     }
 
-    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
       .then(function (result) {
@@ -135,7 +135,7 @@ module.exports = function (router) {
 
     workloadTypeValidator.validate(workloadType)
 
-    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
       .then(function (result) {
@@ -198,7 +198,7 @@ module.exports = function (router) {
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
         if (error instanceof ValidationError) {
-          var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+          var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
           return res.status(400).render('add-reduction', {
             breadcrumbs: result.breadcrumbs,
             linkId: id,
@@ -275,7 +275,7 @@ module.exports = function (router) {
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
         if (error instanceof ValidationError) {
-          var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+          var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
           return res.status(400).render('add-reduction', {
             breadcrumbs: result.breadcrumbs,
             linkId: id,

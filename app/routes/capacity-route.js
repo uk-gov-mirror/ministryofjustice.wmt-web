@@ -45,7 +45,7 @@ module.exports = function (router) {
       childOrgUnitDisplayText = getOrganisationUnit('name', orgUnit.childOrganisationLevel).displayText
     }
 
-    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     var capacityViewPromise = getCapacityView(id, capacityDateRange, organisationLevel)
 

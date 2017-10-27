@@ -38,7 +38,7 @@ module.exports = function (router) {
       return res.sendStatus(404)
     }
 
-    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return contractedHoursService.getContractedHours(id, organisationLevel, workloadType)
     .then(function (result) {
@@ -91,7 +91,7 @@ module.exports = function (router) {
       if (error instanceof ValidationError) {
         return contractedHoursService.getContractedHours(id, organisationLevel, workloadType)
           .then(function (result) {
-            var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+            var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
             return res.render('contracted-hours', {
               errors: error.validationErrors,

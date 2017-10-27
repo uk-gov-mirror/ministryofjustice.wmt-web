@@ -91,7 +91,7 @@ var renderOverview = function (req, res, next) {
     childOrganisationLevelDisplayText = getOrganisationUnit('name', childOrganisationLevel).displayText
   }
 
-  var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+  var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
   var overviewPromise = getOverview(id, organisationLevel)
   return overviewPromise.then(function (result) {

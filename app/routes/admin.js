@@ -20,7 +20,7 @@ module.exports = function (router) {
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return res.render('admin', {
       title: 'Admin',

@@ -6,7 +6,7 @@ const errorHandler = require('../services/validators/error-handler')
 const authorisation = require('../authorisation')
 const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
-const Unathorized = require('../services/errors/authentication-error').Unauthorized
+const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 
 module.exports = function (router) {
@@ -15,7 +15,7 @@ module.exports = function (router) {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
     } catch (error) {
-      if (error instanceof Unathorized) {
+      if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
       } else if (error instanceof Forbidden) {
         return res.status(error.statusCode).render(error.redirect, {
@@ -33,7 +33,7 @@ module.exports = function (router) {
     var fail = req.query.fail
 
     var failureText = fail ? 'Invalid username specified' : null
-    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return res.render('user', {
       title: 'User rights',
       breadcrumbs: breadcrumbs,
@@ -48,7 +48,7 @@ module.exports = function (router) {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
     } catch (error) {
-      if (error instanceof Unathorized) {
+      if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
       } else if (error instanceof Forbidden) {
         return res.status(error.statusCode).render(error.redirect, {
@@ -68,7 +68,7 @@ module.exports = function (router) {
     if (!isValidUsername(username)) {
       return res.redirect(302, '/admin/user?fail=true')
     }
-    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return userRoleService.getRoleByUsername(username).then(function (role) {
       return res.render('user-rights', {
         title: 'User rights',
@@ -88,7 +88,7 @@ module.exports = function (router) {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
     } catch (error) {
-      if (error instanceof Unathorized) {
+      if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
       } else if (error instanceof Forbidden) {
         return res.status(error.statusCode).render(error.redirect, {
@@ -106,7 +106,7 @@ module.exports = function (router) {
       addUpdateUserRole(username, rights, loggedInUsername)
     }
 
-    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return res.render('user', {
       title: 'User rights',
       userRights: { username: username, rights: rights },
