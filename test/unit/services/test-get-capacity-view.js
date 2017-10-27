@@ -89,7 +89,7 @@ const EXPECTED_TEAM_BREAKDOWN = [
   },
   {
     capacity: 40,
-    name: 'Total/Average',
+    name: 'Total / Average',
     totalARMS: 20,
     totalCMS: 25,
     totalCases: 39,
@@ -137,7 +137,7 @@ const EXPECTED_LDU_BREAKDOWN = [
     ]
   },
   {
-    name: 'Total/Average',
+    name: 'Total / Average',
     capacity: 70,
     totalCases: 79,
     totalARMS: 40,
