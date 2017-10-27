@@ -79,10 +79,19 @@ describe('services/workload-points-service', function () {
   describe('updateWorkloadPoints', function () {
     it('should call the necesssary functions with the correct parameters', function () {
       var returnedWorkloadPoints = Object.assign({}, WORKLOAD_POINTS_DETAILS, { previousWpId: 123 })
-      return workloadPointsService.updateWorkloadPoints(returnedWorkloadPoints).then(function (results) {
+      return workloadPointsService.updateWorkloadPoints(returnedWorkloadPoints, false).then(function (results) {
         expect(updatePreviousWorkloadPointsEffectiveTo.calledWith(123)).to.be.true //eslint-disable-line  
         expect(insertNewWorkloadPoints.calledWith(returnedWorkloadPoints)).to.be.true //eslint-disable-line  
-        expect(getWorkloadIdsForWpRecalc.calledWith(123)).to.be.true //eslint-disable-line  
+        expect(getWorkloadIdsForWpRecalc.calledWith(123, false)).to.be.true //eslint-disable-line  
+        expect(createCalculateWorkloadPointsTask.calledWith(recalcIds.minWorkloadStagingId, recalcIds.workloadReportId, 10)).to.be.true //eslint-disable-line        
+      })
+    })
+    it('should call the necesssary functions for t2a updated with the correct parameters', function () {
+      var returnedT2aWorkloadPoints = Object.assign({}, WORKLOAD_POINTS_DETAILS, { previousWpId: 124, is_t2a: true })
+      return workloadPointsService.updateWorkloadPoints(returnedT2aWorkloadPoints, true).then(function (results) {
+        expect(updatePreviousWorkloadPointsEffectiveTo.calledWith(124)).to.be.true //eslint-disable-line  
+        expect(insertNewWorkloadPoints.calledWith(returnedT2aWorkloadPoints)).to.be.true //eslint-disable-line  
+        expect(getWorkloadIdsForWpRecalc.calledWith(124, true)).to.be.true //eslint-disable-line  
         expect(createCalculateWorkloadPointsTask.calledWith(recalcIds.minWorkloadStagingId, recalcIds.workloadReportId, 10)).to.be.true //eslint-disable-line        
       })
     })

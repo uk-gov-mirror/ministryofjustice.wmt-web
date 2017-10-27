@@ -4,6 +4,7 @@ const getIdsForWpRecalc = require('../../../../app/services/data/get-ids-for-wor
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 
 var previousWpId
+var previousT2aWpId
 var inserts = []
 
 var expectedWorkloadReportId
@@ -18,6 +19,7 @@ describe('/services/data/get-ids-for-workload-points-recalc', function () {
       .then(function (insertsWithTwoWo) {
         inserts = insertsWithTwoWo
         previousWpId = inserts.filter((item) => item.table === 'workload_points')[0].id
+        previousT2aWpId = inserts.filter((item) => item.table === 'workload_points')[2].id
         expectedWorkloadReportId = inserts.filter((item) => item.table === 'workload_report')[1].id
         expectedMinWorkloadStagingId = dataHelper.maxStagingId
         expectedMaxWorkloadStagingId = dataHelper.maxStagingId + 2
@@ -26,7 +28,16 @@ describe('/services/data/get-ids-for-workload-points-recalc', function () {
   })
 
   it('should return the correct min and max workload ids and workload report id', function () {
-    return getIdsForWpRecalc(previousWpId)
+    return getIdsForWpRecalc(previousWpId, false)
+      .then(function (result) {
+        expect(result.minWorkloadStagingId).to.eql(expectedMinWorkloadStagingId)
+        expect(result.maxWorkloadStagingId).to.eql(expectedMaxWorkloadStagingId)
+        expect(result.workloadReportId).to.eql(expectedWorkloadReportId)
+      })
+  })
+
+  it('should return the correct min and max workload ids and workload report id for t2a workload points', function () {
+    return getIdsForWpRecalc(previousT2aWpId, true)
       .then(function (result) {
         expect(result.minWorkloadStagingId).to.eql(expectedMinWorkloadStagingId)
         expect(result.maxWorkloadStagingId).to.eql(expectedMaxWorkloadStagingId)

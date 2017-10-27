@@ -39,10 +39,10 @@ module.exports.getWorkloadPoints = function (isT2A) {
   })
 }
 
-module.exports.updateWorkloadPoints = function (workloadPoints) {
+module.exports.updateWorkloadPoints = function (workloadPoints, isT2A = false) {
   return updatePreviousWorkloadPointsEffectiveTo(workloadPoints.previousWpId).then(function (updateResults) {
     return insertNewWorkloadPoints(workloadPoints).then(function (insertResults) {
-      return getWorkloadIdsForWpRecalc(workloadPoints.previousWpId).then(function (ids) {
+      return getWorkloadIdsForWpRecalc(workloadPoints.previousWpId, isT2A).then(function (ids) {
         return createCalculateWorkloadPointsTask(ids.minWorkloadStagingId, ids.workloadReportId, (ids.maxWorkloadStagingId - ids.minWorkloadStagingId + 1))
         .then(function (taskResults) {
           return taskResults

@@ -104,6 +104,9 @@ module.exports.addWorkloadCapacitiesForOffenderManager = function () {
 
   var promise = module.exports.addWorkloadPoints(inserts)
     .then(function (inserts) {
+      return module.exports.addWorkloadPointsT2A(inserts)
+    })
+    .then(function (inserts) {
       return addWorkloadReports(inserts)
     })
     .then(function () {
@@ -287,6 +290,7 @@ var addWorkloads = function (inserts) {
 
       var defaultWorkloadPointsCalculations = {
         workload_points_id: inserts.filter((item) => item.table === 'workload_points')[0].id,
+        t2a_workload_points_id: inserts.filter((item) => item.table === 'workload_points')[2].id,
         total_points: 0,
         sdr_points: 0,
         sdr_conversion_points: 0,
