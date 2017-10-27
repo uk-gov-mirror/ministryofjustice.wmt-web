@@ -7,7 +7,7 @@
   {% include "includes/title-subtitle.html" %}
   <div>
     <div class="column-one-half">
-    {% if noAuth === true or userRole === 'Data Admin'%}
+    {% if noAuth===true or userRole==='Data Admin'%}
       <h2 class="heading-medium">
         <a href="/admin/workload-points">Workload points</a>
       </h2>
@@ -29,7 +29,7 @@
     </div>
     <div class="column-one-half">
       <h2 class="heading-medium">
-      {% if noAuth === true or userRole === 'System Admin' %}
+      {% if noAuth===true or userRole==='System Admin' %}
         <a href="/admin/user">User rights</a>
       {% else %}
         User rights

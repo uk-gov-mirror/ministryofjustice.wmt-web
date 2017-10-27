@@ -21,6 +21,8 @@ module.exports = function (router) {
       id = req.params.id
     }
 
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+
     var caseProgressPromise = getCaseProgress(id, organisationLevel)
 
     return caseProgressPromise.then(function (result) {
@@ -29,7 +31,9 @@ module.exports = function (router) {
         subTitle: result.subTitle,
         breadcrumbs: result.breadcrumbs,
         subNav: getSubNav(id, organisationLevel, req.path),
-        caseProgressList: result.caseProgressList
+        caseProgressList: result.caseProgressList,
+        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+        noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
       })
     }).catch(function (error) {
       next(error)
