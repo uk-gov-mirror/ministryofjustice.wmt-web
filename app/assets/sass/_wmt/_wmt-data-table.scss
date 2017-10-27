@@ -29,6 +29,10 @@ table.data-table tr td:not(:first-child) {
     text-align: center;
 }
 
+table.data-table tr td.align-centre{
+    text-align: center;
+}
+
 table.data-table tr:nth-child(odd){
     padding: 10px 5px;
 }
