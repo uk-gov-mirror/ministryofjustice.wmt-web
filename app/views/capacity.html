@@ -171,7 +171,7 @@
             {% if i === 0 %}
               <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
             {% endif %}
-          <td headers="grade org">{{ member.grades[i].grade }}</td>
+          <td class="align-centre" headers="grade org">{{ member.grades[i].grade }}</td>
           {% if member.grades[i].capacityPercentage > 110 %}
             <td class="capacity-red" headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
           {% else %}
