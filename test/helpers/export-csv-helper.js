@@ -14,15 +14,15 @@ module.exports.TEAM_CASELOAD_RESULT = {
 module.exports.TEAM_CASELOAD_CSV = {
   filename: 'Test_Team_Caseload.csv',
   csv: 'OVERALL\n' +
-    '"OffenderManagerName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
+    '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
     '"John Smith","PO",9,18,12,6,9,6,3,0,189\n' +
     '"Tony Test","PO",9,18,12,6,9,6,3,0,189\n\n\n' +
     'CUSTODY\n' +
-    '"OffenderManagerName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+    '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
     'COMMUNITY\n' +
-    '"OffenderManagerName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+    '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
     'LICENSE\n' +
-    '"OffenderManagerName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"'
+    '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"'
 }
 
 module.exports.LDU_CASELOAD_RESULT = {
@@ -74,13 +74,13 @@ module.exports.LDU_CASELOAD_CSV = {
       '"Test Team 1",5,,2,12\n' +
       '"Test Team 2",5,,2,12\n\n\n' +
       'CUSTODY\n' +
-      '"TeamName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+      '"Team Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
       'COMMUNITY\n' +
-      '"TeamName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+      '"Team Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
       'LICENSE\n' +
-      '"TeamName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+      '"Team Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
       'OVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' +
-      '"TeamName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
+      '"Team Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
       '"Test Team 1","PO",50,50,50,0,10,25,50,0,50\n' +
       '"Test Team 1","PSO",50,50,50,100,90,75,50,0,50\n' +
       '"Test Team 2","PO",50,80,75,70,10,62.5,50,0,66.66666666666666'
@@ -135,13 +135,13 @@ module.exports.REGION_CASELOAD_CSV = {
   '"Test LDU 1",5,,2,12\n' +
   '"Test LDU 2",5,,2,12\n\n\n' +
   'CUSTODY\n' +
-  '"LDUClusterName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
   'COMMUNITY\n' +
-  '"LDUClusterName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
   'LICENSE\n' +
-  '"LDUClusterName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
   'OVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' +
-  '"LDUClusterName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
+  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
   '"Test LDU 1","PO",50,50,50,0,10,25,50,0,50\n' +
   '"Test LDU 1","PSO",50,50,50,100,90,75,50,0,50\n' +
   '"Test LDU 2","PO",50,80,75,70,10,62.5,50,0,66.66666666666666'
@@ -196,13 +196,13 @@ module.exports.NATIONAL_CASELOAD_CSV = {
   '"Test Region 1",5,,2,12\n' +
   '"Test Region 2",5,,2,12\n\n\n' +
   'CUSTODY\n' +
-  '"DivisionName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
   'COMMUNITY\n' +
-  '"DivisionName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
   'LICENSE\n' +
-  '"DivisionName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
   'OVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' +
-  '"DivisionName","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
+  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
   '"Test Region 1","PO",50,50,50,0,10,25,50,0,50\n' +
   '"Test Region 1","PSO",50,50,50,100,90,75,50,0,50\n' +
   '"Test Region 2","PO",50,80,75,70,10,62.5,50,0,66.66666666666666'
@@ -267,7 +267,7 @@ module.exports.TEAM_OVERVIEW_RESULT = {
 
 module.exports.TEAM_OVERVIEW_CSV = {
   filename: 'Test_Team_Overview.csv',
-  csv: '"LDU Cluster", "Team Name", "Offender Manager Name","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases","Grade Code"\n' +
+  csv: '"LDU Cluster","Team Name","Offender Manager Name","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases","Grade Code"\n' +
   '"Test Cluster","Test Team","John Smith",107.36842105263158,190,37.5,6,63,"PO"\n' +
   '"Test Cluster","Test Team","Tony Test",106.84210526315789,190,36.5,6,63,"PO"'
 }

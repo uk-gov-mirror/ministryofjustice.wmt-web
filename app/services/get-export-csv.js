@@ -34,7 +34,7 @@ var getFields = function (organisationLevel, tab) {
     case tabs.CASELOAD:
       childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
       fields = CASELOAD_FIELDS
-      fieldNames = [childOrgForFieldName + 'Name', 'Grade', 'A', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'Untiered', 'Overall']
+      fieldNames = [childOrgForFieldName + ' Name', 'Grade', 'A', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'Untiered', 'Overall']
       break
     case tabs.OVERVIEW:
       if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
