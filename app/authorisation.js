@@ -30,6 +30,17 @@ var isAuthenticationEnabled = function () {
   return (config.AUTHENTICATION_ENABLED === 'true')
 }
 
+var getAuthorisedUserRole = function (req) {
+  var result = {}
+  if (!req.user) {
+    result.noAuth = isAuthenticationEnabled()
+  } else {
+    result.userRole = req.user.user_role
+  }
+  return result
+}
+
 module.exports.hasRole = hasRole
 module.exports.assertUserAuthenticated = assertUserAuthenticated
 module.exports.isAuthenticationEnabled = isAuthenticationEnabled
+module.exports.getAuthorisedUserRole = getAuthorisedUserRole
