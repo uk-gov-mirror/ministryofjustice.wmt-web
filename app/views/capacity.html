@@ -111,7 +111,7 @@
     <thead>
       <tr>
         <th colspan="2" id="org">{{ childOrganisationLevelDisplayText }}</th>
-        <th colspan="9" id="breakdown">Workload breakdown</th>
+        <th colspan="8" id="breakdown">Workload breakdown</th>
       </tr>
       <tr>
         <th id="name">Name</th>
@@ -123,7 +123,6 @@
         <th id="paroms"><abbr title="Parole Assessment Reports by the Offender Manager">PAROMs</abbr></th>
         <th id="fdrs"><abbr title="Fast Delivery Reports">FDRs</abbr></th>
         <th id="sdrs"><abbr title="Standard Delivery Reports">SDRs</abbr></th>
-        <th id="oral"><abbr title="Oral Reports">Oral Reports</abbr></th>
         <th id="gs"><abbr title="Group Supervision">GS</abbr></th>
         <th id="cms"><abbr title="Case Management Support">CMS</abbr></th>
       </tr>
@@ -145,7 +144,6 @@
           <td headers="paroms breakdown">{{ member.paroms }}</td>
           <td headers="fdrs breakdown">{{ member.sdrConversions }}</td>
           <td headers="sdrs breakdown">{{ member.sdrs }}</td>
-          <td headers="oral breakdown">{{ member.oralReports }}</td>
           <td headers="gs breakdown">{{ member.gsPercentage | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.cmsPercentage | round(1) }}%</td>
         </tr>
@@ -172,7 +170,6 @@
           <td headers="paroms breakdown">{{ member.grades[i].paroms }}</td>
           <td headers="fdrs breakdown">{{ member.grades[i].sdrConversions }}</td>
           <td headers="sdrs breakdown">{{ member.grades[i].sdrs }}</td>
-          <td headers="oral breakdown">{{ member.grades[i].oralReports }}</td>
           <td headers="gs breakdown">{{ member.grades[i].gsPercentage | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.grades[i].cmsPercentage | round(1) }}%</td>
         </tr>

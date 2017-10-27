@@ -53,8 +53,7 @@ const LDU_RESULTS = [
     armsTotalCases: 20,
     sdrs: 10,
     sdrConversions: 9,
-    paroms: 8,
-    oralReports: 7
+    paroms: 8
   },
   {
     name: 'Test ldu 1',
@@ -70,8 +69,7 @@ const LDU_RESULTS = [
     armsTotalCases: 20,
     sdrs: 1,
     sdrConversions: 1,
-    paroms: 3,
-    oralReports: 7
+    paroms: 3
   }
 ]
 
@@ -87,8 +85,7 @@ const EXPECTED_TEAM_BREAKDOWN = [
     armsTotalCases: 20,
     sdrs: 10,
     sdrConversions: 9,
-    paroms: 8,
-    oralReports: 7
+    paroms: 8
   }
 ]
 
@@ -109,8 +106,7 @@ const EXPECTED_LDU_BREAKDOWN = [
         armsTotalCases: 20,
         sdrs: 10,
         sdrConversions: 9,
-        paroms: 8,
-        oralReports: 7
+        paroms: 8
       },
       {
         name: 'Test ldu 1',
@@ -124,8 +120,7 @@ const EXPECTED_LDU_BREAKDOWN = [
         armsTotalCases: 20,
         sdrs: 1,
         sdrConversions: 1,
-        paroms: 3,
-        oralReports: 7
+        paroms: 3
       }
     ]
   }
