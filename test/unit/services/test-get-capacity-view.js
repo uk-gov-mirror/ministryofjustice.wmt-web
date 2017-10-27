@@ -96,7 +96,8 @@ const EXPECTED_TEAM_BREAKDOWN = [
     totalGs: 20,
     totalSDRs: 10,
     totalParoms: 8,
-    totalSdrConversions: 9
+    totalSdrConversions: 9,
+    totalTotalT2aCases: 29
   }
 ]
 
@@ -142,9 +143,10 @@ const EXPECTED_LDU_BREAKDOWN = [
     totalARMS: 40,
     totalGs: 11.25,
     totalCMS: 15,
-    totalSDRs: 10,
-    totalParoms: 8,
-    totalSdrConversions: 9
+    totalSDRs: 11,
+    totalParoms: 11,
+    totalSdrConversions: 10,
+    totalTotalT2aCases: 59
   }
 ]
 
