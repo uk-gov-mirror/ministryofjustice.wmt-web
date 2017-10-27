@@ -38,7 +38,8 @@ var VALID_WORKLOAD_POINTS = {
   weightingArmsLicense: '10.2',
   defaultContractedHoursPo: '37',
   defaultContractedHoursPso: '37',
-  parom: '121'
+  parom: '121',
+  isT2A: 'false'
 }
 
 describe('services/domain/workload-points', function () {
@@ -77,6 +78,7 @@ describe('services/domain/workload-points', function () {
     expect(workloadPoints.weightingArmsCommunity).to.equal('10.1')
     expect(workloadPoints.weightingArmsLicense).to.equal('10.2')
     expect(workloadPoints.weightingWarrants).to.equal('0.0')
+    expect(workloadPoints.isT2A).to.equal('false')
   })
 
   it('should raise a ValidationError if a Community Weighting field is out of range', function () {
@@ -289,6 +291,15 @@ describe('services/domain/workload-points', function () {
   it('should raise a ValidationError if Weighting Warrants field is not set', function () {
     var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.weightingWarrants = ''
+
+    expect(function () {
+      new WorkloadPoints(invalidWorkloadPoints)
+    }).to.throw(ValidationError)
+  })
+
+  it('should raise a ValidationError if T2A flag is not set', function () {
+    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    invalidWorkloadPoints.isT2A = null
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)

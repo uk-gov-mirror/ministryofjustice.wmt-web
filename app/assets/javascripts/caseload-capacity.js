@@ -1,4 +1,3 @@
-
 trace1 = {
     x: capacityTable.headings,
     y: capacityTable.rows[0].values,
@@ -63,7 +62,7 @@ layout = {
         showline: true,
         side: 'bottom',
         ticks: 'outside',
-        title: '2016',
+        title: 'Time',
         titlefont: {size: 15},
         type: 'date',
         zeroline: false,

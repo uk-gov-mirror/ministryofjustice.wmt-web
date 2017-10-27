@@ -14,10 +14,14 @@ module.exports = function (id, type) {
     'link_id AS linkId',
     'grade_code AS grade',
     'total_cases AS totalCases',
+<<<<<<< HEAD
     'monthly_sdrs AS sdrs',
     'sdr_conversions_last_30_days AS sdrConversions',
     'paroms_completed_last_30_days AS paroms',
     'oral_reports AS oralReports',
+=======
+    'total_t2a_cases AS totalT2aCases',
+>>>>>>> master
     'cms_adjustment_points AS cmsAdjustmentPoints',
     'gs_adjustment_points AS gsAdjustmentPoints',
     'arms_total_cases AS armsTotalCases',
