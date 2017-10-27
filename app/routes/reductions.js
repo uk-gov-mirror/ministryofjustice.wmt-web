@@ -39,6 +39,8 @@ module.exports = function (router) {
       throw new Error('Only available for offender manager')
     }
 
+    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+
     return reductionsService.getReductions(id, organisationLevel, workloadType).then(function (result) {
       return res.render('reductions', {
         breadcrumbs: result.breadcrumbs,
@@ -50,7 +52,9 @@ module.exports = function (router) {
         scheduledReductions: result.scheduledReductions,
         archivedReductions: result.archivedReductions,
         successText: successText,
-        workloadType: workloadType
+        workloadType: workloadType,
+        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+        noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
       })
     }).catch(function (error) {
       next(error)
@@ -82,6 +86,8 @@ module.exports = function (router) {
       throw new Error('Only available for offender manager')
     }
 
+    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+
     return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
       .then(function (result) {
         var errors = req.session.addReductionErrors
@@ -94,7 +100,9 @@ module.exports = function (router) {
           subNav: getSubNav(id, organisationLevel, req.path, workloadType),
           referenceData: result.referenceData,
           errors: errors,
-          workloadType: workloadType
+          workloadType: workloadType,
+          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+          noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
         })
       }).catch(function (error) {
         next(error)
@@ -127,6 +135,8 @@ module.exports = function (router) {
 
     workloadTypeValidator.validate(workloadType)
 
+    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+
     reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
       .then(function (result) {
         return reductionsService.getReductionByReductionId(reductionId)
@@ -142,7 +152,9 @@ module.exports = function (router) {
               subNav: getSubNav(id, organisationLevel, req.path, workloadType),
               referenceData: result.referenceData,
               reduction: mapReductionToViewModel(reduction),
-              workloadType: workloadType
+              workloadType: workloadType,
+              userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+              noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
             })
           }).catch(function (error) {
             next(error)
@@ -186,6 +198,7 @@ module.exports = function (router) {
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
         if (error instanceof ValidationError) {
+          var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
           return res.status(400).render('add-reduction', {
             breadcrumbs: result.breadcrumbs,
             linkId: id,
@@ -206,7 +219,9 @@ module.exports = function (router) {
               notes: req.body.notes
             },
             errors: error.validationErrors,
-            workloadType: workloadType
+            workloadType: workloadType,
+            userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+            noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
           })
         } else {
           next(error)
@@ -260,6 +275,7 @@ module.exports = function (router) {
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
         if (error instanceof ValidationError) {
+          var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
           return res.status(400).render('add-reduction', {
             breadcrumbs: result.breadcrumbs,
             linkId: id,
@@ -279,7 +295,9 @@ module.exports = function (router) {
               end_year: req.body.redEndYear,
               notes: req.body.notes
             },
-            errors: error.validationErrors
+            errors: error.validationErrors,
+            userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+            noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
           })
         } else {
           next(error)

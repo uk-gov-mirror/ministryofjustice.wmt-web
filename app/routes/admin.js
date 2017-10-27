@@ -19,17 +19,13 @@ module.exports = function (router) {
         })
       }
     }
-    var userRole
-    var noAuth = false
-    if (!req.user) {
-      noAuth = true
-    } else {
-      userRole = req.user.user_role
-    }
+
+    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+
     return res.render('admin', {
       title: 'Admin',
-      userRole: userRole,
-      noAuth: noAuth
+      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+      noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
     })
   })
 }

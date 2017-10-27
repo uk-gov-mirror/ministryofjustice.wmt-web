@@ -10,6 +10,13 @@ const workloadTypes = require('../../app/constants/workload-type')
 
 module.exports = function (router) {
   router.get('/', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
     if (Object.keys(req.query).length !== 0) {
       return next()
     }
@@ -19,10 +26,24 @@ module.exports = function (router) {
   })
 
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
     return renderOverview(req, res, next)
   })
 
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
     return renderOverview(req, res, next)
   })
 
@@ -34,7 +55,6 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-
     var organisationLevel = req.params.organisationLevel
     var id
     if (organisationLevel !== organisationUnitConstants.NATIONAL.name) {
@@ -52,14 +72,6 @@ module.exports = function (router) {
 }
 
 var renderOverview = function (req, res, next) {
-  try {
-    authorisation.assertUserAuthenticated(req)
-  } catch (error) {
-    if (error instanceof Unauthorized) {
-      return res.status(error.statusCode).redirect(error.redirect)
-    }
-  }
-
   var organisationLevel = req.params.organisationLevel
   var organisationUnit = getOrganisationUnit('name', organisationLevel)
   var id
@@ -79,8 +91,9 @@ var renderOverview = function (req, res, next) {
     childOrganisationLevelDisplayText = getOrganisationUnit('name', childOrganisationLevel).displayText
   }
 
-  var overviewPromise = getOverview(id, organisationLevel)
+  var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
 
+  var overviewPromise = getOverview(id, organisationLevel)
   return overviewPromise.then(function (result) {
     return res.render('overview', {
       title: result.title,
@@ -92,7 +105,9 @@ var renderOverview = function (req, res, next) {
       childOrganisationLevel: childOrganisationLevel,
       childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
       subNav: getSubNav(id, organisationLevel, req.path),
-      overviewDetails: result.overviewDetails
+      overviewDetails: result.overviewDetails,
+      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+      noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
     })
   }).catch(function (error) {
     next(error)

@@ -45,6 +45,8 @@ module.exports = function (router) {
       childOrgUnitDisplayText = getOrganisationUnit('name', orgUnit.childOrganisationLevel).displayText
     }
 
+    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+
     var capacityViewPromise = getCapacityView(id, capacityDateRange, organisationLevel)
 
     return capacityViewPromise.then(function (result) {
@@ -59,7 +61,9 @@ module.exports = function (router) {
         capacityBreakdown: result.capacityBreakdown,
         childOrganisationLevel: orgUnit.childOrganisationLevel,
         childOrganisationLevelDisplayText: childOrgUnitDisplayText,
-        organisationLevel: organisationLevel
+        organisationLevel: organisationLevel,
+        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+        noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
       })
     }).catch(function (error) {
       next(error)

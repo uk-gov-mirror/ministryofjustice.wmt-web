@@ -9,23 +9,29 @@ const Unauthorized = require('../services/errors/authentication-error').Unauthor
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id/overview', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
     return renderOverview(req, res, next)
   })
 
   router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
     return renderOverview(req, res, next)
   })
 }
 
 var renderOverview = function (req, res, next) {
-  try {
-    authorisation.assertUserAuthenticated(req)
-  } catch (error) {
-    if (error instanceof Unauthorized) {
-      return res.status(error.statusCode).redirect(error.redirect)
-    }
-  }
-
   var organisationLevel = req.params.organisationLevel
   var organisationUnit = getOrganisationUnit('name', organisationLevel)
   var id
@@ -42,6 +48,8 @@ var renderOverview = function (req, res, next) {
     childOrganisationLevelDisplayText = getOrganisationUnit('name', childOrganisationLevel).displayText
   }
 
+  var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+
   return getCourtReportOverview(id, organisationLevel)
   .then(function (result) {
     return res.render('court-reports-overview', {
@@ -52,7 +60,9 @@ var renderOverview = function (req, res, next) {
       childOrganisationLevel: childOrganisationLevel,
       childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
       subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS),
-      overviewDetails: result.overviewDetails
+      overviewDetails: result.overviewDetails,
+      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+      noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
     })
   }).catch(function (error) {
     next(error)

@@ -33,11 +33,13 @@ module.exports = function (router) {
     var fail = req.query.fail
 
     var failureText = fail ? 'Invalid username specified' : null
-
+    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
     return res.render('user', {
       title: 'User rights',
       breadcrumbs: breadcrumbs,
-      failureText: failureText
+      failureText: failureText,
+      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+      noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
     })
   })
 
@@ -66,13 +68,15 @@ module.exports = function (router) {
     if (!isValidUsername(username)) {
       return res.redirect(302, '/admin/user?fail=true')
     }
-
+    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
     return userRoleService.getRoleByUsername(username).then(function (role) {
       return res.render('user-rights', {
         title: 'User rights',
         username: username,
         rights: role.role,
-        breadcrumbs: breadcrumbs
+        breadcrumbs: breadcrumbs,
+        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+        noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
       })
     }).catch(function (error) {
       next(error)
@@ -102,9 +106,12 @@ module.exports = function (router) {
       addUpdateUserRole(username, rights, loggedInUsername)
     }
 
+    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
     return res.render('user', {
       title: 'User rights',
-      userRights: { username: username, rights: rights }
+      userRights: { username: username, rights: rights },
+      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+      noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
     })
   })
 }

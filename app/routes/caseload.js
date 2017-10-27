@@ -25,6 +25,8 @@ module.exports = function (router) {
       throw new Error('Not available for offender-manager')
     }
 
+    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+
     var orgUnit = getOrganisationUnit('name', organisationLevel)
     var childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)
 
@@ -40,7 +42,9 @@ module.exports = function (router) {
           organisationLevel: organisationLevel,
           childOrganisationLevel: orgUnit.childOrganisationLevel,
           childOrganisationLevelDisplayText: childOrgUnit.displayText,
-          caseloadDetails: caseloadDetails(organisationLevel, result)
+          caseloadDetails: caseloadDetails(organisationLevel, result),
+          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+          noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
         })
       }).catch(function (error) {
         next(error)

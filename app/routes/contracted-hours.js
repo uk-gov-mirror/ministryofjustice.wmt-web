@@ -38,6 +38,8 @@ module.exports = function (router) {
       return res.sendStatus(404)
     }
 
+    var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+
     return contractedHoursService.getContractedHours(id, organisationLevel, workloadType)
     .then(function (result) {
       return res.render('contracted-hours', {
@@ -48,7 +50,9 @@ module.exports = function (router) {
         contractedHours: result.contractedHours,
         woId: id,
         hoursUpdatedSuccess: req.query.hoursUpdatedSuccess,
-        workloadType: workloadType
+        workloadType: workloadType,
+        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+        noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
       })
     }).catch(function (error) {
       next(error)
@@ -87,6 +91,8 @@ module.exports = function (router) {
       if (error instanceof ValidationError) {
         return contractedHoursService.getContractedHours(id, organisationLevel, workloadType)
           .then(function (result) {
+            var authorisedUserRole = authorisation.getAuthoriseddUserRole(req)
+
             return res.render('contracted-hours', {
               errors: error.validationErrors,
               title: result.title,
@@ -94,7 +100,9 @@ module.exports = function (router) {
               breadcrumbs: result.breadcrumbs,
               subNav: getSubNav(id, organisationLevel, req.path, workloadType),
               contractedHours: updatedHours,
-              woId: id
+              woId: id,
+              userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+              noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
             })
           }).catch(function (error) {
             next(error)
