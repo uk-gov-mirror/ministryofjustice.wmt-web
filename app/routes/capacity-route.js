@@ -47,9 +47,7 @@ module.exports = function (router) {
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    var capacityViewPromise = getCapacityView(id, capacityDateRange, organisationLevel)
-
-    return capacityViewPromise.then(function (result) {
+    return getCapacityView(id, capacityDateRange, organisationLevel).then(function (result) {
       return res.render('capacity', {
         title: result.title,
         subTitle: result.subTitle,

@@ -25,7 +25,10 @@ module.exports = function (id, type) {
     selectList.push('id')
   }
 
-  if (ORGANISATION_UNIT.TEAM.name === type) {
+  if (ORGANISATION_UNIT.OFFENDER_MANAGER.name === type) {
+    selectList.push('name')
+    selectList.push('grade_code AS grade')
+  } else if (ORGANISATION_UNIT.TEAM.name === type) {
     selectList.push('CONCAT(forename, \' \', surname) AS name')
     selectList.push('grade_code AS grade')
   } else {

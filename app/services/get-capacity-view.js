@@ -84,11 +84,15 @@ var buildCapacityBreakdownEntry = function (workloadReport) {
     name: workloadReport.name,
     grade: workloadReport.grade,
     totalCases: workloadReport.totalCases,
+    armsTotalCases: workloadReport.armsTotalCases,
+    paroms: workloadReport.paroms,
+    sdrConversions: workloadReport.sdrConversions,
+    sdrs: workloadReport.sdrs,
     totalT2aCases: workloadReport.totalT2aCases,
     linkId: workloadReport.linkId,
     capacityPercentage: percentageCalculator.calculatePercentage(workloadReport.totalPoints, workloadReport.availablePoints),
     cmsPercentage: cmsPercentageValue,
-    gsPercentage: percentageCalculator.calculatePercentage(-workloadReport.gsAdjustmentPoints, (workloadReport.totalPoints - workloadReport.gsAdjustmentPoints)),
-    armsTotalCases: workloadReport.armsTotalCases
+    gsPercentage: percentageCalculator.calculatePercentage(-workloadReport.gsAdjustmentPoints, (workloadReport.totalPoints - workloadReport.gsAdjustmentPoints))
+
   }
 }

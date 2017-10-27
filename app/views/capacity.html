@@ -139,11 +139,11 @@
             <td headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
           {% endif %}
           <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>
-          <td headers="t2a cases breakdown">{{ member.totalT2aCases | round(1) }}</td>
+          <td headers="t2aCases breakdown">{{ member.totalT2aCases | round(1) }}</td>
           <td headers="arms breakdown">{{ member.armsTotalCases }}</td>
-          <td headers="paroms breakdown">-</td>
-          <td headers="fdrs breakdown">-</td>
-          <td headers="sdrs breakdown">-</td>
+          <td headers="paroms breakdown">{{ member.paroms }}</td>
+          <td headers="fdrs breakdown">{{ member.sdrConversions }}</td>
+          <td headers="sdrs breakdown">{{ member.sdrs }}</td>
           <td headers="gs breakdown">{{ member.gsPercentage | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.cmsPercentage | round(1) }}%</td>
         </tr>
@@ -165,11 +165,11 @@
             <td headers="capacity breakdown">{{ member.grades[i].capacityPercentage | round(1) }}%</td>
           {% endif %}
           <td headers="cases breakdown">{{ member.grades[i].totalCases | round(1) }}</td>
-          <td headers="t2a cases breakdown">{{ member.grades[i].totalT2aCases | round(1) }}</td>
+          <td headers="t2aCases breakdown">{{ member.grades[i].totalT2aCases | round(1) }}</td>
           <td headers="arms breakdown">{{ member.grades[i].armsTotalCases }}</td>
-          <td headers="paroms breakdown">-</td>
-          <td headers="fdrs breakdown">-</td>
-          <td headers="sdrs breakdown">-</td>
+          <td headers="paroms breakdown">{{ member.grades[i].paroms }}</td>
+          <td headers="fdrs breakdown">{{ member.grades[i].sdrConversions }}</td>
+          <td headers="sdrs breakdown">{{ member.grades[i].sdrs }}</td>
           <td headers="gs breakdown">{{ member.grades[i].gsPercentage | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.grades[i].cmsPercentage | round(1) }}%</td>
         </tr>

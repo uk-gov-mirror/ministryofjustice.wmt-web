@@ -13,10 +13,10 @@ var defaultWorkload = {
   total_t2a_community_cases: 0,
   total_t2a_custody_cases: 0,
   total_t2a_license_cases: 0,
-  monthly_sdrs: 0,
+  monthly_sdrs: 10,
   sdr_due_next_30_days: 0,
-  sdr_conversions_last_30_days: 0,
-  paroms_completed_last_30_days: 0,
+  sdr_conversions_last_30_days: 9,
+  paroms_completed_last_30_days: 8,
   paroms_due_next_30_days: 0,
   license_last_16_weeks: 9,
   community_last_16_weeks: 10

@@ -7,15 +7,19 @@ const CapacityDateRange = require('../../../app/services/domain/capacity-date-ra
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 
 const CAPACITY_RESULTS = [
-  { effective_from: '2017-01-01',
-    total_points: 100,
-    available_points: 100,
-    reduction_hours: 6,
-    armsTotalCases: 5
+  { effectiveFrom: '2017-01-01',
+    totalPoints: 100,
+    availablePoints: 100,
+    reductionHours: 6,
+    armsTotalCases: 5,
+    sdrs: 10,
+    sdrConversions: 9,
+    paroms: 8,
+    oralReports: 7
   }
 ]
 
-const TEAM_REULTS = [
+const TEAM_RESULTS = [
   { name: 'Test name',
     grade: 'Test grade',
     totalCases: 39,
@@ -26,7 +30,11 @@ const TEAM_REULTS = [
     cmsAdjustmentPoints: 10,
     gsAdjustmentPoints: -10,
     contractedHours: 40,
-    armsTotalCases: 20
+    armsTotalCases: 20,
+    sdrs: 10,
+    sdrConversions: 9,
+    paroms: 8,
+    oralReports: 7
   }
 ]
 
@@ -42,7 +50,10 @@ const LDU_RESULTS = [
     cmsAdjustmentPoints: 9,
     gsAdjustmentPoints: -10,
     contractedHours: 40,
-    armsTotalCases: 20
+    armsTotalCases: 20,
+    sdrs: 10,
+    sdrConversions: 9,
+    paroms: 8
   },
   {
     name: 'Test ldu 1',
@@ -55,7 +66,10 @@ const LDU_RESULTS = [
     cmsAdjustmentPoints: 7,
     gsAdjustmentPoints: -5,
     contractedHours: 40,
-    armsTotalCases: 20
+    armsTotalCases: 20,
+    sdrs: 1,
+    sdrConversions: 1,
+    paroms: 3
   }
 ]
 
@@ -68,7 +82,10 @@ const EXPECTED_TEAM_BREAKDOWN = [
     capacityPercentage: 40,
     cmsPercentage: 25,
     gsPercentage: 20,
-    armsTotalCases: 20
+    armsTotalCases: 20,
+    sdrs: 10,
+    sdrConversions: 9,
+    paroms: 8
   }
 ]
 
@@ -86,7 +103,10 @@ const EXPECTED_LDU_BREAKDOWN = [
         capacityPercentage: 90,
         cmsPercentage: 10,
         gsPercentage: 10,
-        armsTotalCases: 20
+        armsTotalCases: 20,
+        sdrs: 10,
+        sdrConversions: 9,
+        paroms: 8
       },
       {
         name: 'Test ldu 1',
@@ -97,7 +117,10 @@ const EXPECTED_LDU_BREAKDOWN = [
         capacityPercentage: 50,
         cmsPercentage: 20,
         gsPercentage: 12.5,
-        armsTotalCases: 20
+        armsTotalCases: 20,
+        sdrs: 1,
+        sdrConversions: 1,
+        paroms: 3
       }
     ]
   }
@@ -145,7 +168,7 @@ describe('services/get-capacity-view', function () {
 
   it('should return a result object with a table, title and breadcrumbs object for team', function () {
     getWorkloadReports.resolves(CAPACITY_RESULTS)
-    getCapacityBreakdown.resolves(TEAM_REULTS)
+    getCapacityBreakdown.resolves(TEAM_RESULTS)
 
     return getCapacityView(callingId, capacityDateRange, 'team').then((result) => {
       expect(result.capacityTable).to.be.an('object')
