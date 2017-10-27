@@ -25,7 +25,7 @@ module.exports = function (id, organisationLevel) {
 }
 
 var calculateValues = function (results) {
-  var totals = { name: 'Total/Average', totalPercentage: 0, totalPoints: 0, totalContractedHours: 0, totalReduction: 0, totalTotalCases: 0 }
+  var totals = { name: 'Total / Average', totalPercentage: 0, totalPoints: 0, totalContractedHours: 0, totalReduction: 0, totalTotalCases: 0 }
   var totalsToReturn = {}
   if (results.length !== undefined) {
     results.forEach(function (result) {
