@@ -1,6 +1,6 @@
 // Set current year dynamically
   var daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31]
-  var currentYear = new Date().getYear()
+  var currentYear = new Date().getFullYear()
   document.getElementById('start-year').setAttribute('min', currentYear)
 
   var chosenReduction
@@ -66,7 +66,8 @@
     var chosenReductionIndex = document.getElementById("select-box").selectedIndex
     
     if(chosenReductionIndex){
-      chosenReduction = refData[chosenReductionIndex]
+      // Dummy option in dropdown means array is offset by one
+      chosenReduction = refData[chosenReductionIndex - 1]
 
       var startDay = document.getElementById("start-day").value      
       var startMonth = document.getElementById("start-month").value
