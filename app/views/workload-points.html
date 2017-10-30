@@ -19,8 +19,10 @@
 <p>Current Workload Points created by <span class="bold">{{ updatedBy }}</span> on <span class="bold">{{ wp.effectiveFrom }}</span></p> 
 
 {% if wp.isT2A===true %}
+{% set isT2A=1 %}
 {% set formAction='/admin/workload-points/t2a' %}
 {% else %}
+{% set isT2A=0 %}
 {% set formAction='/admin/workload-points' %}
 {% endif %}
 
@@ -305,7 +307,7 @@
 
       <div id="other">
           <p><span class="bold">Delivery Report Workload Points</span></p>
-          {% if wp.isT2A===false %}
+          {% if not isT2A %}
           <div class="grid-row">
             <div class="column-two-thirds">
               <table>
@@ -387,7 +389,7 @@
                       <input class="form-control" id="weightingUpw" name="weightingUpw" type="number" value="{{ wp.weightingUpw }}">
                     </td>   
                   </tr>
-                  {% if wp.isT2A===false %}
+                  {% if not isT2A %}
                   <tr>
                     <th scope="row">
                       {% if errors['weightingArmsCommunity'][0] %}
@@ -415,7 +417,7 @@
               </table>
             </div>
           </div>
-          {% if wp.isT2A===false %}
+          {% if not isT2A %}
           <br>
           <p><span class="bold">Nominal Target (Points)</span></p>
           <div class="grid-row">
