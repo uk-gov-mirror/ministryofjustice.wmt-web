@@ -1,4 +1,5 @@
 const getOverview = require('../services/get-overview')
+const getFullOverview = require('../services/data/get-full-overview')
 const getSubNav = require('../services/get-sub-nav')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')

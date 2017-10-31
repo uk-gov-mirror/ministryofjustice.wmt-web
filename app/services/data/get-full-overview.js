@@ -6,41 +6,34 @@ module.exports = function(id, type) {
     var orgUnit = orgUnitFinder('name', type)
     var table = 'individual_case_overview'
     var whereClause = ''
+    var orderBy = 'ldu_name, team_name'
 
     if(id !== undefined) {
-        whereClause = 'WHERE id = ' + id
+        whereClause = 'WHERE ' + orgUnit.name + '_id = ' + id
     }
 
     var selectColumns = [
-        'name',
+        'ldu_name AS lduCluster',
+        'team_name AS teamName',
+        'of_name AS offenderManager',
         'total_cases AS totalCases',
         'available_points AS availablePoints',
         'total_points AS totalPoints',
         'contracted_hours AS contractedHours',
         'reduction_hours AS reductionHours',
-        'link_id AS linkId']
+        'grade_code AS gradeCode'
+    ]
     
-      if (orgUnit.name === orgUnitConstants.TEAM.name || orgUnit.name === orgUnitConstants.OFFENDER_MANAGER.name) {
-        selectColumns.push('grade_code AS gradeCode')
-      }
-      if(orgUnit.name === orgUnitConstants.TEAM.name) {
-          selectColumns.unshift('team_name AS teamName')
-      }
-      if(orgUnit.name === orgUnitConstants.LDU.name) {
-          selectColumns.unshift('team_name AS teamName')
-          selectColumns.unshift('ldu_name AS lduName')
-      }
-      if(orgUnit.name === orgUnitConstants.REGION.name) {
-        selectColumns.unshift('team_name AS teamName')
-        selectColumns.unshift('ldu_name AS lduName')
+    if(orgUnit.name === orgUnitConstants.REGION.name || orgUnit.name === orgUnitConstants.NATIONAL.name) {
         selectColumns.unshift('region_name AS regionName')
-      }
+        orderBy = ' region_name, ' + orderBy
+    }
     
-      return knex.raw(
-          'SELECT ' + selectColumns.join(', ') +
-          ' FROM ' + table + ' WITH (NOEXPAND)' +
-          whereClause)
-        .then(function (results) {
-          return results
-        })
+    return knex.raw(
+        'SELECT ' + selectColumns.join(', ') +
+        ' FROM ' + table + ' WITH (NOEXPAND)' +
+        whereClause + ' ORDER BY' + orderBy)
+    .then(function (results) {
+        return results
+    })
 }
