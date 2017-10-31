@@ -32,7 +32,7 @@ module.exports = function(id, type) {
     return knex.raw(
         'SELECT ' + selectColumns.join(', ') +
         ' FROM ' + table + ' WITH (NOEXPAND)' +
-        whereClause + ' ORDER BY' + orderBy)
+        whereClause + ' ORDER BY ' + orderBy)
     .then(function (results) {
         return results
     })
