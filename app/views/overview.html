@@ -12,7 +12,11 @@
 
 {% include "includes/sub-nav.html" %}
 
-{% include "includes/export.html" %}
+{% include "includes/export-caseload.html" %}
+
+<!--{% if (organsiationLevel === 'team' or organsiationLevel === 'ldu' or organsiationLevel === 'region') %}-->
+{% include "includes/export-reductions.html" %}
+<!--{% endif %} -->
 
 {% include "includes/organisation-overview.html"%}
 
