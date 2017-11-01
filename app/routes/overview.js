@@ -1,4 +1,6 @@
 const getOverview = require('../services/get-overview')
+const getReductionsExportCsv = require('../services/get-reductions-export-csv')
+const getReductionsExport = require('../services/get-reduction-notes-export')
 const getSubNav = require('../services/get-sub-nav')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
@@ -47,7 +49,7 @@ module.exports = function (router) {
     return renderOverview(req, res, next)
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview/csv', function (req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview/caseload-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -69,6 +71,31 @@ module.exports = function (router) {
     }).catch(function (error) {
       next(error)
     })
+  })
+
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview/reductions-csv', function(req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch(error) {
+      if(error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } 
+    }
+    var organisationLevel = req.params.organisationLevel
+    var id
+    if(organisationLevel !== organisationUnitConstants.NATIONAL.name) {
+      id = req.params.id
+    }
+
+    return getReductionsExport(id, organisationLevel).then(function (result) {
+        console.log(result)
+        var reductionsExportCsv = getReductionsExportCsv(result)
+        res.attachment(reductionsExportCsv.filename)
+        res.send(reductionsExportCsv.csv)
+    }).catch(function (error) {
+        next(error)
+    })
+
   })
 }
 
