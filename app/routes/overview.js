@@ -88,7 +88,6 @@ module.exports = function (router) {
     }
 
     return getReductionsExport(id, organisationLevel).then(function (result) {
-        console.log(result)
         var reductionsExportCsv = getReductionsExportCsv(result)
         res.attachment(reductionsExportCsv.filename)
         res.send(reductionsExportCsv.csv)

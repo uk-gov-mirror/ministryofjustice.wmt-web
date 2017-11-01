@@ -8,7 +8,7 @@ module.exports = function(id, type) {
     var whereClause = ''
 
     if(id !== undefined) {
-        whereClause = ' WHERE ' + orgUnit.name + '_id = ' + id
+        whereClause = ' WHERE ' + orgUnit.name + '_id = ' + id //+ orgUnit.name + '_id = ' + id
     }
 
     var selectColumns = [
