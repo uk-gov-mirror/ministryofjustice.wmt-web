@@ -1,4 +1,5 @@
 const getCapacityView = require('../services/get-capacity-view')
+const getOutstandingReports = require('../services/get-outstanding-reports')
 const dateRangeHelper = require('../services/helpers/date-range-helper')
 const getSubNav = require('../services/get-sub-nav')
 const organisationUnit = require('../constants/organisation-unit')
@@ -47,24 +48,53 @@ module.exports = function (router) {
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    return getCapacityView(id, capacityDateRange, organisationLevel).then(function (result) {
-      return res.render('capacity', {
-        title: result.title,
-        subTitle: result.subTitle,
-        subNav: getSubNav(id, organisationLevel, req.path),
-        breadcrumbs: result.breadcrumbs,
-        capacity: result.capacityTable,
-        errors: errors,
-        query: req.query,
-        capacityBreakdown: result.capacityBreakdown,
-        childOrganisationLevel: orgUnit.childOrganisationLevel,
-        childOrganisationLevelDisplayText: childOrgUnitDisplayText,
-        organisationLevel: organisationLevel,
-        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+    if (organisationLevel !== organisationUnit.OFFENDER_MANAGER.name) {
+      return getCapacityView(id, capacityDateRange, organisationLevel).then(function (result) {
+        var capacityBreakdown = result
+        return getOutstandingReports(id, organisationLevel).then(function (result) {
+          var outstandingReports = result
+          return res.render('capacity', {
+            title: capacityBreakdown.title,
+            subTitle: capacityBreakdown.subTitle,
+            subNav: getSubNav(id, organisationLevel, req.path),
+            breadcrumbs: capacityBreakdown.breadcrumbs,
+            capacity: capacityBreakdown.capacityTable,
+            errors: errors,
+            query: req.query,
+            capacityBreakdown: capacityBreakdown.capacityBreakdown,
+            outstandingReports: outstandingReports,
+            childOrganisationLevel: orgUnit.childOrganisationLevel,
+            childOrganisationLevelDisplayText: childOrgUnitDisplayText,
+            organisationLevel: organisationLevel,
+            userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+            noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+          })
+        })
+      }).catch(function (error) {
+        next(error)
       })
-    }).catch(function (error) {
-      next(error)
-    })
+    } else {
+      return getCapacityView(id, capacityDateRange, organisationLevel).then(function (result) {
+        var capacityBreakdown = result
+        return res.render('capacity', {
+          title: capacityBreakdown.title,
+          subTitle: capacityBreakdown.subTitle,
+          subNav: getSubNav(id, organisationLevel, req.path),
+          breadcrumbs: capacityBreakdown.breadcrumbs,
+          capacity: capacityBreakdown.capacityTable,
+          errors: errors,
+          query: req.query,
+          capacityBreakdown: capacityBreakdown.capacityBreakdown,
+          outstandingReports: [],
+          childOrganisationLevel: orgUnit.childOrganisationLevel,
+          childOrganisationLevelDisplayText: childOrgUnitDisplayText,
+          organisationLevel: organisationLevel,
+          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+          noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+        })
+      }).catch(function (error) {
+        next(error)
+      })
+    }
   })
 }
