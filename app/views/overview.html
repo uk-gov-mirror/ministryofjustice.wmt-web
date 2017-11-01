@@ -14,9 +14,9 @@
 
 {% include "includes/export-caseload.html" %}
 
-<!--{% if (organsiationLevel === 'team' or organsiationLevel === 'ldu' or organsiationLevel === 'region') %}-->
-{% include "includes/export-reductions.html" %}
-<!--{% endif %} -->
+{% if organisationLevel === 'region' or organisationLevel === 'ldu' or organisationLevel === 'team' %}
+    {% include "includes/export-reductions.html" %}
+{% endif %}
 
 {% include "includes/organisation-overview.html"%}
 
