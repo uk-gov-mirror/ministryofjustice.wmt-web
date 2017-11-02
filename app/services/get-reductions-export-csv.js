@@ -4,9 +4,9 @@ const REDUCTIONS_FIELD_NAMES = ['Offender Manager', 'Reason', 'Hours', 'Start Da
 const REDUCTIONS_FIELDS = ['offenderManager', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
 
 module.exports = function(result) {
-    var filename = result.title + 'ReductionsExports.csv'
+    var filename = getFileName(result.title)
 
-    //formatDates(result.reductionNotes)
+    formatDates(result.reductionNotes)
 
     var csv = generateCsv(result.reductionNotes)
     
@@ -14,9 +14,9 @@ module.exports = function(result) {
 }
 
 // TODO: Do we have an agreed naming scheme they would like for these csvs? Org level? Date?
-var getFilename = function (orgName, screen) {
+var getFileName = function (orgName) {
     var replaceSpaces = / /g
-    return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
+    return (orgName + ' Reductions Notes.csv').replace(replaceSpaces, '_')
 }
 
 var generateCsv = function(data) {
