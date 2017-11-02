@@ -19,6 +19,10 @@ table.data-table tr th{
     text-align: center;
 }
 
+table tr.headers th{
+    padding-right: 30px;
+}
+
 table.data-table tr td{
     padding:5px 10px 5px 10px;
     border-left: 1px solid #d9d9d9;
@@ -102,7 +106,6 @@ ul.sub-tier-header li:nth-child(2) {
     display: inline-block;
     width: 60px;
 }
-
 
 ul.tier {
     width: 369px;
