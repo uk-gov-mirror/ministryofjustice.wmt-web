@@ -14,7 +14,7 @@
 
 {% include "includes/export-caseload.html" %}
 
-{% if (organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team') %}
+{% ifAsync ((organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
     {% include "includes/export-reductions.html" %}
 {% endif %}
 

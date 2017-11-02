@@ -1,5 +1,4 @@
 const getOverview = require('../services/get-overview')
-const getReductionsExportCsv = require('../services/get-reductions-export-csv')
 const getReductionsExport = require('../services/get-reductions-export')
 const getSubNav = require('../services/get-sub-nav')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
