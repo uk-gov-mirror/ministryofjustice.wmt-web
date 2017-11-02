@@ -10,10 +10,10 @@ const ORG_OVERVIEW_FIELDS = ['name', 'capacityPercentage', 'availablePoints', 'c
 const REDUCTIONS_FIELD_NAMES = ['Offender Manager', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes']
 const REDUCTIONS_FIELDS = ['offenderManager', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
 
-var reductions;
+var reductions
 
 module.exports = function (organisationLevel, result, tab, reductions) {
-  this.reductions = reductions;
+  this.reductions = reductions
   var filename = getFilename(result.title, tab)
   var fieldsObject = getFields(organisationLevel, tab)
   var fields = fieldsObject.fields
@@ -27,7 +27,7 @@ module.exports = function (organisationLevel, result, tab, reductions) {
 // TODO: Do we have an agreed naming scheme they would like for these csvs? Org level? Date?
 var getFilename = function (orgName, screen) {
   var replaceSpaces = / /g
-  if(reductions === true) {
+  if (reductions === true) {
     return (orgName + ' Reductions Notes.csv').replace(replaceSpaces, '_')
   } else {
     return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
@@ -46,7 +46,7 @@ var getFields = function (organisationLevel, tab) {
       fieldNames = [childOrgForFieldName + ' Name', 'Grade', 'A', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'Untiered', 'Overall']
       break
     case tabs.OVERVIEW:
-      if(reductions === true) {
+      if (reductions === true) {
         fields = REDUCTIONS_FIELDS
         fieldNames = REDUCTIONS_FIELD_NAMES
       } else {
@@ -57,7 +57,7 @@ var getFields = function (organisationLevel, tab) {
           childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
           fields = Object.assign([], ORG_OVERVIEW_FIELDS)
           fieldNames = [childOrgForFieldName + ' Name', 'Capacity Percentage', 'Capacity Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases']
-  
+
           if (organisationLevel === organisationUnitConstants.TEAM.name) {
             fields.push('gradeCode')
             fieldNames.push('Grade Code')
@@ -70,7 +70,7 @@ var getFields = function (organisationLevel, tab) {
             fieldNames.unshift('LDU Cluster')
           }
         }
-      } 
+      }
   }
   return { fields: fields, fieldNames: fieldNames }
 }
@@ -109,7 +109,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       }
       break
     case tabs.OVERVIEW:
-      if(reductions === true) {
+      if (reductions === true) {
         formatReductionDates(result.reductionNotes)
         csv = generateCsv(result.reductionNotes, fields, fieldNames)
         break
@@ -191,9 +191,9 @@ var formatCapacityValue = function (capacity) {
   return parseFloat(capacity).toFixed(2) + '%'
 }
 
-var formatReductionDates = function(data) {
-  data.forEach(function(record) {
-      record.startDate = record.startDate.toString().substring(0, 24)
-      record.endDate = record.endDate.toString().substring(0, 24)
+var formatReductionDates = function (data) {
+  data.forEach(function (record) {
+    record.startDate = record.startDate.toString().substring(0, 24)
+    record.endDate = record.endDate.toString().substring(0, 24)
   })
 }

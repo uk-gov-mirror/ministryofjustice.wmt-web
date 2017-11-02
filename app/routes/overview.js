@@ -72,26 +72,26 @@ module.exports = function (router) {
     })
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview/reductions-csv', function(req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview/reductions-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
-    } catch(error) {
-      if(error instanceof Unauthorized) {
+    } catch (error) {
+      if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
-      } 
+      }
     }
     var organisationLevel = req.params.organisationLevel
     var id
-    if(organisationLevel !== organisationUnitConstants.NATIONAL.name) {
+    if (organisationLevel !== organisationUnitConstants.NATIONAL.name) {
       id = req.params.id
     }
-    
+
     return getReductionsExport(id, organisationLevel).then(function (result) {
-        var reductionsExportCsv = getExportCsv(organisationLevel, result, tabs.OVERVIEW, true)
-        res.attachment(reductionsExportCsv.filename)
-        res.send(reductionsExportCsv.csv)
+      var reductionsExportCsv = getExportCsv(organisationLevel, result, tabs.OVERVIEW, true)
+      res.attachment(reductionsExportCsv.filename)
+      res.send(reductionsExportCsv.csv)
     }).catch(function (error) {
-        next(error)
+      next(error)
     })
   })
 }
