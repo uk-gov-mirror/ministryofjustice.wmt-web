@@ -233,7 +233,7 @@ describe('reductions notes csv export route', function () {
         .get(TEAM_REDUCTIONS_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getCaseloadExportCsv.calledWith(orgUnit.TEAM.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true
+          expect(getCaseloadExportCsv.calledWith(orgUnit.TEAM.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true //eslint-disable-line
         })
     })
   })
@@ -248,7 +248,7 @@ describe('reductions notes csv export route', function () {
         .get(LDU_REDUCTIONS_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getCaseloadExportCsv.calledWith(orgUnit.LDU.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true
+          expect(getCaseloadExportCsv.calledWith(orgUnit.LDU.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true //eslint-disable-line
         })
     })
   })
@@ -263,7 +263,7 @@ describe('reductions notes csv export route', function () {
         .get(REGION_REDUCTIONS_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getCaseloadExportCsv.calledWith(orgUnit.REGION.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true
+          expect(getCaseloadExportCsv.calledWith(orgUnit.REGION.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true //eslint-disable-line
         })
     })
   })
