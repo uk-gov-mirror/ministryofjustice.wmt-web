@@ -7,8 +7,13 @@ const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1',
 const OM_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
 const ORG_OVERVIEW_FIELDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
+const REDUCTIONS_FIELD_NAMES = ['Offender Manager', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes']
+const REDUCTIONS_FIELDS = ['offenderManager', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
 
-module.exports = function (organisationLevel, result, tab) {
+var reductions;
+
+module.exports = function (organisationLevel, result, tab, reductions) {
+  this.reductions = reductions;
   var filename = getFilename(result.title, tab)
   var fieldsObject = getFields(organisationLevel, tab)
   var fields = fieldsObject.fields
@@ -22,7 +27,11 @@ module.exports = function (organisationLevel, result, tab) {
 // TODO: Do we have an agreed naming scheme they would like for these csvs? Org level? Date?
 var getFilename = function (orgName, screen) {
   var replaceSpaces = / /g
-  return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
+  if(reductions === true) {
+    return (orgName + ' Reductions Notes.csv').replace(replaceSpaces, '_')
+  } else {
+    return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
+  }
 }
 
 var getFields = function (organisationLevel, tab) {
@@ -37,26 +46,31 @@ var getFields = function (organisationLevel, tab) {
       fieldNames = [childOrgForFieldName + ' Name', 'Grade', 'A', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'Untiered', 'Overall']
       break
     case tabs.OVERVIEW:
-      if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
-        fields = OM_OVERVIEW_FIELDS
-        fieldNames = OM_OVERVIEW_FIELD_NAMES
+      if(reductions === true) {
+        fields = REDUCTIONS_FIELDS
+        fieldNames = REDUCTIONS_FIELD_NAMES
       } else {
-        childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
-        fields = Object.assign([], ORG_OVERVIEW_FIELDS)
-        fieldNames = [childOrgForFieldName + ' Name', 'Capacity Percentage', 'Capacity Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases']
-
-        if (organisationLevel === organisationUnitConstants.TEAM.name) {
-          fields.push('gradeCode')
-          fieldNames.push('Grade Code')
-          fields.unshift('teamName')
-          fieldNames.unshift('Team Name')
-          fields.unshift('lduCluster')
-          fieldNames.unshift('LDU Cluster')
-        } else if (organisationLevel === organisationUnitConstants.LDU.name) {
-          fields.unshift('lduCluster')
-          fieldNames.unshift('LDU Cluster')
+        if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
+          fields = OM_OVERVIEW_FIELDS
+          fieldNames = OM_OVERVIEW_FIELD_NAMES
+        } else {
+          childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
+          fields = Object.assign([], ORG_OVERVIEW_FIELDS)
+          fieldNames = [childOrgForFieldName + ' Name', 'Capacity Percentage', 'Capacity Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases']
+  
+          if (organisationLevel === organisationUnitConstants.TEAM.name) {
+            fields.push('gradeCode')
+            fieldNames.push('Grade Code')
+            fields.unshift('teamName')
+            fieldNames.unshift('Team Name')
+            fields.unshift('lduCluster')
+            fieldNames.unshift('LDU Cluster')
+          } else if (organisationLevel === organisationUnitConstants.LDU.name) {
+            fields.unshift('lduCluster')
+            fieldNames.unshift('LDU Cluster')
+          }
         }
-      }
+      } 
   }
   return { fields: fields, fieldNames: fieldNames }
 }
@@ -95,23 +109,29 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       }
       break
     case tabs.OVERVIEW:
-      if (organisationLevel === organisationUnitConstants.TEAM.name) {
-        result.overviewDetails.forEach(function (team) {
-          team.teamName = result.breadcrumbs[0].title
-          team.lduCluster = result.breadcrumbs[1].title
-          team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
-        })
-      } else if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
-        result.overviewDetails.lduCluster = result.breadcrumbs[2].title
-        result.overviewDetails.capacity = formatCapacityValue(result.overviewDetails.capacity)
+      if(reductions === true) {
+        formatReductionDates(result.reductionNotes)
+        csv = generateCsv(result.reductionNotes, fields, fieldNames)
+        break
       } else {
-        result.overviewDetails.forEach(function (team) {
-          team.lduCluster = result.breadcrumbs[0].title
-          team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
-        })
+        if (organisationLevel === organisationUnitConstants.TEAM.name) {
+          result.overviewDetails.forEach(function (team) {
+            team.teamName = result.breadcrumbs[0].title
+            team.lduCluster = result.breadcrumbs[1].title
+            team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
+          })
+        } else if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
+          result.overviewDetails.lduCluster = result.breadcrumbs[2].title
+          result.overviewDetails.capacity = formatCapacityValue(result.overviewDetails.capacity)
+        } else {
+          result.overviewDetails.forEach(function (team) {
+            team.lduCluster = result.breadcrumbs[0].title
+            team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
+          })
+        }
+        csv = generateCsv(result.overviewDetails, fields, fieldNames)
+        break
       }
-      csv = generateCsv(result.overviewDetails, fields, fieldNames)
-      break
   }
   return csv
 }
@@ -169,4 +189,11 @@ var parseTotalSummaryTable = function (totalSummary) {
 
 var formatCapacityValue = function (capacity) {
   return parseFloat(capacity).toFixed(2) + '%'
+}
+
+var formatReductionDates = function(data) {
+  data.forEach(function(record) {
+      record.startDate = record.startDate.toString().substring(0, 24)
+      record.endDate = record.endDate.toString().substring(0, 24)
+  })
 }
