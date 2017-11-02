@@ -1,14 +1,14 @@
-const knex = require('../../knex').web
-const orgUnitFinder = require('./helpers/org-unit-finder')
-const orgUnitConstants = require('../constants/organisation-unit')
+const knex = require('../../../knex').web
+const orgUnitFinder = require('../helpers/org-unit-finder')
+const orgUnitConstants = require('../../constants/organisation-unit')
 
 module.exports = function(id, type) {
     var orgUnit = orgUnitFinder('name', type)
-    var table = 'team_reductions_notes_view'
+    var table = 'reductions_notes_export_view'
     var whereClause = ''
 
     if(id !== undefined) {
-        whereClause = ' WHERE ' + orgUnit.name + '_id = ' + id //+ orgUnit.name + '_id = ' + id
+        whereClause = ' WHERE ' + orgUnit.name + '_id = ' + id
     }
 
     var selectColumns = [

@@ -8,7 +8,7 @@ const OM_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'grade', 'capacity', 'case
 const OM_OVERVIEW_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
 const ORG_OVERVIEW_FIELDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
 
-module.exports = function (organisationLevel, result, tab, type) {
+module.exports = function (organisationLevel, result, tab) {
   var filename = getFilename(result.title, tab)
   var fieldsObject = getFields(organisationLevel, tab)
   var fields = fieldsObject.fields

@@ -1,6 +1,6 @@
 const getOverview = require('../services/get-overview')
 const getReductionsExportCsv = require('../services/get-reductions-export-csv')
-const getReductionsExport = require('../services/get-reduction-notes-export')
+const getReductionsExport = require('../services/get-reductions-export')
 const getSubNav = require('../services/get-sub-nav')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
@@ -86,7 +86,7 @@ module.exports = function (router) {
     if(organisationLevel !== organisationUnitConstants.NATIONAL.name) {
       id = req.params.id
     }
-
+    
     return getReductionsExport(id, organisationLevel).then(function (result) {
         var reductionsExportCsv = getReductionsExportCsv(result)
         res.attachment(reductionsExportCsv.filename)
@@ -94,7 +94,6 @@ module.exports = function (router) {
     }).catch(function (error) {
         next(error)
     })
-
   })
 }
 

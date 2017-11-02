@@ -4,12 +4,12 @@ const REDUCTIONS_FIELD_NAMES = ['Offender Manager', 'Reason', 'Hours', 'Start Da
 const REDUCTIONS_FIELDS = ['offenderManager', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
 
 module.exports = function(result) {
-    var filename = 'ReductionsExports.csv'
+    var filename = result.title + 'ReductionsExports.csv'
 
-    formatDates(result)
+    //formatDates(result.reductionNotes)
 
-    var csv = generateCsv(result)
-
+    var csv = generateCsv(result.reductionNotes)
+    
     return { filename: filename, csv: csv}
 }
 
