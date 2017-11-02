@@ -55,6 +55,7 @@ var getOverview
 
 var getReductionsExport
 var reductionApp
+var reductionsRoute
 
 var getSubNavStub
 var getCaseloadExportCsv
@@ -220,48 +221,48 @@ describe('Overview csv export route', function () {
   })
 })
 
-describe('reductions notes csv export route', function() {
-  describe('for team level', function() {
+describe('reductions notes csv export route', function () {
+  describe('for team level', function () {
     it('should respond with 200 when team and id included in URL', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp).get(TEAM_REDUCTIONS_CSV_URL).expect(200)
     })
-    it('should call getCaseloadExportCsv with the correct parameters', function() {
+    it('should call getCaseloadExportCsv with the correct parameters', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp)
         .get(TEAM_REDUCTIONS_CSV_URL)
         .expect(200)
-        .then(function() {
+        .then(function () {
           expect(getCaseloadExportCsv.calledWith(orgUnit.TEAM.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true
         })
     })
   })
-  describe('for ldu level', function() {
+  describe('for ldu level', function () {
     it('should respond with 200 when ldu and id included in URL', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp).get(LDU_REDUCTIONS_CSV_URL).expect(200)
     })
-    it('should call getCaseloadExportCsv with the correct parameters', function() {
+    it('should call getCaseloadExportCsv with the correct parameters', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp)
         .get(LDU_REDUCTIONS_CSV_URL)
         .expect(200)
-        .then(function() {
+        .then(function () {
           expect(getCaseloadExportCsv.calledWith(orgUnit.LDU.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true
         })
     })
   })
-  describe('for region level', function() {
+  describe('for region level', function () {
     it('should respond with 200 when region and id included in URL', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp).get(REGION_REDUCTIONS_CSV_URL).expect(200)
     })
-    it('should call getCaseloadExportCsv with the correct parameters', function() {
+    it('should call getCaseloadExportCsv with the correct parameters', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp)
         .get(REGION_REDUCTIONS_CSV_URL)
         .expect(200)
-        .then(function() {
+        .then(function () {
           expect(getCaseloadExportCsv.calledWith(orgUnit.REGION.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true
         })
     })

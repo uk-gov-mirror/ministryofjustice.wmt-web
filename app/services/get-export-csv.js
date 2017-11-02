@@ -12,8 +12,8 @@ const REDUCTIONS_FIELDS = ['offenderManager', 'reason', 'amount', 'startDate', '
 
 var reductions
 
-module.exports = function (organisationLevel, result, tab, reductions) {
-  this.reductions = reductions
+module.exports = function (organisationLevel, result, tab, reduction) {
+  reductions = reduction
   var filename = getFilename(result.title, tab)
   var fieldsObject = getFields(organisationLevel, tab)
   var fields = fieldsObject.fields

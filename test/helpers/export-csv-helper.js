@@ -307,3 +307,186 @@ module.exports.LDU_OVERVIEW_CSV = {
 module.exports.REGION_OVERVIEW_HEADINGS = '"LDU Cluster Name","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"'
 
 module.exports.NATIONAL_OVERVIEW_HEADINGS = '"Division Name","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"'
+
+module.exports.TEAM_REDUCTIONS_RESULT = {
+  breadcrumbs:
+  [{
+    title: 'Team 1',
+    link: '/probation/team/88',
+    active: undefined },
+  {
+    title: 'LDU Cluster 1',
+    link: '/probation/ldu/79',
+    active: undefined },
+  {
+    title: 'Division 1',
+    link: '/probation/region/40',
+    active: undefined },
+  { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
+  reductionNotes:
+  [ { offenderManager: 'John Smith',
+    reason: 'Disability',
+    amount: 5,
+    startDate: 'Wed Nov 02 2016 11:16:27',
+    endDate: 'Sun Oct 31 2027 11:16:27',
+    status: 'ACTIVE',
+    additionalNotes: null },
+  { offenderManager: 'John Smith',
+    reason: 'Long Term Sickness Absence',
+    amount: 3,
+    startDate: 'Wed Jan 31 2018 11:16:27',
+    endDate: 'Sun Oct 31 2027 11:16:27',
+    status: 'SCHEDULED',
+    additionalNotes: null },
+  { offenderManager: 'John Smith',
+    reason: 'Phased Return to Work',
+    amount: 6,
+    startDate: 'Mon Nov 07 2016 11:16:27',
+    endDate: 'Wed Nov 02 2016 11:16:27',
+    status: 'ARCHIVED',
+    additionalNotes: null },
+  { offenderManager: 'John Smith',
+    reason: 'Phased Return to Work',
+    amount: 4,
+    startDate: 'Wed Nov 02 2016 11:16:27',
+    endDate: 'Sun Oct 31 2027 11:16:27',
+    status: 'DELETED',
+    additionalNotes: null },
+  { offenderManager: 'Marcin Martin',
+    reason: 'Court Duty',
+    amount: 20,
+    startDate: 'Wed May 31 2017 01:00:00',
+    endDate: 'Tue Jun 13 2017 01:00:00',
+    status: 'ARCHIVED',
+    additionalNotes: 'Court duty additional notes ' } ],
+  title: 'Team 1',
+  subTitle: 'Team'
+}
+
+module.exports.TEAM_REDUCTIONS_CSV = {
+  filename: 'Team_1_Reductions_Notes.csv',
+  csv: '"Offender Manager","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
+  '"John Smith","Disability",5,"Wed Nov 02 2016 11:16:27","Sun Oct 31 2027 11:16:27","ACTIVE",\n' +
+  '"John Smith","Long Term Sickness Absence",3,"Wed Jan 31 2018 11:16:27","Sun Oct 31 2027 11:16:27","SCHEDULED",\n' +
+  '"John Smith","Phased Return to Work",6,"Mon Nov 07 2016 11:16:27","Wed Nov 02 2016 11:16:27","ARCHIVED",\n' +
+  '"John Smith","Phased Return to Work",4,"Wed Nov 02 2016 11:16:27","Sun Oct 31 2027 11:16:27","DELETED",\n' +
+  '"Marcin Martin","Court Duty",20,"Wed May 31 2017 01:00:00","Tue Jun 13 2017 01:00:00","ARCHIVED","Court duty additional notes "'
+}
+
+module.exports.LDU_REDUCTIONS_RESULT = {
+  breadcrumbs:
+  [{
+    title: 'LDU Cluster 1',
+    link: '/probation/ldu/79',
+    active: undefined },
+  {
+    title: 'Division 1',
+    link: '/probation/region/40',
+    active: undefined },
+  { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
+  reductionNotes:
+  [ { offenderManager: 'John Smith',
+    reason: 'Disability',
+    amount: 5,
+    startDate: 'Wed Nov 02 2016 11:16:27',
+    endDate: 'Sun Oct 31 2027 11:16:27',
+    status: 'ACTIVE',
+    additionalNotes: null },
+  { offenderManager: 'John Smith',
+    reason: 'Long Term Sickness Absence',
+    amount: 3,
+    startDate: 'Wed Jan 31 2018 11:16:27',
+    endDate: 'Sun Oct 31 2027 11:16:27',
+    status: 'SCHEDULED',
+    additionalNotes: null },
+  { offenderManager: 'John Smith',
+    reason: 'Phased Return to Work',
+    amount: 6,
+    startDate: 'Mon Nov 07 2016 11:16:27',
+    endDate: 'Wed Nov 02 2016 11:16:27',
+    status: 'ARCHIVED',
+    additionalNotes: null },
+  { offenderManager: 'John Smith',
+    reason: 'Phased Return to Work',
+    amount: 4,
+    startDate: 'Wed Nov 02 2016 11:16:27',
+    endDate: 'Sun Oct 31 2027 11:16:27',
+    status: 'DELETED',
+    additionalNotes: null },
+  { offenderManager: 'Marcin Martin',
+    reason: 'Court Duty',
+    amount: 20,
+    startDate: 'Wed May 31 2017 01:00:00',
+    endDate: 'Tue Jun 13 2017 01:00:00',
+    status: 'ARCHIVED',
+    additionalNotes: 'Court duty additional notes ' } ],
+  title: 'LDU Cluster 1',
+  subTitle: 'LDU'
+}
+
+module.exports.LDU_REDUCTIONS_CSV = {
+  filename: 'LDU_Cluster_1_Reductions_Notes.csv',
+  csv: '"Offender Manager","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
+  '"John Smith","Disability",5,"Wed Nov 02 2016 11:16:27","Sun Oct 31 2027 11:16:27","ACTIVE",\n' +
+  '"John Smith","Long Term Sickness Absence",3,"Wed Jan 31 2018 11:16:27","Sun Oct 31 2027 11:16:27","SCHEDULED",\n' +
+  '"John Smith","Phased Return to Work",6,"Mon Nov 07 2016 11:16:27","Wed Nov 02 2016 11:16:27","ARCHIVED",\n' +
+  '"John Smith","Phased Return to Work",4,"Wed Nov 02 2016 11:16:27","Sun Oct 31 2027 11:16:27","DELETED",\n' +
+  '"Marcin Martin","Court Duty",20,"Wed May 31 2017 01:00:00","Tue Jun 13 2017 01:00:00","ARCHIVED","Court duty additional notes "'
+}
+
+module.exports.REGION_REDUCTIONS_RESULT = {
+  breadcrumbs:
+  [{
+    title: 'Division 1',
+    link: '/probation/region/40',
+    active: undefined },
+  { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
+  reductionNotes:
+  [ { offenderManager: 'John Smith',
+    reason: 'Disability',
+    amount: 5,
+    startDate: 'Wed Nov 02 2016 11:16:27',
+    endDate: 'Sun Oct 31 2027 11:16:27',
+    status: 'ACTIVE',
+    additionalNotes: null },
+  { offenderManager: 'John Smith',
+    reason: 'Long Term Sickness Absence',
+    amount: 3,
+    startDate: 'Wed Jan 31 2018 11:16:27',
+    endDate: 'Sun Oct 31 2027 11:16:27',
+    status: 'SCHEDULED',
+    additionalNotes: null },
+  { offenderManager: 'John Smith',
+    reason: 'Phased Return to Work',
+    amount: 6,
+    startDate: 'Mon Nov 07 2016 11:16:27',
+    endDate: 'Wed Nov 02 2016 11:16:27',
+    status: 'ARCHIVED',
+    additionalNotes: null },
+  { offenderManager: 'John Smith',
+    reason: 'Phased Return to Work',
+    amount: 4,
+    startDate: 'Wed Nov 02 2016 11:16:27',
+    endDate: 'Sun Oct 31 2027 11:16:27',
+    status: 'DELETED',
+    additionalNotes: null },
+  { offenderManager: 'Marcin Martin',
+    reason: 'Court Duty',
+    amount: 20,
+    startDate: 'Wed May 31 2017 01:00:00',
+    endDate: 'Tue Jun 13 2017 01:00:00',
+    status: 'ARCHIVED',
+    additionalNotes: 'Court duty additional notes ' } ],
+  title: 'Division 1',
+  subTitle: 'Division'
+}
+
+module.exports.REGION_REDUCTIONS_CSV = {
+  filename: 'Division_1_Reductions_Notes.csv',
+  csv: '"Offender Manager","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
+  '"John Smith","Disability",5,"Wed Nov 02 2016 11:16:27","Sun Oct 31 2027 11:16:27","ACTIVE",\n' +
+  '"John Smith","Long Term Sickness Absence",3,"Wed Jan 31 2018 11:16:27","Sun Oct 31 2027 11:16:27","SCHEDULED",\n' +
+  '"John Smith","Phased Return to Work",6,"Mon Nov 07 2016 11:16:27","Wed Nov 02 2016 11:16:27","ARCHIVED",\n' +
+  '"John Smith","Phased Return to Work",4,"Wed Nov 02 2016 11:16:27","Sun Oct 31 2027 11:16:27","DELETED",\n' +
+  '"Marcin Martin","Court Duty",20,"Wed May 31 2017 01:00:00","Tue Jun 13 2017 01:00:00","ARCHIVED","Court duty additional notes "'
+}
