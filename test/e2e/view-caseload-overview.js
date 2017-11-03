@@ -49,10 +49,10 @@ describe('View overview', function () {
       })
   })
 
-  it('should not include the reductions export at workload owner level', function() {
+  it('should not include the reductions export at workload owner level', function () {
     return browser.url(workloadOwnerDefaultUrl + '/overview')
       .isExisting('.reduction-export').then(function (exist) {
-        expect(exist).to.be.false
+        expect(exist).to.be.false //eslint-disable-line
       })
   })
 
@@ -114,10 +114,10 @@ describe('View overview', function () {
       })
   })
 
-  it('should not include the reductions export at national level', function() {
+  it('should not include the reductions export at national level', function () {
     return browser.url(nationalDefaultUrl + '/overview')
       .isExisting('.reduction-export').then(function (exist) {
-        expect(exist).to.be.false
+        expect(exist).to.be.false //eslint-disable-line
       })
   })
 
