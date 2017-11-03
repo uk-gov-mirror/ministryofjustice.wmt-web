@@ -1,1 +1,3 @@
-<a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/reductions-csv" class="button reduction-export" style="float: right; margin-right: 5px; margin-bottom: 10px">Export Reductions</a>
+{% if ((noAuth===true) or (userRole==='Data Admin') or (userRole==='Manager') or (userRole==='System Admin')) %}
+    <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/reductions-csv" class="button reduction-export" style="float: right; margin-right: 5px; margin-bottom: 10px">Export Reductions</a>
+{% endif %}
