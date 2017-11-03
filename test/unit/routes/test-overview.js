@@ -27,6 +27,8 @@ const HMPPS_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/hmpps/0/overvie
 const TEAM_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/team/1/overview/reductions-csv'
 const LDU_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/ldu/1/overview/reductions-csv'
 const REGION_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/region/1/overview/reductions-csv'
+const NATIONAL_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/national/1/overview/reductions-csv'
+const OM_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/overview/reductions-csv'
 
 const OVERVIEW = {
   title: 'Title',
@@ -265,6 +267,18 @@ describe('reductions notes csv export route', function () {
         .then(function () {
           expect(getExportCsv.calledWith(orgUnit.REGION.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true //eslint-disable-line
         })
+    })
+  })
+  describe('for national level', function() {
+    it('should respond with 500 when national is included in URL', function() {
+      getReductionsExport.resolves(REDUCTIONS)
+      return supertest(reductionApp).get(NATIONAL_REDUCTIONS_CSV_URL).expect(500)
+    })
+  })
+  describe('for offender manager level', function() {
+    it('should respond with 500 when offender manager is included in URL', function() {
+      getReductionsExport.resolves(REDUCTIONS)
+      return supertest(reductionApp).get(OM_REDUCTIONS_CSV_URL).expect(500)
     })
   })
 })
