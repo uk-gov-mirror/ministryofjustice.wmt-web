@@ -27,7 +27,7 @@ const HMPPS_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/hmpps/0/overvie
 const TEAM_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/team/1/overview/reductions-csv'
 const LDU_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/ldu/1/overview/reductions-csv'
 const REGION_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/region/1/overview/reductions-csv'
-const NATIONAL_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/national/1/overview/reductions-csv'
+const NATIONAL_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/hmpps/1/overview/reductions-csv'
 const OM_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/overview/reductions-csv'
 
 const OVERVIEW = {
