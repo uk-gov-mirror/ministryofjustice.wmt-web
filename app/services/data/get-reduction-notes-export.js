@@ -24,7 +24,4 @@ module.exports = function (id, type) {
         'SELECT ' + selectColumns.join(', ') +
         ' FROM ' + table +
         whereClause)
-    .then(function (results) {
-      return results
-    })
 }
