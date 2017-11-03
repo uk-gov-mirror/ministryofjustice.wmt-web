@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const authenticationhelp = require('../helpers/routes/authentication-helper')
+const authenticationHelper = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 const workloadTypes = require('../../app/constants/workload-type')
 
@@ -14,7 +14,7 @@ var nationalDefaultUrl
 
 describe('View overview', function () {
   before(function () {
-    authenticationhelp.login(authenticationhelp.users.Staff)
+    authenticationHelper.login(authenticationHelper.users.Staff)
     return dataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
@@ -182,6 +182,6 @@ describe('View overview', function () {
   })
 
   after(function () {
-    authenticationhelp.logout()
+    authenticationHelper.logout()
   })
 })

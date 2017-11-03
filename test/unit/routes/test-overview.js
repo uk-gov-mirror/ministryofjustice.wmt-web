@@ -58,7 +58,7 @@ var reductionApp
 var reductionsRoute
 
 var getSubNavStub
-var getCaseloadExportCsv
+var getExportCsv
 var authorisationService
 
 before(function () {
@@ -68,12 +68,12 @@ before(function () {
   getSubNavStub = sinon.stub()
   getOverview = sinon.stub()
   getReductionsExport = sinon.stub()
-  getCaseloadExportCsv = sinon.stub().returns({ filename: EXPORT_CSV_FILENAME, csv: EXPORT_CSV })
+  getExportCsv = sinon.stub().returns({ filename: EXPORT_CSV_FILENAME, csv: EXPORT_CSV })
   route = proxyquire('../../../app/routes/overview', {
     '../services/get-overview': getOverview,
     '../services/get-sub-nav': getSubNavStub,
     '../authorisation': authorisationService,
-    '../services/get-export-csv': getCaseloadExportCsv
+    '../services/get-export-csv': getExportCsv
   })
   app = routeHelper.buildApp(route)
 
@@ -81,7 +81,7 @@ before(function () {
     '../services/get-reductions-export': getReductionsExport,
     '../services/get-sub-nav': getSubNavStub,
     '../authorisation': authorisationService,
-    '../services/get-export-csv': getCaseloadExportCsv
+    '../services/get-export-csv': getExportCsv
   })
   reductionApp = routeHelper.buildApp(reductionsRoute)
 })
@@ -130,13 +130,13 @@ describe('Overview csv export route', function () {
       return supertest(app).get(OM_OVERVIEW_CSV_URL).expect(200)
     })
 
-    it('should call getCaseloadExportCsv with the correct parameters', function () {
+    it('should call getExportCsv with the correct parameters', function () {
       getOverview.resolves(OVERVIEW)
       return supertest(app)
         .get(OM_OVERVIEW_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getCaseloadExportCsv.calledWith(orgUnit.OFFENDER_MANAGER.name, OVERVIEW, tabs.OVERVIEW, false)).to.be.true //eslint-disable-line
+          expect(getExportCsv.calledWith(orgUnit.OFFENDER_MANAGER.name, OVERVIEW, tabs.OVERVIEW, false)).to.be.true //eslint-disable-line
         })
     })
   })
@@ -147,13 +147,13 @@ describe('Overview csv export route', function () {
       return supertest(app).get(TEAM_OVERVIEW_CSV_URL).expect(200)
     })
 
-    it('should call getCaseloadExportCsv with the correct parameters', function () {
+    it('should call getExportCsv with the correct parameters', function () {
       getOverview.resolves(OVERVIEW)
       return supertest(app)
         .get(OM_OVERVIEW_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getCaseloadExportCsv.calledWith(orgUnit.OFFENDER_MANAGER.name, OVERVIEW, tabs.OVERVIEW, false)).to.be.true //eslint-disable-line
+          expect(getExportCsv.calledWith(orgUnit.OFFENDER_MANAGER.name, OVERVIEW, tabs.OVERVIEW, false)).to.be.true //eslint-disable-line
         })
     })
   })
@@ -164,13 +164,13 @@ describe('Overview csv export route', function () {
       return supertest(app).get(LDU_OVERVIEW_CSV_URL).expect(200)
     })
 
-    it('should call getCaseloadExportCsv with the correct parameters', function () {
+    it('should call getExportCsv with the correct parameters', function () {
       getOverview.resolves(OVERVIEW)
       return supertest(app)
         .get(LDU_OVERVIEW_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getCaseloadExportCsv.calledWith(orgUnit.LDU.name, OVERVIEW, tabs.OVERVIEW, false)).to.be.true //eslint-disable-line
+          expect(getExportCsv.calledWith(orgUnit.LDU.name, OVERVIEW, tabs.OVERVIEW, false)).to.be.true //eslint-disable-line
         })
     })
   })
@@ -181,13 +181,13 @@ describe('Overview csv export route', function () {
       return supertest(app).get(REGION_OVERVIEW_CSV_URL).expect(200)
     })
 
-    it('should call getCaseloadExportCsv with the correct parameters', function () {
+    it('should call getExportCsv with the correct parameters', function () {
       getOverview.resolves(OVERVIEW)
       return supertest(app)
         .get(REGION_OVERVIEW_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getCaseloadExportCsv.calledWith(orgUnit.REGION.name, OVERVIEW, tabs.OVERVIEW, false)).to.be.true //eslint-disable-line
+          expect(getExportCsv.calledWith(orgUnit.REGION.name, OVERVIEW, tabs.OVERVIEW, false)).to.be.true //eslint-disable-line
         })
     })
   })
@@ -198,13 +198,13 @@ describe('Overview csv export route', function () {
       return supertest(app).get(HMPPS_OVERVIEW_CSV_URL).expect(200)
     })
 
-    it('should call getCaseloadExportCsv with the correct parameters', function () {
+    it('should call getExportCsv with the correct parameters', function () {
       getOverview.resolves(OVERVIEW)
       return supertest(app)
         .get(HMPPS_OVERVIEW_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getCaseloadExportCsv.calledWith(orgUnit.NATIONAL.name, OVERVIEW, tabs.OVERVIEW, false)).to.be.true //eslint-disable-line
+          expect(getExportCsv.calledWith(orgUnit.NATIONAL.name, OVERVIEW, tabs.OVERVIEW, false)).to.be.true //eslint-disable-line
         })
     })
   })
@@ -227,13 +227,13 @@ describe('reductions notes csv export route', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp).get(TEAM_REDUCTIONS_CSV_URL).expect(200)
     })
-    it('should call getCaseloadExportCsv with the correct parameters', function () {
+    it('should call getExportCsv with the correct parameters', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp)
         .get(TEAM_REDUCTIONS_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getCaseloadExportCsv.calledWith(orgUnit.TEAM.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true //eslint-disable-line
+          expect(getExportCsv.calledWith(orgUnit.TEAM.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true //eslint-disable-line
         })
     })
   })
@@ -242,13 +242,13 @@ describe('reductions notes csv export route', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp).get(LDU_REDUCTIONS_CSV_URL).expect(200)
     })
-    it('should call getCaseloadExportCsv with the correct parameters', function () {
+    it('should call getExportCsv with the correct parameters', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp)
         .get(LDU_REDUCTIONS_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getCaseloadExportCsv.calledWith(orgUnit.LDU.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true //eslint-disable-line
+          expect(getExportCsv.calledWith(orgUnit.LDU.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true //eslint-disable-line
         })
     })
   })
@@ -257,13 +257,13 @@ describe('reductions notes csv export route', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp).get(REGION_REDUCTIONS_CSV_URL).expect(200)
     })
-    it('should call getCaseloadExportCsv with the correct parameters', function () {
+    it('should call getExportCsv with the correct parameters', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp)
         .get(REGION_REDUCTIONS_CSV_URL)
         .expect(200)
         .then(function () {
-          expect(getCaseloadExportCsv.calledWith(orgUnit.REGION.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true //eslint-disable-line
+          expect(getExportCsv.calledWith(orgUnit.REGION.name, REDUCTIONS, tabs.OVERVIEW, true)).to.be.true //eslint-disable-line
         })
     })
   })
