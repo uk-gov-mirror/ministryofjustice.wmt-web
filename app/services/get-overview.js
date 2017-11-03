@@ -13,7 +13,7 @@ module.exports = function (id, organisationLevel, isCSV = false) {
   if (organisationLevel === orgUnit.OFFENDER_MANAGER.name) {
     overviewPromise = getIndividualOverview(id, organisationLevel)
   } else {
-    if(isCSV) {
+    if (isCSV) {
       overviewPromise = getFullOverview(id, organisationLevel)
     } else {
       overviewPromise = getOrganisationOverview(id, organisationLevel)

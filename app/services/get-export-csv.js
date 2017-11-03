@@ -6,7 +6,7 @@ const tabs = require('../constants/wmt-tabs')
 const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
-const ORG_OVERVIEW_FIELDS = ['lduCluster','teamName', 'offenderManager', 'gradeCode', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
+const ORG_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'offenderManager', 'gradeCode', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
 
 module.exports = function (organisationLevel, result, tab) {
   var filename = getFilename(result.title, tab)
@@ -45,7 +45,7 @@ var getFields = function (organisationLevel, tab) {
         fields = Object.assign([], ORG_OVERVIEW_FIELDS)
         fieldNames = ['LDU Cluster', 'Team Name', 'Offender Manager', 'Grade Code', 'Capacity Percentage', 'Capacity Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases']
 
-        if (organisationLevel === organisationUnitConstants.REGION.name || organisationLevel === organisationUnitConstants.NATIONAL.name ) {
+        if (organisationLevel === organisationUnitConstants.REGION.name || organisationLevel === organisationUnitConstants.NATIONAL.name) {
           fields.unshift('regionName')
           fieldNames.unshift('Region Name')
         }
@@ -96,7 +96,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
           team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
         })
       }
-      
+
       csv = generateCsv(result.overviewDetails, fields, fieldNames)
       break
   }

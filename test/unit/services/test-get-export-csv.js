@@ -30,15 +30,15 @@ describe('services/get-export-csv', function () {
       expect(getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW)).to.eql(helper.TEAM_OVERVIEW_CSV)
     })
 
-    it('for LDU Overview', function() {
+    it('for LDU Overview', function () {
       expect(getExportCsv(orgUnit.LDU.name, helper.LDU_OVERVIEW_RESULT, tabs.OVERVIEW)).to.eql(helper.LDU_OVERVIEW_CSV)
     })
 
-    it('for Region Overview', function() {
+    it('for Region Overview', function () {
       expect(getExportCsv(orgUnit.REGION.name, helper.REGION_OVERVIEW_RESULT, tabs.OVERVIEW)).to.eql(helper.REGION_OVERVIEW_CSV)
     })
 
-    it('for National Overview', function() {
+    it('for National Overview', function () {
       expect(getExportCsv(orgUnit.NATIONAL.name, helper.NATIONAL_OVERVIEW_RESULT, tabs.OVERVIEW)).to.eql(helper.NATIONAL_OVERVIEW_CSV)
     })
   })
