@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const authenticationHerlp = require('../helpers/routes/authentication-helper')
+const authenticationhelp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 const workloadTypes = require('../../app/constants/workload-type')
 
@@ -14,7 +14,7 @@ var nationalDefaultUrl
 
 describe('View overview', function () {
   before(function () {
-    authenticationHerlp.login(authenticationHerlp.users.Staff)
+    authenticationhelp.login(authenticationhelp.users.Staff)
     return dataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
@@ -41,11 +41,18 @@ describe('View overview', function () {
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('.sln-export')
-      .waitForExist('[href="' + workloadOwnerDefaultUrl + '/overview/csv"]')
+      .waitForExist('[href="' + workloadOwnerDefaultUrl + '/overview/caseload-csv"]')
       .waitForExist('.sln-grade')
       .getText('.sln-grade')
       .then(function (text) {
         expect(text).to.equal(workloadOwnerGrade)
+      })
+  })
+
+  it('should not include the reductions export at workload owner level', function() {
+    return browser.url(workloadOwnerDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false
       })
   })
 
@@ -54,7 +61,9 @@ describe('View overview', function () {
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('.sln-export')
-      .waitForExist('[href="' + teamDefaultUrl + '/overview/csv"]')
+      .waitForExist('[href="' + teamDefaultUrl + '/overview/caseload-csv"]')
+      .waitForExist('.reduction-export')
+      .waitForExist('[href="' + teamDefaultUrl + '/overview/reductions-csv')
       .waitForExist('[href="' + workloadOwnerDefaultUrl + '"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
@@ -67,7 +76,9 @@ describe('View overview', function () {
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('.sln-export')
-      .waitForExist('[href="' + lduDefaultUrl + '/overview/csv"]')
+      .waitForExist('[href="' + lduDefaultUrl + '/overview/caseload-csv"]')
+      .waitForExist('.reduction-export')
+      .waitForExist('[href="' + lduDefaultUrl + '/overview/reductions-csv')
       .waitForExist('[href="' + teamDefaultUrl + '"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
@@ -80,7 +91,9 @@ describe('View overview', function () {
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('.sln-export')
-      .waitForExist('[href="' + regionDefaultUrl + '/overview/csv"]')
+      .waitForExist('[href="' + regionDefaultUrl + '/overview/caseload-csv"]')
+      .waitForExist('.reduction-export')
+      .waitForExist('[href="' + regionDefaultUrl + '/overview/reductions-csv')
       .waitForExist('[href="' + lduDefaultUrl + '"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
@@ -93,11 +106,18 @@ describe('View overview', function () {
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('.sln-export')
-      .waitForExist('[href="' + nationalDefaultUrl + '/overview/csv"]')
+      .waitForExist('[href="' + nationalDefaultUrl + '/overview/caseload-csv"]')
       .waitForExist('[href="' + regionDefaultUrl + '"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
         expect(text).to.equal('Division')
+      })
+  })
+
+  it('should not include the reductions export at national level', function() {
+    return browser.url(nationalDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false
       })
   })
 
@@ -162,6 +182,6 @@ describe('View overview', function () {
   })
 
   after(function () {
-    authenticationHerlp.logout()
+    authenticationhelp.logout()
   })
 })
