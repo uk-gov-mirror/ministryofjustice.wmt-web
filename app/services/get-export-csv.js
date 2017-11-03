@@ -47,7 +47,7 @@ var getFields = function (organisationLevel, tab) {
 
         if (organisationLevel === organisationUnitConstants.REGION.name || organisationLevel === organisationUnitConstants.NATIONAL.name) {
           fields.unshift('regionName')
-          fieldNames.unshift('Region Name')
+          fieldNames.unshift('Region')
         }
       }
   }
