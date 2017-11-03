@@ -155,5 +155,5 @@ var parseTotalSummaryTable = function (totalSummary) {
 }
 
 var formatCapacityValue = function (capacity) {
-  return parseFloat(capacity).toFixed(2) + '%'
+  return parseInt(capacity) + '%'
 }
