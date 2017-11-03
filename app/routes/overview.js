@@ -63,9 +63,7 @@ module.exports = function (router) {
 
     var isCSV = true
     return getOverview(id, organisationLevel, isCSV).then(function (result) {
-      console.log(result)
       var exportCsv = getExportCsv(organisationLevel, result, tabs.OVERVIEW)
-      console.log(exportCsv)
       res.attachment(exportCsv.filename)
       res.send(exportCsv.csv)
     }).catch(function (error) {
