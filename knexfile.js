@@ -17,6 +17,20 @@ module.exports = {
       max: 500
     }
   },
+  archive: {
+    client: 'mssql',
+    connection: {
+      host: config.DATABASE_SERVER,
+      user: config.ARCHIVE_DATABASE_USERNAME,
+      password: config.ARCHIVE_DATABASE_PASSWORD,
+      database: config.ARCHIVE_DATABASE,
+      options: {
+        encrypt: true,
+        requestTimeout: 60000
+      }
+    },
+    debug: false
+  },
   integrationTests: {
     client: 'mssql',
     connection: {
