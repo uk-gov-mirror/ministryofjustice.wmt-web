@@ -48,34 +48,10 @@ module.exports = function (router) {
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    if (organisationLevel !== organisationUnit.OFFENDER_MANAGER.name) {
-      return getCapacityView(id, capacityDateRange, organisationLevel).then(function (result) {
-        var capacityBreakdown = result
-        return getOutstandingReports(id, organisationLevel).then(function (result) {
-          var outstandingReports = result
-          return res.render('capacity', {
-            title: capacityBreakdown.title,
-            subTitle: capacityBreakdown.subTitle,
-            subNav: getSubNav(id, organisationLevel, req.path),
-            breadcrumbs: capacityBreakdown.breadcrumbs,
-            capacity: capacityBreakdown.capacityTable,
-            errors: errors,
-            query: req.query,
-            capacityBreakdown: capacityBreakdown.capacityBreakdown,
-            outstandingReports: outstandingReports,
-            childOrganisationLevel: orgUnit.childOrganisationLevel,
-            childOrganisationLevelDisplayText: childOrgUnitDisplayText,
-            organisationLevel: organisationLevel,
-            userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-            noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
-          })
-        })
-      }).catch(function (error) {
-        next(error)
-      })
-    } else {
-      return getCapacityView(id, capacityDateRange, organisationLevel).then(function (result) {
-        var capacityBreakdown = result
+    return getCapacityView(id, capacityDateRange, organisationLevel).then(function (result) {
+      var capacityBreakdown = result
+      return getOutstandingReports(id, organisationLevel).then(function (result) {
+        var outstandingReports = result
         return res.render('capacity', {
           title: capacityBreakdown.title,
           subTitle: capacityBreakdown.subTitle,
@@ -85,16 +61,16 @@ module.exports = function (router) {
           errors: errors,
           query: req.query,
           capacityBreakdown: capacityBreakdown.capacityBreakdown,
-          outstandingReports: [],
+          outstandingReports: outstandingReports,
           childOrganisationLevel: orgUnit.childOrganisationLevel,
           childOrganisationLevelDisplayText: childOrgUnitDisplayText,
           organisationLevel: organisationLevel,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
           noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
         })
-      }).catch(function (error) {
-        next(error)
       })
-    }
+    }).catch(function (error) {
+      next(error)
+    })
   })
 }

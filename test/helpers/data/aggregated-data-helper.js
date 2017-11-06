@@ -331,6 +331,10 @@ var addWorkloads = function (inserts) {
         overdue_terminations_total: 10,
         unpaid_work_total: 10,
         warrants_total: 10,
+        suspended_total: 10,
+        t2a_overdue_terminations_total: 10,
+        t2a_unpaid_work_total: 10,
+        t2a_warrants_total: 10,
         total_cases: 10,
         location: 'COMMUNITY'
       }

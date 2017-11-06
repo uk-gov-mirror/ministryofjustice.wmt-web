@@ -206,12 +206,12 @@
     </table>
   {% endif %}
   <br>
-  <h3 class="heading-medium">Outstanding reports</h3>
+  <h3 class="heading-medium">Inactive & UPW cases</h3>
   <table id="outstandingReports" class="data-table dataTable">
     <thead>
       <tr>
         <th colspan="2">{{ childOrganisationLevelDisplayText }}</th>
-        <th class="" colspan="5">Risk type</th>
+        <th class="" colspan="5">Inactive & UPW cases</th>
       </tr>
       <tr>
         <th id='name'>Name</th>
@@ -231,7 +231,7 @@
         <td headers="outstanding warrants">{{ member.ow }}</td>
         <td headers="unpaid work">{{ member.upw }}</td>
         <td headers="overdue terminations">{{ member.ot }}</td>
-        <td headers="suspended lifers">-</td>
+        <td headers="suspended lifers">{{ member.sl }}</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -247,7 +247,7 @@
           <td headers="outstanding warrants">{{ member.grades[i].ow }}</td>
           <td headers="unpaid work">{{ member.grades[i].upw }}</td>
           <td headers="overdue terminations">{{ member.grades[i].ot }}</td>
-          <td headers="suspended lifers">-</td>
+          <td headers="suspended lifers">{{ member.grades[i].sl }}</td>
         </tr>
         {% endfor %}
       {% endfor %}

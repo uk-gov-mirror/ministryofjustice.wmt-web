@@ -5,14 +5,20 @@ const organisationConstant = require('../constants/organisation-unit')
 module.exports = function (id, organisationLevel) {
   var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
   if (organisationalUnitType === undefined) {
-    throw new Error(organisationLevel + ' should be offender-manager, region, team, ldu or hmpps')
+    throw new Error(organisationLevel + ' should be region, team, ldu or hmpps')
+  }
+
+  if (organisationalUnitType === organisationConstant.OFFENDER_MANAGER) {
+    return Promise.resolve([])
   }
 
   return getOutstandingReports(id, organisationLevel)
     .then(function (outstandingReports) {
       var result = []
       if (organisationLevel === organisationConstant.TEAM.name) {
-        result = outstandingReports
+        outstandingReports.forEach((report) => {
+          result.push(addT2aCases(report))
+        })
       } else if (organisationalUnitType !== organisationConstant.OFFENDER_MANAGER) {
         result = groupReportsByOrgName(outstandingReports)
       }
@@ -20,27 +26,40 @@ module.exports = function (id, organisationLevel) {
     })
 }
 
+var addT2aCases = function (report) {
+  return {
+    name: report.name,
+    linkId: report.linkId,
+    grade: report.grade,
+    ow: report.ow + report.t2aOw,
+    ot: report.ot + report.t2aOt,
+    upw: report.upw + report.t2aUpw,
+    sl: report.sl
+  }
+}
+
 var groupReportsByOrgName = function (outstandingReports) {
   var result = []
   var organisationMap = new Map()
   outstandingReports.forEach(function (outstandingReport) {
+    var report = addT2aCases(outstandingReport)
     var valueToAdd
-    if (organisationMap.has(outstandingReport.name)) {
-      valueToAdd = organisationMap.get(outstandingReport.name)
-      valueToAdd.push(outstandingReport)
+    if (organisationMap.has(report.name)) {
+      valueToAdd = organisationMap.get(report.name)
+      valueToAdd.push(report)
     } else {
-      valueToAdd = [outstandingReport]
+      valueToAdd = [report]
     }
-    organisationMap.set(outstandingReport.name, valueToAdd)
+    organisationMap.set(report.name, valueToAdd)
   })
-  organisationMap.forEach(function (reports, orgName) {
+  organisationMap.forEach(function (outstandingReport, orgName) {
     var newEntry = {
       name: orgName,
-      linkId: reports[0].linkId,
+      linkId: outstandingReport[0].linkId,
       grades: []
     }
-    reports.forEach(function (report) {
-      newEntry.grades.push(report)
+    outstandingReport.forEach(function (outstandingReport) {
+      newEntry.grades.push(outstandingReport)
     })
     result.push(newEntry)
   })

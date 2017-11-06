@@ -11,7 +11,11 @@ module.exports = function (id, type) {
     'grade_code AS grade',
     'ow',
     'ot',
-    'upw'
+    'upw',
+    't2a_ow AS t2aOw',
+    't2a_ot AS t2aOt',
+    't2a_upw AS t2aUpw',
+    'sl'
   ]
 
   var requiresWorkloadOwnerName = (type === ORGANISATION_UNIT.TEAM.name)
