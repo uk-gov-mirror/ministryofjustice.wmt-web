@@ -9,7 +9,7 @@ module.exports = function (id, organisationLevel) {
 
   result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
   return getReductionsData(id, organisationLevel).then(function (results) {
-    results.forEach(function(record) {
+    results.forEach(function (record) {
       record.startDate = dateFormatter.formatDate(record.startDate, 'DD MM YYYY, HH:mm')
       record.endDate = dateFormatter.formatDate(record.endDate, 'DD MM YYYY, HH:mm')
     })

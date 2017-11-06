@@ -2,7 +2,6 @@ const organisationUnitConstants = require('../constants/organisation-unit')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const json2csv = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
-const dateFormatter = require('./date-formatter')
 
 const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
@@ -45,12 +44,12 @@ var getFields = function (organisationLevel, tab) {
       break
     case tabs.OVERVIEW:
       if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
-         fields = OM_OVERVIEW_FIELDS
-         fieldNames = OM_OVERVIEW_FIELD_NAMES
+        fields = OM_OVERVIEW_FIELDS
+        fieldNames = OM_OVERVIEW_FIELD_NAMES
       } else {
-         childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
-         fields = Object.assign([], ORG_OVERVIEW_FIELDS)
-         fieldNames = [childOrgForFieldName + ' Name', 'Capacity Percentage', 'Capacity Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases']
+        childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
+        fields = Object.assign([], ORG_OVERVIEW_FIELDS)
+        fieldNames = [childOrgForFieldName + ' Name', 'Capacity Percentage', 'Capacity Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases']
 
         if (organisationLevel === organisationUnitConstants.TEAM.name) {
           fields.push('gradeCode')

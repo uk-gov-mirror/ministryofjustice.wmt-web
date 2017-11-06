@@ -82,10 +82,10 @@ module.exports = function (router) {
     }
     var organisationLevel = req.params.organisationLevel
     var id = req.params.id
-    
+
     if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Not available for offender-manager')
-    } else if(organisationLevel === organisationUnitConstants.NATIONAL.name) {
+    } else if (organisationLevel === organisationUnitConstants.NATIONAL.name) {
       throw new Error('Not available at national level')
     }
 

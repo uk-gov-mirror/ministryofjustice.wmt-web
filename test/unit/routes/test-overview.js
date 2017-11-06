@@ -269,14 +269,14 @@ describe('reductions notes csv export route', function () {
         })
     })
   })
-  describe('for national level', function() {
-    it('should respond with 500 when national is included in URL', function() {
+  describe('for national level', function () {
+    it('should respond with 500 when national is included in URL', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp).get(NATIONAL_REDUCTIONS_CSV_URL).expect(500)
     })
   })
-  describe('for offender manager level', function() {
-    it('should respond with 500 when offender manager is included in URL', function() {
+  describe('for offender manager level', function () {
+    it('should respond with 500 when offender manager is included in URL', function () {
       getReductionsExport.resolves(REDUCTIONS)
       return supertest(reductionApp).get(OM_REDUCTIONS_CSV_URL).expect(500)
     })
