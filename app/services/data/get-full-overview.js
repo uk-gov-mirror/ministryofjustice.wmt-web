@@ -26,7 +26,7 @@ module.exports = function (id, type) {
 
   if (orgUnit.name === orgUnitConstants.REGION.name || orgUnit.name === orgUnitConstants.NATIONAL.name) {
     selectColumns.unshift('region_name AS regionName')
-    orderBy = ' region_name, ' + orderBy
+    orderBy = 'region_name,' + orderBy
   }
 
   return knex.raw(

@@ -4,7 +4,7 @@ const json2csv = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
 
 const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
-const OM_OVERVIEW_FIELDS = ['region', 'lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
+const OM_OVERVIEW_FIELDS = ['regionName', 'lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
 const ORG_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'offenderManager', 'gradeCode', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
 
@@ -155,5 +155,5 @@ var parseTotalSummaryTable = function (totalSummary) {
 }
 
 var formatCapacityValue = function (capacity) {
-  return parseInt(capacity) + '%'
+  return Math.round(capacity) + '%'
 }

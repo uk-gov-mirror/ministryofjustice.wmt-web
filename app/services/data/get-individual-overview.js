@@ -13,7 +13,7 @@ module.exports = function (id) {
     'team_id AS teamId',
     'team_name AS teamName',
     'ldu_name AS lduCluster',
-    'region_name AS region',
+    'region_name AS regionName',
     'available_points AS availablePoints',
     'total_points AS totalPoints',
     'total_cases AS cases',
