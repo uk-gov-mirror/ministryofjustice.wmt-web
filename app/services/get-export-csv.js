@@ -11,10 +11,7 @@ const ORG_OVERVIEW_FIELDS = ['name', 'capacityPercentage', 'availablePoints', 'c
 const REDUCTIONS_FIELD_NAMES = ['Offender Manager', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes']
 const REDUCTIONS_FIELDS = ['offenderManager', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
 
-var reductions
-
-module.exports = function (organisationLevel, result, tab, reduction) {
-  reductions = reduction
+module.exports = function (organisationLevel, result, tab) {
   var filename = getFilename(result.title, tab)
   var fieldsObject = getFields(organisationLevel, tab)
   var fields = fieldsObject.fields
@@ -28,7 +25,7 @@ module.exports = function (organisationLevel, result, tab, reduction) {
 // TODO: Do we have an agreed naming scheme they would like for these csvs? Org level? Date?
 var getFilename = function (orgName, screen) {
   var replaceSpaces = / /g
-  if (reductions === true) {
+  if (screen === tabs.REDUCTIONS_EXPORT) {
     return (orgName + ' Reductions Notes.csv').replace(replaceSpaces, '_')
   } else {
     return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
@@ -47,31 +44,31 @@ var getFields = function (organisationLevel, tab) {
       fieldNames = [childOrgForFieldName + ' Name', 'Grade', 'A', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'Untiered', 'Overall']
       break
     case tabs.OVERVIEW:
-      if (reductions === true) {
-        fields = REDUCTIONS_FIELDS
-        fieldNames = REDUCTIONS_FIELD_NAMES
+      if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
+         fields = OM_OVERVIEW_FIELDS
+         fieldNames = OM_OVERVIEW_FIELD_NAMES
       } else {
-        if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
-          fields = OM_OVERVIEW_FIELDS
-          fieldNames = OM_OVERVIEW_FIELD_NAMES
-        } else {
-          childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
-          fields = Object.assign([], ORG_OVERVIEW_FIELDS)
-          fieldNames = [childOrgForFieldName + ' Name', 'Capacity Percentage', 'Capacity Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases']
+         childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
+         fields = Object.assign([], ORG_OVERVIEW_FIELDS)
+         fieldNames = [childOrgForFieldName + ' Name', 'Capacity Percentage', 'Capacity Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases']
 
-          if (organisationLevel === organisationUnitConstants.TEAM.name) {
-            fields.push('gradeCode')
-            fieldNames.push('Grade Code')
-            fields.unshift('teamName')
-            fieldNames.unshift('Team Name')
-            fields.unshift('lduCluster')
-            fieldNames.unshift('LDU Cluster')
-          } else if (organisationLevel === organisationUnitConstants.LDU.name) {
-            fields.unshift('lduCluster')
-            fieldNames.unshift('LDU Cluster')
-          }
+        if (organisationLevel === organisationUnitConstants.TEAM.name) {
+          fields.push('gradeCode')
+          fieldNames.push('Grade Code')
+          fields.unshift('teamName')
+          fieldNames.unshift('Team Name')
+          fields.unshift('lduCluster')
+          fieldNames.unshift('LDU Cluster')
+        } else if (organisationLevel === organisationUnitConstants.LDU.name) {
+          fields.unshift('lduCluster')
+          fieldNames.unshift('LDU Cluster')
         }
       }
+      break
+    case tabs.REDUCTIONS_EXPORT:
+      fields = REDUCTIONS_FIELDS
+      fieldNames = REDUCTIONS_FIELD_NAMES
+      break
   }
   return { fields: fields, fieldNames: fieldNames }
 }
@@ -110,28 +107,26 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       }
       break
     case tabs.OVERVIEW:
-      if (reductions === true) {
-        csv = generateCsv(result.reductionNotes, fields, fieldNames)
-        break
+      if (organisationLevel === organisationUnitConstants.TEAM.name) {
+        result.overviewDetails.forEach(function (team) {
+          team.teamName = result.breadcrumbs[0].title
+          team.lduCluster = result.breadcrumbs[1].title
+          team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
+        })
+      } else if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
+        result.overviewDetails.lduCluster = result.breadcrumbs[2].title
+        result.overviewDetails.capacity = formatCapacityValue(result.overviewDetails.capacity)
       } else {
-        if (organisationLevel === organisationUnitConstants.TEAM.name) {
-          result.overviewDetails.forEach(function (team) {
-            team.teamName = result.breadcrumbs[0].title
-            team.lduCluster = result.breadcrumbs[1].title
-            team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
-          })
-        } else if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
-          result.overviewDetails.lduCluster = result.breadcrumbs[2].title
-          result.overviewDetails.capacity = formatCapacityValue(result.overviewDetails.capacity)
-        } else {
-          result.overviewDetails.forEach(function (team) {
-            team.lduCluster = result.breadcrumbs[0].title
-            team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
-          })
-        }
-        csv = generateCsv(result.overviewDetails, fields, fieldNames)
-        break
+        result.overviewDetails.forEach(function (team) {
+          team.lduCluster = result.breadcrumbs[0].title
+          team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
+        })
       }
+      csv = generateCsv(result.overviewDetails, fields, fieldNames)
+      break
+    case tabs.REDUCTIONS_EXPORT:
+      csv = generateCsv(result.reductionNotes, fields, fieldNames)
+      break
   }
   return csv
 }

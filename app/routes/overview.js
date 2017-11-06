@@ -64,7 +64,7 @@ module.exports = function (router) {
 
     var isCSV = true
     return getOverview(id, organisationLevel, isCSV).then(function (result) {
-      var exportCsv = getExportCsv(organisationLevel, result, tabs.OVERVIEW, false)
+      var exportCsv = getExportCsv(organisationLevel, result, tabs.OVERVIEW)
       res.attachment(exportCsv.filename)
       res.send(exportCsv.csv)
     }).catch(function (error) {
@@ -90,7 +90,7 @@ module.exports = function (router) {
     }
 
     return getReductionsExport(id, organisationLevel).then(function (result) {
-      var reductionsExportCsv = getExportCsv(organisationLevel, result, tabs.OVERVIEW, true)
+      var reductionsExportCsv = getExportCsv(organisationLevel, result, tabs.REDUCTIONS_EXPORT)
       res.attachment(reductionsExportCsv.filename)
       res.send(reductionsExportCsv.csv)
     }).catch(function (error) {
