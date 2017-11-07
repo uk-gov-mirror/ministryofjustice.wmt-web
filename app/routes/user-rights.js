@@ -39,7 +39,7 @@ module.exports = function (router) {
       breadcrumbs: breadcrumbs,
       failureText: failureText,
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
     })
   })
 
@@ -76,7 +76,7 @@ module.exports = function (router) {
         rights: role.role,
         breadcrumbs: breadcrumbs,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
       })
     }).catch(function (error) {
       next(error)
@@ -111,7 +111,7 @@ module.exports = function (router) {
       title: 'User rights',
       userRights: { username: username, rights: rights },
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
     })
   })
 }

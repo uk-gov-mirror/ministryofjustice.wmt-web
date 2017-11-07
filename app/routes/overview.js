@@ -108,7 +108,7 @@ var renderOverview = function (req, res, next) {
       subNav: getSubNav(id, organisationLevel, req.path),
       overviewDetails: result.overviewDetails,
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
     })
   }).catch(function (error) {
     next(error)
