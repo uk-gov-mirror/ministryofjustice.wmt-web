@@ -403,6 +403,24 @@ module.exports.getAnyExistingReductionReasonId = function () {
   return promise
 }
 
+module.exports.getAnyExistingRegionId = function() {
+  var promise = knex('region')
+    .first('id')
+    .then(function (result) {
+      return result.id
+    })
+  return promise
+}
+
+module.exports.getAllExistingReductions = function() {
+  var promise = knex('reductions')
+    .count('id')
+    .then(function (result) {
+      return result
+    })
+  return promise
+}
+
 module.exports.selectGradeForWorkloadOwner = function (workloadOwnerId) {
   var promise = knex('workload_owner')
     .join('offender_manager', 'offender_manager.id', 'offender_manager_id')
