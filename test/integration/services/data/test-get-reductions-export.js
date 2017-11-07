@@ -9,12 +9,12 @@ const insertReduction = require('../../../../app/services/data/insert-reduction'
 var inserts = []
 
   
-  var reductionReason = 'Disability'
+  var reductionReason = { maxAllowanceHours: 0 }
   var activeStartDate = moment().subtract(30, 'days').toDate()
   var activeEndDate = moment().add(30, 'days').toDate()
   var testReduction = new Reduction('1', '5',
     [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
-    [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'Test Note', reductionReason)
+    [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'New Test Note', reductionReason)
   var workloadOwnerId
   var addedReductionId
 
@@ -29,6 +29,7 @@ var inserts = []
   }
 
 describe('services/data/get-reduction-notes-export', function() {
+     
     before(function () {
         return dataHelper.addWorkloadCapacitiesForOffenderManager()
         .then(function (result) {
@@ -49,10 +50,18 @@ describe('services/data/get-reduction-notes-export', function() {
             })
         })
     })
-    
-    it('should return all reductions at region level', function() {
+    /**
+    before(function () {
+        return dataHelper.getAllExistingReductions()
+        .then(function (result) {
+          console.log(result)
+          inserts = result
+        })
+    })
+    */
+    it('should return inserted test reduction at region level', function() {
         //console.log('Result: ', getReductionsExport(50, orgUnitConstants.REGION.name))
-        return getReductionsExport(inserts.filter((item) => item.table === 'region')[0].id, orgUnitConstants.REGION.name)
+        return getReductionsExport(43, orgUnitConstants.REGION.name)
         .then(function (results) {
             console.log(results)
             // Store the id so that we can delete it after the test is complete
