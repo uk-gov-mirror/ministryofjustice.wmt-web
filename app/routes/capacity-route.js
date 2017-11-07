@@ -66,7 +66,7 @@ module.exports = function (router) {
           childOrganisationLevelDisplayText: childOrgUnitDisplayText,
           organisationLevel: organisationLevel,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
         })
       })
     }).catch(function (error) {

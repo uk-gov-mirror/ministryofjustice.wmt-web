@@ -33,7 +33,7 @@ var isAuthenticationEnabled = function () {
 var getAuthorisedUserRole = function (req) {
   var result = {}
   if (!req.user) {
-    result.noAuth = isAuthenticationEnabled()
+    result.authorisation = isAuthenticationEnabled()
   } else {
     result.userRole = req.user.user_role
   }
