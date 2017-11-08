@@ -481,6 +481,30 @@ module.exports.generateNonExistantWorkloadOwnerId = function () {
     })
 }
 
+module.exports.generateNonExistantTeamId = function () {
+  return knex('team')
+    .max('id AS maxId')
+    .then(function (maxId) {
+      return maxId[0].maxId + 1
+    })
+}
+
+module.exports.generateNonExistantLduId = function () {
+  return knex('ldu')
+    .max('id AS maxId')
+    .then(function (maxId) {
+      return maxId[0].maxId + 1
+    })
+}
+
+module.exports.generateNonExistantRegionId = function () {
+  return knex('region')
+    .max('id AS maxId')
+    .then(function (maxId) {
+      return maxId[0].maxId + 1
+    })
+}
+
 module.exports.getAllTasks = function () {
   return knex('tasks')
     .select('submitting_agent',

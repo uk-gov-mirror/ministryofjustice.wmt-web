@@ -8,7 +8,6 @@ const insertReduction = require('../../../../app/services/data/insert-reduction'
 
 var inserts = []
 
-  
   var reductionReason = { maxAllowanceHours: 0 }
   var activeStartDate = moment().subtract(30, 'days').toDate()
   var activeEndDate = moment().add(30, 'days').toDate()
@@ -29,14 +28,16 @@ var inserts = []
   }
 
 describe('services/data/get-reduction-notes-export', function() {
-     
+    /**     
     before(function () {
-        return dataHelper.addWorkloadCapacitiesForOffenderManager()
+        return dataHelper.addCaseProgressDataForAllOrgUnits()
         .then(function (result) {
           inserts = result
+          console.log('Inserts: ', inserts)
           return dataHelper.getAnyExistingWorkloadOwnerId()
             .then(function (id) {
               workloadOwnerId = id
+              console.log('Workload Owner ID: ', workloadOwnerId)
               return dataHelper.getAnyExistingReductionReasonId()
                 .then(function (id) {
                   testReduction.reasonForReductionId = id
@@ -49,16 +50,16 @@ describe('services/data/get-reduction-notes-export', function() {
                 })
             })
         })
-    })
-    /**
-    before(function () {
+    }) */
+    before(function () { 
         return dataHelper.getAllExistingReductions()
         .then(function (result) {
-          console.log(result)
+          console.log('Existing reductions: ', result)
           inserts = result
         })
+        
     })
-    */
+    /** 
     it('should return inserted test reduction at region level', function() {
         //console.log('Result: ', getReductionsExport(50, orgUnitConstants.REGION.name))
         return getReductionsExport(43, orgUnitConstants.REGION.name)
@@ -69,6 +70,8 @@ describe('services/data/get-reduction-notes-export', function() {
             expect(results).to.eql(Object.assign({}, testReduction))
         })
     })
+
+    */
     /** 
     it('should return all reductions at ldu level', function() {
         console.log('Result: ', getReductionsExport(inserts.filter((item) => item.table === 'ldu')[0].id, orgUnitConstants.LDU.name))
@@ -94,21 +97,21 @@ describe('services/data/get-reduction-notes-export', function() {
     */
 
     it('should return an empty list when team does not exist', function () {
-        return getReductionsExport(9999999, orgUnitConstants.TEAM.name)
+        return getReductionsExport(dataHelper.generateNonExistantTeamId(), orgUnitConstants.TEAM.name)
         .then(function (results) {
           expect(results).to.be.empty //eslint-disable-line
         })
     })
     
     it('should return an empty list when ldu does not exist', function () {
-        return getReductionsExport(9999999, orgUnitConstants.LDU.name)
+        return getReductionsExport(dataHelper.generateNonExistantLduId(), orgUnitConstants.LDU.name)
         .then(function (results) {
           expect(results).to.be.empty //eslint-disable-line
         })
     })
     
     it('should return an empty list when region does not exist', function () {
-        return getReductionsExport(9999999, orgUnitConstants.REGION.name)
+        return getReductionsExport(dataHelper.generateNonExistantRegionId(), orgUnitConstants.REGION.name)
         .then(function (results) {
           expect(results).to.be.empty //eslint-disable-line
         })

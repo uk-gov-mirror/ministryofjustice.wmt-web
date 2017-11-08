@@ -53,21 +53,21 @@ describe('services/data/get-organisation-overview', function () {
   })
 
   it('should return an empty list when team does not exist', function () {
-    return getOrganisationOverview(9999999, orgUnitConstants.TEAM.name)
+    return getOrganisationOverview(workloadCapacityHelper.generateNonExistantTeamId, orgUnitConstants.TEAM.name)
     .then(function (results) {
       expect(results).to.be.empty //eslint-disable-line
     })
   })
 
   it('should return an empty list when ldu does not exist', function () {
-    return getOrganisationOverview(9999999, orgUnitConstants.LDU.name)
+    return getOrganisationOverview(workloadCapacityHelper.generateNonExistantLduId, orgUnitConstants.LDU.name)
     .then(function (results) {
       expect(results).to.be.empty //eslint-disable-line
     })
   })
 
   it('should return an empty list when region does not exist', function () {
-    return getOrganisationOverview(9999999, orgUnitConstants.REGION.name)
+    return getOrganisationOverview(workloadCapacityHelper.generateNonExistantRegionId, orgUnitConstants.REGION.name)
     .then(function (results) {
       expect(results).to.be.empty //eslint-disable-line
     })
