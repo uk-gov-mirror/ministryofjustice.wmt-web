@@ -12,7 +12,6 @@ const REDUCTIONS_FIELDS = ['offenderManager', 'reason', 'amount', 'startDate', '
 const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
 const INACTIVE_CASES_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
 
-
 module.exports = function (organisationLevel, result, tab) {
   var filename = getFilename(result.title, tab)
   var fieldsObject = getFields(organisationLevel, tab)
