@@ -31,10 +31,11 @@ var isAuthenticationEnabled = function () {
 }
 
 var getAuthorisedUserRole = function (req) {
-  var result = {}
-  if (!req.user) {
-    result.noAuth = isAuthenticationEnabled()
-  } else {
+  var result = {
+    authorisation: isAuthenticationEnabled(),
+    userRole: ''
+  }
+  if (req.user) {
     result.userRole = req.user.user_role
   }
   return result

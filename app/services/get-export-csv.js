@@ -9,6 +9,9 @@ const OM_OVERVIEW_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Grade Code', 'Capa
 const ORG_OVERVIEW_FIELDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
 const REDUCTIONS_FIELD_NAMES = ['Offender Manager', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes']
 const REDUCTIONS_FIELDS = ['offenderManager', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
+const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
+const INACTIVE_CASES_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
+
 
 module.exports = function (organisationLevel, result, tab) {
   var filename = getFilename(result.title, tab)
@@ -68,6 +71,10 @@ var getFields = function (organisationLevel, tab) {
       fields = REDUCTIONS_FIELDS
       fieldNames = REDUCTIONS_FIELD_NAMES
       break
+    case tabs.CAPACITY.INACTIVE:
+      fields = INACTIVE_CASES_FIELDS
+      fieldNames = INACTIVE_CASES_FIELD_NAMES
+      break
   }
   return { fields: fields, fieldNames: fieldNames }
 }
@@ -125,6 +132,11 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       break
     case tabs.REDUCTIONS_EXPORT:
       csv = generateCsv(result.reductionNotes, fields, fieldNames)
+      break
+    case tabs.CAPACITY.INACTIVE:
+      if (organisationLevel === organisationUnitConstants.TEAM.name) {
+        csv = generateCsv(result.inactiveCaseDetails, fields, fieldNames)
+      }
       break
   }
   return csv
