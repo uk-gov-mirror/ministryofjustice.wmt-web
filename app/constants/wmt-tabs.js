@@ -5,5 +5,6 @@ module.exports = {
     INACTIVE: 'Inactive'
   },
   CASELOAD: 'Caseload',
-  CASE_PROGRESS: 'Case Progress'
+  CASE_PROGRESS: 'Case Progress',
+  REDUCTIONS_EXPORT: 'Reductions Exports'
 }

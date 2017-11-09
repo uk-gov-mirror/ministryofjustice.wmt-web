@@ -7,6 +7,8 @@ const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1',
 const OM_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
 const ORG_OVERVIEW_FIELDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
+const REDUCTIONS_FIELD_NAMES = ['Offender Manager', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes']
+const REDUCTIONS_FIELDS = ['offenderManager', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
 const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
 const INACTIVE_CASES_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
 
@@ -24,7 +26,11 @@ module.exports = function (organisationLevel, result, tab) {
 // TODO: Do we have an agreed naming scheme they would like for these csvs? Org level? Date?
 var getFilename = function (orgName, screen) {
   var replaceSpaces = / /g
-  return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
+  if (screen === tabs.REDUCTIONS_EXPORT) {
+    return (orgName + ' Reductions Notes.csv').replace(replaceSpaces, '_')
+  } else {
+    return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
+  }
 }
 
 var getFields = function (organisationLevel, tab) {
@@ -59,6 +65,10 @@ var getFields = function (organisationLevel, tab) {
           fieldNames.unshift('LDU Cluster')
         }
       }
+      break
+    case tabs.REDUCTIONS_EXPORT:
+      fields = REDUCTIONS_FIELDS
+      fieldNames = REDUCTIONS_FIELD_NAMES
       break
     case tabs.CAPACITY.INACTIVE:
       fields = INACTIVE_CASES_FIELDS
@@ -118,6 +128,9 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
         })
       }
       csv = generateCsv(result.overviewDetails, fields, fieldNames)
+      break
+    case tabs.REDUCTIONS_EXPORT:
+      csv = generateCsv(result.reductionNotes, fields, fieldNames)
       break
     case tabs.CAPACITY.INACTIVE:
       if (organisationLevel === organisationUnitConstants.TEAM.name) {
@@ -180,5 +193,5 @@ var parseTotalSummaryTable = function (totalSummary) {
 }
 
 var formatCapacityValue = function (capacity) {
-  return parseFloat(capacity).toFixed(2) + '%'
+  return Math.round(capacity) + '%'
 }

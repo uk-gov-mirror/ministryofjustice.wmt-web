@@ -35,21 +35,16 @@ describe('services/get-export-csv', function () {
       expect(getExportCsv(orgUnit.REGION.name, helper.LDU_OVERVIEW_RESULT, tabs.OVERVIEW).csv).to.include(helper.REGION_OVERVIEW_HEADINGS)
       expect(getExportCsv(orgUnit.NATIONAL.name, helper.LDU_OVERVIEW_RESULT, tabs.OVERVIEW).csv).to.include(helper.NATIONAL_OVERVIEW_HEADINGS)
     })
-  })
-  describe('should format the capacity when exporting overviews', function () {
-    it('to two decimal figures', function () {
-      var capacityExport = getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
-      expect(capacityExport).to.include('107.37%')
-      expect(capacityExport).to.include('106.84%')
+
+    it('for Team reductions', function () {
+      expect(getExportCsv(orgUnit.TEAM.name, helper.TEAM_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT)).to.eql(helper.TEAM_REDUCTIONS_CSV)
     })
-    it('with a percentage symbol', function () {
-      var capacityExport = getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
-      expect(capacityExport).to.include('107.37%')
-      expect(capacityExport).to.include('106.84%')
+    it('for LDU reductions', function () {
+      expect(getExportCsv(orgUnit.LDU.name, helper.LDU_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT)).to.eql(helper.LDU_REDUCTIONS_CSV)
     })
-    it('for Offender Manager overview', function () {
-      var capacityExport = getExportCsv(orgUnit.OFFENDER_MANAGER.name, helper.OM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
-      expect(capacityExport).to.include('105.00%')
+
+    it('for Region reductions', function () {
+      expect(getExportCsv(orgUnit.REGION.name, helper.REGION_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT)).to.eql(helper.REGION_REDUCTIONS_CSV)
     })
   })
 })

@@ -1,12 +1,12 @@
 const expect = require('chai').expect
-const authenticationHerlp = require('../helpers/routes/authentication-helper')
+const authenticationHelper = require('../helpers/routes/authentication-helper')
 
 var adminURL
 var workloadPointsURL
 
 describe('View admin role', () => {
   before(function () {
-    authenticationHerlp.login(authenticationHerlp.users.DataAdmin)
+    authenticationHelper.login(authenticationHelper.users.DataAdmin)
     adminURL = '/admin'
     workloadPointsURL = '/admin/workload-points'
     return browser.url(adminURL).waitForExist('.breadcrumbs')
@@ -33,6 +33,6 @@ describe('View admin role', () => {
   })
 
   after(function () {
-    authenticationHerlp.logout()
+    authenticationHelper.logout()
   })
 })

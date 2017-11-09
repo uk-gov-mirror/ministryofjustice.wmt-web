@@ -18,11 +18,17 @@ const VALID_URL_WITHOUT_OVERVIEW = '/' + workloadTypes.PROBATION + '/offender-ma
 
 const OM_MISSING_ID_URL = '/' + workloadTypes.PROBATION + '/offender-manager/overview'
 
-const OM_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/overview/csv'
-const TEAM_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/team/1/overview/csv'
-const LDU_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/ldu/1/overview/csv'
-const REGION_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/region/1/overview/csv'
-const HMPPS_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/hmpps/0/overview/csv'
+const OM_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/overview/caseload-csv'
+const TEAM_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/team/1/overview/caseload-csv'
+const LDU_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/ldu/1/overview/caseload-csv'
+const REGION_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/region/1/overview/caseload-csv'
+const HMPPS_OVERVIEW_CSV_URL = '/' + workloadTypes.PROBATION + '/hmpps/0/overview/caseload-csv'
+
+const TEAM_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/team/1/overview/reductions-csv'
+const LDU_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/ldu/1/overview/reductions-csv'
+const REGION_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/region/1/overview/reductions-csv'
+const NATIONAL_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/hmpps/1/overview/reductions-csv'
+const OM_REDUCTIONS_CSV_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/overview/reductions-csv'
 
 const OVERVIEW = {
   title: 'Title',
@@ -30,6 +36,13 @@ const OVERVIEW = {
   breadcrumbs: [{ title: 'Offender Manager' }],
   subNav: {},
   overviewDetails: [{}]
+}
+
+const REDUCTIONS = {
+  title: 'Title',
+  subTitle: 'SubTitle',
+  breadcrumbs: [{ title: 'Team' }],
+  reductionNotes: [{}]
 }
 
 const EXPORT_CSV_FILENAME = 'Test CSV File.csv'
@@ -41,6 +54,11 @@ const EXPORT_CSV = '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1",
 var app
 var route
 var getOverview
+
+var getReductionsExport
+var reductionApp
+var reductionsRoute
+
 var getSubNavStub
 var getExportCsv
 var authorisationService
@@ -51,6 +69,7 @@ before(function () {
   }
   getSubNavStub = sinon.stub()
   getOverview = sinon.stub()
+  getReductionsExport = sinon.stub()
   getExportCsv = sinon.stub().returns({ filename: EXPORT_CSV_FILENAME, csv: EXPORT_CSV })
   route = proxyquire('../../../app/routes/overview', {
     '../services/get-overview': getOverview,
@@ -59,6 +78,14 @@ before(function () {
     '../services/get-export-csv': getExportCsv
   })
   app = routeHelper.buildApp(route)
+
+  reductionsRoute = proxyquire('../../../app/routes/overview', {
+    '../services/get-reductions-export': getReductionsExport,
+    '../services/get-sub-nav': getSubNavStub,
+    '../authorisation': authorisationService,
+    '../services/get-export-csv': getExportCsv
+  })
+  reductionApp = routeHelper.buildApp(reductionsRoute)
 })
 
 describe('overview route', function () {
@@ -151,7 +178,7 @@ describe('Overview csv export route', function () {
   })
 
   describe('for a Region', function () {
-    it('should respond with 200 when ldu and id included in URL', function () {
+    it('should respond with 200 when region and id included in URL', function () {
       getOverview.resolves(OVERVIEW)
       return supertest(app).get(REGION_OVERVIEW_CSV_URL).expect(200)
     })
@@ -168,7 +195,7 @@ describe('Overview csv export route', function () {
   })
 
   describe('for National', function () {
-    it('should respond with 200 when ldu and id included in URL', function () {
+    it('should respond with 200 when hmpps and id included in URL', function () {
       getOverview.resolves(OVERVIEW)
       return supertest(app).get(HMPPS_OVERVIEW_CSV_URL).expect(200)
     })
@@ -195,6 +222,67 @@ describe('Overview csv export route', function () {
       })
   })
 })
+
+describe('reductions notes csv export route', function () {
+  describe('for team level', function () {
+    it('should respond with 200 when team and id included in URL', function () {
+      getReductionsExport.resolves(REDUCTIONS)
+      return supertest(reductionApp).get(TEAM_REDUCTIONS_CSV_URL).expect(200)
+    })
+    it('should call getExportCsv with the correct parameters', function () {
+      getReductionsExport.resolves(REDUCTIONS)
+      return supertest(reductionApp)
+        .get(TEAM_REDUCTIONS_CSV_URL)
+        .expect(200)
+        .then(function () {
+          expect(getExportCsv.calledWith(orgUnit.TEAM.name, REDUCTIONS, tabs.REDUCTIONS_EXPORT)).to.be.true //eslint-disable-line
+        })
+    })
+  })
+  describe('for ldu level', function () {
+    it('should respond with 200 when ldu and id included in URL', function () {
+      getReductionsExport.resolves(REDUCTIONS)
+      return supertest(reductionApp).get(LDU_REDUCTIONS_CSV_URL).expect(200)
+    })
+    it('should call getExportCsv with the correct parameters', function () {
+      getReductionsExport.resolves(REDUCTIONS)
+      return supertest(reductionApp)
+        .get(LDU_REDUCTIONS_CSV_URL)
+        .expect(200)
+        .then(function () {
+          expect(getExportCsv.calledWith(orgUnit.LDU.name, REDUCTIONS, tabs.REDUCTIONS_EXPORT)).to.be.true //eslint-disable-line
+        })
+    })
+  })
+  describe('for region level', function () {
+    it('should respond with 200 when region and id included in URL', function () {
+      getReductionsExport.resolves(REDUCTIONS)
+      return supertest(reductionApp).get(REGION_REDUCTIONS_CSV_URL).expect(200)
+    })
+    it('should call getExportCsv with the correct parameters', function () {
+      getReductionsExport.resolves(REDUCTIONS)
+      return supertest(reductionApp)
+        .get(REGION_REDUCTIONS_CSV_URL)
+        .expect(200)
+        .then(function () {
+          expect(getExportCsv.calledWith(orgUnit.REGION.name, REDUCTIONS, tabs.REDUCTIONS_EXPORT)).to.be.true //eslint-disable-line
+        })
+    })
+  })
+  describe('for national level', function () {
+    it('should respond with 500 when national is included in URL', function () {
+      getReductionsExport.resolves(REDUCTIONS)
+      return supertest(reductionApp).get(NATIONAL_REDUCTIONS_CSV_URL).expect(500)
+    })
+  })
+  describe('for offender manager level', function () {
+    it('should respond with 500 when offender manager is included in URL', function () {
+      getReductionsExport.resolves(REDUCTIONS)
+      return supertest(reductionApp).get(OM_REDUCTIONS_CSV_URL).expect(500)
+    })
+  })
+})
+
 describe(`GET ${INDEX_URI}`, function () {
   it('should respond with a 200', function () {
     return supertest(app)
