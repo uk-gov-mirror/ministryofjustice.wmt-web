@@ -316,7 +316,7 @@ module.exports.TEAM_OVERVIEW_CSV = {
   csv: '"LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"' +
   '\n"LDU Cluster 1","Team 1","John Smith","PO","115%",190,37.5,6,69' +
   '\n"LDU Cluster 1","Team 1","Tony Test","PSO","113%",190,37.5,3,69' +
-  '\n"LDU Cluster 1","Team 1","Jane Doe","PO","116%",190,37.5,1,69' + 
+  '\n"LDU Cluster 1","Team 1","Jane Doe","PO","116%",190,37.5,1,69' +
   '\n"LDU Cluster 1","Team 1","Marcin Martin","PSO","107%",190,37.5,6,69' +
   '\n"LDU Cluster 1","Team 1","Courtney Larry","PO","117%",190,37.5,3,69'
 }
@@ -449,7 +449,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
 module.exports.LDU_OVERVIEW_CSV = {
   filename: 'LDU_Cluster_1_Overview.csv',
   csv: '"LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"' +
-  '\n"LDU Cluster 1","Team 1","John Smith","PO","115%",190,37.5,6,69' + 
+  '\n"LDU Cluster 1","Team 1","John Smith","PO","115%",190,37.5,6,69' +
   '\n"LDU Cluster 1","Team 1","Tony Test","PSO","113%",190,37.5,3,69' +
   '\n"LDU Cluster 1","Team 1","Jane Doe","PO","116%",190,37.5,1,69' +
   '\n"LDU Cluster 1","Team 1","Marcin Martin","PSO","107%",190,37.5,6,69' +
