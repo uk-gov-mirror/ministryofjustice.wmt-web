@@ -195,7 +195,7 @@ describe('Overview csv export route', function () {
   })
 
   describe('for National', function () {
-    it('should respond with 200 when hmppvs and id included in URL', function () {
+    it('should respond with 200 when hmpps and id included in URL', function () {
       getOverview.resolves(OVERVIEW)
       return supertest(app).get(HMPPS_OVERVIEW_CSV_URL).expect(200)
     })
