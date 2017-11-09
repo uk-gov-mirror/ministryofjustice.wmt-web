@@ -7,6 +7,8 @@ const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1',
 const OM_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
 const ORG_OVERVIEW_FIELDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
+const INACTIVE_CASES_FIELDS = ['name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
+const INACTIVE_CASES_FIELD_NAMES = ['Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
 
 module.exports = function (organisationLevel, result, tab) {
   var filename = getFilename(result.title, tab)
@@ -57,6 +59,11 @@ var getFields = function (organisationLevel, tab) {
           fieldNames.unshift('LDU Cluster')
         }
       }
+      break
+    case tabs.CAPACITY.INACTIVE:
+      fields = INACTIVE_CASES_FIELDS
+      fieldNames = INACTIVE_CASES_FIELD_NAMES
+      break
   }
   return { fields: fields, fieldNames: fieldNames }
 }
@@ -111,6 +118,11 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
         })
       }
       csv = generateCsv(result.overviewDetails, fields, fieldNames)
+      break
+    case tabs.CAPACITY.INACTIVE:
+      if (organisationLevel === organisationUnitConstants.TEAM.name) {
+        csv = generateCsv(result.inactiveCaseDetails, fields, fieldNames)
+      }
       break
   }
   return csv
