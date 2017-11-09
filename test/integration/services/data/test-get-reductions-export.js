@@ -33,6 +33,7 @@ describe('services/data/get-reduction-notes-export', function () {
     return dataHelper.addWorkloadCapacitiesForOffenderManager()
             .then(function (result) {
               inserts = result
+              console.log(inserts)
               workloadOwnerId = inserts.filter((item) => item.table === 'workload_owner')[0].id
               return dataHelper.getAnyExistingReductionReasonId()
                     .then(function (id) {
