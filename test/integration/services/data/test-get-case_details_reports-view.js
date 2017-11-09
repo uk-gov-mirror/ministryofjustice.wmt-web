@@ -39,6 +39,8 @@ describe('services/data/get-case-details-reports-view', function () {
     return getCaseDetailsReportsView(inserts.filter((item) => item.table === 'team')[0].id)
       .then(function (results) {
         expect(results.length).to.equal(1)
+        expect(results[0].teamDescription).to.equal('Test Team')
+        expect(results[0].lduDescription).to.equal('Test LDU')
         expect(results[0].location).to.equal(CASE_DETAILS_TO_INSERT[0].location)
         expect(results[0].inactiveCaseType).to.equal(CASE_DETAILS_TO_INSERT[0].row_type)
         expect(results[0].tierNumber).to.equal(CASE_DETAILS_TO_INSERT[0].tier_code)

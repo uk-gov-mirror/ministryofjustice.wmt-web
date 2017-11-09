@@ -4,6 +4,9 @@ module.exports = function (id) {
   var table = 'team_case_details_view'
   var selectList = [
     'link_id AS linkId',
+    'team_description AS teamDescription',
+    'ldu_description AS lduDescription',
+    'link_id AS linkId',
     'CONCAT(forename, \' \', surname) AS name',
     'grade_code AS grade',
     'flag AS inactiveCaseType',

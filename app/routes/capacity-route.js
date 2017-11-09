@@ -12,6 +12,7 @@ const Unauthorized = require('../services/errors/authentication-error').Unauthor
 const workloadTypes = require('../../app/constants/workload-type')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
+const tierHelper = require('../services/helpers/tier-helper')
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload-capacity', function (req, res, next) {
@@ -115,8 +116,10 @@ var formatCaseDetailsForExport = function (caseDetails) {
   var result = []
   caseDetails.forEach(function (caseDetail) {
     var caseType = getCaseTypeDescription(caseDetail.inactiveCaseType)
-    var tier = getTier(caseDetail.tierNumber)
+    var tier = tierHelper.getTierType(caseDetail.tierNumber)
     var formattedCaseDetails = {
+      lduName: caseDetail.lduDescription,
+      teamName: caseDetail.teamDescription,
       name: caseDetail.name,
       gradeCode: caseDetail.grade,
       inactiveCaseType: caseType,
@@ -146,32 +149,4 @@ var getCaseTypeDescription = function (inactiveCaseType) {
       break
   }
   return description
-}
-
-var getTier = function (tierNumber) {
-  var tier
-  switch (tierNumber) {
-    case 1:
-      tier = 'D2'
-      break
-    case 2:
-      tier = 'D1'
-      break
-    case 3:
-      tier = 'C2'
-      break
-    case 4:
-      tier = 'C1'
-      break
-    case 5:
-      tier = 'B2'
-      break
-    case 6:
-      tier = 'B1'
-      break
-    case 7:
-      tier = 'A'
-      break
-  }
-  return tier
 }

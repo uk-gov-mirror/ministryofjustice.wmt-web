@@ -7,8 +7,8 @@ const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1',
 const OM_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
 const ORG_OVERVIEW_FIELDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
-const INACTIVE_CASES_FIELDS = ['name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
-const INACTIVE_CASES_FIELD_NAMES = ['Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
+const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
+const INACTIVE_CASES_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
 
 module.exports = function (organisationLevel, result, tab) {
   var filename = getFilename(result.title, tab)
