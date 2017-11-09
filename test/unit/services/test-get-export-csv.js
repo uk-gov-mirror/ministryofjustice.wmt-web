@@ -47,16 +47,4 @@ describe('services/get-export-csv', function () {
       expect(getExportCsv(orgUnit.REGION.name, helper.REGION_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT)).to.eql(helper.REGION_REDUCTIONS_CSV)
     })
   })
-  describe('should format the capacity when exporting overviews', function () {
-    it('to a whole number with a percentage symbol', function () {
-      var capacityExport = getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
-      expect(capacityExport).to.include('107%')
-      expect(capacityExport).to.include('107%')
-    })
-
-    it('for Offender Manager overview', function () {
-      var capacityExport = getExportCsv(orgUnit.OFFENDER_MANAGER.name, helper.OM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
-      expect(capacityExport).to.include('105%')
-    })
-  })
 })
