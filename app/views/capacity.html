@@ -207,6 +207,9 @@
   {% endif %}
   <br>
   <h3 class="heading-medium">Inactive & UPW cases</h3>
+  {% if organisationLevel === 'team' %}
+  <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/csv" class="button sln-export" style="float: right; margin-bottom: 10px">Export</a>
+  {% endif %}
   <table id="outstandingReports" class="data-table dataTable">
     <thead>
       <tr>

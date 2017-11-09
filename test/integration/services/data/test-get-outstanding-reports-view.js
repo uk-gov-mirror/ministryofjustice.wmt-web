@@ -4,7 +4,7 @@ const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 
 var inserts = []
 
-describe('services/data/get-outstanding-reports-views', function () {
+describe('services/data/get-outstanding-reports-view', function () {
   before(function () {
     return dataHelper.addWorkloadCapacitiesForOffenderManager()
       .then(function (builtInserts) {

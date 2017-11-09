@@ -356,6 +356,10 @@ var addWorkloads = function (inserts) {
     })
 }
 
+module.exports.addCaseDetails = function (caseDetails) {
+  return knex('case_details').returning('id').insert(caseDetails)
+}
+
 module.exports.selectIdsForWorkloadOwner = function () {
   var results = []
 
@@ -377,6 +381,15 @@ module.exports.selectIdsForWorkloadOwner = function () {
     .then(function (result) {
       results.push({ table: 'region', id: result[0].region_id })
       return results
+    })
+  return promise
+}
+
+module.exports.getAnyExistingWorkloadId = function () {
+  var promise = knex('workload')
+    .first('id')
+    .then(function (result) {
+      return result.id
     })
   return promise
 }
