@@ -16,6 +16,7 @@ module.exports = {
     caseProgressView: 'team_case_progress_view',
     overviewView: 'team_case_overview',
     caseloadView: 'team_caseload_view',
+    outstandingReportsView: 'team_outstanding_reports_view',
     courtReporterOverview: 'team_court_reporter_overview',
     childOrganisationLevel: 'offender-manager' },
   LDU: {
@@ -27,6 +28,7 @@ module.exports = {
     caseProgressView: 'ldu_case_progress_view',
     overviewView: 'ldu_case_overview',
     caseloadView: 'ldu_caseload_view',
+    outstandingReportsView: 'ldu_outstanding_reports_view',
     courtReporterOverview: 'ldu_court_reporter_overview',
     childOrganisationLevel: 'team' },
   REGION: {
@@ -38,6 +40,7 @@ module.exports = {
     caseProgressView: 'region_case_progress_view',
     overviewView: 'region_case_overview',
     caseloadView: 'region_caseload_view',
+    outstandingReportsView: 'region_outstanding_reports_view',
     courtReporterOverview: 'region_court_reporter_overview',
     childOrganisationLevel: 'ldu' },
   NATIONAL: {
@@ -49,6 +52,7 @@ module.exports = {
     caseProgressView: 'national_case_progress_view',
     overviewView: 'national_case_overview',
     caseloadView: 'national_caseload_view',
+    outstandingReportsView: 'national_outstanding_reports_view',
     courtReporterOverview: 'national_court_reporter_overview',
     childOrganisationLevel: 'region' }
 }

@@ -54,7 +54,7 @@ module.exports = function (router) {
         successText: successText,
         workloadType: workloadType,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
       })
     }).catch(function (error) {
       next(error)
@@ -102,7 +102,7 @@ module.exports = function (router) {
           errors: errors,
           workloadType: workloadType,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
         })
       }).catch(function (error) {
         next(error)
@@ -154,7 +154,7 @@ module.exports = function (router) {
               reduction: mapReductionToViewModel(reduction),
               workloadType: workloadType,
               userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-              noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+              authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
             })
           }).catch(function (error) {
             next(error)
@@ -221,7 +221,7 @@ module.exports = function (router) {
             errors: error.validationErrors,
             workloadType: workloadType,
             userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-            noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
           })
         } else {
           next(error)
@@ -297,7 +297,7 @@ module.exports = function (router) {
             },
             errors: error.validationErrors,
             userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-            noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
           })
         } else {
           next(error)

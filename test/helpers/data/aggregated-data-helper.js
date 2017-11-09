@@ -331,6 +331,10 @@ var addWorkloads = function (inserts) {
         overdue_terminations_total: 10,
         unpaid_work_total: 10,
         warrants_total: 10,
+        suspended_total: 10,
+        t2a_overdue_terminations_total: 10,
+        t2a_unpaid_work_total: 10,
+        t2a_warrants_total: 10,
         total_cases: 10,
         location: 'COMMUNITY'
       }
@@ -350,6 +354,10 @@ var addWorkloads = function (inserts) {
       })
       return inserts
     })
+}
+
+module.exports.addCaseDetails = function (caseDetails) {
+  return knex('case_details').returning('id').insert(caseDetails)
 }
 
 module.exports.selectIdsForWorkloadOwner = function () {
@@ -373,6 +381,15 @@ module.exports.selectIdsForWorkloadOwner = function () {
     .then(function (result) {
       results.push({ table: 'region', id: result[0].region_id })
       return results
+    })
+  return promise
+}
+
+module.exports.getAnyExistingWorkloadId = function () {
+  var promise = knex('workload')
+    .first('id')
+    .then(function (result) {
+      return result.id
     })
   return promise
 }
