@@ -403,7 +403,7 @@ module.exports.getAnyExistingReductionReasonId = function () {
   return promise
 }
 
-module.exports.getAnyExistingRegionId = function() {
+module.exports.getAnyExistingRegionId = function () {
   var promise = knex('region')
     .first('id')
     .then(function (result) {
@@ -412,7 +412,7 @@ module.exports.getAnyExistingRegionId = function() {
   return promise
 }
 
-module.exports.getAllExistingReductions = function() {
+module.exports.getAllExistingReductions = function () {
   var promise = knex('reductions')
     .count('id')
     .then(function (result) {

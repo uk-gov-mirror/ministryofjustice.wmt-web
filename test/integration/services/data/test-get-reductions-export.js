@@ -7,117 +7,106 @@ const Reduction = require('../../../../app/services/domain/reduction')
 const insertReduction = require('../../../../app/services/data/insert-reduction')
 
 var inserts = []
-
-  var reductionReason = { maxAllowanceHours: 0 }
-  var activeStartDate = moment().subtract(30, 'days').toDate()
-  var activeEndDate = moment().add(30, 'days').toDate()
-  var testReduction = new Reduction('1', '5',
+var reductionReason = { maxAllowanceHours: 0 }
+var activeStartDate = moment().subtract(30, 'days').toDate()
+var activeEndDate = moment().add(30, 'days').toDate()
+var testReductionInsert = new Reduction('1', '5',
     [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
     [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'New Test Note', reductionReason)
-  var workloadOwnerId
-  var addedReductionId
+var workloadOwnerId
 
-  var reductionResult = {
-    name: 'Test Offender Manager',
-    reason: reductionReason,
-    amount: 5,
-    startDate: activeStartDate,
-    endDate: activeEndDate,
-    status: 'Active',
-    additionalNotes: 'Test Note'
-  }
+var testExpectedResult = {
+  offenderManager: 'Test_Forename Test_Surname',
+  reason: 'Disability',
+  amount: 5,
+  status: 'ACTIVE',
+  additionalNotes: 'New Test Note'
+}
 
-describe('services/data/get-reduction-notes-export', function() {
-    /**     
-    before(function () {
-        return dataHelper.addCaseProgressDataForAllOrgUnits()
-        .then(function (result) {
-          inserts = result
-          console.log('Inserts: ', inserts)
-          return dataHelper.getAnyExistingWorkloadOwnerId()
-            .then(function (id) {
-              workloadOwnerId = id
-              console.log('Workload Owner ID: ', workloadOwnerId)
+var reductionResult = {
+  table: 'reductions',
+  id: 0
+}
+
+describe('services/data/get-reduction-notes-export', function () {
+  before(function () {
+    return dataHelper.addWorkloadCapacitiesForOffenderManager()
+            .then(function (result) {
+              inserts = result
+              workloadOwnerId = inserts.filter((item) => item.table === 'workload_owner')[0].id
               return dataHelper.getAnyExistingReductionReasonId()
-                .then(function (id) {
-                  testReduction.reasonForReductionId = id
-                  return insertReduction(workloadOwnerId, testReduction)
-                    .then(function (reductionId) {
-                      addedReductionId = reductionId
-                      //console.log(inserts)
-                      //console.log((inserts.filter((item) => item.table === 'region')[0].id))
+                    .then(function (id) {
+                      testReductionInsert.reasonForReductionId = id
+                      return insertReduction(workloadOwnerId, testReductionInsert)
+                            .then(function (reductionId) {
+                              reductionResult.id = reductionId
+                              inserts.push(reductionResult)
+                            })
                     })
-                })
+            })
+  })
+
+  it('should return inserted test reduction at team level', function () {
+    return getReductionsExport(inserts.filter((item) => item.table === 'team')[0].id, orgUnitConstants.TEAM.name)
+        .then(function (results) {
+          expect(results[0].offenderManager).to.eql(testExpectedResult.offenderManager)
+          expect(results[0].reason).to.eql(testExpectedResult.reason)
+          expect(results[0].status).to.eql(testExpectedResult.status)
+          expect(results[0].additionalNotes).to.eql(testExpectedResult.additionalNotes)
+        })
+  })
+
+  it('should return inserted test reduction at ldu level', function () {
+    return getReductionsExport(inserts.filter((item) => item.table === 'ldu')[0].id, orgUnitConstants.LDU.name)
+        .then(function (results) {
+          expect(results[0].offenderManager).to.eql(testExpectedResult.offenderManager)
+          expect(results[0].reason).to.eql(testExpectedResult.reason)
+          expect(results[0].status).to.eql(testExpectedResult.status)
+          expect(results[0].additionalNotes).to.eql(testExpectedResult.additionalNotes)
+        })
+  })
+
+  it('should return inserted test reduction at region level', function () {
+    return getReductionsExport(inserts.filter((item) => item.table === 'region')[0].id, orgUnitConstants.REGION.name)
+        .then(function (results) {
+          expect(results[0].offenderManager).to.eql(testExpectedResult.offenderManager)
+          expect(results[0].reason).to.eql(testExpectedResult.reason)
+          expect(results[0].status).to.eql(testExpectedResult.status)
+          expect(results[0].additionalNotes).to.eql(testExpectedResult.additionalNotes)
+        })
+  })
+
+  it('should return an empty list when team does not exist', function () {
+    return dataHelper.generateNonExistantTeamId()
+        .then(function (id) {
+          return getReductionsExport(id, orgUnitConstants.TEAM.name)
+            .then(function (results) {
+                expect(results).to.be.empty //eslint-disable-line
             })
         })
-    }) */
-    before(function () { 
-        return dataHelper.getAllExistingReductions()
-        .then(function (result) {
-          console.log('Existing reductions: ', result)
-          inserts = result
-        })
-        
-    })
-    /** 
-    it('should return inserted test reduction at region level', function() {
-        //console.log('Result: ', getReductionsExport(50, orgUnitConstants.REGION.name))
-        return getReductionsExport(43, orgUnitConstants.REGION.name)
-        .then(function (results) {
-            console.log(results)
-            // Store the id so that we can delete it after the test is complete
-            reductionResult.id = results.id
-            expect(results).to.eql(Object.assign({}, testReduction))
-        })
-    })
+  })
 
-    */
-    /** 
-    it('should return all reductions at ldu level', function() {
-        console.log('Result: ', getReductionsExport(inserts.filter((item) => item.table === 'ldu')[0].id, orgUnitConstants.LDU.name))
-        return getReductionsExport(inserts.filter((item) => item.table === 'ldu')[0].id, orgUnitConstants.LDU.name)
-        .then(function (results) {
-            console.log(results)
-            // Store the id so that we can delete it after the test is complete
-            reductionResult.id = results.id
-            expect(results).to.eql(Object.assign({}, testReduction))
+  it('should return an empty list when ldu does not exist', function () {
+    return dataHelper.generateNonExistantLduId()
+        .then(function (id) {
+          return getReductionsExport(id, orgUnitConstants.LDU.name)
+            .then(function (results) {
+                expect(results).to.be.empty //eslint-disable-line
+            })
         })
-    }) 
+  })
 
-    it('should return all reductions at team level', function() {
-        console.log('Result: ', getReductionsExport(inserts.filter((item) => item.table === 'team')[0].id, orgUnitConstants.TEAM.name))
-        return getReductionsExport(inserts.filter((item) => item.table === 'team')[0].id, orgUnitConstants.TEAM.name)
-        .then(function (results) {
-            console.log(results)
-            // Store the id so that we can delete it after the test is complete
-            reductionResult.id = results.id
-            expect(results).to.eql(Object.assign({}, testReduction))
+  it('should return an empty list when region does not exist', function () {
+    return dataHelper.generateNonExistantRegionId()
+        .then(function (id) {
+          return getReductionsExport(id, orgUnitConstants.REGION.name)
+            .then(function (results) {
+                expect(results).to.be.empty //eslint-disable-line
+            })
         })
-    }) 
-    */
+  })
 
-    it('should return an empty list when team does not exist', function () {
-        return getReductionsExport(dataHelper.generateNonExistantTeamId(), orgUnitConstants.TEAM.name)
-        .then(function (results) {
-          expect(results).to.be.empty //eslint-disable-line
-        })
-    })
-    
-    it('should return an empty list when ldu does not exist', function () {
-        return getReductionsExport(dataHelper.generateNonExistantLduId(), orgUnitConstants.LDU.name)
-        .then(function (results) {
-          expect(results).to.be.empty //eslint-disable-line
-        })
-    })
-    
-    it('should return an empty list when region does not exist', function () {
-        return getReductionsExport(dataHelper.generateNonExistantRegionId(), orgUnitConstants.REGION.name)
-        .then(function (results) {
-          expect(results).to.be.empty //eslint-disable-line
-        })
-    })
-
-    after(function () {
-        return dataHelper.removeInsertedData(inserts)
-    })
+  after(function () {
+    return dataHelper.removeInsertedData(inserts)
+  })
 })
