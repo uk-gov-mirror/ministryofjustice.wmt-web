@@ -54,7 +54,7 @@ describe('services/data/get-organisation-overview', function () {
 
   it('should return an empty list when team does not exist', function () {
     return workloadCapacityHelper.generateNonExistantTeamId()
-    .then(function(invalidId) {
+    .then(function (invalidId) {
       return getOrganisationOverview(invalidId, orgUnitConstants.TEAM.name)
       .then(function (results) {
         expect(results).to.be.empty //eslint-disable-line
@@ -64,7 +64,7 @@ describe('services/data/get-organisation-overview', function () {
 
   it('should return an empty list when ldu does not exist', function () {
     return workloadCapacityHelper.generateNonExistantLduId()
-    .then(function(invalidId) {
+    .then(function (invalidId) {
       return getOrganisationOverview(invalidId, orgUnitConstants.LDU.name)
       .then(function (results) {
         expect(results).to.be.empty //eslint-disable-line
@@ -74,7 +74,7 @@ describe('services/data/get-organisation-overview', function () {
 
   it('should return an empty list when region does not exist', function () {
     return workloadCapacityHelper.generateNonExistantRegionId()
-    .then(function(invalidId) {
+    .then(function (invalidId) {
       return getOrganisationOverview(invalidId, orgUnitConstants.REGION.name)
       .then(function (results) {
         expect(results).to.be.empty //eslint-disable-line
