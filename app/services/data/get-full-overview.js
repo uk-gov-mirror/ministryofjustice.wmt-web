@@ -6,7 +6,7 @@ module.exports = function (id, type) {
   var orgUnit = orgUnitFinder('name', type)
   var table = 'individual_case_overview'
   var whereClause = ''
-  var orderBy = 'ldu_name, team_name'
+  var orderBy = 'lduCluster, teamName'
 
   if (id !== undefined) {
     whereClause = 'WHERE ' + orgUnit.name + '_id = ' + id
@@ -26,7 +26,7 @@ module.exports = function (id, type) {
 
   if (orgUnit.name === orgUnitConstants.REGION.name || orgUnit.name === orgUnitConstants.NATIONAL.name) {
     selectColumns.unshift('region_name AS regionName')
-    orderBy = 'region_name,' + orderBy
+    orderBy = 'regionName,' + orderBy
   }
 
   return knex.raw(
