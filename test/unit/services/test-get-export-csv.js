@@ -41,11 +41,11 @@ describe('services/get-export-csv', function () {
     it('for National Overview', function () {
       expect(getExportCsv(orgUnit.NATIONAL.name, helper.NATIONAL_OVERVIEW_RESULT, tabs.OVERVIEW)).to.eql(helper.NATIONAL_OVERVIEW_CSV)
     })
-    
+
     it('for Team reductions', function () {
       expect(getExportCsv(orgUnit.TEAM.name, helper.TEAM_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT)).to.eql(helper.TEAM_REDUCTIONS_CSV)
     })
-    
+
     it('for LDU reductions', function () {
       expect(getExportCsv(orgUnit.LDU.name, helper.LDU_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT)).to.eql(helper.LDU_REDUCTIONS_CSV)
     })
@@ -58,5 +58,6 @@ describe('services/get-export-csv', function () {
     it('to a whole number with a percentage symbol', function () {
       var capacityExport = getExportCsv(orgUnit.REGION.name, helper.PERCENTAGE_FORMAT_TEST, tabs.OVERVIEW).csv
       expect(capacityExport).to.include('115%')
+    })
   })
 })
