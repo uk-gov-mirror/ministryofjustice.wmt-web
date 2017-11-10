@@ -880,3 +880,21 @@ module.exports.NATIONAL_OVERVIEW_CSV = {
   '\n"Division 3","LDU Cluster 3","Team 3","Tony Test","PSO","109%",190,37.5,1,69' +
   '\n"Division 3","LDU Cluster 3","Team 3","Jane Doe","PO","106%",190,37.5,2,69'
 }
+
+module.exports.PERCENTAGE_FORMAT_TEST = {
+  breadcrumbs: [{
+    title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
+  overviewDetails: [{
+    regionName: 'Division 1',
+    lduCluster: 'LDU Cluster 1',
+    teamName: 'Team 1',
+    offenderManager: 'John Smith',
+    totalCases: 69,
+    availablePoints: 190,
+    totalPoints: 219,
+    contractedHours: 37.5,
+    reductionHours: 6,
+    gradeCode: 'PO',
+    capacityPercentage: 115.26315789473685,
+    remainingPoints: -29 }]
+  }
