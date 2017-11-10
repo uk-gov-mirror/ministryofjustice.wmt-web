@@ -4,9 +4,9 @@ const json2csv = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
 
 const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
-const OM_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
-const OM_OVERVIEW_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
-const ORG_OVERVIEW_FIELDS = ['name', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
+const OM_OVERVIEW_FIELDS = ['regionName', 'lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
+const OM_OVERVIEW_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
+const ORG_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'offenderManager', 'gradeCode', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
 const REDUCTIONS_FIELD_NAMES = ['Offender Manager', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes']
 const REDUCTIONS_FIELDS = ['offenderManager', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
 const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
@@ -51,18 +51,11 @@ var getFields = function (organisationLevel, tab) {
       } else {
         childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
         fields = Object.assign([], ORG_OVERVIEW_FIELDS)
-        fieldNames = [childOrgForFieldName + ' Name', 'Capacity Percentage', 'Capacity Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases']
+        fieldNames = ['LDU Cluster', 'Team Name', 'Offender Manager', 'Grade Code', 'Capacity Percentage', 'Capacity Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases']
 
-        if (organisationLevel === organisationUnitConstants.TEAM.name) {
-          fields.push('gradeCode')
-          fieldNames.push('Grade Code')
-          fields.unshift('teamName')
-          fieldNames.unshift('Team Name')
-          fields.unshift('lduCluster')
-          fieldNames.unshift('LDU Cluster')
-        } else if (organisationLevel === organisationUnitConstants.LDU.name) {
-          fields.unshift('lduCluster')
-          fieldNames.unshift('LDU Cluster')
+        if (organisationLevel === organisationUnitConstants.REGION.name || organisationLevel === organisationUnitConstants.NATIONAL.name) {
+          fields.unshift('regionName')
+          fieldNames.unshift('Region')
         }
       }
       break
@@ -112,21 +105,15 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       }
       break
     case tabs.OVERVIEW:
-      if (organisationLevel === organisationUnitConstants.TEAM.name) {
-        result.overviewDetails.forEach(function (team) {
-          team.teamName = result.breadcrumbs[0].title
-          team.lduCluster = result.breadcrumbs[1].title
-          team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
-        })
-      } else if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
+      if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
         result.overviewDetails.lduCluster = result.breadcrumbs[2].title
         result.overviewDetails.capacity = formatCapacityValue(result.overviewDetails.capacity)
       } else {
         result.overviewDetails.forEach(function (team) {
-          team.lduCluster = result.breadcrumbs[0].title
           team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
         })
       }
+
       csv = generateCsv(result.overviewDetails, fields, fieldNames)
       break
     case tabs.REDUCTIONS_EXPORT:
