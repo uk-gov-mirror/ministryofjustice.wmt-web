@@ -30,7 +30,7 @@ module.exports = function (id, organisationLevel, isCSV = false) {
 }
 
 var calculateValues = function (results, isCSV) {
-  var totals = { name: 'Total / Average', totalPercentage: 0, totalPoints: 0, totalContractedHours: 0, totalReduction: 0, totalTotalCases: 0, totalRemainingPoints: 0 }
+  var totals = { name: 'Total / Average', totalPercentage: 0, totalAvailablePoints: 0, totalContractedHours: 0, totalReduction: 0, totalTotalCases: 0, totalRemainingPoints: 0 }
   var totalsToReturn = {}
   if (results.length !== undefined) {
     results.forEach(function (result) {
@@ -44,13 +44,13 @@ var calculateValues = function (results, isCSV) {
     if (!isCSV) {
       totalsToReturn.forEach(function (val, key) {
         totals.totalPercentage += val.capacityPercentage
-        totals.totalPoints += val.totalPoints
+        totals.totalAvailablePoints += val.availablePoints
         totals.totalContractedHours += val.contractedHours
         totals.totalReduction += val.reductionHours
         totals.totalTotalCases += val.totalCases
         totals.totalRemainingPoints += val.remainingPoints
       })
-      totals.totalPercentage = totals.totalPercentage / totalsToReturn.length - 1
+      totals.totalPercentage = totals.totalPercentage / totalsToReturn.length
       totalsToReturn.push(totals)
     }
   } else {

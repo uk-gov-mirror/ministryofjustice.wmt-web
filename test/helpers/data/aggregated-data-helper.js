@@ -331,6 +331,10 @@ var addWorkloads = function (inserts) {
         overdue_terminations_total: 10,
         unpaid_work_total: 10,
         warrants_total: 10,
+        suspended_total: 10,
+        t2a_overdue_terminations_total: 10,
+        t2a_unpaid_work_total: 10,
+        t2a_warrants_total: 10,
         total_cases: 10,
         location: 'COMMUNITY'
       }
@@ -350,6 +354,10 @@ var addWorkloads = function (inserts) {
       })
       return inserts
     })
+}
+
+module.exports.addCaseDetails = function (caseDetails) {
+  return knex('case_details').returning('id').insert(caseDetails)
 }
 
 module.exports.selectIdsForWorkloadOwner = function () {
@@ -377,6 +385,15 @@ module.exports.selectIdsForWorkloadOwner = function () {
   return promise
 }
 
+module.exports.getAnyExistingWorkloadId = function () {
+  var promise = knex('workload')
+    .first('id')
+    .then(function (result) {
+      return result.id
+    })
+  return promise
+}
+
 module.exports.getAnyExistingWorkloadOwnerId = function () {
   var promise = knex('workload_owner')
     .first('id')
@@ -399,6 +416,24 @@ module.exports.getAnyExistingReductionReasonId = function () {
     .first('id')
     .then(function (result) {
       return result.id
+    })
+  return promise
+}
+
+module.exports.getAnyExistingRegionId = function () {
+  var promise = knex('region')
+    .first('id')
+    .then(function (result) {
+      return result.id
+    })
+  return promise
+}
+
+module.exports.getAllExistingReductions = function () {
+  var promise = knex('reductions')
+    .count('id')
+    .then(function (result) {
+      return result
     })
   return promise
 }
@@ -457,6 +492,30 @@ module.exports.getAnyExistingWorkloadOwnerIdWithActiveReduction = function () {
 
 module.exports.generateNonExistantWorkloadOwnerId = function () {
   return knex('workload_owner')
+    .max('id AS maxId')
+    .then(function (maxId) {
+      return maxId[0].maxId + 1
+    })
+}
+
+module.exports.generateNonExistantTeamId = function () {
+  return knex('team')
+    .max('id AS maxId')
+    .then(function (maxId) {
+      return maxId[0].maxId + 1
+    })
+}
+
+module.exports.generateNonExistantLduId = function () {
+  return knex('ldu')
+    .max('id AS maxId')
+    .then(function (maxId) {
+      return maxId[0].maxId + 1
+    })
+}
+
+module.exports.generateNonExistantRegionId = function () {
+  return knex('region')
     .max('id AS maxId')
     .then(function (maxId) {
       return maxId[0].maxId + 1

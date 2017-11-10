@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const authenticationHerlp = require('../helpers/routes/authentication-helper')
+const authenticationHelper = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 const workloadTypes = require('../../app/constants/workload-type')
 
@@ -14,7 +14,7 @@ var nationalDefaultUrl
 
 describe('View overview', function () {
   before(function () {
-    authenticationHerlp.login(authenticationHerlp.users.Staff)
+    authenticationHelper.login(authenticationHelper.users.Staff)
     return dataHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
@@ -41,11 +41,18 @@ describe('View overview', function () {
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('.sln-export')
-      .waitForExist('[href="' + workloadOwnerDefaultUrl + '/overview/csv"]')
+      .waitForExist('[href="' + workloadOwnerDefaultUrl + '/overview/caseload-csv"]')
       .waitForExist('.sln-grade')
       .getText('.sln-grade')
       .then(function (text) {
         expect(text).to.equal(workloadOwnerGrade)
+      })
+  })
+
+  it('should not include the reductions export at workload owner level', function () {
+    return browser.url(workloadOwnerDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false //eslint-disable-line
       })
   })
 
@@ -54,7 +61,7 @@ describe('View overview', function () {
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('.sln-export')
-      .waitForExist('[href="' + teamDefaultUrl + '/overview/csv"]')
+      .waitForExist('[href="' + teamDefaultUrl + '/overview/caseload-csv"]')
       .waitForExist('[href="' + workloadOwnerDefaultUrl + '"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
@@ -67,7 +74,7 @@ describe('View overview', function () {
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('.sln-export')
-      .waitForExist('[href="' + lduDefaultUrl + '/overview/csv"]')
+      .waitForExist('[href="' + lduDefaultUrl + '/overview/caseload-csv"]')
       .waitForExist('[href="' + teamDefaultUrl + '"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
@@ -80,7 +87,7 @@ describe('View overview', function () {
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('.sln-export')
-      .waitForExist('[href="' + regionDefaultUrl + '/overview/csv"]')
+      .waitForExist('[href="' + regionDefaultUrl + '/overview/caseload-csv"]')
       .waitForExist('[href="' + lduDefaultUrl + '"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
@@ -93,11 +100,46 @@ describe('View overview', function () {
       .waitForExist('.breadcrumbs')
       .waitForExist('.sln-subnav')
       .waitForExist('.sln-export')
-      .waitForExist('[href="' + nationalDefaultUrl + '/overview/csv"]')
+      .waitForExist('[href="' + nationalDefaultUrl + '/overview/caseload-csv"]')
       .waitForExist('[href="' + regionDefaultUrl + '"]')
       .getText('.sln-table-org-level')
       .then(function (text) {
         expect(text).to.equal('Division')
+      })
+  })
+
+  it('should not include the reductions export for staff at team level', function () {
+    return browser.url(teamDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false //eslint-disable-line
+      })
+  })
+
+  it('should not include the reductions export for staff at region level', function () {
+    return browser.url(regionDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false //eslint-disable-line
+      })
+  })
+
+  it('should not include the reductions export for staff at ldu level', function () {
+    return browser.url(lduDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false //eslint-disable-line
+      })
+  })
+
+  it('should not include the reductions export for staff at national level', function () {
+    return browser.url(nationalDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false //eslint-disable-line
+      })
+  })
+
+  it('should not include the reductions export for staff at workload owner level', function () {
+    return browser.url(workloadOwnerDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false //eslint-disable-line
       })
   })
 
@@ -161,7 +203,121 @@ describe('View overview', function () {
       })
   })
 
+  describe('should include the reductions export for data admin users', function () {
+    authenticationHelper.logout()
+    authenticationHelper.login(authenticationHelper.users.DataAdmin)
+    it('at team level', function () {
+      return browser.url(teamDefaultUrl + '/overview')
+        .isExisting('.reduction-export').then(function (exist) {
+          expect(exist).to.be.true //eslint-disable-line
+        })
+    })
+    it('at ldu level', function () {
+      return browser.url(lduDefaultUrl + '/overview')
+        .isExisting('.reduction-export').then(function (exist) {
+          expect(exist).to.be.true //eslint-disable-line
+        })
+    })
+    it('at region level', function () {
+      return browser.url(lduDefaultUrl + '/overview')
+        .isExisting('.reduction-export').then(function (exist) {
+          expect(exist).to.be.true //eslint-disable-line
+        })
+    })
+  })
+
+  describe('should not include the reductions export for data admin users', function () {
+    it('at workload owner level', function () {
+      return browser.url(workloadOwnerDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false //eslint-disable-line
+      })
+    })
+    it('at national level', function () {
+      return browser.url(nationalDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false //eslint-disable-line
+      })
+    })
+  })
+
+  describe('should include the reductions export for system admin users', function () {
+    authenticationHelper.logout()
+    authenticationHelper.login(authenticationHelper.users.SystemAdmin)
+    it('at team level', function () {
+      return browser.url(teamDefaultUrl + '/overview')
+        .isExisting('.reduction-export').then(function (exist) {
+          expect(exist).to.be.true //eslint-disable-line
+        })
+    })
+    it('at ldu level', function () {
+      return browser.url(lduDefaultUrl + '/overview')
+        .isExisting('.reduction-export').then(function (exist) {
+          expect(exist).to.be.true //eslint-disable-line
+        })
+    })
+    it('at region level', function () {
+      return browser.url(lduDefaultUrl + '/overview')
+        .isExisting('.reduction-export').then(function (exist) {
+          expect(exist).to.be.true //eslint-disable-line
+        })
+    })
+  })
+
+  describe('should not include the reductions export for system admin users', function () {
+    it('at workload owner level', function () {
+      return browser.url(workloadOwnerDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false //eslint-disable-line
+      })
+    })
+    it('at national level', function () {
+      return browser.url(nationalDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false //eslint-disable-line
+      })
+    })
+  })
+
+  describe('should include the reductions export for managers', function () {
+    authenticationHelper.logout()
+    authenticationHelper.login(authenticationHelper.users.Manager)
+    it('at team level', function () {
+      return browser.url(teamDefaultUrl + '/overview')
+        .isExisting('.reduction-export').then(function (exist) {
+          expect(exist).to.be.true //eslint-disable-line
+        })
+    })
+    it('at ldu level', function () {
+      return browser.url(lduDefaultUrl + '/overview')
+        .isExisting('.reduction-export').then(function (exist) {
+          expect(exist).to.be.true //eslint-disable-line
+        })
+    })
+    it('at region level', function () {
+      return browser.url(lduDefaultUrl + '/overview')
+        .isExisting('.reduction-export').then(function (exist) {
+          expect(exist).to.be.true //eslint-disable-line
+        })
+    })
+  })
+
+  describe('should not include the reductions export for managers', function () {
+    it('at workload owner level', function () {
+      return browser.url(workloadOwnerDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false //eslint-disable-line
+      })
+    })
+    it('at national level', function () {
+      return browser.url(nationalDefaultUrl + '/overview')
+      .isExisting('.reduction-export').then(function (exist) {
+        expect(exist).to.be.false //eslint-disable-line
+      })
+    })
+  })
+
   after(function () {
-    authenticationHerlp.logout()
+    authenticationHelper.logout()
   })
 })

@@ -1,4 +1,5 @@
 const getOverview = require('../services/get-overview')
+const getReductionsExport = require('../services/get-reductions-export')
 const getSubNav = require('../services/get-sub-nav')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
@@ -47,7 +48,7 @@ module.exports = function (router) {
     return renderOverview(req, res, next)
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview/csv', function (req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview/caseload-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -66,6 +67,32 @@ module.exports = function (router) {
       var exportCsv = getExportCsv(organisationLevel, result, tabs.OVERVIEW)
       res.attachment(exportCsv.filename)
       res.send(exportCsv.csv)
+    }).catch(function (error) {
+      next(error)
+    })
+  })
+
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview/reductions-csv', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
+    var organisationLevel = req.params.organisationLevel
+    var id = req.params.id
+
+    if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
+      throw new Error('Not available for offender-manager')
+    } else if (organisationLevel === organisationUnitConstants.NATIONAL.name) {
+      throw new Error('Not available at national level')
+    }
+
+    return getReductionsExport(id, organisationLevel).then(function (result) {
+      var reductionsExportCsv = getExportCsv(organisationLevel, result, tabs.REDUCTIONS_EXPORT)
+      res.attachment(reductionsExportCsv.filename)
+      res.send(reductionsExportCsv.csv)
     }).catch(function (error) {
       next(error)
     })
@@ -108,7 +135,7 @@ var renderOverview = function (req, res, next) {
       subNav: getSubNav(id, organisationLevel, req.path),
       overviewDetails: result.overviewDetails,
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
     })
   }).catch(function (error) {
     next(error)
