@@ -44,7 +44,7 @@ describe('services/get-export-csv', function () {
   })
   describe('should format the capacity percentage when exporting overviews', function () {
     it('to a whole number with a percentage symbol', function () {
-      var capacityExport = getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW).csv
+      var capacityExport = getExportCsv(orgUnit.REGION.name, helper.REGION_OVERVIEW_RESULT, tabs.OVERVIEW).csv
       expect(capacityExport).to.include('115%')
       expect(capacityExport).to.include('113%')
       expect(capacityExport).to.include('116%')
