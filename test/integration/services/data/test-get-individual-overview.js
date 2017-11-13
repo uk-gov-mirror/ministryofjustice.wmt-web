@@ -8,6 +8,8 @@ var inserts = []
 var overview = {
   grade: 'PO',
   teamName: 'Test Team',
+  lduCluster: 'Test LDU',
+  regionName: 'Test Region',
   availablePoints: 25,
   totalPoints: 50,
   cases: 5,
