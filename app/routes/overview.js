@@ -7,6 +7,7 @@ const tabs = require('../constants/wmt-tabs')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const workloadTypes = require('../../app/constants/workload-type')
+const getArchive = require('../services/archive-service')
 
 module.exports = function (router) {
   router.get('/', function (req, res, next) {
@@ -34,6 +35,12 @@ module.exports = function (router) {
       }
     }
     return renderOverview(req, res, next)
+  })
+
+  router.get('/' + workloadTypes.PROBATION + '/archiveData', function(req, res, next) {
+    return getArchive().then(function(result) {
+      console.log(result)
+    })
   })
 
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/', function (req, res, next) {

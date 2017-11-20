@@ -1,17 +1,13 @@
 const getArchive = require('./data/get-archive')
 
 module.exports = function() {
-    let result = {}
-    let archivePromise = getArchive()
-    return archivePromise.then(function(results) {
-        result = calculateCapacity(results)
-        return result
+    return getArchive().then(function(results) {
+        return calculateCapacity(results)
     })
-
 }
 
 var calculateCapacity = function(results) {
-    for(result in results) {
+    results.forEach(function(result) {
         let multipliers = []
         if(result.nominalTarget !== 0) {
             multipliers.push(result.nominalTarget)
@@ -22,15 +18,15 @@ var calculateCapacity = function(results) {
         if(result.hoursReduction !== 0) {
             multipliers.push(result.hoursReduction)
         }
-        let availablePoints
-        for(mult in multipliers) {
-            availablePoints = availablePoints * mult
-        }
-        if(availablePoints !== 0) {
+        if(typeof multipliers !== undefined && multipliers.length > 0) {
+            let availablePoints = 1
+            multipliers.forEach(function(mult) {
+                availablePoints = availablePoints * mult
+            })
             result.capacity = result.totalPoints / availablePoints
         } else {
             result.capacity = NaN // all three were zero.... EDIT
-        } 
-    }
+        }
+    })
     return results
 }
