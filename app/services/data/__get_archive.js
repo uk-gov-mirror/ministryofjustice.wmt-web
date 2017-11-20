@@ -6,7 +6,9 @@ module.exports = function () {
       'ldu_name',
       'team_name',
       'om_name',
-      'reduction'
+      'total_cases',
+      'reduction',
+      'comments'
       )
     .then(function (result) {
       console.log(result)
