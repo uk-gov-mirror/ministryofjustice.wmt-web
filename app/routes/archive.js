@@ -25,8 +25,9 @@ module.exports = function (router) {
 
     return res.render('archive-data', {
       title: 'Archive Data',
+
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
       noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
     })
-})
+  })
 }
