@@ -79,7 +79,31 @@ table td.capacity-red {
 table td a:visited {
     color: #005ea5 !important;
 }
+div.dataTables_length {
+    float: left;
+}
 
+div.dataTables_filter {
+    float: right;
+    padding-bottom: 10px;
+}
+
+div.dataTables_info {
+    float: left;
+}
+
+div.dataTables_paginate {
+    float: right;
+}
+
+div.DTTT {
+    float: left;
+    margin-right: 50px;
+}
+
+div.buttons {
+    clear: both;
+}
 .dataTables_paginate .paginate_button{
     box-sizing:border-box;
     display:inline-block;
