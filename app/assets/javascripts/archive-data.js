@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('.js-data-table').dataTable({
       paging: true,
-      searching: false,
+      searching: true,
       info: false,
       "aaSorting": [],
       columnDefs: [{
