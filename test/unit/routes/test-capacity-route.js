@@ -25,6 +25,7 @@ const CAPACITY_TO_YEAR = 'capacity-to-year='
 describe('/caseload-capacity', function () {
   var app
   var getCapacityStub
+  var getOutstandingReportsStub
   var getSubNavStub
   var capacityStubResult = {title: 'Test', capacityTable: {}, subNav: [{}]}
   var authorisationService
@@ -33,10 +34,12 @@ describe('/caseload-capacity', function () {
   }
   beforeEach(function () {
     getCapacityStub = sinon.stub()
+    getOutstandingReportsStub = sinon.stub().resolves()
     getSubNavStub = sinon.stub()
     var route = proxyquire(
       '../../../app/routes/capacity-route', {
         '../services/get-capacity-view': getCapacityStub,
+        '../services/get-outstanding-reports': getOutstandingReportsStub,
         '../authorisation': authorisationService,
         '../services/get-sub-nav': getSubNavStub
       })

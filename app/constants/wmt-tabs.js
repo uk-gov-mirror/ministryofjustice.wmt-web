@@ -1,6 +1,10 @@
 module.exports = {
   OVERVIEW: 'Overview',
-  CAPACITY: 'Capacity',
+  CAPACITY: {
+    CAPACITY: 'Capacity',
+    INACTIVE: 'Inactive'
+  },
   CASELOAD: 'Caseload',
-  CASE_PROGRESS: 'Case Progress'
+  CASE_PROGRESS: 'Case Progress',
+  REDUCTIONS_EXPORT: 'Reductions Exports'
 }

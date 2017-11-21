@@ -52,7 +52,7 @@ module.exports = function (router) {
         hoursUpdatedSuccess: req.query.hoursUpdatedSuccess,
         workloadType: workloadType,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
       })
     }).catch(function (error) {
       next(error)
@@ -100,9 +100,10 @@ module.exports = function (router) {
               breadcrumbs: result.breadcrumbs,
               subNav: getSubNav(id, organisationLevel, req.path, workloadType),
               contractedHours: updatedHours,
+              workloadType: workloadType,
               woId: id,
               userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-              noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+              authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
             })
           }).catch(function (error) {
             next(error)

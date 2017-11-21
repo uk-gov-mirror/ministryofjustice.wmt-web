@@ -8,7 +8,7 @@ var inserts = []
 var workloadOwnerId
 var workloadReportId
 
-describe('/services/data/create-calculate-workload-points-task', function () {
+describe('/services/data/get-latest-court-reports-staging-id-and-workload-report-id', function () {
   before(function () {
     return crDataHelper.addCourtReportWorkloadsForOffenderManager()
     .then(function (result) {

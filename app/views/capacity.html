@@ -205,6 +205,57 @@
       </tbody>
     </table>
   {% endif %}
+  <br>
+  <h3 class="heading-medium">Inactive & UPW cases</h3>
+  {% if organisationLevel === 'team' %}
+  <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/csv" class="button sln-export" style="float: right; margin-bottom: 10px">Export</a>
+  {% endif %}
+  <table id="outstandingReports" class="data-table dataTable">
+    <thead>
+      <tr>
+        <th colspan="2">{{ childOrganisationLevelDisplayText }}</th>
+        <th class="" colspan="5">Inactive & UPW cases</th>
+      </tr>
+      <tr>
+        <th id='name'>Name</th>
+        <th id="grade">Grade</th>
+        <th id='outstandingWarrants'>Outstanding Warrants</th>
+        <th id='unpaidWork'>UPW</th>
+        <th id='overdueTermination'>Overdue Terminations</th>
+        <th id='suspendedLifers'>Suspended Lifers</th>
+      </tr>
+    </thead>
+    {% if organisationLevel === 'team' %}
+    <tbody>
+      {% for member in outstandingReports %}
+      <tr>
+        <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+        <td headers="grade org">{{ member.grade }}</td>
+        <td headers="outstanding warrants">{{ member.ow }}</td>
+        <td headers="unpaid work">{{ member.upw }}</td>
+        <td headers="overdue terminations">{{ member.ot }}</td>
+        <td headers="suspended lifers">{{ member.sl }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    {% else %}
+    <tbody>
+      {% for member in outstandingReports %}
+        {% for i in range(0, member.grades.length) %}
+        <tr>
+          {% if i === 0 %}
+            <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+          {% endif %}
+          <td class="align-centre" headers="grade org">{{ member.grades[i].grade }}</td>
+          <td headers="outstanding warrants">{{ member.grades[i].ow }}</td>
+          <td headers="unpaid work">{{ member.grades[i].upw }}</td>
+          <td headers="overdue terminations">{{ member.grades[i].ot }}</td>
+          <td headers="suspended lifers">{{ member.grades[i].sl }}</td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+  </table>
 {% endif %}
   
   
