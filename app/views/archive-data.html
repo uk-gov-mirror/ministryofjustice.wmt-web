@@ -8,9 +8,9 @@
 <table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info"
     style="width: 100%;">
     <thead>
-        <tr>
+        <tr class="headers">
             <th>Unique Identifier</th>
-            <th>Cluster</th>
+            <th class="lduName">Cluster</th>
             <th>Team</th>
             <th>Offender Manager</th>
             <th>Total Cases</th>
@@ -22,14 +22,14 @@
     <tbody>
       {% for result in results %}
         <tr>
-            <td>{{ result.uniqueIdentifier }}</td>
+            <td class="uniqueId">{{ result.uniqueIdentifier }}</td>
             <td>{{ result.lduName }}</td>
-            <td>{{ result.teamName }}</td>
-            <td>{{ result.omName }}</td>
-            <td>{{ result.totalCases }}</td>
-            <td>{{ result.capacity }}</td>
-            <td>{{ result.reduction }}</td>
-            <td>{{ result.comments }}</td>
+            <td class= "results">{{ result.teamName }}</td>
+            <td class="omName">{{ result.omName }}</td>
+            <td class="totalCases">{{ result.totalCases }}</td>
+            <td class="capacity">{{ result.capacity }}</td>
+            <td class ="reductions">{{ result.reduction }}</td>
+            <td class="comments">{{ result.comments }}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -39,4 +39,5 @@
 <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
 <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
 <script src="{{ asset_path }}javascripts/archive-data.js"></script>
+
 {% endblock %}
