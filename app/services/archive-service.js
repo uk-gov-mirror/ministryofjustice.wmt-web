@@ -24,6 +24,7 @@ var calculateCapacity = function(results) {
                 availablePoints = availablePoints * mult
             })
             result.capacity = result.totalPoints / availablePoints
+            result.capacity = parseFloat(result.capacity).toFixed(2) + '%'
         } else {
             result.capacity = NaN // all three were zero.... EDIT
         }

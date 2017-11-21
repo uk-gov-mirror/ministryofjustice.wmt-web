@@ -9,23 +9,27 @@
     style="width: 100%;">
     <thead>
         <tr>
+            <th>Unique Identifier</th>
             <th>Cluster</th>
             <th>Team</th>
             <th>Offender Manager</th>
-            <th>Cases </th>
+            <th>Total Cases</th>
+            <th>Capacity %</th>
             <th>Reductions</th>
             <th>Comments</th>
         </tr>
     </thead>
     <tbody>
-      {% for member in archive %}
+      {% for result in results %}
         <tr>
-            <td>{{ member.lduName }}</td>
-            <td>{{ member.team }}</td>
-            <td>{{ member.OffenderManager }}</td>
-            <td>{{ member.totalCases }}</td>
-            <td>{{ member.reduction }}</td>
-            <td>{{ member.comments }}</td>
+            <td>{{ result.uniqueIdentifier }}</td>
+            <td>{{ result.lduName }}</td>
+            <td>{{ result.teamName }}</td>
+            <td>{{ result.omName }}</td>
+            <td>{{ result.totalCases }}</td>
+            <td>{{ result.capacity }}</td>
+            <td>{{ result.reduction }}</td>
+            <td>{{ result.comments }}</td>
         </tr>
         {% endfor %}
     </tbody>
