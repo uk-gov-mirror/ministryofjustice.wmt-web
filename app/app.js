@@ -12,6 +12,7 @@ const dateFilter = require('nunjucks-date-filter')
 const path = require('path')
 const routes = require('./routes')
 const routesNoCsrf = require('./routes-no-csrf')
+const cookieSession = require('cookie-session')
 const getOrganisationalHierarchyTree = require('./services/organisational-hierarchy-tree')
 const logger = require('./logger')
 
@@ -41,7 +42,13 @@ app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_t
 app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_frontend_toolkit')))
 app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images', 'favicon.ico')))
 
+// Cookie session
 app.set('trust proxy', 1) // trust first proxy
+app.use(cookieSession({
+  name: 'wmt-start-application',
+  keys: [config.APPLICATION_SECRET],
+  maxAge: parseInt(config.SESSION_COOKIE_MAXAGE)
+}))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
