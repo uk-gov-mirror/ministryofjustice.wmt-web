@@ -37,12 +37,6 @@ module.exports = function (router) {
     return renderOverview(req, res, next)
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/archiveData', function(req, res, next) {
-    return getArchive().then(function(result) {
-      console.log(result)
-    })
-  })
-
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
