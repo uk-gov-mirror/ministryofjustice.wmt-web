@@ -1,18 +1,18 @@
 {% extends "includes/layout.html" %}
-{% block content %}
 
+{% block content %}
 <main id="content" role="main">
 {% include "includes/breadcrumbs.html" %}
-         
- {% include "includes/title-subtitle.html" %}
+        
+{% include "includes/title-subtitle.html" %}
 <table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info"
     style="width: 100%;">
     <thead>
         <tr>
             <th>Cluster</th>
             <th>Team</th>
-            <th>Offender Manager Name </th>
-            <th>No. Of Cases </th>
+            <th>Offender Manager</th>
+            <th>Cases </th>
             <th>Capacity % </th>
             <th>Reductions</th>
             <th>Comments</th>
@@ -21,6 +21,7 @@
     <tbody>
     </tbody>
 </table>
+</main>
 
 <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
 <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
