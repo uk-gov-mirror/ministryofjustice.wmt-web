@@ -1,4 +1,3 @@
-const getArchiveData = require('../services/data/__get_archive.js')
 const authorisation = require('../authorisation')
 const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
