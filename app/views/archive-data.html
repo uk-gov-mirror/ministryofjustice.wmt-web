@@ -1,0 +1,38 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+<main id="content" role="main">
+{% include "includes/breadcrumbs.html" %}
+        
+{% include "includes/title-subtitle.html" %}
+<table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info"
+    style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Cluster</th>
+            <th>Team</th>
+            <th>Offender Manager</th>
+            <th>Cases </th>
+            <th>Reductions</th>
+            <th>Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for member in archive %}
+        <tr>
+            <td>{{ member.lduName }}</td>
+            <td>{{ member.team }}</td>
+            <td>{{ member.OffenderManager }}</td>
+            <td>{{ member.totalCases }}</td>
+            <td>{{ member.reduction }}</td>
+            <td>{{ member.comments }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</main>
+
+<script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
+<script src="{{ asset_path }}javascripts/datatables.min.js"></script>
+<script src="{{ asset_path }}javascripts/archive-data.js"></script>
+{% endblock %}
