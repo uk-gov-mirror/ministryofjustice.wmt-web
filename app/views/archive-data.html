@@ -13,12 +13,21 @@
             <th>Team</th>
             <th>Offender Manager</th>
             <th>Cases </th>
-            <th>Capacity % </th>
             <th>Reductions</th>
             <th>Comments</th>
         </tr>
     </thead>
     <tbody>
+      {% for member in archive %}
+        <tr>
+            <td>{{ member.lduName }}</td>
+            <td>{{ member.team }}</td>
+            <td>{{ member.OffenderManager }}</td>
+            <td>{{ member.totalCases }}</td>
+            <td>{{ member.reduction }}</td>
+            <td>{{ member.comments }}</td>
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
 </main>

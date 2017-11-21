@@ -23,8 +23,13 @@ module.exports = function (router) {
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return res.render('archive-data', {
-      title: 'Archive Data',
-
+      title: 'Archive',
+      lduName: 'ldu_name',
+      team: 'team_name',
+      OffenderManager:'om_name',
+      totalCases:'total_cases',
+      reduction: 'reduction',
+      comments:'comments',
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
       noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
     })
