@@ -28,6 +28,9 @@ var calculateCapacity = function(results) {
         } else {
             result.capacity = NaN // all three were zero.... EDIT
         }
+        if(result.reduction === null) {
+            result.reduction = 0
+        }
     })
     return results
 }
