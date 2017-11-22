@@ -76,29 +76,12 @@ describe('View / edit Workload Points', () => {
     it('with the correct behaviour for the edit and save buttons', () => {
       return browser.url(workloadPointsUrl)
         .waitForExist('#edit-button')
-        .getAttribute('.form-control', 'readonly')
-        .then(function (readonly) {
-          expect(readonly).to.contain('true')
-          expect(readonly).to.not.contain('false')
-        })
         .click('#edit-button')
-        .getAttribute('.form-control', 'readonly')
-        .then(function (readonly) {
-          expect(readonly).to.not.contain('true')
-        })
-        .waitForExist('#save-notice')
-        .getText('#save-notice')
-        .then(function (text) {
-          expect(text).to.contain('Saving changes made here')
-        })
+        .waitForExist('#save-button')
         .click('#save-button')
-        .getAttribute('.form-control', 'readonly')
-        .then(function (readonly) {
-          expect(readonly).to.contain('true')
-          expect(readonly).to.not.contain('false')
-        })
     })
   })
+
   after(function () {
     authenticationHerlp.logout()
   })
