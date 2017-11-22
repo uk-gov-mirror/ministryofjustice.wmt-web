@@ -10,7 +10,7 @@
     <thead>
         <tr class="headers">
             <th>Unique Identifier</th>
-            <th class="lduName">Cluster</th>
+            <th>Cluster</th>
             <th>Team</th>
             <th>Offender Manager</th>
             <th>Total Cases</th>
@@ -22,14 +22,14 @@
     <tbody>
       {% for result in results %}
         <tr>
-            <td class="uniqueId">{{ result.uniqueIdentifier }}</td>
+            <td>{{ result.uniqueIdentifier }}</td>
             <td>{{ result.lduName }}</td>
-            <td class= "results">{{ result.teamName }}</td>
-            <td class="omName">{{ result.omName }}</td>
-            <td class="totalCases">{{ result.totalCases }}</td>
-            <td class="capacity">{{ result.capacity }}</td>
-            <td class ="reductions">{{ result.reduction }}</td>
-            <td class="comments">{{ result.comments }}</td>
+            <td>{{ result.teamName }}</td>
+            <td>{{ result.omName }}</td>
+            <td>{{ result.totalCases }}</td>
+            <td>{{ result.capacity }}</td>
+            <td>{{ result.reduction }}</td>
+            <td>{{ result.comments }}</td>
         </tr>
         {% endfor %}
     </tbody>
