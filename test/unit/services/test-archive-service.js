@@ -9,13 +9,14 @@ const archiveRawData = [{
     lduName: 'Test LDU',
     teamName: 'Test Team',
     omName: 'Test Offender Manager',
-    totalCases: 1,
-    totalPoints: 6,
+    totalCases: 23,
+    totalPoints: 1183,
     nominalTarget: 2171,
-    contractedHours: 0,
+    contractedHours: 37,
     hoursReduction: 0,
     reduction: null,
-    comments: null
+    comments: null,
+    omTypeId: 1
 }]
 
 const expectedArchiveRecord = {
@@ -30,22 +31,32 @@ const expectedArchiveRecord = {
     hoursReduction: 0,
     reduction: 0,
     comments: '',
-    capacity: '0.01%'
+    capacity: '55.23%'
 }
 
 var archiveService
 var getArchive
 
-beforeEach(function () {
+before(function () {
     getArchive = sinon.stub()
     archiveService = proxyquire('../../../app/services/archive-service', {'./data/get-archive': getArchive })
+    getArchive.resolves(archiveRawData)
 })
 
 describe('services/archive-service', function() {
-    it('should return a capacity percentage formatted to two decimal places and appended with a percentage symbol', function() {
-        getArchive.resolves(archiveRawData)
+    it('should return zero for reduction hours when a null value is passed', function() {
         return archiveService().then(function(result) {
-            expect(result[0].capacity).to.eql(firstArchiveRecord.capacity)
+            expect(result[0].reduction).to.eql(expectedArchiveRecord.reduction)
+        })
+    })
+    it('should return an empty string for comments when a null value is passed', function() {
+        return archiveService().then(function(result) {
+            expect(result[0].reduction).to.eql(expectedArchiveRecord.reduction)
+        })
+    })
+    it('should return a capacity percentage formatted to two decimal places and appended with a percentage symbol', function() {
+        return archiveService().then(function(result) {
+            expect(result[0].capacity).to.eql(expectedArchiveRecord.capacity)
         })
     })
 })

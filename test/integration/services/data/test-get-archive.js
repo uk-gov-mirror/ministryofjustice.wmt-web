@@ -13,7 +13,8 @@ var expectedResult = {
   contractedHours: 0,
   hoursReduction: 0,
   reduction: null,
-  comments: null
+  comments: null,
+  omTypeId: 5
 }
 
 var archiveData
@@ -24,7 +25,7 @@ describe('services/data/get-archive', function () {
       archiveData = results
     })
   })
-  it('should retrieve all eleven columns for archive data', function () {
+  it('should retrieve all twelve columns for archive data', function () {
     expect(archiveData[0]).to.eql(expectedResult)
   })
   it('should include offender managers without reductions', function () {
