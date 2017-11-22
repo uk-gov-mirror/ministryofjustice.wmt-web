@@ -78,6 +78,10 @@ describe('View / edit Workload Points', () => {
         .waitForExist('#edit-button')
         .click('#edit-button')
         .waitForExist('#save-button')
+        .getText('#save-notice')
+        .then(function (text) {
+          expect(text).to.contain('Saving changes made here')
+        })
         .click('#save-button')
     })
   })
