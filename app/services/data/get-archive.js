@@ -12,7 +12,8 @@ module.exports = function () {
     'contracted_hours AS contractedHours',
     'hours_reduction AS hoursReduction',
     'reduction',
-    'comments'
+    'comments',
+    'om_type_id AS omTypeId'
   ]
   return knex.raw('SELECT TOP 1000 ' + selectColumns.join(', ') + ' FROM archive_view')
 }
