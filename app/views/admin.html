@@ -20,22 +20,15 @@
         <a href="/archive-data">Archive Data</a>
       </h2>
       <p>View Archive Data</p>
-    {% else %}
-      <h2 class="heading-medium">
-        <a href="/archive-data">Archive Data</a>
-      </h2>
-      <p>View Archive Data</p>
     {% endif %}
     </div>
     <div class="column-one-half">
-      <h2 class="heading-medium">
       {% if authorisation===false or userRole==='System Admin' %}
+      <h2 class="heading-medium">
         <a href="/admin/user">User rights</a>
-      {% else %}
-        User rights
-      {% endif %}
       </h2>
       <p>Manage user rights</p>
+      {% endif %}
     </div>
   </div>
 
