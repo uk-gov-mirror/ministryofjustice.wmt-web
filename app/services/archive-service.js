@@ -16,7 +16,6 @@ module.exports = function() {
 
 var calculateCapacity = function(results) {
     results.forEach(function(result) {
-        /** 
         let multipliers = []
         if(result.nominalTarget !== 0) {
             multipliers.push(result.nominalTarget)
@@ -37,16 +36,22 @@ var calculateCapacity = function(results) {
             result.capacity = (result.totalPoints / availablePoints) * 100
             result.capacity = parseFloat(result.capacity).toFixed(2) + '%'
         } else {
-            result.capacity = NaN // all three were zero.... EDIT
+            //result.capacity = NaN // all three were zero.... EDIT
+            result.capacity = '0.00%'
         }
-        */
-        let m = new DefaultContractedHours(37, 37)
-        let availablePoints = calculateAvailablePoints(result.nominalTarget, 5, result.contractedHours, result.hoursReduction, m)
-        result.capacity = (result.totalPoints / availablePoints) * 100
-        result.capacity = parseFloat(result.capacity).toFixed(2) + '%'
+        
+        
         if(result.reduction === null) {
             result.reduction = 0
         }
+        if(result.comments === null) {
+            result.comments = ''
+        }
+        /** Calculate available points using probabtion rules
+        let m = new DefaultContractedHours(37, 37)
+        let availablePoints = calculateAvailablePoints(result.nominalTarget, 5, result.contractedHours, result.hoursReduction, m)
+        result.capacity = (result.totalPoints / availablePoints) * 100
+        result.capacity = parseFloat(result.capacity).toFixed(2) + '%' */
     })
     return results
 }

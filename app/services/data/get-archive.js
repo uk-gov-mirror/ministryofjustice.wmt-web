@@ -14,5 +14,5 @@ module.exports = function () {
     'reduction',
     'comments'
   ]
-  return knex.raw('SELECT TOP 50 ' + selectColumns.join(', ') + ' FROM archive_view')
+  return knex.raw('SELECT TOP 1000 ' + selectColumns.join(', ') + ' FROM archive_view')
 }
