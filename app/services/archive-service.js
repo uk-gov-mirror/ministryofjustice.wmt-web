@@ -17,12 +17,17 @@ var calculateCapacity = function(results) {
             result.comments = ''
         }
         let defaultContractedHours = new DefaultContractedHours(37.5, 37.5)
-        let availablePoints = calculateAvailablePoints(result.nominalTarget, result.omTypeId, result.contractedHours, result.hoursReduction, defaultContractedHours)
-        if(availablePoints === 0) {
-            result.capacity = 'CHZ' // TODO: Contracted Hours Zero
+        if(result.contractedHours === 0) {
+            result.capacity = '0.00%'
         } else {
-            result.capacity = parseFloat((result.totalPoints / availablePoints) * 100).toFixed(2) + '%'
+            let availablePoints = calculateAvailablePoints(result.nominalTarget, result.omTypeId, result.contractedHours, result.hoursReduction, defaultContractedHours)
+            let acquiredPoints = calculateAcquiredPoints(result.totalPoints, result.sdrPoints, result.sdrConversionPoints, result.paromsPoints)
+            result.capacity = parseFloat((acquiredPoints / availablePoints) * 100).toFixed(2) + '%'
         }
     })
     return results
+}
+
+var calculateAcquiredPoints = function(totalPoints, sdrPoints, sdrConversionPoints, paromsPoints) {
+    return totalPoints + sdrPoints + sdrConversionPoints + paromsPoints
 }
