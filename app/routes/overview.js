@@ -8,7 +8,6 @@ const tabs = require('../constants/wmt-tabs')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const workloadTypes = require('../../app/constants/workload-type')
-const getArchive = require('../services/archive-service')
 
 module.exports = function (router) {
   router.get('/', function (req, res, next) {

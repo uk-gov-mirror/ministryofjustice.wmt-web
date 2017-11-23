@@ -38,5 +38,4 @@ describe('archive route', function () {
     it('should respond with 500 when an incorrect url is called', function () {
         return supertest(app).get(INVALID_URL).expect(500)
       })
-  })
-  
+})
