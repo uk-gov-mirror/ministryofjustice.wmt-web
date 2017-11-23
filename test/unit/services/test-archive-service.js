@@ -11,6 +11,9 @@ const archiveRawData = [{
     omName: 'Test Offender Manager',
     totalCases: 23,
     totalPoints: 1183,
+    sdrPoints: 0,
+    sdrConversionPoints: 0,
+    paromsPoints: 0,
     nominalTarget: 2171,
     contractedHours: 37,
     hoursReduction: 0,
@@ -24,13 +27,17 @@ const expectedArchiveRecord = {
     lduName: 'Test LDU',
     teamName: 'Test Team',
     omName: 'Test Offender Manager',
-    totalCases: 1,
-    totalPoints: 6,
+    totalCases: 23,
+    totalPoints: 1183,
+    sdrPoints: 0,
+    sdrConversionPoints: 0,
+    paromsPoints: 0,
     nominalTarget: 2171,
-    contractedHours: 0,
+    contractedHours: 37,
     hoursReduction: 0,
     reduction: 0,
     comments: '',
+    omTypeId: 1,
     capacity: '55.23%'
 }
 
@@ -51,7 +58,7 @@ describe('services/archive-service', function() {
     })
     it('should return an empty string for comments when a null value is passed', function() {
         return archiveService().then(function(result) {
-            expect(result[0].reduction).to.eql(expectedArchiveRecord.reduction)
+            expect(result[0].comments).to.eql(expectedArchiveRecord.comments)
         })
     })
     it('should return a capacity percentage formatted to two decimal places and appended with a percentage symbol', function() {

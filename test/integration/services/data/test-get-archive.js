@@ -9,6 +9,9 @@ var expectedResult = {
   omName: 'A.N. Offender Manager 1',
   totalCases: 1,
   totalPoints: 6,
+  sdrPoints: 0,
+  sdrConversionPoints: 0,
+  paromsPoints: 0,
   nominalTarget: 2171,
   contractedHours: 0,
   hoursReduction: 0,
@@ -22,6 +25,7 @@ var archiveData
 describe('services/data/get-archive', function () {
   before(function() {
     return getArchive().then(function (results) {
+      console.log(results[0])
       archiveData = results
     })
   })
