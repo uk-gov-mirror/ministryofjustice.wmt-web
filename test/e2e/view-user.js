@@ -17,7 +17,7 @@ describe('View adding a new user role', () => {
         .waitForExist('.sln-page-title')
         .getText('.sln-page-title')
         .then(function (text) {
-          expect(text).to.equal('User Rights')
+          expect(text).to.equal('User rights')
         })
     })
 

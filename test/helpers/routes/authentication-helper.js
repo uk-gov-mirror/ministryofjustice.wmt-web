@@ -12,11 +12,15 @@ var login = function (user) {
   var username = user + '@' + config.ACTIVE_DIRECTORY_DOMAIN
 
   return browser.url('/login')
-    .waitForExist('#cred_sign_in_button')
-    .setValue('#cred_userid_inputtext', username)
-    .click('#cred_password_inputtext')
-    .keys(password)
-    .submitForm('#credentials')
+    .waitForExist('#i0116')
+    .setValue('#i0116', username)
+    .click('#idSIButton9')
+    .pause(1000)
+    .setValue('#i0118', password)
+    .pause(1000)
+    .click('#idSIButton9')
+    .pause(1000)
+    .click('#idSIButton9')
 }
 
 var logout = function () {

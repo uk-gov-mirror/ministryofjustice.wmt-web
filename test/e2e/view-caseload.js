@@ -32,7 +32,7 @@ describe('View your caseload flow', () => {
         .waitForExist('.breadcrumbs')
         .waitForExist('.sln-subnav')
         .waitForExist('.sln-export')
-        .waitForExist('[href="' + teamDefaultUrl + '/caseload/csv"]')
+        .waitForExist('[href="' + teamDefaultUrl + '/caseload/caseload-csv"]')
         .waitForExist('[href="' + teamDefaultUrl + '/overview"]')
         .waitForExist('[href="' + teamDefaultUrl + '/caseload-capacity"]')
         .waitForExist('[href="' + teamDefaultUrl + '/case-progress"]')
@@ -88,7 +88,7 @@ describe('View your caseload flow', () => {
       return browser.url(lduDefaultUrl + '/caseload')
         .waitForExist('.breadcrumbs')
         .waitForExist('.sln-export')
-        .waitForExist('[href="' + lduDefaultUrl + '/caseload/csv"]')
+        .waitForExist('[href="' + lduDefaultUrl + '/caseload/caseload-csv"]')
         .waitForExist('.sln-page-subtitle')
         .getText('.sln-page-subtitle')
         .then(function (text) {
@@ -141,7 +141,7 @@ describe('View your caseload flow', () => {
         .waitForExist('.sln-table-caseload-by-grade')
         .waitForExist('.breadcrumbs')
         .waitForExist('.sln-export')
-        .waitForExist('[href="' + regionDefaultUrl + '/caseload/csv"]')
+        .waitForExist('[href="' + regionDefaultUrl + '/caseload/caseload-csv"]')
         .waitForExist('.sln-page-subtitle')
         .getText('.sln-page-subtitle')
         .then(function (text) {
@@ -175,7 +175,7 @@ describe('View your caseload flow', () => {
         .waitForExist('.sln-table-caseload-by-grade')
         .waitForExist('.breadcrumbs')
         .waitForExist('.sln-export')
-        .waitForExist('[href="' + nationalDefaultUrl + '/caseload/csv"]')
+        .waitForExist('[href="' + nationalDefaultUrl + '/caseload/caseload-csv"]')
         .waitForExist('.sln-page-subtitle')
         .getText('.sln-page-subtitle')
         .then(function (text) {

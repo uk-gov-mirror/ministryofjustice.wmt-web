@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const authenticationHerlp = require('../helpers/routes/authentication-helper')
+const authenticationHelper = require('../helpers/routes/authentication-helper')
 const workloadCapacityHelper = require('../helpers/data/aggregated-data-helper')
 const workloadTypes = require('../../app/constants/workload-type')
 
@@ -12,7 +12,7 @@ var nationalDefaultUrl
 
 describe('View your caseload capacity flow', () => {
   before(function () {
-    authenticationHerlp.login(authenticationHerlp.users.Staff)
+    authenticationHelper.login(authenticationHelper.users.Staff)
     return workloadCapacityHelper.selectIdsForWorkloadOwner()
       .then(function (results) {
         workloadOwnerIds = results
@@ -135,6 +135,6 @@ describe('View your caseload capacity flow', () => {
   })
 
   after(function () {
-    authenticationHerlp.logout()
+    authenticationHelper.logout()
   })
 })
