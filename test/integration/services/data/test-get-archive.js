@@ -25,7 +25,6 @@ var archiveData
 describe('services/data/get-archive', function () {
   before(function() {
     return getArchive().then(function (results) {
-      console.log(results[0])
       archiveData = results
     })
   })
