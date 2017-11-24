@@ -19,6 +19,17 @@ describe('View archive data', () => {
               expect(text).to.equal('Archive')
             })
     })
+    it('with the correct table headers', () => {
+      return browser.url(adminArchiveURL)
+            .waitForExist('#uniqueId')
+            .waitForExist('#cluster')
+            .waitForExist('#team')
+            .waitForExist('#offenderM')
+            .waitForExist('#totalCases')
+            .waitForExist('#capacity')
+            .waitForExist('#reductions')
+            .waitForExist('#comments')
+    })
   })
 
   after(function () {

@@ -4082,9 +4082,9 @@ scss-tokenizer@^0.2.3:
     js-base64 "^2.1.8"
     source-map "^0.4.2"
 
-selenium-standalone@6.5.0:
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/selenium-standalone/-/selenium-standalone-6.5.0.tgz#5ecaffdcb15799fe69954e6143791a38bf88dfd1"
+selenium-standalone@6.11.0:
+  version "6.11.0"
+  resolved "https://registry.yarnpkg.com/selenium-standalone/-/selenium-standalone-6.11.0.tgz#eb21ff65f3b2ece75061b35d4f9e7572ac0280c2"
   dependencies:
     async "^2.1.4"
     commander "^2.9.0"
@@ -4882,9 +4882,9 @@ window-size@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.4.tgz#f8e1aa1ee5a53ec5bf151ffa09742a6ad7697876"
 
-wmt-probation-rules@ministryofjustice/wmt-probation-rules.git#v0.7.0:
-  version "0.7.0"
-  resolved "https://codeload.github.com/ministryofjustice/wmt-probation-rules/tar.gz/44ce22f4a2d440e8e5043aa391924c34a2ad8bd1"
+wmt-probation-rules@ministryofjustice/wmt-probation-rules.git#v0.8.0:
+  version "0.8.0"
+  resolved "https://codeload.github.com/ministryofjustice/wmt-probation-rules/tar.gz/60aea3834ff2356842226493dc14ff2fa00e246c"
   dependencies:
     lodash "^4.17.4"
     moment "^2.18.1"
