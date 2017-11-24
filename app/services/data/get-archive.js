@@ -18,5 +18,5 @@ module.exports = function () {
     'comments',
     'om_type_id AS omTypeId'
   ]
-  return knex.raw('SELECT TOP 100 ' + selectColumns.join(', ') + ' FROM archive_view')
+  return knex.raw('SELECT TOP 10000 ' + selectColumns.join(', ') + ' FROM archive_view')
 }
