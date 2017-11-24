@@ -15,6 +15,8 @@ describe('View contracted hours for court reporter', function () {
       workloadOwnerIds = results
       workloadOwnerId = workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
       workloadOwnerDefaultUrl = '/' + workloadTypes.COURT_REPORTS + '/offender-manager/' + workloadOwnerId
+    }).then(function(){
+        return browser.url(workloadOwnerDefaultUrl + '/contracted-hours').waitForExist('.breadcrumbs')
     })
   })
 
