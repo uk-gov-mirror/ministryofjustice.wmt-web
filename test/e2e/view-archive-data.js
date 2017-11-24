@@ -18,9 +18,9 @@ describe('View archive data', () => {
             .then(function (text) {
               expect(text).to.equal('Archive')
             })
-        })
-        it('with the correct table headers', () =>{
-            return browser.url(adminArchiveURL)
+    })
+    it('with the correct table headers', () => {
+      return browser.url(adminArchiveURL)
             .waitForExist('#uniqueId')
             .waitForExist('#cluster')
             .waitForExist('#team')
@@ -29,8 +29,8 @@ describe('View archive data', () => {
             .waitForExist('#capacity')
             .waitForExist('#reductions')
             .waitForExist('#comments')
-        })
     })
+  })
 
   after(function () {
     authenticationHelper.logout()
