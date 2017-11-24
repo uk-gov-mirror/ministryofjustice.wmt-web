@@ -23,7 +23,7 @@ var expectedResult = {
 var archiveData
 
 describe('services/data/get-archive', function () {
-  before(function() {
+  before(function () {
     return getArchive().then(function (results) {
       archiveData = results
     })
@@ -33,22 +33,22 @@ describe('services/data/get-archive', function () {
   })
   it('should include offender managers without reductions', function () {
     let bool = false
-    for(var i = 0; i < archiveData.length; i++) {
-        if(archiveData[i].reduction === null) {
-            bool = true
-            break
-        }
+    for (var i = 0; i < archiveData.length; i++) {
+      if (archiveData[i].reduction === null) {
+        bool = true
+        break
+      }
     }
-    expect(bool).to.be.true
+    expect(bool).to.be.true //eslint-disable-line
   })
   it('should include offender mananagers with reductions', function () {
     let bool = false
-    for(var i = 0; i < archiveData.length; i++) {
-        if(archiveData[i].reduction !== null) {
-            bool = true
-            break
-        }
+    for (var i = 0; i < archiveData.length; i++) {
+      if (archiveData[i].reduction !== null) {
+        bool = true
+        break
+      }
     }
-    expect(bool).to.be.true
+    expect(bool).to.be.true //eslint-disable-line
   })
 })

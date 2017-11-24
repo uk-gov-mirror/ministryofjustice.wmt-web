@@ -23,7 +23,7 @@ module.exports = function (router) {
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    return getArchive().then(function(results) {
+    return getArchive().then(function (results) {
       return res.render('archive-data', {
         title: 'Archive',
         results: results,
