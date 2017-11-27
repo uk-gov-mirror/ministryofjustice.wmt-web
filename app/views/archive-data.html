@@ -7,7 +7,9 @@
 {% include "includes/title-subtitle.html" %}
 
 <form method="get">
-    
+<table class="archive">
+    <tr>
+    <td>
         <div class="form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}">
             {% if errors %}
                 <span class="error-message">{{ errors['archiveFromDate'][0] }}</span>
@@ -15,7 +17,7 @@
             <fieldset id="archiveFromDate" >
                 <legend>
                     <span class="form-label-bold">
-                        Show archive data from:
+                        Show archive data with reductions from:
                     </span>
                     <span class="form-hint" id="archive-from-hint">For example, 30 1 2017</span>
                 </legend>
@@ -38,6 +40,8 @@
                 </div>
             </fieldset>
         </div>
+    </td>
+    <td>
         <div class="form-group {% if errors['archiveToDate'][0] %} form-group-error {% endif %}">
             {% if errors %}
                 <span class="error-message">{{ errors['archiveToDate'][0] }}</span>
@@ -45,7 +49,7 @@
             <fieldset id="archiveToDate">
                 <legend>
                     <span class="form-label-bold">
-                        Show archive data to:
+                        Show archive data with reductions to:
                     </span>
                     <span class="form-hint" id="archive-to-hint">For example, 31 3 2017</span>
                 </legend>
@@ -68,12 +72,14 @@
                 </div>
             </fieldset>
         </div>
-    
+    </td>
+    <td>
         <input id="archive-filter-submit" type="submit" value="Filter" class="button" formaction="/archive-data">
-        
+    </td>
+</tr>
+</table>
+</form>
     
-    <form>
-
 <table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info"
     style="width: 100%;">
     <thead>
