@@ -3,6 +3,7 @@ const knex = require('../../../knex').archive
 module.exports = function () {
   var selectColumns = [
     'unique_identifier AS uniqueIdentifier',
+    'om_type_id AS omTypeId',
     'ldu_name AS lduName',
     'team_name AS teamName',
     'om_name AS omName',
@@ -16,7 +17,8 @@ module.exports = function () {
     'hours_reduction AS hoursReduction',
     'reduction',
     'comments',
-    'om_type_id AS omTypeId'
+    'reduction_date AS reductionDate',
+    'reduction_added_by AS reductionAddedBy'
   ]
-  return knex.raw('SELECT TOP 10000 ' + selectColumns.join(', ') + ' FROM archive_view')
+  return knex.raw('SELECT TOP 10000 ' + selectColumns.join(', ') + ' FROM archive_data_view')
 }
