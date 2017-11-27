@@ -6,11 +6,13 @@
 
 {% include "includes/title-subtitle.html" %}
 
+{% include "includes/validation-error-messages.html" %}
+
 <form method="get">
     
         <div class="form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}">
             {% if errors %}
-                <span class="error-message">{{ errors['capacityFromDate'][0] }}</span>
+                <span class="error-message">{{ errors['archiveFromDate'][0] }}</span>
             {% endif %}
             <fieldset id="archiveFromDate" >
                 <legend>
@@ -42,7 +44,7 @@
             {% if errors %}
                 <span class="error-message">{{ errors['archiveToDate'][0] }}</span>
             {% endif %}
-            <fieldset id="capacityToDate">
+            <fieldset id="archiveToDate">
                 <legend>
                     <span class="form-label-bold">
                         Show archive data to:
@@ -69,7 +71,8 @@
             </fieldset>
         </div>
     
-        <input id="archive-filter-submit" type="submit" value="Filter" class="button">
+        <input id="archive-filter-submit" type="submit" value="Filter" class="button" formaction="/archive-data">
+        
     
     <form>
 
