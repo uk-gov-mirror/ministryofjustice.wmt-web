@@ -1,0 +1,77 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+<main id="content" role="main">
+{% include "includes/breadcrumbs.html" %}
+
+{% include "includes/title-subtitle.html" %}
+
+<form method="get">
+    
+        <div class="form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}">
+            {% if errors %}
+                <span class="error-message">{{ errors['capacityFromDate'][0] }}</span>
+            {% endif %}
+            <fieldset id="archiveFromDate" >
+                <legend>
+                    <span class="form-label-bold">
+                        Show archive data from:
+                    </span>
+                    <span class="form-hint" id="archive-from-hint">For example, 30 1 2017</span>
+                </legend>
+                <div class="form-date" aria-describedby="archive-from-hint">
+                    <div class="form-group form-group-day">
+                        <label class="form-label" for="archive-from-day">Day</label>
+                        <input class="form-control" id="archive-from-day" name="archive-from-day"
+                            value={{query['archive-from-day'] | int}}>
+                    </div>
+                    <div class="form-group form-group-month">
+                        <label class="form-label" for="archive-from-month">Month</label>
+                        <input class="form-control" id="archive-from-month" name="archive-from-month"
+                            value={{query['archive-from-month'] | int}}>
+                    </div>
+                    <div class="form-group form-group-year">
+                        <label class="form-label" for="archive-from-year">Year</label>
+                        <input class="form-control" id="archive-from-year" name="archive-from-year"
+                            value={{query['archive-from-year'] | int}}>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="form-group {% if errors['archiveToDate'][0] %} form-group-error {% endif %}">
+            {% if errors %}
+                <span class="error-message">{{ errors['archiveToDate'][0] }}</span>
+            {% endif %}
+            <fieldset id="capacityToDate">
+                <legend>
+                    <span class="form-label-bold">
+                        Show archive data to:
+                    </span>
+                    <span class="form-hint" id="archive-to-hint">For example, 31 3 2017</span>
+                </legend>
+                <div class="form-date" aria-describedby="archive-to-hint">
+                    <div class="form-group form-group-day">
+                        <label class="form-label" for="archive-to-day">Day</label>
+                        <input class="form-control" id="archive-to-day" name="archive-to-day"
+                            value={{query['archive-to-day'] | int}}>
+                    </div>
+                    <div class="form-group form-group-month">
+                        <label class="form-label" for="archive-to-month">Month</label>
+                        <input class="form-control" id="archvie-to-month" name="archive-to-month"
+                            value={{query['archive-to-month'] | int}}>
+                    </div>
+                    <div class="form-group form-group-year">
+                        <label class="form-label" for="archive-to-year">Year</label>
+                        <input class="form-control" id="archive-to-year" name="archvie-to-year"
+                            value={{query['archive-to-year'] | int}}>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    
+        <input id="archive-filter-submit" type="submit" value="Filter" class="button">
+    
+    <form>
+
+</main>
+{% endblock %}
