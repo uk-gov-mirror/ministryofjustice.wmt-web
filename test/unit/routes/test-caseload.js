@@ -15,8 +15,8 @@ const LDU_MISSING_ID_URL = '/' + workloadTypes.PROBATION + '/ldu/caseload'
 const TEAM_CASELOAD_URL = '/' + workloadTypes.PROBATION + '/team/1/caseload'
 const TEAM_MISSING_ID_URL = '/' + workloadTypes.PROBATION + '/team/caseload'
 
-const TEAM_CASELOAD_CSV_URL = '/' + workloadTypes.PROBATION + '/team/1/caseload/csv'
-const LDU_CASELOAD_CSV_URL = '/' + workloadTypes.PROBATION + '/ldu/1/caseload/csv'
+const TEAM_CASELOAD_CSV_URL = '/' + workloadTypes.PROBATION + '/team/1/caseload/caseload-csv'
+const LDU_CASELOAD_CSV_URL = '/' + workloadTypes.PROBATION + '/ldu/1/caseload/caseload-csv'
 
 const TEAM_CASELOAD = {
   title: 'Title',
