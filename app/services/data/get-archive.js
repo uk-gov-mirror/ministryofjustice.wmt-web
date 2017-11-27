@@ -1,4 +1,5 @@
 const knex = require('../../../knex').archive
+const ArchiveDateRange = require('../domain/archive-date-range')
 
 module.exports = function (archiveDateRange) {
   var selectColumns = [
@@ -22,11 +23,11 @@ module.exports = function (archiveDateRange) {
   ]
 
   var whereClause
-  if(archiveDateRange === null) {
-    whereClause = ''
-  } else {
+  if(archiveDateRange instanceof ArchiveDateRange) {
     whereClause = ' WHERE reduction_date BETWEEN ' + archiveDateRange.archiveFromDate.toISOString().substring(0, 10)
     + ' AND ' + archiveDateRange.archiveToDate.toISOString().substring(0, 10)
+  } else {
+    whereClause = ''
   }
 
   return knex.raw('SELECT TOP 100 ' + selectColumns.join(', ') + ' FROM archive_data_view'

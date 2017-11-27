@@ -11,6 +11,8 @@ const REDUCTIONS_FIELD_NAMES = ['Offender Manager', 'Reason', 'Hours', 'Start Da
 const REDUCTIONS_FIELDS = ['offenderManager', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
 const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
 const INACTIVE_CASES_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
+const ARCHIVE_FIELD_NAMES = ['Unique Identifier', 'LDU Cluster', 'Team Name', 'Offender Manager Name', 'Total Cases', 'Capacity', 'Reductions', 'Comments', 'Reduction Date', 'Reduction Added By']
+const ARCHIVE_FIELDS = ['uniqueIdentifier', 'lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'reduction', 'comments', 'reductionDate', 'reductionAddedBy']
 
 module.exports = function (organisationLevel, result, tab) {
   var filename = getFilename(result.title, tab)
@@ -28,6 +30,8 @@ var getFilename = function (orgName, screen) {
   var replaceSpaces = / /g
   if (screen === tabs.REDUCTIONS_EXPORT) {
     return (orgName + ' Reductions Notes.csv').replace(replaceSpaces, '_')
+  } else if(screen === tabs.ADMIN.ARCHIVE) {
+    return 'Archive_Data.csv'
   } else {
     return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
   }
