@@ -2,8 +2,8 @@ const getArchive = require('./data/get-archive')
 const calculateAvailablePoints = require('../../../wmt-probation-rules').calculateAvailablePoints
 const DefaultContractedHours = require('../../../wmt-probation-rules').DefaultContractedHours
 
-module.exports = function (startDate, endDate) {
-  return getArchive(startDate, endDate).then(function (results) {
+module.exports = function (archiveDateRange) {
+  return getArchive(archiveDateRange).then(function (results) {
     return calculateCapacity(results)
   })
 }

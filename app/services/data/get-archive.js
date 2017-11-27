@@ -1,6 +1,6 @@
 const knex = require('../../../knex').archive
 
-module.exports = function (startDate, endDate) {
+module.exports = function (archiveDateRange) {
   var selectColumns = [
     'unique_identifier AS uniqueIdentifier',
     'om_type_id AS omTypeId',
@@ -20,6 +20,15 @@ module.exports = function (startDate, endDate) {
     'reduction_date AS reductionDate',
     'reduction_added_by AS reductionAddedBy'
   ]
-  return knex.raw('SELECT TOP 10000 ' + selectColumns.join(', ') + ' FROM archive_data_view'
-   + 'WHERE reductionDate BETWEEN ' + startDate + ' AND ' + endDate)
+
+  var whereClause
+  if(archiveDateRange === null) {
+    whereClause = ''
+  } else {
+    whereClause = ' WHERE reduction_date BETWEEN ' + archiveDateRange.archiveFromDate.toISOString().substring(0, 10)
+    + ' AND ' + archiveDateRange.archiveToDate.toISOString().substring(0, 10)
+  }
+
+  return knex.raw('SELECT TOP 100 ' + selectColumns.join(', ') + ' FROM archive_data_view'
+   + whereClause)
 }
