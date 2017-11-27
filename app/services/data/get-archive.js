@@ -1,6 +1,6 @@
 const knex = require('../../../knex').archive
 
-module.exports = function () {
+module.exports = function (startDate, endDate) {
   var selectColumns = [
     'unique_identifier AS uniqueIdentifier',
     'om_type_id AS omTypeId',
@@ -20,5 +20,6 @@ module.exports = function () {
     'reduction_date AS reductionDate',
     'reduction_added_by AS reductionAddedBy'
   ]
-  return knex.raw('SELECT TOP 10000 ' + selectColumns.join(', ') + ' FROM archive_data_view')
+  return knex.raw('SELECT TOP 10000 ' + selectColumns.join(', ') + ' FROM archive_data_view'
+   + 'WHERE reductionDate BETWEEN ' + startDate + ' AND ' + endDate)
 }
