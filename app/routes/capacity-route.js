@@ -81,7 +81,7 @@ module.exports = function (router) {
     })
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/capacity/csv', function (req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/capacity/outstanding-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
