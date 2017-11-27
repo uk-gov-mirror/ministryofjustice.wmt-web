@@ -3,8 +3,10 @@
 {% block content %}
 <main id="content" role="main">
 {% include "includes/breadcrumbs.html" %}
-        
+
 {% include "includes/title-subtitle.html" %}
+
+{% include "includes/validation-error-messages.html" %}
 
 <form method="get">
     
@@ -74,39 +76,5 @@
     
     <form>
 
-<table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info"
-    style="width: 100%;">
-    <thead>
-        <tr class="headers">
-            <th id="uniqueId">Unique Identifier</th>
-            <th id="cluster">Cluster</th>
-            <th id="team">Team</th>
-            <th id="offenderM">Offender Manager</th>
-            <th id="totalCases">Total Cases</th>
-            <th id="capacity">Capacity %</th>
-            <th id="reductions">Reductions</th>
-            <th id="comments">Comments</th>
-        </tr>
-    </thead>
-    <tbody>
-      {% for result in results %}
-        <tr>
-            <td>{{ result.uniqueIdentifier }}</td>
-            <td>{{ result.lduName }}</td>
-            <td>{{ result.teamName }}</td>
-            <td>{{ result.omName }}</td>
-            <td>{{ result.totalCases }}</td>
-            <td>{{ result.capacity }}</td>
-            <td>{{ result.reduction }}</td>
-            <td>{{ result.comments }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 </main>
-
-<script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
-<script src="{{ asset_path }}javascripts/datatables.min.js"></script>
-<script src="{{ asset_path }}javascripts/archive-data.js"></script>
-
 {% endblock %}
