@@ -6,8 +6,12 @@
     padding:0;
 }
 
+table.archive{
+    border: none;
+}
+
 table.data-table {
-    max-width: 1024px!important;
+    max-width: 1020px!important;
 }
 
 table.data-table tr th{
@@ -20,7 +24,7 @@ table.data-table tr th{
 }
 
 table tr.headers th{
-    padding-right: 40px!important;
+    padding-right: 25px!important;
 }
 
 table.data-table tr td{
