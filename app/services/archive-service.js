@@ -30,4 +30,4 @@ var calculateCapacity = function (results) {
 
 var calculateAcquiredPoints = function (totalPoints, sdrPoints, sdrConversionPoints, paromsPoints) {
   return totalPoints + sdrPoints + sdrConversionPoints + paromsPoints
-}
+} 

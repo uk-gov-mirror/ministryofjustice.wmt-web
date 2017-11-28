@@ -31,7 +31,11 @@ var getFilename = function (orgName, screen) {
   if (screen === tabs.REDUCTIONS_EXPORT) {
     return (orgName + ' Reductions Notes.csv').replace(replaceSpaces, '_')
   } else if(screen === tabs.ADMIN.ARCHIVE) {
-    return (orgName + ' Archive_Data.csv').replace(replaceSpaces, '_')
+    if(orgName === null) {
+      return 'Archive_Data.csv'
+    } else {
+      return (orgName + ' Archive_Data.csv').replace(replaceSpaces, '_')
+    }
   } else {
     return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
   }
@@ -70,6 +74,10 @@ var getFields = function (organisationLevel, tab) {
     case tabs.CAPACITY.INACTIVE:
       fields = INACTIVE_CASES_FIELDS
       fieldNames = INACTIVE_CASES_FIELD_NAMES
+      break
+    case tabs.ADMIN.ARCHIVE:
+      fields = ARCHIVE_FIELDS
+      fieldNames = ARCHIVE_FIELD_NAMES
       break
   }
   return { fields: fields, fieldNames: fieldNames }
@@ -127,6 +135,9 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       if (organisationLevel === organisationUnitConstants.TEAM.name) {
         csv = generateCsv(result.inactiveCaseDetails, fields, fieldNames)
       }
+      break
+    case tabs.ADMIN.ARCHIVE:
+      csv = generateCsv(result, fields, fieldNames)
       break
   }
   return csv
