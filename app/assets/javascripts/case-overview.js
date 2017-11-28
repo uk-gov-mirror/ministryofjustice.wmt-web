@@ -4,6 +4,7 @@ $(document).ready(function() {
         searching: false,
         info: false,
         "aaSorting": [],
+        "order": [[ 0, "asc" ]],
         columnDefs: [{
           targets: [],
           orderable: false
