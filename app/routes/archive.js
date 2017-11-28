@@ -68,7 +68,8 @@ module.exports = function (router) {
     }
 
     return getArchive(archiveDateRange).then(function (results) {
-      var exportCsv = getExportCsv(organisationUnitConstants.NATIONAL.name, results, tabs.ADMIN.ARCHIVE)
+      let dateFileName = archiveDateRange.archiveFromDate.toISOString().substring(0, 10) + ' ' + archiveDateRange.archiveToDate.toISOString().substring(0, 10)
+      var exportCsv = getExportCsv(dateFileName, results, tabs.ADMIN.ARCHIVE)
       res.attachment(exportCsv.filename)
       res.send(exportCsv.csv)
     }).catch(function (error) {

@@ -31,7 +31,7 @@ var getFilename = function (orgName, screen) {
   if (screen === tabs.REDUCTIONS_EXPORT) {
     return (orgName + ' Reductions Notes.csv').replace(replaceSpaces, '_')
   } else if(screen === tabs.ADMIN.ARCHIVE) {
-    return 'Archive_Data.csv'
+    return (orgName + ' Archive_Data.csv').replace(replaceSpaces, '_')
   } else {
     return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
   }
