@@ -1,20 +1,16 @@
-{% extends "includes/layout.html" %}
-
-{% block content %}
+{% extends "includes/layout.html" %} {% block content %}
 <main id="content" role="main">
-{% include "includes/breadcrumbs.html" %}
-        
-{% include "includes/title-subtitle.html" %}
+    {% include "includes/breadcrumbs.html" %} {% include "includes/title-subtitle.html" %}
 
-<form method="get">
-<table class="archive">
-    <tr>
-    <td>
-        <div class="form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}">
+<form method="get" class "archive-form">
+    <table id="archive-table" width="100%" style="width: 100%;">
+     <tr>
+        <td>
+         <div class="form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}" id="from">
             {% if errors %}
                 <span class="error-message">{{ errors['archiveFromDate'][0] }}</span>
             {% endif %}
-            <fieldset id="archiveFromDate" >
+            <fieldset id="archiveFromDate">
                 <legend>
                     <span class="form-label-bold">
                         Show archive data with reductions from:
@@ -24,27 +20,25 @@
                 <div class="form-date" aria-describedby="archive-from-hint">
                     <div class="form-group form-group-day">
                         <label class="form-label" for="archive-from-day">Day</label>
-                        <input class="form-control" id="archive-from-day" name="archive-from-day"
-                            value={{query['archive-from-day'] | int}}>
-                    </div>
+                        <input class="form-control" id="archive-from-day" name="archive-from-day" value={{query[ 'archive-from-day'] | int}}>
+                     </div>
                     <div class="form-group form-group-month">
                         <label class="form-label" for="archive-from-month">Month</label>
-                        <input class="form-control" id="archive-from-month" name="archive-from-month"
-                            value={{query['archive-from-month'] | int}}>
+                        <input class="form-control" id="archive-from-month" name="archive-from-month" value={{query[ 'archive-from-month'] | int}}>
                     </div>
                     <div class="form-group form-group-year">
                         <label class="form-label" for="archive-from-year">Year</label>
-                        <input class="form-control" id="archive-from-year" name="archive-from-year"
-                            value={{query['archive-from-year'] | int}}>
+                        <input class="form-control" id="archive-from-year" name="archive-from-year" value={{query[ 'archive-from-year'] | int}}>
+                                    
                     </div>
                 </div>
             </fieldset>
         </div>
     </td>
     <td>
-        <div class="form-group {% if errors['archiveToDate'][0] %} form-group-error {% endif %}">
+        <div class="form-group {% if errors['archiveToDate'][0] %} form-group-error {% endif %}" id="to">
             {% if errors %}
-                <span class="error-message">{{ errors['archiveToDate'][0] }}</span>
+                 <span class="error-message">{{ errors['archiveToDate'][0] }}</span> 
             {% endif %}
             <fieldset id="archiveToDate">
                 <legend>
@@ -56,59 +50,57 @@
                 <div class="form-date" aria-describedby="archive-to-hint">
                     <div class="form-group form-group-day">
                         <label class="form-label" for="archive-to-day">Day</label>
-                        <input class="form-control" id="archive-to-day" name="archive-to-day"
-                            value={{query['archive-to-day'] | int}}>
+                        <input class="form-control" id="archive-to-day" name="archive-to-day" value={{query[ 'archive-to-day'] | int}}>
                     </div>
                     <div class="form-group form-group-month">
                         <label class="form-label" for="archive-to-month">Month</label>
-                        <input class="form-control" id="archvie-to-month" name="archive-to-month"
-                            value={{query['archive-to-month'] | int}}>
+                        <input class="form-control" id="archvie-to-month" name="archive-to-month" value={{query[ 'archive-to-month'] | int}}>
                     </div>
                     <div class="form-group form-group-year">
                         <label class="form-label" for="archive-to-year">Year</label>
-                        <input class="form-control" id="archive-to-year" name="archvie-to-year"
-                            value={{query['archive-to-year'] | int}}>
+                        <input class="form-control" id="archive-to-year" name="archvie-to-year" value={{query[ 'archive-to-year'] | int}}>
                     </div>
                 </div>
             </fieldset>
         </div>
-    </td>
-    <td>
+        <td>
         <input id="archive-filter-submit" type="submit" value="Filter" class="button" formaction="/archive-data">
+        </td>
     </td>
-</tr>
-</table>
+    </tr>
+  </table>
 </form>
-    
-<table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info"
-    style="width: 100%;">
-    <thead>
-        <tr class="headers">
-            <th id="uniqueId">Unique Identifier</th>
-            <th id="cluster">Cluster</th>
-            <th id="team">Team</th>
-            <th id="offenderM">Offender Manager</th>
-            <th id="totalCases">Total Cases</th>
-            <th id="capacity">Capacity %</th>
-            <th id="reductions">Reductions</th>
-            <th id="comments">Comments</th>
-        </tr>
-    </thead>
-    <tbody>
-      {% for result in results %}
-        <tr>
-            <td>{{ result.uniqueIdentifier }}</td>
-            <td>{{ result.lduName }}</td>
-            <td>{{ result.teamName }}</td>
-            <td>{{ result.omName }}</td>
-            <td>{{ result.totalCases }}</td>
-            <td>{{ result.capacity }}</td>
-            <td>{{ result.reduction }}</td>
-            <td>{{ result.comments }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+
+ <table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info"
+        style="width: 100%;">
+        <thead>
+            <tr class="headers">
+                <th id="uniqueId">Unique Identifier</th>
+                <th id="cluster">Cluster</th>
+                <th id="team">Team</th>
+                <th id="offenderM">Offender Manager</th>
+                <th id="totalCases">Total Cases</th>
+                <th id="capacity">Capacity %</th>
+                <th id="reductions">Reductions</th>
+                <th id="comments">Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.uniqueIdentifier }}</td>
+                <td>{{ result.lduName }}</td>
+                <td>{{ result.teamName }}</td>
+                <td>{{ result.omName }}</td>
+                <td>{{ result.totalCases }}</td>
+                <td>{{ result.capacity }}</td>
+                <td>{{ result.reduction }}</td>
+                <td>{{ result.comments }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </main>
 
 <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>

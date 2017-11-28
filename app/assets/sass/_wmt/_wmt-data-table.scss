@@ -6,12 +6,13 @@
     padding:0;
 }
 
-table.archive{
-    border: none;
-}
-
 table.data-table {
     max-width: 1020px!important;
+}
+
+table#archive-table{
+    border: none!important;
+    padding-bottom: 20px;
 }
 
 table.data-table tr th{
