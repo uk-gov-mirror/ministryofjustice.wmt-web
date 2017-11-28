@@ -6,7 +6,7 @@
     <table id="archive-table" width="100%" style="width: 100%;">
      <tr>
         <td>
-         <div class="form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}" id="from">
+         <div class="form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}" id="from" style="width:300px;">
             {% if errors %}
                 <span class="error-message">{{ errors['archiveFromDate'][0] }}</span>
             {% endif %}
@@ -28,15 +28,14 @@
                     </div>
                     <div class="form-group form-group-year">
                         <label class="form-label" for="archive-from-year">Year</label>
-                        <input class="form-control" id="archive-from-year" name="archive-from-year" value={{query[ 'archive-from-year'] | int}}>
-                                    
+                        <input class="form-control" id="archive-from-year" name="archive-from-year" value={{query[ 'archive-from-year'] | int}}>          
                     </div>
                 </div>
             </fieldset>
         </div>
     </td>
     <td>
-        <div class="form-group {% if errors['archiveToDate'][0] %} form-group-error {% endif %}" id="to">
+        <div class="form-group {% if errors['archiveToDate'][0] %} form-group-error {% endif %}" id="to"  style="width:300px;">
             {% if errors %}
                  <span class="error-message">{{ errors['archiveToDate'][0] }}</span> 
             {% endif %}
@@ -67,13 +66,13 @@
         </div>
     </td>
     <td>
-        <input id="archive-filter-submit" type="submit" value="Filter" class="button">
+        <input id="archive-search-submit" type="submit" value="Search" style="float: right; width:195px;" class="button">
+        <a href="/archive-data/archive-csv" class="button" style="float: right; margin-top: 5px;">Export Archive Data</a>
+     
     </td>
     </tr>
   </table>
 </form>
-
-<a href="/archive-data/archive-csv" class="button" style="float: right; margin: 20px 20px 50px">Export Archive Data</a>
     
 <table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info"
     style="width: 100%;">
@@ -87,8 +86,6 @@
             <th id="capacity">Capacity %</th>
             <th id="reductions">Reductions</th>
             <th id="comments">Comments</th>
-            <th id="reductionDate">Reduction Date</th>
-            <th id="reductionAddedBy">Reduction Added By</th>
         </tr>
     </thead>
     <tbody>
@@ -102,8 +99,6 @@
             <td>{{ result.capacity }}</td>
             <td>{{ result.reduction }}</td>
             <td>{{ result.comments }}</td>
-            <td>{{ result.reductionDate }}</td>
-            <td>{{ result.reductionAddedBy }}</td>
         </tr>
         {% endfor %}
     </tbody>
