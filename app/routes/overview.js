@@ -90,7 +90,9 @@ module.exports = function (router) {
     }
 
     return getReductionsExport(id, organisationLevel).then(function (result) {
+      console.log(result)
       var reductionsExportCsv = getExportCsv(organisationLevel, result, tabs.REDUCTIONS_EXPORT)
+      console.log(reductionsExportCsv.csv)
       res.attachment(reductionsExportCsv.filename)
       res.send(reductionsExportCsv.csv)
     }).catch(function (error) {
