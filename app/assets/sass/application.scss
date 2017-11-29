@@ -14,13 +14,10 @@ $path: "/public/images/";
   position: absolute !important;
 }
 
-a.reduction-export:visited{
+a.button:visited{
     color:white !important;
 }
 
-a.sln-export:visited{
-    color:white !important;
-}
 @mixin respond-to($media) {
   @if $media==handhelds {
     @media only screen and (max-width: 568px) {
