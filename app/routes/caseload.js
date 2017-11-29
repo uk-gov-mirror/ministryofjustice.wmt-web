@@ -87,11 +87,6 @@ module.exports = function (router) {
           totalSummary: result.caseloadDetails.overallTotalSummary
         },
         {
-          displayName: 'Custody',
-          array: result.caseloadDetails.custodyCaseloadDetails,
-          totalSummary: result.caseloadDetails.custodyTotalSummary
-        },
-        {
           displayName: 'Community',
           array: result.caseloadDetails.communityCaseloadDetails,
           totalSummary: result.caseloadDetails.communityTotalSummary
@@ -100,6 +95,11 @@ module.exports = function (router) {
           displayName: 'License',
           array: result.caseloadDetails.licenseCaseloadDetails,
           totalSummary: result.caseloadDetails.licenseTotalSummary
+        },
+        {
+          displayName: 'Custody',
+          array: result.caseloadDetails.custodyCaseloadDetails,
+          totalSummary: result.caseloadDetails.custodyTotalSummary
         }
       ]
     } else {
