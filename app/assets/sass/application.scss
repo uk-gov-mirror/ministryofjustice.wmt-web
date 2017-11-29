@@ -14,8 +14,11 @@ $path: "/public/images/";
   position: absolute !important;
 }
 
+a.reduction-export:visited{
+    color:white !important;
+}
 
-table.export-buttons td a:visited {
+a.sln-export:visited{
     color:white !important;
 }
 @mixin respond-to($media) {
