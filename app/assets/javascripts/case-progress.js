@@ -17,7 +17,7 @@ caseProgress.forEach(function (caseInfo) {
 })
 
 maxLabelLength = Math.max((namesY.map(function(name){
-    return name.length;
+    return name.length+1;
     })));
 letterWidth = 7
 
@@ -91,7 +91,7 @@ layout = {
     y: -0.117923557914, 
     bgcolor: '#fff', 
     bordercolor: '#444', 
-    borderwidth: 0, 
+    border: 0, 
     font: {
       color: '#444', 
       family: 'Arial', 
@@ -107,7 +107,7 @@ layout = {
     t: 0, 
     b: 0, 
     l: maxLabelLength * letterWidth, 
-    pad: 5
+    pad: 0
   }, 
   plot_bgcolor: 'rgb(255, 255, 255)', 
   showlegend: true, 
