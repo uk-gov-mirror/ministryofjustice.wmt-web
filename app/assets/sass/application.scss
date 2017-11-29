@@ -14,6 +14,10 @@ $path: "/public/images/";
   position: absolute !important;
 }
 
+a.button:visited{
+    color:white !important;
+}
+
 @mixin respond-to($media) {
   @if $media==handhelds {
     @media only screen and (max-width: 568px) {

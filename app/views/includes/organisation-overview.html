@@ -1,3 +1,14 @@
+<table>
+    <tr>
+        <td>
+        {% ifAsync ((organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
+        <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/reductions-csv" class="button reduction-export" style="float: right; margin-left:10px; margin-bottom: 10px">Export Reductions</a>
+        {% endif %}
+        <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="button sln-export" style="float: right; margin-bottom: 10px; ">Export Caseload</a>
+        </td>
+    </tr>
+</table>
+
 {% if organisationLevel === "offender-manager" %}
 <div class="grid-row">
     <div class="column-two-thirds">
@@ -36,6 +47,7 @@
     </div>
 </div>
 {% else %}
+
 <table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     <thead>
         <tr>
