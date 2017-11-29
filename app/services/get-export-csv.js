@@ -3,6 +3,8 @@ const getOrganisationUnit = require('./helpers/org-unit-finder')
 const json2csv = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
 
+const dateFormatter = require('./date-formatter')
+
 const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['regionName', 'lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
@@ -23,14 +25,17 @@ module.exports = function (organisationLevel, result, tab) {
   return { filename: filename, csv: csv }
 }
 
-// TODO: Do we have an agreed naming scheme they would like for these csvs? Org level? Date?
 var getFilename = function (orgName, screen) {
+  let filename
   var replaceSpaces = / /g
   if (screen === tabs.REDUCTIONS_EXPORT) {
-    return (orgName + ' Reductions Notes.csv').replace(replaceSpaces, '_')
+    filename = orgName + ' Reductions Notes '
   } else {
-    return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
+    filename = orgName + ' ' + screen + ' '
   }
+  let timestamp = dateFormatter.formatDate(new Date(), 'DD MM YYYY THH mm')
+  filename = (filename + timestamp.toString()).replace(replaceSpaces, '_') + '.csv'
+  return filename
 }
 
 var getFields = function (organisationLevel, tab) {
