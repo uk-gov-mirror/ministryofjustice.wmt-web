@@ -1,3 +1,8 @@
+var dateFormatter = require('../../app/services/date-formatter')
+
+var replaceSpaces = / /g
+var timestamp = dateFormatter.formatDate(new Date(), 'DD MM YYYY THH mm').toString()
+
 module.exports.TEAM_CASELOAD_RESULT = {
   title: 'Test Team',
   caseloadDetails: {
@@ -12,7 +17,7 @@ module.exports.TEAM_CASELOAD_RESULT = {
 }
 
 module.exports.TEAM_CASELOAD_CSV = {
-  filename: 'Test_Team_Caseload.csv',
+  filename: ('Test_Team_Caseload ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: 'OVERALL\n' +
     '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
     '"John Smith","PO",9,18,12,6,9,6,3,0,189\n' +
@@ -68,7 +73,7 @@ module.exports.LDU_CASELOAD_RESULT = {
 }
 
 module.exports.LDU_CASELOAD_CSV = {
-  filename: 'Test_LDU_Caseload.csv',
+  filename: ('Test_LDU_Caseload ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: 'OVERALL\n' +
       '"name","custodyCases","communityCases","licenseCases","totalCases"\n' +
       '"Test Team 1",5,,2,12\n' +
@@ -129,7 +134,7 @@ module.exports.REGION_CASELOAD_RESULT = {
 }
 
 module.exports.REGION_CASELOAD_CSV = {
-  filename: 'Test_Region_Caseload.csv',
+  filename: ('Test_Region_Caseload ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: 'OVERALL\n' +
   '"name","custodyCases","communityCases","licenseCases","totalCases"\n' +
   '"Test LDU 1",5,,2,12\n' +
@@ -190,7 +195,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
 }
 
 module.exports.NATIONAL_CASELOAD_CSV = {
-  filename: 'Test_National_Caseload.csv',
+  filename: ('Test_National_Caseload ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: 'OVERALL\n' +
   '"name","custodyCases","communityCases","licenseCases","totalCases"\n' +
   '"Test Region 1",5,,2,12\n' +
@@ -232,7 +237,7 @@ module.exports.OM_OVERVIEW_RESULT = {
 }
 
 module.exports.OM_OVERVIEW_CSV = {
-  filename: 'John_Smith_Overview.csv',
+  filename: ('John_Smith_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Region","LDU Cluster","Team Name","Grade Code","Capacity Percentage","Total Cases","Contracted Hours","Reduction Hours"' +
   '\n"Test Region","Test Cluster","Team 1","PO","105%",60,37,4'
 }
@@ -312,7 +317,7 @@ module.exports.TEAM_OVERVIEW_RESULT = {
 }
 
 module.exports.TEAM_OVERVIEW_CSV = {
-  filename: 'Team_1_Overview.csv',
+  filename: ('Team_1_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"' +
   '\n"LDU Cluster 1","Team 1","John Smith","PO","115%",190,37.5,6,69' +
   '\n"LDU Cluster 1","Team 1","Tony Test","PSO","114%",190,37.5,3,69' +
@@ -447,7 +452,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
 }
 
 module.exports.LDU_OVERVIEW_CSV = {
-  filename: 'LDU_Cluster_1_Overview.csv',
+  filename: ('LDU_Cluster_1_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"' +
   '\n"LDU Cluster 1","Team 1","John Smith","PO","115%",190,37.5,6,69' +
   '\n"LDU Cluster 1","Team 1","Tony Test","PSO","114%",190,37.5,3,69' +
@@ -594,7 +599,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
 }
 
 module.exports.REGION_OVERVIEW_CSV = {
-  filename: 'Division_1_Overview.csv',
+  filename: ('Division_1_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Region","LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"' +
   '\n"Division 1","LDU Cluster 1","Team 1","John Smith","PO","115%",190,37.5,6,69' +
   '\n"Division 1","LDU Cluster 1","Team 1","Tony Test","PSO","114%",190,37.5,3,69' +
@@ -857,7 +862,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
 }
 
 module.exports.NATIONAL_OVERVIEW_CSV = {
-  filename: 'HMPPS_Overview.csv',
+  filename: ('HMPPS_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Region","LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Contracted Hours","Reduction Hours","Total Cases"' +
   '\n"Division 1","LDU Cluster 1","Team 1","John Smith","PO","115%",190,37.5,6,69' +
   '\n"Division 1","LDU Cluster 1","Team 1","Tony Test","PSO","114%",190,37.5,3,69' +
@@ -956,7 +961,7 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
 }
 
 module.exports.TEAM_REDUCTIONS_CSV = {
-  filename: 'Team_1_Reductions_Notes.csv',
+  filename: ('Team_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Offender Manager","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
   '"John Smith","Disability",5,"Wed Nov 02 2016 11:16:27","Sun Oct 31 2027 11:16:27","ACTIVE",\n' +
   '"John Smith","Long Term Sickness Absence",3,"Wed Jan 31 2018 11:16:27","Sun Oct 31 2027 11:16:27","SCHEDULED",\n' +
@@ -1017,7 +1022,7 @@ module.exports.LDU_REDUCTIONS_RESULT = {
 }
 
 module.exports.LDU_REDUCTIONS_CSV = {
-  filename: 'LDU_Cluster_1_Reductions_Notes.csv',
+  filename: ('LDU_Cluster_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Offender Manager","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
   '"John Smith","Disability",5,"Wed Nov 02 2016 11:16:27","Sun Oct 31 2027 11:16:27","ACTIVE",\n' +
   '"John Smith","Long Term Sickness Absence",3,"Wed Jan 31 2018 11:16:27","Sun Oct 31 2027 11:16:27","SCHEDULED",\n' +
@@ -1074,7 +1079,7 @@ module.exports.REGION_REDUCTIONS_RESULT = {
 }
 
 module.exports.REGION_REDUCTIONS_CSV = {
-  filename: 'Division_1_Reductions_Notes.csv',
+  filename: ('Division_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Offender Manager","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
   '"John Smith","Disability",5,"Wed Nov 02 2016 11:16:27","Sun Oct 31 2027 11:16:27","ACTIVE",\n' +
   '"John Smith","Long Term Sickness Absence",3,"Wed Jan 31 2018 11:16:27","Sun Oct 31 2027 11:16:27","SCHEDULED",\n' +
