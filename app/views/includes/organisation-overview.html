@@ -2,9 +2,7 @@
     <tr>
         <td>
         {% ifAsync ((organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
-        {% if ((authorisation===false) or (userRole==='Data Admin') or (userRole==='Manager') or (userRole==='System Admin')) %}
         <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/reductions-csv" class="button reduction-export" style="float: right; margin-left:10px; margin-bottom: 10px">Export Reductions</a>
-        {% endif %}
         {% endif %}
         <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="button sln-export" style="float: right; margin-bottom: 10px; ">Export Caseload</a>
         </td>
