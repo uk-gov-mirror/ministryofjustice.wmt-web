@@ -16,7 +16,9 @@ caseProgress.forEach(function (caseInfo) {
   namesY.push(caseInfo.name)
 })
 
-maxLabelLength = Math.max(...(namesY.map(name => name.length)))
+maxLabelLength = Math.max((namesY.map(function(name){
+    return name.length;
+    })));
 letterWidth = 7
 
 trace1 = {
