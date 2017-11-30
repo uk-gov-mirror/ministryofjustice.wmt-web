@@ -16,16 +16,10 @@ caseProgress.forEach(function (caseInfo) {
   namesY.push(caseInfo.name)
 })
 
-maxLabelLength = (function(name){
-    var maxName=0;
-    for (var i =0; i < namesY.length; i++){
-        if (namesY[i].length > maxName){
-            maxName= namesY[i].length
-        }
-    }
-    return maxName;
-})
-letterWidth = 10
+maxLabelLength = Math.max((namesY.map(function(name){
+    return name.length;
+    })));
+letterWidth = 7
 
 trace1 = {
   x: commLast16WeeksX,
@@ -97,7 +91,7 @@ layout = {
     y: -0.117923557914, 
     bgcolor: '#fff', 
     bordercolor: '#444', 
-    border: 0, 
+    borderwidth: 0, 
     font: {
       color: '#444', 
       family: 'Arial', 
@@ -112,8 +106,13 @@ layout = {
     r: 0, 
     t: 0, 
     b: 0, 
+<<<<<<< HEAD
     l: maxLabelLength *letterWidth, 
     pad: 0
+=======
+    l: maxLabelLength * letterWidth, 
+    pad: 5
+>>>>>>> parent of 36263fe... small fixes to view all of the name beside the case progress graph
   }, 
   plot_bgcolor: 'rgb(255, 255, 255)', 
   showlegend: true, 
