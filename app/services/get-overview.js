@@ -55,7 +55,7 @@ var calculateValues = function (results, isCSV) {
     }
   } else {
     var capacityPercentage = 0
-    if(results.availablePoints > 0) {
+    if (results.availablePoints > 0) {
       capacityPercentage = (results.totalPoints / results.availablePoints) * 100
     }
     totalsToReturn = Object.assign({}, results, {capacity: capacityPercentage})
