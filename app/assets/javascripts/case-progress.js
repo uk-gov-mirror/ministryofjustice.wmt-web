@@ -16,9 +16,6 @@ caseProgress.forEach(function (caseInfo) {
   namesY.push(caseInfo.name)
 })
 
-maxLabelLength = Math.max((namesY.map(function(name){
-    return name.length+1;
-    })));
 letterWidth = 7
 
 trace1 = {
@@ -106,7 +103,7 @@ layout = {
     r: 0, 
     t: 0, 
     b: 0, 
-    l: maxLabelLength * letterWidth, 
+    l: 150, 
     pad: 0
   }, 
   plot_bgcolor: 'rgb(255, 255, 255)', 
@@ -144,7 +141,7 @@ layout = {
 
     side: 'left', 
     tickfont: {
-      family: 'Arial', 
+      family: 'Arial',
       size: 12
     }, 
     type: 'category', 
