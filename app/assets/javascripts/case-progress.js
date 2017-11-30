@@ -16,7 +16,16 @@ caseProgress.forEach(function (caseInfo) {
   namesY.push(caseInfo.name)
 })
 
-letterWidth = 7
+maxLabelLength = (function(name){
+    var maxName=0;
+    for (var i =0; i < namesY.length; i++){
+        if (namesY[i].length > maxName){
+            maxName= namesY[i].length
+        }
+    }
+    return maxName;
+})
+letterWidth = 10
 
 trace1 = {
   x: commLast16WeeksX,
@@ -103,7 +112,7 @@ layout = {
     r: 0, 
     t: 0, 
     b: 0, 
-    l: 150, 
+    l: maxLabelLength *letterWidth, 
     pad: 0
   }, 
   plot_bgcolor: 'rgb(255, 255, 255)', 
