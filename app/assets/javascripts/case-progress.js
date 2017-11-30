@@ -106,13 +106,8 @@ layout = {
     r: 0, 
     t: 0, 
     b: 0, 
-<<<<<<< HEAD
     l: maxLabelLength *letterWidth, 
     pad: 0
-=======
-    l: maxLabelLength * letterWidth, 
-    pad: 5
->>>>>>> parent of 36263fe... small fixes to view all of the name beside the case progress graph
   }, 
   plot_bgcolor: 'rgb(255, 255, 255)', 
   showlegend: true, 
