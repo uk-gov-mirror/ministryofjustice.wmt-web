@@ -14,6 +14,8 @@ const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const tierHelper = require('../services/helpers/tier-helper')
 
+var inactiveTeam
+
 module.exports = function (router) {
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload-capacity', function (req, res, next) {
     try {
@@ -57,6 +59,7 @@ module.exports = function (router) {
       var capacityBreakdown = result
       return getOutstandingReports(id, organisationLevel).then(function (result) {
         var outstandingReports = result
+        inactiveTeam = capacityBreakdown.title
         return res.render('capacity', {
           screen: 'capacity',
           linkId: id,
@@ -100,7 +103,7 @@ module.exports = function (router) {
     return getCaseDetailsReports(id, organisationLevel).then(function (caseDetails) {
       var formatedCaseDetails = formatCaseDetailsForExport(caseDetails)
       var result = {
-        title: 'Inactive_&_UPW_Cases',
+        title: inactiveTeam,
         inactiveCaseDetails: formatedCaseDetails
       }
       var exportCsv = getExportCsv(organisationLevel, result, tabs.CAPACITY.INACTIVE)
