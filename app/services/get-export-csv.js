@@ -29,6 +29,8 @@ var getFilename = function (orgName, screen) {
   var replaceSpaces = / /g
   if (screen === tabs.REDUCTIONS_EXPORT) {
     filename = orgName + ' Reductions Notes '
+  } else if (screen === tabs.CAPACITY.INACTIVE) {
+    filename = orgName + ' Inactive & UPW Cases '
   } else {
     filename = orgName + ' ' + screen + ' '
   }
