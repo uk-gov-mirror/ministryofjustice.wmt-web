@@ -39,8 +39,8 @@ var reductionReason = {
 }
 
 var reduction = new Reduction('1', '10',
-  [activeStartDate.getDate(), activeStartDate.getMonth(), activeStartDate.getFullYear()],
-  [activeEndDate.getDate(), activeEndDate.getMonth(), activeEndDate.getFullYear()], 'active note', reductionReason)
+  [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
+  [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
 
 var referenceData = [
   {
