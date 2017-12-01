@@ -209,7 +209,6 @@
 
   <div id="caseload-by-grade">
     {% for caseType in caseloadDetails %}
-    {% if caseType.displayName === 'Overall' %}  
       <h3 class="heading-medium">Caseload by grade</h3>
       <table class="sln-table-caseload-by-grade data-table">
         <thead>
@@ -232,7 +231,7 @@
         </tr>
       </thead>
       <tbody class="">
-        {% for member in caseType.array.details %}
+        {% for member in caseType.array.detailsPercentages %}
           {% for i in range(0, member.grades.length) %}
           <tr>
             {% if i === 0 %}
@@ -253,7 +252,7 @@
         {% endfor %}
         <tr>
           <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om">Average</td>
-          {% for grade, total in caseType.array.totals %}
+          {% for grade, total in caseType.array.percentageTotals %}
           <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
           <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ total.a  | round(1) }}%</td>
           <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ total.b1 | round(1) }}%</td>
@@ -269,7 +268,6 @@
         {% endfor %}
       </tbody>
     </table>
-  {% endif %}
   {% endfor %}
 </div>
 {% endif %}

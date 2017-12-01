@@ -39,7 +39,7 @@ module.exports.getCaseloadSummaryTotalsByTeam = function (caseloads) {
   total cases
 */
 module.exports.aggregateTeamTierTotals = function (caseloadTotalsByTeamByGrade) {
-  return transform(caseloadTotalsByTeamByGrade, false)
+  return collectTransformedData(caseloadTotalsByTeamByGrade, false)
 }
 
 /*
@@ -49,7 +49,7 @@ module.exports.aggregateTeamTierTotals = function (caseloadTotalsByTeamByGrade) 
   percentages of team cases
 */
 module.exports.calculateTeamTierPercentages = function (caseloadTotalsByTeamByGrade) {
-  return transform(caseloadTotalsByTeamByGrade, true)
+  return collectTransformedData(caseloadTotalsByTeamByGrade, true)
 }
 
 /*
@@ -187,6 +187,15 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false, is
     }
   }
   return { details: transformedData, totals: gradeTotals }
+}
+
+var collectTransformedData = function(caseloadTotalsByGrade, isCsv = false) {
+  var data = {}
+  data.details = transform(caseloadTotalsByGrade, false, false).details
+  data.totals = transform(caseloadTotalsByGrade, false, false).totals
+  data.detailsPercentages = transform(caseloadTotalsByGrade, true, false).details
+  data.percentageTotals = transform(caseloadTotalsByGrade, true, false).totals
+  return data
 }
 
 var addGradeTotals = function (gradeTotals, newGradeRecord) {
