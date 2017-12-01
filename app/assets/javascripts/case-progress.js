@@ -94,7 +94,7 @@ layout = {
   barmode: 'stack', 
   dragmode: 'zoom', 
   font: {family: 'Arial'}, 
-  height: 500, 
+  height: 500,
   hovermode: 'y', 
   legend: {
     x: -0.0234375, 
@@ -113,7 +113,7 @@ layout = {
     yanchor: 'top'
   }, 
   margin: {
-    r: 0, 
+    r: 100, 
     t: 0, 
     b: 0, 
     l: maxLabelLength *letterWidth, 
