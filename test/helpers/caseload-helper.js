@@ -79,75 +79,87 @@ module.exports.LDU_CASELOAD = [CUSTODY_CASELOAD_PO_0, CUSTODY_CASELOAD_PO_1, CUS
 module.exports.LDU_CUSTODY_RESULTS = [CUSTODY_CASELOAD_PO_0, CUSTODY_CASELOAD_PO_1, CUSTODY_CASELOAD_PO_2,
   CUSTODY_CASELOAD_PSO_0, CUSTODY_CASELOAD_PSO_1, CUSTODY_CASELOAD_PSO_2]
 
-module.exports.LDU_CUSTODY_AGGREGATED_RESULTS = { 
-  details: 
-  [ { linkId: 2, name: 'Todd Umptious', grades: [
+module.exports.LDU_CUSTODY_AGGREGATED_RESULTS = {
+  details:
+  [ { linkId: 2,
+    name: 'Todd Umptious',
+    grades: [
     {grade: CUSTODY_CASELOAD_PO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0},
     {grade: CUSTODY_CASELOAD_PSO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0}
-] },
-    { linkId: 3, name: 'Jerry Twig', grades: [
+    ] },
+  { linkId: 3,
+    name: 'Jerry Twig',
+    grades: [
       {grade: CUSTODY_CASELOAD_PO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0},
       {grade: CUSTODY_CASELOAD_PSO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0}
-  ] },
-    { linkId: 4, name: 'Jemima Racktool', grades: [
+    ] },
+  { linkId: 4,
+    name: 'Jemima Racktool',
+    grades: [
       {grade: CUSTODY_CASELOAD_PO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0},
       {grade: CUSTODY_CASELOAD_PSO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0}
-  ] } ],
- totals: 
-  { PO: 
-     { grade: 'PO',
-       a: 0,
-       b1: 3,
-       b2: 0,
-       c1: 3,
-       c2: 0,
-       d1: 0,
-       d2: 3,
-       untiered: 3,
-       totalCases: 9,
-       numberOfType: 3 },
-    PSO: 
-     { grade: 'PSO',
-       a: 0,
-       b1: 3,
-       b2: 0,
-       c1: 3,
-       c2: 0,
-       d1: 0,
-       d2: 3,
-       untiered: 3,
-       totalCases: 9,
-       numberOfType: 3 } },
- detailsPercentages: 
-  [ { linkId: 2, name: 'Todd Umptious', grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 },
+    ] } ],
+  totals:
+  { PO:
+  { grade: 'PO',
+    a: 0,
+    b1: 3,
+    b2: 0,
+    c1: 3,
+    c2: 0,
+    d1: 0,
+    d2: 3,
+    untiered: 3,
+    totalCases: 9,
+    numberOfType: 3 },
+    PSO:
+    { grade: 'PSO',
+      a: 0,
+      b1: 3,
+      b2: 0,
+      c1: 3,
+      c2: 0,
+      d1: 0,
+      d2: 3,
+      untiered: 3,
+      totalCases: 9,
+      numberOfType: 3 } },
+  detailsPercentages:
+  [ { linkId: 2,
+    name: 'Todd Umptious',
+    grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 },
 { grade: 'PSO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 } ] },
-    { linkId: 3, name: 'Jerry Twig', grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 },
+  { linkId: 3,
+    name: 'Jerry Twig',
+    grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 },
     { grade: 'PSO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 } ] },
-    { linkId: 4, name: 'Jemima Racktool', grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 },
+  { linkId: 4,
+    name: 'Jemima Racktool',
+    grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 },
     { grade: 'PSO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 } ] } ],
- percentageTotals: 
-  { PO: 
-     { grade: 'PO',
-       a: 0,
-       b1: 50,
-       b2: 0,
-       c1: 50,
-       c2: 0,
-       d1: 0,
-       d2: 50,
-       untiered: 50,
-       totalCases: 50,
-       numberOfType: 3 },
-    PSO: 
-     { grade: 'PSO',
-       a: 0,
-       b1: 50,
-       b2: 0,
-       c1: 50,
-       c2: 0,
-       d1: 0,
-       d2: 50,
-       untiered: 50,
-       totalCases: 50,
-       numberOfType: 3 } } 
+  percentageTotals:
+  { PO:
+  { grade: 'PO',
+    a: 0,
+    b1: 50,
+    b2: 0,
+    c1: 50,
+    c2: 0,
+    d1: 0,
+    d2: 50,
+    untiered: 50,
+    totalCases: 50,
+    numberOfType: 3 },
+    PSO:
+    { grade: 'PSO',
+      a: 0,
+      b1: 50,
+      b2: 0,
+      c1: 50,
+      c2: 0,
+      d1: 0,
+      d2: 50,
+      untiered: 50,
+      totalCases: 50,
+      numberOfType: 3 } }
 }
