@@ -189,7 +189,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false, is
   return { details: transformedData, totals: gradeTotals }
 }
 
-var collectTransformedData = function(caseloadTotalsByGrade, isCsv = false) {
+var collectTransformedData = function (caseloadTotalsByGrade, isCsv = false) {
   var data = {}
   data.details = transform(caseloadTotalsByGrade, false, false).details
   data.totals = transform(caseloadTotalsByGrade, false, false).totals
