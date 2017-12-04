@@ -69,9 +69,8 @@ layout = {
         zerolinewidth: 11
     },
     yaxis: {
-        autorange: false,
+        autorange: true,
         fixedrange: true,
-        range: [0, 500],
         showline: true,
         ticks: 'outside',
         title: 'Capacity %',
