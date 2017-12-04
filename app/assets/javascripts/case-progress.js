@@ -95,6 +95,7 @@ layout = {
   dragmode: 'zoom', 
   font: {family: 'Arial'}, 
   height: 500,
+  width: 850,
   hovermode: 'y', 
   legend: {
     x: -0.0234375, 
