@@ -79,107 +79,77 @@ module.exports.LDU_CASELOAD = [CUSTODY_CASELOAD_PO_0, CUSTODY_CASELOAD_PO_1, CUS
 module.exports.LDU_CUSTODY_RESULTS = [CUSTODY_CASELOAD_PO_0, CUSTODY_CASELOAD_PO_1, CUSTODY_CASELOAD_PO_2,
   CUSTODY_CASELOAD_PSO_0, CUSTODY_CASELOAD_PSO_1, CUSTODY_CASELOAD_PSO_2]
 
-module.exports.LDU_CUSTODY_AGGREGATED_RESULTS = {
-  details: [{linkId: 2,
-    name: 'Todd Umptious',
-    grades: [
-      {grade: CUSTODY_CASELOAD_PO_0.grade,
-        totalCases: CUSTODY_CASELOAD_PO_0.totalCases,
-        untiered: CUSTODY_CASELOAD_PO_0.untiered,
-        d2: CUSTODY_CASELOAD_PO_0.d2,
-        d1: CUSTODY_CASELOAD_PO_0.d1,
-        c2: CUSTODY_CASELOAD_PO_0.c2,
-        c1: CUSTODY_CASELOAD_PO_0.c1,
-        b2: CUSTODY_CASELOAD_PO_0.b2,
-        b1: CUSTODY_CASELOAD_PO_0.b1,
-        a: CUSTODY_CASELOAD_PO_0.a},
-      {grade: CUSTODY_CASELOAD_PSO_0.grade,
-        totalCases: CUSTODY_CASELOAD_PSO_0.totalCases,
-        untiered: CUSTODY_CASELOAD_PSO_0.untiered,
-        d2: CUSTODY_CASELOAD_PSO_0.d2,
-        d1: CUSTODY_CASELOAD_PSO_0.d1,
-        c2: CUSTODY_CASELOAD_PSO_0.c2,
-        c1: CUSTODY_CASELOAD_PSO_0.c1,
-        b2: CUSTODY_CASELOAD_PSO_0.b2,
-        b1: CUSTODY_CASELOAD_PSO_0.b1,
-        a: CUSTODY_CASELOAD_PSO_0.a}
-    ]},
-  {linkId: 3,
-    name: 'Jerry Twig',
-    grades: [
-      {grade: CUSTODY_CASELOAD_PO_1.grade,
-        totalCases: CUSTODY_CASELOAD_PO_1.totalCases,
-        untiered: CUSTODY_CASELOAD_PO_1.untiered,
-        d2: CUSTODY_CASELOAD_PO_1.d2,
-        d1: CUSTODY_CASELOAD_PO_1.d1,
-        c2: CUSTODY_CASELOAD_PO_1.c2,
-        c1: CUSTODY_CASELOAD_PO_1.c1,
-        b2: CUSTODY_CASELOAD_PO_1.b2,
-        b1: CUSTODY_CASELOAD_PO_1.b1,
-        a: CUSTODY_CASELOAD_PO_1.a},
-      {grade: CUSTODY_CASELOAD_PSO_1.grade,
-        totalCases: CUSTODY_CASELOAD_PSO_0.totalCases,
-        untiered: CUSTODY_CASELOAD_PSO_0.untiered,
-        d2: CUSTODY_CASELOAD_PSO_1.d2,
-        d1: CUSTODY_CASELOAD_PSO_1.d1,
-        c2: CUSTODY_CASELOAD_PSO_1.c2,
-        c1: CUSTODY_CASELOAD_PSO_1.c1,
-        b2: CUSTODY_CASELOAD_PSO_1.b2,
-        b1: CUSTODY_CASELOAD_PSO_1.b1,
-        a: CUSTODY_CASELOAD_PSO_1.a}
-    ]},
-  {linkId: 4,
-    name: 'Jemima Racktool',
-    grades: [
-      {grade: CUSTODY_CASELOAD_PO_1.grade,
-        totalCases: CUSTODY_CASELOAD_PO_1.totalCases,
-        untiered: CUSTODY_CASELOAD_PO_1.untiered,
-        d2: CUSTODY_CASELOAD_PO_1.d2,
-        d1: CUSTODY_CASELOAD_PO_1.d1,
-        c2: CUSTODY_CASELOAD_PO_1.c2,
-        c1: CUSTODY_CASELOAD_PO_1.c1,
-        b2: CUSTODY_CASELOAD_PO_1.b2,
-        b1: CUSTODY_CASELOAD_PO_1.b1,
-        a: CUSTODY_CASELOAD_PO_1.a},
-      {grade: CUSTODY_CASELOAD_PSO_1.grade,
-        totalCases: CUSTODY_CASELOAD_PSO_1.totalCases,
-        untiered: CUSTODY_CASELOAD_PSO_0.untiered,
-        d2: CUSTODY_CASELOAD_PSO_1.d2,
-        d1: CUSTODY_CASELOAD_PSO_1.d1,
-        c2: CUSTODY_CASELOAD_PSO_1.c2,
-        c1: CUSTODY_CASELOAD_PSO_1.c1,
-        b2: CUSTODY_CASELOAD_PSO_1.b2,
-        b1: CUSTODY_CASELOAD_PSO_1.b1,
-        a: CUSTODY_CASELOAD_PSO_1.a}
-    ]}],
-  totals: {
-    PO: {
-      a: 0,
-      b1: 3,
-      b2: 0,
-      c1: 3,
-      c2: 0,
-      d1: 0,
-      d2: 3,
-      grade: 'PO',
-      numberOfType: 3,
-      totalCases: 9,
-      untiered: 3
-    },
-    PSO: {
-      a: 0,
-      b1: 3,
-      b2: 0,
-      c1: 3,
-      c2: 0,
-      d1: 0,
-      d2: 3,
-      grade: 'PSO',
-      numberOfType: 3,
-      totalCases: 9,
-      untiered: 3
-    }
-  }
+module.exports.LDU_CUSTODY_AGGREGATED_RESULTS = { 
+  details: 
+  [ { linkId: 2, name: 'Todd Umptious', grades: [
+    {grade: CUSTODY_CASELOAD_PO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0},
+    {grade: CUSTODY_CASELOAD_PSO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0}
+] },
+    { linkId: 3, name: 'Jerry Twig', grades: [
+      {grade: CUSTODY_CASELOAD_PO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0},
+      {grade: CUSTODY_CASELOAD_PSO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0}
+  ] },
+    { linkId: 4, name: 'Jemima Racktool', grades: [
+      {grade: CUSTODY_CASELOAD_PO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0},
+      {grade: CUSTODY_CASELOAD_PSO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0}
+  ] } ],
+ totals: 
+  { PO: 
+     { grade: 'PO',
+       a: 0,
+       b1: 3,
+       b2: 0,
+       c1: 3,
+       c2: 0,
+       d1: 0,
+       d2: 3,
+       untiered: 3,
+       totalCases: 9,
+       numberOfType: 3 },
+    PSO: 
+     { grade: 'PSO',
+       a: 0,
+       b1: 3,
+       b2: 0,
+       c1: 3,
+       c2: 0,
+       d1: 0,
+       d2: 3,
+       untiered: 3,
+       totalCases: 9,
+       numberOfType: 3 } },
+ detailsPercentages: 
+  [ { linkId: 2, name: 'Todd Umptious', grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 },
+{ grade: 'PSO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 } ] },
+    { linkId: 3, name: 'Jerry Twig', grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 },
+    { grade: 'PSO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 } ] },
+    { linkId: 4, name: 'Jemima Racktool', grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 },
+    { grade: 'PSO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 } ] } ],
+ percentageTotals: 
+  { PO: 
+     { grade: 'PO',
+       a: 0,
+       b1: 50,
+       b2: 0,
+       c1: 50,
+       c2: 0,
+       d1: 0,
+       d2: 50,
+       untiered: 50,
+       totalCases: 50,
+       numberOfType: 3 },
+    PSO: 
+     { grade: 'PSO',
+       a: 0,
+       b1: 50,
+       b2: 0,
+       c1: 50,
+       c2: 0,
+       d1: 0,
+       d2: 50,
+       untiered: 50,
+       totalCases: 50,
+       numberOfType: 3 } } 
 }
 
 module.exports.LDU_CUSTODY_PERCENTAGE_RESULTS = {
