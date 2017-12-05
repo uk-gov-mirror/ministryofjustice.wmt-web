@@ -23,7 +23,7 @@ module.exports.getWorkloadPoints = function (isT2A) {
       userId = workloadPoints.updatedByUserId
     }
     if (isT2A) {
-      breadcrumbs[0].title = breadcrumbs[0].title + ' (T2A)'
+      breadcrumbs[0].title += ' (T2A)'
     }
     return userRoleService.getUserById(userId)
     .then(function (user) {
