@@ -8,7 +8,6 @@ const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const getLastUpdated = require('../services/data/get-last-updated-court-reports.js')
 
-
 module.exports = function (router) {
   router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id/overview', function (req, res, next) {
     try {
@@ -55,8 +54,8 @@ var renderOverview = function (req, res, next) {
 
   return getCourtReportOverview(id, organisationLevel)
   .then(function (result) {
-      result.date = lastUpdated
-      console.log(result)
+    result.date = lastUpdated
+    console.log(result)
     return res.render('court-reports-overview', {
       title: result.title,
       subTitle: result.subTitle,
