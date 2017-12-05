@@ -21,6 +21,9 @@ module.exports.getWorkloadPoints = function (isT2A) {
       var formattedUpdateDate = dateFormatter.formatDate(workloadPoints.effectiveFrom, 'DD/MM/YYYY HH:mm')
       workloadPoints.effectiveFrom = formattedUpdateDate
       userId = workloadPoints.updatedByUserId
+    } else {
+      workloadPoints = {}
+      workloadPoints.isT2A = isT2A
     }
     return userRoleService.getUserById(userId)
     .then(function (user) {
