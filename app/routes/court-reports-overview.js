@@ -6,6 +6,8 @@ const workloadTypeConstants = require('../constants/workload-type')
 const workloadTypes = require('../../app/constants/workload-type')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
+const getLastUpdated = require('../services/data/get-last-updated-court-reports.js')
+
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id/overview', function (req, res, next) {
@@ -49,9 +51,12 @@ var renderOverview = function (req, res, next) {
   }
 
   var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+  var lastUpdated = getLastUpdated
 
   return getCourtReportOverview(id, organisationLevel)
   .then(function (result) {
+      result.date = lastUpdated
+      console.log(result)
     return res.render('court-reports-overview', {
       title: result.title,
       subTitle: result.subTitle,
@@ -61,6 +66,7 @@ var renderOverview = function (req, res, next) {
       childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
       subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS),
       overviewDetails: result.overviewDetails,
+      date: lastUpdated,
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
       authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
     })
