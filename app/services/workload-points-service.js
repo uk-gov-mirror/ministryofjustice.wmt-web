@@ -22,10 +22,13 @@ module.exports.getWorkloadPoints = function (isT2A) {
       workloadPoints.effectiveFrom = formattedUpdateDate
       userId = workloadPoints.updatedByUserId
     }
+    if (isT2A) {
+      breadcrumbs[0].title += ' (T2A)'
+    }
     return userRoleService.getUserById(userId)
     .then(function (user) {
       var updatedBy = userId // Default to the user id
-      var title = (isT2A) ? breadcrumbs[0].title + ' (T2A)' : breadcrumbs[0].title
+      var title = breadcrumbs[0].title
       if (user) {
         updatedBy = (user.name) ? user.name : user.username
       }
