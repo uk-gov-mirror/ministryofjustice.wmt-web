@@ -38,7 +38,7 @@
         <span class="error-message">{{ errors['reasonForReductionId'][0] }}</span>
       {% endif %}
       <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}" onChange="populateHours(), calculateExpiry(), enableAddReduction()"> 
-        <option value="select" selected>Please select a reason...</option>
+        <option value="select" disabled selected>Please select a reason...</option>
         {% for reason in referenceData %}
         <option value="{{ reason.id }}" {% if reason.id == reduction.reasonId %} selected {% endif %}>{{ reason.reasonShortName }}</option>
         {% endfor %}
