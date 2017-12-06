@@ -50,11 +50,11 @@ var renderOverview = function (req, res, next) {
   }
 
   var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-  var lastUpdated = getLastUpdated
+  var lastUpdated = getLastUpdated()
 
   return getCourtReportOverview(id, organisationLevel)
   .then(function (result) {
-    result.date = lastUpdated
+    result.date =lastUpdated
     console.log(result)
     return res.render('court-reports-overview', {
       title: result.title,
@@ -65,7 +65,7 @@ var renderOverview = function (req, res, next) {
       childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
       subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS),
       overviewDetails: result.overviewDetails,
-      date: lastUpdated,
+      date: result.date,
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
       authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
     })
