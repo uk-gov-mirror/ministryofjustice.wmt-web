@@ -19,7 +19,7 @@
     {% endif %}
   {% else %}
     {% set headerText='New reduction' %}
-    {% set reductionText='Add a new reduction for' %}
+    {% set reductionText='Add a new reduction for ' %}
     {% set submitButtonText='Add reduction' %}
     {% set formAction='/' + workloadType + '/offender-manager/' + linkId +'/add-reduction' %}
     {% set formMethod='POST' %}  
@@ -37,8 +37,7 @@
       {% if errors['reasonForReductionId'][0] %}
         <span class="error-message">{{ errors['reasonForReductionId'][0] }}</span>
       {% endif %}
-      <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}" onChange="populateHours(), calculateExpiry()"> 
-        <option value="select" disabled selected>Please select a reason...</option>
+      <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}" onChange="populateHours(), calculateExpiry()">
         {% for reason in referenceData %}
         <option value="{{ reason.id }}" {% if reason.id == reduction.reasonId %} selected {% endif %}>{{ reason.reasonShortName }}</option>
         {% endfor %}
