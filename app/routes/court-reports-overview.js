@@ -6,7 +6,7 @@ const workloadTypeConstants = require('../constants/workload-type')
 const workloadTypes = require('../../app/constants/workload-type')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
-const getLastUpdated = require('../services/data/get-last-updated-court-reports')
+const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 
 var lastUpdated
@@ -55,7 +55,7 @@ var renderOverview = function (req, res, next) {
   var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
   return getLastUpdated().then(function(result) {
-    lastUpdated = dateFormatter.formatDate(result.date_created, 'DD-MM-YYYY HH:mm')
+    lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return getCourtReportOverview(id, organisationLevel)
     .then(function (result) {
       result.date = lastUpdated

@@ -18,6 +18,11 @@ a.button:visited{
     color:white !important;
 }
 
+div.lastUpdated{
+    position: relative;
+   left: 70%;
+}
+
 @mixin respond-to($media) {
   @if $media==handhelds {
     @media only screen and (max-width: 568px) {
