@@ -413,7 +413,8 @@ module.exports = function (router) {
         end_day: reduction.reductionEndDate.getDate(),
         end_month: reduction.reductionEndDate.getMonth() + 1,
         end_year: reduction.reductionEndDate.getFullYear(),
-        notes: reduction.notes
+        notes: reduction.notes,
+        status: reduction.status
       }
     }
     return viewModel
