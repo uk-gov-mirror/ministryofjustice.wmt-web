@@ -152,7 +152,6 @@ module.exports = function (router) {
               subNav: getSubNav(id, organisationLevel, req.path, workloadType),
               referenceData: result.referenceData,
               reduction: mapReductionToViewModel(reduction),
-              reductionStatus: reduction.status,
               workloadType: workloadType,
               userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
               authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
@@ -414,7 +413,8 @@ module.exports = function (router) {
         end_day: reduction.reductionEndDate.getDate(),
         end_month: reduction.reductionEndDate.getMonth() + 1,
         end_year: reduction.reductionEndDate.getFullYear(),
-        notes: reduction.notes
+        notes: reduction.notes,
+        status: reduction.status
       }
     }
     return viewModel

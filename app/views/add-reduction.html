@@ -3,12 +3,12 @@
 {% block content %}
 
 <main id="content" role="main">
-  {% include "includes/breadcrumbs.html" %} 
+  {% include "includes/breadcrumbs.html" %}
 
   {% if reduction %}
     {% set headerText='Reduction' %}
     {% set reductionText='Showing reduction for ' %}
-    {% if reductionStatus !== 'ARCHIVED' %}
+    {% if reduction.status !== 'ARCHIVED' %}
       {% set submitButtonText='Save changes' %}
       {% set formAction='/' + workloadType + '/offender-manager/' +  linkId  + '/edit-reduction' %}
       {% set formMethod='POST' %}
@@ -132,7 +132,7 @@
   </form>
   <div>
   <ul>
-    {% if reductionStatus !== 'ARCHIVED' %}
+    {% if reduction.status !== 'ARCHIVED' %}
     <li><a  href="javascript:document.archiveReduction.submit()">Archive reduction</a></li>
     {% endif %}
     <li><a  href="javascript:document.deleteReduction.submit()">Delete reduction</a></li>
@@ -147,7 +147,7 @@
   var refData = {{ referenceData | dump | safe }}
 </script>
 <script src="/public/javascripts/add-reduction.js"></script>
-{% if reductionStatus === 'ARCHIVED' %}
+{% if reduction.status === 'ARCHIVED' %}
 <script>
     $(function(){
       $('#select-box').prop('disabled', true);
