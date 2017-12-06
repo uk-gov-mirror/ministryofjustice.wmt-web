@@ -36,6 +36,16 @@
     }
   }
 
+  var enableAddReduction = function() {
+    var select = document.getElementById('select-box')
+    if(select.options[select.selectedIndex] !== select.options[0]) {
+      document.getElementById('submit-button').removeAttribute('disabled')
+    } else {
+      document.getElementById('submit-button').setAttribute('disabled', true)
+      document.getElementById('hours').value = ''
+    }
+  }
+
   var populateHours = function () {
 
     var value = ''

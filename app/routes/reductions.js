@@ -194,7 +194,7 @@ module.exports = function (router) {
     .then(function (result) {
       try {
         // Dummy option in dropdown means array is offset by one
-        reductionReason = result.referenceData[req.body.reasonForReductionId]
+        reductionReason = result.referenceData[req.body.reasonForReductionId - 1]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
         if (error instanceof ValidationError) {

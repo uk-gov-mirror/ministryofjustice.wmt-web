@@ -37,7 +37,8 @@
       {% if errors['reasonForReductionId'][0] %}
         <span class="error-message">{{ errors['reasonForReductionId'][0] }}</span>
       {% endif %}
-      <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}" onChange="populateHours(), calculateExpiry()">
+      <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}" onChange="populateHours(), calculateExpiry(), enableAddReduction()"> 
+        <option value="select" selected>Please select a reason...</option>
         {% for reason in referenceData %}
         <option value="{{ reason.id }}" {% if reason.id == reduction.reasonId %} selected {% endif %}>{{ reason.reasonShortName }}</option>
         {% endfor %}
@@ -112,7 +113,7 @@
       <textarea class="form-control form-control-3-4" name="notes" id="textarea" rows="5">{{ reduction.notes }}</textarea>
     </div> 
     {% include "includes/csrf-hidden-input.html"%}
-    <input class="button" type="submit" value="{{ submitButtonText }}">
+    <input id="submit-button" class="button" type="submit" value="{{ submitButtonText }}">
   </form>
   {% if reduction %}
   <h2 class="heading-small">Other options</h2>
@@ -146,6 +147,13 @@
   var refData = {{ referenceData | dump | safe }}
 </script>
 <script src="/public/javascripts/add-reduction.js"></script>
+{% if not reduction %}
+<script>
+  $(function(){
+    $('#submit-button').prop('disabled', true);
+  });
+</script>
+{% endif %}
 {% if reduction.status === 'ARCHIVED' %}
 <script>
     $(function(){
