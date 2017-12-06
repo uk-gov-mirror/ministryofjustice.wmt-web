@@ -110,7 +110,7 @@
         <span class="error-message">{{ errors['notes'][0] }}</span>
       {% endif %}
       <label class="form-label-bold" for="textarea">Additional notes</label>
-      <textarea class="form-control form-control-3-4" name="notes" id="textarea" rows="5" >{{ reduction.notes }}</textarea>
+      <textarea class="form-control form-control-3-4" name="notes" id="textarea" rows="5">{{ reduction.notes }}</textarea>
     </div> 
     {% include "includes/csrf-hidden-input.html"%}
     <input class="button" type="submit" value="{{ submitButtonText }}">
@@ -142,8 +142,24 @@
 
 </main>
 {% endblock %} {% block body_end %}
+<script src="/public/javascripts/vendor/jquery.min.js"></script>
 <script type="text/javascript">
   var refData = {{ referenceData | dump | safe }}
 </script>
 <script src="/public/javascripts/add-reduction.js"></script>
+{% if reductionStatus === 'ARCHIVED' %}
+<script>
+    $(function(){
+      $('#select-box').prop('disabled', true);
+      $('#end-year').prop('readonly', true);
+      $('#end-month').prop('readonly', true);
+      $('#end-day').prop('readonly', true);
+      $('#start-year').prop('readonly', true);
+      $('#start-month').prop('readonly', true);
+      $('#start-day').prop('readonly', true);
+      $('#hours').prop('readonly', true);
+      $('#textarea').prop('readonly', true);
+    });
+</script>
+{% endif %}
 {% endblock %}
