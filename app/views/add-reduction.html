@@ -8,13 +8,21 @@
   {% if reduction %}
     {% set headerText='Reduction' %}
     {% set reductionText='Showing reduction for ' %}
-    {% set submitButtonText='Save changes' %}
-    {% set formAction='/' + workloadType + '/offender-manager/' +  linkId  + '/edit-reduction' %}
+    {% if reductionStatus !== 'ARCHIVED' %}
+      {% set submitButtonText='Save changes' %}
+      {% set formAction='/' + workloadType + '/offender-manager/' +  linkId  + '/edit-reduction' %}
+      {% set formMethod='POST' %}
+    {% else %}
+      {% set submitButtonText='Back to Reductions' %}
+      {% set formAction='/' + workloadType + '/offender-manager/' + linkId + '/reductions' %}
+      {% set formMethod='GET' %}
+    {% endif %}
   {% else %}
     {% set headerText='New reduction' %}
     {% set reductionText='Add a new reduction for' %}
     {% set submitButtonText='Add reduction' %}
-    {% set formAction='/' + workloadType + '/offender-manager/' + linkId +'/add-reduction' %}    
+    {% set formAction='/' + workloadType + '/offender-manager/' + linkId +'/add-reduction' %}
+    {% set formMethod='POST' %}  
   {% endif %}
 
   {% include "includes/validation-error-messages.html" %}
@@ -22,7 +30,7 @@
   <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">{{ headerText }}</header>
   <p class="lede">{{ reductionText }}<span class="bold">{{ title }}</span></p>
   {% set first = true %}
-  <form action="{{ formAction }}" method=POST id="reductionForm">
+  <form action="{{ formAction }}" method="{{formMethod}}" id="reductionForm">
     <input type="hidden" name="reductionId" value="{{reduction.id}}"/>
     <div class="form-group" id="reduction_reason_selection">
       <label class="form-label-bold" for="select-box">Reason for reduction</label>
@@ -115,6 +123,7 @@
     <input type="hidden" name="reductionId" value="{{reduction.id}}">
     <input type="hidden" name="status" value="ARCHIVED">
   </form>
+  
   <form name="deleteReduction" method="POST" action="/{{ workloadType }}/offender-manager/{{ linkId }}/update-reduction-status">
     <!-- Including the csrf-hidden-input.html hides the links -->
     <input type="hidden"  name="_csrf"  value="{{ csrfToken }}">
@@ -123,7 +132,9 @@
   </form>
   <div>
   <ul>
+    {% if reductionStatus !== 'ARCHIVED' %}
     <li><a  href="javascript:document.archiveReduction.submit()">Archive reduction</a></li>
+    {% endif %}
     <li><a  href="javascript:document.deleteReduction.submit()">Delete reduction</a></li>
   </ul>
   </div>
