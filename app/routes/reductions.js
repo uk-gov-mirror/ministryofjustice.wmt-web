@@ -10,6 +10,10 @@ const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 const workloadTypeValidator = require('../services/validators/workload-type-validator')
+const getLastUpdated = require('../services/data/get-last-updated')
+const dateFormatter = require('../services/date-formatter')
+
+var lastUpdated
 
 module.exports = function (router) {
   router.get('/:workloadType/:organisationLevel/:id/reductions', function (req, res, next) {
@@ -41,7 +45,10 @@ module.exports = function (router) {
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
+    return getLastUpdated().then(function(result) {
+        lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return reductionsService.getReductions(id, organisationLevel, workloadType).then(function (result) {
+        result.date = lastUpdated
       return res.render('reductions', {
         breadcrumbs: result.breadcrumbs,
         linkId: id,
@@ -53,6 +60,7 @@ module.exports = function (router) {
         archivedReductions: result.archivedReductions,
         successText: successText,
         workloadType: workloadType,
+        date: result.date,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
         authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
       })
@@ -60,6 +68,7 @@ module.exports = function (router) {
       next(error)
     })
   })
+})
 
   router.get('/:workloadType/:organisationLevel/:id/add-reduction', function (req, res, next) {
     try {

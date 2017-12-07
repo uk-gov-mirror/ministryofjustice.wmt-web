@@ -13,8 +13,11 @@ const workloadTypes = require('../../app/constants/workload-type')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const tierHelper = require('../services/helpers/tier-helper')
+const getLastUpdated = require('../services/data/get-last-updated')
+const dateFormatter = require('../services/date-formatter')
 
 var inactiveTeam
+var lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload-capacity', function (req, res, next) {
@@ -60,6 +63,9 @@ module.exports = function (router) {
       return getOutstandingReports(id, organisationLevel).then(function (result) {
         var outstandingReports = result
         inactiveTeam = capacityBreakdown.title
+        return getLastUpdated().then(function(result) {
+            lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+            result.date = lastUpdated
         return res.render('capacity', {
           screen: 'capacity',
           linkId: id,
@@ -75,6 +81,7 @@ module.exports = function (router) {
           childOrganisationLevel: orgUnit.childOrganisationLevel,
           childOrganisationLevelDisplayText: childOrgUnitDisplayText,
           organisationLevel: organisationLevel,
+          date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
           authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
         })
@@ -82,6 +89,7 @@ module.exports = function (router) {
     }).catch(function (error) {
       next(error)
     })
+  })
   })
 
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/capacity/outstanding-csv', function (req, res, next) {

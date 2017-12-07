@@ -7,6 +7,10 @@ const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 const logger = require('../logger')
+const getLastUpdated = require('../services/data/get-last-updated')
+const dateFormatter = require('../services/date-formatter')
+
+var lastUpdated
 
 module.exports = function (router) {
   router.get('/admin/workload-points', function (req, res) {
@@ -26,8 +30,11 @@ module.exports = function (router) {
     var success = req.query.success
     var successText = success ? 'You have successfully updated the workload points!' : null
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    return getLastUpdated().then(function(result) {
+        lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return workloadPointsService.getWorkloadPoints(false)
       .then(function (result) {
+        result.date = lastUpdated
         return res.render('workload-points', {
           title: result.title,
           subTitle: result.subTitle,
@@ -35,10 +42,12 @@ module.exports = function (router) {
           wp: result.workloadPoints,
           updatedBy: result.updatedBy,
           successText: successText,
+          date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
           authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
         })
       })
+    })
   })
 
   router.get('/admin/workload-points/t2a', function (req, res) {
@@ -58,8 +67,11 @@ module.exports = function (router) {
     var success = req.query.success
     var successText = success ? 'You have successfully updated the workload points for transition to adulthood cases!' : null
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    return getLastUpdated().then(function(result) {
+        lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return workloadPointsService.getWorkloadPoints(true)
       .then(function (result) {
+        result.date = lastUpdated
         return res.render('workload-points', {
           title: result.title,
           subTitle: result.subTitle,
@@ -67,11 +79,13 @@ module.exports = function (router) {
           wp: result.workloadPoints,
           updatedBy: result.updatedBy,
           successText: successText,
+          date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
           authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
         })
       })
   })
+})
 
   router.post('/admin/workload-points', function (req, res, next) {
     try {
