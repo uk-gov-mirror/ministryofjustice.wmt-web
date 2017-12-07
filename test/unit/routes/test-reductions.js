@@ -173,7 +173,7 @@ describe('reductions route', function () {
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(successDataToPost)
-        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions?edited=true')
+        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1')
     })
 
     it('should post incorrect data and validation errors should be populated', function () {
