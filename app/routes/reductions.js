@@ -229,7 +229,7 @@ module.exports = function (router) {
       }
 
       return reductionsService.addReduction(id, reduction, workloadType).then(function () {
-        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions?success=true')
+        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id)
       }).catch(function (error) {
         next(error)
       })
@@ -306,7 +306,7 @@ module.exports = function (router) {
 
       return reductionsService.updateReduction(id, reductionId, reduction, workloadType)
       .then(function () {
-        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions?edited=true')
+        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id)
       }).catch(function (error) {
         next(error)
       })
