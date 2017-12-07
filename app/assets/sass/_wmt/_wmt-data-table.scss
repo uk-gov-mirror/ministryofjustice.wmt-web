@@ -29,6 +29,10 @@ table.data-table tr td{
     border: 1px solid #d9d9d9!important;
 }
 
+table.data-table th, table.data-table td {
+    font-size: 16px;
+}
+
 table.data-table tr td:not(:first-child) {
     text-align: center;
 }
