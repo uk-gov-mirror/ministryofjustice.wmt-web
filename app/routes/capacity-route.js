@@ -63,33 +63,33 @@ module.exports = function (router) {
       return getOutstandingReports(id, organisationLevel).then(function (result) {
         var outstandingReports = result
         inactiveTeam = capacityBreakdown.title
-        return getLastUpdated().then(function(result) {
-            lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
-            result.date = lastUpdated
-        return res.render('capacity', {
-          screen: 'capacity',
-          linkId: id,
-          title: capacityBreakdown.title,
-          subTitle: capacityBreakdown.subTitle,
-          subNav: getSubNav(id, organisationLevel, req.path),
-          breadcrumbs: capacityBreakdown.breadcrumbs,
-          capacity: capacityBreakdown.capacityTable,
-          errors: errors,
-          query: req.query,
-          capacityBreakdown: capacityBreakdown.capacityBreakdown,
-          outstandingReports: outstandingReports,
-          childOrganisationLevel: orgUnit.childOrganisationLevel,
-          childOrganisationLevelDisplayText: childOrgUnitDisplayText,
-          organisationLevel: organisationLevel,
-          date: result.date,
-          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        return getLastUpdated().then(function (result) {
+          lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+          result.date = lastUpdated
+          return res.render('capacity', {
+            screen: 'capacity',
+            linkId: id,
+            title: capacityBreakdown.title,
+            subTitle: capacityBreakdown.subTitle,
+            subNav: getSubNav(id, organisationLevel, req.path),
+            breadcrumbs: capacityBreakdown.breadcrumbs,
+            capacity: capacityBreakdown.capacityTable,
+            errors: errors,
+            query: req.query,
+            capacityBreakdown: capacityBreakdown.capacityBreakdown,
+            outstandingReports: outstandingReports,
+            childOrganisationLevel: orgUnit.childOrganisationLevel,
+            childOrganisationLevelDisplayText: childOrgUnitDisplayText,
+            organisationLevel: organisationLevel,
+            date: result.date,
+            userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+          })
         })
+      }).catch(function (error) {
+        next(error)
       })
-    }).catch(function (error) {
-      next(error)
     })
-  })
   })
 
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/capacity/outstanding-csv', function (req, res, next) {

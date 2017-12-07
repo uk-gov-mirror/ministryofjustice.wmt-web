@@ -126,27 +126,27 @@ var renderOverview = function (req, res, next) {
   var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
   var overviewPromise = getOverview(id, organisationLevel)
-  return getLastUpdated().then(function(result) {
+  return getLastUpdated().then(function (result) {
     lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
-  return overviewPromise.then(function (result) {
-    result.date = lastUpdated
-    return res.render('overview', {
-      title: result.title,
-      subTitle: result.subTitle,
-      breadcrumbs: result.breadcrumbs,
-      organisationLevel: organisationLevel,
-      linkId: req.params.id,
-      screen: 'overview',
-      childOrganisationLevel: childOrganisationLevel,
-      childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
-      subNav: getSubNav(id, organisationLevel, req.path),
-      overviewDetails: result.overviewDetails,
-      date: result.date,
-      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+    return overviewPromise.then(function (result) {
+      result.date = lastUpdated
+      return res.render('overview', {
+        title: result.title,
+        subTitle: result.subTitle,
+        breadcrumbs: result.breadcrumbs,
+        organisationLevel: organisationLevel,
+        linkId: req.params.id,
+        screen: 'overview',
+        childOrganisationLevel: childOrganisationLevel,
+        childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
+        subNav: getSubNav(id, organisationLevel, req.path),
+        overviewDetails: result.overviewDetails,
+        date: result.date,
+        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+      })
+    }).catch(function (error) {
+      next(error)
     })
-  }).catch(function (error) {
-    next(error)
   })
-})
 }

@@ -29,23 +29,23 @@ module.exports = function (router) {
 
     var caseProgressPromise = getCaseProgress(id, organisationLevel)
 
-    return getLastUpdated().then(function(result) {
-        lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
-    return caseProgressPromise.then(function (result) {
+    return getLastUpdated().then(function (result) {
+      lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+      return caseProgressPromise.then(function (result) {
         result.date = lastUpdated
-      return res.render('case-progress', {
-        title: result.title,
-        subTitle: result.subTitle,
-        breadcrumbs: result.breadcrumbs,
-        subNav: getSubNav(id, organisationLevel, req.path),
-        caseProgressList: result.caseProgressList,
-        date: result.date,
-        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        return res.render('case-progress', {
+          title: result.title,
+          subTitle: result.subTitle,
+          breadcrumbs: result.breadcrumbs,
+          subNav: getSubNav(id, organisationLevel, req.path),
+          caseProgressList: result.caseProgressList,
+          date: result.date,
+          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        })
+      }).catch(function (error) {
+        next(error)
       })
-    }).catch(function (error) {
-      next(error)
     })
-  })
   })
 }

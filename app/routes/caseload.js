@@ -34,11 +34,11 @@ module.exports = function (router) {
     var orgUnit = getOrganisationUnit('name', organisationLevel)
     var childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)
 
-    return getLastUpdated().then(function(result) {
-        lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
-    return getCaseload(id, organisationLevel)
+    return getLastUpdated().then(function (result) {
+      lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+      return getCaseload(id, organisationLevel)
       .then(function (result) {
-          result.date =lastUpdated
+        result.date = lastUpdated
         return res.render('caseload', {
           screen: 'caseload',
           linkId: req.params.id,
@@ -57,7 +57,7 @@ module.exports = function (router) {
       }).catch(function (error) {
         next(error)
       })
-  })
+    })
   })
 
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload/caseload-csv', function (req, res, next) {

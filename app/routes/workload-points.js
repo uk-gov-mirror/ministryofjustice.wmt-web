@@ -39,7 +39,7 @@ module.exports = function (router) {
           authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
         })
       })
-    })
+  })
 
   router.get('/admin/workload-points/t2a', function (req, res) {
     try {

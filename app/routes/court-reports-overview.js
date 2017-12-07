@@ -54,7 +54,7 @@ var renderOverview = function (req, res, next) {
 
   var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-  return getLastUpdated().then(function(result) {
+  return getLastUpdated().then(function (result) {
     lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return getCourtReportOverview(id, organisationLevel)
     .then(function (result) {

@@ -45,30 +45,30 @@ module.exports = function (router) {
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    return getLastUpdated().then(function(result) {
-        lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
-    return reductionsService.getReductions(id, organisationLevel, workloadType).then(function (result) {
+    return getLastUpdated().then(function (result) {
+      lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+      return reductionsService.getReductions(id, organisationLevel, workloadType).then(function (result) {
         result.date = lastUpdated
-      return res.render('reductions', {
-        breadcrumbs: result.breadcrumbs,
-        linkId: id,
-        title: result.title,
-        subTitle: result.subTitle,
-        subNav: getSubNav(id, organisationLevel, req.path, workloadType),
-        activeReductions: result.activeReductions,
-        scheduledReductions: result.scheduledReductions,
-        archivedReductions: result.archivedReductions,
-        successText: successText,
-        workloadType: workloadType,
-        date: result.date,
-        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        return res.render('reductions', {
+          breadcrumbs: result.breadcrumbs,
+          linkId: id,
+          title: result.title,
+          subTitle: result.subTitle,
+          subNav: getSubNav(id, organisationLevel, req.path, workloadType),
+          activeReductions: result.activeReductions,
+          scheduledReductions: result.scheduledReductions,
+          archivedReductions: result.archivedReductions,
+          successText: successText,
+          workloadType: workloadType,
+          date: result.date,
+          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        })
+      }).catch(function (error) {
+        next(error)
       })
-    }).catch(function (error) {
-      next(error)
     })
   })
-})
 
   router.get('/:workloadType/:organisationLevel/:id/add-reduction', function (req, res, next) {
     try {
