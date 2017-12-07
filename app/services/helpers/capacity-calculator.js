@@ -1,9 +1,10 @@
+var percentageCalculator = require('./percentage-calculator').calculatePercentage
 
 module.exports.calculate = function (workloadReports) {
   var capacities = []
   workloadReports.forEach(function (report) {
-    var capacityPercentage = (report.total_points / report.available_points) * 100
-    var reductionPercentage = (report.reduction_hours / report.contracted_hours) * 100
+    var capacityPercentage = percentageCalculator(report.total_points, report.available_points)
+    var reductionPercentage = percentageCalculator(report.reduction_hours, report.contracted_hours)
     capacities.push({
       workload_report_date: report.effective_from,
       capacity_percentage: capacityPercentage,
