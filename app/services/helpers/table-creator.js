@@ -20,17 +20,9 @@ module.exports.createCapacityTable = function (id, rowLabel, workloadReports) {
   var capacityResults = capacityCalculator.calculate(workloadReports)
   capacityResults.forEach(function (capacity) {
     headings.push(capacity['workload_report_date'])
-    //if(capacity['capacity_percentage'] === Infinity) {
-    //  capacityPercentageRow.values.push(customRound(0))
-    //} else {
-      capacityPercentageRow.values.push(customRound(capacity['capacity_percentage']))
-    //}
+    capacityPercentageRow.values.push(customRound(capacity['capacity_percentage']))
     reductionRow.values.push(capacity['reductions'])
-    //if(capacity['reduction_percentage'] === NaN) {
-    //  reductionPercentageRow.values.push(customRound(0))
-    //} else {
-      reductionPercentageRow.values.push(customRound(capacity['reduction_percentage']))
-    //}
+    reductionPercentageRow.values.push(customRound(capacity['reduction_percentage']))
   })
 
   rows.push(capacityPercentageRow)

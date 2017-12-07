@@ -4,12 +4,12 @@ module.exports.calculate = function (workloadReports) {
   workloadReports.forEach(function (report) {
     var capacityPercentage
     var reductionPercentage
-    if(report.available_points === 0) {
+    if (report.available_points === 0) {
       capacityPercentage = 0
     } else {
       capacityPercentage = (report.total_points / report.available_points) * 100
     }
-    if(report.contracted_hours === 0) {
+    if (report.contracted_hours === 0) {
       reductionPercentage = 0
     } else {
       reductionPercentage = (report.reduction_hours / report.contracted_hours) * 100
