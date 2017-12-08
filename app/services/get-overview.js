@@ -4,6 +4,7 @@ const getIndividualOverview = require('./data/get-individual-overview')
 const getOrganisationOverview = require('./data/get-organisation-overview')
 const getFullOverview = require('./data/get-full-overview')
 const orgUnit = require('../constants/organisation-unit')
+const calculatePercentage = require('./helpers/percentage-calculator').calculatePercentage
 
 module.exports = function (id, organisationLevel, isCSV = false) {
   var result = {}
@@ -30,34 +31,28 @@ module.exports = function (id, organisationLevel, isCSV = false) {
 }
 
 var calculateValues = function (results, isCSV) {
-  var totals = { name: 'Total / Average', totalPercentage: 0, totalAvailablePoints: 0, totalContractedHours: 0, totalReduction: 0, totalTotalCases: 0, totalRemainingPoints: 0 }
+  var totals = { name: 'Total / Average', totalCapacityPercentage: 0, totalPoints: 0, totalAvailablePoints: 0, totalContractedHours: 0, totalReduction: 0, totalTotalCases: 0, totalRemainingPoints: 0 }
   var totalsToReturn = {}
   if (results.length !== undefined) {
     results.forEach(function (result) {
-      result.capacityPercentage = 0
       result.remainingPoints = result.availablePoints - result.totalPoints
-      if (result.availablePoints > 0) {
-        result.capacityPercentage = (result.totalPoints / result.availablePoints) * 100
-      }
+      result.capacityPercentage = calculatePercentage(result.totalPoints, result.availablePoints)
     })
     totalsToReturn = results
     if (!isCSV) {
       totalsToReturn.forEach(function (val, key) {
-        totals.totalPercentage += val.capacityPercentage
+        totals.totalPoints += val.totalPoints
         totals.totalAvailablePoints += val.availablePoints
         totals.totalContractedHours += val.contractedHours
         totals.totalReduction += val.reductionHours
         totals.totalTotalCases += val.totalCases
         totals.totalRemainingPoints += val.remainingPoints
       })
-      totals.totalPercentage = totals.totalPercentage / totalsToReturn.length
+      totals.totalCapacityPercentage = calculatePercentage(totals.totalPoints, totals.totalAvailablePoints)
       totalsToReturn.push(totals)
     }
   } else {
-    var capacityPercentage = 0
-    if (results.availablePoints > 0) {
-      capacityPercentage = (results.totalPoints / results.availablePoints) * 100
-    }
+    var capacityPercentage = calculatePercentage(results.totalPoints, results.availablePoints)
     totalsToReturn = Object.assign({}, results, {capacity: capacityPercentage})
   }
   return totalsToReturn
