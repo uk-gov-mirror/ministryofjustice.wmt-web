@@ -7,6 +7,11 @@ module.exports = function () {
     .andWhere('status', 'COMPLETE')
     .orderBy('id', 'desc')
     .then(function (result) {
+      if(result === undefined) {
+        result = {
+          date_processed: ''
+        }
+      }
       return result
     })
 }
