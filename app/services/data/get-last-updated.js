@@ -5,6 +5,7 @@ module.exports = function () {
     .first('date_processed')
     .where('type', 'PROCESS-IMPORT')
     .andWhere('status', 'COMPLETE')
+    .orderBy('id', 'desc')
     .then(function (result) {
       return result
     })
