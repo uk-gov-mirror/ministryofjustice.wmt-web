@@ -231,14 +231,24 @@
     {% if organisationLevel === 'team' %}
     <tbody>
       {% for member in outstandingReports %}
+      {% if loop.last %}
       <tr>
-        <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
-        <td headers="grade org">{{ member.grade }}</td>
-        <td headers="outstanding warrants">{{ member.ow }}</td>
-        <td headers="unpaid work">{{ member.upw }}</td>
-        <td headers="overdue terminations">{{ member.ot }}</td>
-        <td headers="suspended lifers">{{ member.sl }}</td>
+            <td colspan="2" headers="name org">{{ member.name }}</td>
+            <td headers="outstanding warrants">{{ member.totalOW }}</td>
+            <td headers="unpaid work">{{ member.totalUPW }}</td>
+            <td headers="overdue terminations">{{ member.totalOT }}</td>
+            <td headers="suspended lifers">{{ member.totalSL }}</td>
       </tr>
+      {% else %}
+      <tr>
+          <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+          <td headers="grade org">{{ member.grade }}</td>
+          <td headers="outstanding warrants">{{ member.ow }}</td>
+          <td headers="unpaid work">{{ member.upw }}</td>
+          <td headers="overdue terminations">{{ member.ot }}</td>
+          <td headers="suspended lifers">{{ member.sl }}</td>
+      </tr>
+      {% endif %}
       {% endfor %}
     </tbody>
     {% else %}
@@ -256,6 +266,15 @@
           <td headers="suspended lifers">{{ member.grades[i].sl }}</td>
         </tr>
         {% endfor %}
+        {% if loop.last %}
+        <tr>
+            <td colspan="2" headers="name org">{{ member.name }}</td>
+            <td headers="outstanding warrants">{{ member.totalOW }}</td>
+            <td headers="unpaid work">{{ member.totalUPW }}</td>
+            <td headers="overdue terminations">{{ member.totalOT }}</td>
+            <td headers="suspended lifers">{{ member.totalSL }}</td>
+        </tr>
+        {% endif %}
       {% endfor %}
     </tbody>
     {% endif %}

@@ -238,7 +238,7 @@ module.exports = function (router) {
       }
 
       return reductionsService.addReduction(id, reduction, workloadType).then(function () {
-        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions?success=true')
+        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id)
       }).catch(function (error) {
         next(error)
       })
@@ -315,7 +315,7 @@ module.exports = function (router) {
 
       return reductionsService.updateReduction(id, reductionId, reduction, workloadType)
       .then(function () {
-        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions?edited=true')
+        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id)
       }).catch(function (error) {
         next(error)
       })
@@ -422,7 +422,8 @@ module.exports = function (router) {
         end_day: reduction.reductionEndDate.getDate(),
         end_month: reduction.reductionEndDate.getMonth() + 1,
         end_year: reduction.reductionEndDate.getFullYear(),
-        notes: reduction.notes
+        notes: reduction.notes,
+        status: reduction.status
       }
     }
     return viewModel

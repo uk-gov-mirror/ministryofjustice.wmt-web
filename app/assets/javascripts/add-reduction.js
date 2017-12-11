@@ -36,6 +36,10 @@
     }
   }
 
+  var enableAddReduction = function() {
+    document.getElementById('submit-button').removeAttribute('disabled')
+  }
+
   var populateHours = function () {
 
     var value = ''
