@@ -46,9 +46,9 @@ const LDU_RESULTS = [
     ow: 39,
     ot: 29,
     upw: 19,
-    t2aOw: 0,
-    t2aOt: 0,
-    t2aUpw: 0,
+    t2aOw: 3,
+    t2aOt: 3,
+    t2aUpw: 3,
     sl: 90
   },
   {
@@ -58,9 +58,9 @@ const LDU_RESULTS = [
     ow: 40,
     ot: 30,
     upw: 20,
-    t2aOw: 0,
-    t2aOt: 0,
-    t2aUpw: 0,
+    t2aOw: 3,
+    t2aOt: 3,
+    t2aUpw: 3,
     sl: 91
   }
 ]
@@ -72,10 +72,10 @@ const EXPECTED_LDU_RESULT = [
         grade: 'Test grade 1',
         linkId: 1,
         name: 'Test ldu 1',
-        ot: 29,
-        ow: 39,
+        ot: 32,
+        ow: 42,
         sl: 90,
-        upw: 19
+        upw: 22
       }
     ],
     linkId: 1,
@@ -87,10 +87,10 @@ const EXPECTED_LDU_RESULT = [
         grade: 'Test grade 2',
         linkId: 2,
         name: 'Test ldu 2',
-        ot: 30,
-        ow: 40,
+        ot: 33,
+        ow: 43,
         sl: 91,
-        upw: 20
+        upw: 23
       }
     ],
     linkId: 2,
@@ -98,10 +98,10 @@ const EXPECTED_LDU_RESULT = [
   },
   {
     name: 'Total',
-    totalOT: 59,
-    totalOW: 79,
+    totalOT: 65,
+    totalOW: 85,
     totalSL: 181,
-    totalUPW: 39
+    totalUPW: 45
   }
 ]
 
