@@ -54,6 +54,7 @@ const EXPORT_CSV = '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1",
 var app
 var route
 var getOverview
+var getLastUpdated
 
 var getReductionsExport
 var reductionApp
@@ -70,9 +71,11 @@ before(function () {
   getSubNavStub = sinon.stub()
   getOverview = sinon.stub()
   getReductionsExport = sinon.stub()
+  getLastUpdated = sinon.stub().resolves(new Date(2017, 11, 1))
   getExportCsv = sinon.stub().returns({ filename: EXPORT_CSV_FILENAME, csv: EXPORT_CSV })
   route = proxyquire('../../../app/routes/overview', {
     '../services/get-overview': getOverview,
+    '../services/data/get-last-updated': getLastUpdated,
     '../services/get-sub-nav': getSubNavStub,
     '../authorisation': authorisationService,
     '../services/get-export-csv': getExportCsv
