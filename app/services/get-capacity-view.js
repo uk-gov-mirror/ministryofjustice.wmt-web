@@ -18,7 +18,7 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
   return getWorkloadReports(id, capacityDateRange.capacityFromDate.toISOString(), capacityDateRange.capacityToDate.toISOString(), organisationLevel)
   .then(function (results) {
     result.capacityBreakdown = []
-    result.capacityTable = tableCreator.createCapacityTable(id, organisationalUnitType.displayText, capacityDateRange, results)
+    result.capacityTable = tableCreator.createCapacityTable(id, organisationalUnitType.displayText, results)
     result.title = result.breadcrumbs[0].title
     result.subTitle = organisationalUnitType.displayText
 

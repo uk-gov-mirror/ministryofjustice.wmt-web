@@ -21,11 +21,17 @@ module.exports.getWorkloadPoints = function (isT2A) {
       var formattedUpdateDate = dateFormatter.formatDate(workloadPoints.effectiveFrom, 'DD/MM/YYYY HH:mm')
       workloadPoints.effectiveFrom = formattedUpdateDate
       userId = workloadPoints.updatedByUserId
+    } else {
+      workloadPoints = {}
+      workloadPoints.isT2A = isT2A
+    }
+    if (isT2A) {
+      breadcrumbs[0].title += ' (T2A)'
     }
     return userRoleService.getUserById(userId)
     .then(function (user) {
       var updatedBy = userId // Default to the user id
-      var title = (isT2A) ? breadcrumbs[0].title + ' (T2A)' : breadcrumbs[0].title
+      var title = breadcrumbs[0].title
       if (user) {
         updatedBy = (user.name) ? user.name : user.username
       }

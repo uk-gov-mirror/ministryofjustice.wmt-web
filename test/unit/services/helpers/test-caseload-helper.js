@@ -44,7 +44,7 @@ describe('services/helpers/caseload-helper', function () {
   describe('calculateTeamTierPercentages', function () {
     it('should calculate each grades tier totals as percentage of the team totals', function () {
       var result = caseloadHelper.calculateTeamTierPercentages(helper.LDU_CUSTODY_RESULTS)
-      expect(result).to.eql(helper.LDU_CUSTODY_PERCENTAGE_RESULTS)
+      expect(result).to.eql(helper.LDU_CUSTODY_AGGREGATED_RESULTS)
     })
   })
 

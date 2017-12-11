@@ -75,8 +75,11 @@
     </div>
 
     <input id="caseload-filter-submit" type="submit" value="Filter" class="button">
-    
 </form>
+<br>
+{% if capacity.headings.length === 0 %}
+<span class="error-message">There is no data for this period ({{query['capacity-from-day'] | int}}/{{query['capacity-from-month'] | int}}/{{query['capacity-from-year'] | int}} - {{query['capacity-to-day'] | int}}/{{query['capacity-to-month'] | int}}/{{query['capacity-to-year'] | int}})</span>
+{% endif %}
 
 <table class="non-javascript">
     <thead>
