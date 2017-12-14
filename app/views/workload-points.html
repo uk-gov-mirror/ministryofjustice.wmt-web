@@ -412,6 +412,28 @@
                       <input class="form-control" id="weightingArmsLicense" name="weightingArmsLicense" type="number" value="{{ wp.weightingArmsLicense }}">
                     </td>   
                   </tr>
+                  <tr>
+                    <th scope="row">
+                      {% if errors['weightingCmsPoints'][0] %}
+                        <span class="error-message">{{ errors['weightingCmsPoints'][0] }}</span>
+                      {% endif %}  
+                      <label class="form-label-bold" for="weightingCmsPoints">CMS</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="weightingCmsPoints" name="weightingCmsPoints" type="number" value="{{ wp.cmsPoints }}">
+                    </td>   
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% if errors['weightingGsPoints'][0] %}
+                        <span class="error-message">{{ errors['weightingGsPoints'][0] }}</span>
+                      {% endif %}  
+                      <label class="form-label-bold" for="weightingGsPoints">GS</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="weightingGsPoints" name="weightingGsPoints" type="number" value="{{ wp.gsPoints }}">
+                    </td>   
+                  </tr>
                   {% endif %}
                 </tbody>
               </table>
