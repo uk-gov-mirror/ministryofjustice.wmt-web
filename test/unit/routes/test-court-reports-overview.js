@@ -27,6 +27,7 @@ const OVERVIEW = {
 var app
 var route
 var getCourtReportOverview
+var getLastUpdated
 var getSubNavStub
 var authorisationService
 var hasRoleResult = true
@@ -39,8 +40,10 @@ before(function () {
 
   getSubNavStub = sinon.stub()
   getCourtReportOverview = sinon.stub()
+  getLastUpdated = sinon.stub().resolves(new Date(2017, 11, 1))
   route = proxyquire('../../../app/routes/court-reports-overview', {
     '../services/get-court-report-overview': getCourtReportOverview,
+    '../services/data/get-last-updated': getLastUpdated,
     '../services/get-sub-nav': getSubNavStub,
     '../authorisation': authorisationService
   })

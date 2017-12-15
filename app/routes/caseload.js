@@ -7,6 +7,10 @@ const tabs = require('../constants/wmt-tabs')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const workloadTypes = require('../../app/constants/workload-type')
+const getLastUpdated = require('../services/data/get-last-updated')
+const dateFormatter = require('../services/date-formatter')
+
+var lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload', function (req, res, next) {
@@ -30,8 +34,11 @@ module.exports = function (router) {
     var orgUnit = getOrganisationUnit('name', organisationLevel)
     var childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)
 
-    return getCaseload(id, organisationLevel)
+    return getLastUpdated().then(function (result) {
+      lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+      return getCaseload(id, organisationLevel)
       .then(function (result) {
+        result.date = lastUpdated
         return res.render('caseload', {
           screen: 'caseload',
           linkId: req.params.id,
@@ -43,12 +50,14 @@ module.exports = function (router) {
           childOrganisationLevel: orgUnit.childOrganisationLevel,
           childOrganisationLevelDisplayText: childOrgUnit.displayText,
           caseloadDetails: caseloadDetails(organisationLevel, result),
+          date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
           authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
         })
       }).catch(function (error) {
         next(error)
       })
+    })
   })
 
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload/caseload-csv', function (req, res, next) {
