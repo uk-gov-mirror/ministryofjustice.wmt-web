@@ -3057,10 +3057,6 @@ moment@2.x.x, moment@^2.10.6, moment@^2.18.1, moment@^2.9.0:
   version "2.19.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.1.tgz#56da1a2d1cbf01d38b7e1afc31c10bcfa1929167"
 
-moment@^2.19.2:
-  version "2.19.4"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.4.tgz#17e5e2c6ead8819c8ecfad83a0acccb312e94682"
-
 ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
@@ -4086,9 +4082,9 @@ scss-tokenizer@^0.2.3:
     js-base64 "^2.1.8"
     source-map "^0.4.2"
 
-selenium-standalone@6.11.0:
-  version "6.11.0"
-  resolved "https://registry.yarnpkg.com/selenium-standalone/-/selenium-standalone-6.11.0.tgz#eb21ff65f3b2ece75061b35d4f9e7572ac0280c2"
+selenium-standalone@6.5.0:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/selenium-standalone/-/selenium-standalone-6.5.0.tgz#5ecaffdcb15799fe69954e6143791a38bf88dfd1"
   dependencies:
     async "^2.1.4"
     commander "^2.9.0"
@@ -4328,7 +4324,7 @@ standard-engine@~7.0.0:
     minimist "^1.1.0"
     pkg-conf "^2.0.0"
 
-standard@^10.0.3:
+standard@^10.0.2:
   version "10.0.3"
   resolved "https://registry.yarnpkg.com/standard/-/standard-10.0.3.tgz#7869bcbf422bdeeaab689a1ffb1fea9677dd50ea"
   dependencies:
@@ -4886,12 +4882,12 @@ window-size@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.4.tgz#f8e1aa1ee5a53ec5bf151ffa09742a6ad7697876"
 
-wmt-probation-rules@ministryofjustice/wmt-probation-rules.git#v0.8.5:
-  version "0.8.5"
-  resolved "https://codeload.github.com/ministryofjustice/wmt-probation-rules/tar.gz/e4921a73fc9c41933af27ca58350fc2607d9a9cc"
+wmt-probation-rules@ministryofjustice/wmt-probation-rules.git#v0.7.0:
+  version "0.7.0"
+  resolved "https://codeload.github.com/ministryofjustice/wmt-probation-rules/tar.gz/44ce22f4a2d440e8e5043aa391924c34a2ad8bd1"
   dependencies:
     lodash "^4.17.4"
-    moment "^2.19.2"
+    moment "^2.18.1"
 
 wordwrap@~0.0.2:
   version "0.0.3"
@@ -5042,3 +5038,4 @@ zip-stream@^1.1.0:
     compress-commons "^1.2.0"
     lodash "^4.8.0"
     readable-stream "^2.0.0"
+    
