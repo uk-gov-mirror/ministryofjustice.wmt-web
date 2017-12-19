@@ -10,6 +10,10 @@ const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 const workloadTypeValidator = require('../services/validators/workload-type-validator')
+const getLastUpdated = require('../services/data/get-last-updated')
+const dateFormatter = require('../services/date-formatter')
+
+var lastUpdated
 
 module.exports = function (router) {
   router.get('/:workloadType/:organisationLevel/:id/reductions', function (req, res, next) {
@@ -41,23 +45,28 @@ module.exports = function (router) {
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    return reductionsService.getReductions(id, organisationLevel, workloadType).then(function (result) {
-      return res.render('reductions', {
-        breadcrumbs: result.breadcrumbs,
-        linkId: id,
-        title: result.title,
-        subTitle: result.subTitle,
-        subNav: getSubNav(id, organisationLevel, req.path, workloadType),
-        activeReductions: result.activeReductions,
-        scheduledReductions: result.scheduledReductions,
-        archivedReductions: result.archivedReductions,
-        successText: successText,
-        workloadType: workloadType,
-        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+    return getLastUpdated().then(function (result) {
+      lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+      return reductionsService.getReductions(id, organisationLevel, workloadType).then(function (result) {
+        result.date = lastUpdated
+        return res.render('reductions', {
+          breadcrumbs: result.breadcrumbs,
+          linkId: id,
+          title: result.title,
+          subTitle: result.subTitle,
+          subNav: getSubNav(id, organisationLevel, req.path, workloadType),
+          activeReductions: result.activeReductions,
+          scheduledReductions: result.scheduledReductions,
+          archivedReductions: result.archivedReductions,
+          successText: successText,
+          workloadType: workloadType,
+          date: result.date,
+          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        })
+      }).catch(function (error) {
+        next(error)
       })
-    }).catch(function (error) {
-      next(error)
     })
   })
 

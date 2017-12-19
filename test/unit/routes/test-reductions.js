@@ -62,6 +62,7 @@ const returnedId = 1
 var app
 var route
 var reductionsService
+var getLastUpdated
 var getSubNavStub
 var authorisationService
 var validRole = roles.MANAGER
@@ -81,6 +82,7 @@ var initaliseApp = function (middleware) {
     hasRole: hasRoleFunction
   }
   getSubNavStub = sinon.stub()
+  getLastUpdated = sinon.stub().resolves(new Date(2017, 11, 1))
   reductionsService = sinon.stub()
   reductionsService.getReductions = sinon.stub()
   reductionsService.getAddReductionsRefData = sinon.stub()
@@ -90,6 +92,7 @@ var initaliseApp = function (middleware) {
   reductionsService.getReductionByReductionId = sinon.stub()
   route = proxyquire('../../../app/routes/reductions', {
     '../services/reductions-service': reductionsService,
+    '../services/data/get-last-updated': getLastUpdated,
     '../authorisation': authorisationService,
     '../services/get-sub-nav': getSubNavStub
   })

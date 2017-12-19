@@ -6,6 +6,10 @@ const workloadTypeConstants = require('../constants/workload-type')
 const workloadTypes = require('../../app/constants/workload-type')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
+const getLastUpdated = require('../services/data/get-last-updated')
+const dateFormatter = require('../services/date-formatter')
+
+var lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id/overview', function (req, res, next) {
@@ -50,21 +54,26 @@ var renderOverview = function (req, res, next) {
 
   var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-  return getCourtReportOverview(id, organisationLevel)
-  .then(function (result) {
-    return res.render('court-reports-overview', {
-      title: result.title,
-      subTitle: result.subTitle,
-      breadcrumbs: result.breadcrumbs,
-      organisationLevel: organisationLevel,
-      childOrganisationLevel: childOrganisationLevel,
-      childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
-      subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS),
-      overviewDetails: result.overviewDetails,
-      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+  return getLastUpdated().then(function (result) {
+    lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+    return getCourtReportOverview(id, organisationLevel)
+    .then(function (result) {
+      result.date = lastUpdated
+      return res.render('court-reports-overview', {
+        title: result.title,
+        subTitle: result.subTitle,
+        breadcrumbs: result.breadcrumbs,
+        organisationLevel: organisationLevel,
+        childOrganisationLevel: childOrganisationLevel,
+        childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
+        subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS),
+        overviewDetails: result.overviewDetails,
+        date: result.date,
+        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+      })
+    }).catch(function (error) {
+      next(error)
     })
-  }).catch(function (error) {
-    next(error)
   })
 }

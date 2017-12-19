@@ -27,6 +27,7 @@ describe('/caseload-capacity', function () {
   var getCapacityStub
   var getOutstandingReportsStub
   var getSubNavStub
+  var getLastUpdated
   var capacityStubResult = {title: 'Test', capacityTable: {}, subNav: [{}]}
   var authorisationService
   authorisationService = {
@@ -36,12 +37,14 @@ describe('/caseload-capacity', function () {
     getCapacityStub = sinon.stub()
     getOutstandingReportsStub = sinon.stub().resolves()
     getSubNavStub = sinon.stub()
+    getLastUpdated = sinon.stub().resolves(new Date(2017, 11, 1))
     var route = proxyquire(
       '../../../app/routes/capacity-route', {
         '../services/get-capacity-view': getCapacityStub,
         '../services/get-outstanding-reports': getOutstandingReportsStub,
         '../authorisation': authorisationService,
-        '../services/get-sub-nav': getSubNavStub
+        '../services/get-sub-nav': getSubNavStub,
+        '../services/data/get-last-updated': getLastUpdated
       })
     app = routeHelper.buildApp(route)
   })
