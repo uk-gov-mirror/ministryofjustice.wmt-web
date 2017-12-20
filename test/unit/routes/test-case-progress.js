@@ -21,6 +21,7 @@ const CASE_PROGRESS = {
 var app
 var route
 var getCaseProgress
+var getLastUpdated
 var getSubNavStub
 var authorisationService
 
@@ -30,8 +31,10 @@ before(function () {
   }
   getSubNavStub = sinon.stub()
   getCaseProgress = sinon.stub()
+  getLastUpdated = sinon.stub().resolves(new Date(2017, 11, 1))
   route = proxyquire('../../../app/routes/case-progress', {
     '../services/get-case-progress': getCaseProgress,
+    '../services/data/get-last-updated': getLastUpdated,
     '../authorisation': authorisationService,
     '../services/get-sub-nav': getSubNavStub})
   app = routeHelper.buildApp(route)

@@ -8,6 +8,10 @@ const tabs = require('../constants/wmt-tabs')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const workloadTypes = require('../../app/constants/workload-type')
+const getLastUpdated = require('../services/data/get-last-updated')
+const dateFormatter = require('../services/date-formatter')
+
+var lastUpdated
 
 module.exports = function (router) {
   router.get('/', function (req, res, next) {
@@ -122,22 +126,27 @@ var renderOverview = function (req, res, next) {
   var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
   var overviewPromise = getOverview(id, organisationLevel)
-  return overviewPromise.then(function (result) {
-    return res.render('overview', {
-      title: result.title,
-      subTitle: result.subTitle,
-      breadcrumbs: result.breadcrumbs,
-      organisationLevel: organisationLevel,
-      linkId: req.params.id,
-      screen: 'overview',
-      childOrganisationLevel: childOrganisationLevel,
-      childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
-      subNav: getSubNav(id, organisationLevel, req.path),
-      overviewDetails: result.overviewDetails,
-      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+  return getLastUpdated().then(function (result) {
+    lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+    return overviewPromise.then(function (result) {
+      result.date = lastUpdated
+      return res.render('overview', {
+        title: result.title,
+        subTitle: result.subTitle,
+        breadcrumbs: result.breadcrumbs,
+        organisationLevel: organisationLevel,
+        linkId: req.params.id,
+        screen: 'overview',
+        childOrganisationLevel: childOrganisationLevel,
+        childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
+        subNav: getSubNav(id, organisationLevel, req.path),
+        overviewDetails: result.overviewDetails,
+        date: result.date,
+        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+      })
+    }).catch(function (error) {
+      next(error)
     })
-  }).catch(function (error) {
-    next(error)
   })
 }
