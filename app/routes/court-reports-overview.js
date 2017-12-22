@@ -72,8 +72,8 @@ var renderOverview = function (req, res, next) {
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
         authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
       })
-    }).catch(function (error) {
-      next(error)
     })
+  }).catch(function (error) {
+    next(error)
   })
 }

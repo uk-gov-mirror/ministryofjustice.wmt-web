@@ -86,9 +86,9 @@ module.exports = function (router) {
             authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
           })
         })
-      }).catch(function (error) {
-        next(error)
       })
+    }).catch(function (error) {
+      next(error)
     })
   })
 
