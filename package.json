@@ -86,6 +86,6 @@
     "underscore": "^1.8.3",
     "util": "^0.10.3",
     "validator": "^8.2.0",
-    "wmt-probation-rules": "ministryofjustice/wmt-probation-rules.git#v0.8.1"
+    "wmt-probation-rules": "ministryofjustice/wmt-probation-rules.git#v0.8.6"
   }
 }
