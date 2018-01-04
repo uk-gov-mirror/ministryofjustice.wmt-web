@@ -184,7 +184,7 @@ describe('services/validators/fieldset-validator', function () {
     })
 
     it('should return false if date is within the valid range', function () {
-      var validDate = dateFormatter.now().add(81, 'years').toDate()
+      var validDate = dateFormatter.now().add(50, 'years').toDate()
       var validDateArray = [validDate.getDate(), validDate.getMonth() + 1, validDate.getFullYear()]
       FieldsetValidator(validDateArray, FIELD_NAME, errorHandler)
           .isValidDate()
