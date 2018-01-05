@@ -232,6 +232,8 @@
     <tbody>
       {% for member in outstandingReports %}
       {% if loop.last %}
+    </tbody>
+    <tfoot>
       <tr>
             <td colspan="2" headers="name org">{{ member.name }}</td>
             <td headers="outstanding warrants">{{ member.totalOW }}</td>
@@ -239,6 +241,7 @@
             <td headers="overdue terminations">{{ member.totalOT }}</td>
             <td headers="suspended lifers">{{ member.totalSL }}</td>
       </tr>
+    </tfoot>
       {% else %}
       <tr>
           <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
@@ -250,7 +253,7 @@
       </tr>
       {% endif %}
       {% endfor %}
-    </tbody>
+    
     {% else %}
     <tbody>
       {% for member in outstandingReports %}
@@ -267,6 +270,8 @@
         </tr>
         {% endfor %}
         {% if loop.last %}
+    </tbody>
+    <tfoot>
         <tr>
             <td colspan="2" headers="name org">{{ member.name }}</td>
             <td headers="outstanding warrants">{{ member.totalOW }}</td>
@@ -274,9 +279,10 @@
             <td headers="overdue terminations">{{ member.totalOT }}</td>
             <td headers="suspended lifers">{{ member.totalSL }}</td>
         </tr>
+    </tfoot>
         {% endif %}
       {% endfor %}
-    </tbody>
+    
     {% endif %}
   </table>
 {% endif %}
