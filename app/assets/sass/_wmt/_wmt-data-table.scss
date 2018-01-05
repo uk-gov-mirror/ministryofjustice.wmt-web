@@ -35,8 +35,8 @@ table.data-table tr td:not(:first-child) {
     text-align: center;
 }
 
-table.data-table tfoot tr {
-    background: rgb(199, 192, 192);
+table.data-table tfoot tr td {
+    font-weight: bold;
 }
 
 table.data-table tr td.align-centre{
