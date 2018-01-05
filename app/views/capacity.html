@@ -133,8 +133,11 @@
     {% if organisationLevel === 'team' %}
       <tbody>
         {% for member in capacityBreakdown %}
-        <tr>
+        
           {% if loop.last %}
+        </tbody>
+        <tfoot>
+            <tr>
           <td colspan="2" headers="name org">{{ member.name }}</td>
           <td headers="capacity breakdown">{{ member.capacity | round(1) }}%</td>
           <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>
@@ -145,7 +148,10 @@
           <td headers="sdrs breakdown">{{ member.totalSDRs }}</td>
           <td headers="gs breakdown">{{ member.totalGs | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.totalCMS | round(1) }}%</td>
+        </tr>
+        </tfoot>
           {% else %}
+          <tr>
           <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade org">{{ member.grade }}</td>
           {% if member.capacityPercentage > 110 %}
@@ -161,10 +167,11 @@
           <td headers="sdrs breakdown">{{ member.sdrs }}</td>
           <td headers="gs breakdown">{{ member.gsPercentage | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.cmsPercentage | round(1) }}%</td>
-          {% endif %}
         </tr>
+          {% endif %}
+        
         {% endfor %}
-      </tbody>
+      
     </table>
   {% else %}
       <tbody>
@@ -191,6 +198,8 @@
         </tr>
         {% endfor %}
         {% if loop.last %}
+    </tbody>
+    <tfoot>
         <tr>
             <td colspan="2" headers="name org">{{ member.name }}</td>
             <td headers="capacity breakdown">{{ member.capacity | round(1) }}%</td>
@@ -203,9 +212,9 @@
             <td headers="gs breakdown">{{ member.totalGs | round(1) }}%</td>
             <td headers="cms breakdown">{{ member.totalCMS | round(1) }}%</td>
         </tr>
+    </tfoot>
         {% endif %}
       {% endfor %}
-      </tbody>
     </table>
   {% endif %}
   <br>
