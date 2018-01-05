@@ -35,12 +35,13 @@ table.data-table tr td:not(:first-child) {
     text-align: center;
 }
 
-table.data-table tfoot tr:first-child td {
-    padding-top: 50px !important;
+table.data-table tr td.align-centre {
+    text-align: center;
 }
 
-table.data-table tr td.align-centre{
-    text-align: center;
+table.data-table tr td.blank-row {
+    height: 20px;
+    border: none !important;
 }
 
 table.data-table tr:nth-child(odd){

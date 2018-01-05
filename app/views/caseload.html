@@ -315,6 +315,19 @@
         </tbody>
         <tfoot>
           <tr>
+            <td class="blank-row"></td>
+            <td class="blank-row"></td>
+            <td class="blank-row"></td>
+            <td class="blank-row"></td>
+            <td class="blank-row"></td>
+            <td class="blank-row"></td>
+            <td class="blank-row"></td>
+            <td class="blank-row"></td>
+            <td class="blank-row"></td>
+            <td class="blank-row"></td>
+            <td class="blank-row"></td>
+          </tr>
+          <tr>
             <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om">Average</td>
             {% for grade, total in caseType.array.percentageTotals %}
             <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
