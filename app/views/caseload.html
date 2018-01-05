@@ -79,6 +79,8 @@
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total">{{ member.totalCases }}</td>
               </tr>
             {% endfor %}
+          </tbody>
+          <tfoot>
             <tr>
               <td colspan="2" headers="{{caseType.displayName}}_om">Total</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ caseType.array.totals.a | round(1) }}</td>
@@ -91,7 +93,7 @@
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ caseType.array.totals.untiered | round(1) }}</td>   
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total" >{{ caseType.array.totals.overall | round(1) }}</td>   
             </tr>
-          </tbody>
+          </tfoot>
         </table>
       </div>
     {% endfor %}
@@ -131,6 +133,8 @@
               <td headers="total totals">{{ org.totalCases }}</td>
             </tr>
           {% endfor %}
+        </tbody>
+        <tfoot>
           <tr>
             <td headers="name org">Total</td>
             <td headers="community totals">{{caseType.totalSummary[0].totals.totalCommunity}}</td>
@@ -138,7 +142,7 @@
             <td headers="custody totals">{{caseType.totalSummary[0].totals.totalCustody}}</td>
             <td headers="total totals">{{caseType.totalSummary[0].totals.totalTotalCases}}</td>
           </tr>
-          </tbody>
+        </tfoot> 
         </table>
 
         <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by grade</h3>
@@ -182,6 +186,8 @@
             </tr>
             {% endfor %}
           {% endfor %}
+        </tbody>
+        <tfoot>
           <tr>
             <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om">Average</td>
             {% for grade, total in caseType.array.percentageTotals %}
@@ -198,7 +204,7 @@
           </tr>
           <tr>
           {% endfor %}
-        </tbody>
+        </tfoot>
       </table>
       </div>
     {% else %}
@@ -244,6 +250,8 @@
               </tr>
             {% endfor %}
             {% endfor %}
+          </tbody>
+          <tfoot>
             <tr>
                 <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name">Total</td>
                 {% for grade, total in caseType.array.totals %}
@@ -260,7 +268,7 @@
             </tr>
             <tr>
           {% endfor %}
-          </tbody>
+        </tfoot>
         </table>
 
         <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by grade</h3>
@@ -304,6 +312,8 @@
             </tr>
             {% endfor %}
           {% endfor %}
+        </tbody>
+        <tfoot>
           <tr>
             <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om">Average</td>
             {% for grade, total in caseType.array.percentageTotals %}
@@ -320,7 +330,7 @@
           </tr>
           <tr>
           {% endfor %}
-        </tbody>
+        </tfoot>
       </table>
       </div>
     {% endif %}
