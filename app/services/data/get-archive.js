@@ -3,8 +3,6 @@ const ArchiveDateRange = require('../domain/archive-date-range')
 
 module.exports = function (archiveDateRange) {
   var selectColumns = [
-    'unique_identifier AS uniqueIdentifier',
-    'om_type_id AS omTypeId',
     'ldu_name AS lduName',
     'team_name AS teamName',
     'om_name AS omName',
@@ -30,6 +28,6 @@ module.exports = function (archiveDateRange) {
     whereClause = ''
   }
 
-  return knex.raw('SELECT TOP 100 ' + selectColumns.join(', ') + ' FROM archive_data_view'
+  return knex.raw('SELECT top 100 ' + selectColumns.join(', ') + ' FROM archive_data_view'
    + whereClause)
 }

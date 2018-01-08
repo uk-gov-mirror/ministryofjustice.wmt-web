@@ -79,7 +79,6 @@
     style="width: 100%;">
     <thead>
         <tr class="headers">
-            <th id="uniqueId">Unique Identifier</th>
             <th id="cluster">Cluster</th>
             <th id="team">Team</th>
             <th id="offenderM">Offender Manager</th>
@@ -94,7 +93,6 @@
     <tbody>
       {% for result in results %}
         <tr>
-            <td>{{ result.uniqueIdentifier }}</td>
             <td>{{ result.lduName }}</td>
             <td>{{ result.teamName }}</td>
             <td>{{ result.omName }}</td>
