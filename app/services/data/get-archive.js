@@ -28,6 +28,6 @@ module.exports = function (archiveDateRange) {
     whereClause = ''
   }
 
-  return knex.raw('SELECT top 100 ' + selectColumns.join(', ') + ' FROM archive_data_view'
+  return knex.raw('SELECT top 10000 ' + selectColumns.join(', ') + ' FROM archive_data_view'
    + whereClause)
 }

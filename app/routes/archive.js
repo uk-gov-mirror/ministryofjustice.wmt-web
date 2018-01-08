@@ -9,6 +9,7 @@ const ValidationError = require('../services/errors/validation-error')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const organisationUnitConstants = require('../constants/organisation-unit')
+const dateFormatter = require('../services/date-formatter')
 
 var archiveDateRange
 var errors
@@ -43,6 +44,11 @@ module.exports = function (router) {
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return getArchive(archiveDateRange).then(function (results) {
+      results.forEach(function(result) {
+        if(result.reductionDate !== null) {
+          result.reductionDate = dateFormatter.formatDate(result.reductionDate, 'DD-MM-YYYY HH:mm')
+        }
+      })
       return res.render('archive-data', {
         title: 'Archive',
         results: results,
