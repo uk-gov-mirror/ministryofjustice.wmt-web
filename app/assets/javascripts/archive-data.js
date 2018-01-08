@@ -1,3 +1,5 @@
+//var data
+
 $(document).ready(function() {
     $('.js-data-table').dataTable({
       paging: true,
@@ -11,5 +13,15 @@ $(document).ready(function() {
       }
       ]
     });
-  });
 
+    
+    
+});
+
+function printData() {
+  var table = $('.js-data-table').DataTable();
+  var data = table.rows({
+    filter: 'applied'
+  }).data();
+  console.log(data)
+}

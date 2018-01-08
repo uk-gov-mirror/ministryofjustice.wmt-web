@@ -73,7 +73,7 @@
   </table>
 </form>
 
-<a href="/archive-data/archive-csv" class="button" style="float: right; margin: 20px 20px 50px">Export Archive Data</a>
+<a onclick="printData()" class="button" style="float: right; margin: 20px 20px 50px">Export Archive Data</a>
     
 <table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info"
     style="width: 100%;">
@@ -111,5 +111,17 @@
 <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
 <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
 <script src="{{ asset_path }}javascripts/archive-data.js"></script>
+
+<script>
+        $(document).ready(function() {
+    
+        var table = $('.js-data-table').DataTable();
+        var data = table.rows().data();
+    
+        function printData() {
+          console.log(data)
+        }
+      });
+</script>
 
 {% endblock %}
