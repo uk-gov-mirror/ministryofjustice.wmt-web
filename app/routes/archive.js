@@ -68,7 +68,10 @@ module.exports = function (router) {
     }
 
     return getArchive(archiveDateRange).then(function (results) {
-      let dateFileName = archiveDateRange.archiveFromDate.toISOString().substring(0, 10) + ' ' + archiveDateRange.archiveToDate.toISOString().substring(0, 10)
+      let dateFileName = null
+      if(archiveDateRange !== null) {
+        dateFileName = archiveDateRange.archiveFromDate.toISOString().substring(0, 10) + ' ' + archiveDateRange.archiveToDate.toISOString().substring(0, 10)
+      }
       var exportCsv = getExportCsv(dateFileName, results, tabs.ADMIN.ARCHIVE)
       res.attachment(exportCsv.filename)
       res.send(exportCsv.csv)
