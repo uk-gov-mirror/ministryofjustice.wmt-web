@@ -1,5 +1,6 @@
 $(document).ready(function() {
       $('.js-data-table').dataTable({
+        fixedHeader: true,
         paging: false,
         searching: false,
         info: false,
@@ -7,8 +8,10 @@ $(document).ready(function() {
         "order": [[ 0, "asc" ]],
         columnDefs: [{
           targets: [],
-          orderable: false
+          orderable: false,
         }
         ]
       });
     });
+
+
