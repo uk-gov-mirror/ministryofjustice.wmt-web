@@ -93,16 +93,27 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
         '\n\n\nCOMMUNITY\n' + communityCsv + '\n\n\nLICENSE\n' + licenseCsv)
       } else {
         var overallTable = parseTotalSummaryTable(result.caseloadDetails.overallTotalSummary)
-        var custodyTable = parseCaseloadDetailsTable(result.caseloadDetails.custodyCaseloadDetails)
-        var communityTable = parseCaseloadDetailsTable(result.caseloadDetails.communityCaseloadDetails)
-        var licenseTable = parseCaseloadDetailsTable(result.caseloadDetails.licenseCaseloadDetails)
+        var custodyTable = parseCaseloadDetailsTable(result.caseloadDetails.custodyCaseloadDetails.details)
+        var communityTable = parseCaseloadDetailsTable(result.caseloadDetails.communityCaseloadDetails.details)
+        var licenseTable = parseCaseloadDetailsTable(result.caseloadDetails.licenseCaseloadDetails.details)
 
         overallCsv = generateCsv(overallTable)
         custodyCsv = generateCsv(custodyTable, fields, fieldNames)
         communityCsv = generateCsv(communityTable, fields, fieldNames)
         licenseCsv = generateCsv(licenseTable, fields, fieldNames)
 
-        var overallByGradeTable = parseCaseloadDetailsTable(result.caseloadDetails.overallCaseloadDetails)
+        var overallByGradeTable = parseCaseloadDetailsTable(result.caseloadDetails.overallCaseloadDetails.detailsPercentages)
+        overallByGradeTable.forEach(function (row) {
+          row.totalCases = row.totalCases.toFixed(2) + '%'
+          row.untiered = row.untiered.toFixed(2) + '%'
+          row.d2 = row.d2.toFixed(2) + '%'
+          row.d1 = row.d1.toFixed(2) + '%'
+          row.c2 = row.c2.toFixed(2) + '%'
+          row.c1 = row.c1.toFixed(2) + '%'
+          row.b2 = row.b2.toFixed(2) + '%'
+          row.b1 = row.b1.toFixed(2) + '%'
+          row.a = row.a.toFixed(2) + '%'
+        })
         var overallByGradeCsv = generateCsv(overallByGradeTable, fields, fieldNames)
 
         csv = ('OVERALL\n' + overallCsv + '\n\n\nCUSTODY\n' + custodyCsv +
