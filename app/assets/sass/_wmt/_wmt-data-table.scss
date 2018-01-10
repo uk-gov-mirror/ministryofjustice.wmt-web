@@ -6,21 +6,6 @@
     padding:0;
 }
 
-table.fixedHeader-floating {
-    position:fixed !important;
-    background-color:white
-}
-
-table.fixedHeader-floating.no-footer {
-    border-bottom-width:0
-}
-
-table.fixedHeader-locked {
-    position:absolute !important;
-    background-color:white
-}
-    @media print{table.fixedHeader-floating{display:none}}
-
 table.data-table {
     max-width: 1024px!important;
 }
@@ -28,6 +13,7 @@ table.data-table {
 table.data-table tr th {
     padding: 0 10px;
     text-align: center;
+    background-color:white;
 }
 
 table.data-table tr, table.data-table th, table.data-table td {

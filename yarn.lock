@@ -1586,6 +1586,10 @@ flat@^2.0.0:
   dependencies:
     is-buffer "~1.1.2"
 
+floatthead@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/floatthead/-/floatthead-2.0.3.tgz#a0df62342bf169aa1d56c3b518348b0916231df2"
+
 for-in@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -3057,6 +3061,10 @@ moment@2.x.x, moment@^2.10.6, moment@^2.18.1, moment@^2.9.0:
   version "2.19.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.1.tgz#56da1a2d1cbf01d38b7e1afc31c10bcfa1929167"
 
+moment@^2.19.2:
+  version "2.20.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
+
 ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
@@ -4082,9 +4090,9 @@ scss-tokenizer@^0.2.3:
     js-base64 "^2.1.8"
     source-map "^0.4.2"
 
-selenium-standalone@6.5.0:
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/selenium-standalone/-/selenium-standalone-6.5.0.tgz#5ecaffdcb15799fe69954e6143791a38bf88dfd1"
+selenium-standalone@6.11.0:
+  version "6.11.0"
+  resolved "https://registry.yarnpkg.com/selenium-standalone/-/selenium-standalone-6.11.0.tgz#eb21ff65f3b2ece75061b35d4f9e7572ac0280c2"
   dependencies:
     async "^2.1.4"
     commander "^2.9.0"
@@ -4882,12 +4890,12 @@ window-size@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.4.tgz#f8e1aa1ee5a53ec5bf151ffa09742a6ad7697876"
 
-wmt-probation-rules@ministryofjustice/wmt-probation-rules.git#v0.7.0:
-  version "0.7.0"
-  resolved "https://codeload.github.com/ministryofjustice/wmt-probation-rules/tar.gz/44ce22f4a2d440e8e5043aa391924c34a2ad8bd1"
+wmt-probation-rules@ministryofjustice/wmt-probation-rules.git#v0.8.6:
+  version "0.8.5"
+  resolved "https://codeload.github.com/ministryofjustice/wmt-probation-rules/tar.gz/98729f70244d5ec23ee54881602e9995e753da20"
   dependencies:
     lodash "^4.17.4"
-    moment "^2.18.1"
+    moment "^2.19.2"
 
 wordwrap@~0.0.2:
   version "0.0.3"
