@@ -79,3 +79,11 @@
         <p>Last updated on  <span class="bold">{{date}}</span></p>
  </div>
 {% endblock %}
+
+{% block page_specific_scripts %}
+
+    <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
+    <script src="/public/javascripts/floatThead.js"></script>
+    <script src="/public/javascripts/jquery.floatThead.js"></script>
+   
+{% endblock %}
