@@ -8,7 +8,7 @@ $(document).ready(function() {
       "order": [[ 0, "asc" ]],
       columnDefs: [{
         targets: [],
-        orderable: false,
+        orderable: false
       }
       ]
     });
