@@ -1,130 +1,131 @@
 <table>
-    <tr>
-        <td>
-        {% ifAsync ((organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
-        <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/reductions-csv" class="button reduction-export" style="float: right; margin-left:10px; margin-bottom: 10px">Export Reductions</a>
-        {% endif %}
-        <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="button sln-export" style="float: right; margin-bottom: 10px; ">Export Caseload</a>
-        </td>
-    </tr>
-</table>
-
-{% if organisationLevel === "offender-manager" %}
-<div class="grid-row">
-    <div class="column-two-thirds">
-        <table>
-            <tbody>
-                <tr>
-                    <th scope="row">Grade</th>
-                    <td class="sln-grade numeric">{{ overviewDetails.grade }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Team</th>
-                    <td class="numeric"><a href="/probation/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
-                </tr>
-                <tr>
-                    <th scope="row">Capacity</th>
-                    {% if overviewDetails.capacity > 110 %}
-                    <td class="numeric capacity-red"> {{ overviewDetails.capacity | round }}%</td>
-                    {% else %}
-                    <td class="numeric"> {{ overviewDetails.capacity | round }}%</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <th scope="row">Cases</th>
-                    <td class="numeric">{{ overviewDetails.cases }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Contracted hours</th>
-                    <td class="numeric">{{ overviewDetails.contractedHours }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Reduction</th>
-                    <td class="numeric">{{ overviewDetails.reduction }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <tr>
+            <td>
+            {% ifAsync ((organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
+            <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/reductions-csv" class="button reduction-export" style="float: right; margin-left:10px; margin-bottom: 10px">Export Reductions</a>
+            {% endif %}
+            <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="button sln-export" style="float: right; margin-bottom: 10px; ">Export Caseload</a>
+            </td>
+        </tr>
+    </table>
+    
+    {% if organisationLevel === "offender-manager" %}
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <table>
+                <tbody>
+                    <tr>
+                        <th scope="row">Grade</th>
+                        <td class="sln-grade numeric">{{ overviewDetails.grade }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Team</th>
+                        <td class="numeric"><a href="/probation/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Capacity</th>
+                        {% if overviewDetails.capacity > 110 %}
+                        <td class="numeric capacity-red"> {{ overviewDetails.capacity | round }}%</td>
+                        {% else %}
+                        <td class="numeric"> {{ overviewDetails.capacity | round }}%</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th scope="row">Cases</th>
+                        <td class="numeric">{{ overviewDetails.cases }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Contracted hours</th>
+                        <td class="numeric">{{ overviewDetails.contractedHours }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Reduction</th>
+                        <td class="numeric">{{ overviewDetails.reduction }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-{% else %}
-
-<table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
-    <thead>
-        <tr>
-            {% if organisationLevel === 'team' %}
-            <th class="sln-table-org-level" id="om" colspan="2">{{ childOrganisationLevelDisplayText }}</th>
+    {% else %}
+    
+    <table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+        <thead>
+            <tr>
+                {% if organisationLevel === 'team' %}
+                <th class="sln-table-org-level" id="om" colspan="2">{{ childOrganisationLevelDisplayText }}</th>
+                {% else %}
+                <th class="sln-table-org-level" id="om">{{ childOrganisationLevelDisplayText }}</th>
+                {% endif %}
+                <th id="cap" colspan="3">Capacity</th>
+                <th id="hrs" colspan="2">Hours</th>
+                <th id="cases">Cases</th>
+            </tr>
+    
+            <tr class="headers">
+                <th headers="om" id="name">Name</th>
+                {% if organisationLevel === 'team' %}
+                <th headers="om" id="grade">Grade</th>
+                {% endif %}
+                <th headers="cap" id="current">Current(%)</th>
+                <th headers="cap" id="points">Available Points</th>
+                <th headers="cap" id="remaining">Remaining Points</th>
+                <th headers="hrs" id="contracted">Contracted</th>
+                <th headers="hrs" id="reduction">Reduction</th>
+                <th headers="cases" id="total">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in overviewDetails %}
+            {% if member.name !== 'Total / Average' %}
+            <tr>
+              <td headers="name om"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
+            {% if organisationLevel === 'team' %}  
+              <td headers="grade om">{{ member.gradeCode }}</td>
+            {% endif %}
+            {% if member.capacityPercentage > 110 %}
+              <td class="capacity-red" headers="current cap">{{ member.capacityPercentage | round }}%</td>
             {% else %}
-            <th class="sln-table-org-level" id="om">{{ childOrganisationLevelDisplayText }}</th>
+              <td headers="current cap">{{ member.capacityPercentage | round }}%</td>
             {% endif %}
-            <th id="cap" colspan="3">Capacity</th>
-            <th id="hrs" colspan="2">Hours</th>
-            <th id="cases">Cases</th>
-        </tr>
-
-        <tr class="headers">
-            <th headers="om" id="name">Name</th>
-            {% if organisationLevel === 'team' %}
-            <th headers="om" id="grade">Grade</th>
+            <td headers="points cap">{{ member.availablePoints }}</td>
+            {% if member.capacityPercentage > 110 %}
+              <td class="capacity-red" headers="remaining cap">{{ member.remainingPoints }}</td>
+            {% else %}
+              <td headers="remaining cap">{{ member.remainingPoints}}</td>
             {% endif %}
-            <th headers="cap" id="current">Current (%)</th>
-            <th headers="cap" id="points">Available Points</th>
-            <th headers="cap" id="remaining">Remaining Points</th>
-            <th headers="hrs" id="contracted">Contracted</th>
-            <th headers="hrs" id="reduction">Reduction</th>
-            <th headers="cases" id="total">Total</th>
-        </tr>
-    </thead>
-    <tbody>
+            <td headers="hrs contracted">{{ member.contractedHours }}</td>
+            <td headers="hrs reduction">{{ member.reductionHours }}</td>
+            <td headers="cases total">{{ member.totalCases }}</td>
+          </tr>
+          {% endif %}
+          {% endfor%}
+        </tbody>
+        <tfoot>
         {% for member in overviewDetails %}
-        {% if member.name !== 'Total / Average' %}
-        <tr>
-          <td headers="name om"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
-        {% if organisationLevel === 'team' %}  
-          <td headers="grade om">{{ member.gradeCode }}</td>
-        {% endif %}
-        {% if member.capacityPercentage > 110 %}
-          <td class="capacity-red" headers="current cap">{{ member.capacityPercentage | round }}%</td>
-        {% else %}
-          <td headers="current cap">{{ member.capacityPercentage | round }}%</td>
-        {% endif %}
-        <td headers="points cap">{{ member.availablePoints }}</td>
-        {% if member.capacityPercentage > 110 %}
-          <td class="capacity-red" headers="remaining cap">{{ member.remainingPoints }}</td>
-        {% else %}
-          <td headers="remaining cap">{{ member.remainingPoints}}</td>
-        {% endif %}
-        <td headers="hrs contracted">{{ member.contractedHours }}</td>
-        <td headers="hrs reduction">{{ member.reductionHours }}</td>
-        <td headers="cases total">{{ member.totalCases }}</td>
-      </tr>
-      {% endif %}
-      {% endfor%}
-    </tbody>
-    <tfoot>
-    {% for member in overviewDetails %}
-    {% if member.name === 'Total / Average' %}
-        <tr>
-        <td headers="name om">{{ member.name }}</td>
-        {% if organisationLevel === 'team' %}  
-          <td headers="grade om">{{ member.gradeCode }}</td>
-        {% endif %}
-        <td headers="current cap">{{ member.totalCapacityPercentage | round }}%</td>
-        <td headers="points cap">{{ member.totalAvailablePoints }}</td>
-        <td headers="remaining cap">{{ member.totalRemainingPoints}}</td>
-        <td headers="hrs contracted">{{ member.totalContractedHours }}</td>
-        <td headers="hrs reduction">{{ member.totalReduction }}</td>
-        <td headers="cases total">{{ member.totalTotalCases }}</td>  
-        </tr>
-        {% endif %}
-        {% endfor%}
-    </tfoot>
-  </table>
-{% endif %}
-
-{% block page_specific_scripts %}
-
-    <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
-    <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
-    <script src="{{ asset_path }}javascripts/case-overview.js"></script>
-   
-{% endblock %}
+        {% if member.name === 'Total / Average' %}
+            <tr>
+            <td headers="name om">{{ member.name }}</td>
+            {% if organisationLevel === 'team' %}  
+              <td headers="grade om">{{ member.gradeCode }}</td>
+            {% endif %}
+            <td headers="current cap">{{ member.totalCapacityPercentage | round }}%</td>
+            <td headers="points cap">{{ member.totalAvailablePoints }}</td>
+            <td headers="remaining cap">{{ member.totalRemainingPoints}}</td>
+            <td headers="hrs contracted">{{ member.totalContractedHours }}</td>
+            <td headers="hrs reduction">{{ member.totalReduction }}</td>
+            <td headers="cases total">{{ member.totalTotalCases }}</td>  
+            </tr>
+            {% endif %}
+            {% endfor%}
+        </tfoot>
+      </table>
+    {% endif %}
+    
+    {% block page_specific_scripts %}
+    
+        <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
+        <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
+        <script src="{{ asset_path }}javascripts/fixed-overview-header.js"></script>
+        <script src="{{ asset_path }}javascripts/case-overview.js"></script>
+       
+    {% endblock %}
