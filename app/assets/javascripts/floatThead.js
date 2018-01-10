@@ -1,5 +1,8 @@
-$(document).ready(function() {
-    $('table.data-table').floatThead({
-       position: 'absolute'
+   $(document).ready(function() {
+   var $table = $('table.data-table');
+   $table.floatThead({
+       responsiveContainer: function($table){
+           return $table.closest('.table-responsive');
+       }
    });
-   });
+});
