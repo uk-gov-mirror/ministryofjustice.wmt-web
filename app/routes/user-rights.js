@@ -134,8 +134,10 @@ var removeUserRole = function (username, next) {
 var addUpdateUserRole = function (username, rights, loggedInUsername) {
   return userRoleService.getUserByUsername(loggedInUsername).then(function (result) {
     var loggedInUser = result
+    logger.info('addUpdateUserRole', '/admin/user', 'Logged In User: ' + loggedInUser)
     return userRoleService.getUserByUsername(username).then(function (result) {
       var user = result
+      logger.info('addUpdateUserRole', '/admin/user', 'User: ' + user)
       return userRoleService.getRole(rights).then(function (role) {
         return userRoleService.updateUserRole(user.id, role.id, loggedInUser.id).then(function (result) {
           return result
