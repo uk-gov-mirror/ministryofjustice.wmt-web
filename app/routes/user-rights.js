@@ -8,7 +8,6 @@ const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
-const logger = require('../logger')
 
 module.exports = function (router) {
   router.get('/admin/user', function (req, res) {
@@ -66,16 +65,12 @@ module.exports = function (router) {
 
     var username = req.body.username
 
-    logger.info(req.method, req.path, 'Username: ' + username)
-
     if (!isValidUsername(username)) {
       return res.redirect(302, '/admin/user?fail=true')
     }
 
-    logger.info(req.method, req.path, 'Username without domain: ' + userRoleService.removeDomainFromUsername(username))
-
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    return userRoleService.getRoleByUsername(username).then(function (role) {
+    return userRoleService.getRoleByUsername(userRoleService.removeDomainFromUsername(username)).then(function (role) {
       return res.render('user-rights', {
         title: 'User rights',
         username: username,
@@ -123,10 +118,10 @@ module.exports = function (router) {
 }
 
 var removeUserRole = function (username, next) {
-  return userRoleService.getUserByUsername(username).then(function (user) {
+  return userRoleService.getUserByUsername(userRoleService.removeDomainFromUsername(username)).then(function (user) {
     if (user) {
       return userRoleService.removeUserRoleByUserId(user.id).then(function () {
-        return userRoleService.removeUserByUsername(user.username)
+        return userRoleService.removeUserByUsername(userRoleService.removeDomainFromUsername(user.username))
       })
     }
   }).catch(function (error) {
@@ -137,10 +132,8 @@ var removeUserRole = function (username, next) {
 var addUpdateUserRole = function (username, rights, loggedInUsername) {
   return userRoleService.getUserByUsername(loggedInUsername).then(function (result) {
     var loggedInUser = result
-    logger.info('addUpdateUserRole', '/admin/user', 'Logged In User: ' + loggedInUser)
-    return userRoleService.getUserByUsername(username).then(function (result) {
+    return userRoleService.getUserByUsername(userRoleService.removeDomainFromUsername(username)).then(function (result) {
       var user = result
-      logger.info('addUpdateUserRole', '/admin/user', 'User: ' + user)
       return userRoleService.getRole(rights).then(function (role) {
         return userRoleService.updateUserRole(user.id, role.id, loggedInUser.id).then(function (result) {
           return result
@@ -149,13 +142,13 @@ var addUpdateUserRole = function (username, rights, loggedInUsername) {
     }).catch(function (noUserExist) {
       return userRoleService.getRole(rights).then(function (result) {
         var role = result
-        return userRoleService.addUser(username).then(function (userId) {
+        return userRoleService.addUser(userRoleService.removeDomainFromUsername(username)).then(function (userId) {
           var newUserRole = new UserRole(userId, role.id, new Date(), loggedInUser.id)
           return userRoleService.addUserRole(newUserRole).then(function (result) {
             return result
           }).catch(function (unableToAddUserRole) {
                         // If its not able to add the user role then the added user needs to be removed
-            return userRoleService.removeUserByUsername(username).then(function (result) {
+            return userRoleService.removeUserByUsername(userRoleService.removeDomainFromUsername(username)).then(function (result) {
               return result
             })
           })
@@ -167,8 +160,6 @@ var addUpdateUserRole = function (username, rights, loggedInUsername) {
 
 var isValidUsername = function (username) {
   var errors = errorHandler()
-
-  logger.info('isValidUsername', '/admin/user', 'Username: ' + username)
 
   fieldValidator(username, 'username', errors)
         .isValidUsername(username)
