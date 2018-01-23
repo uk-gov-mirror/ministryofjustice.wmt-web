@@ -72,7 +72,7 @@ module.exports = function (router) {
       return res.redirect(302, '/admin/user?fail=true')
     }
 
-    logger.info(req.method, req.path, 'Username without domain: ' + getUsernameWithoutDomain(username))
+    logger.info(req.method, req.path, 'Username without domain: ' + userRoleService.removeDomainFromUsername(username))
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return userRoleService.getRoleByUsername(username).then(function (role) {
@@ -177,10 +177,4 @@ var isValidUsername = function (username) {
     return false
   }
   return true
-}
-
-var getUsernameWithoutDomain = function (username) {
-  var usernameWithoutDomain = ''
-
-  return usernameWithoutDomain.substring(username.indexOf('@') + 1)
 }
