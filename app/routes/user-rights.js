@@ -8,6 +8,7 @@ const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
+const logger = require('../logger')
 
 module.exports = function (router) {
   router.get('/admin/user', function (req, res) {
@@ -64,6 +65,8 @@ module.exports = function (router) {
     ]
 
     var username = req.body.username
+
+    logger.info(req.method, req.path, 'Username: ' + username)
 
     if (!isValidUsername(username)) {
       return res.redirect(302, '/admin/user?fail=true')
@@ -159,6 +162,8 @@ var addUpdateUserRole = function (username, rights, loggedInUsername) {
 
 var isValidUsername = function (username) {
   var errors = errorHandler()
+
+  logger.info('isValidUsername', '/admin/user', 'Username: ' + username)
 
   fieldValidator(username, 'username', errors)
         .isValidUsername(username)
