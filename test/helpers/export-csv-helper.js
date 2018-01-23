@@ -1750,6 +1750,7 @@ module.exports.OM_OVERVIEW_RESULT = {
     reduction: 4,
     defaultContractedHoursPo: 37,
     defaultContractedHoursPso: 37,
+    defaultContractedHoursSpo: 0,
     capacity: 105,
     lduCluster: 'Test Cluster',
     regionName: 'Test Region'

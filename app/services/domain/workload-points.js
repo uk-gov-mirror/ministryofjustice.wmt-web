@@ -38,6 +38,7 @@ class WorkloadPoints {
     this.weightingArmsLicense = request.weightingArmsLicense
     this.defaultContractedHoursPo = request.defaultContractedHoursPo
     this.defaultContractedHoursPso = request.defaultContractedHoursPso
+    this.defaultContractedHoursSpo = request.defaultContractedHoursSpo
     this.parom = request.parom
     this.paroms_enabled = 1
     this.isT2A = request.isT2A
@@ -162,6 +163,9 @@ class WorkloadPoints {
     FieldValidator(this.defaultContractedHoursPso, 'defaultContractedHoursPso', errors)
       .isRequired()
       .isInt(0, 37)
+    FieldValidator(this.defaultContractedHoursSpo, 'defaultContractedHoursSpo', errors)
+      .isRequired()
+      .isInt(0, 37)
     FieldValidator(this.parom, 'parom', errors)
       .isRequired()
       .isInt(0, 999)
@@ -176,6 +180,7 @@ class WorkloadPoints {
     this.weightingArmsLicense = '0'
     this.defaultContractedHoursPo = '0'
     this.defaultContractedHoursPso = '0'
+    this.defaultContractedHoursSpo = '0'
     this.parom = '0'
     this.paroms_enabled = '0'
   }
