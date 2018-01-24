@@ -34,13 +34,13 @@ var defaultWorkloadPoints = {
   nominalTargetPo: 5678,
   defaultContractedHoursPo: 37,
   defaultContractedHoursPso: 38,
-  defaultContractedHoursSpo: 0,
   weightingOverdue: 10,
   weightingWarrants: 20,
   weightingUpw: 70,
   parom: 99,
   effectiveTo: null,
-  isT2A: false
+  isT2A: false,
+  defaultContractedHoursSpo: 0,
 }
 
 var defaultWorkloadPointsT2A = Object.assign({}, defaultWorkloadPoints, { isT2A: true })

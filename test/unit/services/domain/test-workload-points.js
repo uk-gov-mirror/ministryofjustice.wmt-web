@@ -38,9 +38,9 @@ var VALID_WORKLOAD_POINTS = {
   weightingArmsLicense: '10.2',
   defaultContractedHoursPo: '37',
   defaultContractedHoursPso: '37',
-  defaultContractedHoursSpo: '0',
   parom: '121',
-  isT2A: 'false'
+  isT2A: 'false',
+  defaultContractedHoursSpo: '0',
 }
 
 describe('services/domain/workload-points', function () {

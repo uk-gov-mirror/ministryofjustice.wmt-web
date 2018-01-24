@@ -50,11 +50,11 @@ var WORKLOAD_POINTS_TO_POST = {
   weightingUpw: '100.0',
   defaultContractedHoursPo: '37',
   defaultContractedHoursPso: '37',
-  defaultContractedHoursSpo: '0',
   parom: '121',
   weightingArmsCommunity: '15',
   weightingArmsLicense: '10',
-  isT2A: 'false'
+  isT2A: 'false',
+  defaultContractedHoursSpo: '0',
 }
 
 var WORKLOAD_POINTS_T2A_TO_POST = {
