@@ -36,10 +36,10 @@ module.exports = function (workloadPoints) {
       weighting_arms_lic: workloadPoints.weightingArmsLicense,
       default_contracted_hours_po: workloadPoints.defaultContractedHoursPo,
       default_contracted_hours_pso: workloadPoints.defaultContractedHoursPso,
-      default_contracted_hours_spo: workloadPoints.defaultContractedHoursSpo,
       parom: workloadPoints.parom,
       paroms_enabled: 1,
-      is_t2a: workloadPoints.isT2A
+      is_t2a: workloadPoints.isT2A,
+      default_contracted_hours_spo: workloadPoints.defaultContractedHoursSpo
     })
     .returning('id')
 }
