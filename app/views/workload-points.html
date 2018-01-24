@@ -478,7 +478,18 @@
                     <td class="numeric">
                       <input class="form-control" id="defaultContractedHoursPso" name="defaultContractedHoursPso" type="number" value="{{ wp.defaultContractedHoursPso }}">
                     </td>   
-                  </tr>                  
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% if errors['defaultContractedHoursSpo'][0] %}
+                        <span class="error-message">{{ errors['defaultContractedHoursSpo'][0] }}</span>
+                      {% endif %} 
+                      <label class="form-label-bold" for="defaultContractedHoursSpo">SPO</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="defaultContractedHoursSpo" name="defaultContractedHoursSpo" type="number" value="{{ wp.defaultContractedHoursSpo }}">
+                    </td>   
+                  </tr>                 
                 </tbody>
               </table>
             </div>

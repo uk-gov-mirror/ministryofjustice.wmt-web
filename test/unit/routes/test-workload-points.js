@@ -50,6 +50,7 @@ var WORKLOAD_POINTS_TO_POST = {
   weightingUpw: '100.0',
   defaultContractedHoursPo: '37',
   defaultContractedHoursPso: '37',
+  defaultContractedHoursSpo: '0',
   parom: '121',
   weightingArmsCommunity: '15',
   weightingArmsLicense: '10',

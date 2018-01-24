@@ -34,6 +34,7 @@ var defaultWorkloadPoints = {
   nominalTargetPo: 5678,
   defaultContractedHoursPo: 37,
   defaultContractedHoursPso: 38,
+  defaultContractedHoursSpo: 0,
   weightingOverdue: 10,
   weightingWarrants: 20,
   weightingUpw: 70,
