@@ -40,7 +40,7 @@ var VALID_WORKLOAD_POINTS = {
   defaultContractedHoursPso: '37',
   parom: '121',
   isT2A: 'false',
-  defaultContractedHoursSpo: '0',
+  defaultContractedHoursSpo: '0'
 }
 
 describe('services/domain/workload-points', function () {

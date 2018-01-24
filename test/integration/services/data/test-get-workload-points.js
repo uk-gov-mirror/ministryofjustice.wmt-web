@@ -44,7 +44,7 @@ var expectedInsertedWorkloadPoints = {
   'weightingUpw': insertedWorkloadPoints.weighting_u,
   'parom': insertedWorkloadPoints.parom,
   'isT2A': insertedWorkloadPoints.is_t2a,
-  'defaultContractedHoursSpo': insertedWorkloadPoints.default_contracted_hours_spo,
+  'defaultContractedHoursSpo': insertedWorkloadPoints.default_contracted_hours_spo
 }
 
 var getExistingActiveWorkloadPointsT2A = function () {

@@ -54,7 +54,7 @@ var WORKLOAD_POINTS_TO_POST = {
   weightingArmsCommunity: '15',
   weightingArmsLicense: '10',
   isT2A: 'false',
-  defaultContractedHoursSpo: '0',
+  defaultContractedHoursSpo: '0'
 }
 
 var WORKLOAD_POINTS_T2A_TO_POST = {

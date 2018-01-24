@@ -39,7 +39,7 @@ module.exports = function (workloadPoints) {
       parom: workloadPoints.parom,
       paroms_enabled: 1,
       is_t2a: workloadPoints.isT2A,
-      default_contracted_hours_spo: workloadPoints.defaultContractedHoursSpo,
+      default_contracted_hours_spo: workloadPoints.defaultContractedHoursSpo
     })
     .returning('id')
 }
