@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const totalsRounder = require('../../../../app/services/helpers/totalsRounder')
+const totalsRounder = require('../../../../app/services/helpers/totals-rounder')
 
 describe('services/helpers/totals-rounder', function () {
   it('should round total contrcated hours to 1 decimal place', function () {
