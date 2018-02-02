@@ -5,6 +5,7 @@ const getOrganisationOverview = require('./data/get-organisation-overview')
 const getFullOverview = require('./data/get-full-overview')
 const orgUnit = require('../constants/organisation-unit')
 const calculatePercentage = require('./helpers/percentage-calculator').calculatePercentage
+const totalsRounder = require('./helpers/totals-rounder')
 
 module.exports = function (id, organisationLevel, isCSV = false) {
   var result = {}
@@ -48,6 +49,7 @@ var calculateValues = function (results, isCSV) {
         totals.totalTotalCases += val.totalCases
         totals.totalRemainingPoints += val.remainingPoints
       })
+      totals = totalsRounder(totals)
       totals.totalCapacityPercentage = calculatePercentage(totals.totalPoints, totals.totalAvailablePoints)
       totalsToReturn.push(totals)
     }
