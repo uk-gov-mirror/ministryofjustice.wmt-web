@@ -204,15 +204,10 @@ module.exports = function (router) {
     .then(function (result) {
       try {
         // Find the index in the array of reasons where this reason occurs
-        logger.info(req.body.reasonForReductionId)
-        var index = result.referenceData.findIndex(reason => reason.id === req.body.reasonForReductionId)
-        logger.info(index)
-        logger.info(result.referenceData)
-        console.log('Passed findIndex')
+        var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
         reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
-        console.log('Erroring here')
         if (error instanceof ValidationError) {
           var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
           return res.status(400).render('add-reduction', {
@@ -287,12 +282,9 @@ module.exports = function (router) {
     .then(function (result) {
       try {
         // Find the index in the array of reasons where this reason occurs
-        var index = result.referenceData.findIndex(reason => reason.id === req.body.reasonForReductionId)
-        console.log('Passed findIndex')
+        var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
         reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
-      } catch (error) {
-        console.log('Erroring here')
         if (error instanceof ValidationError) {
           var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
           return res.status(400).render('add-reduction', {
