@@ -208,6 +208,7 @@ module.exports = function (router) {
         reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
+        console.log('Erroring here')
         if (error instanceof ValidationError) {
           var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
           return res.status(400).render('add-reduction', {
@@ -287,6 +288,7 @@ module.exports = function (router) {
         reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
+        console.log('Erroring here')
         if (error instanceof ValidationError) {
           var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
           return res.status(400).render('add-reduction', {
