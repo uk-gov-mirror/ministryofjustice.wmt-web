@@ -285,6 +285,7 @@ module.exports = function (router) {
         var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
         reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
+      } catch (error) {
         if (error instanceof ValidationError) {
           var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
           return res.status(400).render('add-reduction', {
