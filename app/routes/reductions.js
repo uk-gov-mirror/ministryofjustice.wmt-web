@@ -12,6 +12,7 @@ const Forbidden = require('../services/errors/authentication-error').Forbidden
 const workloadTypeValidator = require('../services/validators/workload-type-validator')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
+const logger = require('../logger')
 
 var lastUpdated
 
@@ -203,7 +204,10 @@ module.exports = function (router) {
     .then(function (result) {
       try {
         // Find the index in the array of reasons where this reason occurs
+        logger.info(req.body.reasonForReductionId)
         var index = result.referenceData.findIndex(reason => reason.id === req.body.reasonForReductionId)
+        logger.info(index)
+        logger.info(result.referenceData)
         console.log('Passed findIndex')
         reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
