@@ -204,6 +204,7 @@ module.exports = function (router) {
       try {
         // Find the index in the array of reasons where this reason occurs
         var index = result.referenceData.findIndex(reason => reason.id === req.body.reasonForReductionId)
+        console.log('Passed findIndex')
         reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
@@ -282,6 +283,7 @@ module.exports = function (router) {
       try {
         // Find the index in the array of reasons where this reason occurs
         var index = result.referenceData.findIndex(reason => reason.id === req.body.reasonForReductionId)
+        console.log('Passed findIndex')
         reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
