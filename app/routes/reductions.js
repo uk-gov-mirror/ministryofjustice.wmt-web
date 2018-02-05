@@ -12,7 +12,6 @@ const Forbidden = require('../services/errors/authentication-error').Forbidden
 const workloadTypeValidator = require('../services/validators/workload-type-validator')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
-const logger = require('../logger')
 
 var lastUpdated
 
@@ -203,8 +202,8 @@ module.exports = function (router) {
     return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
     .then(function (result) {
       try {
-        //Find the index in the array of reasons where this reason occurs
-        index = result.referenceData.findIndex(reason => reason.id==req.body.reasonForReductionId)
+        // Find the index in the array of reasons where this reason occurs
+        var index = result.referenceData.findIndex(reason => reason.id === req.body.reasonForReductionId)
         reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
@@ -281,8 +280,9 @@ module.exports = function (router) {
     return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
     .then(function (result) {
       try {
-        // Dummy option in dropdown means array is offset by one
-        reductionReason = result.referenceData[req.body.reasonForReductionId - 1]
+        // Find the index in the array of reasons where this reason occurs
+        var index = result.referenceData.findIndex(reason => reason.id === req.body.reasonForReductionId)
+        reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
         if (error instanceof ValidationError) {
