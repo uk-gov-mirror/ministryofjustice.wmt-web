@@ -33,7 +33,7 @@ const addReductionsRefData = {
   title: 'Title',
   subTitle: 'SubTitle',
   breadcrumbs: [],
-  referenceData: [{ maxAllowanceHours: 0 }]
+  referenceData: [{ id: 1, maxAllowanceHours: 0 }]
 }
 
 const addReduction = {
