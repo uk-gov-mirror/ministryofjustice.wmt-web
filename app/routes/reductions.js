@@ -12,7 +12,6 @@ const Forbidden = require('../services/errors/authentication-error').Forbidden
 const workloadTypeValidator = require('../services/validators/workload-type-validator')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
-const logger = require('../logger')
 
 var lastUpdated
 
@@ -173,8 +172,6 @@ module.exports = function (router) {
   })
 
   router.post('/:workloadType/:organisationLevel/:id/add-reduction', function (req, res, next) {
-    logger.info(req.method, req.path, 'ADD ROUTE Log 1: Id of manager reduction being applied to: ' + req.params.id)
-    logger.info(req.method, req.path, 'ADD ROUTE Log 2: Reduction hours on submission of form: ' + req.body.reductionHours)
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER, roles.DATA_ADMIN, roles.SYSTEM_ADMIN])
@@ -205,10 +202,10 @@ module.exports = function (router) {
     return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
     .then(function (result) {
       try {
-        // Dummy option in dropdown means array is offset by one
-        reductionReason = result.referenceData[req.body.reasonForReductionId - 1]
+        // Find the index in the array of reasons where this reason occurs
+        var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
+        reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
-        logger.info(req.method, req.path, 'ADD ROUTE Log 3: Reduction generated: ' + reduction.hours)
       } catch (error) {
         if (error instanceof ValidationError) {
           var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
@@ -253,8 +250,6 @@ module.exports = function (router) {
   })
 
   router.post('/:workloadType/:organisationLevel/:id/edit-reduction', function (req, res, next) {
-    logger.info(req.method, req.path, 'EDIT ROUTE Log 1: Id of manager reduction being applied to: ' + req.params.id)
-    logger.info(req.method, req.path, 'EDIT ROUTE Log 2: Reduction hours on submission of form: ' + req.body.reductionHours)
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER, roles.DATA_ADMIN, roles.SYSTEM_ADMIN])
@@ -285,10 +280,10 @@ module.exports = function (router) {
     return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
     .then(function (result) {
       try {
-        // Dummy option in dropdown means array is offset by one
-        reductionReason = result.referenceData[req.body.reasonForReductionId - 1]
+        // Find the index in the array of reasons where this reason occurs
+        var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
+        reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
-        logger.info(req.method, req.path, 'EDIT ROUTE Log 3: Reduction generated:' + reduction.hours)
       } catch (error) {
         if (error instanceof ValidationError) {
           var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
