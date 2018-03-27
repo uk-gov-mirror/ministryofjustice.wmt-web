@@ -103,8 +103,9 @@ var averageTotals = function (totals, totalNumberOfGrades) {
 
 var buildCapacityBreakdownEntry = function (workloadReport) {
   var cmsPercentageValue = 0
-
-  if (workloadReport.cmsAdjustmentPoints > 0) {
+  // changed from "if (workloadReport.cmsAdjustmentPoints > 0)" to allow dividing by negative
+  // numbers and allow negative cms adjustment points to be shown for CMS adjsutments
+  if (workloadReport.cmsAdjustmentPoints !== 0) {
     cmsPercentageValue = percentageCalculator.calculatePercentage(workloadReport.cmsAdjustmentPoints, workloadReport.totalPoints)
   }
 
