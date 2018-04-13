@@ -1,7 +1,6 @@
 const ValidationError = require('../errors/validation-error')
 const FieldSetValidator = require('../validators/fieldset-validator')
 const ErrorHandler = require('../validators/error-handler')
-const moment = require('moment')
 
 class ArchiveDateRange {
   constructor (fromDay, fromMonth, fromYear, toDay, toMonth, toYear) {

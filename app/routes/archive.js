@@ -8,11 +8,9 @@ const dateRangeHelper = require('../services/helpers/date-range-helper')
 const ValidationError = require('../services/errors/validation-error')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
-const organisationUnitConstants = require('../constants/organisation-unit')
 const dateFormatter = require('../services/date-formatter')
 
 var archiveDateRange
-var errors
 
 module.exports = function (router) {
   router.get('/archive-data', function (req, res, next) {
@@ -34,7 +32,6 @@ module.exports = function (router) {
       archiveDateRange = dateRangeHelper.createArchiveDateRange(req.query)
     } catch (error) {
       if (error instanceof ValidationError) {
-        errors = error.validationErrors
         archiveDateRange = dateRangeHelper.createArchiveDateRange({})
       } else {
         throw error
@@ -44,8 +41,8 @@ module.exports = function (router) {
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return getArchive(archiveDateRange).then(function (results) {
-      results.forEach(function(result) {
-        if(result.reductionDate !== null) {
+      results.forEach(function (result) {
+        if (result.reductionDate !== null) {
           result.reductionDate = dateFormatter.formatDate(result.reductionDate, 'DD-MM-YYYY HH:mm')
         }
       })
@@ -75,7 +72,7 @@ module.exports = function (router) {
 
     return getArchive(archiveDateRange).then(function (results) {
       let dateFileName = null
-      if(archiveDateRange !== null) {
+      if (archiveDateRange !== null) {
         dateFileName = archiveDateRange.archiveFromDate.toISOString().substring(0, 10) + ' ' + archiveDateRange.archiveToDate.toISOString().substring(0, 10)
       }
       var exportCsv = getExportCsv(dateFileName, results, tabs.ADMIN.ARCHIVE)

@@ -21,13 +21,13 @@ module.exports = function (archiveDateRange) {
   ]
 
   var whereClause
-  if(archiveDateRange instanceof ArchiveDateRange) {
-    whereClause = ' WHERE reduction_date BETWEEN ' + archiveDateRange.archiveFromDate.toISOString().substring(0, 10)
-    + ' AND ' + archiveDateRange.archiveToDate.toISOString().substring(0, 10)
+  if (archiveDateRange instanceof ArchiveDateRange) {
+    whereClause = ' WHERE reduction_date BETWEEN ' + archiveDateRange.archiveFromDate.toISOString().substring(0, 10) +
+    ' AND ' + archiveDateRange.archiveToDate.toISOString().substring(0, 10)
   } else {
     whereClause = ''
   }
 
-  return knex.raw('SELECT top 10000 ' + selectColumns.join(', ') + ' FROM archive_data_view'
-   + whereClause)
+  return knex.raw('SELECT top 10000 ' + selectColumns.join(', ') + ' FROM archive_data_view' +
+   whereClause)
 }
