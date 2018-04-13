@@ -13,6 +13,11 @@ const workloadTypes = require('../../app/constants/workload-type')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const tierHelper = require('../services/helpers/tier-helper')
+const getLastUpdated = require('../services/data/get-last-updated')
+const dateFormatter = require('../services/date-formatter')
+
+var inactiveTeam
+var lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload-capacity', function (req, res, next) {
@@ -57,23 +62,29 @@ module.exports = function (router) {
       var capacityBreakdown = result
       return getOutstandingReports(id, organisationLevel).then(function (result) {
         var outstandingReports = result
-        return res.render('capacity', {
-          screen: 'capacity',
-          linkId: id,
-          title: capacityBreakdown.title,
-          subTitle: capacityBreakdown.subTitle,
-          subNav: getSubNav(id, organisationLevel, req.path),
-          breadcrumbs: capacityBreakdown.breadcrumbs,
-          capacity: capacityBreakdown.capacityTable,
-          errors: errors,
-          query: req.query,
-          capacityBreakdown: capacityBreakdown.capacityBreakdown,
-          outstandingReports: outstandingReports,
-          childOrganisationLevel: orgUnit.childOrganisationLevel,
-          childOrganisationLevelDisplayText: childOrgUnitDisplayText,
-          organisationLevel: organisationLevel,
-          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        inactiveTeam = capacityBreakdown.title
+        return getLastUpdated().then(function (result) {
+          lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+          result.date = lastUpdated
+          return res.render('capacity', {
+            screen: 'capacity',
+            linkId: id,
+            title: capacityBreakdown.title,
+            subTitle: capacityBreakdown.subTitle,
+            subNav: getSubNav(id, organisationLevel, req.path),
+            breadcrumbs: capacityBreakdown.breadcrumbs,
+            capacity: capacityBreakdown.capacityTable,
+            errors: errors,
+            query: req.query,
+            capacityBreakdown: capacityBreakdown.capacityBreakdown,
+            outstandingReports: outstandingReports,
+            childOrganisationLevel: orgUnit.childOrganisationLevel,
+            childOrganisationLevelDisplayText: childOrgUnitDisplayText,
+            organisationLevel: organisationLevel,
+            date: result.date,
+            userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+          })
         })
       })
     }).catch(function (error) {
@@ -81,7 +92,7 @@ module.exports = function (router) {
     })
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/capacity/csv', function (req, res, next) {
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/capacity/outstanding-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -100,7 +111,7 @@ module.exports = function (router) {
     return getCaseDetailsReports(id, organisationLevel).then(function (caseDetails) {
       var formatedCaseDetails = formatCaseDetailsForExport(caseDetails)
       var result = {
-        title: 'Inactive_&_UPW_Cases',
+        title: inactiveTeam,
         inactiveCaseDetails: formatedCaseDetails
       }
       var exportCsv = getExportCsv(organisationLevel, result, tabs.CAPACITY.INACTIVE)

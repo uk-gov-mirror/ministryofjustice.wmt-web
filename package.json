@@ -61,6 +61,7 @@
     "express-nunjucks": "2.2.x",
     "express-sanitized": "^0.5.1",
     "express-session": "^1.15.5",
+    "floatthead": "^2.0.3",
     "govuk-elements-sass": "3.0.x",
     "govuk_frontend_toolkit": "5.2.x",
     "govuk_template_jinja": "0.19.x",
@@ -86,6 +87,6 @@
     "underscore": "^1.8.3",
     "util": "^0.10.3",
     "validator": "^8.2.0",
-    "wmt-probation-rules": "ministryofjustice/wmt-probation-rules.git#v0.8.0"
+    "wmt-probation-rules": "ministryofjustice/wmt-probation-rules.git#v0.8.9"
   }
 }

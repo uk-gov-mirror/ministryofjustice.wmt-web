@@ -2,13 +2,14 @@ const organisationUnitConstants = require('../constants/organisation-unit')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const json2csv = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
+const dateFormatter = require('./date-formatter')
 
 const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['regionName', 'lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
 const ORG_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'offenderManager', 'gradeCode', 'capacityPercentage', 'availablePoints', 'contractedHours', 'reductionHours', 'totalCases']
-const REDUCTIONS_FIELD_NAMES = ['Offender Manager', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes']
-const REDUCTIONS_FIELDS = ['offenderManager', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
+const REDUCTIONS_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team', 'Offender Manager', 'Contracted Hours', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes']
+const REDUCTIONS_FIELDS = ['regionName', 'lduName', 'teamName', 'offenderManager', 'contractedHours', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
 const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
 const INACTIVE_CASES_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
 const ARCHIVE_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Offender Manager Name', 'Total Cases', 'Capacity', 'Reductions', 'Comments', 'Reduction Date', 'Reduction Added By']
@@ -30,7 +31,6 @@ module.exports = function (organisationLevel, result, tab) {
   return { filename: filename, csv: csv }
 }
 
-// TODO: Do we have an agreed naming scheme they would like for these csvs? Org level? Date?
 var getFilename = function (orgName, screen) {
   var replaceSpaces = / /g
   if (screen === tabs.REDUCTIONS_EXPORT) {
@@ -104,16 +104,27 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
         '\n\n\nCOMMUNITY\n' + communityCsv + '\n\n\nLICENSE\n' + licenseCsv)
       } else {
         var overallTable = parseTotalSummaryTable(result.caseloadDetails.overallTotalSummary)
-        var custodyTable = parseCaseloadDetailsTable(result.caseloadDetails.custodyCaseloadDetails)
-        var communityTable = parseCaseloadDetailsTable(result.caseloadDetails.communityCaseloadDetails)
-        var licenseTable = parseCaseloadDetailsTable(result.caseloadDetails.licenseCaseloadDetails)
+        var custodyTable = parseCaseloadDetailsTable(result.caseloadDetails.custodyCaseloadDetails.details)
+        var communityTable = parseCaseloadDetailsTable(result.caseloadDetails.communityCaseloadDetails.details)
+        var licenseTable = parseCaseloadDetailsTable(result.caseloadDetails.licenseCaseloadDetails.details)
 
         overallCsv = generateCsv(overallTable)
         custodyCsv = generateCsv(custodyTable, fields, fieldNames)
         communityCsv = generateCsv(communityTable, fields, fieldNames)
         licenseCsv = generateCsv(licenseTable, fields, fieldNames)
 
-        var overallByGradeTable = parseCaseloadDetailsTable(result.caseloadDetails.overallCaseloadDetails)
+        var overallByGradeTable = parseCaseloadDetailsTable(result.caseloadDetails.overallCaseloadDetails.detailsPercentages)
+        overallByGradeTable.forEach(function (row) {
+          row.totalCases = row.totalCases.toFixed(2) + '%'
+          row.untiered = row.untiered.toFixed(2) + '%'
+          row.d2 = row.d2.toFixed(2) + '%'
+          row.d1 = row.d1.toFixed(2) + '%'
+          row.c2 = row.c2.toFixed(2) + '%'
+          row.c1 = row.c1.toFixed(2) + '%'
+          row.b2 = row.b2.toFixed(2) + '%'
+          row.b1 = row.b1.toFixed(2) + '%'
+          row.a = row.a.toFixed(2) + '%'
+        })
         var overallByGradeCsv = generateCsv(overallByGradeTable, fields, fieldNames)
 
         csv = ('OVERALL\n' + overallCsv + '\n\n\nCUSTODY\n' + custodyCsv +

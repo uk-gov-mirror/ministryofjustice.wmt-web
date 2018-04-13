@@ -10,6 +10,10 @@ const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 const workloadTypeValidator = require('../services/validators/workload-type-validator')
+const getLastUpdated = require('../services/data/get-last-updated')
+const dateFormatter = require('../services/date-formatter')
+
+var lastUpdated
 
 module.exports = function (router) {
   router.get('/:workloadType/:organisationLevel/:id/reductions', function (req, res, next) {
@@ -41,20 +45,25 @@ module.exports = function (router) {
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    return reductionsService.getReductions(id, organisationLevel, workloadType).then(function (result) {
-      return res.render('reductions', {
-        breadcrumbs: result.breadcrumbs,
-        linkId: id,
-        title: result.title,
-        subTitle: result.subTitle,
-        subNav: getSubNav(id, organisationLevel, req.path, workloadType),
-        activeReductions: result.activeReductions,
-        scheduledReductions: result.scheduledReductions,
-        archivedReductions: result.archivedReductions,
-        successText: successText,
-        workloadType: workloadType,
-        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+    return getLastUpdated().then(function (result) {
+      lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+      return reductionsService.getReductions(id, organisationLevel, workloadType).then(function (result) {
+        result.date = lastUpdated
+        return res.render('reductions', {
+          breadcrumbs: result.breadcrumbs,
+          linkId: id,
+          title: result.title,
+          subTitle: result.subTitle,
+          subNav: getSubNav(id, organisationLevel, req.path, workloadType),
+          activeReductions: result.activeReductions,
+          scheduledReductions: result.scheduledReductions,
+          archivedReductions: result.archivedReductions,
+          successText: successText,
+          workloadType: workloadType,
+          date: result.date,
+          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        })
       })
     }).catch(function (error) {
       next(error)
@@ -193,8 +202,9 @@ module.exports = function (router) {
     return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
     .then(function (result) {
       try {
-        // Dummy option in dropdown means array is offset by one
-        reductionReason = result.referenceData[req.body.reasonForReductionId - 1]
+        // Find the index in the array of reasons where this reason occurs
+        var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
+        reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
         if (error instanceof ValidationError) {
@@ -229,7 +239,7 @@ module.exports = function (router) {
       }
 
       return reductionsService.addReduction(id, reduction, workloadType).then(function () {
-        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions?success=true')
+        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id)
       }).catch(function (error) {
         next(error)
       })
@@ -270,8 +280,9 @@ module.exports = function (router) {
     return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
     .then(function (result) {
       try {
-        // Dummy option in dropdown means array is offset by one
-        reductionReason = result.referenceData[req.body.reasonForReductionId - 1]
+        // Find the index in the array of reasons where this reason occurs
+        var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
+        reductionReason = result.referenceData[index]
         reduction = generateNewReductionFromRequest(req.body, reductionReason)
       } catch (error) {
         if (error instanceof ValidationError) {
@@ -306,7 +317,7 @@ module.exports = function (router) {
 
       return reductionsService.updateReduction(id, reductionId, reduction, workloadType)
       .then(function () {
-        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions?edited=true')
+        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id)
       }).catch(function (error) {
         next(error)
       })
@@ -413,7 +424,8 @@ module.exports = function (router) {
         end_day: reduction.reductionEndDate.getDate(),
         end_month: reduction.reductionEndDate.getMonth() + 1,
         end_year: reduction.reductionEndDate.getFullYear(),
-        notes: reduction.notes
+        notes: reduction.notes,
+        status: reduction.status
       }
     }
     return viewModel

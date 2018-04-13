@@ -75,8 +75,11 @@
     </div>
 
     <input id="caseload-filter-submit" type="submit" value="Filter" class="button">
-
-<form>
+</form>
+<br>
+{% if capacity.headings.length === 0 %}
+<span class="error-message">There is no data for this period ({{query['capacity-from-day'] | int}}/{{query['capacity-from-month'] | int}}/{{query['capacity-from-year'] | int}} - {{query['capacity-to-day'] | int}}/{{query['capacity-to-month'] | int}}/{{query['capacity-to-year'] | int}})</span>
+{% endif %}
 
 <table class="non-javascript">
     <thead>
@@ -107,6 +110,7 @@
 
 {% if organisationLevel !== 'offender-manager' %}
   <h3 class="heading-medium">Capacity breakdown</h3>
+
   <table id="capacity-breakdown" class="data-table dataTable">
     <thead>
       <tr>
@@ -118,7 +122,7 @@
         <th id="grade">Grade</th>
         <th id="capacity">Capacity (%)</th>
         <th id="cases">Cases</th>
-        <th id="t2aCases">T2A</th>
+        <th id="t2aCases"><abbr title="Transition To Adulthood">T2A</abbr></th>
         <th id="arms"><abbr title="Active Risk Management System">ARMS</abbr></th>
         <th id="paroms"><abbr title="Parole Assessment Reports by the Offender Manager">PAROMs</abbr></th>
         <th id="fdrs"><abbr title="Fast Delivery Reports">FDRs</abbr></th>
@@ -130,8 +134,11 @@
     {% if organisationLevel === 'team' %}
       <tbody>
         {% for member in capacityBreakdown %}
-        <tr>
+        
           {% if loop.last %}
+        </tbody>
+        <tfoot>
+            <tr>
           <td colspan="2" headers="name org">{{ member.name }}</td>
           <td headers="capacity breakdown">{{ member.capacity | round(1) }}%</td>
           <td headers="cases breakdown">{{ member.totalCases | round(1) }}</td>
@@ -142,7 +149,10 @@
           <td headers="sdrs breakdown">{{ member.totalSDRs }}</td>
           <td headers="gs breakdown">{{ member.totalGs | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.totalCMS | round(1) }}%</td>
+        </tr>
+        </tfoot>
           {% else %}
+          <tr>
           <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade org">{{ member.grade }}</td>
           {% if member.capacityPercentage > 110 %}
@@ -158,11 +168,13 @@
           <td headers="sdrs breakdown">{{ member.sdrs }}</td>
           <td headers="gs breakdown">{{ member.gsPercentage | round(1) }}%</td>
           <td headers="cms breakdown">{{ member.cmsPercentage | round(1) }}%</td>
-          {% endif %}
         </tr>
+          {% endif %}
+        
         {% endfor %}
-      </tbody>
+      
     </table>
+
   {% else %}
       <tbody>
       {% for member in capacityBreakdown %}
@@ -188,6 +200,8 @@
         </tr>
         {% endfor %}
         {% if loop.last %}
+    </tbody>
+    <tfoot>
         <tr>
             <td colspan="2" headers="name org">{{ member.name }}</td>
             <td headers="capacity breakdown">{{ member.capacity | round(1) }}%</td>
@@ -200,15 +214,15 @@
             <td headers="gs breakdown">{{ member.totalGs | round(1) }}%</td>
             <td headers="cms breakdown">{{ member.totalCMS | round(1) }}%</td>
         </tr>
+    </tfoot>
         {% endif %}
       {% endfor %}
-      </tbody>
     </table>
   {% endif %}
   <br>
   <h3 class="heading-medium">Inactive & UPW cases</h3>
   {% if organisationLevel === 'team' %}
-  <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/csv" class="button sln-export" style="float: right; margin-bottom: 10px">Export</a>
+  <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/outstanding-csv" class="button sln-export" style="float: right; margin-bottom: 10px">Export</a>
   {% endif %}
   <table id="outstandingReports" class="data-table dataTable">
     <thead>
@@ -228,16 +242,29 @@
     {% if organisationLevel === 'team' %}
     <tbody>
       {% for member in outstandingReports %}
-      <tr>
-        <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
-        <td headers="grade org">{{ member.grade }}</td>
-        <td headers="outstanding warrants">{{ member.ow }}</td>
-        <td headers="unpaid work">{{ member.upw }}</td>
-        <td headers="overdue terminations">{{ member.ot }}</td>
-        <td headers="suspended lifers">{{ member.sl }}</td>
-      </tr>
-      {% endfor %}
+      {% if loop.last %}
     </tbody>
+    <tfoot>
+      <tr>
+            <td colspan="2" headers="name org">{{ member.name }}</td>
+            <td headers="outstanding warrants">{{ member.totalOW }}</td>
+            <td headers="unpaid work">{{ member.totalUPW }}</td>
+            <td headers="overdue terminations">{{ member.totalOT }}</td>
+            <td headers="suspended lifers">{{ member.totalSL }}</td>
+      </tr>
+    </tfoot>
+      {% else %}
+      <tr>
+          <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+          <td headers="grade org">{{ member.grade }}</td>
+          <td headers="outstanding warrants">{{ member.ow }}</td>
+          <td headers="unpaid work">{{ member.upw }}</td>
+          <td headers="overdue terminations">{{ member.ot }}</td>
+          <td headers="suspended lifers">{{ member.sl }}</td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    
     {% else %}
     <tbody>
       {% for member in outstandingReports %}
@@ -253,19 +280,39 @@
           <td headers="suspended lifers">{{ member.grades[i].sl }}</td>
         </tr>
         {% endfor %}
+        {% if loop.last %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2" headers="name org">{{ member.name }}</td>
+            <td headers="outstanding warrants">{{ member.totalOW }}</td>
+            <td headers="unpaid work">{{ member.totalUPW }}</td>
+            <td headers="overdue terminations">{{ member.totalOT }}</td>
+            <td headers="suspended lifers">{{ member.totalSL }}</td>
+        </tr>
+    </tfoot>
+        {% endif %}
       {% endfor %}
+    
     {% endif %}
   </table>
 {% endif %}
   
-  
 </main>
+
+<div class="lastUpdated">
+        <p>Last updated on  <span class="bold">{{date}}</span></p>
+        </div>
+
 {% endblock %}
 
 {% block body_end %}
     <script type="text/javascript">
         var capacityTable = {{ capacity | dump | safe }}
     </script>
+    <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
     <script src="/public/javascripts/plotly-latest.min.js"></script>
     <script src="/public/javascripts/caseload-capacity.js"></script>
+    <script src="/public/javascripts/floatThead.js"></script>
+    <script src="/public/javascripts/jquery.floatThead.js"></script>
 {% endblock %}

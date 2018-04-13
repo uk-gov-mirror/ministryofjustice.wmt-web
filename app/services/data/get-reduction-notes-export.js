@@ -11,7 +11,11 @@ module.exports = function (id, type) {
   }
 
   var selectColumns = [
+    'region_name AS regionName',
+    'ldu_name AS lduName',
+    'team_name AS teamName',
     'name AS offenderManager',
+    'contracted_hours AS contractedHours',
     'reduction_reason AS reason',
     'amount',
     'start_date AS startDate',

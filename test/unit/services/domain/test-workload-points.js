@@ -39,7 +39,8 @@ var VALID_WORKLOAD_POINTS = {
   defaultContractedHoursPo: '37',
   defaultContractedHoursPso: '37',
   parom: '121',
-  isT2A: 'false'
+  isT2A: 'false',
+  defaultContractedHoursSpo: '0'
 }
 
 describe('services/domain/workload-points', function () {
@@ -60,6 +61,7 @@ describe('services/domain/workload-points', function () {
     expect(workloadPoints.cusD2).to.equal('10')
     expect(workloadPoints.defaultContractedHoursPo).to.equal('37')
     expect(workloadPoints.defaultContractedHoursPso).to.equal('37')
+    expect(workloadPoints.defaultContractedHoursSpo).to.equal('0')
     expect(workloadPoints.sdrConversion).to.equal('51')
     expect(workloadPoints.licA).to.equal('150')
     expect(workloadPoints.licB1).to.equal('110')
@@ -153,6 +155,15 @@ describe('services/domain/workload-points', function () {
     }).to.throw(ValidationError)
   })
 
+  it('should raise a ValidationError if Default Contracted Hours SPO field is not set', function () {
+    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    invalidWorkloadPoints.defaultContractedHoursSpo = ''
+
+    expect(function () {
+      new WorkloadPoints(invalidWorkloadPoints)
+    }).to.throw(ValidationError)
+  })
+
   it('should raise a ValidationError if Default Contracted Hours PO field is outside valid range', function () {
     var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.defaultContractedHoursPo = '-1'
@@ -165,6 +176,15 @@ describe('services/domain/workload-points', function () {
   it('should raise a ValidationError if Default Contracted Hours PSO field is outside valid range', function () {
     var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.defaultContractedHoursPso = '50'
+
+    expect(function () {
+      new WorkloadPoints(invalidWorkloadPoints)
+    }).to.throw(ValidationError)
+  })
+
+  it('should raise a ValidationError if Default Contracted Hours SPO field is outside valid range', function () {
+    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    invalidWorkloadPoints.defaultContractedHoursSpo = '38'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)

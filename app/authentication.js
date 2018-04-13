@@ -80,6 +80,9 @@ module.exports = function (app) {
   passport.use(samlStrategy)
 
   passport.logout = function (req, res) {
+    logger.info(req.method, req.path, 'username: ' + req.user.username)
+    logger.info(req.method, req.path, 'domain: ' + config.ACTIVE_DIRECTORY_DOMAIN)
+
     if (!req.user) {
       return res.redirect('/')
     }

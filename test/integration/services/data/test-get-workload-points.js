@@ -43,7 +43,8 @@ var expectedInsertedWorkloadPoints = {
   'weightingWarrants': insertedWorkloadPoints.weighting_w,
   'weightingUpw': insertedWorkloadPoints.weighting_u,
   'parom': insertedWorkloadPoints.parom,
-  'isT2A': insertedWorkloadPoints.is_t2a
+  'isT2A': insertedWorkloadPoints.is_t2a,
+  'defaultContractedHoursSpo': insertedWorkloadPoints.default_contracted_hours_spo
 }
 
 var getExistingActiveWorkloadPointsT2A = function () {
@@ -84,6 +85,7 @@ var getExistingActiveWorkloadPoints = function (isT2A = false) {
     'nominal_target_po AS nominalTargetPo',
     'default_contracted_hours_po AS defaultContractedHoursPo',
     'default_contracted_hours_pso AS defaultContractedHoursPso',
+    'default_contracted_hours_spo AS defaultContractedHoursSpo',
     'weighting_o AS weightingOverdue',
     'weighting_w AS weightingWarrants',
     'weighting_u AS weightingUpw',

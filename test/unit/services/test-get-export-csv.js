@@ -7,51 +7,51 @@ const helper = require('../../helpers/export-csv-helper')
 describe('services/get-export-csv', function () {
   describe('should return the correct csv object', function () {
     it('for Team Caseload', function () {
-      expect(getExportCsv(orgUnit.TEAM.name, helper.TEAM_CASELOAD_RESULT, tabs.CASELOAD)).to.eql(helper.TEAM_CASELOAD_CSV)
+      expect(getExportCsv(orgUnit.TEAM.name, helper.TEAM_CASELOAD_RESULT, tabs.CASELOAD).csv).to.eql(helper.TEAM_CASELOAD_CSV.csv)
     })
 
     it('for LDU Caseload', function () {
-      expect(getExportCsv(orgUnit.LDU.name, helper.LDU_CASELOAD_RESULT, tabs.CASELOAD)).to.eql(helper.LDU_CASELOAD_CSV)
+      expect(getExportCsv(orgUnit.LDU.name, helper.LDU_CASELOAD_RESULT, tabs.CASELOAD).csv).to.eql(helper.LDU_CASELOAD_CSV.csv)
     })
 
     it('for Region Caseload', function () {
-      expect(getExportCsv(orgUnit.REGION.name, helper.REGION_CASELOAD_RESULT, tabs.CASELOAD)).to.eql(helper.REGION_CASELOAD_CSV)
+      expect(getExportCsv(orgUnit.REGION.name, helper.REGION_CASELOAD_RESULT, tabs.CASELOAD).csv).to.eql(helper.REGION_CASELOAD_CSV.csv)
     })
 
     it('for National Caseload', function () {
-      expect(getExportCsv(orgUnit.NATIONAL.name, helper.NATIONAL_CASELOAD_RESULT, tabs.CASELOAD)).to.eql(helper.NATIONAL_CASELOAD_CSV)
+      expect(getExportCsv(orgUnit.NATIONAL.name, helper.NATIONAL_CASELOAD_RESULT, tabs.CASELOAD).csv).to.eql(helper.NATIONAL_CASELOAD_CSV.csv)
     })
 
     it('for Offender Manager Overview', function () {
-      expect(getExportCsv(orgUnit.OFFENDER_MANAGER.name, helper.OM_OVERVIEW_RESULT, tabs.OVERVIEW)).to.eql(helper.OM_OVERVIEW_CSV)
+      expect(getExportCsv(orgUnit.OFFENDER_MANAGER.name, helper.OM_OVERVIEW_RESULT, tabs.OVERVIEW).csv).to.eql(helper.OM_OVERVIEW_CSV.csv)
     })
 
     it('for Team Overview', function () {
-      expect(getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW)).to.eql(helper.TEAM_OVERVIEW_CSV)
+      expect(getExportCsv(orgUnit.TEAM.name, helper.TEAM_OVERVIEW_RESULT, tabs.OVERVIEW).csv).to.eql(helper.TEAM_OVERVIEW_CSV.csv)
     })
 
     it('for LDU Overview', function () {
-      expect(getExportCsv(orgUnit.LDU.name, helper.LDU_OVERVIEW_RESULT, tabs.OVERVIEW)).to.eql(helper.LDU_OVERVIEW_CSV)
+      expect(getExportCsv(orgUnit.LDU.name, helper.LDU_OVERVIEW_RESULT, tabs.OVERVIEW).csv).to.eql(helper.LDU_OVERVIEW_CSV.csv)
     })
 
     it('for Region Overview', function () {
-      expect(getExportCsv(orgUnit.REGION.name, helper.REGION_OVERVIEW_RESULT, tabs.OVERVIEW)).to.eql(helper.REGION_OVERVIEW_CSV)
+      expect(getExportCsv(orgUnit.REGION.name, helper.REGION_OVERVIEW_RESULT, tabs.OVERVIEW).csv).to.eql(helper.REGION_OVERVIEW_CSV.csv)
     })
 
     it('for National Overview', function () {
-      expect(getExportCsv(orgUnit.NATIONAL.name, helper.NATIONAL_OVERVIEW_RESULT, tabs.OVERVIEW)).to.eql(helper.NATIONAL_OVERVIEW_CSV)
+      expect(getExportCsv(orgUnit.NATIONAL.name, helper.NATIONAL_OVERVIEW_RESULT, tabs.OVERVIEW).csv).to.eql(helper.NATIONAL_OVERVIEW_CSV.csv)
     })
 
     it('for Team reductions', function () {
-      expect(getExportCsv(orgUnit.TEAM.name, helper.TEAM_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT)).to.eql(helper.TEAM_REDUCTIONS_CSV)
+      expect(getExportCsv(orgUnit.TEAM.name, helper.TEAM_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT).csv).to.eql(helper.TEAM_REDUCTIONS_CSV.csv)
     })
 
     it('for LDU reductions', function () {
-      expect(getExportCsv(orgUnit.LDU.name, helper.LDU_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT)).to.eql(helper.LDU_REDUCTIONS_CSV)
+      expect(getExportCsv(orgUnit.LDU.name, helper.LDU_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT).csv).to.eql(helper.LDU_REDUCTIONS_CSV.csv)
     })
 
     it('for Region reductions', function () {
-      expect(getExportCsv(orgUnit.REGION.name, helper.REGION_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT)).to.eql(helper.REGION_REDUCTIONS_CSV)
+      expect(getExportCsv(orgUnit.REGION.name, helper.REGION_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT).csv).to.eql(helper.REGION_REDUCTIONS_CSV.csv)
     })
   })
   describe('should format the capacity percentage when exporting overviews', function () {

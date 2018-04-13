@@ -18,7 +18,7 @@ const addReductionsRefData = {
   title: 'Title',
   subTitle: 'SubTitle',
   breadcrumbs: [],
-  referenceData: [{ maxAllowanceHours: 0 }]
+  referenceData: [{ id: 1, maxAllowanceHours: 0 }]
 }
 
 const existingReduction = {
@@ -62,6 +62,7 @@ const returnedId = 1
 var app
 var route
 var reductionsService
+var getLastUpdated
 var getSubNavStub
 var authorisationService
 var validRole = roles.MANAGER
@@ -81,6 +82,7 @@ var initaliseApp = function (middleware) {
     hasRole: hasRoleFunction
   }
   getSubNavStub = sinon.stub()
+  getLastUpdated = sinon.stub().resolves(new Date(2017, 11, 1))
   reductionsService = sinon.stub()
   reductionsService.getReductions = sinon.stub()
   reductionsService.getAddReductionsRefData = sinon.stub()
@@ -90,6 +92,7 @@ var initaliseApp = function (middleware) {
   reductionsService.getReductionByReductionId = sinon.stub()
   route = proxyquire('../../../app/routes/reductions', {
     '../services/reductions-service': reductionsService,
+    '../services/data/get-last-updated': getLastUpdated,
     '../authorisation': authorisationService,
     '../services/get-sub-nav': getSubNavStub
   })
@@ -145,7 +148,7 @@ describe('reductions route', function () {
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
         .send(successDataToPost)
-        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions?success=true')
+        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1')
     })
 
     it('should post the correct data and respond with 200 for existing reduction', function () {
@@ -154,7 +157,7 @@ describe('reductions route', function () {
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
         .send(successDataToPost)
-        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions?success=true')
+        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1')
     })
 
     it('should post incorrect data and validation errors should be populated', function () {
@@ -173,7 +176,7 @@ describe('reductions route', function () {
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(successDataToPost)
-        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions?edited=true')
+        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1')
     })
 
     it('should post incorrect data and validation errors should be populated', function () {

@@ -38,5 +38,6 @@ module.exports = {
   'nominalTargetPo': 'Nominal Target PO',
   'nominalTargetPso': 'Nominal Target PSO',
   'defaultContractedHoursPo': 'Default Contracted Hours PO',
-  'defaultContractedHoursPso': 'Default Contracted Hours PSO'
+  'defaultContractedHoursPso': 'Default Contracted Hours PSO',
+  'defaultContractedHoursSpo': 'Default Contracted Hours SPO'
 }

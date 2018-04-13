@@ -33,7 +33,7 @@ const addReductionsRefData = {
   title: 'Title',
   subTitle: 'SubTitle',
   breadcrumbs: [],
-  referenceData: [{ maxAllowanceHours: 0 }]
+  referenceData: [{ id: 1, maxAllowanceHours: 0 }]
 }
 
 const addReduction = {
@@ -87,6 +87,7 @@ const returnedId = 1
 var app
 var route
 var reductionsService
+var getLastUpdated
 var getSubNavStub
 var authorisationService
 var validRole = roles.MANAGER
@@ -106,6 +107,7 @@ var initaliseApp = function (middleware) {
     isUserAuthenticated: sinon.stub().returns(true)
   }
   getSubNavStub = sinon.stub()
+  getLastUpdated = sinon.stub().resolves(new Date(2017, 11, 1))
   reductionsService = sinon.stub()
   reductionsService.getReductions = sinon.stub()
   reductionsService.getAddReductionsRefData = sinon.stub()
@@ -114,6 +116,7 @@ var initaliseApp = function (middleware) {
   reductionsService.updateReductionStatus = sinon.stub()
   reductionsService.getReductionByReductionId = sinon.stub()
   route = proxyquire('../../../app/routes/reductions', {
+    '../services/data/get-last-updated': getLastUpdated,
     '../services/reductions-service': reductionsService,
     '../authorisation': authorisationService,
     '../services/get-sub-nav': getSubNavStub
@@ -217,7 +220,7 @@ describe('court-reports reductions route', function () {
       return superTest(app)
       .post(ADD_REDUCTION_POST_URL)
       .send(successDataToPost)
-      .expect(302, 'Found. Redirecting to /' + workloadType.COURT_REPORTS + '/offender-manager/1/reductions?success=true')
+      .expect(302, 'Found. Redirecting to /' + workloadType.COURT_REPORTS + '/offender-manager/1')
       .then(function (results) {
         expect(reductionsService.addReduction.called).to.be.eql(true)
       })
@@ -244,7 +247,7 @@ describe('court-reports reductions route', function () {
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(successDataToPost)
-        .expect(302, 'Found. Redirecting to /' + workloadType.COURT_REPORTS + '/offender-manager/1/reductions?edited=true')
+        .expect(302, 'Found. Redirecting to /' + workloadType.COURT_REPORTS + '/offender-manager/1')
         .then(function (results) {
           expect(reductionsService.updateReduction.called).to.be.eql(true)
         })

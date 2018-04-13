@@ -3,11 +3,18 @@ const getReductionsExport = require('../services/get-reductions-export')
 const getSubNav = require('../services/get-sub-nav')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
+const roles = require('../constants/user-roles')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
+const Forbidden = require('../services/errors/authentication-error').Forbidden
 const workloadTypes = require('../../app/constants/workload-type')
+const getLastUpdated = require('../services/data/get-last-updated')
+const dateFormatter = require('../services/date-formatter')
+const messages = require('../constants/messages')
+
+var lastUpdated
 
 module.exports = function (router) {
   router.get('/', function (req, res, next) {
@@ -75,9 +82,15 @@ module.exports = function (router) {
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview/reductions-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.MANAGER, roles.DATA_ADMIN, roles.SYSTEM_ADMIN])
     } catch (error) {
       if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.MANAGER_ROLES_REQUIRED
+        })
       }
     }
     var organisationLevel = req.params.organisationLevel
@@ -122,20 +135,25 @@ var renderOverview = function (req, res, next) {
   var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
   var overviewPromise = getOverview(id, organisationLevel)
-  return overviewPromise.then(function (result) {
-    return res.render('overview', {
-      title: result.title,
-      subTitle: result.subTitle,
-      breadcrumbs: result.breadcrumbs,
-      organisationLevel: organisationLevel,
-      linkId: req.params.id,
-      screen: 'overview',
-      childOrganisationLevel: childOrganisationLevel,
-      childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
-      subNav: getSubNav(id, organisationLevel, req.path),
-      overviewDetails: result.overviewDetails,
-      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+  return getLastUpdated().then(function (result) {
+    lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+    return overviewPromise.then(function (result) {
+      result.date = lastUpdated
+      return res.render('overview', {
+        title: result.title,
+        subTitle: result.subTitle,
+        breadcrumbs: result.breadcrumbs,
+        organisationLevel: organisationLevel,
+        linkId: req.params.id,
+        screen: 'overview',
+        childOrganisationLevel: childOrganisationLevel,
+        childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
+        subNav: getSubNav(id, organisationLevel, req.path),
+        overviewDetails: result.overviewDetails,
+        date: result.date,
+        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+      })
     })
   }).catch(function (error) {
     next(error)

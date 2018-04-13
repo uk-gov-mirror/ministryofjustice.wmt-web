@@ -2,7 +2,7 @@ const DisplayTable = require('../domain/display-table')
 const capacityCalculator = require('../helpers/capacity-calculator')
 const customRound = require('./custom-round')
 
-module.exports.createCapacityTable = function (id, rowLabel, capacityDateRange, workloadReports) {
+module.exports.createCapacityTable = function (id, rowLabel, workloadReports) {
   var headings = []
   var rows = []
   var orgLabel

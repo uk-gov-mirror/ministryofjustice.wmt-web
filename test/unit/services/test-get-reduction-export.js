@@ -7,8 +7,8 @@ const proxyquire = require('proxyquire')
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 const orgUnitConstant = require('../../../app/constants/organisation-unit.js')
 
-var activeStartDate = moment('12-25-2017').toDate() // 2017-12-25T00:00:00.000Z
-var activeEndDate = moment('12-25-2018').toDate() // 2018-12-25T00:00:00.000Z
+var activeStartDate = moment('25-12-2017', 'DD-MM-YYYY').toDate() // 2017-12-25T00:00:00.000Z
+var activeEndDate = moment('25-12-2018', 'DD-MM-YYYY').toDate() // 2018-12-25T00:00:00.000Z
 
 var breadcrumbs = breadcrumbHelper.TEAM_BREADCRUMBS
 

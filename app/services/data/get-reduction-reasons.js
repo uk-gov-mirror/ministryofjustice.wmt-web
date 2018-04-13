@@ -9,6 +9,6 @@ module.exports = function () {
             'reason_short_name AS reasonShortName',
             'allowance_percentage AS allowancePercentage',
             'max_allowance_percentage AS maxAllowancePercentage',
-            'months_to_expiry AS monthsToExpiry'
-           )
+            'months_to_expiry AS monthsToExpiry')
+    .orderBy('reason_short_name')
 }

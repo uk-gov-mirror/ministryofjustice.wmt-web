@@ -33,6 +33,7 @@ module.exports = function (isT2A = false) {
             'nominal_target_po AS nominalTargetPo',
             'default_contracted_hours_po AS defaultContractedHoursPo',
             'default_contracted_hours_pso AS defaultContractedHoursPso',
+            'default_contracted_hours_spo AS defaultContractedHoursSpo',
             'weighting_o AS weightingOverdue',
             'weighting_w AS weightingWarrants',
             'weighting_u AS weightingUpw',

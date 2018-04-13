@@ -31,16 +31,16 @@ var getLatestIdsForCourtReportsCalc
 var newReductionId = 9
 var existingReductionId = 10
 var workloadOwnerId = 11
-var activeStartDate = moment().subtract(30, 'days').toDate()
-var activeEndDate = moment().add(30, 'days').toDate()
+var activeStartDate = moment('10-30-2017', 'MM-DD-YYYY').toDate() // 2017-10-31T11:25:05.805Z
+var activeEndDate = moment('12-30-2017', 'MM-DD-YYYY').toDate() // 2017-12-30T11:25:05.807Z
 
 var reductionReason = {
   maxAllowanceHours: 0
 }
 
 var reduction = new Reduction('1', '10',
-  [activeStartDate.getDate(), activeStartDate.getMonth(), activeStartDate.getFullYear()],
-  [activeEndDate.getDate(), activeEndDate.getMonth(), activeEndDate.getFullYear()], 'active note', reductionReason)
+  [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
+  [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
 
 var referenceData = [
   {

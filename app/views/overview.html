@@ -12,13 +12,12 @@
 
 {% include "includes/sub-nav.html" %}
 
-{% include "includes/export-caseload.html" %}
-
-{% ifAsync ((organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
-    {% include "includes/export-reductions.html" %}
-{% endif %}
-
 {% include "includes/organisation-overview.html"%}
 
 </main>
+
+<div class="lastUpdated">
+<p>Last updated on  <span class="bold">{{date}}</span></p>
+</div>
+
 {% endblock %}

@@ -6,6 +6,22 @@
     padding:0;
 }
 
+table.fixedHeader-floating {
+    position:fixed !important;
+    background-color:white;
+}
+
+table.fixedHeader-floating.no-footer {
+    border-bottom-width:0;
+}
+
+table.fixedHeader-locked {
+    position:absolute !important;
+    background-color:white;
+}
+
+@media print{table.fixedHeader-floating{display:none}}
+
 table.data-table {
     max-width: 1020px!important;
 }
@@ -15,13 +31,14 @@ table#archive-table{
     padding-bottom: 20px;
 }
 
-table.data-table tr th{
+table.data-table tr th {
     padding: 0 10px;
-    border: 1px solid #d9d9d9;
+    text-align: center;
+    background-color:white;
 }
 
-table.data-table tr th{
-    text-align: center;
+table.data-table tr, table.data-table th, table.data-table td {
+    border: 2px solid #000000 ;
 }
 
 table tr.headers th{
@@ -30,12 +47,18 @@ table tr.headers th{
 
 table.data-table tr td{
     padding:5px 10px 5px 10px;
-    border-left: 1px solid #d9d9d9;
-    border: 1px solid #d9d9d9!important;
+}
+
+table.data-table th, table.data-table td {
+    font-size: 16px;
 }
 
 table.data-table tr td:not(:first-child) {
     text-align: center;
+}
+
+table.data-table tfoot tr {
+    background: rgb(199, 192, 192);
 }
 
 table.data-table tr td.align-centre{
@@ -59,13 +82,13 @@ table.data-table tr td:first-child{
 table.data-table tr.data-sub-header td {
     min-width: 25px;
     font-weight: bold;
-    background: #e6f4fb;
+    background: #e6f4fb ;
     padding: 5px 10px 5px 10px;
 }
 
 table.data-table tr.data-sub-header td:first-child{
 
-    padding: 5px 5px 5px  15px;
+   padding: 5px 5px 5px  15px;
 }
 
 table.data-table tr.data-sub-header td:first-child,
@@ -174,7 +197,7 @@ ul.sub-tier-header li {
     background-color: rgba(255,228,157,0.8);
     margin:0;
     float: left;
-    border-left: 1px solid #d9d9d9;
+    border-left: 1px solid #d9d9d9 ;
 }
 
 ul.sub-tier-header li:first-child {
@@ -202,7 +225,7 @@ ul.tier li {
     background: rgba(255,228,157,0.5);
     margin:0;
     float: left;
-    border-left: 1px solid #d9d9d9;
+    border-left: 1px solid #d9d9d9 ;
 }
 
 ul.tier li:first-child {

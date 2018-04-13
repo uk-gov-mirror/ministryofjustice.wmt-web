@@ -1,7 +1,6 @@
 // Set current year dynamically
   var daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31]
   var currentYear = new Date().getFullYear()
-  document.getElementById('start-year').setAttribute('min', currentYear)
 
   var chosenReduction
 
@@ -34,6 +33,10 @@
         document.getElementById('end-year').removeAttribute('readonly')
       }    
     }
+  }
+
+  var enableAddReduction = function() {
+    document.getElementById('submit-button').removeAttribute('disabled')
   }
 
   var populateHours = function () {
