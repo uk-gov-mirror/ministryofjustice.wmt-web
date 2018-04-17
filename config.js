@@ -23,10 +23,7 @@ module.exports = {
   DB_APP_SCHEMA: 'app',
 
   // ARCHIVE DB
-  ARCHIVE_DATABASE_SERVER: process.env.WMT_ARCHIVE_DB_SERVER || 'localhost',
   ARCHIVE_DATABASE: process.env.WMT_ARCHIVE_DB_NAME || 'wmt_db',
-  ARCHIVE_DATABASE_USERNAME: process.env.WMT_DB_USERNAME || 'wmt',
-  ARCHIVE_DATABASE_PASSWORD: process.env.WMT_DB_PASSWORD || 'wmt',
 
   // App
   WEB_APP_DATABASE_USERNAME: process.env.WMT_WEB_APP_DATABASE_USERNAME || 'wmt_web',
