@@ -1,0 +1,126 @@
+{% extends "includes/layout.html" %} 
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/breadcrumbs.html" %}
+ 
+{% include "includes/title-subtitle.html" %}
+
+{% include "includes/validation-error-messages.html" %}
+
+<form method="get" class "archive-form">
+
+         <div class="form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}" id="from">
+            {% if errors %}
+                <span class="error-message">{{ errors['archiveFromDate'][0] }}</span>
+            {% endif %}
+            <fieldset id="archiveFromDate">
+                <legend>
+                    <span class="form-label-bold">
+                        Show archive data with from:
+                    </span>
+                    <span class="form-hint" id="fortnightly-archive-from-hint">For example, 30 1 2017</span>
+                </legend>
+                <div class="form-date" aria-describedby="fortnightly-archive-from-hint">
+                    <div class="form-group form-group-day">
+                        <label class="form-label" for="fortnightly-archive-from-day">Day</label>
+                        <input class="form-control" id="fortnightly-archive-from-day" name="fortnightly-archive-from-day" 
+                            value={{query[ 'fortnightly-archive-from-day'] | int}}>
+                     </div>
+                    <div class="form-group form-group-month">
+                        <label class="form-label" for="fortnightly-archive-from-month">Month</label>
+                        <input class="form-control" id="fortnightly-archive-from-month" name="fortnightly-archive-from-month" 
+                            value={{query[ 'fortnightly-archive-from-month'] | int}}>
+                    </div>
+                    <div class="form-group form-group-year">
+                        <label class="form-label" for="fortnightly-archive-from-year">Year</label>
+                        <input class="form-control" id="fortnightly-archive-from-year" name="fortnightly-archive-from-year" 
+                        value={{query[ 'fortnightly-archive-from-year'] | int}}>           
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="form-group {% if errors['archiveToDate'][0] %} form-group-error {% endif %}" id="to">
+            {% if errors %}
+                 <span class="error-message">{{ errors['archiveToDate'][0] }}</span> 
+            {% endif %}
+            <fieldset id="archiveToDate">
+                <legend>
+                    <span class="form-label-bold">
+                        Show archive data to:
+                    </span>
+                    <span class="form-hint" id="fortnightly-archive-to-hint">For example, 31 3 2017</span>
+                </legend>
+                <div class="form-date" aria-describedby="fortnightly-archive-to-hint">
+                    <div class="form-group form-group-day">
+                        <label class="form-label" for="fortnightly-archive-to-day">Day</label>
+                        <input class="form-control" id="fortnightly-archive-to-day" name="fortnightly-archive-to-day" value={{query[ 'fortnightly-archive-to-day'] | int}}>
+                    </div>
+                    <div class="form-group form-group-month">
+                        <label class="form-label" for="fortnightly-archive-to-month">Month</label>
+                        <input class="form-control" id="fortnightly-archive-to-month" name="fortnightly-archive-to-month"
+                            value={{query['fortnightly-archive-to-month'] | int}}>
+                    </div>
+                    <div class="form-group form-group-year">
+                        <label class="form-label" for="fortnightly-archive-to-year">Year</label>
+                        <input class="form-control" id="fortnightly-archive-to-year" name="fortnightly-archive-to-year"
+                            value={{query['fortnightly-archive-to-year'] | int}}>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <input id="archive-filter-submit" type="submit" value="Filter" class="button">
+</form>
+
+<a href="/archive-data/fortnightly-caseload-data/archive-csv" class="button sln-export" style="float: right; margin-left:10px; margin-bottom: 10px">Export Archive Data</a>
+    
+<table id="fortnightly-caseload-table" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+    <thead>
+        <tr class="headers">
+            <th id="workloadID">Start Date</th>
+            <th id="workloadDate">End Date</th>
+            <th id="cluster">Cluster</th>
+            <th id="team">Team</th>
+            <th id="offenderManager">Offender Manager</th>
+            <th id="totalCases">Average Cases</th>
+            <th id="capacity">Average Capacity %</th>
+            <th id="reductions">Average Reductions</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for result in results %}
+        <tr>
+            <td>{{ result.startDate }}</td>
+            <td>{{ result.endDate }}</td>
+            <td>{{ result.lduName }}</td>
+            <td>{{ result.teamName }}</td>
+            <td>{{ result.omName }}</td>
+            <td>{{ result.totalCases }}</td>
+            <td>{{ result.capacity }}</td>
+            <td>{{ result.hoursReduction }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</main>
+
+<script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
+<script src="{{ asset_path }}javascripts/datatables.min.js"></script>
+<script src="{{ asset_path }}javascripts/archive-data.js"></script>
+
+<script>
+        $(document).ready(function() {
+    
+        var table = $('.js-data-table').DataTable();
+        var data = table.rows().data();
+    
+        function printData() {
+          console.log(data)
+        }
+      });
+</script>
+
+{% endblock %}

@@ -9,11 +9,12 @@ const ValidationError = require('../services/errors/validation-error')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const dateFormatter = require('../services/date-formatter')
-
+const archiveOptions = require('../constants/archive-options')
+const log = require ('../logger')
 var archiveDateRange
 
 module.exports = function (router) {
-  router.get('/archive-data', function (req, res, next) {
+  router.get('/archive-data/fortnightly-caseload-data', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.DATA_ADMIN])
@@ -28,34 +29,36 @@ module.exports = function (router) {
       }
     }
 
+    var errors =  null
+
     try {
-      archiveDateRange = dateRangeHelper.createArchiveDateRange(req.query)
+      archiveDateRange = dateRangeHelper.createFortnightlyArchiveDateRange(req.query)
     } catch (error) {
       if (error instanceof ValidationError) {
-        archiveDateRange = dateRangeHelper.createArchiveDateRange({})
+        errors = error.validationErrors
+        archiveDateRange = dateRangeHelper.createFortnightlyArchiveDateRange({})
       } else {
         throw error
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)    
+  
+    // If date range has errors don't search database
+    if (errors) {
+      return renderResults(res, errors, [], authorisedUserRole)
+    }
 
-    return getArchive(archiveDateRange).then(function (results) {
-      results.forEach(function (result) {
-        if (result.reductionDate !== null) {
-          result.reductionDate = dateFormatter.formatDate(result.reductionDate, 'DD-MM-YYYY HH:mm')
-        }
-      })
-      return res.render('archive-data', {
-        title: 'Archive',
-        results: results,
-        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
-      })
+    return getArchive(archiveOptions.FORTNIGHTLY, archiveDateRange).then(function (results) {
+      results = formatResults(results)
+      return renderResults(res, errors, results, authorisedUserRole)
+    }).catch(function (error) {
+      log.error(error)
+      next(error)
     })
   })
 
-  router.get('/archive-data/archive-csv', function (req, res, next) {
+  router.get('/archive-data/fortnightly-caseload-data/archive-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.DATA_ADMIN])
@@ -70,16 +73,45 @@ module.exports = function (router) {
       }
     }
 
-    return getArchive(archiveDateRange).then(function (results) {
+    return getArchive(archiveOptions.FORTNIGHTLY, archiveDateRange).then(function (results) {
+      results = formatResults(results)
       let dateFileName = null
       if (archiveDateRange !== null) {
         dateFileName = archiveDateRange.archiveFromDate.toISOString().substring(0, 10) + ' ' + archiveDateRange.archiveToDate.toISOString().substring(0, 10)
       }
-      var exportCsv = getExportCsv(dateFileName, results, tabs.ADMIN.ARCHIVE)
+      var exportCsv = getExportCsv(dateFileName, results, tabs.ADMIN.FORTNIGHTLY_ARCHIVE)
       res.attachment(exportCsv.filename)
       res.send(exportCsv.csv)
     }).catch(function (error) {
       next(error)
     })
   })
+}
+
+var renderResults = function (res, errors, results, authorisedUserRole) {
+  return res.render('fortnightly-caseload-data', {
+    title: 'Archived Fortnightly Caseload Data',
+    results: results,
+    errors: errors,
+    userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+    noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
+  })
+}
+
+var formatResults = function (results) {
+  results.forEach(function (result) {
+    if (result.startDate !== null) {
+      result.startDate = dateFormatter.formatDate(result.startDate, 'DD-MM-YYYY')
+    }
+    if (result.endDate !== null) {
+      result.endDate = dateFormatter.formatDate(result.endDate, 'DD-MM-YYYY')
+    }
+    if (result.hoursReduction !== null) {
+      result.hoursReduction = Number(result.hoursReduction.toFixed(1))
+    }
+    else {
+      result.hoursReduction = 0
+    }
+  })
+  return results
 }

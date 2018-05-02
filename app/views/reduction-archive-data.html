@@ -1,0 +1,120 @@
+{% extends "includes/layout.html" %} 
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/breadcrumbs.html" %}
+ 
+{% include "includes/title-subtitle.html" %}
+
+{% include "includes/validation-error-messages.html" %}
+
+<form method="get" class "archive-form">
+
+         <div class="form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}" id="from">
+            {% if errors %}
+                <span class="error-message">{{ errors['archiveFromDate'][0] }}</span>
+            {% endif %}
+            <fieldset id="archiveFromDate">
+                <legend>
+                    <span class="form-label-bold">
+                        Show archive data with from:
+                    </span>
+                    <span class="form-hint" id="reduction-archive-from-hint">For example, 30 1 2017</span>
+                </legend>
+                <div class="form-date" aria-describedby="reduction-archive-from-hint">
+                    <div class="form-group form-group-day">
+                        <label class="form-label" for="reduction-archive-from-day">Day</label>
+                        <input class="form-control" id="reduction-archive-from-day" name="reduction-archive-from-day" 
+                            value={{query[ 'reduction-archive-from-day'] | int}}>
+                     </div>
+                    <div class="form-group form-group-month">
+                        <label class="form-label" for="reduction-archive-from-month">Month</label>
+                        <input class="form-control" id="reduction-archive-from-month" name="reduction-archive-from-month" 
+                            value={{query[ 'reduction-archive-from-month'] | int}}>
+                    </div>
+                    <div class="form-group form-group-year">
+                        <label class="form-label" for="reduction-archive-from-year">Year</label>
+                        <input class="form-control" id="reduction-archive-from-year" name="reduction-archive-from-year" 
+                        value={{query[ 'reduction-archive-from-year'] | int}}>           
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="form-group {% if errors['archiveToDate'][0] %} form-group-error {% endif %}" id="to">
+            {% if errors %}
+                 <span class="error-message">{{ errors['archiveToDate'][0] }}</span> 
+            {% endif %}
+            <fieldset id="archiveToDate">
+                <legend>
+                    <span class="form-label-bold">
+                        Show archive data to:
+                    </span>
+                    <span class="form-hint" id="reduction-archive-to-hint">For example, 31 3 2017</span>
+                </legend>
+                <div class="form-date" aria-describedby="reduction-archive-to-hint">
+                    <div class="form-group form-group-day">
+                        <label class="form-label" for="reduction-archive-to-day">Day</label>
+                        <input class="form-control" id="reduction-archive-to-day" name="reduction-archive-to-day" value={{query[ 'reduction-archive-to-day'] | int}}>
+                    </div>
+                    <div class="form-group form-group-month">
+                        <label class="form-label" for="reduction-archive-to-month">Month</label>
+                        <input class="form-control" id="reduction-archive-to-month" name="reduction-archive-to-month"
+                            value={{query['reduction-archive-to-month'] | int}}>
+                    </div>
+                    <div class="form-group form-group-year">
+                        <label class="form-label" for="reduction-archive-to-year">Year</label>
+                        <input class="form-control" id="reduction-archive-to-year" name="reduction-archive-to-year"
+                            value={{query['reduction-archive-to-year'] | int}}>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <input id="archive-filter-submit" type="submit" value="Filter" class="button">
+</form>
+
+<a href="/archive-data/reductions/archive-csv" class="button sln-export" style="float: right; margin-left:10px; margin-bottom: 10px">Export Archive Data</a>
+    
+<table id="reduction-archive-table" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+    <thead>
+        <tr class="headers">
+            <th id="offenderManager">Offender Manager</th>
+            <th id="reductions">Reduction Hours</th>
+            <th id="comments">Comments</th>
+            <th id="reductionDate">Date Reduction Updated</th>
+            <th id="reductionAddedBy">Reduction Updated By</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for result in results %}
+        <tr>
+            <td>{{ result.omName }}</td>
+            <td>{{ result.hoursReduced }}</td>
+            <td>{{ result.comments }}</td>
+            <td>{{ result.lastUpdatedDate }}</td>
+            <td>{{ result.reductionAddedBy }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</main>
+
+<script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
+<script src="{{ asset_path }}javascripts/datatables.min.js"></script>
+<script src="{{ asset_path }}javascripts/archive-data.js"></script>
+
+<script>
+        $(document).ready(function() {
+    
+        var table = $('.js-data-table').DataTable();
+        var data = table.rows().data();
+    
+        function printData() {
+          console.log(data)
+        }
+      });
+</script>
+
+{% endblock %}

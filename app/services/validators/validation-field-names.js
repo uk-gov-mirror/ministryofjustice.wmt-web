@@ -39,5 +39,8 @@ module.exports = {
   'nominalTargetPso': 'Nominal Target PSO',
   'defaultContractedHoursPo': 'Default Contracted Hours PO',
   'defaultContractedHoursPso': 'Default Contracted Hours PSO',
-  'defaultContractedHoursSpo': 'Default Contracted Hours SPO'
+  'defaultContractedHoursSpo': 'Default Contracted Hours SPO',
+  'archiveFromDate': 'Show Archive Data From',
+  'archiveToDate': 'Show Archive Data To',
+  'maxArchiveHistory': 'the earliest recorded data',
 }

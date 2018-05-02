@@ -1,0 +1,5 @@
+module.exports = {
+  DAILY: 'DAILY',
+  FORTNIGHTLY: 'FORTNIGHTLY',
+  REDUCTIONS: 'REDUCTIONS'
+}

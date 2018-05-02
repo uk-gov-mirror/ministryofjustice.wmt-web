@@ -45,7 +45,7 @@ var getArchive
 
 before(function () {
   getArchive = sinon.stub()
-  archiveService = proxyquire('../../../app/services/archive-service', {'./data/get-archive': getArchive})
+  archiveService = proxyquire('../../../app/services/archive-service', {'./data/get-daily-archive': getArchive})
   getArchive.resolves(archiveRawData)
 })
 

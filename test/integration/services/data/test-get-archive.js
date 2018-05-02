@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 
-const getArchive = require('../../../../app/services/data/get-archive')
+const getArchive = require('../../../../app/services/data/get-daily-archive')
 
 var expectedResult = {
   uniqueIdentifier: '1',
@@ -22,7 +22,7 @@ var expectedResult = {
 
 var archiveData
 
-describe('services/data/get-archive', function () {
+describe('services/data/get-daily-archive', function () {
   before(function () {
     return getArchive().then(function (results) {
       archiveData = results

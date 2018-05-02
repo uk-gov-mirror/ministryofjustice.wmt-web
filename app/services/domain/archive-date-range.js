@@ -1,6 +1,8 @@
 const ValidationError = require('../errors/validation-error')
 const FieldSetValidator = require('../validators/fieldset-validator')
 const ErrorHandler = require('../validators/error-handler')
+const CASELOAD_CAPACITY = require('../../constants/caseload-capacity')
+const moment = require('moment')
 
 class ArchiveDateRange {
   constructor (fromDay, fromMonth, fromYear, toDay, toMonth, toYear) {
@@ -26,13 +28,14 @@ class ArchiveDateRange {
       .isRequired()
       .isValidDate()
       .isPastDate()
+      .isLaterThan(moment().subtract(CASELOAD_CAPACITY.MAX_HISTORY, 'years'), 'maxArchiveHistory')
       .getFormattedDate()
 
     this.archiveToDate = FieldSetValidator(this.toFields, 'archiveToDate', errors)
       .isRequired()
       .isValidDate(this.archiveToDate)
       .isPastOrPresentDate(this.archiveToDate)
-      .isLaterThan(this.archiveFromDate, 'archiveFromDate')
+      .isOnOrAfter(this.archiveFromDate, 'archiveFromDate')
       .getFormattedDate()
 
     var validationErrors = errors.get()

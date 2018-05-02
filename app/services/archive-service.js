@@ -1,21 +1,32 @@
-const getArchive = require('./data/get-archive')
+const getDailyArchive = require('./data/get-daily-archive')
+const getFortnightlyArchive = require('./data/get-fortnightly-archive')
+const getReductionArchive = require('./data/get-reduction-archive')
 const calculateAvailablePoints = require('wmt-probation-rules').calculateAvailablePoints
 const DefaultContractedHours = require('wmt-probation-rules').DefaultContractedHours
+const archiveOptions = require('../constants/archive-options')
 
-module.exports = function (archiveDateRange) {
-  return getArchive(archiveDateRange).then(function (results) {
-    return calculateCapacity(results)
-  })
+module.exports = function (archiveOption, archiveDateRange) {
+  switch(archiveOption) {
+    case archiveOptions.DAILY:
+      return getDailyArchive(archiveDateRange).then(function (results) {
+        return calculateCapacity(results)
+      })
+      break
+    case archiveOptions.FORTNIGHTLY:
+      return getFortnightlyArchive(archiveDateRange).then(function (results) {
+        return calculateCapacity(results)
+      })
+      break
+    case archiveOptions.REDUCTIONS:
+      return getReductionArchive(archiveDateRange)
+      break
+  }
 }
+
+
 
 var calculateCapacity = function (results) {
   results.forEach(function (result) {
-    if (result.reduction === null) {
-      result.reduction = 0
-    }
-    if (result.comments === null) {
-      result.comments = ''
-    }
     if (result.contractedHours === 0) {
       result.capacity = '0.00%'
     } else {
