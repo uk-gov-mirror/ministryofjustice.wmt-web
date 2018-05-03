@@ -1,7 +1,6 @@
 const dateFormatter = require('../date-formatter')
 const CapacityDateRange = require('../domain/capacity-date-range')
 const ArchiveDateRange = require('../domain/archive-date-range')
-const log = require('../../logger')
 
 module.exports.createCapacityDateRange = function (dateParameters) {
   var capacityDateRange

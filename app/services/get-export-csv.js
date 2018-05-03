@@ -22,8 +22,6 @@ const REDUCTION_ARCHIVE_FIELD_NAMES = ['Offender Manager Name', 'Reduction Hours
 const REDUCTION_ARCHIVE_FIELDS = ['omName', 'hoursReduced', 'comments', 'lastUpdatedDate', 'reductionAddedBy']
 // const DAILY_ARCHIVE_FIELDS = ['lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'reduction', 'comments', 'reductionDate', 'reductionAddedBy']
 
-const log = require('../logger')
-
 module.exports = function (organisationLevel, result, tab) {
   var filename
   if (tab === tabs.ADMIN.DAILY_ARCHIVE || tab === tabs.ADMIN.FORTNIGHTLY_ARCHIVE || tab === tabs.ADMIN.REDUCTION_ARCHIVE) {
