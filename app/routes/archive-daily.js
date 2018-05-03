@@ -10,7 +10,6 @@ const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const dateFormatter = require('../services/date-formatter')
 const archiveOptions = require('../constants/archive-options')
-const log = require('../logger')
 
 var archiveDateRange
 
@@ -30,7 +29,7 @@ module.exports = function (router) {
       }
     }
 
-    var errors =  null
+    var errors
 
     try {
       archiveDateRange = dateRangeHelper.createDailyArchiveDateRange(req.query)
@@ -46,12 +45,12 @@ module.exports = function (router) {
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     if (errors) {
-      return renderResults (res, errors, results, authorisedUserRole)
+      return renderResults(res, errors, [], authorisedUserRole)
     }
 
     return getArchive(archiveOptions.DAILY, archiveDateRange).then(function (results) {
       results = formatResults(results)
-      return renderResults (res, errors, results, authorisedUserRole)
+      return renderResults(res, errors, results, authorisedUserRole)
     }).catch(function (error) {
       next(error)
     })

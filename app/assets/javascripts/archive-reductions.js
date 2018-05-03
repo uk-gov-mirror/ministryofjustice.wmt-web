@@ -6,7 +6,7 @@ $(document).ready(function() {
       "pageLength": 100,
       searching: true,
       info: false,
-      order: [[1, 'asc']],
+      order: [[3, 'asc']],
       "aaSorting": [],
       columnDefs: [{
         targets: [],

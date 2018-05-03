@@ -35,7 +35,7 @@ class ArchiveDateRange {
       .isRequired()
       .isValidDate(this.archiveToDate)
       .isPastOrPresentDate(this.archiveToDate)
-      .isOnOrAfter(this.archiveFromDate, 'archiveFromDate')
+      .isLaterThan(this.archiveFromDate, 'archiveFromDate')
       .getFormattedDate()
 
     var validationErrors = errors.get()

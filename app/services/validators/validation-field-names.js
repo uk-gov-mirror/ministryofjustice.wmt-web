@@ -42,5 +42,5 @@ module.exports = {
   'defaultContractedHoursSpo': 'Default Contracted Hours SPO',
   'archiveFromDate': 'Show Archive Data From',
   'archiveToDate': 'Show Archive Data To',
-  'maxArchiveHistory': 'the earliest recorded data',
+  'maxArchiveHistory': 'the earliest recorded data'
 }

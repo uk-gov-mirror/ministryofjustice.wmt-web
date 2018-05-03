@@ -62,7 +62,7 @@ var getFilename = function (orgName, screen) {
     } else {
       return (orgName + ' Archived_Reductions.csv').replace(replaceSpaces, '_')
     }
-  }else {
+  } else {
     return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
   }
 }
@@ -182,7 +182,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       }
       break
     case tabs.ADMIN.DAILY_ARCHIVE:
-    case tabs.ADMIN.FORTNIGHTLY_ARCHIVE: 
+    case tabs.ADMIN.FORTNIGHTLY_ARCHIVE:
     case tabs.ADMIN.REDUCTION_ARCHIVE:
       csv = generateCsv(result, fields, fieldNames)
       break

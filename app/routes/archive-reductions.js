@@ -29,8 +29,7 @@ module.exports = function (router) {
       }
     }
 
-    var errors =  null
-
+    var errors
 
     try {
       archiveDateRange = dateRangeHelper.createReductionArchiveDateRange(req.query)
@@ -43,8 +42,8 @@ module.exports = function (router) {
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)    
-  
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+
     // If date range has errors don't search database
     if (errors) {
       return renderResults(res, errors, [], authorisedUserRole)

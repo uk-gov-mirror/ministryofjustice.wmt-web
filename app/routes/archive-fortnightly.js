@@ -10,7 +10,6 @@ const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const dateFormatter = require('../services/date-formatter')
 const archiveOptions = require('../constants/archive-options')
-const log = require ('../logger')
 var archiveDateRange
 
 module.exports = function (router) {
@@ -29,7 +28,7 @@ module.exports = function (router) {
       }
     }
 
-    var errors =  null
+    var errors
 
     try {
       archiveDateRange = dateRangeHelper.createFortnightlyArchiveDateRange(req.query)
@@ -42,8 +41,8 @@ module.exports = function (router) {
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)    
-  
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+
     // If date range has errors don't search database
     if (errors) {
       return renderResults(res, errors, [], authorisedUserRole)
@@ -53,7 +52,6 @@ module.exports = function (router) {
       results = formatResults(results)
       return renderResults(res, errors, results, authorisedUserRole)
     }).catch(function (error) {
-      log.error(error)
       next(error)
     })
   })
@@ -108,8 +106,7 @@ var formatResults = function (results) {
     }
     if (result.hoursReduction !== null) {
       result.hoursReduction = Number(result.hoursReduction.toFixed(1))
-    }
-    else {
+    } else {
       result.hoursReduction = 0
     }
   })

@@ -13,7 +13,7 @@ module.exports = function (archiveDateRange) {
   var whereClause = ''
 
   if (archiveDateRange instanceof ArchiveDateRange) {
-    whereClause = " WHERE last_updated_date BETWEEN '" + archiveDateRange.archiveFromDate.toISOString().substring(0, 10) +
+    whereClause = " WHERE last_updated_date BETWEEN '" + archiveDateRange.archiveFromDate.toISOString() +
     "' AND '" + archiveDateRange.archiveToDate.toISOString().substring(0, 10) + "'"
   } else {
     whereClause = ''
