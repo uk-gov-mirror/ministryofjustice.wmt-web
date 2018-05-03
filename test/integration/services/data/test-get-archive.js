@@ -3,7 +3,8 @@ const expect = require('chai').expect
 const getArchive = require('../../../../app/services/data/get-daily-archive')
 
 var expectedResult = {
-  uniqueIdentifier: '1',
+  workloadID: 2745,
+  workloadDate: new Date('2014-06-18T14:18:46.000Z'),
   lduName: 'All NPS North West',
   teamName: 'Chesh & Gt Manch CRC - CRC Transfers',
   omName: 'A.N. Offender Manager 1',
@@ -14,10 +15,7 @@ var expectedResult = {
   paromsPoints: 0,
   nominalTarget: 2171,
   contractedHours: 0,
-  hoursReduction: 0,
-  reduction: null,
-  comments: null,
-  omTypeId: 5
+  hoursReduction: 0
 }
 
 var archiveData
@@ -29,26 +27,17 @@ describe('services/data/get-daily-archive', function () {
     })
   })
   it('should retrieve all twelve columns for archive data', function () {
-    expect(archiveData[0]).to.eql(expectedResult)
-  })
-  it('should include offender managers without reductions', function () {
-    let bool = false
-    for (var i = 0; i < archiveData.length; i++) {
-      if (archiveData[i].reduction === null) {
-        bool = true
-        break
-      }
-    }
-    expect(bool).to.be.true //eslint-disable-line
-  })
-  it('should include offender mananagers with reductions', function () {
-    let bool = false
-    for (var i = 0; i < archiveData.length; i++) {
-      if (archiveData[i].reduction !== null) {
-        bool = true
-        break
-      }
-    }
-    expect(bool).to.be.true //eslint-disable-line
+    expect(archiveData[0].workloadID).to.eql(expectedResult.workloadID)
+    expect(archiveData[0].lduName).to.eql(expectedResult.lduName)
+    expect(archiveData[0].teamName).to.eql(expectedResult.teamName)
+    expect(archiveData[0].omName).to.eql(expectedResult.omName)
+    expect(archiveData[0].totalCases).to.eql(expectedResult.totalCases)
+    expect(archiveData[0].totalPoints).to.eql(expectedResult.totalPoints)
+    expect(archiveData[0].sdrPoints).to.eql(expectedResult.sdrPoints)
+    expect(archiveData[0].sdrConversionPoints).to.eql(expectedResult.sdrConversionPoints)
+    expect(archiveData[0].paromsPoints).to.eql(expectedResult.paromsPoints)
+    expect(archiveData[0].nominalTarget).to.eql(expectedResult.nominalTarget)
+    expect(archiveData[0].contractedHours).to.eql(expectedResult.contractedHours)
+    expect(archiveData[0].hoursReduction).to.eql(expectedResult.hoursReduction)
   })
 })
