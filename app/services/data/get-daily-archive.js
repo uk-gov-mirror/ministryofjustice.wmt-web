@@ -28,9 +28,6 @@ module.exports = function (archiveDateRange) {
 
   var orderBy = ' ORDER BY workload_id ASC '
 
-  console.log(knex.raw('SELECT top 10000 ' + selectColumns.join(', ') + ' FROM archive_data_view' +
-  whereClause + orderBy).toString())
-
   return knex.raw('SELECT top 10000 ' + selectColumns.join(', ') + ' FROM archive_data_view' +
    whereClause + orderBy)
 }

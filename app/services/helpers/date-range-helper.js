@@ -33,11 +33,9 @@ module.exports.createCapacityDateRange = function (dateParameters) {
 
 module.exports.createDailyArchiveDateRange = function (dateParameters) {
   var archiveDateRange
-  log.info(Object.keys(dateParameters).length)
   if (Object.keys(dateParameters).length === 0) {
     archiveDateRange = null
   } else {
-    console.log('In here')
     archiveDateRange = new ArchiveDateRange(
       dateParameters['daily-archive-from-day'],
       dateParameters['daily-archive-from-month'],
@@ -52,7 +50,6 @@ module.exports.createDailyArchiveDateRange = function (dateParameters) {
 
 module.exports.createFortnightlyArchiveDateRange = function (dateParameters) {
   var archiveDateRange
-  log.info(Object.keys(dateParameters).length)
   if (Object.keys(dateParameters).length === 0) {
     archiveDateRange = null
   } else {
@@ -70,7 +67,6 @@ module.exports.createFortnightlyArchiveDateRange = function (dateParameters) {
 
 module.exports.createReductionArchiveDateRange = function (dateParameters) {
   var archiveDateRange
-  log.info(Object.keys(dateParameters).length)
   if (Object.keys(dateParameters).length === 0) {
     archiveDateRange = null
   } else {

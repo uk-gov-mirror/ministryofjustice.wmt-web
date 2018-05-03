@@ -24,5 +24,4 @@ function printData() {
   var data = table.rows({
     filter: 'applied'
   }).data();
-  console.log(data)
 }

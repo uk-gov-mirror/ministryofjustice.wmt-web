@@ -10,6 +10,9 @@ const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const dateFormatter = require('../services/date-formatter')
 const archiveOptions = require('../constants/archive-options')
+const renderResults = require('../helpers/render-results')
+const viewTemplate = 'reduction-archive-data'
+const title = 'Archived Reductions'
 
 var archiveDateRange
 
@@ -46,11 +49,11 @@ module.exports = function (router) {
 
     // If date range has errors don't search database
     if (errors) {
-      return renderResults(res, errors, [], authorisedUserRole)
+      return renderResults(viewTemplate, title, res, errors, [], authorisedUserRole)
     }
     return getArchive(archiveOptions.REDUCTIONS, archiveDateRange).then(function (results) {
       results = formatResults(results)
-      return renderResults(res, errors, results, authorisedUserRole)
+      return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole)
     }).catch(function (error) {
       next(error)
     })
@@ -83,16 +86,6 @@ module.exports = function (router) {
     }).catch(function (error) {
       next(error)
     })
-  })
-}
-
-var renderResults = function (res, errors, results, authorisedUserRole) {
-  return res.render('reduction-archive-data', {
-    title: 'Archived Reductions',
-    results: results,
-    errors: errors,
-    userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-    noAuth: authorisedUserRole.noAuth  // used by proposition-link for the admin role
   })
 }
 

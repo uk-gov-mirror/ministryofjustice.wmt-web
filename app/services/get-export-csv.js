@@ -187,7 +187,6 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       csv = generateCsv(result, fields, fieldNames)
       break
   }
-  log.info(csv)
   return csv
 }
 

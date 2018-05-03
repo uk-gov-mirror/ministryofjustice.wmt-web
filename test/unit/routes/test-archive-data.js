@@ -46,7 +46,6 @@ before(function () {
 
 describe('archive route', function () {
   it('should respond with 200 when archive data is called', function () {
-    console.log(ARCHIVE_DATA_URL)
     getArchive.resolves(getArchiveResult)
     return supertest(app).get(ARCHIVE_DATA_URL).expect(200)
   })

@@ -105,16 +105,4 @@
 <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
 <script src="{{ asset_path }}javascripts/archive-reductions.js"></script>
 
-<script>
-        $(document).ready(function() {
-    
-        var table = $('.js-data-table').DataTable();
-        var data = table.rows().data();
-    
-        function printData() {
-          console.log(data)
-        }
-      });
-</script>
-
 {% endblock %}

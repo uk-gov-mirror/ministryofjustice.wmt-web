@@ -21,8 +21,6 @@ module.exports = function (archiveDateRange) {
 
   var orderBy = ' ORDER BY last_updated_date ASC '
 
-  console.log(knex.raw('SELECT ' + selectColumns.join(', ') + ' FROM archive_reductions_view' +
-  whereClause + orderBy).toString())
   return knex.raw('SELECT ' + selectColumns.join(', ') + ' FROM archive_reductions_view' +
    whereClause + orderBy)
 }
