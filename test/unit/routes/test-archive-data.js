@@ -1,7 +1,6 @@
 const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
-const expect = require('chai').expect
 const sinon = require('sinon')
 require('sinon-bluebird')
 
@@ -49,7 +48,7 @@ describe('archive route', function () {
   it('should respond with 200 when archive data is called', function () {
     console.log(ARCHIVE_DATA_URL)
     getArchive.resolves(getArchiveResult)
-    return supertest(app).get(ARCHIVE_DATA_URL).expect(200) 
+    return supertest(app).get(ARCHIVE_DATA_URL).expect(200)
   })
 
   it('should respond with 500 when an incorrect url is called', function () {
