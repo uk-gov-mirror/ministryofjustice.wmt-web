@@ -32,34 +32,11 @@ module.exports = function (router) {
       }
     }
 
-    var errors
-
-    try {
-      archiveDateRange = dateRangeHelper.createDailyArchiveDateRange(req.query)
-    } catch (error) {
-      if (error instanceof ValidationError) {
-        errors = error.validationErrors
-        archiveDateRange = dateRangeHelper.createDailyArchiveDateRange({})
-      } else {
-        throw error
-      }
-    }
-
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-
-    if (errors) {
-      return renderResults(viewTemplate, title, res, errors, [], authorisedUserRole)
-    }
-
-    return getArchive(archiveOptions.DAILY, archiveDateRange).then(function (results) {
-      results = formatResults(results)
-      return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole)
-    }).catch(function (error) {
-      next(error)
-    })
+    return renderResults(viewTemplate, title, res, null, null, authorisedUserRole)
   })
 
-  router.get('/archive-data/daily-caseload-data/archive-csv', function (req, res, next) {
+  router.post('/archive-data/daily-caseload-data', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.DATA_ADMIN])
@@ -72,6 +49,67 @@ module.exports = function (router) {
           message: messages.ADMIN_ROLES_REQUIRED
         })
       }
+    }
+
+    var errors
+
+    try {
+      archiveDateRange = dateRangeHelper.createDailyArchiveDateRange(req.body)
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        errors = error.validationErrors
+        archiveDateRange = dateRangeHelper.createDailyArchiveDateRange({})
+      } else {
+        throw error
+      }
+    }
+
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+
+    if (errors) {
+      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole)
+    }
+
+    return getArchive(archiveOptions.DAILY, archiveDateRange).then(function (results) {
+      results = formatResults(results)
+      return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole)
+    }).catch(function (error) {
+      next(error)
+    })
+  })
+
+  router.post('/archive-data/daily-caseload-data/archive-csv', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
+
+    var errors
+
+    try {
+      archiveDateRange = dateRangeHelper.createDailyArchiveDateRange(req.body)
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        errors = error.validationErrors
+        archiveDateRange = dateRangeHelper.createDailyArchiveDateRange({})
+      } else {
+        throw error
+      }
+    }
+
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+
+    if (errors) {
+      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole)
     }
 
     return getArchive(archiveOptions.DAILY, archiveDateRange).then(function (results) {

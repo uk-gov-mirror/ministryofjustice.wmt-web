@@ -32,10 +32,29 @@ module.exports = function (router) {
       }
     }
 
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    return renderResults(viewTemplate, title, res, null, null, authorisedUserRole)
+  })
+
+  router.post('/archive-data/fortnightly-caseload-data', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
+
     var errors
 
     try {
-      archiveDateRange = dateRangeHelper.createFortnightlyArchiveDateRange(req.query)
+      archiveDateRange = dateRangeHelper.createFortnightlyArchiveDateRange(req.body)
     } catch (error) {
       if (error instanceof ValidationError) {
         errors = error.validationErrors
@@ -49,7 +68,7 @@ module.exports = function (router) {
 
     // If date range has errors don't search database
     if (errors) {
-      return renderResults(viewTemplate, title, res, errors, [], authorisedUserRole)
+      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole)
     }
 
     return getArchive(archiveOptions.FORTNIGHTLY, archiveDateRange).then(function (results) {
@@ -60,7 +79,7 @@ module.exports = function (router) {
     })
   })
 
-  router.get('/archive-data/fortnightly-caseload-data/archive-csv', function (req, res, next) {
+  router.post('/archive-data/fortnightly-caseload-data/archive-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.DATA_ADMIN])
@@ -73,6 +92,25 @@ module.exports = function (router) {
           message: messages.ADMIN_ROLES_REQUIRED
         })
       }
+    }
+
+    var errors
+
+    try {
+      archiveDateRange = dateRangeHelper.createFortnightlyArchiveDateRange(req.body)
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        errors = error.validationErrors
+        archiveDateRange = dateRangeHelper.createFortnightlyArchiveDateRange({})
+      } else {
+        throw error
+      }
+    }
+
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+
+    if (errors) {
+      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole)
     }
 
     return getArchive(archiveOptions.FORTNIGHTLY, archiveDateRange).then(function (results) {

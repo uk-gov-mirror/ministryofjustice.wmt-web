@@ -20,7 +20,7 @@ var expectedResult = {
 
 var archiveData
 
-describe('services/data/get-daily-archive', function () {
+describe('services/data/get-fortnightly-archive', function () {
   before(function () {
     return getArchive().then(function (results) {
       archiveData = results

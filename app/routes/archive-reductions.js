@@ -32,34 +32,12 @@ module.exports = function (router) {
       }
     }
 
-    var errors
-
-    try {
-      archiveDateRange = dateRangeHelper.createReductionArchiveDateRange(req.query)
-    } catch (error) {
-      if (error instanceof ValidationError) {
-        errors = error.validationErrors
-        archiveDateRange = dateRangeHelper.createReductionArchiveDateRange({})
-      } else {
-        throw error
-      }
-    }
-
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    // If date range has errors don't search database
-    if (errors) {
-      return renderResults(viewTemplate, title, res, errors, [], authorisedUserRole)
-    }
-    return getArchive(archiveOptions.REDUCTIONS, archiveDateRange).then(function (results) {
-      results = formatResults(results)
-      return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole)
-    }).catch(function (error) {
-      next(error)
-    })
+    return renderResults(viewTemplate, title, res, null, null, authorisedUserRole)
   })
 
-  router.get('/archive-data/reductions/archive-csv', function (req, res, next) {
+  router.post('/archive-data/reductions', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.DATA_ADMIN])
@@ -74,6 +52,67 @@ module.exports = function (router) {
       }
     }
 
+    var errors
+
+    try {
+      archiveDateRange = dateRangeHelper.createReductionArchiveDateRange(req.body)
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        errors = error.validationErrors
+        archiveDateRange = dateRangeHelper.createReductionArchiveDateRange({})
+      } else {
+        throw error
+      }
+    }
+
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+
+    // If date range has errors don't search database
+    if (errors) {
+      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole)
+    }
+    return getArchive(archiveOptions.REDUCTIONS, archiveDateRange).then(function (results) {
+      results = formatResults(results)
+      return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole)
+    }).catch(function (error) {
+      next(error)
+    })
+  })
+
+  router.post('/archive-data/reductions/archive-csv', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
+
+    var errors
+
+    try {
+      archiveDateRange = dateRangeHelper.createReductionArchiveDateRange(req.body)
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        errors = error.validationErrors
+        archiveDateRange = dateRangeHelper.createReductionArchiveDateRange({})
+      } else {
+        throw error
+      }
+    }
+
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+
+    // If date range has errors don't search database
+    if (errors) {
+      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole)
+    }
     return getArchive(archiveOptions.REDUCTIONS, archiveDateRange).then(function (results) {
       results = formatResults(results)
       let dateFileName = null

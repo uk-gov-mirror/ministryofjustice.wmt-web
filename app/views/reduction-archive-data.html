@@ -10,7 +10,8 @@
 
 {% include "includes/validation-error-messages.html" %}
 
-<form method="get" class "archive-form">
+<form method="post" class "archive-form">
+        {% include "includes/csrf-hidden-input.html"%}
 
          <div class="form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}" id="from">
             {% if errors %}
@@ -72,11 +73,11 @@
             </fieldset>
         </div>
 
-        <input id="archive-filter-submit" type="submit" value="Filter" class="button">
+        <input id="archive-reductions-filter-submit" type="submit" value="Filter" class="button" formaction="/archive-data/reductions">
+        <input id="archive-reductions-csv-submit" type="submit" class="button sln-export" style="float: right; margin-left:10px; margin-bottom: 10px" value="Export Archived Reductions" formaction="/archive-data/reductions/archive-csv">
 </form>
 
-<a href="/archive-data/reductions/archive-csv" class="button sln-export" style="float: right; margin-left:10px; margin-bottom: 10px">Export Archive Data</a>
-    
+{% if (results) %}
 <table id="reduction-archive-table" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     <thead>
         <tr class="headers">
@@ -99,6 +100,7 @@
         {% endfor %}
     </tbody>
 </table>
+{% endif %}
 </main>
 
 <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>

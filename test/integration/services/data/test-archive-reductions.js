@@ -12,7 +12,7 @@ var expectedResult = {
 
 var archiveReductionData
 
-describe('services/data/get-daily-archive', function () {
+describe('services/data/get-archived-reductions', function () {
   before(function () {
     return getArchivedReductions().then(function (results) {
       archiveReductionData = results
