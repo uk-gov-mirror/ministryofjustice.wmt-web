@@ -67,12 +67,12 @@ module.exports = function (router) {
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     if (errors) {
-      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole)
+      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange)
     }
 
     return getArchive(archiveOptions.DAILY, archiveDateRange).then(function (results) {
       results = formatResults(results)
-      return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole)
+      return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole, archiveDateRange)
     }).catch(function (error) {
       next(error)
     })

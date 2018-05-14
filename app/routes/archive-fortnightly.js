@@ -68,12 +68,12 @@ module.exports = function (router) {
 
     // If date range has errors don't search database
     if (errors) {
-      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole)
+      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange)
     }
 
     return getArchive(archiveOptions.FORTNIGHTLY, archiveDateRange).then(function (results) {
       results = formatResults(results)
-      return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole)
+      return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole, archiveDateRange)
     }).catch(function (error) {
       next(error)
     })
