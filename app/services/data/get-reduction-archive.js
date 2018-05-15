@@ -1,7 +1,10 @@
 const knex = require('../../../knex').archive
-const ArchiveDateRange = require('../domain/archive-date-range')
 
-module.exports = function (archiveDateRange) {
+module.exports = function (archiveDateRange, extraCriteria) {
+  if (extraCriteria !== null && extraCriteria !== undefined) {
+    extraCriteria = extraCriteria.trim()
+  }
+
   var selectColumns = [
     'om_name AS omName',
     'hours_reduced AS hoursReduced',
@@ -10,17 +13,39 @@ module.exports = function (archiveDateRange) {
     'reduction_added_by AS reductionAddedBy'
   ]
 
-  var whereClause = ''
-
-  if (archiveDateRange instanceof ArchiveDateRange) {
-    whereClause = " WHERE last_updated_date BETWEEN '" + archiveDateRange.archiveFromDate.toISOString() +
-    "' AND '" + archiveDateRange.archiveToDate.toISOString().substring(0, 10) + "'"
+  if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {
+    console.log(knex('archive_reductions_view')
+    .select(selectColumns)
+    .whereBetween('last_updated_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+    .andWhere(function () {
+      this.where('om_name', 'like', '%' + extraCriteria + '%')
+      .orWhere('reduction_added_by', 'like', '%' + extraCriteria + '%')
+    })
+    .orderBy('last_updated_date', 'ASC').toString())
   } else {
-    whereClause = ''
+    console.log(knex('archive_reductions_view')
+    .select(selectColumns)
+    .whereBetween('last_updated_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+    .orderBy('last_updated_date', 'ASC').toString())
   }
 
-  var orderBy = ' ORDER BY last_updated_date ASC '
-
-  return knex.raw('SELECT ' + selectColumns.join(', ') + ' FROM archive_reductions_view' +
-   whereClause + orderBy)
+  if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {
+    return knex('archive_reductions_view')
+    .select(selectColumns)
+    .whereBetween('last_updated_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+    .andWhere(function () {
+      this.where('om_name', 'like', '%' + extraCriteria + '%')
+      .orWhere('reduction_added_by', 'like', '%' + extraCriteria + '%')
+    })
+    .orderBy('last_updated_date', 'ASC')
+  } else {
+    return knex('archive_reductions_view')
+    .select(selectColumns)
+    .whereBetween('last_updated_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+    .orderBy('last_updated_date', 'ASC')
+  }
 }

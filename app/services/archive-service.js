@@ -5,17 +5,17 @@ const calculateAvailablePoints = require('wmt-probation-rules').calculateAvailab
 const DefaultContractedHours = require('wmt-probation-rules').DefaultContractedHours
 const archiveOptions = require('../constants/archive-options')
 
-module.exports = function (archiveOption, archiveDateRange) {
+module.exports = function (archiveOption, archiveDateRange, extraCriteria) {
   if (archiveOption === archiveOptions.DAILY) {
-    return getDailyArchive(archiveDateRange).then(function (results) {
+    return getDailyArchive(archiveDateRange, extraCriteria).then(function (results) {
       return calculateCapacity(results)
     })
   } else if (archiveOption === archiveOptions.FORTNIGHTLY) {
-    return getFortnightlyArchive(archiveDateRange).then(function (results) {
+    return getFortnightlyArchive(archiveDateRange, extraCriteria).then(function (results) {
       return calculateCapacity(results)
     })
   } else {
-    return getReductionArchive(archiveDateRange)
+    return getReductionArchive(archiveDateRange, extraCriteria)
   }
 }
 

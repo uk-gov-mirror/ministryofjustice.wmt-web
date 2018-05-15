@@ -22,7 +22,9 @@
                     <span class="form-label-bold">
                         Show archive data from:
                     </span>
-                    <span class="form-hint" id="daily-archive-from-hint">For example, 30 1 2015</span>
+                    <span class="form-hint" id="daily-archive-from-hint">
+                        For example, 30 1 2015 - Must be between 18/06/2014 and 25/08/2016
+                    </span>
                 </legend>
                 <div class="form-date" aria-describedby="daily-archive-from-hint">
                     <div class="form-group form-group-day">
@@ -52,7 +54,9 @@
                     <span class="form-label-bold">
                         Show archive data to:
                     </span>
-                    <span class="form-hint" id="daily-archive-to-hint">For example, 31 3 2015</span>
+                    <span class="form-hint" id="daily-archive-to-hint">
+                        For example, 31 3 2015 - Must be between 19/06/2014 and 26/08/2016
+                    </span>
                 </legend>
                 <div class="form-date" aria-describedby="daily-archive-to-hint">
                     <div class="form-group form-group-day">
@@ -70,6 +74,23 @@
                         <input class="form-control" id="daily-archive-to-year" name="daily-archive-to-year"
                             value={{dateRange.toFields[2] | int}}>
                     </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="form-group" id="daily-multi-search-field">
+            <fieldset id="multiSearchDate">
+                <legend>
+                    <span class="form-label-bold">
+                        Search by Offender Manager, Team or LDU Cluster
+                    </span>
+                    <span class="form-hint" id="daily-multi-search-field-hint">For Example, John Smith</span>
+                </legend>
+                <div aria-describedby="daily-multi-search-field-hint">
+                    <div class="form-group">
+                        <label class="form-label" for="daily-multi-search-field-entry">Extra Search Criteria</label>
+                        <input class="form-control" id="daily-multi-search-field-entry" name="daily-multi-search-field-entry" value="{{ extraSearchCriteria }}">
+                     </div>
                 </div>
             </fieldset>
         </div>

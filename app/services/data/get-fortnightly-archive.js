@@ -1,7 +1,11 @@
 const knex = require('../../../knex').archive
-const ArchiveDateRange = require('../domain/archive-date-range')
+const archiveDataLimit = require('../../../config').ARCHIVE_DATA_LIMIT
 
-module.exports = function (archiveDateRange) {
+module.exports = function (archiveDateRange, extraCriteria) {
+  if (extraCriteria !== null && extraCriteria !== undefined) {
+    extraCriteria = extraCriteria.trim()
+  }
+
   var selectColumns = [
     'start_date AS startDate',
     'end_date AS endDate',
@@ -18,16 +22,24 @@ module.exports = function (archiveDateRange) {
     'average_hours_reduction AS hoursReduction'
   ]
 
-  var whereClause = ''
-  if (archiveDateRange instanceof ArchiveDateRange) {
-    whereClause = " WHERE start_date >= '" + archiveDateRange.archiveFromDate.toISOString().substring(0, 10) +
-    "' AND end_date <='" + archiveDateRange.archiveToDate.toISOString().substring(0, 10) + "'"
+  if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {
+    return knex('fortnightly_archive_data_view')
+    .limit(parseInt(archiveDataLimit))
+    .select(selectColumns)
+    .where('start_date', '>=', archiveDateRange.archiveFromDate.toISOString().substring(0, 10))
+    .andWhere('end_date', '<=', archiveDateRange.archiveToDate.toISOString().substring(0, 10))
+    .andWhere(function () {
+      this.where('team_name', 'like', '%' + extraCriteria + '%')
+      .orWhere('ldu_name', 'like', '%' + extraCriteria + '%')
+      .orWhere('om_name', 'like', '%' + extraCriteria + '%')
+    })
+    .orderBy('start_date', 'ASC')
   } else {
-    whereClause = ''
+    return knex('fortnightly_archive_data_view')
+    .limit(parseInt(archiveDataLimit))
+    .select(selectColumns)
+    .where('start_date', '>=', archiveDateRange.archiveFromDate.toISOString().substring(0, 10))
+    .andWhere('end_date', '<=', archiveDateRange.archiveToDate.toISOString().substring(0, 10))
+    .orderBy('start_date', 'ASC')
   }
-
-  var orderBy = ' ORDER BY start_date ASC '
-
-  return knex.raw('SELECT top 10000 ' + selectColumns.join(', ') + ' FROM fortnightly_archive_data_view' +
-   whereClause + orderBy)
 }

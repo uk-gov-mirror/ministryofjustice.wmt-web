@@ -66,14 +66,15 @@ module.exports = function (router) {
     }
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    var extraCriteria = req.body['reductions-multi-search-field-entry']
 
     // If date range has errors don't search database
     if (errors) {
-      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange)
+      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
     }
-    return getArchive(archiveOptions.REDUCTIONS, archiveDateRange).then(function (results) {
+    return getArchive(archiveOptions.REDUCTIONS, archiveDateRange, extraCriteria).then(function (results) {
       results = formatResults(results)
-      return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole, archiveDateRange)
+      return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole, archiveDateRange, extraCriteria)
     }).catch(function (error) {
       next(error)
     })
@@ -108,12 +109,13 @@ module.exports = function (router) {
     }
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    var extraCriteria = req.body['reductions-multi-search-field-entry']
 
     // If date range has errors don't search database
     if (errors) {
-      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole)
+      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
     }
-    return getArchive(archiveOptions.REDUCTIONS, archiveDateRange).then(function (results) {
+    return getArchive(archiveOptions.REDUCTIONS, archiveDateRange, extraCriteria).then(function (results) {
       results = formatResults(results)
       let dateFileName = null
       if (archiveDateRange !== null) {

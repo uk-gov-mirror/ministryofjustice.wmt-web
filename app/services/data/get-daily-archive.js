@@ -1,7 +1,11 @@
 const knex = require('../../../knex').archive
-const ArchiveDateRange = require('../domain/archive-date-range')
+const archiveDataLimit = require('../../../config').ARCHIVE_DATA_LIMIT
 
-module.exports = function (archiveDateRange) {
+module.exports = function (archiveDateRange, extraCriteria) {
+  if (extraCriteria !== null && extraCriteria !== undefined) {
+    extraCriteria = extraCriteria.trim()
+  }
+
   var selectColumns = [
     'workload_id AS workloadID',
     'workload_date AS workloadDate',
@@ -18,16 +22,24 @@ module.exports = function (archiveDateRange) {
     'hours_reduction AS hoursReduction'
   ]
 
-  var whereClause
-  if (archiveDateRange instanceof ArchiveDateRange) {
-    whereClause = " WHERE workload_date BETWEEN '" + archiveDateRange.archiveFromDate.toISOString().substring(0, 10) +
-    "' AND '" + archiveDateRange.archiveToDate.toISOString().substring(0, 10) + "'"
+  if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {
+    return knex('archive_data_view')
+    .limit(parseInt(archiveDataLimit))
+    .select(selectColumns)
+    .whereBetween('workload_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+    .andWhere(function () {
+      this.where('team_name', 'like', '%' + extraCriteria + '%')
+      .orWhere('ldu_name', 'like', '%' + extraCriteria + '%')
+      .orWhere('om_name', 'like', '%' + extraCriteria + '%')
+    })
+    .orderBy('workload_id', 'ASC')
   } else {
-    whereClause = ''
+    return knex('archive_data_view')
+    .limit(parseInt(archiveDataLimit))
+    .select(selectColumns)
+    .whereBetween('workload_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+    .orderBy('workload_id', 'ASC')
   }
-
-  var orderBy = ' ORDER BY workload_id ASC '
-
-  return knex.raw('SELECT top 10000 ' + selectColumns.join(', ') + ' FROM archive_data_view' +
-   whereClause + orderBy)
 }
