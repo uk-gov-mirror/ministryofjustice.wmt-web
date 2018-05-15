@@ -26,7 +26,7 @@ module.exports = {
       database: config.ARCHIVE_DATABASE,
       options: {
         encrypt: true,
-        requestTimeout: 60000
+        requestTimeout: 120000
       }
     },
     debug: false
