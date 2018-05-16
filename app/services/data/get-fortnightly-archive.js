@@ -24,7 +24,7 @@ module.exports = function (archiveDateRange, extraCriteria) {
   ]
 
   if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {
-    return knex('fortnightly_archive_data_view')
+    return knex('fortnightly_archive_data')
     .limit(parseInt(archiveDataLimit))
     .select(selectColumns)
     .where('start_date', '>=', archiveDateRange.archiveFromDate.toISOString().substring(0, 10))
@@ -40,7 +40,7 @@ module.exports = function (archiveDateRange, extraCriteria) {
       throw error
     })
   } else {
-    return knex('fortnightly_archive_data_view')
+    return knex('fortnightly_archive_data')
     .limit(parseInt(archiveDataLimit))
     .select(selectColumns)
     .where('start_date', '>=', archiveDateRange.archiveFromDate.toISOString().substring(0, 10))
