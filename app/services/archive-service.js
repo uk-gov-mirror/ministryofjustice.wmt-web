@@ -4,6 +4,7 @@ const getReductionArchive = require('./data/get-reduction-archive')
 const calculateAvailablePoints = require('wmt-probation-rules').calculateAvailablePoints
 const DefaultContractedHours = require('wmt-probation-rules').DefaultContractedHours
 const archiveOptions = require('../constants/archive-options')
+const log = require('../logger')
 
 module.exports = function (archiveOption, archiveDateRange, extraCriteria) {
   if (archiveOption === archiveOptions.DAILY) {
@@ -13,6 +14,10 @@ module.exports = function (archiveOption, archiveDateRange, extraCriteria) {
   } else if (archiveOption === archiveOptions.FORTNIGHTLY) {
     return getFortnightlyArchive(archiveDateRange, extraCriteria).then(function (results) {
       return calculateCapacity(results)
+    })
+    .catch(function (error) {
+      log.error(error)
+      throw error
     })
   } else {
     return getReductionArchive(archiveDateRange, extraCriteria)

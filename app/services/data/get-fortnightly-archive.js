@@ -1,5 +1,6 @@
 const knex = require('../../../knex').archive
 const archiveDataLimit = require('../../../config').ARCHIVE_DATA_LIMIT
+const log = require('../../logger')
 
 module.exports = function (archiveDateRange, extraCriteria) {
   if (extraCriteria !== null && extraCriteria !== undefined) {
@@ -34,6 +35,10 @@ module.exports = function (archiveDateRange, extraCriteria) {
       .orWhere('om_name', 'like', '%' + extraCriteria + '%')
     })
     .orderBy('start_date', 'ASC')
+    .catch(function (error) {
+      log.error(error)
+      throw error
+    })
   } else {
     return knex('fortnightly_archive_data_view')
     .limit(parseInt(archiveDataLimit))
@@ -41,5 +46,9 @@ module.exports = function (archiveDateRange, extraCriteria) {
     .where('start_date', '>=', archiveDateRange.archiveFromDate.toISOString().substring(0, 10))
     .andWhere('end_date', '<=', archiveDateRange.archiveToDate.toISOString().substring(0, 10))
     .orderBy('start_date', 'ASC')
+    .catch(function (error) {
+      log.error(error)
+      throw error
+    })
   }
 }

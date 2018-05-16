@@ -13,6 +13,7 @@ const archiveOptions = require('../constants/archive-options')
 const renderResults = require('../helpers/render-results')
 const viewTemplate = 'fortnightly-caseload-data'
 const title = 'Archived Fortnightly Caseload Data'
+const log = require('../logger')
 
 var archiveDateRange
 
@@ -76,6 +77,7 @@ module.exports = function (router) {
       results = formatResults(results)
       return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole, archiveDateRange, extraCriteria)
     }).catch(function (error) {
+      log.error(error)
       next(error)
     })
   })
