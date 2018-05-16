@@ -32,7 +32,11 @@ var calculateCapacity = function (results) {
       let defaultContractedHours = new DefaultContractedHours(37.5, 37.5, 37.5)
       let availablePoints = calculateAvailablePoints(result.nominalTarget, result.omTypeId, result.contractedHours, result.hoursReduction, defaultContractedHours)
       let acquiredPoints = calculateAcquiredPoints(result.totalPoints, result.sdrPoints, result.sdrConversionPoints, result.paromsPoints)
-      result.capacity = Number(parseFloat((acquiredPoints / availablePoints) * 100).toFixed(1)) + '%'
+      if (availablePoints !== 0) {
+        result.capacity = Number(parseFloat((acquiredPoints / availablePoints) * 100).toFixed(1)) + '%'
+      } else {
+        result.capacity = '0%'
+      }
     }
   })
   return results
