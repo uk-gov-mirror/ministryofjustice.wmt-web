@@ -71,7 +71,8 @@ module.exports = function (app) {
     {
       path: config.ACTIVE_DIRECTORY_RETURN_ADDRESS,
       entryPoint: config.ACTIVE_DIRECTORY_ENTRY_POINT,
-      issuer: config.ACTIVE_DIRECTORY_ISSUER
+      issuer: config.ACTIVE_DIRECTORY_ISSUER,
+      disableRequestedAuthnContext: true
     },
     function (profile, done) {
       return done(null, profile)
