@@ -18,6 +18,7 @@ var calculateHours = function (woContractedHours, percentage) {
     result = undefined
   } else {
     result = (woContractedHours / 100) * percentage
+    result = Number(result.toFixed(2)) // WMT0046 - Fixing issue of result being numbers like 1.1500000000001
   }
   return result
 }
