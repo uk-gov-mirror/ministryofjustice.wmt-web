@@ -37,6 +37,7 @@ var calculateCapacity = function (results) {
       } else {
         result.capacity = '0%'
       }
+      result.hoursReduction =  Number(parseFloat(result.hoursReduction).toFixed(1))
     }
   })
   return results

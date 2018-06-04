@@ -110,7 +110,7 @@
       {% for result in results %}
         <tr>
             <td>{{ result.omName }}</td>
-            <td>{{ result.hoursReduced }}</td>
+            <td>{{ result.hoursReduced | round(1) }}</td>
             <td>{{ result.comments }}</td>
             <td>{{ result.lastUpdatedDate }}</td>
             <td>{{ result.reductionAddedBy }}</td>
