@@ -307,6 +307,7 @@ module.exports = function (router) {
               notes: req.body.notes
             },
             errors: error.validationErrors,
+            workloadType: workloadType,
             userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
             authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
           })
