@@ -9,9 +9,17 @@
     {% set headerText='Reduction' %}
     {% set reductionText='Showing reduction for ' %}
     {% if reduction.status !== 'ARCHIVED' %}
-      {% set submitButtonText='Save changes' %}
-      {% set formAction='/' + workloadType + '/offender-manager/' +  linkId  + '/edit-reduction' %}
-      {% set formMethod='POST' %}
+      {% if reduction.id %}
+        {% set submitButtonText='Save changes' %}
+        {% set formAction='/' + workloadType + '/offender-manager/' +  linkId  + '/edit-reduction' %}
+        {% set formMethod='POST' %}
+      {% else %}
+        {% set headerText='New reduction' %}
+        {% set reductionText='Add a new reduction for ' %}
+        {% set submitButtonText='Add reduction' %}
+        {% set formAction='/' + workloadType + '/offender-manager/' + linkId +'/add-reduction' %}
+        {% set formMethod='POST' %}
+      {% endif %}
     {% else %}
       {% set submitButtonText='Back to Reductions' %}
       {% set formAction='/' + workloadType + '/offender-manager/' + linkId + '/reductions' %}
