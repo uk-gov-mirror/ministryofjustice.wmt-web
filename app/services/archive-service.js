@@ -20,7 +20,9 @@ module.exports = function (archiveOption, archiveDateRange, extraCriteria) {
       throw error
     })
   } else {
-    return getReductionArchive(archiveDateRange, extraCriteria)
+    return getReductionArchive(archiveDateRange, extraCriteria).then(function (results) {
+      return formatReductionTo1DP(results)
+    })
   }
 }
 
@@ -45,4 +47,11 @@ var calculateCapacity = function (results) {
 
 var calculateAcquiredPoints = function (totalPoints, sdrPoints, sdrConversionPoints, paromsPoints) {
   return totalPoints + sdrPoints + sdrConversionPoints + paromsPoints
+}
+
+var formatReductionTo1DP = function (results) {
+  results.forEach(function (result) {
+    result.hoursReduced = Number(parseFloat(result.hoursReduced).toFixed(1))
+  })
+  return results
 }
