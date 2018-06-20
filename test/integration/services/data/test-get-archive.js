@@ -1,6 +1,7 @@
 const expect = require('chai').expect
 
 const getArchive = require('../../../../app/services/data/get-daily-archive')
+const ArchiveDateRange = require('../../../../app/services/domain/archive-date-range')
 
 var expectedResult = {
   workloadID: 2745,
@@ -20,9 +21,11 @@ var expectedResult = {
 
 var archiveData
 
+var archiveDateRange = new ArchiveDateRange(18, 6, 2014, 26, 8, 2016)
+
 describe('services/data/get-daily-archive', function () {
   before(function () {
-    return getArchive().then(function (results) {
+    return getArchive(archiveDateRange).then(function (results) {
       archiveData = results
     })
   })

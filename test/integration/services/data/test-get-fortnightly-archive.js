@@ -1,15 +1,16 @@
 const expect = require('chai').expect
 
 const getArchive = require('../../../../app/services/data/get-fortnightly-archive')
+const ArchiveDateRange = require('../../../../app/services/domain/archive-date-range')
 
 var expectedResult = {
   startDate: new Date('2014-06-05T00:00:00.000Z'),
   endDate: new Date('2014-06-19T00:00:00.000Z'),
-  lduName: 'Approved Premises',
-  teamName: '*Howarth House',
-  omName: 'A.N. Offender Manager 2',
-  totalCases: 1,
-  totalPoints: 102,
+  lduName: 'NPS Team',
+  teamName: 'NPS - Newport - Team 1',
+  omName: 'A.N. Offender Manager 1511',
+  totalCases: 48,
+  totalPoints: 2519,
   sdrPoints: 0,
   sdrConversionPoints: 0,
   paromsPoints: 0,
@@ -20,9 +21,12 @@ var expectedResult = {
 
 var archiveData
 
+var archiveDateRange = new ArchiveDateRange(5, 6, 2014, 25, 8, 2016)
+var extraCriteria = 'A.N. Offender Manager 1511'
+
 describe('services/data/get-fortnightly-archive', function () {
   before(function () {
-    return getArchive().then(function (results) {
+    return getArchive(archiveDateRange, extraCriteria).then(function (results) {
       archiveData = results
     })
   })
