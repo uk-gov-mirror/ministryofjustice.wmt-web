@@ -12,5 +12,6 @@ module.exports = {
   getIsDateLaterThanMessage: function (displayName, options) { return `${displayName} must be after ${options.secondaryDisplayName}` },
   getIsLessThanLengthMessage: function (displayName, options) { return `${displayName} must be shorter than ${options.length} characters` },
   getIsValidUsernameMessage: function (displayName) { return `${displayName} is invalid` },
-  getIsBooleanMessage: function (displayName) { return `${displayName} must be true or false` }
+  getIsBooleanMessage: function (displayName) { return `${displayName} must be true or false` },
+  getContractedHoursAreZero: function () { return 'You cannot add a reduction for an offender manager with 0 contracted hours' },
 }

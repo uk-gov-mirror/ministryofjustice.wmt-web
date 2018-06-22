@@ -12,6 +12,8 @@ const Forbidden = require('../services/errors/authentication-error').Forbidden
 const workloadTypeValidator = require('../services/validators/workload-type-validator')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
+const ErrorHandler = require('../services/validators/error-handler')
+const ERROR_MESSAGES = require('../services/validators/validation-error-messages')
 
 var lastUpdated
 
@@ -44,29 +46,29 @@ module.exports = function (router) {
     }
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    var reductionsResultData
 
     return getLastUpdated().then(function (result) {
       lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
       return reductionsService.getReductions(id, organisationLevel, workloadType).then(function (result) {
         result.date = lastUpdated
-        return res.render('reductions', {
-          breadcrumbs: result.breadcrumbs,
-          linkId: id,
-          title: result.title,
-          subTitle: result.subTitle,
-          subNav: getSubNav(id, organisationLevel, req.path, workloadType),
-          activeReductions: result.activeReductions,
-          scheduledReductions: result.scheduledReductions,
-          archivedReductions: result.archivedReductions,
-          successText: successText,
-          workloadType: workloadType,
-          date: result.date,
-          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
-        })
+        reductionsResultData = result
+
+        if (req.session.ContractedHoursIsZero === true) {
+          delete req.session.ContractedHoursIsZero
+          var errors = ErrorHandler()
+          errors.add('headingActive', ERROR_MESSAGES.getContractedHoursAreZero)
+          throw new ValidationError(errors.get())
+        } else {
+          return renderReductionsMainPage(req, res, reductionsResultData, successText, workloadType, id, organisationLevel, authorisedUserRole)
+        }
       })
     }).catch(function (error) {
-      next(error)
+      if(error instanceof ValidationError) {
+        return renderReductionsMainPage(req, res, reductionsResultData, successText, workloadType, id, organisationLevel, authorisedUserRole, error)
+      } else {
+        next(error)
+      }
     })
   })
 
@@ -101,18 +103,25 @@ module.exports = function (router) {
       .then(function (result) {
         var errors = req.session.addReductionErrors
         delete req.session.addReductionErrors
-        return res.render('add-reduction', {
-          breadcrumbs: result.breadcrumbs,
-          linkId: id,
-          title: result.title,
-          subTitle: result.subTitle,
-          subNav: getSubNav(id, organisationLevel, req.path, workloadType),
-          referenceData: result.referenceData,
-          errors: errors,
-          workloadType: workloadType,
-          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
-        })
+
+        if (result.contractedHours === 0) {
+          req.session.ContractedHoursIsZero = true
+          var routeToReductionPage = '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions'
+          res.redirect(routeToReductionPage)
+        } else {
+          return res.render('add-reduction', {
+            breadcrumbs: result.breadcrumbs,
+            linkId: id,
+            title: result.title,
+            subTitle: result.subTitle,
+            subNav: getSubNav(id, organisationLevel, req.path, workloadType),
+            referenceData: result.referenceData,
+            errors: errors,
+            workloadType: workloadType,
+            userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+          })
+        }
       }).catch(function (error) {
         next(error)
       })
@@ -430,5 +439,27 @@ module.exports = function (router) {
       }
     }
     return viewModel
+  }
+
+  var renderReductionsMainPage = function (req, res, results, successText, workloadType, id, organisationLevel, authorisedUserRole, error = null) {
+    var displayJson = {
+      breadcrumbs: results.breadcrumbs,
+      linkId: id,
+      title: results.title,
+      subTitle: results.subTitle,
+      subNav: getSubNav(id, organisationLevel, req.path, workloadType),
+      activeReductions: results.activeReductions,
+      scheduledReductions: results.scheduledReductions,
+      archivedReductions: results.archivedReductions,
+      successText: successText,
+      workloadType: workloadType,
+      date: results.date,
+      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+    }
+    if (error) {
+      displayJson.errors = error.validationErrors
+    }
+    return res.render('reductions', displayJson)
   }
 }
