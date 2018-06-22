@@ -13,5 +13,5 @@ module.exports = {
   getIsLessThanLengthMessage: function (displayName, options) { return `${displayName} must be shorter than ${options.length} characters` },
   getIsValidUsernameMessage: function (displayName) { return `${displayName} is invalid` },
   getIsBooleanMessage: function (displayName) { return `${displayName} must be true or false` },
-  getContractedHoursAreZero: function () { return 'You cannot add a reduction for an offender manager with 0 contracted hours' },
+  getContractedHoursAreZero: function () { return 'You cannot add a reduction for an offender manager with 0 contracted hours' }
 }

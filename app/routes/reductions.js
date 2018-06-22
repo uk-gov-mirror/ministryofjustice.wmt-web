@@ -64,7 +64,7 @@ module.exports = function (router) {
         }
       })
     }).catch(function (error) {
-      if(error instanceof ValidationError) {
+      if (error instanceof ValidationError) {
         return renderReductionsMainPage(req, res, reductionsResultData, successText, workloadType, id, organisationLevel, authorisedUserRole, error)
       } else {
         next(error)
