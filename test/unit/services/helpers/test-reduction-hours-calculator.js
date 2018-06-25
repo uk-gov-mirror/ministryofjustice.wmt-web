@@ -18,9 +18,9 @@ var reductionQueryResults = [
 ]
 
 var reductionWithHoursResults = [
-  Object.assign({}, baseReductionReasonsRow, { allowanceHours: 37, maxAllowanceHours: undefined }),
-  Object.assign({}, baseReductionReasonsRow, { allowanceHours: 14.8, maxAllowanceHours: undefined, allowancePercentage: 40, maxAllowancePercentage: undefined }),
-  Object.assign({}, baseReductionReasonsRow, { allowanceHours: undefined, maxAllowanceHours: 18.5, allowancePercentage: undefined, maxAllowancePercentage: 50 }),
+  Object.assign({}, baseReductionReasonsRow, { allowanceHours: 37, maxAllowanceHours: 37 }),
+  Object.assign({}, baseReductionReasonsRow, { allowanceHours: 14.8, maxAllowanceHours: 37, allowancePercentage: 40, maxAllowancePercentage: undefined }),
+  Object.assign({}, baseReductionReasonsRow, { allowanceHours: 37, maxAllowanceHours: 18.5, allowancePercentage: undefined, maxAllowancePercentage: 50 }),
   Object.assign({}, baseReductionReasonsRow, { allowanceHours: 17.39, maxAllowanceHours: 18.5, allowancePercentage: 47, maxAllowancePercentage: 50 })
 ]
 
