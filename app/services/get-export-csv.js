@@ -2,7 +2,6 @@ const organisationUnitConstants = require('../constants/organisation-unit')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const json2csv = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
-const dateFormatter = require('./date-formatter')
 
 const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['regionName', 'lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
@@ -12,9 +11,24 @@ const REDUCTIONS_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team', 'Offender Manag
 const REDUCTIONS_FIELDS = ['regionName', 'lduName', 'teamName', 'offenderManager', 'contractedHours', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
 const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
 const INACTIVE_CASES_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
+// const DAILY_ARCHIVE_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Offender Manager Name', 'Total Cases', 'Capacity', 'Reductions', 'Comments', 'Reduction Date', 'Reduction Added By']
+const DAILY_ARCHIVE_FIELD_NAMES = ['Workload Date', 'Workload ID', 'LDU Cluster', 'Team Name', 'Offender Manager Name', 'Total Cases', 'Capacity', 'Reductions']
+const DAILY_ARCHIVE_FIELDS = ['workloadDate', 'workloadID', 'lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'hoursReduction']
+
+const FORTNIGHTLY_ARCHIVE_FIELD_NAMES = ['Start Date', 'End Date', 'LDU Cluster', 'Team Name', 'Offender Manager Name', 'Average Cases', 'Average Capacity', 'Average Reductions']
+const FORTNIGHTLY_ARCHIVE_FIELDS = ['startDate', 'endDate', 'lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'hoursReduction']
+
+const REDUCTION_ARCHIVE_FIELD_NAMES = ['Offender Manager Name', 'Reduction Hours', 'Comments', 'Date Updated', 'Reduction Updated By']
+const REDUCTION_ARCHIVE_FIELDS = ['omName', 'hoursReduced', 'comments', 'lastUpdatedDate', 'reductionAddedBy']
+// const DAILY_ARCHIVE_FIELDS = ['lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'reduction', 'comments', 'reductionDate', 'reductionAddedBy']
 
 module.exports = function (organisationLevel, result, tab) {
-  var filename = getFilename(result.title, tab)
+  var filename
+  if (tab === tabs.ADMIN.DAILY_ARCHIVE || tab === tabs.ADMIN.FORTNIGHTLY_ARCHIVE || tab === tabs.ADMIN.REDUCTION_ARCHIVE) {
+    filename = getFilename(organisationLevel, tab)
+  } else {
+    filename = getFilename(result.title, tab)
+  }
   var fieldsObject = getFields(organisationLevel, tab)
   var fields = fieldsObject.fields
   var fieldNames = fieldsObject.fieldNames
@@ -25,18 +39,30 @@ module.exports = function (organisationLevel, result, tab) {
 }
 
 var getFilename = function (orgName, screen) {
-  let filename
   var replaceSpaces = / /g
   if (screen === tabs.REDUCTIONS_EXPORT) {
-    filename = orgName + ' Reductions Notes '
-  } else if (screen === tabs.CAPACITY.INACTIVE) {
-    filename = orgName + ' Inactive & UPW Cases '
+    return (orgName + ' Reductions Notes.csv').replace(replaceSpaces, '_')
+  } else if (screen === tabs.ADMIN.DAILY_ARCHIVE) {
+    if (orgName === null) {
+      return 'Daily_Archive_Data.csv'
+    } else {
+      return (orgName + ' Daily_Archive_Data.csv').replace(replaceSpaces, '_')
+    }
+  } else if (screen === tabs.ADMIN.FORTNIGHTLY_ARCHIVE) {
+    if (orgName === null) {
+      return 'Fortnightly_Archive_Data.csv'
+    } else {
+      return (orgName + ' Fortnightly_Archive_Data.csv').replace(replaceSpaces, '_')
+    }
+  } else if (screen === tabs.ADMIN.REDUCTION_ARCHIVE) {
+    if (orgName === null) {
+      return 'Archived_Reductions.csv'
+    } else {
+      return (orgName + ' Archived_Reductions.csv').replace(replaceSpaces, '_')
+    }
   } else {
-    filename = orgName + ' ' + screen + ' '
+    return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
   }
-  let timestamp = dateFormatter.formatDate(new Date(), 'DD MM YYYY THH mm')
-  filename = (filename + timestamp.toString()).replace(replaceSpaces, '_') + '.csv'
-  return filename
 }
 
 var getFields = function (organisationLevel, tab) {
@@ -72,6 +98,18 @@ var getFields = function (organisationLevel, tab) {
     case tabs.CAPACITY.INACTIVE:
       fields = INACTIVE_CASES_FIELDS
       fieldNames = INACTIVE_CASES_FIELD_NAMES
+      break
+    case tabs.ADMIN.DAILY_ARCHIVE:
+      fields = DAILY_ARCHIVE_FIELDS
+      fieldNames = DAILY_ARCHIVE_FIELD_NAMES
+      break
+    case tabs.ADMIN.FORTNIGHTLY_ARCHIVE:
+      fields = FORTNIGHTLY_ARCHIVE_FIELDS
+      fieldNames = FORTNIGHTLY_ARCHIVE_FIELD_NAMES
+      break
+    case tabs.ADMIN.REDUCTION_ARCHIVE:
+      fields = REDUCTION_ARCHIVE_FIELDS
+      fieldNames = REDUCTION_ARCHIVE_FIELD_NAMES
       break
   }
   return { fields: fields, fieldNames: fieldNames }
@@ -140,6 +178,11 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       if (organisationLevel === organisationUnitConstants.TEAM.name) {
         csv = generateCsv(result.inactiveCaseDetails, fields, fieldNames)
       }
+      break
+    case tabs.ADMIN.DAILY_ARCHIVE:
+    case tabs.ADMIN.FORTNIGHTLY_ARCHIVE:
+    case tabs.ADMIN.REDUCTION_ARCHIVE:
+      csv = generateCsv(result, fields, fieldNames)
       break
   }
   return csv

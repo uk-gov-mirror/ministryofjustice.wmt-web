@@ -9,33 +9,26 @@
     <div class="column-one-half">
     {% if authorisation===false or userRole==='Data Admin'%}
       <h2 class="heading-medium">
-        <a href="/admin/workload-points">Workload points</a>
+        <a class="blue-link" href="/admin/workload-points">Workload points</a>
       </h2>
       <p>Set workload points for standard cases</p>
       <h2 class="heading-medium">
-          <a href="/admin/workload-points/t2a">Workload points (T2A)</a>
+          <a class="blue-link" href="/admin/workload-points/t2a">Workload points (T2A)</a>
       </h2>
       <p>Set workload points for Transition to Adulthood cases</p>
-    {% else %}
       <h2 class="heading-medium">
-        Workload points
+        <a class="blue-link" href="/archive-options">Archive Data</a>
       </h2>
-      <p>Set workload points for standard cases</p>
-      <h2 class="heading-medium">
-        Workload points (T2A)
-      </h2>
-      <p>Set workload points for Transition to Adulthood cases</p>
+      <p>View Archive Data</p>
     {% endif %}
     </div>
     <div class="column-one-half">
-      <h2 class="heading-medium">
       {% if authorisation===false or userRole==='System Admin' %}
-        <a href="/admin/user">User rights</a>
-      {% else %}
-        User rights
-      {% endif %}
+      <h2 class="heading-medium">
+        <a class="blue-link" href="/admin/user">User rights</a>
       </h2>
       <p>Manage user rights</p>
+      {% endif %}
     </div>
   </div>
 

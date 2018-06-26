@@ -24,7 +24,6 @@ describe('services/data/get-full-overview', function () {
     return dataHelper.addWorkloadCapacitiesForOffenderManager()
         .then(function (buildInserts) {
           inserts = buildInserts
-          console.log(inserts)
         })
   })
 
