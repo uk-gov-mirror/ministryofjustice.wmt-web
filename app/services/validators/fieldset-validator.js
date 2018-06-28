@@ -72,6 +72,14 @@ class FieldsetValidator {
     return this
   }
 
+  isOnOrAfter (dateToCompare, dateToCompareFieldName) {
+    if (!isDateOnOrAfter(this.formattedDate, dateToCompare)) {
+      var options = { secondaryFieldName: dateToCompareFieldName }
+      this.errors.add(this.fieldName, ERROR_MESSAGES.getPresentOrFutureMessage, options)
+    }
+    return this
+  }
+
   getFormattedDate () {
     return this.formattedDate
   }
@@ -93,6 +101,10 @@ function isDateInThePast (date) {
 
 function isDateAfter (endDate, startDate) {
   return endDate > startDate
+}
+
+function isDateOnOrAfter (endDate, startDate) {
+  return endDate >= startDate
 }
 
 module.exports = function (data, fieldName, errors) {
