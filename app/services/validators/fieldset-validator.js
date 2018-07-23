@@ -2,6 +2,7 @@ const moment = require('moment')
 const ERROR_MESSAGES = require('./validation-error-messages')
 const dateFormatter = require('../date-formatter')
 const DATE_LIMIT = moment('20990101', 'YYYYMMDD')
+const DATE_LOWER_LIMIT = moment('19000101', 'YYYYMMDD')
 
 class FieldsetValidator {
   /**
@@ -87,7 +88,7 @@ class FieldsetValidator {
 function validateDate (date) {
   if (!date) return false
   return date instanceof moment && date.isValid() &&
-    date < DATE_LIMIT
+    date < DATE_LIMIT && date > DATE_LOWER_LIMIT
 }
 
 function isDateInTheFuture (date) {
