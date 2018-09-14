@@ -88,7 +88,7 @@
         if(startDate.getYear() % 4 === 0){
           daysInMonth[1] = 29 
         } else {
-          daysInMonth[2] = 28
+          daysInMonth[1] = 28
         }
 
         if (Number(startDay) > 0 && Number(startDay) < daysInMonth[startDate.getMonth()] + 1
