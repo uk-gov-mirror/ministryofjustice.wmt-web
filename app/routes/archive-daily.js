@@ -70,7 +70,12 @@ module.exports = function (router) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
     }
 
-    return getArchive(archiveOptions.DAILY, archiveDateRange, extraCriteria).then(function (results) {
+    var thisArchiveOption = archiveOptions.DAILY
+    if (archiveDateRange.archiveFromDate.isSameOrAfter(dateFormatter.build(26,8,2016))){
+      thisArchiveOption = archiveOptions.NEW_DAILY
+    }
+
+    return getArchive(thisArchiveOption, archiveDateRange, extraCriteria).then(function (results) {
       results = formatResults(results)
       return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole, archiveDateRange, extraCriteria)
     }).catch(function (error) {

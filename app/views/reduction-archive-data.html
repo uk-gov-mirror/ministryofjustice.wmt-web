@@ -101,7 +101,10 @@
         <tr class="headers">
             <th id="offenderManager">Offender Manager</th>
             <th id="reductions">Reduction Hours</th>
+            <th id="reductionReason">Reduction Reason</th>
             <th id="comments">Comments</th>
+            <th id="reductionStartDate">Start Date</th>
+            <th id="reductionExpiryDate">Expiry Date</th>
             <th id="reductionDate">Date Reduction Updated</th>
             <th id="reductionAddedBy">Reduction Updated By</th>
         </tr>
@@ -111,7 +114,10 @@
         <tr>
             <td>{{ result.omName }}</td>
             <td>{{ result.hoursReduced | round(1) }}</td>
+            <td>N/A</td>
             <td>{{ result.comments }}</td>
+            <td>N/A</td>
+            <td>N/A</td>
             <td>{{ result.lastUpdatedDate }}</td>
             <td>{{ result.reductionAddedBy }}</td>
         </tr>

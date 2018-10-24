@@ -5,6 +5,7 @@ const tableCreator = require('./helpers/table-creator')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const organisationConstant = require('../constants/organisation-unit')
 const percentageCalculator = require('./helpers/percentage-calculator')
+const log = require('../logger')
 
 module.exports = function (id, capacityDateRange, organisationLevel) {
   var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
@@ -40,6 +41,7 @@ var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
 
   if (organisationLevel === organisationConstant.TEAM.name) {
     workloadReports.forEach(function (workloadReport) {
+      log.info(workloadReport)
       var capacityBreakdownRow = buildCapacityBreakdownEntry(workloadReport)
       totals = addTotals(totals, capacityBreakdownRow)
       capacityBreakdown.push(buildCapacityBreakdownEntry(workloadReport))
