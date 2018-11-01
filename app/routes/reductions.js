@@ -214,7 +214,7 @@ module.exports = function (router) {
         // Find the index in the array of reasons where this reason occurs
         var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
         reductionReason = result.referenceData[index]
-        reduction = generateNewReductionFromRequest(req.body, reductionReason)
+        reduction = generateNewReductionFromRequest(req.body, reductionReason, req.user.userId)
       } catch (error) {
         if (error instanceof ValidationError) {
           var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
@@ -292,7 +292,7 @@ module.exports = function (router) {
         // Find the index in the array of reasons where this reason occurs
         var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
         reductionReason = result.referenceData[index]
-        reduction = generateNewReductionFromRequest(req.body, reductionReason)
+        reduction = generateNewReductionFromRequest(req.body, reductionReason, req.user.userId)
       } catch (error) {
         if (error instanceof ValidationError) {
           var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
@@ -397,11 +397,11 @@ module.exports = function (router) {
     return successText
   }
 
-  var generateNewReductionFromRequest = function (requestBody, reductionReason) {
+  var generateNewReductionFromRequest = function (requestBody, reductionReason, submitterId) {
     var reductionStartDate = [requestBody.redStartDay, requestBody.redStartMonth, requestBody.redStartYear]
     var reductionEndDate = [requestBody.redEndDay, requestBody.redEndMonth, requestBody.redEndYear]
     var reasonId = requestBody.reasonForReductionId
-    return new Reduction(reasonId, requestBody.reductionHours, reductionStartDate, reductionEndDate, requestBody.notes, reductionReason)
+    return new Reduction(reasonId, requestBody.reductionHours, reductionStartDate, reductionEndDate, requestBody.notes, reductionReason, submitterId)
   }
 
   var requestStatusVerified = function (reductionStatus) {
