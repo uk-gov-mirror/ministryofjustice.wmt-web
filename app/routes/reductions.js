@@ -214,7 +214,11 @@ module.exports = function (router) {
         // Find the index in the array of reasons where this reason occurs
         var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
         reductionReason = result.referenceData[index]
-        reduction = generateNewReductionFromRequest(req.body, reductionReason, req.user.userId)
+        var userId = null
+        if (req.user !== undefined && req.user !== null) {
+          userId = req.user.userId
+        }
+        reduction = generateNewReductionFromRequest(req.body, reductionReason, userId)
       } catch (error) {
         if (error instanceof ValidationError) {
           var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
@@ -248,7 +252,7 @@ module.exports = function (router) {
       }
 
       return reductionsService.addReduction(id, reduction, workloadType).then(function () {
-        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id)
+        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions')
       }).catch(function (error) {
         next(error)
       })
@@ -292,7 +296,11 @@ module.exports = function (router) {
         // Find the index in the array of reasons where this reason occurs
         var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
         reductionReason = result.referenceData[index]
-        reduction = generateNewReductionFromRequest(req.body, reductionReason, req.user.userId)
+        var userId = null
+        if (req.user !== undefined && req.user !== null) {
+          userId = req.user.userId
+        }
+        reduction = generateNewReductionFromRequest(req.body, reductionReason, userId)
       } catch (error) {
         if (error instanceof ValidationError) {
           var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
@@ -327,7 +335,7 @@ module.exports = function (router) {
 
       return reductionsService.updateReduction(id, reductionId, reduction, workloadType)
       .then(function () {
-        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id)
+        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions')
       }).catch(function (error) {
         next(error)
       })
