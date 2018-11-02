@@ -220,7 +220,7 @@ describe('court-reports reductions route', function () {
       return superTest(app)
       .post(ADD_REDUCTION_POST_URL)
       .send(successDataToPost)
-      .expect(302, 'Found. Redirecting to /' + workloadType.COURT_REPORTS + '/offender-manager/1')
+      .expect(302, 'Found. Redirecting to /' + workloadType.COURT_REPORTS + '/offender-manager/1/reductions')
       .then(function (results) {
         expect(reductionsService.addReduction.called).to.be.eql(true)
       })
@@ -247,7 +247,7 @@ describe('court-reports reductions route', function () {
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(successDataToPost)
-        .expect(302, 'Found. Redirecting to /' + workloadType.COURT_REPORTS + '/offender-manager/1')
+        .expect(302, 'Found. Redirecting to /' + workloadType.COURT_REPORTS + '/offender-manager/1/reductions')
         .then(function (results) {
           expect(reductionsService.updateReduction.called).to.be.eql(true)
         })
