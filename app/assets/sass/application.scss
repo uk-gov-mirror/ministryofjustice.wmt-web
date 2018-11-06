@@ -30,6 +30,7 @@ a.button:visited{
 div.lastUpdated{
     position: relative;
     left: 65%;
+    width: 35%;
 }
 
 @mixin respond-to($media) {
