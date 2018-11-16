@@ -4,6 +4,7 @@ const json2csv = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
 
 const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
+const CASELOAD_TEAM_FIELDS = ['name', 'grade', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['regionName', 'lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
 const ORG_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'offenderManager', 'gradeCode', 'capacityPercentage', 'availablePoints', 'remainingPoints', 'contractedHours', 'reductionHours', 'totalCases']
@@ -73,7 +74,11 @@ var getFields = function (organisationLevel, tab) {
   switch (tab) {
     case tabs.CASELOAD:
       childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
-      fields = CASELOAD_FIELDS
+      if (organisationLevel === organisationUnitConstants.TEAM.name) {
+        fields = CASELOAD_TEAM_FIELDS
+      } else {
+        fields = CASELOAD_FIELDS
+      }
       fieldNames = [childOrgForFieldName + ' Name', 'Grade', 'A', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'Untiered', 'Overall']
       break
     case tabs.OVERVIEW:

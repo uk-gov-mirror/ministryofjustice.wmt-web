@@ -7,8 +7,8 @@ module.exports.TEAM_CASELOAD_RESULT = {
   title: 'Test Team',
   caseloadDetails: {
     overallCaseloadDetails: [
-      { linkId: 2767, name: 'John Smith', gradeCode: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' },
-      { linkId: 2771, name: 'Tony Test', gradeCode: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' }
+      { linkId: 2767, name: 'John Smith', grade: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' },
+      { linkId: 2771, name: 'Tony Test', grade: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' }
     ],
     custodyCaseloadDetails: [],
     communityCaseloadDetails: [],
