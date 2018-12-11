@@ -21,7 +21,8 @@ module.exports = function (id, type) {
     'start_date AS startDate',
     'end_date AS endDate',
     'reduction_status AS status',
-    'additional_notes AS additionalNotes'
+    'additional_notes AS additionalNotes',
+    'grade_code AS gradeCode'
   ]
 
   return knex.raw(
