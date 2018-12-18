@@ -108,6 +108,49 @@
 
 <div id="plotly-div-line" aria-hidden="true"></div>
 
+
+
+{% if organisationLevel === 'offender-manager' %}
+
+    <h3 class="heading-medium">Case Details</h3>
+
+    <table id="case-details" class="js-data-table data-table dataTable">
+        <thead>
+        <tr>
+            <th id="tierCode">Tier Code</th>
+            <th id="rowType">Row Type</th>
+            <th id="crn">Case Reference No</th>
+            <th id="Case Type">Cases</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% if caseDetails %}
+                {% for row in caseDetails %}
+                    <tr>
+                        <td>
+                            {{ row.tierCode }}
+                        </td>
+                        <td>
+                            {{ row.rowType }}
+                        </td>
+                        <td>
+                            {{ row.caseReferenceNo }}
+                        </td>
+                        <td>
+                            {{ row.caseType | capitalize }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">
+                        This Offender Manager has no Cases
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endif %}
 {% if organisationLevel !== 'offender-manager' %}
   <h3 class="heading-medium">Capacity breakdown</h3>
 
@@ -325,4 +368,6 @@
     <script src="/public/javascripts/caseload-capacity.js"></script>
     <script src="/public/javascripts/floatThead.js"></script>
     <script src="/public/javascripts/jquery.floatThead.js"></script>
+    <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
+    <script src="{{ asset_path }}javascripts/case-details.js"></script>
 {% endblock %}
