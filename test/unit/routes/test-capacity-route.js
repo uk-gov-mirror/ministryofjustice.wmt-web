@@ -36,7 +36,7 @@ describe('/caseload-capacity', function () {
   }
   beforeEach(function () {
     getCapacityStub = sinon.stub()
-    getCaseDetailsStub = sinon.stub.resolves()
+    getCaseDetailsStub = sinon.stub().resolves()
     getOutstandingReportsStub = sinon.stub().resolves()
     getSubNavStub = sinon.stub()
     getLastUpdated = sinon.stub().resolves(new Date(2017, 11, 1))
