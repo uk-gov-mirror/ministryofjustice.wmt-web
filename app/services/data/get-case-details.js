@@ -1,7 +1,6 @@
 const knex = require('../../../knex').web
 
 module.exports = function (id) {
-
   var selectList = [
     'tierCode',
     'rowType',
