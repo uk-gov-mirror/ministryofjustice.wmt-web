@@ -22,6 +22,24 @@ const archiveRawData = [{
   omTypeId: 1
 }]
 
+const newArchiveRawData = [{
+  uniqueIdentifier: '1',
+  lduName: 'New Test LDU',
+  teamName: 'New Test Team',
+  omName: 'New Test Offender Manager',
+  totalCases: 11,
+  totalPoints: 900,
+  sdrPoints: 0,
+  sdrConversionPoints: 0,
+  paromsPoints: 0,
+  nominalTarget: 1222,
+  contractedHours: 37,
+  hoursReduction: 0,
+  reduction: null,
+  comments: null,
+  omTypeId: 1
+}]
+
 const expectedArchiveRecord = {
   uniqueIdentifier: '1',
   lduName: 'Test LDU',
@@ -43,11 +61,18 @@ const expectedArchiveRecord = {
 
 var archiveService
 var getArchive
+var getArchiveNewDB
 
 before(function () {
   getArchive = sinon.stub()
-  archiveService = proxyquire('../../../app/services/archive-service', {'./data/get-daily-archive': getArchive})
+  getArchiveNewDB = sinon.stub()
+  archiveService = proxyquire('../../../app/services/archive-service',
+  {
+    './data/get-daily-archive': getArchive,
+    './data/get-daily-archive-from-new-db': getArchiveNewDB
+  })
   getArchive.resolves(archiveRawData)
+  getArchiveNewDB.resolves(newArchiveRawData)
 })
 
 describe('services/archive-service', function () {

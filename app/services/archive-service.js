@@ -2,18 +2,21 @@ const getDailyArchive = require('./data/get-daily-archive')
 const getDailyArchiveFromNewDB = require('./data/get-daily-archive-from-new-db')
 const getFortnightlyArchive = require('./data/get-fortnightly-archive')
 const getReductionArchive = require('./data/get-reduction-archive')
+const getReductionArchiveFromNewDB = require('./data/get-reduction-archive-from-new-db')
 const calculateAvailablePoints = require('wmt-probation-rules').calculateAvailablePoints
 const DefaultContractedHours = require('wmt-probation-rules').DefaultContractedHours
 const archiveOptions = require('../constants/archive-options')
-const archiveDataLimit = require('../../config').ARCHIVE_DATA_LIMIT
+var archiveDataLimit
 const log = require('../logger')
 
 module.exports = function (archiveOption, archiveDateRange, extraCriteria) {
+  archiveDataLimit = require('../../config').ARCHIVE_DATA_LIMIT
   if (archiveOption === archiveOptions.DAILY) {
     return getDailyArchive(archiveDateRange, extraCriteria).then(function (results) {
       results = calculateCapacity(results)
       if (results.length < archiveDataLimit) {
-        return getDailyArchiveFromNewDB(archiveDateRange, extraCriteria).then(function (newResults) {
+        archiveDataLimit = archiveDataLimit - results.length
+        return getDailyArchiveFromNewDB(archiveDateRange, extraCriteria, archiveDataLimit).then(function (newResults) {
           newResults.forEach(function (result) {
             if (result.availablePoints !== 0) {
               result.capacity = capacityCalculation(result.totalPoints, result.availablePoints)
@@ -36,11 +39,20 @@ module.exports = function (archiveOption, archiveDateRange, extraCriteria) {
       throw error
     })
   } else if (archiveOption === archiveOptions.REDUCTIONS){
-    return getReductionArchive(archiveDateRange, extraCriteria).then(function (results) {
-      return formatReductionTo1DP(results)
+    return getReductionArchive(archiveDateRange, extraCriteria).then(function (oldReductions) {
+      oldReductions.forEach(function (oldReduction) {
+        oldReduction.reductionReason = 'N/A'
+        oldReduction.startDate = 'N/A'
+        oldReduction.endDate = 'N/A'
+        oldReduction.reductionStatus = 'N/A'
+      })
+      return getReductionArchiveFromNewDB(archiveDateRange, extraCriteria).then(function (newReductions) {
+        var results = oldReductions.concat(newReductions)
+        return formatReductionTo1DP(results)
+      })
     })
   } else {
-    return getDailyArchiveFromNewDB(archiveDateRange, extraCriteria).then(function (results) {
+    return getDailyArchiveFromNewDB(archiveDateRange, extraCriteria, archiveDataLimit).then(function (results) {
       results.forEach(function (result) {
         if (result.availablePoints !== 0) {
           result.capacity = capacityCalculation(result.totalPoints, result.availablePoints)

@@ -1,7 +1,6 @@
 const knex = require('../../../knex').web
-const archiveDataLimit = require('../../../config').ARCHIVE_DATA_LIMIT
 
-module.exports = function (archiveDateRange, extraCriteria) {
+module.exports = function (archiveDateRange, extraCriteria, archiveDataLimit) {
   if (extraCriteria !== null && extraCriteria !== undefined) {
     extraCriteria = extraCriteria.trim()
   }
