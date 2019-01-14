@@ -140,14 +140,14 @@ jQuery.fn.tabs = function(settings){
 			var currHash = hash || window.location.hash;
 			var hashedTab = tabsNav.find('[href="'+ currHash +'"]');
 
-        if( hashedTab.size() > 0){
+        if( hashedTab.size > 0){
 		    	selectTab(hashedTab,true);
 		    }
 		    else {
 		    	selectTab( tabsNav.find('a:first'),true);
 		    }
 		    //return true/false
-		    return !!hashedTab.size();
+		    return !!hashedTab.size;
 		}
 
 

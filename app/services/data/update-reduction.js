@@ -9,7 +9,8 @@ module.exports = function (reductionId, workloadOwnerId, newReduction) {
       effective_from: newReduction.reductionStartDate,
       effective_to: newReduction.reductionEndDate,
       notes: newReduction.notes,
-      status: newReduction.status
+      status: newReduction.status,
+      user_id: newReduction.reductionSubmitter
     })
     .where('id', reductionId)
     .returning('id')

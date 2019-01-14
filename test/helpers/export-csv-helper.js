@@ -7,8 +7,8 @@ module.exports.TEAM_CASELOAD_RESULT = {
   title: 'Test Team',
   caseloadDetails: {
     overallCaseloadDetails: [
-      { linkId: 2767, name: 'John Smith', gradeCode: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' },
-      { linkId: 2771, name: 'Tony Test', gradeCode: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' }
+      { linkId: 2767, name: 'John Smith', grade: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' },
+      { linkId: 2771, name: 'Tony Test', grade: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' }
     ],
     custodyCaseloadDetails: [],
     communityCaseloadDetails: [],
@@ -2451,7 +2451,8 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     startDate: '28 11 2016, 16:15',
     endDate: '26 11 2027, 16:15',
     status: 'ACTIVE',
-    additionalNotes: null },
+    additionalNotes: null,
+    gradeCode: 'PO' },
   { regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
@@ -2462,7 +2463,8 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     startDate: '26 02 2018, 16:15',
     endDate: '26 11 2027, 16:15',
     status: 'SCHEDULED',
-    additionalNotes: null },
+    additionalNotes: null,
+    gradeCode: 'SPO' },
   { regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
@@ -2473,7 +2475,8 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     startDate: '03 12 2016, 16:15',
     endDate: '28 11 2016, 16:15',
     status: 'ARCHIVED',
-    additionalNotes: null },
+    additionalNotes: null,
+    gradeCode: 'PSO' },
   { regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
@@ -2484,17 +2487,18 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     startDate: '28 11 2016, 16:15',
     endDate: '26 11 2027, 16:15',
     status: 'DELETED',
-    additionalNotes: null } ],
+    additionalNotes: null,
+    gradeCode: 'PO' } ],
   title: 'Team 1',
   subTitle: 'Team' }
 
 module.exports.TEAM_REDUCTIONS_CSV = {
   filename: ('Team_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region","LDU Cluster","Team","Offender Manager","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
+  csv: '"Region","LDU Cluster","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
+  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
+  '"Division 1","LDU Cluster 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
+  '"Division 1","LDU Cluster 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
+  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
 }
 
 module.exports.LDU_REDUCTIONS_RESULT = {
@@ -2519,7 +2523,8 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     startDate: '28 11 2016, 16:15',
     endDate: '26 11 2027, 16:15',
     status: 'ACTIVE',
-    additionalNotes: null },
+    additionalNotes: null,
+    gradeCode: 'PO' },
   { regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
@@ -2530,7 +2535,8 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     startDate: '26 02 2018, 16:15',
     endDate: '26 11 2027, 16:15',
     status: 'SCHEDULED',
-    additionalNotes: null },
+    additionalNotes: null,
+    gradeCode: 'SPO' },
   { regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
@@ -2541,7 +2547,8 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     startDate: '03 12 2016, 16:15',
     endDate: '28 11 2016, 16:15',
     status: 'ARCHIVED',
-    additionalNotes: null },
+    additionalNotes: null,
+    gradeCode: 'PSO' },
   { regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
@@ -2552,17 +2559,18 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     startDate: '28 11 2016, 16:15',
     endDate: '26 11 2027, 16:15',
     status: 'DELETED',
-    additionalNotes: null } ],
+    additionalNotes: null,
+    gradeCode: 'PO' } ],
   title: 'LDU Cluster 1',
   subTitle: 'LDU Cluster' }
 
 module.exports.LDU_REDUCTIONS_CSV = {
   filename: ('LDU_Cluster_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region","LDU Cluster","Team","Offender Manager","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
+  csv: '"Region","LDU Cluster","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
+  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
+  '"Division 1","LDU Cluster 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
+  '"Division 1","LDU Cluster 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
+  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
 }
 
 module.exports.REGION_REDUCTIONS_RESULT = {
@@ -2583,7 +2591,8 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     startDate: '28 11 2016, 16:15',
     endDate: '26 11 2027, 16:15',
     status: 'ACTIVE',
-    additionalNotes: null },
+    additionalNotes: null,
+    gradeCode: 'PO' },
   { regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
@@ -2594,7 +2603,8 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     startDate: '26 02 2018, 16:15',
     endDate: '26 11 2027, 16:15',
     status: 'SCHEDULED',
-    additionalNotes: null },
+    additionalNotes: null,
+    gradeCode: 'SPO' },
   { regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
@@ -2605,7 +2615,8 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     startDate: '03 12 2016, 16:15',
     endDate: '28 11 2016, 16:15',
     status: 'ARCHIVED',
-    additionalNotes: null },
+    additionalNotes: null,
+    gradeCode: 'PSO' },
   { regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
@@ -2616,15 +2627,16 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     startDate: '28 11 2016, 16:15',
     endDate: '26 11 2027, 16:15',
     status: 'DELETED',
-    additionalNotes: null } ],
+    additionalNotes: null,
+    gradeCode: 'PO' } ],
   title: 'Division 1',
   subTitle: 'Division' }
 
 module.exports.REGION_REDUCTIONS_CSV = {
   filename: ('Division_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region","LDU Cluster","Team","Offender Manager","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
+  csv: '"Region","LDU Cluster","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
+  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
+  '"Division 1","LDU Cluster 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
+  '"Division 1","LDU Cluster 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
+  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
 }

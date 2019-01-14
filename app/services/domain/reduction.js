@@ -5,7 +5,7 @@ const ErrorHandler = require('../validators/error-handler')
 const reductionStatusType = require('../../constants/reduction-status-type')
 
 class Reduction {
-  constructor (reasonForReductionId, hours, reductionStartDate, reductionEndDate, notes, reductionReason) {
+  constructor (reasonForReductionId, hours, reductionStartDate, reductionEndDate, notes, reductionReason, reductionSubmitter) {
     this.reasonForReductionId = reasonForReductionId
     this.hours = hours
     this.reductionStartDateFields = reductionStartDate
@@ -13,6 +13,7 @@ class Reduction {
     this.notes = notes
     this.isValid(reductionReason)
     this.status = this.setReductionStatus()
+    this.reductionSubmitter = reductionSubmitter
   }
 
   isValid (reductionReason) {
