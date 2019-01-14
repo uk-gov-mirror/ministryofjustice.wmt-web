@@ -23,7 +23,7 @@ module.exports = function (id, organisationLevel) {
 
 var formatTier = function (results) {
   results.forEach(function (result) {
-    switch(result.tierCode) {
+    switch (result.tierCode) {
       case '0':
         result.tierCode = 'Untiered'
         break
