@@ -1,5 +1,3 @@
-//var data
-
 $.fn.dataTable.moment = function ( format, locale ) {
   var types = $.fn.dataTable.ext.type;
 
