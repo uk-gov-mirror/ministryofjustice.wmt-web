@@ -38,7 +38,7 @@ module.exports = function (archiveOption, archiveDateRange, extraCriteria) {
       log.error(error)
       throw error
     })
-  } else if (archiveOption === archiveOptions.REDUCTIONS){
+  } else if (archiveOption === archiveOptions.REDUCTIONS) {
     return getReductionArchive(archiveDateRange, extraCriteria).then(function (oldReductions) {
       oldReductions.forEach(function (oldReduction) {
         oldReduction.reductionReason = 'N/A'
@@ -96,5 +96,5 @@ var formatReductionTo1DP = function (results) {
 }
 
 var capacityCalculation = function (thisTotalPoints, thisAvailablePoints) {
-  return  Number(parseFloat((thisTotalPoints / thisAvailablePoints) * 100).toFixed(1)) + '%'
+  return Number(parseFloat((thisTotalPoints / thisAvailablePoints) * 100).toFixed(1)) + '%'
 }

@@ -76,7 +76,7 @@ module.exports = function (router) {
     }
 
     var thisArchiveOption = archiveOptions.DAILY
-    if (archiveDateRange.archiveFromDate.isSameOrAfter(newDataStartDate)){
+    if (archiveDateRange.archiveFromDate.isSameOrAfter(newDataStartDate)) {
       thisArchiveOption = archiveOptions.NEW_DAILY
     }
 
@@ -124,7 +124,7 @@ module.exports = function (router) {
     }
 
     var thisArchiveOption = archiveOptions.DAILY
-    if (archiveDateRange.archiveFromDate.isSameOrAfter(newDataStartDate)){
+    if (archiveDateRange.archiveFromDate.isSameOrAfter(newDataStartDate)) {
       thisArchiveOption = archiveOptions.NEW_DAILY
     }
 

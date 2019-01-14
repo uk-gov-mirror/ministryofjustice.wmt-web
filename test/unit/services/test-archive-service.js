@@ -67,10 +67,10 @@ before(function () {
   getArchive = sinon.stub()
   getArchiveNewDB = sinon.stub()
   archiveService = proxyquire('../../../app/services/archive-service',
-  {
-    './data/get-daily-archive': getArchive,
-    './data/get-daily-archive-from-new-db': getArchiveNewDB
-  })
+    {
+      './data/get-daily-archive': getArchive,
+      './data/get-daily-archive-from-new-db': getArchiveNewDB
+    })
   getArchive.resolves(archiveRawData)
   getArchiveNewDB.resolves(newArchiveRawData)
 })
