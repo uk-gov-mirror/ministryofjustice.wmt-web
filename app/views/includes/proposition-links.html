@@ -1,5 +1,5 @@
 <ul id="proposition-links">
-  {% if authorisation===false or userRole==='Data Admin' or userRole==='System Admin' %}
+  {% if authorisation===false or userRole==='Data Admin' or userRole==='System Admin' or userRole==='Manager'%}
   <li><a href="/admin">Admin</a></li>
   {% endif %}
   <li><a href="/probation/hmpps/0">Offender Management</a></li>
