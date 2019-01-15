@@ -57,6 +57,7 @@ module.exports = function (archiveOption, archiveDateRange, extraCriteria) {
     })
   } else {
     return getDailyArchiveFromNewDB(archiveDateRange, extraCriteria, archiveDataLimit).then(function (results) {
+      results.sort(caseloadDataArraySort)
       results.forEach(function (result) {
         if (result.availablePoints !== 0) {
           result.capacity = capacityCalculation(result.totalPoints, result.availablePoints)
