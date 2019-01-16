@@ -9,7 +9,8 @@ module.exports = {
       password: config.WEB_APP_DATABASE_PASSWORD,
       database: config.DATABASE,
       options: {
-        encrypt: true
+        encrypt: true,
+        requestTimeout: 120000
       }
     },
     debug: false,
