@@ -4,7 +4,6 @@ const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
-const log = require('../logger')
 
 module.exports = function (router) {
   router.get('/admin/expiring-reductions', function (req, res) {
@@ -29,7 +28,6 @@ module.exports = function (router) {
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return expiringReductionsService.getExpiringReductions(userId)
       .then(function (result) {
-        log.info(result.reductions)
         return res.render('expiring-reductions', {
           title: result.title,
           subTitle: result.subTitle,

@@ -8,7 +8,7 @@ module.exports = function (router) {
   router.get('/admin', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
-      authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN])
+      authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN, roles.MANAGER])
     } catch (error) {
       if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
