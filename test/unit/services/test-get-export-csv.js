@@ -53,6 +53,10 @@ describe('services/get-export-csv', function () {
     it('for Region reductions', function () {
       expect(getExportCsv(orgUnit.REGION.name, helper.REGION_REDUCTIONS_RESULT, tabs.REDUCTIONS_EXPORT).csv).to.eql(helper.REGION_REDUCTIONS_CSV.csv)
     })
+
+    it('for ARMS Export', function () {
+      expect(getExportCsv(orgUnit.TEAM.name, helper.ARMS_EXPORT_RESULT.armsExportDetails, tabs.EXPORT.ARMS_EXPORT).csv).to.eql(helper.ARMS_EXPORT_CSV.csv)
+    })
   })
   describe('should format the capacity percentage when exporting overviews', function () {
     it('to a whole number with a percentage symbol', function () {
