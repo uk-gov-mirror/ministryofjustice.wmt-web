@@ -11,5 +11,10 @@ module.exports = {
     DAILY_ARCHIVE: 'Daily Archive',
     FORTNIGHTLY_ARCHIVE: 'Fortnightly Archive',
     REDUCTION_ARCHIVE: 'Reduction Archive'
+  },
+  EXPORT: {
+      ARMS_EXPORT: 'ARMS Export',
+      CASE_DETAILS_EXPORT: 'Case Details Export',
+      GROUP_SUPERVISION_EXPORT: 'Group Supervision Export'
   }
 }
