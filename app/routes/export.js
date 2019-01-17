@@ -82,7 +82,6 @@ module.exports = function (router) {
 
         var tabType
 
-
         switch (radioButton) {
             case "1":
                 exportPromise = armsPromise
@@ -121,15 +120,33 @@ module.exports = function (router) {
 }
 
 var formatResults = function (results, tabType) {
+    var newDate
     results.forEach(function (result) {
         if (tabType === tabs.EXPORT.ARMS_EXPORT)
-        {                
-                result.assessmentDate = dateFormatter.formatDate(moment(result.assessmentDate), 'DD-MM-YYYY')
-                result.releaseDate = dateFormatter.formatDate(moment(result.releaseDate), 'DD-MM-YYYY')
+        {
+            newDate = new Date(result.assessmentDate)
+            year = newDate.getFullYear()
+            month = newDate.getMonth() + 1
+            dt = newDate.getDate()
+
+            result.assessmentDate = dt + '-' + month + '-' + year
+
+            newDate = new Date(result.releaseDate)
+            year = newDate.getFullYear()
+            month = newDate.getMonth() + 1
+            dt = newDate.getDate()
+
+            result.releaseDate = dt + '-' + month + '-' + year            
         }
 
-        if (tabType === tabs.EXPORT.CASE_DETAILS_EXPORT) {
-            result.contactDate = moment(result.contactDate, 'DD-MM-YYYY')
+        if (tabType === tabs.EXPORT.GROUP_SUPERVISION_EXPORT)
+        {
+            newDate = new Date(result.contactDate)
+            year = newDate.getFullYear()
+            month = newDate.getMonth() + 1
+            dt = newDate.getDate()
+
+            result.contactDate = dt + '-' + month + '-' + year   
         }
     })
     return results

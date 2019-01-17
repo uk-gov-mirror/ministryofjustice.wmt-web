@@ -36,7 +36,6 @@ module.exports = function (organisationLevel, result, tab) {
     filename = getFilename(organisationLevel, tab)
   } else {
       filename = getFilename(result.title, tab)
-      console.log(result.title)
   }
   var fieldsObject = getFields(organisationLevel, tab)
   var fields = fieldsObject.fields
