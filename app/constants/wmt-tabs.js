@@ -13,8 +13,8 @@ module.exports = {
     REDUCTION_ARCHIVE: 'Reduction Archive'
   },
   EXPORT: {
-      ARMS_EXPORT: 'ARMS Export',
-      CASE_DETAILS_EXPORT: 'Case Details Export',
-      GROUP_SUPERVISION_EXPORT: 'Group Supervision Export'
+    ARMS_EXPORT: 'ARMS Export',
+    CASE_DETAILS_EXPORT: 'Case Details Export',
+    GROUP_SUPERVISION_EXPORT: 'Group Supervision Export'
   }
 }

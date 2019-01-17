@@ -8,5 +8,5 @@ module.exports = function (id, organisationLevel) {
   result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
   result.title = result.breadcrumbs[0].title
   result.subTitle = organisationalUnitType.displayText
-  return result  
+  return result
 }

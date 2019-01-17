@@ -35,7 +35,7 @@ module.exports = function (organisationLevel, result, tab) {
   if (tab === tabs.ADMIN.DAILY_ARCHIVE || tab === tabs.ADMIN.FORTNIGHTLY_ARCHIVE || tab === tabs.ADMIN.REDUCTION_ARCHIVE) {
     filename = getFilename(organisationLevel, tab)
   } else {
-      filename = getFilename(result.title, tab)
+    filename = getFilename(result.title, tab)
   }
   var fieldsObject = getFields(organisationLevel, tab)
   var fields = fieldsObject.fields
@@ -67,25 +67,25 @@ var getFilename = function (orgName, screen) {
       return 'Archived_Reductions.csv'
     } else {
       return (orgName + ' Archived_Reductions.csv').replace(replaceSpaces, '_')
-      }
+    }
   } else if (screen === tabs.EXPORT.ARMS_EXPORT) {
-      if (orgName === null) {
-          return 'ARMS_Export.csv'
-      } else {
-          return (orgName + ' ARMS_Export.csv').replace(replaceSpaces, '_')
-      }
+    if (orgName === null) {
+      return 'ARMS_Export.csv'
+    } else {
+      return (orgName + ' ARMS_Export.csv').replace(replaceSpaces, '_')
+    }
   } else if (screen === tabs.EXPORT.CASE_DETAILS_EXPORT) {
-      if (orgName === null) {
-          return 'Case_Details_Export.csv'
-      } else {
-          return (orgName + ' Case_Details_Export.csv').replace(replaceSpaces, '_')
-      }
+    if (orgName === null) {
+      return 'Case_Details_Export.csv'
+    } else {
+      return (orgName + ' Case_Details_Export.csv').replace(replaceSpaces, '_')
+    }
   } else if (screen === tabs.EXPORT.GROUP_SUPERVISION_EXPORT) {
-      if (orgName === null) {
-          return 'Group_Supervision_Export.csv'
-      } else {
-          return (orgName + ' Group_Supervision_Export.csv').replace(replaceSpaces, '_')
-      }
+    if (orgName === null) {
+      return 'Group_Supervision_Export.csv'
+    } else {
+      return (orgName + ' Group_Supervision_Export.csv').replace(replaceSpaces, '_')
+    }
   } else {
     return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
   }
@@ -150,9 +150,9 @@ var getFields = function (organisationLevel, tab) {
       fieldNames = CASE_DETAILS_EXPORT_FIELD_NAMES
       break
     case tabs.EXPORT.GROUP_SUPERVISION_EXPORT:
-        fields = GROUP_SUPERVISION_EXPORT_FIELDS
-        fieldNames = GROUP_SUPERVISION_EXPORT_FIELD_NAMES
-        break
+      fields = GROUP_SUPERVISION_EXPORT_FIELDS
+      fieldNames = GROUP_SUPERVISION_EXPORT_FIELD_NAMES
+      break
   }
   return { fields: fields, fieldNames: fieldNames }
 }

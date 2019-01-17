@@ -13,18 +13,18 @@ module.exports = function (id, type) {
     'omGradeCode',
     'contact_description AS contactDescription'
   ]
-    
-  var whereString 
-    
+
+  var whereString
+
   if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
-    whereString = ' WHERE ' + type + 'id = ' + id 
+    whereString = ' WHERE ' + type + 'id = ' + id
   }
-    
+
   return knex.schema.raw('SELECT ' + selectList.join(', ') +
         ' FROM ' + table +
         whereString)
       .then(function (results) {
-          log.info(results.length)
-          return results
-        })
+        log.info(results.length)
+        return results
+      })
 }
