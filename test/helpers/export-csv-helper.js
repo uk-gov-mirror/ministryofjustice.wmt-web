@@ -32,12 +32,72 @@ module.exports.TEAM_CASELOAD_CSV = {
 
 module.exports.ARMS_EXPORT_CSV = {
   filename: ('Test_Team_Caseload ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region Name", "LDU Cluster","Team Name","Assessment Date","CRN","Offender Manager Name","Offender Manager Grade","Sentence Type","Release Date"\n' +
-    '"NPS North West", "Cumbria","NPS - Carlisle 1","4-10-2018","CASEREF30134","A.N. Offender Manager CMBY478NPSM","PO","Licence","14-9-2018"\n' +
-    '"NPS North West", "Cumbria","NPS - Carlisle 1","9-10-2018","CASEREF30154","A.N. Offender Manager CMBY478NPSM","PO","Community","22-2-2017"\n' +
-    '"NPS North West", "Cumbria","NPS - Carlisle 1","28-9-2018","CASEREF30098","A.N. Offender Manager CMBE297NPSM","PO","Community","1-1-1800"\n' +
-    '"NPS North West", "Cumbria","Rehabilitation","10-9-2018","CASEREF30027","A.N. Offender Manager N01B324NPSM","PO","Community","25-7-2018"\n' +
-    '"NPS North West", "Cumbria","Rehabilitation","19-9-2018","CASEREF30065","A.N. Offender Manager N01B324NPSM","PO","Community","16-12-2016"'
+  csv: '"Region Name","LDU Cluster","Team Name","Assessment Date","CRN","Offender Manager Name","Offender Manager Grade","Sentence Type","Release Date"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","4-10-2018","CASEREF30134","A.N. Offender Manager CMBY478NPSM","PO","Licence","14-9-2018"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","9-10-2018","CASEREF30154","A.N. Offender Manager CMBY478NPSM","PO","Community","22-2-2017"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","28-9-2018","CASEREF30098","A.N. Offender Manager CMBE297NPSM","PO","Community","1-1-1800"\n' +
+    '"NPS North West","Cumbria","Rehabilitation","10-9-2018","CASEREF30027","A.N. Offender Manager N01B324NPSM","PO","Community","25-7-2018"\n' +
+    '"NPS North West","Cumbria","Rehabilitation","19-9-2018","CASEREF30065","A.N. Offender Manager N01B324NPSM","PO","Community","16-12-2016"'
+}
+
+module.exports.ARMS_EXPORT_RESULT = {
+    title: 'ARMS Export',
+    armsExportDetails:
+    [{
+        regionName: 'NPS North West',
+        lduName: 'Cumbria',
+        teamName: 'NPS - Carlisle 1',
+        assessmentDate: '4-10-2018',
+        CRN: 'CASEREF30134',
+        omName: 'A.N. Offender Manager CMBY478NPSM',
+        omGrade: 'PO',
+        sentencetype: 'Licence',
+        releaseDate: '14-9-2018'
+    },
+    {
+        regionName: 'NPS North West',
+        lduName: 'Cumbria',
+        teamName: 'NPS - Carlisle 1',
+        assessmentDate: '9-10-2018',
+        CRN: 'CASEREF30154',
+        omName: 'A.N. Offender Manager CMBY478NPSM',
+        omGrade: 'PO',
+        sentencetype: 'Community',
+        releaseDate: '22-2-2017'
+    },
+    {
+        regionName: 'NPS North West',
+        lduName: 'Cumbria',
+        teamName: 'NPS - Carlisle 1',
+        assessmentDate: '28-9-2018',
+        CRN: 'CASEREF30098',
+        omName: 'A.N. Offender Manager CMBE297NPSM',
+        omGrade: 'PO',
+        sentencetype: 'Community',
+        releaseDate: '1-1-1800'
+    },
+    {
+        regionName: 'NPS North West',
+        lduName: 'Cumbria',
+        teamName: 'Rehabilitation',
+        assessmentDate: '10-9-2018',
+        CRN: 'CASEREF30027',
+        omName: 'A.N. Offender Manager N01B324NPSM',
+        omGrade: 'PO',
+        sentencetype: 'Community',
+        releaseDate: '25-7-2018'
+    },
+    {
+        regionName: 'NPS North West',
+        lduName: 'Cumbria',
+        teamName: 'Rehabilitation',
+        assessmentDate: '19-9-2018',
+        CRN: 'CASEREF30065',
+        omName: 'A.N. Offender Manager N01B324NPSM',
+        omGrade: 'PO',
+        sentencetype: 'Community',
+        releaseDate: '16-12-2016'
+    }]
 }
 
 module.exports.LDU_CASELOAD_RESULT = {
@@ -2649,54 +2709,4 @@ module.exports.REGION_REDUCTIONS_CSV = {
   '"Division 1","LDU Cluster 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
   '"Division 1","LDU Cluster 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
   '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
-}
-
-module.exports.ARMS_EXPORT_RESULT = {
-  title: 'ARMS Export',
-  armsExportDetails:
-  [{ regionName: 'NPS North West',
-    lduName: 'Cumbria',
-    teamName: 'NPS - Carlisle 1',
-    assessmentDate: '4-10-2018',
-    CRN: 'CASEREF30134',
-    omName: 'A.N. Offender Manager CMBY478NPSM',
-    omGrade: 'PO',
-    sentencetype: 'Licence',
-    releaseDate: '14-9-2018' },
-  { regionName: 'NPS North West',
-    lduName: 'Cumbria',
-    teamName: 'NPS - Carlisle 1',
-    assessmentDate: '9-10-2018',
-    CRN: 'CASEREF30154',
-    omName: 'A.N. Offender Manager CMBY478NPSM',
-    omGrade: 'PO',
-    sentencetype: 'Community',
-    releaseDate: '22-2-2017' },
-  { regionName: 'NPS North West',
-    lduName: 'Cumbria',
-    teamName: 'NPS - Carlisle 1',
-    assessmentDate: '28-9-2018',
-    CRN: 'CASEREF30098',
-    omName: 'A.N. Offender Manager CMBE297NPSM',
-    omGrade: 'PO',
-    sentencetype: 'Community',
-    releaseDate: '1-1-1800' },
-  { regionName: 'NPS North West',
-    lduName: 'Cumbria',
-    teamName: 'Rehabilitation',
-    assessmentDate: '10-9-2018',
-    CRN: 'CASEREF30027',
-    omName: 'A.N. Offender Manager N01B324NPSM',
-    omGrade: 'PO',
-    sentencetype: 'Community',
-    releaseDate: '25-7-2018' },
-  { regionName: 'NPS North West',
-    lduName: 'Cumbria',
-    teamName: 'Rehabilitation',
-    assessmentDate: '19-9-2018',
-    CRN: 'CASEREF30065',
-    omName: 'A.N. Offender Manager N01B324NPSM',
-    omGrade: 'PO',
-    sentencetype: 'Community',
-    releaseDate: '16-12-2016' }]
 }
