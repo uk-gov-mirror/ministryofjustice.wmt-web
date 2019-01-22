@@ -5,9 +5,13 @@
 <main id="content" role="main">
   {% include "includes/breadcrumbs.html" %}
   <header class="heading-xlarge" style="margin-top:0; margin-bottom:32px">Search for an Offender Manager</header>
+    {% include "includes/validation-error-messages.html" %}
    <form method="POST">
-    <div class='search-group'>
-        <fieldset>
+    {% if errors %}
+        <span class="error-message">{{ errors['search'][0] }}</span>
+    {% endif %}
+    <div class="search-group {% if errors['search'][0] %} form-group-error {% endif %}">
+        <fieldset id="search">
             <legend>
             <span class="form-label-bold">Search by Surname</span>
             <span class="form-hint">For example, Smith</span>
