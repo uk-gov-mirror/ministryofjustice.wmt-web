@@ -86,7 +86,7 @@ var setTierWeightings = function (ws, caseStyle, points) {
   }
   var count = 0
   var i
-  for (i = 0; i < 24; i++){
+  for (i = 0; i < 24; i++) {
     switch (i % 8) {
       case 0:
         ws.cell(4, start).number(0).style(caseStyle)
