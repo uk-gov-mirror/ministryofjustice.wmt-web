@@ -14,8 +14,8 @@ module.exports = function (router) {
     }
     return workloadPointsService(false).then(function (result) {
       return workloadPointsService(true).then(function (t2aResult) {
-        wb = getExportXlsx(result, t2aResult)
-        wb.write('ExcelFile.xlsx', res);
+        var wb = getExportXlsx(result, t2aResult)
+        wb.write('ExcelFile.xlsx', res)
       })
     })
   })
