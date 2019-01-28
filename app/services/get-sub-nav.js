@@ -4,7 +4,6 @@ const organisationUnitConstants = require('../constants/organisation-unit')
 const workloadConstants = require('../constants/workload-type')
 
 module.exports = function (id, organisationalUnitName, currentPath, workloadType = workloadConstants.PROBATION) {
-  console.log(organisationalUnitName)
   var baseLink = linkGenerator.fromIdAndNameAndWorkloadType(id, organisationalUnitName, workloadType)
   var navigation = []
 

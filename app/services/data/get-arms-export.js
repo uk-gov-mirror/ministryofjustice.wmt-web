@@ -1,5 +1,4 @@
 const knex = require('../../../knex').web
-const log = require('../../logger')
 
 module.exports = function (id, type) {
   var table = 'arms_export_view'
@@ -25,7 +24,6 @@ module.exports = function (id, type) {
         ' FROM ' + table +
         whereString)
       .then(function (results) {
-        log.info(results.length)
         return results
       })
 }
