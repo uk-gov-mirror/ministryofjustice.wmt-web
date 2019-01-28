@@ -29,6 +29,8 @@ const CASE_DETAILS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Nam
 const CASE_DETAILS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'tierCode', 'rowType', 'caseReferenceNo', 'caseType']
 const GROUP_SUPERVISION_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Contact Date', 'CRN', 'Offender Manager Name', 'Offender Manager Grade', 'Contact Type Description']
 const GROUP_SUPERVISION_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'contactDate', 'CRN', 'omName', 'omGradeCode', 'contactDescription']
+const CMS_EXPORT_FIELD_NAMES = ['Contact Region Name', 'Contact LDU Cluster', 'Contact Team Name', 'Contact Date', 'Contact Name', 'Contact Grade', 'OM Region Name', 'OM LDU Cluster', 'OM Team Name', 'CRN', 'OM Name', 'OM Grade', 'Contact Type Description']
+const CMS_EXPORT_FIELDS = ['contactRegionName', 'contactLduName', 'contactTeamName', 'contactDate', 'contactName', 'contactGradeCode', 'omRegionName', 'omLduName', 'omTeamName', 'contactId', 'omName', 'omGradeCode', 'contactDescription']
 
 module.exports = function (organisationLevel, result, tab) {
   var filename
@@ -85,6 +87,12 @@ var getFilename = function (orgName, screen) {
       return 'Group_Supervision_Export.csv'
     } else {
       return (orgName + ' Group_Supervision_Export.csv').replace(replaceSpaces, '_')
+    }
+  } else if (screen === tabs.EXPORT.CMS_EXPORT) {
+    if (orgName === null) {
+      return 'CMS_Export.csv'
+    } else {
+      return (orgName + ' CMS_Export.csv').replace(replaceSpaces, '_')
     }
   } else {
     return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
@@ -152,6 +160,10 @@ var getFields = function (organisationLevel, tab) {
     case tabs.EXPORT.GROUP_SUPERVISION_EXPORT:
       fields = GROUP_SUPERVISION_EXPORT_FIELDS
       fieldNames = GROUP_SUPERVISION_EXPORT_FIELD_NAMES
+      break
+    case tabs.EXPORT.CMS_EXPORT:
+      fields = CMS_EXPORT_FIELDS
+      fieldNames = CMS_EXPORT_FIELD_NAMES
       break
   }
   return { fields: fields, fieldNames: fieldNames }
@@ -227,6 +239,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
     case tabs.EXPORT.ARMS_EXPORT:
     case tabs.EXPORT.CASE_DETAILS_EXPORT:
     case tabs.EXPORT.GROUP_SUPERVISION_EXPORT:
+    case tabs.EXPORT.CMS_EXPORT:
       csv = generateCsv(result, fields, fieldNames)
       break
   }

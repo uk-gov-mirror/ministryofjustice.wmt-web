@@ -15,6 +15,7 @@ module.exports = {
   EXPORT: {
     ARMS_EXPORT: 'ARMS Export',
     CASE_DETAILS_EXPORT: 'Case Details Export',
-    GROUP_SUPERVISION_EXPORT: 'Group Supervision Export'
+    GROUP_SUPERVISION_EXPORT: 'Group Supervision Export',
+    CMS_EXPORT: 'CMS Export'
   }
 }

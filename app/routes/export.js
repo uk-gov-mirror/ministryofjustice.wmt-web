@@ -7,6 +7,7 @@ const workloadTypes = require('../../app/constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const getArmsExport = require('../services/data/get-arms-export')
+const getCMSExport = require('../services/data/get-cms-export')
 const getCaseDetailsExport = require('../services/data/get-case-details-export')
 const getGroupSupervisionExport = require('../services/data/get-group-supervision-export')
 const getExportCsv = require('../services/get-export-csv')
@@ -73,6 +74,7 @@ module.exports = function (router) {
     var armsPromise = getArmsExport(id, organisationLevel)
     var caseDetailsPromise = getCaseDetailsExport(id, organisationLevel)
     var groupSupervisionPromise = getGroupSupervisionExport(id, organisationLevel)
+    var cmsPromise = getCMSExport(id, organisationLevel)
 
     var tabType
 
@@ -85,8 +87,10 @@ module.exports = function (router) {
         exportPromise = caseDetailsPromise
         tabType = tabs.EXPORT.CASE_DETAILS_EXPORT
         break
-            //    case 3:
-            //        exportPromise =
+      case '3':
+        exportPromise = cmsPromise
+        tabType = tabs.EXPORT.CMS_EXPORT
+        break
       case '4':
         exportPromise = groupSupervisionPromise
         tabType = tabs.EXPORT.GROUP_SUPERVISION_EXPORT
@@ -132,7 +136,7 @@ var formatResults = function (results, tabType) {
       result.releaseDate = dt + '-' + month + '-' + year
     }
 
-    if (tabType === tabs.EXPORT.GROUP_SUPERVISION_EXPORT) {
+    if ((tabType === tabs.EXPORT.GROUP_SUPERVISION_EXPORT) || (tabType === tabs.EXPORT.CMS_EXPORT)) {
       newDate = new Date(result.contactDate)
       year = newDate.getFullYear()
       month = newDate.getMonth() + 1

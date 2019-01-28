@@ -31,7 +31,7 @@ module.exports.TEAM_CASELOAD_CSV = {
 }
 
 module.exports.ARMS_EXPORT_CSV = {
-  filename: ('Test_Team_Caseload ' + timestamp + '.csv').replace(replaceSpaces, '_'),
+  filename: ('Test_Arms_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Region Name","LDU Cluster","Team Name","Assessment Date","CRN","Offender Manager Name","Offender Manager Grade","Sentence Type","Release Date"\n' +
     '"NPS North West","Cumbria","NPS - Carlisle 1","4-10-2018","CASEREF30134","A.N. Offender Manager CMBY478NPSM","PO","Licence","14-9-2018"\n' +
     '"NPS North West","Cumbria","NPS - Carlisle 1","9-10-2018","CASEREF30154","A.N. Offender Manager CMBY478NPSM","PO","Community","22-2-2017"\n' +
@@ -97,6 +97,221 @@ module.exports.ARMS_EXPORT_RESULT = {
     omGrade: 'PO',
     sentencetype: 'Community',
     releaseDate: '16-12-2016'
+  }]
+}
+
+module.exports.CASE_DETAILS_EXPORT_CSV = {
+  filename: ('Test_Case_Details_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
+  csv: '"Region Name","LDU Cluster","Team Name","Tier Code","Row Type,"CRN","Case Type"\n' +
+    '"NPS North West","Cheshire","Crewe NPS OMU","D2","N","CASEREF5448","COMMUNITY"\n' +
+    '"NPS North West","Cheshire","Warrington NPS OMU","B1","N","CASEREF67","COMMUNITY"\n' +
+    '"NPS North West","Cheshire","Warrington NPS OMU","C1","N","CASEREF2413","COMMUNITY"\n' +
+    '"NPS North West","Cheshire","Warrington NPS OMU","C1","N","CASEREF2479","COMMUNITY"\n' +
+    '"NPS North West","Cheshire","Warrington NPS OMU","C1","N","CASEREF6008","COMMUNITY"\n'
+}
+
+module.exports.CASE_DETAILS_EXPORT_RESULT = {
+  title: 'Case Details Export',
+  caseDetailsExportDetails:
+  [{
+    regionName: 'NPS North West',
+    lduName: 'Cheshire',
+    teamName: 'Crewe NPS OMU',
+    tierCode: 'D2',
+    rowType: 'N',
+    caseReferenceNo: 'CASEREF5448',
+    caseType: 'COMMUNITY'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Cheshire',
+    teamName: 'Warrington NPS OMU',
+    tierCode: 'B1',
+    rowType: 'N',
+    caseReferenceNo: 'CASEREF67',
+    caseType: 'COMMUNITY'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Cheshire',
+    teamName: 'Warrington NPS OMU',
+    tierCode: 'C1',
+    rowType: 'N',
+    caseReferenceNo: 'CASEREF2413',
+    caseType: 'COMMUNITY'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Cheshire',
+    teamName: 'Warrington NPS OMU',
+    tierCode: 'C1',
+    rowType: 'N',
+    caseReferenceNo: 'CASEREF2479',
+    caseType: 'COMMUNITY'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Cheshire',
+    teamName: 'Warrington NPS OMU',
+    tierCode: 'C1',
+    rowType: 'N',
+    caseReferenceNo: 'CASEREF6008',
+    caseType: 'COMMUNITY'
+  }]
+}
+
+module.exports.CMS_EXPORT_CSV = {
+  filename: ('Test_CMS_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
+  csv: '"Contact Region Name","Contact LDU Cluster","Contact Team Name","Contact Date","Contact Name","Contact Grade","OM Region Name","OM LDU Cluster","OM Team Name","CRN","OM Name","OM Grade","Contact Type Description"\n' +
+    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-09-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","1659864416","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High"\n' +
+    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-09-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","1659864416","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High"\n' +
+    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-09-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","1659864416","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High"\n' +
+    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","04-10-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","1659864416","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High"\n' +
+    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","04-10-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","1659864416","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High"\n'
+}
+
+module.exports.CMS_EXPORT_RESULT = {
+  title: 'Case Details Export',
+  cmsExportDetails:
+  [{
+    contactRegionName: 'NPS North West',
+    contactLduName: 'Lancashire NW',
+    contactTeamName: 'Blackpool OMU C - NPS',
+    contactDate: '24-9-2018',
+    contactName: 'A.N. Offender Manager N01D068NPSQ',
+    contactGradeCode: 'PSO',
+    omRegionName: 'NPS North West',
+    omLduName: 'Lancashire NW',
+    omTeamName: 'Blackpool OMU C - NPS',
+    contactId: 1659864416,
+    omName: 'A.N. Offender Manager LCSE771NPSM',
+    omGradeCode: 'PO',
+    contactDescription: 'CMS - Case Related Communication - High'
+  },
+  {
+    contactRegionName: 'NPS North West',
+    contactLduName: 'Lancashire NW',
+    contactTeamName: 'Blackpool OMU C - NPS',
+    contactDate: '24-9-2018',
+    contactName: 'A.N. Offender Manager N01D068NPSQ',
+    contactGradeCode: 'PSO',
+    omRegionName: 'NPS North West',
+    omLduName: 'Lancashire NW',
+    omTeamName: 'Blackpool OMU C - NPS',
+    contactId: 1659864416,
+    omName: 'A.N. Offender Manager LCSE771NPSM',
+    omGradeCode: 'PO',
+    contactDescription: 'CMS - Case Related Communication - High'
+  },
+  {
+    contactRegionName: 'NPS North West',
+    contactLduName: 'Lancashire NW',
+    contactTeamName: 'Blackpool OMU C - NPS',
+    contactDate: '24-9-2018',
+    contactName: 'A.N. Offender Manager N01D068NPSQ',
+    contactGradeCode: 'PSO',
+    omRegionName: 'NPS North West',
+    omLduName: 'Lancashire NW',
+    omTeamName: 'Blackpool OMU C - NPS',
+    contactId: 1659864416,
+    omName: 'A.N. Offender Manager LCSE771NPSM',
+    omGradeCode: 'PO',
+    contactDescription: 'CMS - Case Related Communication - High'
+  },
+  {
+    contactRegionName: 'NPS North West',
+    contactLduName: 'Lancashire NW',
+    contactTeamName: 'Blackpool OMU C - NPS',
+    contactDate: '4-10-2018',
+    contactName: 'A.N. Offender Manager N01D068NPSQ',
+    contactGradeCode: 'PSO',
+    omRegionName: 'NPS North West',
+    omLduName: 'Lancashire NW',
+    omTeamName: 'Blackpool OMU C - NPS',
+    contactId: 1660958873,
+    omName: 'A.N. Offender Manager LCSE771NPSM',
+    omGradeCode: 'PO',
+    contactDescription: 'CMS - Case Related Communication - Low'
+  },
+  {
+    contactRegionName: 'NPS North West',
+    contactLduName: 'Lancashire NW',
+    contactTeamName: 'Blackpool OMU C - NPS',
+    contactDate: '4-10-2018',
+    contactName: 'A.N. Offender Manager N01D068NPSQ',
+    contactGradeCode: 'PSO',
+    omRegionName: 'NPS North West',
+    omLduName: 'Lancashire NW',
+    omTeamName: 'Blackpool OMU C - NPS',
+    contactId: 1660958873,
+    omName: 'A.N. Offender Manager LCSE771NPSM',
+    omGradeCode: 'PO',
+    contactDescription: 'CMS - Case Related Communication - Low'
+  }]
+}
+
+module.exports.GS_EXPORT_CSV = {
+  filename: ('Test_Group_Supervision_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
+  csv: '"Region Name","LDU Cluster","Team Name","Contact Date","CRN","Offender Manager Name","Offender Manager Grade","Contact Type Description"\n' +
+    '"NPS North West","Lancashire SE","NPS - Burnley 1","10-10-2018","1660883167","A.N. Offender Manager N01B320NPSM","PO","GS Employment session NS"\n' +
+    '"NPS North West","Lancashire SE","NPS - Burnley 1","10-10-2018","1660858807","A.N. Offender Manager N01B320NPSM","PO","GS Employment session NS"\n' +
+    '"NPS North West","Lancashire SE","NPS - Burnley 2","10-10-2018","1661654096","A.N. Offender Manager N01C411NPSN","PO","GS Employment session NS"\n' +
+    '"NPS North West","Lancashire SE","NPS - Burnley 2","10-10-2018","1660908486","A.N. Offender Manager N01B911NPSM","PO","GS Employment session NS"\n' +
+    '"NPS North West","Lancashire SE","NPS - Burnley 2","10-10-2018","1660902791","A.N. Offender Manager N01C411NPSN","PO","GS Employment session NS"\n'
+}
+
+module.exports.GS_EXPORT_RESULT = {
+  title: 'Group Supervision Export',
+  gsExportDetails:
+  [{
+    regionName: 'NPS North West',
+    lduName: 'Lancashire SE',
+    teamName: 'NPS - Burnley 1',
+    contactDate: '10-10-2018',
+    CRN: 1660883167,
+    omName: 'A.N. Offender Manager N01B320NPSM',
+    omGradeCode: 'PO',
+    contactDescription: 'GS Employment session NS'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Lancashire SE',
+    teamName: 'NPS - Burnley 1',
+    contactDate: '10-10-2018',
+    CRN: 1660858807,
+    omName: 'A.N. Offender Manager N01B320NPSM',
+    omGradeCode: 'PO',
+    contactDescription: 'GS Employment session NS'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Lancashire SE',
+    teamName: 'NPS - Burnley 2',
+    contactDate: '10-10-2018',
+    CRN: 1661654096,
+    omName: 'A.N. Offender Manager N01C411NPSN',
+    omGradeCode: 'PO',
+    contactDescription: 'GS Employment session NS'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Lancashire SE',
+    teamName: 'NPS - Burnley 2',
+    contactDate: '10-10-2018',
+    CRN: 1660908486,
+    omName: 'A.N. Offender Manager N01B911NPSM',
+    omGradeCode: 'PO',
+    contactDescription: 'GS Employment session NS'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Lancashire SE',
+    teamName: 'NPS - Burnley 2',
+    contactDate: '10-10-2018',
+    CRN: 1660902791,
+    omName: 'A.N. Offender Manager N01C411NPSN',
+    omGradeCode: 'PO',
+    contactDescription: 'GS Employment session NS'
   }]
 }
 
