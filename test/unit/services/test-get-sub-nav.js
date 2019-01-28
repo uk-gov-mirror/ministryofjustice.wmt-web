@@ -21,7 +21,7 @@ describe('services/get-sub-nav', function () {
 
   it('returns a list which has four elements for non offender manager', function () {
     var subNav = getSubNav(id, organisationalUnitName, currentLink)
-    expect(subNav.length).to.eql(4)
+    expect(subNav.length).to.eql(5)
   })
 
   it('returns a list which has one elements for non offender manager court-report org', function () {

@@ -23,6 +23,15 @@ const REDUCTION_ARCHIVE_FIELD_NAMES = ['Offender Manager Name', 'Reduction Hours
 const REDUCTION_ARCHIVE_FIELDS = ['omName', 'hoursReduced', 'reductionReason', 'comments', 'startDate', 'endDate', 'lastUpdatedDate', 'reductionAddedBy']
 // const DAILY_ARCHIVE_FIELDS = ['lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'reduction', 'comments', 'reductionDate', 'reductionAddedBy']
 
+const ARMS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Assessment Date', 'CRN', 'Offender Manager Name', 'Offender Manager Grade', 'Sentence Type', 'Release Date']
+const ARMS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'assessmentDate', 'CRN', 'omName', 'omGrade', 'sentencetype', 'releaseDate']
+const CASE_DETAILS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Tier Code', 'Row Type', 'CRN', 'Case Type']
+const CASE_DETAILS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'tierCode', 'rowType', 'caseReferenceNo', 'caseType']
+const GROUP_SUPERVISION_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Contact Date', 'CRN', 'Offender Manager Name', 'Offender Manager Grade', 'Contact Type Description']
+const GROUP_SUPERVISION_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'contactDate', 'CRN', 'omName', 'omGradeCode', 'contactDescription']
+const CMS_EXPORT_FIELD_NAMES = ['Contact Region Name', 'Contact LDU Cluster', 'Contact Team Name', 'Contact Date', 'Contact Name', 'Contact Grade', 'OM Region Name', 'OM LDU Cluster', 'OM Team Name', 'CRN', 'OM Name', 'OM Grade', 'Contact Type Description']
+const CMS_EXPORT_FIELDS = ['contactRegionName', 'contactLduName', 'contactTeamName', 'contactDate', 'contactName', 'contactGradeCode', 'omRegionName', 'omLduName', 'omTeamName', 'contactId', 'omName', 'omGradeCode', 'contactDescription']
+
 module.exports = function (organisationLevel, result, tab) {
   var filename
   if (tab === tabs.ADMIN.DAILY_ARCHIVE || tab === tabs.ADMIN.FORTNIGHTLY_ARCHIVE || tab === tabs.ADMIN.REDUCTION_ARCHIVE) {
@@ -60,6 +69,30 @@ var getFilename = function (orgName, screen) {
       return 'Archived_Reductions.csv'
     } else {
       return (orgName + ' Archived_Reductions.csv').replace(replaceSpaces, '_')
+    }
+  } else if (screen === tabs.EXPORT.ARMS_EXPORT) {
+    if (orgName === null) {
+      return 'ARMS_Export.csv'
+    } else {
+      return (orgName + ' ARMS_Export.csv').replace(replaceSpaces, '_')
+    }
+  } else if (screen === tabs.EXPORT.CASE_DETAILS_EXPORT) {
+    if (orgName === null) {
+      return 'Case_Details_Export.csv'
+    } else {
+      return (orgName + ' Case_Details_Export.csv').replace(replaceSpaces, '_')
+    }
+  } else if (screen === tabs.EXPORT.GROUP_SUPERVISION_EXPORT) {
+    if (orgName === null) {
+      return 'Group_Supervision_Export.csv'
+    } else {
+      return (orgName + ' Group_Supervision_Export.csv').replace(replaceSpaces, '_')
+    }
+  } else if (screen === tabs.EXPORT.CMS_EXPORT) {
+    if (orgName === null) {
+      return 'CMS_Export.csv'
+    } else {
+      return (orgName + ' CMS_Export.csv').replace(replaceSpaces, '_')
     }
   } else {
     return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
@@ -115,6 +148,22 @@ var getFields = function (organisationLevel, tab) {
     case tabs.ADMIN.REDUCTION_ARCHIVE:
       fields = REDUCTION_ARCHIVE_FIELDS
       fieldNames = REDUCTION_ARCHIVE_FIELD_NAMES
+      break
+    case tabs.EXPORT.ARMS_EXPORT:
+      fields = ARMS_EXPORT_FIELDS
+      fieldNames = ARMS_EXPORT_FIELD_NAMES
+      break
+    case tabs.EXPORT.CASE_DETAILS_EXPORT:
+      fields = CASE_DETAILS_EXPORT_FIELDS
+      fieldNames = CASE_DETAILS_EXPORT_FIELD_NAMES
+      break
+    case tabs.EXPORT.GROUP_SUPERVISION_EXPORT:
+      fields = GROUP_SUPERVISION_EXPORT_FIELDS
+      fieldNames = GROUP_SUPERVISION_EXPORT_FIELD_NAMES
+      break
+    case tabs.EXPORT.CMS_EXPORT:
+      fields = CMS_EXPORT_FIELDS
+      fieldNames = CMS_EXPORT_FIELD_NAMES
       break
   }
   return { fields: fields, fieldNames: fieldNames }
@@ -187,6 +236,10 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
     case tabs.ADMIN.DAILY_ARCHIVE:
     case tabs.ADMIN.FORTNIGHTLY_ARCHIVE:
     case tabs.ADMIN.REDUCTION_ARCHIVE:
+    case tabs.EXPORT.ARMS_EXPORT:
+    case tabs.EXPORT.CASE_DETAILS_EXPORT:
+    case tabs.EXPORT.GROUP_SUPERVISION_EXPORT:
+    case tabs.EXPORT.CMS_EXPORT:
       csv = generateCsv(result, fields, fieldNames)
       break
   }

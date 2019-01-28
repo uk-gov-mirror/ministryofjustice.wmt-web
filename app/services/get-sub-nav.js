@@ -31,6 +31,9 @@ module.exports = function (id, organisationalUnitName, currentPath, workloadType
         navigation.push(new Link('Capacity', baseLink + '/caseload-capacity'))
         navigation.push(new Link('Caseload', baseLink + '/caseload'))
         navigation.push(new Link('Case Progress', baseLink + '/case-progress'))
+        if (organisationalUnitName !== organisationUnitConstants.NATIONAL.name) {
+          navigation.push(new Link('Export', baseLink + '/export'))
+        }
       }
   }
 
