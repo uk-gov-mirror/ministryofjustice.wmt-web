@@ -67,7 +67,7 @@ describe('services/get-export-csv', function () {
     })
 
     it('for Group Supervision Export', function () {
-      expect(getExportCsv(orgUnit.TEAM.name, helper.GS_EXPORT_CSV.gsExportDetails, tabs.EXPORT.GROUP_SUPERVISION_EXPORT).csv).to.eql(helper.GS_EXPORT_CSV.csv)
+      expect(getExportCsv(orgUnit.TEAM.name, helper.GS_EXPORT_RESULT.gsExportDetails, tabs.EXPORT.GROUP_SUPERVISION_EXPORT).csv).to.eql(helper.GS_EXPORT_CSV.csv)
     })
   })
   describe('should format the capacity percentage when exporting overviews', function () {
