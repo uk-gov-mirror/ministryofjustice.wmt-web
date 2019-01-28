@@ -261,8 +261,8 @@ module.exports.GS_EXPORT_CSV = {
 }
 
 module.exports.GS_EXPORT_RESULT = {
-   title: 'Group Supervision Export',
-   gsExportDetails:
+  title: 'Group Supervision Export',
+  gsExportDetails:
   [{
     regionName: 'NPS North West',
     lduName: 'Lancashire SE',
