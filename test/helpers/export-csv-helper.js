@@ -166,8 +166,8 @@ module.exports.CMS_EXPORT_CSV = {
     '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-9-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS",1659864416,"A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High"\n' +
     '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-9-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS",1659864416,"A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High"\n' +
     '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-9-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS",1659864416,"A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High"\n' +
-    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","4-10-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS",1659864416,"A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High"\n' +
-    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","4-10-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS",1659864416,"A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High"'
+    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","4-10-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS",1660958873,"A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - Low"\n' +
+    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","4-10-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS",1660958873,"A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - Low"'
 }
 
 module.exports.CMS_EXPORT_RESULT = {
