@@ -136,7 +136,13 @@ var formatResults = function (results) {
       result.omName = 'NO NAME FOR THIS REDUCTION'
     }
     if (result.lastUpdatedDate !== null) {
-      result.lastUpdatedDate = dateFormatter.formatDate(result.lastUpdatedDate, 'DD-MM-YYYY')
+      result.lastUpdatedDate = dateFormatter.formatDate(result.lastUpdatedDate, 'DD/MM/YYYY')
+    }
+    if (result.startDate !== null && result.startDate !== 'N/A') {
+      result.startDate = dateFormatter.formatDate(result.startDate, 'DD/MM/YYYY')
+    }
+    if (result.endDate !== null && result.endDate !== 'N/A') {
+      result.endDate = dateFormatter.formatDate(result.endDate, 'DD/MM/YYYY')
     }
   })
   return results

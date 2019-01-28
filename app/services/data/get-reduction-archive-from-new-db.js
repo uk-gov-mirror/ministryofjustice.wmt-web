@@ -1,4 +1,4 @@
-const knex = require('../../../knex').archive
+const knex = require('../../../knex').web
 const archiveDataLimit = require('../../../config').ARCHIVE_DATA_LIMIT
 
 module.exports = function (archiveDateRange, extraCriteria) {
@@ -11,11 +11,15 @@ module.exports = function (archiveDateRange, extraCriteria) {
     'hours_reduced AS hoursReduced',
     'comments',
     'last_updated_date AS lastUpdatedDate',
-    'reduction_added_by AS reductionAddedBy'
+    'reduction_added_by AS reductionAddedBy',
+    'reduction_reason AS reductionReason',
+    'start_date AS startDate',
+    'end_date AS endDate',
+    'reduction_status AS reductionStatus'
   ]
 
   if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {
-    return knex('archive_reduction_data')
+    return knex('reductions_archive_view')
     .limit(parseInt(archiveDataLimit))
     .select(selectColumns)
     .whereBetween('last_updated_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
@@ -26,7 +30,7 @@ module.exports = function (archiveDateRange, extraCriteria) {
     })
     .orderBy('last_updated_date', 'ASC')
   } else {
-    return knex('archive_reduction_data')
+    return knex('reductions_archive_view')
     .limit(parseInt(archiveDataLimit))
     .select(selectColumns)
     .whereBetween('last_updated_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),

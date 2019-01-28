@@ -15,6 +15,7 @@ const tabs = require('../constants/wmt-tabs')
 const tierHelper = require('../services/helpers/tier-helper')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
+const getCaseDetailsView = require('../services/get-case-details-view')
 
 var inactiveTeam
 var lastUpdated
@@ -63,27 +64,31 @@ module.exports = function (router) {
       return getOutstandingReports(id, organisationLevel).then(function (result) {
         var outstandingReports = result
         inactiveTeam = capacityBreakdown.title
-        return getLastUpdated().then(function (result) {
-          lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
-          result.date = lastUpdated
-          return res.render('capacity', {
-            screen: 'capacity',
-            linkId: id,
-            title: capacityBreakdown.title,
-            subTitle: capacityBreakdown.subTitle,
-            subNav: getSubNav(id, organisationLevel, req.path),
-            breadcrumbs: capacityBreakdown.breadcrumbs,
-            capacity: capacityBreakdown.capacityTable,
-            errors: errors,
-            query: req.query,
-            capacityBreakdown: capacityBreakdown.capacityBreakdown,
-            outstandingReports: outstandingReports,
-            childOrganisationLevel: orgUnit.childOrganisationLevel,
-            childOrganisationLevelDisplayText: childOrgUnitDisplayText,
-            organisationLevel: organisationLevel,
-            date: result.date,
-            userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-            authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        return getCaseDetailsView(id, organisationLevel).then(function (result) {
+          var caseDetails = result
+          return getLastUpdated().then(function (result) {
+            lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+            result.date = lastUpdated
+            return res.render('capacity', {
+              screen: 'capacity',
+              linkId: id,
+              title: capacityBreakdown.title,
+              subTitle: capacityBreakdown.subTitle,
+              subNav: getSubNav(id, organisationLevel, req.path),
+              breadcrumbs: capacityBreakdown.breadcrumbs,
+              capacity: capacityBreakdown.capacityTable,
+              errors: errors,
+              query: req.query,
+              capacityBreakdown: capacityBreakdown.capacityBreakdown,
+              outstandingReports: outstandingReports,
+              caseDetails: caseDetails,
+              childOrganisationLevel: orgUnit.childOrganisationLevel,
+              childOrganisationLevelDisplayText: childOrgUnitDisplayText,
+              organisationLevel: organisationLevel,
+              date: result.date,
+              userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+              authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+            })
           })
         })
       })
