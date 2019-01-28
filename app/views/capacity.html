@@ -108,6 +108,49 @@
 
 <div id="plotly-div-line" aria-hidden="true"></div>
 
+
+
+{% if organisationLevel === 'offender-manager' %}
+
+    <h3 class="heading-medium">Case Details</h3>
+
+    <table id="case-details" class="js-data-table data-table dataTable">
+        <thead>
+        <tr>
+            <th id="tierCode">Tier Code</th>
+            <th id="rowType">Row Type</th>
+            <th id="crn">Case Reference No</th>
+            <th id="Case Type">Case Type</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% if caseDetails %}
+                {% for row in caseDetails %}
+                    <tr>
+                        <td>
+                            {{ row.tierCode }}
+                        </td>
+                        <td>
+                            {{ row.rowType }}
+                        </td>
+                        <td>
+                            {{ row.caseReferenceNo }}
+                        </td>
+                        <td>
+                            {{ row.caseType | capitalize }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">
+                        This Offender Manager has no Cases
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endif %}
 {% if organisationLevel !== 'offender-manager' %}
   <h3 class="heading-medium">Capacity breakdown</h3>
 
@@ -115,7 +158,7 @@
     <thead>
       <tr>
         <th colspan="2" id="org">{{ childOrganisationLevelDisplayText }}</th>
-        <th colspan="9" id="breakdown">Workload breakdown</th>
+        <th colspan="11" id="breakdown">Workload breakdown</th>
       </tr>
       <tr>
         <th id="name">Name</th>
@@ -127,8 +170,10 @@
         <th id="paroms"><abbr title="Parole Assessment Reports by the Offender Manager">PAROMs</abbr></th>
         <th id="fdrs"><abbr title="Fast Delivery Reports">FDRs</abbr></th>
         <th id="sdrs"><abbr title="Standard Delivery Reports">SDRs</abbr></th>
-        <th id="gs"><abbr title="Group Supervision">GS</abbr></th>
-        <th id="cms"><abbr title="Case Management Support">CMS</abbr></th>
+        <th id="gs"><abbr title="Group Supervision Percentage">GS %</abbr></th>
+        <th id="gsPoints"><abbr title="Group Supervision Points">GS Points</abbr></th>
+        <th id="cms"><abbr title="Case Management Support Percentage">CMS %</abbr></th>
+        <th id="cmsPoints"><abbr title="Case Management Support Points">CMS Points</abbr></th>
       </tr>
     </thead>
     {% if organisationLevel === 'team' %}
@@ -148,7 +193,9 @@
           <td headers="fdrs breakdown">{{ member.totalSdrConversions }}</td>
           <td headers="sdrs breakdown">{{ member.totalSDRs }}</td>
           <td headers="gs breakdown">{{ member.totalGs | round(1) }}%</td>
+          <td headers="gs points breakdown">{{ member.totalGSPoints }}</td>
           <td headers="cms breakdown">{{ member.totalCMS | round(1) }}%</td>
+          <td headers="cms points breakdown">{{ member.totalCMSPoints }}</td>
         </tr>
         </tfoot>
           {% else %}
@@ -167,7 +214,9 @@
           <td headers="fdrs breakdown">{{ member.sdrConversions }}</td>
           <td headers="sdrs breakdown">{{ member.sdrs }}</td>
           <td headers="gs breakdown">{{ member.gsPercentage | round(1) }}%</td>
+          <td headers="gs points breakdown">{{ member.gsPoints }}</td>
           <td headers="cms breakdown">{{ member.cmsPercentage | round(1) }}%</td>
+          <td headers="cms points breakdown">{{ member.cmsPoints }}</td>
         </tr>
           {% endif %}
         
@@ -196,7 +245,9 @@
           <td headers="fdrs breakdown">{{ member.grades[i].sdrConversions }}</td>
           <td headers="sdrs breakdown">{{ member.grades[i].sdrs }}</td>
           <td headers="gs breakdown">{{ member.grades[i].gsPercentage | round(1) }}%</td>
+          <td headers="gs points breakdown">{{ member.grades[i].gsPoints }}</td>
           <td headers="cms breakdown">{{ member.grades[i].cmsPercentage | round(1) }}%</td>
+          <td headers="cms points breakdown">{{ member.grades[i].cmsPoints }}</td>
         </tr>
         {% endfor %}
         {% if loop.last %}
@@ -212,7 +263,9 @@
             <td headers="fdrs breakdown">{{ member.totalSdrConversions }}</td>
             <td headers="sdrs breakdown">{{ member.totalSDRs }}</td>
             <td headers="gs breakdown">{{ member.totalGs | round(1) }}%</td>
+            <td headers="gs points breakdown">{{ member.totalGSPoints }}</td>
             <td headers="cms breakdown">{{ member.totalCMS | round(1) }}%</td>
+            <td headers="cms points breakdown">{{ member.totalCMSPoints }}</td>
         </tr>
     </tfoot>
         {% endif %}
@@ -315,4 +368,6 @@
     <script src="/public/javascripts/caseload-capacity.js"></script>
     <script src="/public/javascripts/floatThead.js"></script>
     <script src="/public/javascripts/jquery.floatThead.js"></script>
+    <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
+    <script src="{{ asset_path }}javascripts/case-details.js"></script>
 {% endblock %}

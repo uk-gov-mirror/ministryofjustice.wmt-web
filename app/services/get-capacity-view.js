@@ -5,6 +5,7 @@ const tableCreator = require('./helpers/table-creator')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
 const organisationConstant = require('../constants/organisation-unit')
 const percentageCalculator = require('./helpers/percentage-calculator')
+const log = require('../logger')
 
 module.exports = function (id, capacityDateRange, organisationLevel) {
   var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
@@ -35,11 +36,12 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
 
 var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
   var capacityBreakdown = []
-  var totals = { name: 'Total / Average', capacity: 0, totalCases: 0, totalARMS: 0, totalGs: 0, totalCMS: 0, totalSDRs: 0, totalParoms: 0, totalSdrConversions: 0, totalTotalT2aCases: 0 }
+  var totals = { name: 'Total / Average', capacity: 0, totalCases: 0, totalARMS: 0, totalGs: 0, totalCMS: 0, totalSDRs: 0, totalParoms: 0, totalSdrConversions: 0, totalTotalT2aCases: 0, totalCMSPoints: 0, totalGSPoints: 0 }
   var totalNumberOfGrades = 0
 
   if (organisationLevel === organisationConstant.TEAM.name) {
     workloadReports.forEach(function (workloadReport) {
+      log.info(workloadReport)
       var capacityBreakdownRow = buildCapacityBreakdownEntry(workloadReport)
       totals = addTotals(totals, capacityBreakdownRow)
       capacityBreakdown.push(buildCapacityBreakdownEntry(workloadReport))
@@ -91,6 +93,8 @@ var addTotals = function (totals, capacityBreakdown) {
   totals.totalParoms += capacityBreakdown.paroms
   totals.totalSdrConversions += capacityBreakdown.sdrConversions
   totals.totalTotalT2aCases += capacityBreakdown.totalT2aCases
+  totals.totalGSPoints += capacityBreakdown.gsPoints
+  totals.totalCMSPoints += capacityBreakdown.cmsPoints
   return totals
 }
 
@@ -121,7 +125,8 @@ var buildCapacityBreakdownEntry = function (workloadReport) {
     linkId: workloadReport.linkId,
     capacityPercentage: percentageCalculator.calculatePercentage(workloadReport.totalPoints, workloadReport.availablePoints),
     cmsPercentage: cmsPercentageValue,
-    gsPercentage: percentageCalculator.calculatePercentage(-workloadReport.gsAdjustmentPoints, (workloadReport.totalPoints - workloadReport.gsAdjustmentPoints))
-
+    gsPercentage: percentageCalculator.calculatePercentage(-workloadReport.gsAdjustmentPoints, (workloadReport.totalPoints - workloadReport.gsAdjustmentPoints)),
+    cmsPoints: workloadReport.cmsAdjustmentPoints,
+    gsPoints: workloadReport.gsAdjustmentPoints
   }
 }

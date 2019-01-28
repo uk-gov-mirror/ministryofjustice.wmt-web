@@ -13,6 +13,11 @@ const archiveOptions = require('../constants/archive-options')
 const renderResults = require('../helpers/render-results')
 const viewTemplate = 'daily-caseload-data'
 const title = 'Archived Daily Caseload Data'
+const newDataStartDay = require('../../config').NEW_DATABASE_START_DAY
+const newDataStartMonth = require('../../config').NEW_DATABASE_START_MONTH
+const newDataStartYear = require('../../config').NEW_DATABASE_START_YEAR
+
+const newDataStartDate = dateFormatter.build(newDataStartDay, newDataStartMonth, newDataStartYear)
 
 var archiveDateRange
 
@@ -70,7 +75,12 @@ module.exports = function (router) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
     }
 
-    return getArchive(archiveOptions.DAILY, archiveDateRange, extraCriteria).then(function (results) {
+    var thisArchiveOption = archiveOptions.DAILY
+    if (archiveDateRange.archiveFromDate.isSameOrAfter(newDataStartDate)) {
+      thisArchiveOption = archiveOptions.NEW_DAILY
+    }
+
+    return getArchive(thisArchiveOption, archiveDateRange, extraCriteria).then(function (results) {
       results = formatResults(results)
       return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole, archiveDateRange, extraCriteria)
     }).catch(function (error) {
@@ -113,7 +123,12 @@ module.exports = function (router) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
     }
 
-    return getArchive(archiveOptions.DAILY, archiveDateRange, extraCriteria).then(function (results) {
+    var thisArchiveOption = archiveOptions.DAILY
+    if (archiveDateRange.archiveFromDate.isSameOrAfter(newDataStartDate)) {
+      thisArchiveOption = archiveOptions.NEW_DAILY
+    }
+
+    return getArchive(thisArchiveOption, archiveDateRange, extraCriteria).then(function (results) {
       results = formatResults(results)
       let dateFileName = null
       if (archiveDateRange !== null) {
