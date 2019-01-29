@@ -22,7 +22,7 @@
                     <span class="form-label-bold">
                         Show archive data from:
                     </span>
-                    <span class="form-hint" id="reduction-archive-from-hint">For example, 30 1 2015 - Must be between 24/10/2014 and 19/01/2017</span>
+                    <span class="form-hint" id="reduction-archive-from-hint">For example, 30 1 2015 - This date must be on or after 24/10/2014</span>
                 </legend>
                 <div class="form-date" aria-describedby="reduction-archive-from-hint">
                     <div class="form-group form-group-day">
@@ -52,7 +52,7 @@
                     <span class="form-label-bold">
                         Show archive data to:
                     </span>
-                    <span class="form-hint" id="reduction-archive-to-hint">For example, 31 3 2015 - Must be between 25/10/2014 and 20/01/2017</span>
+                    <span class="form-hint" id="reduction-archive-to-hint">For example, 31 3 2015 - This date must be on or after 25/10/2014</span>
                 </legend>
                 <div class="form-date" aria-describedby="reduction-archive-to-hint">
                     <div class="form-group form-group-day">
@@ -101,7 +101,10 @@
         <tr class="headers">
             <th id="offenderManager">Offender Manager</th>
             <th id="reductions">Reduction Hours</th>
+            <th id="reductionReason">Reduction Reason</th>
             <th id="comments">Comments</th>
+            <th id="reductionStartDate">Start Date</th>
+            <th id="reductionExpiryDate">Expiry Date</th>
             <th id="reductionDate">Date Reduction Updated</th>
             <th id="reductionAddedBy">Reduction Updated By</th>
         </tr>
@@ -111,7 +114,10 @@
         <tr>
             <td>{{ result.omName }}</td>
             <td>{{ result.hoursReduced | round(1) }}</td>
+            <td>{{ result.reductionReason }}</td>
             <td>{{ result.comments }}</td>
+            <td>{{ result.startDate }}</td>
+            <td>{{ result.endDate }}</td>
             <td>{{ result.lastUpdatedDate }}</td>
             <td>{{ result.reductionAddedBy }}</td>
         </tr>
@@ -122,6 +128,7 @@
 </main>
 
 <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
+<script src="{{ asset_path }}javascripts/moment.min.js"></script>
 <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
 <script src="{{ asset_path }}javascripts/archive-reductions.js"></script>
 

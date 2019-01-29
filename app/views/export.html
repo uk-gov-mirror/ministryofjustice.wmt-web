@@ -1,0 +1,52 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/breadcrumbs.html" %}
+
+    {% include "includes/validation-error-messages.html" %}
+
+    {% include "includes/title-subtitle.html" %}
+
+    {% include "includes/sub-nav.html" %}    
+
+    <form method="post">
+
+        {% include "includes/csrf-hidden-input.html"%}
+
+        <div class="form-group">
+            <fieldset class="inline">
+                <h2 class="heading-medium">
+                    Please select the type of export to download:
+                </h2>
+                <div class="multiple-choice">
+                    <input id="radio-inline-1" type="radio" name="radioInlineGroup" value="1" checked="checked">
+                    <label for="radio-inline-1">ARMS</label>
+                </div>
+                <div class="multiple-choice">
+                    <input id="radio-inline-2" type="radio" name="radioInlineGroup" value="2">
+                    <label for="radio-inline-2">Case Details</label>
+                </div>
+                <div class="multiple-choice">
+                    <input id="radio-inline-3" type="radio" name="radioInlineGroup" value="3">
+                    <label for="radio-inline-3">Case Management Support</label>
+                </div>
+                <div class="multiple-choice">
+                    <input id="radio-inline-4" type="radio" name="radioInlineGroup" value="4">
+                    <label for="radio-inline-4">Group Supervision</label>
+                </div>
+            </fieldset>
+        </div>
+        
+        <input type="submit" class="button sln-export" style="float: left; margin-left:10px; margin-bottom: 10px" value="Export" formaction="/probation/{{ organisationLevel }}/{{ linkId }}/export">
+
+    </form>
+</main>
+
+<div class="lastUpdated">
+    <p>Last updated on  <span class="bold">{{date}}</span></p>
+</div>
+
+{% endblock %}

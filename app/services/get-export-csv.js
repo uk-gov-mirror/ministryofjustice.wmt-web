@@ -4,11 +4,12 @@ const json2csv = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
 
 const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
+const CASELOAD_TEAM_FIELDS = ['name', 'grade', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['regionName', 'lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction']
 const OM_OVERVIEW_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours']
 const ORG_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'offenderManager', 'gradeCode', 'capacityPercentage', 'availablePoints', 'remainingPoints', 'contractedHours', 'reductionHours', 'totalCases']
-const REDUCTIONS_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team', 'Offender Manager', 'Contracted Hours', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes']
-const REDUCTIONS_FIELDS = ['regionName', 'lduName', 'teamName', 'offenderManager', 'contractedHours', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
+const REDUCTIONS_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team', 'Offender Manager', 'Grade Code', 'Contracted Hours', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes']
+const REDUCTIONS_FIELDS = ['regionName', 'lduName', 'teamName', 'offenderManager', 'gradeCode', 'contractedHours', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
 const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
 const INACTIVE_CASES_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
 // const DAILY_ARCHIVE_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Offender Manager Name', 'Total Cases', 'Capacity', 'Reductions', 'Comments', 'Reduction Date', 'Reduction Added By']
@@ -18,9 +19,18 @@ const DAILY_ARCHIVE_FIELDS = ['workloadDate', 'workloadID', 'lduName', 'teamName
 const FORTNIGHTLY_ARCHIVE_FIELD_NAMES = ['Start Date', 'End Date', 'LDU Cluster', 'Team Name', 'Offender Manager Name', 'Average Cases', 'Average Capacity', 'Average Reductions']
 const FORTNIGHTLY_ARCHIVE_FIELDS = ['startDate', 'endDate', 'lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'hoursReduction']
 
-const REDUCTION_ARCHIVE_FIELD_NAMES = ['Offender Manager Name', 'Reduction Hours', 'Comments', 'Date Updated', 'Reduction Updated By']
-const REDUCTION_ARCHIVE_FIELDS = ['omName', 'hoursReduced', 'comments', 'lastUpdatedDate', 'reductionAddedBy']
+const REDUCTION_ARCHIVE_FIELD_NAMES = ['Offender Manager Name', 'Reduction Hours', 'Reduction Reason', 'Comments', 'Start Date', 'End Date', 'Date Updated', 'Reduction Updated By']
+const REDUCTION_ARCHIVE_FIELDS = ['omName', 'hoursReduced', 'reductionReason', 'comments', 'startDate', 'endDate', 'lastUpdatedDate', 'reductionAddedBy']
 // const DAILY_ARCHIVE_FIELDS = ['lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'reduction', 'comments', 'reductionDate', 'reductionAddedBy']
+
+const ARMS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Assessment Date', 'CRN', 'Offender Manager Name', 'Offender Manager Grade', 'Sentence Type', 'Release Date']
+const ARMS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'assessmentDate', 'CRN', 'omName', 'omGrade', 'sentencetype', 'releaseDate']
+const CASE_DETAILS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Tier Code', 'Row Type', 'CRN', 'Case Type']
+const CASE_DETAILS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'tierCode', 'rowType', 'caseReferenceNo', 'caseType']
+const GROUP_SUPERVISION_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Contact Date', 'CRN', 'Offender Manager Name', 'Offender Manager Grade', 'Contact Type Description']
+const GROUP_SUPERVISION_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'contactDate', 'CRN', 'omName', 'omGradeCode', 'contactDescription']
+const CMS_EXPORT_FIELD_NAMES = ['Contact Region Name', 'Contact LDU Cluster', 'Contact Team Name', 'Contact Date', 'Contact Name', 'Contact Grade', 'OM Region Name', 'OM LDU Cluster', 'OM Team Name', 'CRN', 'OM Name', 'OM Grade', 'Contact Type Description']
+const CMS_EXPORT_FIELDS = ['contactRegionName', 'contactLduName', 'contactTeamName', 'contactDate', 'contactName', 'contactGradeCode', 'omRegionName', 'omLduName', 'omTeamName', 'contactId', 'omName', 'omGradeCode', 'contactDescription']
 
 module.exports = function (organisationLevel, result, tab) {
   var filename
@@ -60,6 +70,30 @@ var getFilename = function (orgName, screen) {
     } else {
       return (orgName + ' Archived_Reductions.csv').replace(replaceSpaces, '_')
     }
+  } else if (screen === tabs.EXPORT.ARMS_EXPORT) {
+    if (orgName === null) {
+      return 'ARMS_Export.csv'
+    } else {
+      return (orgName + ' ARMS_Export.csv').replace(replaceSpaces, '_')
+    }
+  } else if (screen === tabs.EXPORT.CASE_DETAILS_EXPORT) {
+    if (orgName === null) {
+      return 'Case_Details_Export.csv'
+    } else {
+      return (orgName + ' Case_Details_Export.csv').replace(replaceSpaces, '_')
+    }
+  } else if (screen === tabs.EXPORT.GROUP_SUPERVISION_EXPORT) {
+    if (orgName === null) {
+      return 'Group_Supervision_Export.csv'
+    } else {
+      return (orgName + ' Group_Supervision_Export.csv').replace(replaceSpaces, '_')
+    }
+  } else if (screen === tabs.EXPORT.CMS_EXPORT) {
+    if (orgName === null) {
+      return 'CMS_Export.csv'
+    } else {
+      return (orgName + ' CMS_Export.csv').replace(replaceSpaces, '_')
+    }
   } else {
     return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
   }
@@ -73,7 +107,11 @@ var getFields = function (organisationLevel, tab) {
   switch (tab) {
     case tabs.CASELOAD:
       childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
-      fields = CASELOAD_FIELDS
+      if (organisationLevel === organisationUnitConstants.TEAM.name) {
+        fields = CASELOAD_TEAM_FIELDS
+      } else {
+        fields = CASELOAD_FIELDS
+      }
       fieldNames = [childOrgForFieldName + ' Name', 'Grade', 'A', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'Untiered', 'Overall']
       break
     case tabs.OVERVIEW:
@@ -110,6 +148,22 @@ var getFields = function (organisationLevel, tab) {
     case tabs.ADMIN.REDUCTION_ARCHIVE:
       fields = REDUCTION_ARCHIVE_FIELDS
       fieldNames = REDUCTION_ARCHIVE_FIELD_NAMES
+      break
+    case tabs.EXPORT.ARMS_EXPORT:
+      fields = ARMS_EXPORT_FIELDS
+      fieldNames = ARMS_EXPORT_FIELD_NAMES
+      break
+    case tabs.EXPORT.CASE_DETAILS_EXPORT:
+      fields = CASE_DETAILS_EXPORT_FIELDS
+      fieldNames = CASE_DETAILS_EXPORT_FIELD_NAMES
+      break
+    case tabs.EXPORT.GROUP_SUPERVISION_EXPORT:
+      fields = GROUP_SUPERVISION_EXPORT_FIELDS
+      fieldNames = GROUP_SUPERVISION_EXPORT_FIELD_NAMES
+      break
+    case tabs.EXPORT.CMS_EXPORT:
+      fields = CMS_EXPORT_FIELDS
+      fieldNames = CMS_EXPORT_FIELD_NAMES
       break
   }
   return { fields: fields, fieldNames: fieldNames }
@@ -182,6 +236,10 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
     case tabs.ADMIN.DAILY_ARCHIVE:
     case tabs.ADMIN.FORTNIGHTLY_ARCHIVE:
     case tabs.ADMIN.REDUCTION_ARCHIVE:
+    case tabs.EXPORT.ARMS_EXPORT:
+    case tabs.EXPORT.CASE_DETAILS_EXPORT:
+    case tabs.EXPORT.GROUP_SUPERVISION_EXPORT:
+    case tabs.EXPORT.CMS_EXPORT:
       csv = generateCsv(result, fields, fieldNames)
       break
   }
