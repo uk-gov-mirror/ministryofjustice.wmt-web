@@ -4,7 +4,7 @@ const proxyquire = require('proxyquire')
 const sinon = require('sinon')
 require('sinon-bluebird')
 
-const ADMIN_URL = '/admin/'
+const SEARCH_URL = '/officer-search/'
 
 var app
 var route
@@ -18,7 +18,7 @@ var initaliseApp = function () {
     assertUserAuthenticated: sinon.stub(),
     hasRole: hasRoleStub
   }
-  route = proxyquire('../../../app/routes/admin', {
+  route = proxyquire('../../../app/routes/search', {
     '../services/user-role-service': userRoleService,
     '../authorisation': authorisationService
   })
@@ -29,8 +29,8 @@ before(function () {
   initaliseApp()
 })
 
-describe('admin route', function () {
-  it('should respond with 200 when the user has the admin role', function () {
-    return supertest(app).get(ADMIN_URL).expect(200)
+describe('search route', function () {
+  it('should respond with 200 when the /officer-search route is called', function () {
+    return supertest(app).get(SEARCH_URL).expect(200)
   })
 })
