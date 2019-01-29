@@ -28,20 +28,6 @@ module.exports = function (router) {
               return res.status(error.statusCode).redirect(error.redirect)
             }
         }
-        var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-        var errors
-        try {
-            isValid(req.body.surnameBox)
-        } catch (error) {
-            if (error instanceof ValidationError) {
-                errors = error.validationErrors
-              } else {
-                throw error
-            }
-        }
-        if (errors) {
-            return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole)
-        }
         return offenderSearch(req.body.surnameBox).then(function(result){
             res.render('search-for-officer', {
                  results: result
@@ -49,16 +35,3 @@ module.exports = function (router) {
         })
     })
 }
-
-var isValid = function (surname) {
-    var errors = ErrorHandler()
-
-    this.search = FieldSetValidator(surname, 'search', errors)
-      .isRequired()
-
-    var validationErrors = errors.get()
-
-    if (validationErrors) {
-      throw new ValidationError(validationErrors)
-    }
-  }
