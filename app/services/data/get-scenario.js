@@ -27,7 +27,12 @@ module.exports = function () {
     'reduction_hours',
     'default_contracted_hours_po',
     'default_contracted_hours_pso',
-    'default_contracted_hours_spo'
+    'default_contracted_hours_spo',
+    'cms_points',
+    'gs_points',
+    'sdr_total',
+    'sdr_conversions_total',
+    'paroms_total'
   ]
   var scenarioArray = []
   return knex('scenario_view')
