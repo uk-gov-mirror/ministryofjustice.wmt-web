@@ -41,9 +41,9 @@ var collateCaseTypes = function (results) {
   return caseNumbers
 }
 
-var determineDefaultContractedHours = function(result) {
+var determineDefaultContractedHours = function (result) {
   var defaultContractedHours = 37
-  switch(result.grade_code) {
+  switch (result.grade_code) {
     case grades.DMY:
       defaultContractedHours = 0
       break
