@@ -3,10 +3,13 @@ const caseHeaders = require('../constants/excel-headings').caseHeaders
 const nameHeaders = require('../constants/excel-headings').nameHeaders
 const reportHeaders = require('../constants/excel-headings').reportHeaders
 const caseTypeHeaders = require('../constants/excel-headings').caseTypeHeaders
+const inputScenarioCaseData = require('./excel/input-scenario-case-data')
 const armsCommMultiplier = 4
 const armsLicMultiplier = 2
+const typeTierGroupLength = 4 // the number of fields for each tier and type of case
+const tiersPerType = 8
 
-module.exports = function (caseData, t2aCaseData) {
+module.exports = function (caseData, t2aCaseData, scenarioData) {
   var wb = new excel.Workbook()
   var ws = wb.addWorksheet('Sheet 1')
   var caseStyle = wb.createStyle({
@@ -29,6 +32,7 @@ module.exports = function (caseData, t2aCaseData) {
   setTierWeightings(ws, caseStyle, caseData)
   setTierWeightings(ws, caseStyle, t2aCaseData)
   setReportWeightings(ws, caseStyle, caseData)
+  inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType)
   return wb
 }
 
@@ -53,7 +57,7 @@ var setCaseHeaders = function (ws, start, caseStyle) {
   while (count < caseHeaders.length) {
     ws.cell(2, start, 2, start + 3, true).string(caseHeaders[count]).style(caseStyle)
     count = count + 1
-    start = start + 4
+    start = start + typeTierGroupLength
   }
 }
 
@@ -68,7 +72,7 @@ var setHeaders = function (ws) {
 var setCaseTypeHeaders = function (ws, caseStyle) {
   var count = 0
   var i
-  for (i = 22; i < 214; i = i + 4) {
+  for (i = 22; i < 214; i = i + typeTierGroupLength) {
     ws.cell(3, i).string(caseTypeHeaders[count]).style(caseStyle)
     ws.cell(3, i + 1).string(caseTypeHeaders[count + 1]).style(caseStyle)
     ws.cell(3, i + 2).string(caseTypeHeaders[count + 2]).style(caseStyle)
@@ -102,7 +106,7 @@ var setTierWeightings = function (ws, caseStyle, points) {
         count = count + 1
         break
     }
-    start = start + 4
+    start = start + typeTierGroupLength
   }
 }
 
