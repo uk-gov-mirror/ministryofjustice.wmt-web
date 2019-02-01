@@ -37,7 +37,7 @@ var formatTier = function (results) {
         result.tierCode = 'C2'
         break
       case '4':
-        result.tierCode = 'C2'
+        result.tierCode = 'C1'
         break
       case '5':
         result.tierCode = 'B2'
@@ -61,7 +61,7 @@ var formatTier = function (results) {
         result.tierCode = 'C2'
         break
       case 4:
-        result.tierCode = 'C2'
+        result.tierCode = 'C1'
         break
       case 5:
         result.tierCode = 'B2'
