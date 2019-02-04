@@ -1,5 +1,4 @@
 const knex = require('../../../knex').web
-const log = require('../../logger')
 
 module.exports = function (id, type) {
   var table = 'contact_cms_export_view AS contactCMS'
@@ -36,7 +35,6 @@ module.exports = function (id, type) {
       ' JOIN ' + table2 + ' ON contactCMS.contactId = omCMS.contactId' +
         whereString)
       .then(function (results) {
-        log.info(results.length)
         return results
       })
 }
