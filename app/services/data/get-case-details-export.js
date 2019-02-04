@@ -9,7 +9,9 @@ module.exports = function (id, type) {
     'tierCode',
     'rowType',
     'caseReferenceNo',
-    'caseType'
+    'caseType',
+    'offenderManagerName',
+    'gradeCode'
   ]
 
   var whereString
