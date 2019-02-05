@@ -1,0 +1,59 @@
+{% extends "includes/layout.html" %} 
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/breadcrumbs.html" %}
+  <header class="heading-xlarge" style="margin-top:0; margin-bottom:32px">Search for an Offender Manager</header>
+    {% include "includes/validation-error-messages.html" %}
+   <form method="POST">
+    {% if errors %}
+        <span class="error-message">{{ errors['search'][0] }}</span>
+    {% endif %}
+    <div class="search-group {% if errors['search'][0] %} form-group-error {% endif %}">
+        <fieldset id="search">
+            <legend>
+            <span class="form-label-bold">Search by Surname</span>
+            <span class="form-hint">For example, Smith</span>
+            <label class="form-label-bold" for="surname">Surname</label>
+            <input class="form-control" id="surname" name="surnameBox" style="width: 256px; margin-bottom: 16px">
+            </legend>
+        </fieldset>
+
+        {% include "includes/csrf-hidden-input.html"%}
+        <input id="search-button" class="button" type="submit" value="Search" formaction="/officer-search/search" style="width: 96px; text-align: center; margin-bottom: 48px">
+    </div>
+  </form>
+  <div class="results">
+
+
+    <table id="results-table" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+        <thead>
+            <tr class="headers">
+                <th id="division">Division</th>
+                <th id="ldu">LDU Cluster</th>
+                <th id="team">Team</th>
+                <th id="surname">Surname</th>
+                <th id="forename">Forename</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if (results) %}
+                {% for result in results %}
+                <tr>
+                    <td>{{ result.region }}</td>
+                    <td>{{ result.ldu }}</td>
+                    <td>{{ result.team }}</td>
+                    <td>{{ result.surname }}</td>
+                    <td>{{ result.forename }}</td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+  </div>
+</main>
+<script src="/public/javascripts/vendor/jquery.min.js"></script>
+<script src="{{ asset_path }}javascripts/datatables.min.js"></script>
+<script src="{{ asset_path }}javascripts/search-data.js"></script>
+{% endblock %}

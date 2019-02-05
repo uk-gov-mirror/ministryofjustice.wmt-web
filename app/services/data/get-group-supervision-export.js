@@ -10,7 +10,9 @@ module.exports = function (id, type) {
     'CRN',
     'omName',
     'omGradeCode',
-    'contact_description AS contactDescription'
+    'contact_description AS contactDescription',
+    'contactCode',
+    'points'
   ]
 
   var whereString
