@@ -78,6 +78,7 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     columnStart = 22
     rowStart = rowStart + 1
   }
+  inputTotals(ws, rowStart)
 }
 
 var inputOffenderManagerData = function (ws, offenderManager, row) {
@@ -97,8 +98,8 @@ var totalPointsFormula = function (row) {
 
 var inputFormulas = function (ws, row) {
   ws.cell(row, 3).formula('=SUM(V' + row + ':HE' + row + ')')
-  ws.cell(row, 9).formula('=IFERROR((H' + row + '/R' + row + ')*100,0)')
-  ws.cell(row, 11).formula('=IFERROR((J' + row + '/R' + row + ')*100,0)')
+  ws.cell(row, 9).formula('=IFERROR((H' + row + '/R' + row + ')*100,0)').style(this.percentageStyle)
+  ws.cell(row, 11).formula('=IFERROR((J' + row + '/R' + row + ')*100,0)').style(this.percentageStyle)
   ws.cell(row, 12).formula('=HF' + row + '*HF4')
   ws.cell(row, 13).formula('=HG' + row + '*HG4')
   ws.cell(row, 14).formula('=HH' + row + '*HH4')
@@ -108,10 +109,60 @@ var inputFormulas = function (ws, row) {
   ws.cell(row, 18).formula('=SUM(H' + row + ',J' + row + ',L' + row + ':Q' + row + ')')
   ws.cell(row, 19).formula('=IFERROR(((D' + row + ' * (E' + row + '/F' + row + '))*((E' + row + '-G' + row + ')/E' + row + ')),0)')
   ws.cell(row, 20).formula('=S' + row + '-R' + row)
-  ws.cell(row, 21).formula('=IFERROR(R' + row + '/S' + row + ',0)')
+  ws.cell(row, 21).formula('=IFERROR(R' + row + '/S' + row + ',0)').style(this.percentageStyle)
 }
 
-module.exports = function (ws, scenarioData, typeTierGroupLength, tiersPerType) {
-  // need to add name, contracted hours etc
+var inputTotals = function (ws, row) {
+  var dataEndRow = row - 1
+  ws.cell(row, 1).string('Total / Average')
+  ws.cell(row, 3).formula('=SUM(C' + 5 +':C' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 4).formula('=AVERAGE(D' + 5 +':D' + dataEndRow + ')').style(this.averageStyle)
+  ws.cell(row, 5).formula('=AVERAGE(E' + 5 +':E' + dataEndRow + ')').style(this.averageStyle)
+  ws.cell(row, 6).formula('=AVERAGE(F' + 5 +':F' + dataEndRow + ')').style(this.averageStyle)
+  ws.cell(row, 7).formula('=SUM(G' + 5 +':G' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 8).formula('=SUM(H' + 5 +':H' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 9).formula('=AVERAGE(I' + 5 +':I' + dataEndRow + ')').style(this.averagePercentageStyle)
+  ws.cell(row, 10).formula('=SUM(J' + 5 +':J' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 11).formula('=AVERAGE(K' + 5 +':K' + dataEndRow + ')').style(this.averagePercentageStyle)
+  ws.cell(row, 12).formula('=SUM(L' + 5 +':L' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 13).formula('=SUM(M' + 5 +':M' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 14).formula('=SUM(N' + 5 +':N' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 15).formula('=SUM(O' + 5 +':O' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 16).formula('=SUM(P' + 5 +':P' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 17).formula('=SUM(Q' + 5 +':Q' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 18).formula('=SUM(R' + 5 +':R' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 19).formula('=SUM(S' + 5 +':S' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 20).formula('=SUM(T' + 5 +':T' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 21).formula('=AVERAGE(U' + 5 +':U' + dataEndRow + ')').style(this.averagePercentageStyle)
+  ws.cell(row, 22).formula('=SUM(V' + 5 +':V' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 23).formula('=SUM(W' + 5 +':W' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 24).formula('=SUM(X' + 5 +':X' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 25).formula('=SUM(Y' + 5 +':Y' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 26).formula('=SUM(Z' + 5 +':Z' + dataEndRow + ')').style(this.sumStyle)
+  
+  var columnNo = 27
+  var firstLetter
+  var secondLetter
+  for (firstLetter = 0; firstLetter < 7; firstLetter++) {
+    for (secondLetter = 0; secondLetter < 26; secondLetter++) {
+      var char1 = String.fromCharCode(firstLetter + 65)
+      var char2 = String.fromCharCode(secondLetter + 65)
+      ws.cell(row, columnNo).formula('=SUM(' + char1 + char2 + 5 +':' + char1 + char2 + dataEndRow + ')').style(this.sumStyle)
+      columnNo = columnNo + 1
+    }
+  }
+  for (secondLetter = 0; secondLetter < 10; secondLetter++) {
+    var char1 = 'H'
+    var char2 = String.fromCharCode(secondLetter + 65)
+    ws.cell(row, columnNo).formula('=SUM(' + char1 + char2 + 5 +':' + char1 + char2 + dataEndRow + ')').style(this.sumStyle)
+    columnNo = columnNo + 1
+  }
+}
+
+module.exports = function (ws, scenarioData, typeTierGroupLength, tiersPerType, sumStyle, averageStyle, averagePercentageStyle, percentageStyle) {
+  this.sumStyle = sumStyle
+  this.averageStyle = averageStyle
+  this.averagePercentageStyle = averagePercentageStyle
+  this.percentageStyle = percentageStyle
   inputCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType)
 }

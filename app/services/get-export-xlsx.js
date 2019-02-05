@@ -20,6 +20,48 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
       size: 12
     }
   })
+  
+  var sumStyle = wb.createStyle({
+    font: {
+      size: 12,
+      color: '#FFFFFF'
+    },
+    fill: {
+      type: 'pattern',
+      patternType: 'solid',
+      fgColor: '#0000FF'
+    }
+  })
+
+  var averageStyle = wb.createStyle({
+    font: {
+      size: 12,
+    },
+    fill: {
+      type: 'pattern',
+      patternType: 'solid',
+      fgColor: '#FFFF00'
+    }
+  })
+
+  var averagePercentageStyle = wb.createStyle({
+    font: {
+      size: 12,
+    },
+    numberFormat: '#.00%; -#.00%; 0%',
+    fill: {
+      type: 'pattern',
+      patternType: 'solid',
+      fgColor: '#FFFF00'
+    }
+  })
+
+  var percentageStyle = wb.createStyle({
+    font: {
+      size: 12,
+    },
+    numberFormat: '#.00%; -#.00%; 0%',
+  })
 
   mergeCells(ws, caseStyle)
   var start = 22
@@ -32,7 +74,7 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   setTierWeightings(ws, caseStyle, caseData)
   setTierWeightings(ws, caseStyle, t2aCaseData)
   setReportWeightings(ws, caseStyle, caseData)
-  inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType)
+  inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType, sumStyle, averageStyle, averagePercentageStyle, percentageStyle)
   return wb
 }
 
