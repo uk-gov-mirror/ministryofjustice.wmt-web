@@ -20,7 +20,7 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
       size: 12
     }
   })
-  
+
   var sumStyle = wb.createStyle({
     font: {
       size: 12,
@@ -35,7 +35,7 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
 
   var averageStyle = wb.createStyle({
     font: {
-      size: 12,
+      size: 12
     },
     fill: {
       type: 'pattern',
@@ -46,7 +46,7 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
 
   var averagePercentageStyle = wb.createStyle({
     font: {
-      size: 12,
+      size: 12
     },
     numberFormat: '#.00%; -#.00%; 0%',
     fill: {
@@ -58,9 +58,9 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
 
   var percentageStyle = wb.createStyle({
     font: {
-      size: 12,
+      size: 12
     },
-    numberFormat: '#.00%; -#.00%; 0%',
+    numberFormat: '#.00%; -#.00%; 0%'
   })
 
   mergeCells(ws, caseStyle)
