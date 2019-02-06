@@ -1,7 +1,7 @@
 const knex = require('../../../knex').web
 const Scenario = require('../domain/scenario')
 
-module.exports = function () {
+module.exports = function (id, organisationLevel) {
   var columns = [
     'region_name',
     'ldu_name',
@@ -37,6 +37,7 @@ module.exports = function () {
   var scenarioArray = []
   return knex('scenario_view')
     .columns(columns)
+    .where(organisationLevel + '_id', id)
     .then(function (results) {
       scenarioArray = groupScenarioData(results)
       return scenarioArray

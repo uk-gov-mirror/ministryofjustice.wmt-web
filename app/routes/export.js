@@ -3,13 +3,14 @@ const getSubNav = require('../services/get-sub-nav')
 const organisationUnit = require('../constants/organisation-unit')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
-const workloadTypes = require('../../app/constants/workload-type')
+const workloadTypes = require('../constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const getArmsExport = require('../services/data/get-arms-export')
 const getCMSExport = require('../services/data/get-cms-export')
 const getCaseDetailsExport = require('../services/data/get-case-details-export')
 const getGroupSupervisionExport = require('../services/data/get-group-supervision-export')
+const getScenarioExport = require('../services/get-scenario')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 
@@ -75,6 +76,7 @@ module.exports = function (router) {
     var caseDetailsPromise = getCaseDetailsExport(id, organisationLevel)
     var groupSupervisionPromise = getGroupSupervisionExport(id, organisationLevel)
     var cmsPromise = getCMSExport(id, organisationLevel)
+    var scenarioPromise = getScenarioExport(id, organisationLevel)
 
     var tabType
 
@@ -95,6 +97,9 @@ module.exports = function (router) {
         exportPromise = groupSupervisionPromise
         tabType = tabs.EXPORT.GROUP_SUPERVISION_EXPORT
         break
+      case '5':
+        exportPromise = scenarioPromise
+        break
       default:
         exportPromise = Promise.resolve()
     }
@@ -102,14 +107,19 @@ module.exports = function (router) {
     return getLastUpdated().then(function (result) {
       lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
       return exportPromise.then(function (results) {
-        formatResults(results, tabType)
-        result.date = lastUpdated
-        results.title = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY')
-        let dateFileName = null
-        dateFileName = result.title
-        var exportCsv = getExportCsv(dateFileName, results, tabType)
-        res.attachment(exportCsv.filename)
-        res.send(exportCsv.csv)
+        if (radioButton === '5') {
+          var scenarioFileName = organisationLevel + '_Scenario_' + dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY') + '.xlsx'
+          results.write(scenarioFileName, res)
+        } else {
+          formatResults(results, tabType)
+          result.date = lastUpdated
+          results.title = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY')
+          let dateFileName = null
+          dateFileName = result.title
+          var exportCsv = getExportCsv(dateFileName, results, tabType)
+          res.attachment(exportCsv.filename)
+          res.send(exportCsv.csv)
+        }
       })
     }).catch(function (error) {
       next(error)
