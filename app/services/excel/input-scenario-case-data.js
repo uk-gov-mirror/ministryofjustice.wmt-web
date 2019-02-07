@@ -107,8 +107,8 @@ var inputFormulas = function (ws, row) {
   ws.cell(row, 16).formula('=HJ' + row + '*HJ4')
   ws.cell(row, 17).formula(totalPointsFormula(row))
   ws.cell(row, 18).formula('=SUM(H' + row + ',J' + row + ',L' + row + ':Q' + row + ')')
-  ws.cell(row, 19).formula('=IFERROR(((D' + row + ' * (E' + row + '/F' + row + '))*((E' + row + '-G' + row + ')/E' + row + ')),0)')
-  ws.cell(row, 20).formula('=S' + row + '-R' + row)
+  ws.cell(row, 19).formula('=IFERROR(((D' + row + ' * (E' + row + '/F' + row + '))*((E' + row + '-G' + row + ')/E' + row + ')),0)').style(this.roundedStyle)
+  ws.cell(row, 20).formula('=S' + row + '-R' + row).style(this.roundedStyle)
   ws.cell(row, 21).formula('=IFERROR(R' + row + '/S' + row + ',0)').style(this.percentageStyle)
 }
 
@@ -133,7 +133,7 @@ var inputTotals = function (ws, row) {
   ws.cell(row, 18).formula('=SUM(R' + 5 + ':R' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 19).formula('=SUM(S' + 5 + ':S' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 20).formula('=SUM(T' + 5 + ':T' + dataEndRow + ')').style(this.sumStyle)
-  ws.cell(row, 21).formula('=AVERAGE(U' + 5 + ':U' + dataEndRow + ')').style(this.averagePercentageStyle)
+  ws.cell(row, 21).formula('=(R' + row + '/S' + row + ')').style(this.averagePercentageStyle)
   ws.cell(row, 22).formula('=SUM(V' + 5 + ':V' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 23).formula('=SUM(W' + 5 + ':W' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 24).formula('=SUM(X' + 5 + ':X' + dataEndRow + ')').style(this.sumStyle)
@@ -161,10 +161,11 @@ var inputTotals = function (ws, row) {
   }
 }
 
-module.exports = function (ws, scenarioData, typeTierGroupLength, tiersPerType, sumStyle, averageStyle, averagePercentageStyle, percentageStyle) {
+module.exports = function (ws, scenarioData, typeTierGroupLength, tiersPerType, sumStyle, averageStyle, averagePercentageStyle, percentageStyle, roundedStyle) {
   this.sumStyle = sumStyle
   this.averageStyle = averageStyle
   this.averagePercentageStyle = averagePercentageStyle
   this.percentageStyle = percentageStyle
+  this.roundedStyle = roundedStyle
   inputCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType)
 }

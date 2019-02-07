@@ -48,7 +48,7 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
     font: {
       size: 12
     },
-    numberFormat: '#.00%; -#.00%; 0%',
+    numberFormat: '#%; -#%; 0%',
     fill: {
       type: 'pattern',
       patternType: 'solid',
@@ -60,7 +60,14 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
     font: {
       size: 12
     },
-    numberFormat: '#.00%; -#.00%; 0%'
+    numberFormat: '#%; -#%; 0%'
+  })
+
+  var roundedStyle = wb.createStyle({
+    font: {
+      size: 12
+    },
+    numberFormat: '#; -#; 0'
   })
 
   mergeCells(ws, caseStyle)
@@ -74,7 +81,7 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   setTierWeightings(ws, caseStyle, caseData)
   setTierWeightings(ws, caseStyle, t2aCaseData)
   setReportWeightings(ws, caseStyle, caseData)
-  inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType, sumStyle, averageStyle, averagePercentageStyle, percentageStyle)
+  inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType, sumStyle, averageStyle, averagePercentageStyle, percentageStyle, roundedStyle)
   return wb
 }
 
