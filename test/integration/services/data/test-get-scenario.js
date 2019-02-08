@@ -11,7 +11,7 @@ describe('services/data/get-scenario team', function () {
     })
   })
   it('should retrieve all 5 Scenario Objects for HMPPS > Division 1 > LDU Cluster 1 > Team 1', function () {
-      expect(scenarioData.length).to.eql(5)
+    expect(scenarioData.length).to.eql(5)
   })
   it('Each Licence Case Numbers Array should contain 8 objects', function () {
     scenarioData.forEach(function (scenario) {
@@ -37,7 +37,7 @@ describe('services/data/get-scenario ldu', function () {
     })
   })
   it('should retrieve all 5 Scenario Objects for HMPPS > Division 1 > LDU Cluster 1', function () {
-      expect(scenarioData.length).to.eql(10)
+    expect(scenarioData.length).to.eql(10)
   })
   it('Each Licence Case Numbers Array should contain 8 objects', function () {
     scenarioData.forEach(function (scenario) {
@@ -63,7 +63,7 @@ describe('services/data/get-scenario division', function () {
     })
   })
   it('should retrieve all 5 Scenario Objects for HMPPS > Division 1', function () {
-      expect(scenarioData.length).to.eql(10)
+    expect(scenarioData.length).to.eql(10)
   })
   it('Each Licence Case Numbers Array should contain 8 objects', function () {
     scenarioData.forEach(function (scenario) {

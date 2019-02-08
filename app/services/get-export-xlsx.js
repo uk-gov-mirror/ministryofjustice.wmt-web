@@ -33,6 +33,19 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
     }
   })
 
+  var roundedSumStyle = wb.createStyle({
+    font: {
+      size: 12,
+      color: '#FFFFFF'
+    },
+    fill: {
+      type: 'pattern',
+      patternType: 'solid',
+      fgColor: '#0000FF'
+    },
+    numberFormat: '#; -#; 0'
+  })
+
   var averageStyle = wb.createStyle({
     font: {
       size: 12
@@ -81,7 +94,7 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   setTierWeightings(ws, caseStyle, caseData)
   setTierWeightings(ws, caseStyle, t2aCaseData)
   setReportWeightings(ws, caseStyle, caseData)
-  inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType, sumStyle, averageStyle, averagePercentageStyle, percentageStyle, roundedStyle)
+  inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType, sumStyle, averageStyle, averagePercentageStyle, percentageStyle, roundedStyle, roundedSumStyle)
   return wb
 }
 
@@ -142,16 +155,16 @@ var setTierWeightings = function (ws, caseStyle, points) {
   for (i = 0; i < 24; i++) {
     switch (i % 8) {
       case 0:
-        ws.cell(4, start).number(0).style(caseStyle)
-        ws.cell(4, start + 1).number(0).style(caseStyle)
-        ws.cell(4, start + 2).number(0).style(caseStyle)
-        ws.cell(4, start + 3).number(0).style(caseStyle)
+        ws.cell(4, start).number(0)
+        ws.cell(4, start + 1).number(0)
+        ws.cell(4, start + 2).number(0)
+        ws.cell(4, start + 3).number(0)
         break
       default:
-        ws.cell(4, start).number(points[keys[count]]).style(caseStyle)
-        ws.cell(4, start + 1).number(0 - points[keys[count]]).style(caseStyle)
-        ws.cell(4, start + 2).number(0).style(caseStyle)
-        ws.cell(4, start + 3).number(0 - points[keys[count]]).style(caseStyle)
+        ws.cell(4, start).number(points[keys[count]])
+        ws.cell(4, start + 1).number(0 - points[keys[count]])
+        ws.cell(4, start + 2).number(0)
+        ws.cell(4, start + 3).number(0 - points[keys[count]])
         count = count + 1
         break
     }
@@ -160,9 +173,9 @@ var setTierWeightings = function (ws, caseStyle, points) {
 }
 
 var setReportWeightings = function (ws, caseStyle, points) {
-  ws.cell(4, 214).number(points['sdr']).style(caseStyle)
-  ws.cell(4, 215).number(points['sdrConversion']).style(caseStyle)
-  ws.cell(4, 216).number(points['parom']).style(caseStyle)
-  ws.cell(4, 217).number(points['weightingArmsCommunity'] * armsCommMultiplier).style(caseStyle)
-  ws.cell(4, 218).number(points['weightingArmsLicense'] * armsLicMultiplier).style(caseStyle)
+  ws.cell(4, 214).number(points['sdr'])
+  ws.cell(4, 215).number(points['sdrConversion'])
+  ws.cell(4, 216).number(points['parom'])
+  ws.cell(4, 217).number(points['weightingArmsCommunity'] * armsCommMultiplier)
+  ws.cell(4, 218).number(points['weightingArmsLicense'] * armsLicMultiplier)
 }
