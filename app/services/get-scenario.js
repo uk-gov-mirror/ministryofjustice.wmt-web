@@ -7,7 +7,7 @@ module.exports = function (id, organisationLevel) {
     return workloadPointsService(false).then(function (result) {
       return workloadPointsService(true).then(function (t2aResult) {
         var wb = getExportXlsx(result, t2aResult, scenarioData)
-          return wb
+        return wb
       })
     })
   })
