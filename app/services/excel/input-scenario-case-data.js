@@ -17,56 +17,38 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     for (var i = 0; i < tiersPerType; i++) {
       var casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
-      ws.cell(rowStart, columnStart).number(casesForThisTier.totalCases)
-      ws.cell(rowStart, columnStart + 1).number(casesForThisTier.warrantsTotal)
-      ws.cell(rowStart, columnStart + 2).number(casesForThisTier.UPW)
-      ws.cell(rowStart, columnStart + 3).number(casesForThisTier.overdueTerminationsTotal)
+      setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
       columnStart = columnStart + typeTierGroupLength
     }
     for (i = 0; i < tiersPerType; i++) {
       casesForThisTier = c.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
-      ws.cell(rowStart, columnStart).number(casesForThisTier.totalCases)
-      ws.cell(rowStart, columnStart + 1).number(casesForThisTier.warrantsTotal)
-      ws.cell(rowStart, columnStart + 2).number(casesForThisTier.UPW)
-      ws.cell(rowStart, columnStart + 3).number(casesForThisTier.overdueTerminationsTotal)
+      setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
       columnStart = columnStart + typeTierGroupLength
     }
     for (i = 0; i < tiersPerType; i++) {
       casesForThisTier = c.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
-      ws.cell(rowStart, columnStart).number(casesForThisTier.totalCases)
-      ws.cell(rowStart, columnStart + 1).number(casesForThisTier.warrantsTotal)
-      ws.cell(rowStart, columnStart + 2).number(casesForThisTier.UPW)
-      ws.cell(rowStart, columnStart + 3).number(casesForThisTier.overdueTerminationsTotal)
+      setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
       columnStart = columnStart + typeTierGroupLength
     }
     // t2a
     for (i = 0; i < tiersPerType; i++) {
       casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
-      ws.cell(rowStart, columnStart).number(casesForThisTier.t2aTotalCases)
-      ws.cell(rowStart, columnStart + 1).number(casesForThisTier.t2aWarrantsTotal)
-      ws.cell(rowStart, columnStart + 2).number(casesForThisTier.t2aUPW)
-      ws.cell(rowStart, columnStart + 3).number(casesForThisTier.t2aOverdueTerminationsTotal)
+      setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
       columnStart = columnStart + typeTierGroupLength
     }
     for (i = 0; i < tiersPerType; i++) {
       casesForThisTier = c.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
-      ws.cell(rowStart, columnStart).number(casesForThisTier.t2aTotalCases)
-      ws.cell(rowStart, columnStart + 1).number(casesForThisTier.t2aWarrantsTotal)
-      ws.cell(rowStart, columnStart + 2).number(casesForThisTier.t2aUPW)
-      ws.cell(rowStart, columnStart + 3).number(casesForThisTier.t2aOverdueTerminationsTotal)
+      setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
       columnStart = columnStart + typeTierGroupLength
     }
     for (i = 0; i < tiersPerType; i++) {
       casesForThisTier = c.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
-      ws.cell(rowStart, columnStart).number(casesForThisTier.t2aTotalCases)
-      ws.cell(rowStart, columnStart + 1).number(casesForThisTier.t2aWarrantsTotal)
-      ws.cell(rowStart, columnStart + 2).number(casesForThisTier.t2aUPW)
-      ws.cell(rowStart, columnStart + 3).number(casesForThisTier.t2aOverdueTerminationsTotal)
+      setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
       columnStart = columnStart + typeTierGroupLength
     }
     // reports to go here
@@ -183,6 +165,20 @@ var inputTotals = function (ws, row) {
     char2 = String.fromCharCode(secondLetter + 65)
     ws.cell(row, columnNo).formula('=SUM(' + char1 + char2 + 5 + ':' + char1 + char2 + dataEndRow + ')').style(this.sumStyle)
     columnNo = columnNo + 1
+  }
+}
+
+var setTierTotals = function (ws, rowStart, columnStart, casesForThisTier, t2a) {
+  if (t2a) {
+    ws.cell(rowStart, columnStart).number(casesForThisTier.t2aTotalCases)
+    ws.cell(rowStart, columnStart + 1).number(casesForThisTier.t2aWarrantsTotal)
+    ws.cell(rowStart, columnStart + 2).number(casesForThisTier.t2aUPW)
+    ws.cell(rowStart, columnStart + 3).number(casesForThisTier.t2aOverdueTerminationsTotal)
+  } else {
+    ws.cell(rowStart, columnStart).number(casesForThisTier.totalCases)
+    ws.cell(rowStart, columnStart + 1).number(casesForThisTier.warrantsTotal)
+    ws.cell(rowStart, columnStart + 2).number(casesForThisTier.UPW)
+    ws.cell(rowStart, columnStart + 3).number(casesForThisTier.overdueTerminationsTotal)
   }
 }
 
