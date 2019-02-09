@@ -1,5 +1,4 @@
 const knex = require('../../../knex').web
-const Scenario = require('../domain/scenario')
 
 module.exports = function (id, organisationLevel) {
   var columns = [
@@ -34,31 +33,8 @@ module.exports = function (id, organisationLevel) {
     'sdr_conversions_total',
     'paroms_total'
   ]
-  var scenarioArray = []
+
   return knex('scenario_view')
     .columns(columns)
     .where(organisationLevel + '_id', id)
-    .then(function (results) {
-      scenarioArray = groupScenarioData(results)
-      return scenarioArray
-    })
-}
-
-var groupScenarioData = function (results) {
-  var scenarioMap = new Map()
-  var localScenarioArray = []
-  results.forEach(function (result) {
-    scenarioMap.set(result['workload_id'], [])
-  })
-  results.forEach(function (result) {
-    var temporaryMappedItems = []
-    temporaryMappedItems = scenarioMap.get(result['workload_id'])
-    temporaryMappedItems.push(result)
-    scenarioMap.set(result['workload_id'], temporaryMappedItems)
-  })
-  for (var value of scenarioMap.values()) {
-    var scenarioObj = new Scenario(value)
-    localScenarioArray.push(scenarioObj)
-  }
-  return localScenarioArray
 }
