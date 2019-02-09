@@ -719,8 +719,7 @@ module.exports =
   sdr_total: 0,
   sdr_conversions_total: 0,
   paroms_total: 0 },
-  //
-  { region_name: 'NPS London',
+{ region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
