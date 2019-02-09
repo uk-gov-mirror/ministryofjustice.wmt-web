@@ -24,13 +24,13 @@ describe('services/get-export-xlsx', function () {
 
     it('with the correct workload points configuration for t2a and non-t2a', function () {
       var columnNo = 22
-      
+
       workloadPointsTester(workloadPointsConfig, workloadPointsKeys, columnNo)
       columnNo = 118
       workloadPointsTester(t2aWorkloadPointsConfig, t2aWorkloadPointsKeys, columnNo)
-      
-      cell = ws.cell(5, 1)
-      thisCell = ws.cells[cell.excelRefs[0]]
+
+      var cell = ws.cell(5, 1)
+      var thisCell = ws.cells[cell.excelRefs[0]]
       log.info(workbook.sharedStrings[thisCell.v])
     })
 
@@ -90,7 +90,7 @@ describe('services/get-export-xlsx', function () {
   })
 })
 
-var workloadPointsTester = function(arrayToTest, keysToTest, columnNo) {
+var workloadPointsTester = function (arrayToTest, keysToTest, columnNo) {
   var rowNo = 4
   var arrayIndex = 0
   for (let i = 0; i < 24; i++) {
@@ -111,14 +111,14 @@ var workloadPointsTester = function(arrayToTest, keysToTest, columnNo) {
 }
 
 var getCellValue = function (rowNo, columnNo) {
-  cell = ws.cell(rowNo, columnNo)
-  thisCell = ws.cells[cell.excelRefs[0]]
+  var cell = ws.cell(rowNo, columnNo)
+  var thisCell = ws.cells[cell.excelRefs[0]]
   return thisCell.v
 }
 
 var getCellFormula = function (rowNo, columnNo) {
-  cell = ws.cell(rowNo, columnNo)
-  thisCell = ws.cells[cell.excelRefs[0]]
+  var cell = ws.cell(rowNo, columnNo)
+  var thisCell = ws.cells[cell.excelRefs[0]]
   return thisCell.f
 }
 
