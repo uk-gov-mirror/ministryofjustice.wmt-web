@@ -69,6 +69,18 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
     }
   })
 
+  var cmsGsPercentageStyle = wb.createStyle({
+    font: {
+      size: 12
+    },
+    numberFormat: '0.0%; -0.0%; 0%',
+    fill: {
+      type: 'pattern',
+      patternType: 'solid',
+      fgColor: '#FFFF00'
+    }
+  })
+
   var percentageStyle = wb.createStyle({
     font: {
       size: 12
@@ -94,7 +106,7 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   setTierWeightings(ws, caseStyle, caseData)
   setTierWeightings(ws, caseStyle, t2aCaseData)
   setReportWeightings(ws, caseStyle, caseData)
-  inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType, sumStyle, averageStyle, averagePercentageStyle, percentageStyle, roundedStyle, roundedSumStyle)
+  inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType, sumStyle, averageStyle, averagePercentageStyle, percentageStyle, roundedStyle, roundedSumStyle, cmsGsPercentageStyle)
   return wb
 }
 

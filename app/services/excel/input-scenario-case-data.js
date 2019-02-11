@@ -105,8 +105,8 @@ var totalPointsFormula = function (row) {
 // Add formulas to Cells C to U (Data below "Total Cases" Column to "Current % Capacity" Column in produced spreadsheet)
 var inputFormulas = function (ws, row) {
   ws.cell(row, 3).formula('=SUM(V' + row + ':HE' + row + ')') // Total Cases
-  ws.cell(row, 9).formula('=IFERROR((H' + row + '/R' + row + ')*100,0)').style(this.percentageStyle) // CMS %
-  ws.cell(row, 11).formula('=IFERROR((J' + row + '/R' + row + ')*100,0)').style(this.percentageStyle) // GS %
+  ws.cell(row, 9).formula('=IFERROR((H' + row + '/R' + row + '),0)').style(this.percentageStyle) // CMS %
+  ws.cell(row, 11).formula('=IFERROR((J' + row + '/R' + row + '),0)').style(this.percentageStyle) // GS %
   ws.cell(row, 12).formula('=HF' + row + '*HF4') // SDR Points
   ws.cell(row, 13).formula('=HG' + row + '*HG4') // FDR Points
   ws.cell(row, 14).formula('=HH' + row + '*HH4') // Parom Points
@@ -124,13 +124,13 @@ var inputTotals = function (ws, row) {
   ws.cell(row, 1).string('Total / Average')
   ws.cell(row, 3).formula('=SUM(C' + 5 + ':C' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 4).formula('=AVERAGE(D' + 5 + ':D' + dataEndRow + ')').style(this.averageStyle)
-  ws.cell(row, 5).formula('=AVERAGE(E' + 5 + ':E' + dataEndRow + ')').style(this.averageStyle)
-  ws.cell(row, 6).formula('=AVERAGE(F' + 5 + ':F' + dataEndRow + ')').style(this.averageStyle)
+  ws.cell(row, 5).formula('=SUM(E' + 5 + ':E' + dataEndRow + ')').style(this.sumStyle)
+  ws.cell(row, 6).formula('=SUM(F' + 5 + ':F' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 7).formula('=SUM(G' + 5 + ':G' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 8).formula('=SUM(H' + 5 + ':H' + dataEndRow + ')').style(this.sumStyle)
-  ws.cell(row, 9).formula('=AVERAGE(I' + 5 + ':I' + dataEndRow + ')').style(this.averagePercentageStyle)
+  ws.cell(row, 9).formula('=AVERAGE(I' + 5 + ':I' + dataEndRow + ')').style(this.cmsGsPercentageStyle)
   ws.cell(row, 10).formula('=SUM(J' + 5 + ':J' + dataEndRow + ')').style(this.sumStyle)
-  ws.cell(row, 11).formula('=AVERAGE(K' + 5 + ':K' + dataEndRow + ')').style(this.averagePercentageStyle)
+  ws.cell(row, 11).formula('=AVERAGE(K' + 5 + ':K' + dataEndRow + ')').style(this.cmsGsPercentageStyle)
   ws.cell(row, 12).formula('=SUM(L' + 5 + ':L' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 13).formula('=SUM(M' + 5 + ':M' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 14).formula('=SUM(N' + 5 + ':N' + dataEndRow + ')').style(this.sumStyle)
@@ -182,12 +182,13 @@ var setTierTotals = function (ws, rowStart, columnStart, casesForThisTier, t2a) 
   }
 }
 
-module.exports = function (ws, scenarioData, typeTierGroupLength, tiersPerType, sumStyle, averageStyle, averagePercentageStyle, percentageStyle, roundedStyle, roundedSumStyle) {
+module.exports = function (ws, scenarioData, typeTierGroupLength, tiersPerType, sumStyle, averageStyle, averagePercentageStyle, percentageStyle, roundedStyle, roundedSumStyle, cmsGsPercentageStyle) {
   this.sumStyle = sumStyle
   this.averageStyle = averageStyle
   this.averagePercentageStyle = averagePercentageStyle
   this.percentageStyle = percentageStyle
   this.roundedStyle = roundedStyle
   this.roundedSumStyle = roundedSumStyle
+  this.cmsGsPercentageStyle = cmsGsPercentageStyle
   inputCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType)
 }
