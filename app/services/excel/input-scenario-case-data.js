@@ -102,9 +102,13 @@ var totalPointsFormula = function (row) {
   return formula
 }
 
+var totalCasesFormula = function (row) {
+  return '=SUM(V' + row + ',Z' + row + ',AD' + row + ',AH' + row + ',AL' + row + ',AP' + row + ',AT' + row + ',AX' + row + ',BB' + row + ',BF' + row + ',BJ' + row + ',BN' + row + ',BR' + row + ',BV' + row + ',BZ' + row + ',CD' + row + ',CH' + row + ',CL' + row + ',CP' + row + ',CT' + row + ',CX' + row + ',DB' + row + ',DF' + row + ',DJ' + row + ',DN' + row + ',DR' + row + ',DV' + row + ',DZ' + row + ',ED' + row + ',EH' + row + ',EL' + row + ',EP' + row + ',ET' + row + ',EX' + row + ',FB' + row + ',FF' + row + ',FJ' + row + ',FN' + row + ',FR' + row + ',FV' + row + ',FZ' + row + ',GD' + row + ',GH' + row + ',GL' + row + ',GP' + row + ',GT' + row + ',GX' + row + ',HB' + row + ')'
+}
+
 // Add formulas to Cells C to U (Data below "Total Cases" Column to "Current % Capacity" Column in produced spreadsheet)
 var inputFormulas = function (ws, row) {
-  ws.cell(row, 3).formula('=SUM(V' + row + ':HE' + row + ')') // Total Cases
+  ws.cell(row, 3).formula(totalCasesFormula(row)) // Total Cases
   ws.cell(row, 9).formula('=IFERROR((H' + row + '/R' + row + '),0)').style(this.percentageStyle) // CMS %
   ws.cell(row, 11).formula('=IFERROR((J' + row + '/R' + row + '),0)').style(this.percentageStyle) // GS %
   ws.cell(row, 12).formula('=HF' + row + '*HF4') // SDR Points
@@ -128,9 +132,9 @@ var inputTotals = function (ws, row) {
   ws.cell(row, 6).formula('=SUM(F' + 5 + ':F' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 7).formula('=SUM(G' + 5 + ':G' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 8).formula('=SUM(H' + 5 + ':H' + dataEndRow + ')').style(this.sumStyle)
-  ws.cell(row, 9).formula('=AVERAGE(I' + 5 + ':I' + dataEndRow + ')').style(this.cmsGsPercentageStyle)
+  ws.cell(row, 9).formula('=IFERROR((H' + row + '/R' + row + '),0)').style(this.cmsGsPercentageStyle)
   ws.cell(row, 10).formula('=SUM(J' + 5 + ':J' + dataEndRow + ')').style(this.sumStyle)
-  ws.cell(row, 11).formula('=AVERAGE(K' + 5 + ':K' + dataEndRow + ')').style(this.cmsGsPercentageStyle)
+  ws.cell(row, 11).formula('=IFERROR((J' + row + '/R' + row + '),0)').style(this.cmsGsPercentageStyle)
   ws.cell(row, 12).formula('=SUM(L' + 5 + ':L' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 13).formula('=SUM(M' + 5 + ':M' + dataEndRow + ')').style(this.sumStyle)
   ws.cell(row, 14).formula('=SUM(N' + 5 + ':N' + dataEndRow + ')').style(this.sumStyle)
