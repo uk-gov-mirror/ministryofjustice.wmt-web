@@ -1,5 +1,4 @@
 const knex = require('../../../knex').web
-const log = require('../../logger')
 
 module.exports = function (surname) {
   var columns = [
