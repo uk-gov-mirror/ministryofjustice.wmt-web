@@ -41,7 +41,6 @@ var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
 
   if (organisationLevel === organisationConstant.TEAM.name) {
     workloadReports.forEach(function (workloadReport) {
-      log.info(workloadReport)
       var capacityBreakdownRow = buildCapacityBreakdownEntry(workloadReport)
       totals = addTotals(totals, capacityBreakdownRow)
       capacityBreakdown.push(buildCapacityBreakdownEntry(workloadReport))
