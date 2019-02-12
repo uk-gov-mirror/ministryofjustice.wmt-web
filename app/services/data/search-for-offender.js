@@ -9,6 +9,5 @@ module.exports = function (surname) {
     'ldu',
     'region'
   ]
-  log.info(knex('offender_manager_search_view').columns(columns).where('surname', surname).toString())
   return knex('offender_manager_search_view').columns(columns).where('surname', surname)
 }
