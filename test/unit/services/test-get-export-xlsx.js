@@ -9,7 +9,6 @@ var t2aWorkloadPointsKeys = Object.keys(workloadPointsConfig.t2aWorkloadPointsCo
 var scenarioObjects
 var workbook
 var ws
-const log = require('../../../app/logger')
 const xlsxForumlas = require('../../helpers/data/xlsx-test-data/xlsx-formulas')
 
 describe('services/get-export-xlsx', function () {
@@ -26,10 +25,6 @@ describe('services/get-export-xlsx', function () {
       workloadPointsTester(workloadPointsConfig.workloadPointsConfig, workloadPointsKeys, columnNo)
       columnNo = 118
       workloadPointsTester(workloadPointsConfig.t2aWorkloadPointsConfig, t2aWorkloadPointsKeys, columnNo)
-
-      var cell = ws.cell(5, 1)
-      var thisCell = ws.cells[cell.excelRefs[0]]
-      log.info(workbook.sharedStrings[thisCell.v])
     })
 
     it('with the correct totals for each tier', function () {
@@ -79,6 +74,16 @@ describe('services/get-export-xlsx', function () {
         rowStart++
         columnStart = 22
       })
+    })
+
+    it('with the correct names', function () {
+      expect(getCellString(5, 1)).to.eql(scenarioObjects[0].name)
+      expect(getCellString(6, 1)).to.eql(scenarioObjects[1].name)
+    })
+
+    it('with the correct grades', function () {
+      expect(getCellString(5, 2)).to.eql(scenarioObjects[0].grade)
+      expect(getCellString(6, 2)).to.eql(scenarioObjects[1].grade)
     })
 
     it('with the correct total points formulas', function () {
@@ -180,6 +185,11 @@ var getCellFormula = function (rowNo, columnNo) {
   return thisCell.f
 }
 
+var getCellString = function (rowNo, columnNo) {
+  var cell = ws.cell(rowNo, columnNo)
+  var thisCell = ws.cells[cell.excelRefs[0]]
+  return workbook.sharedStrings[thisCell.v]
+}
 var caseTotalsTester = function (rowStart, columnStart, casesForThisTier, t2a) {
   if (t2a) {
     expect(getCellValue(rowStart, columnStart)).to.eql(casesForThisTier.t2aTotalCases)
