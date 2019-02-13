@@ -16,5 +16,16 @@ module.exports = function (results) {
     var scenarioObj = new Scenario(value)
     scenarioArray.push(scenarioObj)
   }
+  scenarioArray.sort(sortScenarioArray)
   return scenarioArray
+}
+
+var sortScenarioArray = function(scenarioObj1, scenarioObj2) {
+  if (scenarioObj1.name.toUpperCase() > scenarioObj2.name.toUpperCase()) {
+    return 1
+  }
+  if (scenarioObj1.name.toUpperCase() < scenarioObj2.name.toUpperCase()) {
+    return -1
+  }
+  return 0
 }
