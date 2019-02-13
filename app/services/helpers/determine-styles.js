@@ -90,10 +90,10 @@ module.exports.determineWeightingStyle = function (columnNo, styles) {
     styleToApply = styles.t2aLicStyle
   } else if (columnNo >= t2aCusRange.start && columnNo <= t2aCusRange.end) {
     styleToApply = styles.t2aCusStyle
-  } else if (columnNo >= reportsRange.start && columnNo <= reportsRange.end){
+  } else if (columnNo >= reportsRange.start && columnNo <= reportsRange.end) {
     styleToApply = styles.reportsStyle
   } else {
     styleToApply = styles.caseStyle
   }
-  return styleToApply 
+  return styleToApply
 }

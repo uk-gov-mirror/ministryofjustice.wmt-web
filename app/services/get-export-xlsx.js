@@ -15,7 +15,7 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   var wb = new excel.Workbook()
   var ws = wb.addWorksheet('Sheet 1', {
     'sheetFormat': {
-      'defaultColWidth': 8,
+      'defaultColWidth': 8
     }
   })
   var styles = createStyles(wb)
