@@ -32,7 +32,7 @@ module.exports.TEAM_CASELOAD_CSV = {
 
 module.exports.ARMS_EXPORT_CSV = {
   filename: ('Test_Arms_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region Name","LDU Cluster","Team Name","Assessment Date","CRN","Offender Manager Name","Offender Manager Grade","Sentence Type","Release Date"\n' +
+  csv: '"Region Name","LDU Cluster","Team Name","Assessment Date","CRN","Offender Manager Name","Offender Manager Grade","Sentence Type","Sentence or Release Date"\n' +
     '"NPS North West","Cumbria","NPS - Carlisle 1","4-10-2018","CASEREF30134","A.N. Offender Manager CMBY478NPSM","PO","Licence","14-9-2018"\n' +
     '"NPS North West","Cumbria","NPS - Carlisle 1","9-10-2018","CASEREF30154","A.N. Offender Manager CMBY478NPSM","PO","Community","22-2-2017"\n' +
     '"NPS North West","Cumbria","NPS - Carlisle 1","28-9-2018","CASEREF30098","A.N. Offender Manager CMBE297NPSM","PO","Community","1-1-1800"\n' +
