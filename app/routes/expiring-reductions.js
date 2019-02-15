@@ -26,7 +26,7 @@ module.exports = function (router) {
       userId = req.user.userId
     }
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    return expiringReductionsService.getExpiringReductions(userId)
+    return expiringReductionsService(userId)
       .then(function (result) {
         return res.render('expiring-reductions', {
           title: result.title,

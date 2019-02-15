@@ -2,7 +2,7 @@ const getExpiringReductions = require('./data/get-expiring-reductions')
 const Link = require('./domain/link')
 const dateFormatter = require('./date-formatter')
 
-module.exports.getExpiringReductions = function (userId) {
+module.exports = function (userId) {
   var breadcrumbs = [
     new Link('Expiring Reductions', '/admin/expiring-reductions'),
     new Link('Admin', '/admin')
