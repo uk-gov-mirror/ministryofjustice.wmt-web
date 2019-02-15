@@ -11,6 +11,7 @@ var route
 var userRoleService
 var authorisationService
 var hasRoleStub = sinon.stub()
+var expiringReductionsStub = sinon.stub()
 
 var initaliseApp = function () {
   userRoleService = sinon.stub()
@@ -18,9 +19,11 @@ var initaliseApp = function () {
     assertUserAuthenticated: sinon.stub(),
     hasRole: hasRoleStub
   }
+  expiringReductionsStub = sinon.stub().resolves()
   route = proxyquire('../../../app/routes/expiring-reductions', {
     '../services/user-role-service': userRoleService,
-    '../authorisation': authorisationService
+    '../authorisation': authorisationService,
+    '../services/expiring-reductions-service': expiringReductionsStub
   })
   app = routeHelper.buildApp(route)
 }
