@@ -35,7 +35,7 @@
                 <td headers="reduction_hours">{{ reduction.hours }}</td>
                 <td headers="reduction_start_date">{{ reduction.startDate }}</td>
                 <td headers="reduction_end_date">{{ reduction.endDate }}</td>
-                <td><a href="/probation/offender-manager/{{ reduction.workloadOwnerId }}/edit-reduction?reductionId={{ reduction.reductionId }}">View</a></td>
+                <td><a href="/{{ reduction.workloadType }}/offender-manager/{{ reduction.workloadOwnerId }}/edit-reduction?reductionId={{ reduction.reductionId }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
