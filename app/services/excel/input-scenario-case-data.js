@@ -52,27 +52,47 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
       columnStart = columnStart + typeTierGroupLength
     }
     // reports to go here
-    ws.cell(rowStart, columnStart).number(c.sdrTotal).style(this.styles.caseStyle)
-    ws.cell(rowStart, columnStart + 1).number(c.sdrConversionsTotal).style(this.styles.caseStyle)
-    ws.cell(rowStart, columnStart + 2).number(c.paromsTotal).style(this.styles.caseStyle)
-    ws.cell(rowStart, columnStart + 3).number(c.armsCommunity).style(this.styles.caseStyle)
-    ws.cell(rowStart, columnStart + 4).number(c.armsLicense).style(this.styles.caseStyle)
+    ws.cell(rowStart, columnStart).number(c.sdrTotal).style(this.styles.editableStyle)
+    ws.cell(rowStart, columnStart + 1).number(c.sdrConversionsTotal).style(this.styles.editableStyle)
+    ws.cell(rowStart, columnStart + 2).number(c.paromsTotal).style(this.styles.editableStyle)
+    ws.cell(rowStart, columnStart + 3).number(c.armsCommunity).style(this.styles.editableStyle)
+    ws.cell(rowStart, columnStart + 4).number(c.armsLicense).style(this.styles.editableStyle)
     columnStart = 22
     rowStart = rowStart + 1
   }
   inputBottomTotals(ws, rowStart)
+  var endRow = rowStart - 1
+  var lockedCellRanges = [
+    'C5:' + 'C' + endRow,
+    'I5:' + 'I' + endRow,
+    'J5:' + 'J' + endRow,
+    'K5:' + 'K' + endRow,
+    'L5:' + 'L' + endRow,
+    'M5:' + 'M' + endRow,
+    'N5:' + 'N' + endRow,
+    'O5:' + 'O' + endRow,
+    'P5:' + 'P' + endRow,
+    'Q5:' + 'Q' + endRow,
+    'R5:' + 'R' + endRow,
+    'S5:' + 'S' + endRow,
+    'T5:' + 'T' + endRow,
+    'U5:' + 'U' + endRow
+  ]
+  lockedCellRanges.forEach(function (lockedCellRange) {
+    lockCells(ws, lockedCellRange)
+  })
 }
 
 // Input Offender Manager Name, Grade to the left side of the produced spreadsheet
 var inputOffenderManagerData = function (ws, offenderManager, row) {
-  ws.cell(row, 1).string(offenderManager.name).style(this.styles.caseStyle)
-  ws.cell(row, 2).string(offenderManager.grade).style(this.styles.caseStyle)
-  ws.cell(row, 4).number(offenderManager.nominalTarget).style(this.styles.caseStyle)
-  ws.cell(row, 5).number(offenderManager.contractedHours).style(this.styles.caseStyle)
-  ws.cell(row, 6).number(offenderManager.defaultContractedHours).style(this.styles.caseStyle)
-  ws.cell(row, 7).number(offenderManager.reductionHours).style(this.styles.caseStyle)
-  ws.cell(row, 8).number(offenderManager.cms).style(this.styles.caseStyle)
-  ws.cell(row, 10).number(offenderManager.gs).style(this.styles.caseStyle)
+  ws.cell(row, 1).string(offenderManager.name).style(this.styles.editableStyle)
+  ws.cell(row, 2).string(offenderManager.grade).style(this.styles.editableStyle)
+  ws.cell(row, 4).number(offenderManager.nominalTarget).style(this.styles.editableStyle)
+  ws.cell(row, 5).number(offenderManager.contractedHours).style(this.styles.editableStyle)
+  ws.cell(row, 6).number(offenderManager.defaultContractedHours).style(this.styles.editableStyle)
+  ws.cell(row, 7).number(offenderManager.reductionHours).style(this.styles.editableStyle)
+  ws.cell(row, 8).number(offenderManager.cms).style(this.styles.editableStyle)
+  ws.cell(row, 10).number(offenderManager.gs).style(this.styles.editableStyle)
 }
 
 var totalPointsFormula = function (row) {
@@ -108,16 +128,16 @@ var totalCasesFormula = function (row) {
 
 // Add formulas to Cells C to U (Data below "Total Cases" Column to "Current % Capacity" Column in produced spreadsheet)
 var inputMainBodyFormulas = function (ws, row) {
-  ws.cell(row, 3).formula(totalCasesFormula(row)).style(this.styles.caseStyle) // Total Cases
+  ws.cell(row, 3).formula(totalCasesFormula(row)).style(this.styles.nonEditableCaseStyle) // Total Cases
   ws.cell(row, 9).formula('=IFERROR((H' + row + '/R' + row + '),0)').style(this.styles.percentageStyle) // CMS %
   ws.cell(row, 11).formula('=IFERROR((J' + row + '/R' + row + '),0)').style(this.styles.percentageStyle) // GS %
-  ws.cell(row, 12).formula('=HF' + row + '*HF4').style(this.styles.caseStyle) // SDR Points
-  ws.cell(row, 13).formula('=HG' + row + '*HG4').style(this.styles.caseStyle) // FDR Points
-  ws.cell(row, 14).formula('=HH' + row + '*HH4').style(this.styles.caseStyle) // Parom Points
-  ws.cell(row, 15).formula('=HI' + row + '*HI4').style(this.styles.caseStyle) // ARMS Comm Points
-  ws.cell(row, 16).formula('=HJ' + row + '*HJ4').style(this.styles.caseStyle) // ARMS Licence Points
-  ws.cell(row, 17).formula(totalPointsFormula(row)).style(this.styles.caseStyle) // Total Caseload Points
-  ws.cell(row, 18).formula('=SUM(H' + row + ',J' + row + ',L' + row + ':Q' + row + ')').style(this.styles.caseStyle) // Overall Total Points
+  ws.cell(row, 12).formula('=HF' + row + '*HF4').style(this.styles.nonEditableCaseStyle) // SDR Points
+  ws.cell(row, 13).formula('=HG' + row + '*HG4').style(this.styles.nonEditableCaseStyle) // FDR Points
+  ws.cell(row, 14).formula('=HH' + row + '*HH4').style(this.styles.nonEditableCaseStyle) // Parom Points
+  ws.cell(row, 15).formula('=HI' + row + '*HI4').style(this.styles.nonEditableCaseStyle) // ARMS Comm Points
+  ws.cell(row, 16).formula('=HJ' + row + '*HJ4').style(this.styles.nonEditableCaseStyle) // ARMS Licence Points
+  ws.cell(row, 17).formula(totalPointsFormula(row)).style(this.styles.nonEditableCaseStyle) // Total Caseload Points
+  ws.cell(row, 18).formula('=SUM(H' + row + ',J' + row + ',L' + row + ':Q' + row + ')').style(this.styles.nonEditableCaseStyle) // Overall Total Points
   ws.cell(row, 19).formula('=IFERROR(ROUNDDOWN(((D' + row + ' * (E' + row + '/F' + row + '))*((E' + row + '-G' + row + ')/E' + row + ')),0),0)').style(this.styles.roundedStyle) // Available Points
   ws.cell(row, 20).formula('=S' + row + '-R' + row).style(this.styles.roundedStyle) // Remaining Points
   ws.cell(row, 21).formula('=IFERROR(R' + row + '/S' + row + ',0)').style(this.styles.percentageStyle) // Current % Capacity
@@ -125,7 +145,8 @@ var inputMainBodyFormulas = function (ws, row) {
 
 var inputBottomTotals = function (ws, row) {
   var dataEndRow = row - 1
-  ws.cell(row, 1).string('Total / Average').style(this.styles.caseStyle)
+  ws.cell(row, 1).string('Total / Average').style(this.styles.totalAverageStyle)
+  ws.cell(row, 2).style(this.styles.totalAverageStyle)
   ws.cell(row, 3).formula('=SUM($C$' + 5 + ':C' + dataEndRow + ')').style(this.styles.sumStyle)
   ws.cell(row, 4).formula('=AVERAGE($D$' + 5 + ':D' + dataEndRow + ')').style(this.styles.averageStyle)
   ws.cell(row, 5).formula('=SUM($E$' + 5 + ':E' + dataEndRow + ')').style(this.styles.sumStyle)
@@ -174,16 +195,26 @@ var inputBottomTotals = function (ws, row) {
 
 var setTierTotals = function (ws, rowStart, columnStart, casesForThisTier, t2a) {
   if (t2a) {
-    ws.cell(rowStart, columnStart).number(casesForThisTier.t2aTotalCases).style(this.styles.caseStyle)
-    ws.cell(rowStart, columnStart + 1).number(casesForThisTier.t2aWarrantsTotal).style(this.styles.caseStyle)
-    ws.cell(rowStart, columnStart + 2).number(casesForThisTier.t2aUPW).style(this.styles.caseStyle)
-    ws.cell(rowStart, columnStart + 3).number(casesForThisTier.t2aOverdueTerminationsTotal).style(this.styles.caseStyle)
+    ws.cell(rowStart, columnStart).number(casesForThisTier.t2aTotalCases).style(this.styles.editableStyle)
+    ws.cell(rowStart, columnStart + 1).number(casesForThisTier.t2aWarrantsTotal).style(this.styles.editableStyle)
+    ws.cell(rowStart, columnStart + 2).number(casesForThisTier.t2aUPW).style(this.styles.editableStyle)
+    ws.cell(rowStart, columnStart + 3).number(casesForThisTier.t2aOverdueTerminationsTotal).style(this.styles.editableStyle)
   } else {
-    ws.cell(rowStart, columnStart).number(casesForThisTier.totalCases).style(this.styles.caseStyle)
-    ws.cell(rowStart, columnStart + 1).number(casesForThisTier.warrantsTotal).style(this.styles.caseStyle)
-    ws.cell(rowStart, columnStart + 2).number(casesForThisTier.UPW).style(this.styles.caseStyle)
-    ws.cell(rowStart, columnStart + 3).number(casesForThisTier.overdueTerminationsTotal).style(this.styles.caseStyle)
+    ws.cell(rowStart, columnStart).number(casesForThisTier.totalCases).style(this.styles.editableStyle)
+    ws.cell(rowStart, columnStart + 1).number(casesForThisTier.warrantsTotal).style(this.styles.editableStyle)
+    ws.cell(rowStart, columnStart + 2).number(casesForThisTier.UPW).style(this.styles.editableStyle)
+    ws.cell(rowStart, columnStart + 3).number(casesForThisTier.overdueTerminationsTotal).style(this.styles.editableStyle)
   }
+}
+
+const lockCells = (ws, range) => {
+  ws.addDataValidation({
+    type: 'textLength',
+    error: 'This cell is locked',
+    operator: 'equal',
+    sqref: range,
+    formulas: [''],
+  })
 }
 
 module.exports = function (ws, scenarioData, typeTierGroupLength, tiersPerType, styles) {
