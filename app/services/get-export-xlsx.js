@@ -37,6 +37,7 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   ws.row(4).freeze()
   ws.column(21).freeze()
   ws.column(21).setWidth(8)
+  ws.column(1).setWidth(20)
   setRowHeights(ws)
   return wb
 }
