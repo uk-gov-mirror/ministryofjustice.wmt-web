@@ -213,7 +213,7 @@ const lockCells = (ws, range) => {
     error: 'This cell is locked',
     operator: 'equal',
     sqref: range,
-    formulas: [''],
+    formulas: ['']
   })
 }
 

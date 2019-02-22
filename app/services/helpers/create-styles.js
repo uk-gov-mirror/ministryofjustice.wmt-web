@@ -15,7 +15,7 @@ module.exports = function (wb) {
   var lightGray = '#D3D3D3'
 
   var baseFontStyle = { size: defaultFontSize }
-  var baseMediumBorderStyle =  {
+  var baseMediumBorderStyle = {
     left: {
       style: 'medium',
       color: black
@@ -41,7 +41,7 @@ module.exports = function (wb) {
     outline: true
   }
 
-  var baseLightBorderStyle =  {
+  var baseLightBorderStyle = {
     left: {
       style: 'thin',
       color: black
