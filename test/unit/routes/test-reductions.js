@@ -148,7 +148,7 @@ describe('reductions route', function () {
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
         .send(successDataToPost)
-        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1')
+        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions')
     })
 
     it('should post the correct data and respond with 200 for existing reduction', function () {
@@ -157,7 +157,7 @@ describe('reductions route', function () {
       return superTest(app)
         .post(ADD_REDUCTION_POST_URL)
         .send(successDataToPost)
-        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1')
+        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions')
     })
 
     it('should post incorrect data and validation errors should be populated', function () {
@@ -176,7 +176,7 @@ describe('reductions route', function () {
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(successDataToPost)
-        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1')
+        .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions')
     })
 
     it('should post incorrect data and validation errors should be populated', function () {
