@@ -249,7 +249,8 @@ module.exports = function (wb) {
       patternType: patternType,
       fgColor: '#0000FF'
     },
-    numberFormat: '#; -#; 0'
+    numberFormat: '#; -#; 0',
+    border: baseMediumBorderStyle
   })
 
   var averageStyle = wb.createStyle({

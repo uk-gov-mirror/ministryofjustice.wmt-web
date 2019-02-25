@@ -70,13 +70,13 @@ module.exports.determineCaseStyle = function (header, styles) {
 
 module.exports.determineWeightingStyle = function (columnNo, styles) {
   var styleToApply
-  var commRange = { start: 22, end: 53 }
-  var licRange = { start: 54, end: 85 }
-  var cusRange = { start: 86, end: 117 }
-  var t2aCommRage = { start: 118, end: 149 }
-  var t2aLicRange = { start: 150, end: 181 }
-  var t2aCusRange = { start: 182, end: 213 }
-  var reportsRange = { start: 214, end: 218 }
+  var commRange = { start: 25, end: 56 }
+  var licRange = { start: 57, end: 88 }
+  var cusRange = { start: 89, end: 120 }
+  var t2aCommRage = { start: 121, end: 152 }
+  var t2aLicRange = { start: 153, end: 184 }
+  var t2aCusRange = { start: 185, end: 216 }
+  var reportsRange = { start: 217, end: 221 }
 
   if (columnNo >= commRange.start && columnNo <= commRange.end) {
     styleToApply = styles.commStyle

@@ -10,6 +10,10 @@ const armsCommMultiplier = 4
 const armsLicMultiplier = 2
 const typeTierGroupLength = 4 // the number of fields for each tier and type of case
 const tiersPerType = 8
+const reportColumnStart = 217
+const casesColumnStart = 25
+const t2aCasesColumnStart = 121
+const numberOfReportColumns = 5
 
 module.exports = function (caseData, t2aCaseData, scenarioData) {
   var wb = new excel.Workbook()
@@ -21,10 +25,10 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   var styles = createStyles(wb)
 
   mergeCells(ws, styles.caseStyle)
-  var start = 22
+  var start = casesColumnStart
   var additionalHeading = ''
   setCaseHeaders(ws, start, styles, additionalHeading)
-  start = 118
+  start = t2aCasesColumnStart
   additionalHeading = 'T2A '
   setCaseHeaders(ws, start, styles, additionalHeading)
   setReportHeaders(ws, styles)
@@ -35,15 +39,17 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   setReportWeightings(ws, styles, caseData)
   inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType, styles)
   ws.row(4).freeze()
-  ws.column(21).freeze()
-  ws.column(21).setWidth(8)
-  ws.column(1).setWidth(20)
+  ws.column(24).freeze()
+  ws.column(24).setWidth(8)
+  ws.column(2).setWidth(15)
+  ws.column(3).setWidth(15)
+  ws.column(4).setWidth(20)
   setRowHeights(ws)
   return wb
 }
 
 var setReportHeaders = function (ws, styles) {
-  var start = 214
+  var start = reportColumnStart
   var count = 0
   while (count < reportHeaders.length) {
     var styleToApply = determineStyles.determineWeightingStyle(start, styles)
@@ -55,9 +61,9 @@ var setReportHeaders = function (ws, styles) {
 }
 
 var mergeCells = function (ws, caseStyle) {
-  ws.cell(1, 22, 1, 117, true).string('Cases').style(caseStyle)
-  ws.cell(1, 118, 1, 213, true).string('T2A Cases').style(caseStyle)
-  ws.cell(1, 214, 1, 218, true).string('Reports').style(caseStyle)
+  ws.cell(1, casesColumnStart, 1, t2aCasesColumnStart - 1, true).string('Cases').style(caseStyle)
+  ws.cell(1, t2aCasesColumnStart, 1, reportColumnStart - 1, true).string('T2A Cases').style(caseStyle)
+  ws.cell(1, reportColumnStart, 1, reportColumnStart + numberOfReportColumns - 1, true).string('Reports').style(caseStyle)
 }
 
 var setCaseHeaders = function (ws, start, styles, additionalHeading) {
@@ -89,7 +95,7 @@ var setHeaders = function (ws, nameHeadersStyle) {
 var setCaseTypeHeaders = function (ws, styles) {
   var count = 0
   var i
-  for (i = 22; i < 214; i = i + typeTierGroupLength) {
+  for (i = casesColumnStart; i < reportColumnStart; i = i + typeTierGroupLength) {
     var styleToApply = determineStyles.determineWeightingStyle(i, styles)
     ws.cell(3, i).string(caseTypeHeaders[count]).style(styleToApply)
     ws.cell(3, i + 1).string(caseTypeHeaders[count + 1]).style(styleToApply)
@@ -102,9 +108,9 @@ var setTierWeightings = function (ws, styles, points) {
   var keys = Object.keys(points)
   var start
   if (points['isT2A']) {
-    start = 118
+    start = t2aCasesColumnStart
   } else {
-    start = 22
+    start = casesColumnStart
   }
   var count = 0
   var i
@@ -130,12 +136,12 @@ var setTierWeightings = function (ws, styles, points) {
 }
 
 var setReportWeightings = function (ws, styles, points) {
-  var styleToApply = determineStyles.determineWeightingStyle(214, styles)
-  ws.cell(4, 214).number(points['sdr']).style(styleToApply)
-  ws.cell(4, 215).number(points['sdrConversion']).style(styleToApply)
-  ws.cell(4, 216).number(points['parom']).style(styleToApply)
-  ws.cell(4, 217).number(points['weightingArmsCommunity'] * armsCommMultiplier).style(styleToApply)
-  ws.cell(4, 218).number(points['weightingArmsLicense'] * armsLicMultiplier).style(styleToApply)
+  var styleToApply = determineStyles.determineWeightingStyle(reportColumnStart, styles)
+  ws.cell(4, reportColumnStart).number(points['sdr']).style(styleToApply)
+  ws.cell(4, reportColumnStart + 1).number(points['sdrConversion']).style(styleToApply)
+  ws.cell(4, reportColumnStart + 2).number(points['parom']).style(styleToApply)
+  ws.cell(4, reportColumnStart + 3).number(points['weightingArmsCommunity'] * armsCommMultiplier).style(styleToApply)
+  ws.cell(4, reportColumnStart + 4).number(points['weightingArmsLicense'] * armsLicMultiplier).style(styleToApply)
 }
 
 var setRowHeights = function (ws) {
