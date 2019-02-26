@@ -64,6 +64,7 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
   var endRow = rowStart - 1
   var lockedCellRanges = [
     'F5:' + 'F' + endRow,
+    'K5:' + 'K' + endRow,
     'L5:' + 'L' + endRow,
     'M5:' + 'M' + endRow,
     'N5:' + 'N' + endRow,
@@ -94,8 +95,8 @@ var inputOffenderManagerData = function (ws, offenderManager, row) {
   ws.cell(row, 8).number(offenderManager.contractedHours).style(this.styles.editableStyle)
   ws.cell(row, 9).number(offenderManager.defaultContractedHours).style(this.styles.editableStyle)
   ws.cell(row, 10).number(offenderManager.reductionHours).style(this.styles.editableStyle)
-  ws.cell(row, 11).number(offenderManager.cms).style(this.styles.editableStyle)
-  ws.cell(row, 13).number(offenderManager.gs).style(this.styles.editableStyle)
+  ws.cell(row, 11).number(offenderManager.cms).style(this.styles.nonEditableCaseStyle)
+  ws.cell(row, 13).number(offenderManager.gs).style(this.styles.nonEditableCaseStyle)
 }
 
 var totalPointsFormula = function (row) {
