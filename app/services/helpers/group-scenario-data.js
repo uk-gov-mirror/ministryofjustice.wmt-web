@@ -26,7 +26,7 @@ function fieldSorter (fields) {
       .map(function (o) {
         var dir = 1
         if (o[0] === '-') {
-          dir = -1;
+          dir = -1
           o = o.substring(1)
         }
         if (a[o] > b[o]) return dir
