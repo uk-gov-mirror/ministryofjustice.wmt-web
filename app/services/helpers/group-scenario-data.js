@@ -20,7 +20,7 @@ module.exports = function (results) {
   return scenarioArray
 }
 
-function fieldSorter(fields) {
+function fieldSorter (fields) {
   return function (a, b) {
     return fields
       .map(function (o) {
@@ -34,7 +34,11 @@ function fieldSorter(fields) {
         return 0
       })
       .reduce(function firstNonZeroValue (p, n) {
-        return p ? p : n
+        if (p) {
+          return p
+        } else {
+          return n
+        }
       }, 0)
   }
 }
