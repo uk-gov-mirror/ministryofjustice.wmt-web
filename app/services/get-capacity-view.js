@@ -35,7 +35,7 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
 
 var parseCapacityBreakdown = function (workloadReports, organisationLevel) {
   var capacityBreakdown = []
-  var totals = { name: 'Total / Average', capacity: 0, totalCases: 0, totalARMS: 0, totalGs: 0, totalCMS: 0, totalSDRs: 0, totalParoms: 0, totalSdrConversions: 0, totalTotalT2aCases: 0, totalCMSPoints: 0, totalGSPoints: 0 }
+  var totals = { name: 'Total / Average', capacity: 0, totalCases: 0, totalARMS: 0, totalGs: 0, totalCMS: 0, totalSDRs: 0, totalParoms: 0, totalSdrConversions: 0, totalTotalT2aCases: 0, totalCMSPoints: 0, totalGSPoints: 0, totalPoints: 0, availablePoints: 0}
   var totalNumberOfGrades = 0
 
   if (organisationLevel === organisationConstant.TEAM.name) {
@@ -93,13 +93,15 @@ var addTotals = function (totals, capacityBreakdown) {
   totals.totalTotalT2aCases += capacityBreakdown.totalT2aCases
   totals.totalGSPoints += capacityBreakdown.gsPoints
   totals.totalCMSPoints += capacityBreakdown.cmsPoints
+  totals.totalPoints += capacityBreakdown.totalPoints
+  totals.availablePoints += capacityBreakdown.availablePoints
   return totals
 }
 
 var averageTotals = function (totals, totalNumberOfGrades) {
-  totals.capacity = totals.capacity / totalNumberOfGrades
-  totals.totalGs = totals.totalGs / totalNumberOfGrades
-  totals.totalCMS = totals.totalCMS / totalNumberOfGrades
+  totals.capacity = percentageCalculator.calculatePercentage(totals.totalPoints, totals.availablePoints)
+  totals.totalGs = percentageCalculator.calculatePercentage(totals.totalGSPoints, totals.totalPoints)
+  totals.totalCMS = percentageCalculator.calculatePercentage(totals.totalCMSPoints, totals.totalPoints)
   return totals
 }
 
@@ -114,6 +116,8 @@ var buildCapacityBreakdownEntry = function (workloadReport) {
   return {
     name: workloadReport.name,
     grade: workloadReport.grade,
+    totalPoints: workloadReport.totalPoints,
+    availablePoints: workloadReport.availablePoints,
     totalCases: workloadReport.totalCases,
     armsTotalCases: workloadReport.armsTotalCases,
     paroms: workloadReport.paroms,
