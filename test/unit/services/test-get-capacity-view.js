@@ -76,6 +76,8 @@ const LDU_RESULTS = [
 const EXPECTED_TEAM_BREAKDOWN = [
   { name: 'Test name',
     grade: 'Test grade',
+    availablePoints: 100,
+    totalPoints: 40,
     totalCases: 39,
     totalT2aCases: 29,
     linkId: 1,
@@ -92,16 +94,18 @@ const EXPECTED_TEAM_BREAKDOWN = [
   {
     capacity: 40,
     name: 'Total / Average',
+    availablePoints: 100,
     totalARMS: 20,
     totalCMS: 25,
     totalCases: 39,
-    totalGs: 20,
+    totalGs: -25,
     totalCMSPoints: 10,
     totalGSPoints: -10,
     totalSDRs: 10,
     totalParoms: 8,
     totalSdrConversions: 9,
-    totalTotalT2aCases: 29
+    totalTotalT2aCases: 29,
+    totalPoints: 40
   }
 ]
 
@@ -113,6 +117,8 @@ const EXPECTED_LDU_BREAKDOWN = [
       {
         name: 'Test ldu 1',
         grade: 'Test grade 1',
+        availablePoints: 100,
+        totalPoints: 90,
         totalCases: 39,
         totalT2aCases: 29,
         linkId: 1,
@@ -129,6 +135,8 @@ const EXPECTED_LDU_BREAKDOWN = [
       {
         name: 'Test ldu 1',
         grade: 'Test grade 2',
+        availablePoints: 70,
+        totalPoints: 35,
         totalCases: 40,
         totalT2aCases: 30,
         linkId: 1,
@@ -146,17 +154,19 @@ const EXPECTED_LDU_BREAKDOWN = [
   },
   {
     name: 'Total / Average',
-    capacity: 70,
+    availablePoints: 170,
+    capacity: 73.52941176470588,
     totalCases: 79,
     totalARMS: 40,
-    totalGs: 11.25,
-    totalCMS: 15,
+    totalGs: -12,
+    totalCMS: 12.8,
     totalCMSPoints: 16,
     totalGSPoints: -15,
     totalSDRs: 11,
     totalParoms: 11,
     totalSdrConversions: 10,
-    totalTotalT2aCases: 59
+    totalTotalT2aCases: 59,
+    totalPoints: 125
   }
 ]
 

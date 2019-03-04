@@ -6,7 +6,11 @@
                     <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/reductions-csv" class="button reduction-export" style="float: right; margin-left:10px; margin-bottom: 10px">Export Reductions</a>
                 {% endif %}
             {% endif %}
-            <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="button sln-export" style="float: right; margin-bottom: 10px; ">Export Caseload</a>
+            {% ifAsync ((organisationLevel === 'hmpps') or (organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
+                <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="button sln-export" style="float: right; margin-bottom: 10px; ">Export Overview</a>
+            {% else %}
+                <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="button sln-export" style="float: right; margin-bottom: 10px; ">Export Caseload</a>
+            {% endif %}
             </td>
         </tr>
     </table>
