@@ -20,16 +20,16 @@ describe('services/get-export-xlsx', function () {
     })
 
     it('with the correct workload points configuration for t2a and non-t2a', function () {
-      var columnNo = 22
+      var columnNo = 25
 
       workloadPointsTester(workloadPointsConfig.workloadPointsConfig, workloadPointsKeys, columnNo)
-      columnNo = 118
+      columnNo = 121
       workloadPointsTester(workloadPointsConfig.t2aWorkloadPointsConfig, t2aWorkloadPointsKeys, columnNo)
     })
 
     it('with the correct totals for each tier', function () {
       var rowStart = 5
-      var columnStart = 22
+      var columnStart = 25
       var tiersPerType = 8
       var typeTierGroupLength = 4
 
@@ -72,83 +72,83 @@ describe('services/get-export-xlsx', function () {
           columnStart = columnStart + typeTierGroupLength
         }
         rowStart++
-        columnStart = 22
+        columnStart = 25
       })
     })
 
     it('with the correct names', function () {
-      expect(getCellString(5, 1)).to.eql(scenarioObjects[0].name)
-      expect(getCellString(6, 1)).to.eql(scenarioObjects[1].name)
+      expect(getCellString(5, 4)).to.eql(scenarioObjects[0].name)
+      expect(getCellString(6, 4)).to.eql(scenarioObjects[1].name)
     })
 
     it('with the correct grades', function () {
-      expect(getCellString(5, 2)).to.eql(scenarioObjects[0].grade)
-      expect(getCellString(6, 2)).to.eql(scenarioObjects[1].grade)
+      expect(getCellString(5, 5)).to.eql(scenarioObjects[0].grade)
+      expect(getCellString(6, 5)).to.eql(scenarioObjects[1].grade)
     })
 
     it('with the correct total points formulas', function () {
-      expect(getCellFormula(5, 17)).to.eql(xlsxForumlas.totalPointsFormula1)
-      expect(getCellFormula(6, 17)).to.eql(xlsxForumlas.totalPointsFormula2)
+      expect(getCellFormula(5, 20)).to.eql(xlsxForumlas.totalPointsFormula1)
+      expect(getCellFormula(6, 20)).to.eql(xlsxForumlas.totalPointsFormula2)
     })
 
     it('with the correct total cases formulas', function () {
-      expect(getCellFormula(5, 3)).to.eql(xlsxForumlas.totalCasesForumula1)
-      expect(getCellFormula(6, 3)).to.eql(xlsxForumlas.totalCasesForumula2)
+      expect(getCellFormula(5, 6)).to.eql(xlsxForumlas.totalCasesForumula1)
+      expect(getCellFormula(6, 6)).to.eql(xlsxForumlas.totalCasesForumula2)
     })
 
     it('with the correct cms % formulas', function () {
-      expect(getCellFormula(5, 9)).to.eql(xlsxForumlas.cmsFormula1)
-      expect(getCellFormula(6, 9)).to.eql(xlsxForumlas.cmsFormula2)
+      expect(getCellFormula(5, 12)).to.eql(xlsxForumlas.cmsFormula1)
+      expect(getCellFormula(6, 12)).to.eql(xlsxForumlas.cmsFormula2)
     })
 
     it('with the correct gs % formulas', function () {
-      expect(getCellFormula(5, 11)).to.eql(xlsxForumlas.gsFormula1)
-      expect(getCellFormula(6, 11)).to.eql(xlsxForumlas.gsFormula2)
+      expect(getCellFormula(5, 14)).to.eql(xlsxForumlas.gsFormula1)
+      expect(getCellFormula(6, 14)).to.eql(xlsxForumlas.gsFormula2)
     })
 
     it('with the correct sdr formulas', function () {
-      expect(getCellFormula(5, 12)).to.eql(xlsxForumlas.sdrFormula1)
-      expect(getCellFormula(6, 12)).to.eql(xlsxForumlas.sdrFormula2)
+      expect(getCellFormula(5, 15)).to.eql(xlsxForumlas.sdrFormula1)
+      expect(getCellFormula(6, 15)).to.eql(xlsxForumlas.sdrFormula2)
     })
 
     it('with the correct fdr formulas', function () {
-      expect(getCellFormula(5, 13)).to.eql(xlsxForumlas.fdrFormula1)
-      expect(getCellFormula(6, 13)).to.eql(xlsxForumlas.fdrFormula2)
+      expect(getCellFormula(5, 16)).to.eql(xlsxForumlas.fdrFormula1)
+      expect(getCellFormula(6, 16)).to.eql(xlsxForumlas.fdrFormula2)
     })
 
     it('with the correct parom formulas', function () {
-      expect(getCellFormula(5, 14)).to.eql(xlsxForumlas.paromFormula1)
-      expect(getCellFormula(6, 14)).to.eql(xlsxForumlas.paromFormula2)
+      expect(getCellFormula(5, 17)).to.eql(xlsxForumlas.paromFormula1)
+      expect(getCellFormula(6, 17)).to.eql(xlsxForumlas.paromFormula2)
     })
 
     it('with the correct ARMS community formulas', function () {
-      expect(getCellFormula(5, 15)).to.eql(xlsxForumlas.armsCommFormula1)
-      expect(getCellFormula(6, 15)).to.eql(xlsxForumlas.armsCommFormula2)
+      expect(getCellFormula(5, 18)).to.eql(xlsxForumlas.armsCommFormula1)
+      expect(getCellFormula(6, 18)).to.eql(xlsxForumlas.armsCommFormula2)
     })
 
     it('with the correct ARMS licence formulas', function () {
-      expect(getCellFormula(5, 16)).to.eql(xlsxForumlas.armsLicForumula1)
-      expect(getCellFormula(6, 16)).to.eql(xlsxForumlas.armsLicForumula2)
+      expect(getCellFormula(5, 19)).to.eql(xlsxForumlas.armsLicForumula1)
+      expect(getCellFormula(6, 19)).to.eql(xlsxForumlas.armsLicForumula2)
     })
 
     it('with the correct Overall Total Points formulas', function () {
-      expect(getCellFormula(5, 18)).to.eql(xlsxForumlas.overallTotalPointsFormula1)
-      expect(getCellFormula(6, 18)).to.eql(xlsxForumlas.overallTotalPointsFormula2)
+      expect(getCellFormula(5, 21)).to.eql(xlsxForumlas.overallTotalPointsFormula1)
+      expect(getCellFormula(6, 21)).to.eql(xlsxForumlas.overallTotalPointsFormula2)
     })
 
     it('with the correct Available Total Points formulas', function () {
-      expect(getCellFormula(5, 19)).to.eql(xlsxForumlas.availablePointsFormula1)
-      expect(getCellFormula(6, 19)).to.eql(xlsxForumlas.availablePointsFormula2)
+      expect(getCellFormula(5, 22)).to.eql(xlsxForumlas.availablePointsFormula1)
+      expect(getCellFormula(6, 22)).to.eql(xlsxForumlas.availablePointsFormula2)
     })
 
     it('with the correct Remaining Total Points formulas', function () {
-      expect(getCellFormula(5, 20)).to.eql(xlsxForumlas.remainingPointsFormula1)
-      expect(getCellFormula(6, 20)).to.eql(xlsxForumlas.remainingPointsFormula2)
+      expect(getCellFormula(5, 23)).to.eql(xlsxForumlas.remainingPointsFormula1)
+      expect(getCellFormula(6, 23)).to.eql(xlsxForumlas.remainingPointsFormula2)
     })
 
     it('with the correct Capacity formulas', function () {
-      expect(getCellFormula(5, 21)).to.eql(xlsxForumlas.capacityFormula1)
-      expect(getCellFormula(6, 21)).to.eql(xlsxForumlas.capacityFormula2)
+      expect(getCellFormula(5, 24)).to.eql(xlsxForumlas.capacityFormula1)
+      expect(getCellFormula(6, 24)).to.eql(xlsxForumlas.capacityFormula2)
     })
   })
 })

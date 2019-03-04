@@ -4,6 +4,9 @@ const grades = require('../../constants/grade')
 class Scenario {
   constructor (results) {
     this.name = results[0].om_name
+    this.division = results[0].region_name
+    this.ldu = results[0].ldu_name
+    this.team = results[0].team_name
     this.grade = results[0].grade_code
     this.contractedHours = results[0].contracted_hours
     this.reductionHours = results[0].reduction_hours

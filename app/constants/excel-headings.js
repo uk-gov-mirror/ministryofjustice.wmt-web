@@ -25,7 +25,10 @@ const caseHeaders = [
   'Cus A'
 ]
 const nameHeaders = [
-  'Name',
+  'Division',
+  'LDU Cluster',
+  'Team',
+  'OM Name',
   'Grade',
   'Total Cases',
   'Nominal Target',

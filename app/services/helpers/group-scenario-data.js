@@ -16,16 +16,29 @@ module.exports = function (results) {
     var scenarioObj = new Scenario(value)
     scenarioArray.push(scenarioObj)
   }
-  scenarioArray.sort(sortScenarioArray)
+  scenarioArray.sort(fieldSorter(['ldu', 'team', 'name']))
   return scenarioArray
 }
 
-var sortScenarioArray = function (scenarioObj1, scenarioObj2) {
-  if (scenarioObj1.name.toUpperCase() > scenarioObj2.name.toUpperCase()) {
-    return 1
+function fieldSorter (fields) {
+  return function (a, b) {
+    return fields
+      .map(function (o) {
+        var dir = 1
+        if (o[0] === '-') {
+          dir = -1
+          o = o.substring(1)
+        }
+        if (a[o] > b[o]) return dir
+        if (a[o] < b[o]) return -(dir)
+        return 0
+      })
+      .reduce(function firstNonZeroValue (p, n) {
+        if (p) {
+          return p
+        } else {
+          return n
+        }
+      }, 0)
   }
-  if (scenarioObj1.name.toUpperCase() < scenarioObj2.name.toUpperCase()) {
-    return -1
-  }
-  return 0
 }
