@@ -7,6 +7,12 @@
   {% include "includes/title-subtitle.html" %}
   <div>
     <div class="column-one-half">
+    {% if authorisation===false or userRole==='Manager' or userRole==='Data Admin'%}
+      <h2 class="heading-medium">
+        <a class="blue-link" href="/admin/expiring-reductions">Expiring Reductions</a>
+      </h2>
+      <p>View your staff's reductions expiring in the next 7 days</p>
+    {% endif %}
     {% if authorisation===false or userRole==='Data Admin'%}
       <h2 class="heading-medium">
         <a class="blue-link" href="/admin/workload-points">Workload points</a>
