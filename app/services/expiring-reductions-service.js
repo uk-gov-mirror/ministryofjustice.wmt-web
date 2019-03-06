@@ -4,8 +4,7 @@ const dateFormatter = require('./date-formatter')
 
 module.exports = function (userId) {
   var breadcrumbs = [
-    new Link('Expiring Reductions', '/admin/expiring-reductions'),
-    new Link('Admin', '/admin')
+    new Link('Expiring Reductions', '/expiring-reductions'),
   ]
 
   return getExpiringReductions(userId).then(function (reductions) {
@@ -16,7 +15,7 @@ module.exports = function (userId) {
     var result = {}
     var title = breadcrumbs[0].title
     result.title = title
-    result.subTitle = breadcrumbs[1].title
+    result.subTitle = breadcrumbs[0].title
     result.breadcrumbs = breadcrumbs
     result.reductions = reductions
     return result
