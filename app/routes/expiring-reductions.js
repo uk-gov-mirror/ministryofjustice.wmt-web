@@ -6,7 +6,7 @@ const Unauthorized = require('../services/errors/authentication-error').Unauthor
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 
 module.exports = function (router) {
-  router.get('/admin/expiring-reductions', function (req, res) {
+  router.get('/expiring-reductions', function (req, res) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.DATA_ADMIN, roles.MANAGER])

@@ -11,7 +11,13 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-    return res.render('search-for-officer', {})
+
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+
+    return res.render('search-for-officer', {
+      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+    })
   })
 
   router.post('/officer-search/search', function (req, res, next) {
@@ -22,8 +28,13 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
+
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+
     return offenderSearch(req.body.surnameBox).then(function (result) {
       res.render('search-for-officer', {
+        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
         results: result
       })
     })

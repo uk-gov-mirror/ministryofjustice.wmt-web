@@ -5,19 +5,15 @@ const sinon = require('sinon')
 const log = require('../../../app/logger')
 require('sinon-bluebird')
 
-const PAGE_URL = '/admin/expiring-reductions'
+const PAGE_URL = '/expiring-reductions'
 
 const result = {
   title: 'Expiring Reductions',
-  subTitle: 'Admin',
+  subTitle: 'Expiring Reductions',
   breadcrumbs: [
     {
       title: 'Expiring Reductions',
-      link: '/admin/expiring-reductions'
-    },
-    {
-      title: 'Admin',
-      link: '/admin'
+      link: '/expiring-reductions'
     }
   ],
   reductions: [
