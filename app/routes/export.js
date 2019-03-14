@@ -125,6 +125,41 @@ module.exports = function (router) {
       next(error)
     })
   })
+
+  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/export-individual-caseload', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
+    var organisationLevel = req.params.organisationLevel
+    var id
+
+    if (organisationLevel !== organisationUnit.NATIONAL.name) {
+      id = req.params.id
+    }
+
+    var exportPromise = getCaseDetailsExport(id, 'workloadOwner')
+
+    var tabType = tabs.EXPORT.CASE_DETAILS_EXPORT
+
+    return getLastUpdated().then(function (result) {
+      lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+      return exportPromise.then(function (results) {
+        result.date = lastUpdated
+        results.title = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY')
+        let dateFileName = null
+        dateFileName = result.title
+        var exportCsv = getExportCsv(dateFileName, results, tabType)
+        res.attachment(exportCsv.filename)
+        res.send(exportCsv.csv)
+      })
+    }).catch(function (error) {
+      next(error)
+    })
+  })
 }
 
 var formatResults = function (results, tabType) {
