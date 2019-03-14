@@ -36,6 +36,8 @@
       <li><a href="#custody" role="anchor-div">Custody</a></li>
       <li><a href="#license" role="anchor-div">License</a></li>
       <li><a href="#community" role="anchor-div">Community</a></li>
+      <li><a href="#cms" role="anchor-div">CMS</a></li>
+      <li><a href="#gs" role="anchor-div">GS</a></li>
       <li><a href="#other" role="anchor-div">Other</a></li>
     </ul>
 
@@ -299,6 +301,534 @@
                         <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
                       </td>
                     </tr>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+
+      <div id="cms">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+              <table>
+                <tbody>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commA'][0] %}
+                          <span class="error-message">{{ errors['commA'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-a">CMS01 - CMS - Sentence Plan Intervention Delivery - Low</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-a" name="commA" type="number" value="{{ wp.commA }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commB1'][0] %}
+                          <span class="error-message">{{ errors['commB1'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-b1">CMS02 - CMS - Sentence Plan Intervention Delivery - Medium</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-b1" name="commB1" type="number" value="{{ wp.commB1 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commB2'][0] %}
+                          <span class="error-message">{{ errors['commB2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-b2">CMS03 - CMS - Sentence Plan Intervention Delivery - High</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-b2" name="commB2" type="number" value="{{ wp.commB2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commC1'][0] %}
+                          <span class="error-message">{{ errors['commC1'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-c1">CMS04 - CMS - Completing & Assisting with Referrals - Low</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-c1" name="commC1" type="number" value="{{ wp.commC1 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commC2'][0] %}
+                          <span class="error-message">{{ errors['commC2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-c2">CMS05 - CMS - Completing & Assisting with Referrals - Medium</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-c2" name="commC2" type="number" value="{{ wp.commC2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD1'][0] %}
+                          <span class="error-message">{{ errors['commD1'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d1">CMS06 - CMS - Completing & Assisting with Referrals - High</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d1" name="commD1" type="number" value="{{ wp.commD1 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS07 - CMS - Attending Partnership Meetings - Low</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS08 - CMS - Attending Partnership Meetings - Medium</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS09 - CMS - Attending Partnership Meetings - High</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS10 - CMS - Assistance with Case Conferencing - Low</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS11 - CMS - Assistance with Case Conferencing - Medium</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS12 - CMS - Assistance with Case Conferencing - High</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS13 - CMS - Information & Intelligence Gathering - Low</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS14 - CMS - Information & Intelligence Gathering - Medium</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS15 - CMS - Information & Intelligence Gathering - High</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS16 - CMS - Home & Prison Visits - Low</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS17 - CMS - Home & Prison Visits - Medium</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS18 - CMS - Home & Prison Visits - High</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS19 - CMS - HDC Assessments & Support - Low</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS20 - CMS - HDC Assessments & Support - Medium</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS21 - CMS - HDC Assessments & Support - High</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS22 - CMS - Victims Services Liaison - Low</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS23 - CMS - Victims Services Liaison - Medium</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS24 - CMS - Victims Services Liaison - High</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS25 - CMS - Court Liaison & Applications to Court - Low</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS26 - CMS - Court Liaison & Applications to Court - Medium</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS27 - CMS - Court Liaison & Applications to Court - High</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS28 - CMS - Case Related Communication - Low</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS29 - CMS - Case Related Communication - Medium</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS30 - CMS - Case Related Communication - High</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS31 - CMS - Assistance with Assessments - Low</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS32 - CMS - Assistance with Assessments - Medium</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS33 - CMS - Assistance with Assessments - High</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS34 - CMS - ROTL Assessments & Support - Low</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS35 - CMS - ROTL Assessments & Support - Medium</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">CMS36 - CMS - ROTL Assessments & Support - High</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+
+      <div id="gs">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+              <table>
+                <tbody>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commA'][0] %}
+                          <span class="error-message">{{ errors['commA'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-a">NGS001 - GS Rights and Responsibilities session NS</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-a" name="commA" type="number" value="{{ wp.commA }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commB1'][0] %}
+                          <span class="error-message">{{ errors['commB1'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-b1">NGS002 - GS Community session NS</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-b1" name="commB1" type="number" value="{{ wp.commB1 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commB2'][0] %}
+                          <span class="error-message">{{ errors['commB2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-b2">NGS003 - GS Identity session NS</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-b2" name="commB2" type="number" value="{{ wp.commB2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commC1'][0] %}
+                          <span class="error-message">{{ errors['commC1'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-c1"> NGS004 - GS Being Social session NS</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-c1" name="commC1" type="number" value="{{ wp.commC1 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commC2'][0] %}
+                          <span class="error-message">{{ errors['commC2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-c2">NGS005 - GS Disclosure session NS</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-c2" name="commC2" type="number" value="{{ wp.commC2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD1'][0] %}
+                          <span class="error-message">{{ errors['commD1'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d1">NGS006 - GS Employment session NS</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d1" name="commD1" type="number" value="{{ wp.commD1 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commD2'][0] %}
+                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-d2">NGS007 - GS Keeping Accommodation session NS</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                          {% if errors['commD2'][0] %}
+                            <span class="error-message">{{ errors['commD2'][0] }}</span>
+                          {% endif %}
+                          <label class="form-label-bold" for="comm-d2">NGS008 - GS Finances session NS</label>
+                        </th>
+                        <td class="numeric">
+                          <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                        </td>
+                      </tr>
+                      <tr>
+                          <th scope="row">
+                            {% if errors['commD2'][0] %}
+                              <span class="error-message">{{ errors['commD2'][0] }}</span>
+                            {% endif %}
+                            <label class="form-label-bold" for="comm-d2">NGS009 - GS Dear Me session NS</label>
+                          </th>
+                          <td class="numeric">
+                            <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                          </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                              {% if errors['commD2'][0] %}
+                                <span class="error-message">{{ errors['commD2'][0] }}</span>
+                              {% endif %}
+                              <label class="form-label-bold" for="comm-d2">NGS010 - GS Moving On session NS</label>
+                            </th>
+                            <td class="numeric">
+                              <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                            </td>
+                          </tr>
                   </tbody>
               </table>
             </div>
