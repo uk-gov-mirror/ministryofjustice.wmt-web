@@ -1,5 +1,6 @@
 const workloadPointsService = require('../services/workload-points-service')
 const WorkloadPoints = require('../services/domain/workload-points')
+const Adjustment = require('../services/domain/adjustment')
 const ValidationError = require('../services/errors/validation-error')
 const authorisation = require('../authorisation')
 const messages = require('../constants/messages')
@@ -7,6 +8,8 @@ const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 const logger = require('../logger')
+const getAdjustmentPointsConfig = require('../services/data/get-adjustment-points-config')
+const adjustmentTypes = require('../constants/adjustment-type')
 
 module.exports = function (router) {
   router.get('/admin/workload-points', function (req, res) {
@@ -28,16 +31,24 @@ module.exports = function (router) {
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return workloadPointsService.getWorkloadPoints(false)
       .then(function (result) {
-        return res.render('workload-points', {
-          title: result.title,
-          subTitle: result.subTitle,
-          breadcrumbs: result.breadcrumbs,
-          wp: result.workloadPoints,
-          updatedBy: result.updatedBy,
-          successText: successText,
-          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
-        })
+        return getAdjustmentPointsConfig(adjustmentTypes.CMS)
+          .then(function (cms) {
+            return getAdjustmentPointsConfig(adjustmentTypes.GS)
+              .then(function (gs) {
+                return res.render('workload-points', {
+                  title: result.title,
+                  subTitle: result.subTitle,
+                  breadcrumbs: result.breadcrumbs,
+                  wp: result.workloadPoints,
+                  gs: gs,
+                  cms: cms,
+                  updatedBy: result.updatedBy,
+                  successText: successText,
+                  userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+                  authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+                })
+              })
+          })
       })
   })
 
@@ -92,6 +103,10 @@ module.exports = function (router) {
         req.body.userId = req.user.userId.toString()
       }
       var updatedWorkloadPoints = new WorkloadPoints(req.body)
+      var cmsObjects = filterAdjustments('CMS', req)
+      var gsObjects = filterAdjustments('NGS', req)
+      var updatedCMSAdjustmentPoints = new Adjustment(cmsObjects)
+      var updatedGSAdjustmentPoints = new Adjustment(gsObjects)
       return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints, false)
         .then(function () {
           return res.redirect(302, '/admin/workload-points?success=true')
@@ -102,16 +117,22 @@ module.exports = function (router) {
         var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
         return workloadPointsService.getWorkloadPoints(false)
           .then(function (result) {
-            return res.status(400).render('workload-points', {
-              title: result.title,
-              subTitle: result.subTitle,
-              breadcrumbs: result.breadcrumbs,
-              wp: req.body,
-              updatedBy: result.updatedBy,
-              errors: error.validationErrors,
-              userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-              authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
-            })
+            return getAdjustmentPointsConfig(adjustmentTypes.CMS)
+              .then(function (cms) {
+                return getAdjustmentPointsConfig(adjustmentTypes.GS)
+                  .then(function (gs) {
+                    return res.status(400).render('workload-points', {
+                      title: result.title,
+                      subTitle: result.subTitle,
+                      breadcrumbs: result.breadcrumbs,
+                      wp: req.body,
+                      updatedBy: result.updatedBy,
+                      errors: error.validationErrors,
+                      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+                      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+                    })
+                  })
+              })
           })
       }
       next(error)
@@ -162,4 +183,15 @@ module.exports = function (router) {
       next(error)
     }
   })
+}
+
+var filterAdjustments = function (prefix, req) {
+  var object = {}
+  Object.keys(req.body).forEach(function (key) {
+    if (key.startsWith(prefix)) {
+      object[key] = req.body[key]
+    }
+  })
+  delete object[prefix + 'Count']
+  return object
 }
