@@ -38,7 +38,7 @@ module.exports = function (router) {
           subTitle: result.subTitle,
           breadcrumbs: result.breadcrumbs,
           subNav: getSubNav(id, organisationLevel, req.path),
-          caseProgressList: result.caseProgressList.sort(function(a,b){return b.name.localeCompare(a.name)}), // sorted backwards as the plot displays backwards, table is incorrect
+          caseProgressList: result.caseProgressList.sort(function (a, b) { return b.name.localeCompare(a.name) }), // sorted backwards as the plot displays backwards, table is incorrect
           date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
           authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role

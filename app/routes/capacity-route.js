@@ -69,8 +69,8 @@ module.exports = function (router) {
           return getLastUpdated().then(function (result) {
             lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
             result.date = lastUpdated
-            capacityBreakdown.capacityBreakdown.sort(function(a, b){return a.name.localeCompare(b.name)})
-            outstandingReports.sort(function(a, b){return a.name.localeCompare(b.name)})
+            capacityBreakdown.capacityBreakdown.sort(function (a, b) { return a.name.localeCompare(b.name) })
+            outstandingReports.sort(function (a, b) { return a.name.localeCompare(b.name) })
             return res.render('capacity', {
               screen: 'capacity',
               linkId: id,

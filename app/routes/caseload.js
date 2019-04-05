@@ -115,21 +115,21 @@ module.exports = function (router) {
       details = result.caseloadDetails
     }
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name && organisationLevel !== organisationUnitConstants.TEAM.name) {
-      details[0].array.details.sort(function(a, b){return a.name.localeCompare(b.name)})
-      details[0].array.detailsPercentages.sort(function(a, b){return a.name.localeCompare(b.name)})
-      details[0].totalSummary.sort(function(a, b){return a.name.localeCompare(b.name)})
-      details[1].array.details.sort(function(a, b){return a.name.localeCompare(b.name)})
-      details[1].array.detailsPercentages.sort(function(a, b){return a.name.localeCompare(b.name)})
-      details[2].array.details.sort(function(a, b){return a.name.localeCompare(b.name)})
-      details[2].array.detailsPercentages.sort(function(a, b){return a.name.localeCompare(b.name)})
-      details[3].array.details.sort(function(a, b){return a.name.localeCompare(b.name)})
-      details[3].array.detailsPercentages.sort(function(a, b){return a.name.localeCompare(b.name)})
+      details[0].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[0].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[0].totalSummary.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[1].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[1].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[2].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[2].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[3].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[3].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
     } else if (organisationLevel == organisationUnitConstants.TEAM.name) {
-      details[0].array.sort(function(a, b){return a.name.localeCompare(b.name)})
-      details[0].totalSummary.sort(function(a, b){return a.name.localeCompare(b.name)})
-      details[1].array.sort(function(a, b){return a.name.localeCompare(b.name)})
-      details[2].array.sort(function(a, b){return a.name.localeCompare(b.name)})
-      details[3].array.sort(function(a, b){return a.name.localeCompare(b.name)})
+      details[0].array.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[0].totalSummary.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[1].array.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[2].array.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[3].array.sort(function (a, b) { return a.name.localeCompare(b.name) })
     }
     return details
   }
