@@ -34,7 +34,12 @@ module.exports = function (id, organisationLevel) {
     'paroms_total'
   ]
 
-  return knex('scenario_view')
-    .columns(columns)
-    .where(organisationLevel + '_id', id)
+  if (organisationLevel && id) {
+    return knex('scenario_view')
+      .columns(columns)
+      .where(organisationLevel + '_id', id)
+  } else {
+    return knex('scenario_view')
+      .columns(columns)
+  }
 }
