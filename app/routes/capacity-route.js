@@ -16,8 +16,8 @@ const tierHelper = require('../services/helpers/tier-helper')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const getCaseDetailsView = require('../services/get-case-details-view')
+const getBreadcrumbs = require('../services/get-breadcrumbs')
 
-var inactiveTeam
 var lastUpdated
 
 module.exports = function (router) {
@@ -63,7 +63,6 @@ module.exports = function (router) {
       var capacityBreakdown = result
       return getOutstandingReports(id, organisationLevel).then(function (result) {
         var outstandingReports = result
-        inactiveTeam = capacityBreakdown.title
         return getCaseDetailsView(id, organisationLevel).then(function (result) {
           var caseDetails = result
           return getLastUpdated().then(function (result) {
@@ -113,10 +112,12 @@ module.exports = function (router) {
       throw new Error('Only available for a team')
     }
 
+    var breadcrumbs = getBreadcrumbs(id, organisationLevel)
+
     return getCaseDetailsReports(id, organisationLevel).then(function (caseDetails) {
       var formatedCaseDetails = formatCaseDetailsForExport(caseDetails)
       var result = {
-        title: inactiveTeam,
+        title: breadcrumbs[0].title,
         inactiveCaseDetails: formatedCaseDetails
       }
       var exportCsv = getExportCsv(organisationLevel, result, tabs.CAPACITY.INACTIVE)
