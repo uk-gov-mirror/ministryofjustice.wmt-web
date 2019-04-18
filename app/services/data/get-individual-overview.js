@@ -18,6 +18,7 @@ module.exports = function (id) {
     'total_points AS totalPoints',
     'total_cases AS cases',
     'contracted_hours AS contractedHours',
+    'cms_adjustment_points as cmsAdjustmentPoints',
     'reduction_hours AS reduction'
   ]
 
