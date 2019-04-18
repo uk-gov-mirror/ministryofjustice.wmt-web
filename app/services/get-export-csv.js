@@ -217,7 +217,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
       if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
         result.overviewDetails.lduCluster = result.breadcrumbs[2].title
         result.overviewDetails.capacity = formatCapacityValue(result.overviewDetails.capacity)
-        result.overviewDetails.cmsPercentage = formatCMSPercentage(esult.overviewDetails.cmsPercentage)
+        result.overviewDetails.cmsPercentage = formatCMSPercentage(result.overviewDetails.cmsPercentage)
       } else {
         result.overviewDetails.forEach(function (team) {
           team.capacityPercentage = formatCapacityValue(team.capacityPercentage)
