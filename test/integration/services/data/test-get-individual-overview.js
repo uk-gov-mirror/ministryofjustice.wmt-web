@@ -10,6 +10,7 @@ var overview = {
   teamName: 'Test Team',
   lduCluster: 'Test LDU',
   regionName: 'Test Region',
+  cmsAdjustmentPoints: 0,
   availablePoints: 25,
   totalPoints: 50,
   cases: 5,
