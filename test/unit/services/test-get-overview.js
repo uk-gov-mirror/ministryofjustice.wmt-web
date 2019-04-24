@@ -17,7 +17,9 @@ const OVERVIEW = {
   totalCases: 2,
   hours: 3,
   reductionHours: 3,
-  contractedHours: 37
+  contractedHours: 37,
+  cmsAdjustmentPoints: 0,
+  cmsPercentage: 0
 }
 const ORGANISATION_OVERVIEWS = [
   Object.assign({}, OVERVIEW, {capacityPercentage: 80}), Object.assign({}, OVERVIEW, {capacityPercentage: 80})
@@ -131,7 +133,7 @@ describe('services/get-overview', function () {
 
   it('should return 0 contracted hours if there are indeed 0 contracted hours, and the correct overview totals', function () {
     var orgName = orgUnitConstant.REGION.name
-    var totals = { name: 'Total / Average', totalContractedHours: 0, totalCapacityPercentage: 80, totalPoints: 40, totalAvailablePoints: 50, totalReduction: 3, totalRemainingPoints: 10, totalTotalCases: 2 }
+    var totals = { name: 'Total / Average', totalContractedHours: 0, totalCapacityPercentage: 80, totalPoints: 40, totalAvailablePoints: 50, totalReduction: 3, totalRemainingPoints: 10, totalTotalCases: 2, totalCMSPoints: 0, totalCMSPercentage: 0 }
     var zeroContractedHours = Object.assign({}, OVERVIEW, {contractedHours: 0})
     getOrganisationOverview.withArgs(id, orgName).resolves([zeroContractedHours])
 
