@@ -39,6 +39,14 @@
                         <td class="numeric">{{ overviewDetails.cases }}</td>
                     </tr>
                     <tr>
+                        <th scope="row">CMS Points</th>
+                        <td class="numeric">{{ overviewDetails.cmsAdjustmentPoints }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">CMS %</th>
+                        <td class="numeric">{{ overviewDetails.cmsPercentage | round(1) }}%</td>
+                    </tr>
+                    <tr>
                         <th scope="row">Contracted hours</th>
                         <td class="numeric">{{ overviewDetails.contractedHours }}</td>
                     </tr>
