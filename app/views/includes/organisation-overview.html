@@ -39,14 +39,6 @@
                         <td class="numeric">{{ overviewDetails.cases }}</td>
                     </tr>
                     <tr>
-                        <th scope="row">CMS Points</th>
-                        <td class="numeric">{{ overviewDetails.cmsAdjustmentPoints }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">CMS %</th>
-                        <td class="numeric">{{ overviewDetails.cmsPercentage | round(1) }}%</td>
-                    </tr>
-                    <tr>
                         <th scope="row">Contracted hours</th>
                         <td class="numeric">{{ overviewDetails.contractedHours }}</td>
                     </tr>
@@ -69,7 +61,6 @@
                 <th class="sln-table-org-level" id="om">{{ childOrganisationLevelDisplayText }}</th>
                 {% endif %}
                 <th id="cap" colspan="3">Capacity</th>
-                <th id="cms" colspan="2">CMS</th>
                 <th id="hrs" colspan="2">Hours</th>
                 <th id="cases">Cases</th>
             </tr>
@@ -82,8 +73,6 @@
                 <th headers="cap" id="current">Current(%)</th>
                 <th headers="cap" id="points">Available Points</th>
                 <th headers="cap" id="remaining">Remaining Points</th>
-                <th headers="cms" id="remaining">CMS Points</th>
-                <th headers="cms" id="remaining">CMS %</th>
                 <th headers="hrs" id="contracted">Contracted</th>
                 <th headers="hrs" id="reduction">Reduction</th>
                 <th headers="cases" id="total">Total</th>
@@ -108,8 +97,6 @@
             {% else %}
               <td headers="remaining cap">{{ member.remainingPoints}}</td>
             {% endif %}
-            <td headers="cms points">{{ member.cmsAdjustmentPoints }}</td>
-            <td headers="cms percentage">{{ member.cmsPercentage | round(1) }}%</td>
             <td headers="hrs contracted">{{ member.contractedHours }}</td>
             <td headers="hrs reduction">{{ member.reductionHours }}</td>
             <td headers="cases total">{{ member.totalCases }}</td>
@@ -128,8 +115,6 @@
             <td headers="current cap">{{ member.totalCapacityPercentage | round }}%</td>
             <td headers="points cap">{{ member.totalAvailablePoints }}</td>
             <td headers="remaining cap">{{ member.totalRemainingPoints}}</td>
-            <td headers="cms points">{{ member.totalCMSPoints }}</td>
-            <td headers="cms percentage">{{ member.totalCMSPercentage | round(1) }}%</td>
             <td headers="hrs contracted">{{ member.totalContractedHours }}</td>
             <td headers="hrs reduction">{{ member.totalReduction }}</td>
             <td headers="cases total">{{ member.totalTotalCases }}</td>  
