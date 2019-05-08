@@ -21,6 +21,7 @@ module.exports = function (id, type) {
     'total_points AS totalPoints',
     'contracted_hours AS contractedHours',
     'reduction_hours AS reductionHours',
+    'cms_adjustment_points as cmsAdjustmentPoints',
     'grade_code AS gradeCode'
   ]
 
