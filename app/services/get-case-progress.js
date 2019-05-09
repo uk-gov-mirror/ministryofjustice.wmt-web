@@ -12,6 +12,7 @@ module.exports = function (id, organisationLevel) {
     result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
     result.title = result.breadcrumbs[0].title
     result.subTitle = organisationalUnitType.displayText
+    result.caseProgressList.sort(function (a, b) { return b.name.localeCompare(a.name) }) // sorted backwards as the plot displays backwards, table is incorrect
     return result
   })
 }
