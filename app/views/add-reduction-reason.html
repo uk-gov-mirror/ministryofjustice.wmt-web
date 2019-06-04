@@ -1,0 +1,152 @@
+{% extends "includes/layout.html" %} 
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/breadcrumbs.html" %}
+
+  {% if reduction %}
+    {% set headerText='Reduction' %}
+    {% set reductionText='Showing reduction for ' %}
+    {% if reduction.status !== 'ARCHIVED' %}
+      {% if reduction.id %}
+        {% set submitButtonText='Save changes' %}
+        {% set formAction='/' + workloadType + '/offender-manager/' +  linkId  + '/edit-reduction' %}
+        {% set formMethod='POST' %}
+      {% else %}
+        {% set headerText='New reduction' %}
+        {% set reductionText='Add a new reduction Reason' %}
+        {% set submitButtonText='Add reduction' %}
+        {% set formAction='/' + workloadType + '/offender-manager/' + linkId +'/add-reduction' %}
+        {% set formMethod='POST' %}
+      {% endif %}
+    {% else %}
+      {% set submitButtonText='Back to Reductions' %}
+      {% set formAction='/' + workloadType + '/offender-manager/' + linkId + '/reductions' %}
+      {% set formMethod='GET' %}
+    {% endif %}
+  {% else %}
+    {% set headerText='New Reduction Reason' %}
+    {% set reductionText='Add a new reduction reason' %}
+    {% set submitButtonText='Add reduction reason' %}
+    {% set formAction='/' + workloadType + '/offender-manager/' + linkId +'/add-reduction' %}
+    {% set formMethod='POST' %}  
+  {% endif %}
+
+  {% include "includes/validation-error-messages.html" %}
+
+  <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">{{ headerText }}</header>
+  <p class="lede">{{ reductionText }}<span class="bold">{{ title }}</span></p>
+  {% set first = true %}
+  <form action="{{ formAction }}" method="{{formMethod}}" id="reductionForm">
+    <input type="hidden" name="reductionId" value="{{reduction.id}}"/>
+    <div class="form-group" id="reduction_reason_selection">
+      
+    <div class="form-group" id="reduction_name">
+      {% if errors['reductionName'][0] %}
+        <span class="error-message">{{ errors['reductionName'][0] }}</span>
+      {% endif %}
+      <label class="form-label-bold" for="reductionName">Reduction Name</label>
+      <input class="form-control" id="reductionName" name="reductionName" style="width: 800px" value="{{reduction.name}}">
+    </div>
+
+    <div class="form-group" id="reduction_short_name">
+      {% if errors['reductionShortName'][0] %}
+        <span class="error-message">{{ errors['reductionShortName'][0] }}</span>
+      {% endif %}
+      <label class="form-label-bold" for="reductionShortName">Abbreviated Reduction Name</label>
+      <input class="form-control" id="reductionShortName" name="reductionShortName" style="width: 800px" value="{{reduction.shortName}}">
+    </div>
+
+    <div class="form-group" id="reduction_category">
+        {% if errors['reductionCategory'][0] %}
+          <span class="error-message">{{ errors['reductionCategory'][0] }}</span>
+        {% endif %}
+        <label class="form-label-bold" for="reductionCategory">Category</label>
+        <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}"> 
+        <option value="select" disabled selected>Please select a category...</option>
+        <option value="1">Personal Circumstances</option>
+        <option value="2">Community Justice Learning</option>
+        <option value="3">Work Circumstances</option>
+      </select>
+      </div>
+
+    <div class="form-group" id="allowance_percentage">
+      {% if errors['allowancePercentage'][0] %}
+        <span class="error-message">{{ errors['allowancePercentage'][0] }}</span>
+      {% endif %}
+      <label class="form-label-bold" for="allowancePercentage">Allowance Percentage (Optional)</label>
+      <input class="form-control" id="allowancePercentage" name="allowancePercentage" style="width: 100px" value="{{reduction.allowancePercentage}}">
+    </div>
+
+    <div class="form-group" id="max_allowance_percentage">
+      {% if errors['maxAllowancePercentage'][0] %}
+        <span class="error-message">{{ errors['maxAllowancePercentage'][0] }}</span>
+      {% endif %}
+      <label class="form-label-bold" for="maxAllowancePercentage">Maximum Allowance Percentage (Optional)</label>
+      <input class="form-control" id="maxAllowancePercentage" name="maxAllowancePercentage" style="width: 100px" value="{{reduction.maxAllowancePercentage}}">
+    </div>
+
+    <div class="form-group" id="months_to_expiry">
+        {% if errors['monthsToExpiry'][0] %}
+          <span class="error-message">{{ errors['monthsToExpiry'][0] }}</span>
+        {% endif %}
+        <label class="form-label-bold" for="monthsToExpiry">Months to Expiry (Optional)</label>
+        <input class="form-control" id="monthsToExpiry" name="monthsToExpiry" style="width: 100px" value="{{reduction.monthsToExpiry}}">
+      </div>
+
+    {% include "includes/csrf-hidden-input.html"%}
+    <input id="submit-button" class="button" type="submit" value="{{ submitButtonText }}">
+  </form>
+  {# {% if reduction %} #}
+  <h2 class="heading-small">Other options</h2>
+  <form name="archiveReduction" method="POST" action="/{{ workloadType }}/offender-manager/{{ linkId }}/update-reduction-status">
+    <!-- Including the csrf-hidden-input.html hides the links -->
+    <input type="hidden"  name="_csrf"  value="{{ csrfToken }}">
+    <input type="hidden" name="reductionId" value="{{reduction.id}}">
+    <input type="hidden" name="status" value="ARCHIVED">
+  </form>
+  
+  <form name="deleteReduction" method="POST" action="/{{ workloadType }}/offender-manager/{{ linkId }}/update-reduction-status">
+    <!-- Including the csrf-hidden-input.html hides the links -->
+    <input type="hidden"  name="_csrf"  value="{{ csrfToken }}">
+    <input type="hidden" name="reductionId" value="{{ reduction.id }}">
+    <input type="hidden" name="status" value="DELETED">
+  </form>
+  <div>
+  <ul>
+    <li><a  href="javascript:document.deleteReduction.submit()">Delete Reduction Reason</a></li>
+  </ul>
+  </div>
+  {# {% endif %} #}
+
+</main>
+{% endblock %} {% block body_end %}
+<script src="/public/javascripts/vendor/jquery.min.js"></script>
+<script type="text/javascript">
+  var refData = {{ referenceData | dump | safe }}
+</script>
+<script src="/public/javascripts/add-reduction.js"></script>
+{% if not reduction %}
+<script>
+  $(function(){
+    $('#submit-button').prop('disabled', true);
+  });
+</script>
+{% endif %}
+{% if reduction.status === 'ARCHIVED' %}
+<script>
+    $(function(){
+      $('#select-box').prop('disabled', true);
+      $('#end-year').prop('readonly', true);
+      $('#end-month').prop('readonly', true);
+      $('#end-day').prop('readonly', true);
+      $('#start-year').prop('readonly', true);
+      $('#start-month').prop('readonly', true);
+      $('#start-day').prop('readonly', true);
+      $('#hours').prop('readonly', true);
+      $('#textarea').prop('readonly', true);
+    });
+</script>
+{% endif %}
+{% endblock %}

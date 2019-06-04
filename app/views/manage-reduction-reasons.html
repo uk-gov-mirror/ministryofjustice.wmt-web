@@ -1,0 +1,92 @@
+{% extends "includes/layout.html" %} 
+
+{% block content %}
+<main id="content" role="main">
+
+    {% include "includes/breadcrumbs.html" %}
+    
+    {% include "includes/validation-error-messages.html" %} 
+    
+    {% include "includes/title-subtitle.html"%}
+    
+    {% include "includes/sub-nav.html" %} 
+    
+    {% if successText %}
+    <div class="message message--success">{{ successText }}</div>
+    {% endif %}
+
+    {% set columnNameType='Type' %}
+    {% set columnNameHours='Hours' %}
+    {% set columnNameStartDate='Start date' %}
+    {% set columnNameEndDate='End date' %}
+
+    <a href="/add-reduction-reason" class="button">Add a reduction reason</a>
+        
+    <table class="sln-table-reductions">
+        <thead>
+            <tr>
+                <th id="name_abb">Name</th>
+                <th id="category">Reduction Category</th>
+                <th id="months_to_expiry">Months to Expiry</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="">
+            <tr>
+                <td headers="name_abb">Disability</td>
+                <td headers="category">Personal Circumstances</td>
+                <td headers="months_to_expiry">N/A</td>
+                <td><a href="/add-reduction-reason">View</a></td>
+            </tr>
+            <tr>
+                <td headers="name_abb">Long Term Sickness Absence</td>
+                <td headers="category">Personal Circumstances</td>
+                <td headers="months_to_expiry">N/A</td>
+                <td><a href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ newReduction.id }}">View</a></td>
+            </tr>
+            <tr>
+                <td headers="name_abb">Phased Return to Work</td>
+                <td headers="category">Personal Circumstances</td>
+                <td headers="months_to_expiry">N/A</td>
+                <td><a href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ newReduction.id }}">View</a></td>
+            </tr>
+            <tr>
+                <td headers="name_abb">Pregnancy</td>
+                <td headers="category">Personal Circumstances</td>
+                <td headers="months_to_expiry">N/A</td>
+                <td><a href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ newReduction.id }}">View</a></td>
+            </tr>
+            <tr>
+                <td headers="name_abb">Maternity Leave</td>
+                <td headers="category">Personal Circumstances</td>
+                <td headers="months_to_expiry">6</td>
+                <td><a href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ newReduction.id }}">View</a></td>
+            </tr>
+            <tr>
+                <td headers="name_abb">PQiP - 1st 6 months</td>
+                <td headers="category">Community Justice Learning</td>
+                <td headers="months_to_expiry">6</td>
+                <td><a href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ newReduction.id }}">View</a></td>
+            </tr>
+            <tr>
+                <td headers="name_abb">NQO</td>
+                <td headers="category">Community Justice Learning</td>
+                <td headers="months_to_expiry">9</td>
+                <td><a href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ newReduction.id }}">View</a></td>
+            </tr>
+             <tr>
+                <td headers="name_abb">Groups (Group Supervision)</td>
+                <td headers="category">Work Circumstances</td>
+                <td headers="months_to_expiry">N/A</td>
+                <td><a href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ newReduction.id }}">View</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</main>
+
+<div class="lastUpdated">
+        <p>Last updated on  <span class="bold">{{date}}</span></p>
+        </div>
+
+{% endblock %}
