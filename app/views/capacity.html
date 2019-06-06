@@ -310,6 +310,7 @@
         <th id='unpaidWork'>UPW</th>
         <th id='overdueTermination'>Overdue Terminations</th>
         <th id='suspendedLifers'>Suspended Lifers</th>
+        <th id='suspendedSentenceOrders'>Suspended Sentence Orders</th>
       </tr>
     </thead>
     {% if organisationLevel === 'team' %}
@@ -324,6 +325,7 @@
             <td headers="unpaid work">{{ member.totalUPW }}</td>
             <td headers="overdue terminations">{{ member.totalOT }}</td>
             <td headers="suspended lifers">{{ member.totalSL }}</td>
+            <td headers="suspended sentence orders">{{ member.totalSSO }}</td>
       </tr>
     </tfoot>
       {% else %}
@@ -334,6 +336,7 @@
           <td headers="unpaid work">{{ member.upw }}</td>
           <td headers="overdue terminations">{{ member.ot }}</td>
           <td headers="suspended lifers">{{ member.sl }}</td>
+          <td headers="suspended sentence orders">{{ member.sso }}</td>
       </tr>
       {% endif %}
       {% endfor %}
@@ -351,6 +354,7 @@
           <td headers="unpaid work">{{ member.grades[i].upw }}</td>
           <td headers="overdue terminations">{{ member.grades[i].ot }}</td>
           <td headers="suspended lifers">{{ member.grades[i].sl }}</td>
+          <td headers="suspended sentence orders">{{ member.grades[i].sso }}</td>
         </tr>
         {% endfor %}
         {% if loop.last %}
@@ -362,6 +366,7 @@
             <td headers="unpaid work">{{ member.totalUPW }}</td>
             <td headers="overdue terminations">{{ member.totalOT }}</td>
             <td headers="suspended lifers">{{ member.totalSL }}</td>
+            <td headers="suspended sentence orders">{{ member.totalSSO }}</td>
         </tr>
     </tfoot>
         {% endif %}
