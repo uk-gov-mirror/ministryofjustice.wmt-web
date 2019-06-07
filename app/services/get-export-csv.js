@@ -31,6 +31,8 @@ const GROUP_SUPERVISION_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Tea
 const GROUP_SUPERVISION_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'contactDate', 'caseRefNo', 'contactId', 'omName', 'omGradeCode', 'contactDescription', 'contactCode', 'points']
 const CMS_EXPORT_FIELD_NAMES = ['Contact Region Name', 'Contact LDU Cluster', 'Contact Team Name', 'Contact Date', 'Contact Name', 'Contact Grade', 'OM Region Name', 'OM LDU Cluster', 'OM Team Name', 'CRN', 'Contact Id', 'OM Name', 'OM Grade', 'Contact Type Description', 'Contact Code', 'Contact Points', 'OM Points']
 const CMS_EXPORT_FIELDS = ['contactRegionName', 'contactLduName', 'contactTeamName', 'contactDate', 'contactName', 'contactGradeCode', 'omRegionName', 'omLduName', 'omTeamName', 'caseRefNo', 'contactId', 'omName', 'omGradeCode', 'contactDescription', 'contactCode', 'contactPoints', 'omPoints']
+const SUSPENDED_LIFERS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Tier Code', 'Row Type', 'CRN', 'Case Type', 'Offender Manager Name', 'Grade Code', 'In Custody?', 'Register Level', 'Register Category', 'Register Category Description', 'Registration Date']
+const SUSPENDED_LIFERS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'tierCode', 'rowType', 'caseReferenceNo', 'caseType', 'offenderManagerName', 'gradeCode', 'inCustody', 'registerLevel', 'registerCategory', 'registerCategoryDescription', 'registrationDate']
 
 module.exports = function (organisationLevel, result, tab) {
   var filename
@@ -165,6 +167,10 @@ var getFields = function (organisationLevel, tab) {
       fields = CMS_EXPORT_FIELDS
       fieldNames = CMS_EXPORT_FIELD_NAMES
       break
+    case tabs.EXPORT.SUSPENDED_LIFERS_EXPORT:
+      fields = SUSPENDED_LIFERS_EXPORT_FIELDS
+      fieldNames = SUSPENDED_LIFERS_EXPORT_FIELD_NAMES
+      break
   }
   return { fields: fields, fieldNames: fieldNames }
 }
@@ -240,6 +246,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
     case tabs.EXPORT.CASE_DETAILS_EXPORT:
     case tabs.EXPORT.GROUP_SUPERVISION_EXPORT:
     case tabs.EXPORT.CMS_EXPORT:
+    case tabs.EXPORT.SUSPENDED_LIFERS_EXPORT:
       csv = generateCsv(result, fields, fieldNames)
       break
   }
