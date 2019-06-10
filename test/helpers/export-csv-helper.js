@@ -389,7 +389,7 @@ module.exports.SUSPENDED_LIFER_EXPORT_RESULT = {
     registerCategoryDescription: 'Lifer - IPP',
     registrationDate: '28/02/2019'
   },
-  { 
+  {
     regionName: 'NPS North West',
     lduName: 'Lancashire SE',
     teamName: 'NPS - Blackburn 2',
