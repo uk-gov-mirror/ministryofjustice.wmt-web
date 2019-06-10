@@ -41,7 +41,10 @@ module.exports = function (id, type) {
               var year = newDate.getFullYear()
               var month = newDate.getMonth() + 1
               var dt = newDate.getDate()
-              result.registrationDate = dt + '-' + month + '-' + year
+              if (month < 10) {
+                month = '0' + month
+              }
+              result.registrationDate = dt + '/' + month + '/' + year
             }
           })
         }

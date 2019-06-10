@@ -360,6 +360,100 @@ module.exports.GS_EXPORT_RESULT = {
   }]
 }
 
+module.exports.SUSPENDED_LIFER_CSV = {
+  filename: ('Test_Suspended_Lifer_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
+  csv: '"Region Name","LDU Cluster","Team Name","Tier Code","Row Type","CRN","Case Type","Offender Manager Name","Grade Code","In Custody?","Register Level","Register Category","Register Category Description","Registration Date"\n' +
+  '"NPS North West","Lancashire SE","NPS - Blackburn 2","D2","Suspended Lifer","N144966","LICENSE","Test Forename 511 Test Surname 511","PSO","No","L2","LF01","Lifer - IPP","28/02/2019"\n' +
+  '"NPS North West","Lancashire SE","NPS - Blackburn 2","D2","Suspended Lifer","N145304","LICENSE","Test Forename 511 Test Surname 511","PSO","No","L2","LF03","Lifer - Life Imprisonment","19/12/1990"\n' +
+  '"NPS North West","Lancashire SE","NPS - Blackburn 2","D2","Suspended Lifer","N146588","LICENSE","Test Forename 511 Test Surname 511","PSO","No","L2","LF03","Lifer - Life Imprisonment","28/05/1999"\n' +
+  '"NPS North West","Lancashire SE","NPS - Blackburn 2","D2","Suspended Lifer","N148080","LICENSE","Test Forename 511 Test Surname 511","PSO","No","L2","LF03","Lifer - Life Imprisonment","14/02/2019"\n' +
+  '"NPS North West","Lancashire SE","NPS - Blackburn 2","D2","Suspended Lifer","N148392","LICENSE","Test Forename 511 Test Surname 511","PSO","No","L2","LF03","Lifer - Life Imprisonment","14/02/2019"'
+}
+
+module.exports.SUSPENDED_LIFER_EXPORT_RESULT = {
+  title: 'Suspended Lifers Export',
+  suspendedLiferExportDetails:
+  [{
+    regionName: 'NPS North West',
+    lduName: 'Lancashire SE',
+    teamName: 'NPS - Blackburn 2',
+    tierCode: 'D2',
+    rowType: 'Suspended Lifer',
+    caseReferenceNo: 'N144966',
+    caseType: 'LICENSE',
+    offenderManagerName: 'Test Forename 511 Test Surname 511',
+    gradeCode: 'PSO',
+    inCustody: 'No',
+    registerLevel: 'L2',
+    registerCategory: 'LF01',
+    registerCategoryDescription: 'Lifer - IPP',
+    registrationDate: '28/02/2019'
+  },
+  { 
+    regionName: 'NPS North West',
+    lduName: 'Lancashire SE',
+    teamName: 'NPS - Blackburn 2',
+    tierCode: 'D2',
+    rowType: 'Suspended Lifer',
+    caseReferenceNo: 'N145304',
+    caseType: 'LICENSE',
+    offenderManagerName: 'Test Forename 511 Test Surname 511',
+    gradeCode: 'PSO',
+    inCustody: 'No',
+    registerLevel: 'L2',
+    registerCategory: 'LF03',
+    registerCategoryDescription: 'Lifer - Life Imprisonment',
+    registrationDate: '19/12/1990'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Lancashire SE',
+    teamName: 'NPS - Blackburn 2',
+    tierCode: 'D2',
+    rowType: 'Suspended Lifer',
+    caseReferenceNo: 'N146588',
+    caseType: 'LICENSE',
+    offenderManagerName: 'Test Forename 511 Test Surname 511',
+    gradeCode: 'PSO',
+    inCustody: 'No',
+    registerLevel: 'L2',
+    registerCategory: 'LF03',
+    registerCategoryDescription: 'Lifer - Life Imprisonment',
+    registrationDate: '28/05/1999'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Lancashire SE',
+    teamName: 'NPS - Blackburn 2',
+    tierCode: 'D2',
+    rowType: 'Suspended Lifer',
+    caseReferenceNo: 'N148080',
+    caseType: 'LICENSE',
+    offenderManagerName: 'Test Forename 511 Test Surname 511',
+    gradeCode: 'PSO',
+    inCustody: 'No',
+    registerLevel: 'L2',
+    registerCategory: 'LF03',
+    registerCategoryDescription: 'Lifer - Life Imprisonment',
+    registrationDate: '14/02/2019' },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Lancashire SE',
+    teamName: 'NPS - Blackburn 2',
+    tierCode: 'D2',
+    rowType: 'Suspended Lifer',
+    caseReferenceNo: 'N148392',
+    caseType: 'LICENSE',
+    offenderManagerName: 'Test Forename 511 Test Surname 511',
+    gradeCode: 'PSO',
+    inCustody: 'No',
+    registerLevel: 'L2',
+    registerCategory: 'LF03',
+    registerCategoryDescription: 'Lifer - Life Imprisonment',
+    registrationDate: '14/02/2019'
+  }]
+}
+
 module.exports.LDU_CASELOAD_RESULT = {
   title: 'LDU Cluster 2',
   subTitle: 'LDU Cluster',
