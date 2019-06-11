@@ -18,6 +18,7 @@ module.exports = function (id, type) {
     'total_points AS totalPoints',
     'contracted_hours AS contractedHours',
     'reduction_hours AS reductionHours',
+    'cms_adjustment_points as cmsAdjustmentPoints',
     'link_id AS linkId']
 
   if (orgUnit.name === orgUnitConstants.TEAM.name || orgUnit.name === orgUnitConstants.OFFENDER_MANAGER.name) {
