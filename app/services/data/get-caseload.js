@@ -2,13 +2,14 @@ const knex = require('../../../knex').web
 const orgUnitFinder = require('../helpers/org-unit-finder')
 const ORGANISATION_UNIT = require('../../constants/organisation-unit')
 
-module.exports = function (id, type) {
+module.exports = function (id, type, getNationalCaseload = false) {
   var orgUnit = orgUnitFinder('name', type)
   var table = orgUnit.caseloadView
 
   var selectList = [
     'link_id AS linkId',
     'grade_code AS grade',
+    'region_name AS regionName',
     'total_cases AS totalCases',
     'location AS caseType',
     'untiered',
@@ -40,6 +41,10 @@ module.exports = function (id, type) {
   }
 
   var noExpandHint = ' WITH (NOEXPAND)'
+
+  if (getNationalCaseload) {
+    whereString = ''
+  }
 
   return knex.schema.raw('SELECT ' + selectList.join(', ') +
       ' FROM ' + table +

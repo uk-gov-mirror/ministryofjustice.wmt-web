@@ -9,23 +9,24 @@ module.exports = function () {
     'ldu_name AS lduName',
     'team_name AS teamName',
     'name AS offenderManager',
+    'grade_code AS gradeCode',
     'contracted_hours AS contractedHours',
     'reduction_reason AS reason',
-    'amount',
+    'amount AS hours',
     'start_date AS startDate',
     'end_date AS endDate',
     'reduction_status AS status',
     'additional_notes AS additionalNotes',
-    'grade_code AS gradeCode'
   ]
 
   return knex(table)
     .columns(selectColumns)
-    .where(status, 'ACTIVE')
+    .where('reduction_status', 'ACTIVE')
     .then(function (results) {
       results.forEach(function (record) {
         record.startDate = dateFormatter.formatDate(record.startDate, 'DD MM YYYY, HH:mm')
         record.endDate = dateFormatter.formatDate(record.endDate, 'DD MM YYYY, HH:mm')
       })
+      return results
     })
 }

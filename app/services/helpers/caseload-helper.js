@@ -25,6 +25,7 @@ module.exports.getCaseloadSummaryTotalsByTeam = function (caseloads) {
       // Make a copy of the object to ensure the original value isn't affected
       var newValue = {
         name: caseloads[idx].name,
+        regionName: caseloads[idx].regionName,
         linkId: caseloads[idx].linkId,
         totalCases: 0,
         custodyTotalCases: 0,
@@ -141,7 +142,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false, is
 
   // For each team, create one entry in the new results set with one 'grade' sub-object per grade
   for (var team in caseloadTotalsByTeam) {
-    var newTeamEntry = { linkId: caseloadTotalsByTeam[team].linkId, name: caseloadTotalsByTeam[team].name }
+    var newTeamEntry = { linkId: caseloadTotalsByTeam[team].linkId, name: caseloadTotalsByTeam[team].name, regionName: caseloadTotalsByTeam[team].regionName }
     var teamGradeRecords = caseloadTotalsByGrade.filter((row) => row.linkId === caseloadTotalsByTeam[team].linkId)
     var gradeRecords = []
     for (var record in teamGradeRecords) {

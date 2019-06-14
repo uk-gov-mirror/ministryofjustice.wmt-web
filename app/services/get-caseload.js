@@ -5,10 +5,10 @@ const caseloadHelper = require('./helpers/caseload-helper')
 const organistaionUnit = require('../constants/organisation-unit')
 const caseType = require('../constants/case-type')
 
-module.exports = function (id, organisationLevel, isCSV = false) {
+module.exports = function (id, organisationLevel, isCSV = false, getNationalCaseload = false) {
   var organisationUnitType = getOrganisationUnit('name', organisationLevel)
 
-  return getCaseload(id, organisationLevel)
+  return getCaseload(id, organisationLevel, getNationalCaseload)
     .then(function (results) {
       var breadcrumbs = getBreadcrumbs(id, organisationLevel)
       var title = breadcrumbs[0].title
