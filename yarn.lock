@@ -3801,10 +3801,6 @@ punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
-python-shell@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/python-shell/-/python-shell-1.0.7.tgz#40cf1bea92c888122e3812d1dee809227ecb1212"
-
 q@1.1.x:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/q/-/q-1.1.2.tgz#6357e291206701d99f197ab84e57e8ad196f2a89"

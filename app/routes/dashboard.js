@@ -1,6 +1,5 @@
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
-const dashboard = require('../services/dashboard')
 
 module.exports = function (router) {
   router.get('/dashboard', function (req, res, next) {
@@ -11,6 +10,5 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-    return dashboard()
   })
 }
