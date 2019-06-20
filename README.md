@@ -4,18 +4,24 @@ This is the webserver application that will present the information stored in th
 It is a node.js application using the express web framework.
 
 ## Prerequisites
-- Node v6.10.0 (managed using [nvm](https://github.com/creationix/nvm))
+- Node v6 (managed using [nvm](https://github.com/creationix/nvm))
+- Yarn
 
 On OSX (using [homebrew](https://brew.sh/)):
 
 - `brew install nvm`
 - Follow the instructions in the brew installer output
-- `nvm install 6.10.0`
+
+Install Node version 6
+- `nvm install 6`
+
+Install Yarn
+- `npm install -g yarn`
 
 ## Getting Started
 ```
-npm install
-npm start
+yarn install
+yarn start
 ```
 
 Navigate to `http://localhost:3000` to see the running application
