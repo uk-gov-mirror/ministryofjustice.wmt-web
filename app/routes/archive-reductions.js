@@ -68,7 +68,7 @@ module.exports = function (router) {
     }
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var extraCriteria = heDecode.decode(req.body['daily-multi-search-field-entry'])
+    var extraCriteria = heDecode.decode(req.body['reductions-multi-search-field-entry'])
 
     // If date range has errors don't search database
     if (errors) {
@@ -111,7 +111,7 @@ module.exports = function (router) {
     }
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var extraCriteria = heDecode.decode(req.body['daily-multi-search-field-entry'])
+    var extraCriteria = heDecode.decode(req.body['reductions-multi-search-field-entry'])
 
     // If date range has errors don't search database
     if (errors) {
