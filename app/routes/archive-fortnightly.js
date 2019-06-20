@@ -113,7 +113,7 @@ module.exports = function (router) {
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     var extraCriteria = heDecode.decode(req.body['daily-multi-search-field-entry'])
-    
+
     if (errors) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
     }

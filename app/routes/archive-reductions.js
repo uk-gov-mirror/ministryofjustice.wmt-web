@@ -112,7 +112,7 @@ module.exports = function (router) {
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     var extraCriteria = heDecode.decode(req.body['daily-multi-search-field-entry'])
-    
+
     // If date range has errors don't search database
     if (errors) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
