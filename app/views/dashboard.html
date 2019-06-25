@@ -1,0 +1,44 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/breadcrumbs.html" %}
+
+    {% include "includes/validation-error-messages.html" %}
+
+    {% include "includes/title-subtitle.html" %}
+
+    {% include "includes/sub-nav.html" %}
+    
+
+    <table class="sln-table-reductions">
+        <colgroup>
+            <col span="1" style="width:35%;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th id="filetype">File Type</th>
+                <th id="time_generated">Date Generated</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody class="">
+            {% for dashboardFile in dashboardFiles %}
+            <tr>
+                <td headers="time_generated">{{ dashboardFile.file_type | capitalize}}</td>
+                <td headers="time_generated">{{ dashboardFile.date_created }}</td>
+                <td><a href="/probation/{{ organisationLevel }}/{{ linkId }}/dashboard/download?id={{ dashboardFile.id }}">Download a copy</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+
+<div class="lastUpdated">
+    <p>Last updated on  <span class="bold">{{date}}</span></p>
+</div>
+
+{% endblock %}
