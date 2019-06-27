@@ -34,7 +34,7 @@ module.exports = function (id, organisationalUnitName, currentPath, workloadType
         if (organisationalUnitName !== organisationUnitConstants.NATIONAL.name) {
           navigation.push(new Link('Export', baseLink + '/export'))
         } else {
-          if (authorisation === false || userRole === 'Data Admin' || userRole === 'System Admin' || userRole === 'Manager') {
+          if (authorisation === false || userRole === 'Data Admin') {
             navigation.push(new Link('Dashboard', baseLink + '/dashboard'))
           }
         }
