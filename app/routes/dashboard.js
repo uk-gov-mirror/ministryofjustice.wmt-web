@@ -24,7 +24,7 @@ module.exports = function (router) {
       } else if (error instanceof Forbidden) {
         return res.status(error.statusCode).render(error.redirect, {
           heading: messages.ACCESS_DENIED,
-          message: messages.MANAGER_ROLES_REQUIRED
+          message: messages.ADMIN_ROLES_REQUIRED
         })
       }
     }
@@ -63,14 +63,14 @@ module.exports = function (router) {
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/dashboard/download', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
-      authorisation.hasRole(req, [roles.SYSTEM_ADMIN, roles.DATA_ADMIN, roles.MANAGER])
+      authorisation.hasRole(req, [roles.DATA_ADMIN])
     } catch (error) {
       if (error instanceof Unauthorized) {
         return res.status(error.statusCode).redirect(error.redirect)
       } else if (error instanceof Forbidden) {
         return res.status(error.statusCode).render(error.redirect, {
           heading: messages.ACCESS_DENIED,
-          message: messages.MANAGER_ROLES_REQUIRED
+          message: messages.ADMIN_ROLES_REQUIRED
         })
       }
     }
