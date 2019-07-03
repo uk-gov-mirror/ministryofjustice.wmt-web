@@ -162,6 +162,13 @@
   });
 </script>
 {% endif %}
+{% if not reduction.isEnabled %}
+<script>
+  $(function(){
+    $('#submit-button').prop('disabled', true);
+  });
+</script>
+{% endif %}
 {% if reduction.status === 'ARCHIVED' %}
 <script>
     $(function(){

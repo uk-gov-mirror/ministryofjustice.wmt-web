@@ -9,8 +9,11 @@
 
   {% include "includes/title-subtitle.html"%}
 
+  {# <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">{{ headerText }}</header> #}
+  {# <p class="lede">{{ reductionText }}<span class="bold">{{ title }}</span></p> #}
   {% set first = true %}
-  <form action="/add-reduction-reason" method="POST" id="reductionForm">
+  <form action="/edit-reduction-reason?id={{ reduction.id }}" method="POST" id="reductionForm">
+    <input type="hidden" name="reasonId" id="reasonId" value="{{ reduction.id }}"/>
       
     <div class="form-group" id="reduction_name">
       {% if errors['reductionName'][0] %}
@@ -28,7 +31,7 @@
       <input class="form-control" id="reductionShortName" name="reductionShortName" style="width: 800px" value="{{reduction.reasonShortName}}" maxlength="255">
     </div>
 
-    <div class="form-group" id="reduction_category">
+    <div class="form-group" id="category">
         {% if errors['category'][0] %}
           <span class="error-message">{{ errors['category'][0] }}</span>
         {% endif %}
@@ -80,7 +83,7 @@
 
     {% include "includes/csrf-hidden-input.html"%}
     
-    <input id="submit-button" class="button" type="submit" value="Add Reduction Reason">
+    <input id="submit-button" class="button" type="submit" value="Save Changes">
   </form>
 
 </main>

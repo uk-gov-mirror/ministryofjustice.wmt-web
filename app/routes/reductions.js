@@ -14,7 +14,7 @@ const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const ErrorHandler = require('../services/validators/error-handler')
 const ERROR_MESSAGES = require('../services/validators/validation-error-messages')
-
+const log = require('../logger')
 var lastUpdated
 
 module.exports = function (router) {
@@ -409,6 +409,7 @@ module.exports = function (router) {
     var reductionStartDate = [requestBody.redStartDay, requestBody.redStartMonth, requestBody.redStartYear]
     var reductionEndDate = [requestBody.redEndDay, requestBody.redEndMonth, requestBody.redEndYear]
     var reasonId = requestBody.reasonForReductionId
+    console.log('reasonId ' + reasonId)
     return new Reduction(reasonId, requestBody.reductionHours, reductionStartDate, reductionEndDate, requestBody.notes, reductionReason, submitterId)
   }
 
@@ -430,6 +431,7 @@ module.exports = function (router) {
   }
 
   var mapReductionToViewModel = function (reduction) {
+    log.info(reduction)
     var viewModel
     if (reduction !== undefined) {
       viewModel = {
@@ -443,7 +445,8 @@ module.exports = function (router) {
         end_month: reduction.reductionEndDate.getMonth() + 1,
         end_year: reduction.reductionEndDate.getFullYear(),
         notes: reduction.notes,
-        status: reduction.status
+        status: reduction.status,
+        isEnabled: reduction.isEnabled
       }
     }
     return viewModel
