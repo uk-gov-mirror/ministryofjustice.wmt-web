@@ -1,6 +1,5 @@
 const workloadPointsService = require('../services/workload-points-service')
 const WorkloadPoints = require('../services/domain/workload-points')
-const Adjustment = require('../services/domain/adjustment')
 const ValidationError = require('../services/errors/validation-error')
 const authorisation = require('../authorisation')
 const messages = require('../constants/messages')
@@ -9,6 +8,7 @@ const Unauthorized = require('../services/errors/authentication-error').Unauthor
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 const logger = require('../logger')
 const getAdjustmentPointsConfig = require('../services/data/get-adjustment-points-config')
+const updateAdjustmentPointsConfig = require('../services/data/update-adjustment-points-config')
 const adjustmentTypes = require('../constants/adjustment-type')
 
 module.exports = function (router) {
@@ -102,14 +102,29 @@ module.exports = function (router) {
       if (req.user) {
         req.body.userId = req.user.userId.toString()
       }
-      var updatedWorkloadPoints = new WorkloadPoints(req.body)
-      var cmsObjects = filterAdjustments('CMS', req)
-      var gsObjects = filterAdjustments('NGS', req)
-      var updatedCMSAdjustmentPoints = new Adjustment(cmsObjects)
-      var updatedGSAdjustmentPoints = new Adjustment(gsObjects)
+      var adjustmentsFromInput = filterAdjustments('adjustment', req)
+      var updatedWorkloadPoints = new WorkloadPoints(req.body, adjustmentsFromInput)
       return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints, false)
         .then(function () {
-          return res.redirect(302, '/admin/workload-points?success=true')
+          return getAdjustmentPointsConfig(adjustmentTypes.CMS)
+            .then(function (cms) {
+              return getAdjustmentPointsConfig(adjustmentTypes.GS)
+                .then(function (gs) {
+                  var cmsUpdated = updateAdjustmentObjects(cms, adjustmentsFromInput)
+                  var gsUpdated = updateAdjustmentObjects(gs, adjustmentsFromInput)
+                  adjustmentUpdatePromises = []
+                  cmsUpdated.forEach(function (cmsAdjustment) {
+                    adjustmentUpdatePromises.push(updateAdjustmentPointsConfig(cmsAdjustment))
+                  })
+                  gsUpdated.forEach(function (gsAdjustment) {
+                    adjustmentUpdatePromises.push(updateAdjustmentPointsConfig(gsAdjustment))
+                  })
+                  return Promise.all(adjustmentUpdatePromises)
+                    .then(function () {
+                      return res.redirect(302, '/admin/workload-points?success=true')
+                    })
+                })
+            })
         })
     } catch (error) {
       logger.error(error)
@@ -121,11 +136,15 @@ module.exports = function (router) {
               .then(function (cms) {
                 return getAdjustmentPointsConfig(adjustmentTypes.GS)
                   .then(function (gs) {
+                    var cmsUpdated = updateAdjustmentObjects(cms, adjustmentsFromInput)
+                    var gsUpdated = updateAdjustmentObjects(gs, adjustmentsFromInput)
                     return res.status(400).render('workload-points', {
                       title: result.title,
                       subTitle: result.subTitle,
                       breadcrumbs: result.breadcrumbs,
                       wp: req.body,
+                      cms: cmsUpdated,
+                      gs: gsUpdated,
                       updatedBy: result.updatedBy,
                       errors: error.validationErrors,
                       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
@@ -194,4 +213,11 @@ var filterAdjustments = function (prefix, req) {
   })
   delete object[prefix + 'Count']
   return object
+}
+
+var updateAdjustmentObjects = function (adjDBObjects, adjUserInput){
+  adjDBObjects.forEach(function (adj) {
+    adj.points = adjUserInput['adjustment' + adj.adjustmentId]
+  })
+  return adjDBObjects
 }

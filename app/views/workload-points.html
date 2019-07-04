@@ -38,7 +38,7 @@
       <li><a href="#custody" role="anchor-div">Custody</a></li>
       <li><a href="#license" role="anchor-div">License</a></li>
       <li><a href="#community" role="anchor-div">Community</a></li>
-      {% if wp.isT2A===false %}
+      {% if not wp.isT2A or wp.isT2A === false or wp.isT2A === 'false' %}
         <li><a href="#cms" role="anchor-div">CMS</a></li>
         <li><a href="#gs" role="anchor-div">GS</a></li>
       {% endif %}
@@ -310,23 +310,23 @@
             </div>
           </div>
       </div>
-      {% if wp.isT2A===false %}
+      {% if not wp.isT2A or wp.isT2A === false or wp.isT2A === 'false' %}
       <div id="cms">
         <div class="grid-row">
-            <div class="column-two-thirds">
+            <div class="column-full">
               <table>
                 <tbody>
                   {% for c in cms %}
-                  {% set cmsId=c.contactCode %}
-                    <tr>
+                  {% set cmsId = 'adjustment' + c.adjustmentId %}
+                    <tr class="{% if errors[cmsId][0] %} border-error {% endif %}">
                       <th scope="row">
                         {% if errors[cmsId][0] %}
                           <span class="error-message">{{ errors[cmsId][0] }}</span>
                         {% endif %}
-                        <label class="form-label-bold" for="{{ cmsId }}">{{ c.contactCode }} - {{ c.contactDescription }}</label>
+                        <label class="form-label-bold" for="{{ cmsId }}">{{ c.contactCode }} &nbsp; - &nbsp; {{ c.contactDescription }}</label>
                       </th>
                       <td class="numeric">
-                        <input class="form-control" id="{{ cmsId }}" name="{{ cmsId }}" type="number" value="{{ c.points }}">
+                        <input class="form-control {% if errors[cmsId] %} form-control-error {% endif %}" id="{{ cmsId }}" name="{{ cmsId }}" type="number" value="{{ c.points }}">
                       </td>
                     </tr>
                   {% endfor %}
@@ -339,17 +339,17 @@
 
       <div id="gs">
         <div class="grid-row">
-            <div class="column-two-thirds">
+            <div class="column-full">
               <table>
                 <tbody>
                     {% for g in gs %}
-                      {% set gsId=g.contactCode %}
+                      {% set gsId = 'adjustment' + g.adjustmentId %}
                       <tr>
                         <th scope="row">
                           {% if errors[gsId][0] %}
                             <span class="error-message">{{ errors[gsId][0] }}</span>
                           {% endif %}
-                          <label class="form-label-bold" for="{{ gsId }}">{{ g.contactCode }} - {{ g.contactDescription }}</label>
+                          <label class="form-label-bold" for="{{ gsId }}">{{ g.contactCode }} &nbsp; - &nbsp; {{ g.contactDescription }}</label>
                         </th>
                         <td class="numeric">
                           <input class="form-control" id="{{ gsId }}" name="{{ gsId }}" type="number" value="{{ g.points }}">
