@@ -32,6 +32,9 @@ module.exports = function (router) {
 
     var breadcrumbs = getBreadcrumbs('/manage-reduction-reasons')
 
+    var success = req.query.success
+    var successText = success ? 'The Reduction Reason was saved successfully!' : null
+
     return getReductionReasons(false).then(function (reasons) {
       var reductionReasons = formatReductionReasons(reasons)
       var enabledReductionReasons = reductionReasons.filter(enabledReduction => enabledReduction.isEnabled === true)
@@ -41,6 +44,7 @@ module.exports = function (router) {
         disabledReductionReasons: disabledReductionReasons,
         breadcrumbs: breadcrumbs,
         title: 'Manage Reduction Reasons',
+        successText: successText,
         subTitle: getSubtitle(true),
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
         authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
@@ -173,7 +177,7 @@ module.exports = function (router) {
       }
       return insertReductionReason(reductionReason)
         .then(function () {
-          return res.redirect(302, '/manage-reduction-reasons')
+          return res.redirect(302, '/manage-reduction-reasons?success=true')
         })
     })
   })
@@ -236,7 +240,7 @@ module.exports = function (router) {
       }
       return updateReductionReason(req.body.reasonId, reductionReason)
         .then(function () {
-          return res.redirect(302, '/manage-reduction-reasons')
+          return res.redirect(302, '/manage-reduction-reasons?success=true')
         })
     })
   })
