@@ -292,7 +292,7 @@ var getBreadcrumbs = function (currentRoute) {
       ]
       break
     case '/add-reduction-reason':
-      var breadcrumbs = [
+      breadcrumbs = [
         new Link('Add Reduction Reason', '/add-reduction-reason'),
         new Link('Manage Reduction Reasons', '/manage-reduction-reasons'),
         new Link('Admin', '/admin')
