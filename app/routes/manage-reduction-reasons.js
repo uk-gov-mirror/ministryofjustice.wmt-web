@@ -110,7 +110,7 @@ module.exports = function (router) {
       return getReductionCategories().then(function (categories) {
         return res.render('edit-reduction-reason', {
           reduction: reason,
-          breadcrumbs, breadcrumbs,
+          breadcrumbs: breadcrumbs,
           categories: categories,
           title: 'Edit Reduction Reason',
           subTitle: getSubtitle(false),
@@ -199,7 +199,7 @@ module.exports = function (router) {
 
     var breadcrumbs = getBreadcrumbs('/edit-reduction-reason')
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var id = req.query.id
+    // var id = req.query.id
     var reductionReason
 
     return getReductionCategories().then(function (categories) {
@@ -262,7 +262,7 @@ var formatReductionReasons = function (reasons) {
 var findCategoryById = function (categories, id) {
   var categoryName = null
   if (id) {
-    categoryName = categories.filter(category => category.id = parseInt(id))[0].category
+    categoryName = categories.filter(category => category.id === parseInt(id))[0].category
   }
   return categoryName
 }
@@ -277,7 +277,7 @@ var getIsEnabled = function (isEnabled) {
 
 var getBreadcrumbs = function (currentRoute) {
   var breadcrumbs
-  switch(currentRoute) {
+  switch (currentRoute) {
     case '/manage-reduction-reasons':
       breadcrumbs = [
         new Link('Manage Reduction Reasons', '/manage-reduction-reasons'),
@@ -285,7 +285,7 @@ var getBreadcrumbs = function (currentRoute) {
       ]
       break
     case '/edit-reduction-reason':
-      var breadcrumbs = [
+      breadcrumbs = [
         new Link('Edit Reduction Reason', '/edit-reduction-reason'),
         new Link('Manage Reduction Reasons', '/manage-reduction-reasons'),
         new Link('Admin', '/admin')
@@ -304,7 +304,7 @@ var getBreadcrumbs = function (currentRoute) {
 
 var getSubtitle = function (isListPage) {
   if (isListPage) {
-      return 'Admin'
+    return 'Admin'
   } else {
     return 'Manage Reduction Reasons'
   }

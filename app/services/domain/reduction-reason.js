@@ -27,7 +27,7 @@ class ReductionReason {
 
     FieldValidator(this.category, 'category', errors)
       .isRequired()
-    
+
     if (this.maxAllowancePercentage) {
       FieldValidator(this.maxAllowancePercentage, 'maxAllowancePercentage', errors)
         .isFloat(0.01, 100)
@@ -38,7 +38,7 @@ class ReductionReason {
         .isFloat(0.01, 100)
         .isLessThanOrEqualTo(this.maxAllowancePercentage)
     }
-    
+
     if (this.monthsToExpiry) {
       FieldValidator(this.monthsToExpiry, 'monthsToExpiry', errors)
         .isInt(1, 2147483647)
