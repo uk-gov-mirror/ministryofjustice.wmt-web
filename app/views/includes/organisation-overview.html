@@ -8,8 +8,6 @@
             {% endif %}
             {% ifAsync ((organisationLevel === 'hmpps') or (organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
                 <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="button sln-export" style="float: right; margin-bottom: 10px; ">Export Overview</a>
-            {% else %}
-                <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="button sln-export" style="float: right; margin-bottom: 10px; ">Export Caseload</a>
             {% endif %}
             </td>
         </tr>
