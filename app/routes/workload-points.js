@@ -112,7 +112,7 @@ module.exports = function (router) {
                 .then(function (gs) {
                   var cmsUpdated = updateAdjustmentObjects(cms, adjustmentsFromInput)
                   var gsUpdated = updateAdjustmentObjects(gs, adjustmentsFromInput)
-                  adjustmentUpdatePromises = []
+                  var adjustmentUpdatePromises = []
                   cmsUpdated.forEach(function (cmsAdjustment) {
                     adjustmentUpdatePromises.push(updateAdjustmentPointsConfig(cmsAdjustment))
                   })
@@ -215,7 +215,7 @@ var filterAdjustments = function (prefix, req) {
   return object
 }
 
-var updateAdjustmentObjects = function (adjDBObjects, adjUserInput){
+var updateAdjustmentObjects = function (adjDBObjects, adjUserInput) {
   adjDBObjects.forEach(function (adj) {
     adj.points = adjUserInput['adjustment' + adj.adjustmentId]
   })
