@@ -114,7 +114,7 @@ module.exports = function (router) {
             linkId: id,
             title: result.title,
             subTitle: result.subTitle,
-            subNav: getSubNav(id, organisationLevel, req.path, workloadType),
+            subNav: getSubNav(id, organisationLevel, req.path, workloadType, authorisedUserRole.authorisation, authorisedUserRole.userRole),
             referenceData: result.referenceData,
             errors: errors,
             workloadType: workloadType,
