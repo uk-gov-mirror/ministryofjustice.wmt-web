@@ -36,8 +36,10 @@ class FieldValidator {
   isLessThanOrEqualTo (value, specificMessage) {
     var message = (!specificMessage) ? ERROR_MESSAGES.getAllowancePercentageLessThanMaximum : specificMessage
     if (value) {
-      if (this.data && this.data > value) {
-        this.errors.add(this.fieldName, message)
+      if (this.data) {
+        if (parseFloat(this.data) > parseFloat(value)) {
+          this.errors.add(this.fieldName, message)
+        }
       }
     }
     return this
