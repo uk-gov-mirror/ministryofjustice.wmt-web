@@ -22,7 +22,7 @@ module.exports = function (archiveDateRange, extraCriteria) {
     return knex('reductions_archive_view')
     .limit(parseInt(archiveDataLimit))
     .select(selectColumns)
-    .whereBetween('last_updated_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+    .whereBetween('end_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
       archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
     .andWhere(function () {
       this.where('om_name', 'like', '%' + extraCriteria + '%')
@@ -33,7 +33,7 @@ module.exports = function (archiveDateRange, extraCriteria) {
     return knex('reductions_archive_view')
     .limit(parseInt(archiveDataLimit))
     .select(selectColumns)
-    .whereBetween('last_updated_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+    .whereBetween('end_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
       archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
     .orderBy('last_updated_date', 'ASC')
   }
