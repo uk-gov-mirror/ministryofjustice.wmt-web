@@ -14,7 +14,6 @@ const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const ErrorHandler = require('../services/validators/error-handler')
 const ERROR_MESSAGES = require('../services/validators/validation-error-messages')
-const log = require('../logger')
 var lastUpdated
 
 module.exports = function (router) {
@@ -239,7 +238,8 @@ module.exports = function (router) {
               end_day: req.body.redEndDay,
               end_month: req.body.redEndMonth,
               end_year: req.body.redEndYear,
-              notes: req.body.notes
+              notes: req.body.notes,
+              isEnabled: reductionReason.isEnabled
             },
             errors: error.validationErrors,
             workloadType: workloadType,
@@ -431,7 +431,6 @@ module.exports = function (router) {
   }
 
   var mapReductionToViewModel = function (reduction) {
-    log.info(reduction)
     var viewModel
     if (reduction !== undefined) {
       viewModel = {
