@@ -14,6 +14,7 @@ const renderResults = require('../helpers/render-results')
 const viewTemplate = 'fortnightly-caseload-data'
 const title = 'Archived Fortnightly Caseload Data'
 const log = require('../logger')
+const heDecode = require('he')
 
 var archiveDateRange
 
@@ -67,7 +68,7 @@ module.exports = function (router) {
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    var extraCriteria = req.body['fortnightly-multi-search-field-entry']
+    var extraCriteria = heDecode.decode(req.body['fortnightly-multi-search-field-entry'])
     // If date range has errors don't search database
     if (errors) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
@@ -112,7 +113,7 @@ module.exports = function (router) {
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    var extraCriteria = req.body['fortnightly-multi-search-field-entry']
+    var extraCriteria = heDecode.decode(req.body['fortnightly-multi-search-field-entry'])
     if (errors) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
     }

@@ -13,6 +13,7 @@ const archiveOptions = require('../constants/archive-options')
 const renderResults = require('../helpers/render-results')
 const viewTemplate = 'reduction-archive-data'
 const title = 'Archived Reductions'
+const heDecode = require('he')
 
 var archiveDateRange
 
@@ -66,7 +67,7 @@ module.exports = function (router) {
     }
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var extraCriteria = req.body['reductions-multi-search-field-entry']
+    var extraCriteria = heDecode.decode(req.body['reductions-multi-search-field-entry'])
 
     // If date range has errors don't search database
     if (errors) {
@@ -109,7 +110,7 @@ module.exports = function (router) {
     }
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var extraCriteria = req.body['reductions-multi-search-field-entry']
+    var extraCriteria = heDecode.decode(req.body['reductions-multi-search-field-entry'])
 
     // If date range has errors don't search database
     if (errors) {
