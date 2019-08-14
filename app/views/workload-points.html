@@ -14,7 +14,7 @@
 <div class="message message--success">{{ successText }}</div>
 {% endif %}
 
-<p>Workload points are set here and are used to calculate capacity points for all Offender Managers throughout the Workload Management Tool.</p>
+<p>Workload points are set here and are used to calculate capacity points for all Offender Managers throughout the Workload Measurement Tool.</p>
 
 <p>Current Workload Points created by <span class="bold">{{ updatedBy }}</span> on <span class="bold">{{ wp.effectiveFrom }}</span></p> 
 
@@ -352,7 +352,7 @@
                           <label class="form-label-bold" for="{{ gsId }}">{{ g.contactCode }} &nbsp; - &nbsp; {{ g.contactDescription }}</label>
                         </th>
                         <td class="numeric">
-                          <input class="form-control" id="{{ gsId }}" name="{{ gsId }}" type="number" value="{{ g.points }}">
+                          <input class="form-control {% if errors[gsId] %} form-control-error {% endif %}" id="{{ gsId }}" name="{{ gsId }}" type="number" value="{{ g.points }}">
                         </td>
                     </tr>
                     {% endfor %}

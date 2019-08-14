@@ -1,4 +1,4 @@
-# Workload Management Tool - Web application
+# Workload Measurement Tool - Web application
 This is the webserver application that will present the information stored in the WMT database to the end user.
 
 It is a node.js application using the express web framework.

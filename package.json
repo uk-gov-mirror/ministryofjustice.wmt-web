@@ -1,7 +1,7 @@
 {
   "name": "wmt-web",
   "version": "0.1.0",
-  "description": "The frontend of the workload management tool",
+  "description": "The frontend of the workload measurement tool",
   "main": "app/app.js",
   "scripts": {
     "start": "gulp",
