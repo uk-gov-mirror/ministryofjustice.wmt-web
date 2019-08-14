@@ -11,7 +11,8 @@ var reductionReasonsRow = {
   reasonShortName: '1',
   allowancePercentage: 20,
   maxAllowancePercentage: null,
-  monthsToExpiry: 6
+  monthsToExpiry: 6,
+  isEnabled: true
 }
 
 var insertedId

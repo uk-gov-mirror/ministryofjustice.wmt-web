@@ -29,6 +29,12 @@
       </h2>
       <p>Manage user rights</p>
       {% endif %}
+      {% if authorisation===false or userRole==='Data Admin'%}
+      <h2 class="heading-medium">
+        <a class="blue-link" href="/manage-reduction-reasons">Manage Reduction Reasons</a>
+      </h2>
+      <p>Add, Edit and Remove Reduction Reasons</p>
+      {% endif %}
     </div>
   </div>
 

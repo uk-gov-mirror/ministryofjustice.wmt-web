@@ -42,5 +42,12 @@ module.exports = {
   'defaultContractedHoursSpo': 'Default Contracted Hours SPO',
   'archiveFromDate': 'Show Archive Data From',
   'archiveToDate': 'Show Archive Data To',
-  'maxArchiveHistory': 'the earliest recorded data'
+  'maxArchiveHistory': 'the earliest recorded data',
+  'reductionName': 'Reduction Name',
+  'reductionShortName': 'Abbreviated Reduction Name',
+  'category': 'Reduction Catgeory',
+  'maxAllowancePercentage': 'Maximum Allowance Percentage',
+  'allowancePercentage': 'Allowance Percentage',
+  'monthsToExpiry': 'Months to Expiry',
+  'isEnabled': 'Reduction Reason Status'
 }

@@ -16,7 +16,7 @@ const title = 'Archived Daily Caseload Data'
 const newDataStartDay = require('../../config').NEW_DATABASE_START_DAY
 const newDataStartMonth = require('../../config').NEW_DATABASE_START_MONTH
 const newDataStartYear = require('../../config').NEW_DATABASE_START_YEAR
-
+const heDecode = require('he')
 const newDataStartDate = dateFormatter.build(newDataStartDay, newDataStartMonth, newDataStartYear)
 
 var archiveDateRange
@@ -70,7 +70,7 @@ module.exports = function (router) {
     }
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var extraCriteria = req.body['daily-multi-search-field-entry']
+    var extraCriteria = heDecode.decode(req.body['daily-multi-search-field-entry'])
     if (errors) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
     }
@@ -117,7 +117,7 @@ module.exports = function (router) {
     }
 
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var extraCriteria = req.body['daily-multi-search-field-entry']
+    var extraCriteria = heDecode.decode(req.body['daily-multi-search-field-entry'])
 
     if (errors) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
