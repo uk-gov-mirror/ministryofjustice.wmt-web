@@ -321,7 +321,8 @@ module.exports = function (router) {
               end_day: req.body.redEndDay,
               end_month: req.body.redEndMonth,
               end_year: req.body.redEndYear,
-              notes: req.body.notes
+              notes: req.body.notes,
+              isEnabled: reductionReason.isEnabled
             },
             errors: error.validationErrors,
             workloadType: workloadType,
