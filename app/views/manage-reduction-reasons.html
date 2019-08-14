@@ -1,0 +1,77 @@
+{% extends "includes/layout.html" %} 
+
+{% block content %}
+<main id="content" role="main">
+
+    {% include "includes/breadcrumbs.html" %}
+    
+    {% include "includes/validation-error-messages.html" %} 
+    
+    {% include "includes/title-subtitle.html"%}
+    
+    {% include "includes/sub-nav.html" %} 
+    
+    {% if successText %}
+    <div class="message message--success">{{ successText }}</div>
+    {% endif %}
+
+    {% set columnNameType='Type' %}
+    {% set columnNameHours='Hours' %}
+    {% set columnNameStartDate='Start date' %}
+    {% set columnNameEndDate='End date' %}
+
+    <a href="/add-reduction-reason" class="button">Add a reduction reason</a>
+    
+    <h2 id="headingActive" class="heading-large">Enabled Reduction Reasons</h2>
+
+    <table class="sln-table-reductions">
+        <thead>
+            <tr>
+                <th id="name_abb">Name</th>
+                <th id="category">Reduction Category</th>
+                <th id="months_to_expiry">Months to Expiry</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="">
+            {% for reduction in enabledReductionReasons %}
+            <tr>
+                <td headers="name_abb">{{ reduction.reasonShortName }}</td>
+                <td headers="category">{{ reduction.category }}</td>
+                <td headers="months_to_expiry">{{ reduction.monthsToExpiry }}</td>
+                <td><a href="/edit-reduction-reason?id={{ reduction.id }}">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 id="headingActive" class="heading-large">Disabled Reduction Reasons</h2>
+
+    <table class="sln-table-reductions">
+        <thead>
+            <tr>
+                <th id="name_abb">Name</th>
+                <th id="category">Reduction Category</th>
+                <th id="months_to_expiry">Months to Expiry</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="">
+            {% for disabledReduction in disabledReductionReasons %}
+            <tr>
+                <td headers="name_abb">{{ disabledReduction.reasonShortName }}</td>
+                <td headers="category">{{ disabledReduction.category }}</td>
+                <td headers="months_to_expiry">{{ disabledReduction.monthsToExpiry }}</td>
+                <td><a href="/edit-reduction-reason?id={{ disabledReduction.id }}">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</main>
+
+<div class="lastUpdated">
+        <p>Last updated on  <span class="bold">{{date}}</span></p>
+        </div>
+
+{% endblock %}

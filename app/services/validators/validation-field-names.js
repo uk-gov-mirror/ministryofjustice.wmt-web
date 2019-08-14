@@ -88,5 +88,12 @@ module.exports = {
   'adjustment44': 'NGS007',
   'adjustment42': 'NGS008',
   'adjustment39': 'NGS009',
-  'adjustment45': 'NGS010'
+  'adjustment45': 'NGS010',
+  'reductionName': 'Reduction Name',
+  'reductionShortName': 'Abbreviated Reduction Name',
+  'category': 'Reduction Catgeory',
+  'maxAllowancePercentage': 'Maximum Allowance Percentage',
+  'allowancePercentage': 'Allowance Percentage',
+  'monthsToExpiry': 'Months to Expiry',
+  'isEnabled': 'Reduction Reason Status'
 }
