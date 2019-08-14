@@ -100,6 +100,8 @@ var route
 var workloadPointsService
 var authorisationService
 var hasRoleResult = true
+var getAdjustmentPointsConfig
+var updateAdjustmentPointsConfig
 
 before(function () {
   authorisationService = {
@@ -110,9 +112,13 @@ before(function () {
     getWorkloadPoints: sinon.stub().resolves(WORKLOAD_POINTS),
     updateWorkloadPoints: sinon.stub().resolves({})
   }
+  getAdjustmentPointsConfig = sinon.stub.resolves()
+  updateAdjustmentPointsConfig = sinon.stub.resolves()
   route = proxyquire('../../../app/routes/workload-points', {
     '../services/workload-points-service': workloadPointsService,
-    '../authorisation': authorisationService
+    '../authorisation': authorisationService,
+    '../services/data/get-adjustment-points-config': getAdjustmentPointsConfig,
+    '../services/data/update-adjustment-points-config': updateAdjustmentPointsConfig
   })
   app = routeHelper.buildApp(route)
 })
