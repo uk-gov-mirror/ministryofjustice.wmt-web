@@ -67,7 +67,7 @@ var renderOverview = function (req, res, next) {
         organisationLevel: organisationLevel,
         childOrganisationLevel: childOrganisationLevel,
         childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
-        subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS),
+        subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS, authorisedUserRole.authorisation, authorisedUserRole.userRole),
         overviewDetails: result.overviewDetails,
         date: result.date,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role

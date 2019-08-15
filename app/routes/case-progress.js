@@ -37,7 +37,7 @@ module.exports = function (router) {
           title: result.title,
           subTitle: result.subTitle,
           breadcrumbs: result.breadcrumbs,
-          subNav: getSubNav(id, organisationLevel, req.path),
+          subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
           caseProgressList: result.caseProgressList,
           date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
