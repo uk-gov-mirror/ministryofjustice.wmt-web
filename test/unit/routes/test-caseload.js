@@ -61,43 +61,54 @@ const ORG_CASELOAD = {
   breadcrumbs: [{}],
   subNav: {},
   caseloadDetails: {
-    overallCaseloadDetails: { details: [
-      { name: 'Zoe Johnson' },
-      { name: 'Aaron George' },
-      { name: 'Bernard Bloggs' }
-    ],
-    detailsPercentages: [
-      { name: 'Zoe Johnson' },
-      { name: 'Aaron George' },
-      { name: 'Bernard Bloggs' }
-    ]},
-    communityCaseloadDetails: { details: [
-      { name: 'Zoe Johnson' },
-      { name: 'Aaron George' },
-      { name: 'Bernard Bloggs' }
-    ],detailsPercentages: [
-      { name: 'Zoe Johnson' },
-      { name: 'Aaron George' },
-      { name: 'Bernard Bloggs' }
-    ]},
-    custodyCaseloadDetails: { details: [
-      { name: 'Zoe Johnson' },
-      { name: 'Aaron George' },
-      { name: 'Bernard Bloggs' }
-    ],detailsPercentages: [
-      { name: 'Zoe Johnson' },
-      { name: 'Aaron George' },
-      { name: 'Bernard Bloggs' }
-    ]},
-    licenseCaseloadDetails: { details: [
-      { name: 'Zoe Johnson' },
-      { name: 'Aaron George' },
-      { name: 'Bernard Bloggs' }
-    ], detailsPercentages: [
-      { name: 'Zoe Johnson' },
-      { name: 'Aaron George' },
-      { name: 'Bernard Bloggs' }
-    ]},
+    overallCaseloadDetails: {
+      details: [
+        { name: 'Zoe Johnson' },
+        { name: 'Aaron George' },
+        { name: 'Bernard Bloggs' }
+      ],
+      detailsPercentages: [
+        { name: 'Zoe Johnson' },
+        { name: 'Aaron George' },
+        { name: 'Bernard Bloggs' }
+      ]
+    },
+    communityCaseloadDetails: {
+      details: [
+        { name: 'Zoe Johnson' },
+        { name: 'Aaron George' },
+        { name: 'Bernard Bloggs' }
+      ],
+      detailsPercentages: [
+        { name: 'Zoe Johnson' },
+        { name: 'Aaron George' },
+        { name: 'Bernard Bloggs' }
+      ]
+    },
+    custodyCaseloadDetails: {
+      details: [
+        { name: 'Zoe Johnson' },
+        { name: 'Aaron George' },
+        { name: 'Bernard Bloggs' }
+      ],
+      detailsPercentages: [
+        { name: 'Zoe Johnson' },
+        { name: 'Aaron George' },
+        { name: 'Bernard Bloggs' }
+      ]
+    },
+    licenseCaseloadDetails: {
+      details: [
+        { name: 'Zoe Johnson' },
+        { name: 'Aaron George' },
+        { name: 'Bernard Bloggs' }
+      ],
+      detailsPercentages: [
+        { name: 'Zoe Johnson' },
+        { name: 'Aaron George' },
+        { name: 'Bernard Bloggs' }
+      ]
+    },
     overallTotalSummary: [
       { name: 'Zoe Johnson' },
       { name: 'Aaron George' },
