@@ -3,7 +3,7 @@ const ErrorHandler = require('../validators/error-handler')
 const FieldValidator = require('../validators/field-validator')
 
 class WorkloadPoints {
-  constructor (request) {
+  constructor (request, adjustments) {
     this.previousWpId = request.previousWpId
     this.commA = request.commA
     this.commB1 = request.commB1
@@ -42,16 +42,23 @@ class WorkloadPoints {
     this.parom = request.parom
     this.paroms_enabled = 1
     this.isT2A = request.isT2A
-    this.isValid()
+    var newAdjustments = {}
+    if (adjustments) {
+      Object.keys(adjustments).forEach(function (key) {
+        newAdjustments[key] = adjustments[key]
+      })
+    }
+    this.isValid(newAdjustments)
   }
 
-  isValid () {
+  isValid (newAdjustments) {
     var errors = ErrorHandler()
     this.isValidCommonPoints(errors)
     if (this.isT2A === 'true') {
       this.initializeStandardPoints()
     }
     this.isValidStandardPoints(errors)
+    this.isAdjustmentPointsValid(newAdjustments, errors)
     var validationErrors = errors.get()
     if (validationErrors) {
       throw new ValidationError(validationErrors)
@@ -183,6 +190,14 @@ class WorkloadPoints {
     this.defaultContractedHoursSpo = '0'
     this.parom = '0'
     this.paroms_enabled = '0'
+  }
+
+  isAdjustmentPointsValid (newAdjustments, errors) {
+    Object.keys(newAdjustments).forEach(function (thisKey) {
+      FieldValidator(newAdjustments[thisKey], thisKey, errors)
+        .isRequired()
+        .isInt(0, 999)
+    })
   }
 }
 
