@@ -59,6 +59,7 @@ var renderOverview = function (req, res, next) {
     return getCourtReportOverview(id, organisationLevel)
     .then(function (result) {
       result.date = lastUpdated
+      result.overviewDetails.sort(function (a, b) { return a.name.localeCompare(b.name) })
       return res.render('court-reports-overview', {
         title: result.title,
         subTitle: result.subTitle,

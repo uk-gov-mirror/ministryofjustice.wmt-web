@@ -7,6 +7,9 @@ const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 const logger = require('../logger')
+const getAdjustmentPointsConfig = require('../services/data/get-adjustment-points-config')
+const updateAdjustmentPointsConfig = require('../services/data/update-adjustment-points-config')
+const adjustmentTypes = require('../constants/adjustment-type')
 
 module.exports = function (router) {
   router.get('/admin/workload-points', function (req, res) {
@@ -28,16 +31,24 @@ module.exports = function (router) {
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return workloadPointsService.getWorkloadPoints(false)
       .then(function (result) {
-        return res.render('workload-points', {
-          title: result.title,
-          subTitle: result.subTitle,
-          breadcrumbs: result.breadcrumbs,
-          wp: result.workloadPoints,
-          updatedBy: result.updatedBy,
-          successText: successText,
-          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
-        })
+        return getAdjustmentPointsConfig(adjustmentTypes.CMS)
+          .then(function (cms) {
+            return getAdjustmentPointsConfig(adjustmentTypes.GS)
+              .then(function (gs) {
+                return res.render('workload-points', {
+                  title: result.title,
+                  subTitle: result.subTitle,
+                  breadcrumbs: result.breadcrumbs,
+                  wp: result.workloadPoints,
+                  gs: gs,
+                  cms: cms,
+                  updatedBy: result.updatedBy,
+                  successText: successText,
+                  userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+                  authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+                })
+              })
+          })
       })
   })
 
@@ -91,10 +102,29 @@ module.exports = function (router) {
       if (req.user) {
         req.body.userId = req.user.userId.toString()
       }
-      var updatedWorkloadPoints = new WorkloadPoints(req.body)
+      var adjustmentsFromInput = filterAdjustments('adjustment', req)
+      var updatedWorkloadPoints = new WorkloadPoints(req.body, adjustmentsFromInput)
       return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints, false)
         .then(function () {
-          return res.redirect(302, '/admin/workload-points?success=true')
+          return getAdjustmentPointsConfig(adjustmentTypes.CMS)
+            .then(function (cms) {
+              return getAdjustmentPointsConfig(adjustmentTypes.GS)
+                .then(function (gs) {
+                  var cmsUpdated = updateAdjustmentObjects(cms, adjustmentsFromInput)
+                  var gsUpdated = updateAdjustmentObjects(gs, adjustmentsFromInput)
+                  var adjustmentUpdatePromises = []
+                  cmsUpdated.forEach(function (cmsAdjustment) {
+                    adjustmentUpdatePromises.push(updateAdjustmentPointsConfig(cmsAdjustment))
+                  })
+                  gsUpdated.forEach(function (gsAdjustment) {
+                    adjustmentUpdatePromises.push(updateAdjustmentPointsConfig(gsAdjustment))
+                  })
+                  return Promise.all(adjustmentUpdatePromises)
+                    .then(function () {
+                      return res.redirect(302, '/admin/workload-points?success=true')
+                    })
+                })
+            })
         })
     } catch (error) {
       logger.error(error)
@@ -102,16 +132,26 @@ module.exports = function (router) {
         var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
         return workloadPointsService.getWorkloadPoints(false)
           .then(function (result) {
-            return res.status(400).render('workload-points', {
-              title: result.title,
-              subTitle: result.subTitle,
-              breadcrumbs: result.breadcrumbs,
-              wp: req.body,
-              updatedBy: result.updatedBy,
-              errors: error.validationErrors,
-              userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-              authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
-            })
+            return getAdjustmentPointsConfig(adjustmentTypes.CMS)
+              .then(function (cms) {
+                return getAdjustmentPointsConfig(adjustmentTypes.GS)
+                  .then(function (gs) {
+                    var cmsUpdated = updateAdjustmentObjects(cms, adjustmentsFromInput)
+                    var gsUpdated = updateAdjustmentObjects(gs, adjustmentsFromInput)
+                    return res.status(400).render('workload-points', {
+                      title: result.title,
+                      subTitle: result.subTitle,
+                      breadcrumbs: result.breadcrumbs,
+                      wp: req.body,
+                      cms: cmsUpdated,
+                      gs: gsUpdated,
+                      updatedBy: result.updatedBy,
+                      errors: error.validationErrors,
+                      userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+                      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+                    })
+                  })
+              })
           })
       }
       next(error)
@@ -162,4 +202,22 @@ module.exports = function (router) {
       next(error)
     }
   })
+}
+
+var filterAdjustments = function (prefix, req) {
+  var object = {}
+  Object.keys(req.body).forEach(function (key) {
+    if (key.startsWith(prefix)) {
+      object[key] = req.body[key]
+    }
+  })
+  delete object[prefix + 'Count']
+  return object
+}
+
+var updateAdjustmentObjects = function (adjDBObjects, adjUserInput) {
+  adjDBObjects.forEach(function (adj) {
+    adj.points = adjUserInput['adjustment' + adj.adjustmentId]
+  })
+  return adjDBObjects
 }

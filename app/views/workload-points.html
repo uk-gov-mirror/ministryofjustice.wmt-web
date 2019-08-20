@@ -14,7 +14,7 @@
 <div class="message message--success">{{ successText }}</div>
 {% endif %}
 
-<p>Workload points are set here and are used to calculate capacity points for all Offender Managers throughout the Workload Management Tool.</p>
+<p>Workload points are set here and are used to calculate capacity points for all Offender Managers throughout the Workload Measurement Tool.</p>
 
 <p>Current Workload Points created by <span class="bold">{{ updatedBy }}</span> on <span class="bold">{{ wp.effectiveFrom }}</span></p> 
 
@@ -29,6 +29,8 @@
 <form action="{{ formAction }}" method=POST id="workloadPointsForm">
 
   <input class="form-control" id="previousWpId" name="previousWpId" type="hidden" value="{{ wp.workloadPointsId }}">
+  <input class="form-control" id="cmsCount" name="cmsCount" type="hidden" value="{{ cms.length }}">
+  <input class="form-control" id="gsCount" name="gsCount" type="hidden" value="{{ gs.length }}">
   <input class="form-control" id="isT2A" name="isT2A" type="hidden" value="{{ wp.isT2A }}">
 
   <div class="js-tabs">
@@ -36,6 +38,10 @@
       <li><a href="#custody" role="anchor-div">Custody</a></li>
       <li><a href="#license" role="anchor-div">License</a></li>
       <li><a href="#community" role="anchor-div">Community</a></li>
+      {% if not wp.isT2A or wp.isT2A === false or wp.isT2A === 'false' %}
+        <li><a href="#cms" role="anchor-div">CMS</a></li>
+        <li><a href="#gs" role="anchor-div">GS</a></li>
+      {% endif %}
       <li><a href="#other" role="anchor-div">Other</a></li>
     </ul>
 
@@ -304,7 +310,58 @@
             </div>
           </div>
       </div>
+      {% if not wp.isT2A or wp.isT2A === false or wp.isT2A === 'false' %}
+      <div id="cms">
+        <div class="grid-row">
+            <div class="column-full">
+              <table>
+                <tbody>
+                  {% for c in cms %}
+                  {% set cmsId = 'adjustment' + c.adjustmentId %}
+                    <tr class="{% if errors[cmsId][0] %} border-error {% endif %}">
+                      <th scope="row">
+                        {% if errors[cmsId][0] %}
+                          <span class="error-message">{{ errors[cmsId][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="{{ cmsId }}">{{ c.contactCode }} &nbsp; - &nbsp; {{ c.contactDescription }}</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control {% if errors[cmsId] %} form-control-error {% endif %}" id="{{ cmsId }}" name="{{ cmsId }}" type="number" value="{{ c.points }}">
+                      </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+            
+            </div>
+          </div>
+      </div>
 
+      <div id="gs">
+        <div class="grid-row">
+            <div class="column-full">
+              <table>
+                <tbody>
+                    {% for g in gs %}
+                      {% set gsId = 'adjustment' + g.adjustmentId %}
+                      <tr>
+                        <th scope="row">
+                          {% if errors[gsId][0] %}
+                            <span class="error-message">{{ errors[gsId][0] }}</span>
+                          {% endif %}
+                          <label class="form-label-bold" for="{{ gsId }}">{{ g.contactCode }} &nbsp; - &nbsp; {{ g.contactDescription }}</label>
+                        </th>
+                        <td class="numeric">
+                          <input class="form-control {% if errors[gsId] %} form-control-error {% endif %}" id="{{ gsId }}" name="{{ gsId }}" type="number" value="{{ g.points }}">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+      {% endif %}
       <div id="other">
           {% if not isT2A %}
           <p><span class="bold">Delivery Report Workload Points</span></p>
