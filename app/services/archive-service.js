@@ -15,6 +15,11 @@ module.exports = function (archiveOption, archiveDateRange, extraCriteria) {
   if (archiveOption === archiveOptions.DAILY) {
     return getDailyArchive(archiveDateRange, extraCriteria).then(function (results) {
       results = calculateCapacity(results)
+      results.forEach(function (result) {
+        result.cmsPoints = 'N/A'
+        result.gsPoints = 'N/A'
+        result.armsTotalCases = 'N/A'
+      })
       if (results.length < archiveDataLimit) {
         archiveDataLimit = archiveDataLimit - results.length
         return getDailyArchiveFromNewDB(archiveDateRange, extraCriteria, archiveDataLimit).then(function (newResults) {
@@ -74,10 +79,17 @@ var calculateCapacity = function (results) {
   results.forEach(function (result) {
     if (result.contractedHours === 0 || result.contractedHours === null) {
       result.capacity = '0%'
+      let defaultContractedHours = new DefaultContractedHours(37.5, 37.5, 37.5)
+      let availablePoints = calculateAvailablePoints(result.nominalTarget, result.omTypeId, result.contractedHours, result.hoursReduction, defaultContractedHours)
+      let acquiredPoints = calculateAcquiredPoints(result.totalPoints, result.sdrPoints, result.sdrConversionPoints, result.paromsPoints)
+      result.totalPoints = acquiredPoints
+      result.availablePoints = availablePoints
     } else {
       let defaultContractedHours = new DefaultContractedHours(37.5, 37.5, 37.5)
       let availablePoints = calculateAvailablePoints(result.nominalTarget, result.omTypeId, result.contractedHours, result.hoursReduction, defaultContractedHours)
       let acquiredPoints = calculateAcquiredPoints(result.totalPoints, result.sdrPoints, result.sdrConversionPoints, result.paromsPoints)
+      result.totalPoints = acquiredPoints
+      result.availablePoints = availablePoints
       if (availablePoints !== 0) {
         result.capacity = capacityCalculation(acquiredPoints, availablePoints)
       } else {

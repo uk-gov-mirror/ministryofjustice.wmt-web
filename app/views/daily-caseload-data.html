@@ -100,30 +100,36 @@
 </form>
 
 {% if (results) %}  
-<table id="daily-caseload-table" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+<table id="daily-caseload-table" class="display nowrap data-table dataTable" cellspacing="0" role="grid" aria-describedby="daily-caseload-table_info">
     <thead>
         <tr class="headers">
             <th id="workloadDate">Workload Date</th>
-            <th id="workloadID">Workload ID</th>
+            <th id="division">Division</th>
             <th id="cluster">Cluster</th>
             <th id="team">Team</th>
             <th id="offenderM">Offender Manager</th>
+            <th id="grade">Grade</th>
             <th id="totalCases">Total Cases</th>
             <th id="capacity">Capacity %</th>
             <th id="reductions">Reductions</th>
+            <th id="cms">CMS</th>
+            <th id="gs">GS</th>
         </tr>
     </thead>
     <tbody>
       {% for result in results %}
         <tr>
             <td>{{ result.workloadDate }}</td>
-            <td>{{ result.workloadID }}</td>
+            <td>{{ result.regionName }}</td>
             <td>{{ result.lduName }}</td>
             <td>{{ result.teamName }}</td>
             <td>{{ result.omName }}</td>
+            <td>{{ result.grade }}</td>
             <td>{{ result.totalCases }}</td>
             <td>{{ result.capacity }}</td>
             <td>{{ result.hoursReduction }}</td>
+            <td>100 - 5%</td>
+            <td>20 - 1%</td>
         </tr>
         {% endfor %}
     </tbody>
