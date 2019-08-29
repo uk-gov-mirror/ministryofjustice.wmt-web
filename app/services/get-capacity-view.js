@@ -26,7 +26,10 @@ module.exports = function (id, capacityDateRange, organisationLevel) {
       return getCapacityBreakdown(id, organisationLevel)
       .then(function (memberCapacityBreakdown) {
         result.capacityBreakdown = parseCapacityBreakdown(memberCapacityBreakdown, organisationLevel)
+        var temp = Object.assign({}, result.capacityBreakdown[result.capacityBreakdown.length - 1])
+        result.capacityBreakdown.pop()
         result.capacityBreakdown.sort(function (a, b) { return a.name.localeCompare(b.name) })
+        result.capacityBreakdown.push(temp)
         return result
       })
     }
