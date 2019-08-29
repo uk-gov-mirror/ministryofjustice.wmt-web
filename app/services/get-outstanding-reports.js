@@ -25,7 +25,10 @@ module.exports = function (id, organisationLevel) {
       } else if (organisationalUnitType !== organisationConstant.OFFENDER_MANAGER) {
         result = groupReportsByOrgName(outstandingReports)
       }
+      var temp = Object.assign({}, result[result.length - 1])
+      result.pop()
       result.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      result.push(temp)
       return result
     })
 }
