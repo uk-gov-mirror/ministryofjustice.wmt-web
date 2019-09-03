@@ -4,6 +4,13 @@ const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
+const getSubNav = require('../services/get-expiring-reductions-nav')
+const Link = require('../services/domain/link')
+
+const breadcrumbs = [
+  new Link('Expiring Reductions', '/expiring-reductions')
+]
+const title = breadcrumbs[0].title
 
 module.exports = function (router) {
   router.get('/expiring-reductions', function (req, res) {
@@ -27,14 +34,15 @@ module.exports = function (router) {
     }
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return expiringReductionsService(userId)
-      .then(function (result) {
+      .then(function (reductions) {
         return res.render('expiring-reductions', {
-          title: result.title,
-          subTitle: result.subTitle,
-          breadcrumbs: result.breadcrumbs,
-          reductions: result.reductions,
+          title: title,
+          subTitle: title,
+          breadcrumbs: breadcrumbs,
+          reductions: reductions,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
+          subNav: getSubNav(req.path)
         })
       })
   })
