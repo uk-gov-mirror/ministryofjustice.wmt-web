@@ -16,38 +16,51 @@
 
         {% include "includes/csrf-hidden-input.html"%}
 
-        <div class="form-group">
-            <fieldset class="inline">
-                <h2 class="heading-medium">
-                    Please select the type of export to download:
-                </h2>
-                <div class="multiple-choice">
-                    <input id="radio-inline-1" type="radio" name="radioInlineGroup" value="1" checked="checked">
-                    <label for="radio-inline-1">ARMS</label>
-                </div>
-                <div class="multiple-choice">
-                    <input id="radio-inline-2" type="radio" name="radioInlineGroup" value="2">
-                    <label for="radio-inline-2">Case Details</label>
-                </div>
-                <div class="multiple-choice">
-                    <input id="radio-inline-3" type="radio" name="radioInlineGroup" value="3">
-                    <label for="radio-inline-3">Case Management Support</label>
-                </div>
-                <div class="multiple-choice">
-                    <input id="radio-inline-4" type="radio" name="radioInlineGroup" value="4">
-                    <label for="radio-inline-4">Group Supervision</label>
-                </div>
-            </fieldset>
-        </div>
-
-        <div class="form-group">
-            <fieldset class="inline">
-                <div class="multiple-choice">
-                    <input id="radio-inline-5" type="radio" name="radioInlineGroup" value="5">
-                    <label for="radio-inline-5">Scenario</label>
-                </div>
-            </fieldset>
-        </div>
+        <div class="grid-row form-group">
+                <fieldset class="inline-block">
+                    <div class="column-one-third">
+                        <div class="multiple-choice">
+                            <input id="radio-inline-1" type="radio" name="radioInlineGroup" value="1" checked="checked">
+                            <label class="inline-block" for="radio-inline-1">ARMS</label>
+                        </div>
+                    </div>
+                    <div class="column-one-third">
+                        <div class="multiple-choice">
+                            <input id="radio-inline-2" type="radio" name="radioInlineGroup" value="2">
+                            <label class="inline-block" for="radio-inline-2">Case Details</label>
+                        </div>
+                    </div>
+                    <div class="column-one-third">
+                        <div class="multiple-choice">
+                            <input id="radio-inline-3" type="radio" name="radioInlineGroup" value="3">
+                            <label class="inline-block" for="radio-inline-3">Case Management Support</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+    
+            <div class="grid-row form-group">
+                <fieldset class="inline-block">
+                    <div class="column-one-third">
+                        <div class="multiple-choice">
+                            <input id="radio-inline-4" type="radio" name="radioInlineGroup" value="4">
+                            <label class="inline-block" for="radio-inline-4">Group Supervision</label>
+                        </div>
+                    </div>
+                    <div class="column-one-third">
+                        <div class="multiple-choice">
+                            <input id="radio-inline-5" type="radio" name="radioInlineGroup" value="5">
+                            <label class="inline-block" for="radio-inline-5">Scenario</label>
+                        </div>
+                    </div>
+                    <div class="column-one-third">
+                        <div class="multiple-choice">
+                            <input id="radio-inline-6" type="radio" name="radioInlineGroup" value="6">
+                            <label class="inline-block" for="radio-inline-6">Percentage Capacity Breakdown</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
         
         <input type="submit" class="button sln-export" style="float: left; margin-left:10px; margin-bottom: 10px" value="Export" formaction="/probation/{{ organisationLevel }}/{{ linkId }}/export">
 
