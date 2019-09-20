@@ -60,7 +60,7 @@
                 {% else %}
                 <th class="sln-table-org-level" id="om">{{ childOrganisationLevelDisplayText }}</th>
                 {% endif %}
-                <th id="cap" colspan="3">Capacity</th>
+                <th id="cap" colspan="4">Capacity</th>
                 <th id="hrs" colspan="2">Hours</th>
                 <th id="cases">Cases</th>
             </tr>
@@ -72,6 +72,7 @@
                 {% endif %}
                 <th headers="cap" id="current">Current(%)</th>
                 <th headers="cap" id="points">Available Points</th>
+                <th headers="cap" id="totalPoints">Total Points Used</th>
                 <th headers="cap" id="remaining">Remaining Points</th>
                 <th headers="hrs" id="contracted">Contracted</th>
                 <th headers="hrs" id="reduction">Reduction</th>
@@ -92,6 +93,7 @@
               <td headers="current cap">{{ member.capacityPercentage | round }}%</td>
             {% endif %}
             <td headers="points cap">{{ member.availablePoints }}</td>
+            <td headers="totalPoints cap">{{ member.totalPoints }}</td>
             {% if member.capacityPercentage > 110 %}
               <td class="capacity-red" headers="remaining cap">{{ member.remainingPoints }}</td>
             {% else %}
@@ -114,6 +116,7 @@
             {% endif %}
             <td headers="current cap">{{ member.totalCapacityPercentage | round }}%</td>
             <td headers="points cap">{{ member.totalAvailablePoints }}</td>
+            <td headers="totalPoints cap">{{ member.totalPoints }}</td>
             <td headers="remaining cap">{{ member.totalRemainingPoints}}</td>
             <td headers="hrs contracted">{{ member.totalContractedHours }}</td>
             <td headers="hrs reduction">{{ member.totalReduction }}</td>
