@@ -120,10 +120,61 @@ module.exports = function (router) {
       details[0].totalsRow = details[0].totalSummary[0].totals
       details[0].totalSummary.sort(function (a, b) { return a.name.localeCompare(b.name) })
       details[1].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[1].array.details.forEach(function (detail) {
+        if (detail.grades.length > 1) {
+          var total = {grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, untiered: 0, totalCases: 0}
+          detail.grades.forEach(function (grade) {
+            total.a += grade.a
+            total.b1 += grade.b1
+            total.b2 += grade.b2
+            total.c1 += grade.c1
+            total.c2 += grade.c2
+            total.d1 += grade.d1
+            total.d2 += grade.d2
+            total.untiered += grade.untiered
+            total.totalCases += grade.totalCases
+          })
+          detail.grades.push(total)
+        }
+      })
       details[1].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
       details[2].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[2].array.details.forEach(function (detail) {
+        if (detail.grades.length > 1) {
+          var total = {grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, untiered: 0, totalCases: 0}
+          detail.grades.forEach(function (grade) {
+            total.a += grade.a
+            total.b1 += grade.b1
+            total.b2 += grade.b2
+            total.c1 += grade.c1
+            total.c2 += grade.c2
+            total.d1 += grade.d1
+            total.d2 += grade.d2
+            total.untiered += grade.untiered
+            total.totalCases += grade.totalCases
+          })
+          detail.grades.push(total)
+        }
+      })
       details[2].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
       details[3].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      details[3].array.details.forEach(function (detail) {
+        if (detail.grades.length > 1) {
+          var total = {grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, untiered: 0, totalCases: 0}
+          detail.grades.forEach(function (grade) {
+            total.a += grade.a
+            total.b1 += grade.b1
+            total.b2 += grade.b2
+            total.c1 += grade.c1
+            total.c2 += grade.c2
+            total.d1 += grade.d1
+            total.d2 += grade.d2
+            total.untiered += grade.untiered
+            total.totalCases += grade.totalCases
+          })
+          detail.grades.push(total)
+        }
+      })
       details[3].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
     } else if (organisationLevel === organisationUnitConstants.TEAM.name) {
       details[0].array.sort(function (a, b) { return a.name.localeCompare(b.name) })
