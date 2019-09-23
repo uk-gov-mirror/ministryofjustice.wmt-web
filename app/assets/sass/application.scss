@@ -32,6 +32,14 @@ div.lastUpdated{
     left: 65%;
 }
 
+td.details-control {
+  background: url('../images/details_open.png') no-repeat center center;
+  cursor: pointer;
+}
+tr.shown td.details-control {
+  background: url('../images/details_close.png') no-repeat center center;
+}
+
 @mixin respond-to($media) {
   @if $media==handhelds {
     @media only screen and (max-width: 568px) {

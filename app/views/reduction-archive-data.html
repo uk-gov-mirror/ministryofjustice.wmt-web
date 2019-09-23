@@ -12,10 +12,12 @@
 
 <form method="post" class "archive-form">
         {% include "includes/csrf-hidden-input.html"%}
+        <input id="rawQuery" type="hidden" name="rawQuery" value="{{ stringifiedBody }}">
+        <input id="startSearching" type="hidden" name="startSearching" value="{{ startSearching }}">
 
-         <div class="form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}" id="from">
+         <div class="form-group {% if errors[archiveFromDate][0] %} form-group-error {% endif %}" id="from">
             {% if errors %}
-                <span class="error-message">{{ errors['archiveFromDate'][0] }}</span>
+                <span class="error-message">{{ errors[archiveFromDate][0] }}</span>
             {% endif %}
             <fieldset id="archiveFromDate">
                 <legend>
@@ -43,9 +45,9 @@
                 </div>
             </fieldset>
         </div>
-        <div class="form-group {% if errors['archiveToDate'][0] %} form-group-error {% endif %}" id="to">
+        <div class="form-group {% if errors[archiveToDate][0] %} form-group-error {% endif %}" id="to">
             {% if errors %}
-                 <span class="error-message">{{ errors['archiveToDate'][0] }}</span> 
+                 <span class="error-message">{{ errors[archiveToDate][0] }}</span> 
             {% endif %}
             <fieldset id="archiveToDate">
                 <legend>
@@ -91,14 +93,14 @@
             </fieldset>
         </div>
 
-        <input id="archive-reductions-filter-submit" type="submit" value="Search" class="button" formaction="/archive-data/reductions">
+        <input id="archive-reductions-filter-submit" type="submit" value="Search" class="button" formaction="/archive-data/reductions-search">
         <input id="archive-reductions-csv-submit" type="submit" class="button sln-export" style="float: right; margin-left:10px; margin-bottom: 10px" value="Export Archived Reductions" formaction="/archive-data/reductions/archive-csv">
 </form>
 
-{% if (results) %}
-<table id="reduction-archive-table" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+<table id="reduction-archive-table" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" style="width: 100%;" hidden>
     <thead>
         <tr class="headers">
+            <th></th>
             <th id="offenderManager">Offender Manager</th>
             <th id="reductions">Reduction Hours</th>
             <th id="reductionReason">Reduction Reason</th>
@@ -109,27 +111,12 @@
             <th id="reductionAddedBy">Reduction Updated By</th>
         </tr>
     </thead>
-    <tbody>
-      {% for result in results %}
-        <tr>
-            <td>{{ result.omName }}</td>
-            <td>{{ result.hoursReduced | round(1) }}</td>
-            <td>{{ result.reductionReason }}</td>
-            <td>{{ result.comments }}</td>
-            <td>{{ result.startDate }}</td>
-            <td>{{ result.endDate }}</td>
-            <td>{{ result.lastUpdatedDate }}</td>
-            <td>{{ result.reductionAddedBy }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
 </table>
-{% endif %}
 </main>
 
 <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
 <script src="{{ asset_path }}javascripts/moment.min.js"></script>
-<script src="{{ asset_path }}javascripts/datatables.min.js"></script>
-<script src="{{ asset_path }}javascripts/archive-reductions.js"></script>
+<script src="{{ asset_path }}javascripts/datatables2.min.js"></script>
+<script src="{{ asset_path }}javascripts/archive-reductions-new.js"></script>
 
 {% endblock %}

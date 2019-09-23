@@ -73,12 +73,71 @@ module.exports = function (router) {
     if (errors) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
     }
-    return getArchive(archiveOptions.REDUCTIONS, archiveDateRange, extraCriteria).then(function (results) {
+    return getArchive(archiveOptions.REDUCTIONS, archiveDateRange, extraCriteria, parseInt(req.body.start), parseInt(req.body.length)).then(function (results) {
       results = formatResults(results)
-      return renderResults(viewTemplate, title, res, errors, results, authorisedUserRole, archiveDateRange, extraCriteria)
+      if (results.length === 0) {
+        return res.json({
+          draw: 0,
+          recordsTotal: 0,
+          recordsFiltered: 0,
+          reductions: results
+        })
+      }
+
+      var offset = parseInt(req.body.start)
+      var limit = parseInt(req.body.length)
+
+      var reductions = results.slice(offset, Math.min(offset + limit, results.length))
+      return res.json({
+        draw: req.body.draw,
+        recordsTotal: results.length,
+        recordsFiltered: results.length,
+        reductions: reductions
+      })
     }).catch(function (error) {
       next(error)
     })
+  })
+
+  router.post('/archive-data/reductions-search', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
+
+    var errors
+
+    try {
+      archiveDateRange = dateRangeHelper.createReductionArchiveDateRange(req.body)
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        errors = error.validationErrors
+        archiveDateRange = dateRangeHelper.createReductionArchiveDateRange({})
+      } else {
+        throw error
+      }
+    }
+
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    var extraCriteria = heDecode.decode(req.body['reductions-multi-search-field-entry'])
+
+    // If date range has errors don't search database
+    if (errors) {
+      return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
+    }
+    var stringifiedBody = Object.assign({}, req.body)
+    stringifiedBody['reductions-multi-search-field-entry'] = heDecode.decode(stringifiedBody['reductions-multi-search-field-entry'])
+    stringifiedBody = JSON.stringify(stringifiedBody)
+    return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria, true, stringifiedBody)
   })
 
   router.post('/archive-data/reductions/archive-csv', function (req, res, next) {
