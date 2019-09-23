@@ -1,0 +1,49 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/breadcrumbs.html" %}
+
+{% include "includes/validation-error-messages.html" %}
+
+{% include "includes/title-subtitle.html" %}
+
+{% include "includes/sub-nav.html" %}
+
+<table class="non-javascript">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Count</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for reduction in reductions %}
+        <tr>
+            <th scope="row">{{ reduction.reductionReason }}</th>
+            <td>{{ reduction.count }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div id="plotly-div-reductions" aria-hidden="true"></div>
+
+</main>
+
+<div class="lastUpdated">
+        <p>Last updated on  <span class="bold">{{date}}</span></p>
+        </div>
+
+{% endblock %}
+
+{% block body_end %}
+    <script type="text/javascript">
+        var rowTitle = {{ title | dump | safe }}
+        var reductions = {{ reductions | dump | safe }}
+    </script>
+    <script src="/public/javascripts/plotly-latest.min.js"></script>
+    <script src="/public/javascripts/reductions.js"></script>
+{% endblock %}
