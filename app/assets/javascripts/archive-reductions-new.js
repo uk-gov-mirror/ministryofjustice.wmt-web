@@ -23,13 +23,33 @@ function format ( d ) {
   // `d` is the original data object for the row
   return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
       '<tr>'+
-          '<th>Date</th>'+
+          '<th>Hours</th>'+
+          '<th>Reason</th>'+
+          '<th>Comments</th>'+
+          '<th>Start Date</th>'+
+          '<th>End Date</th>'+
           '<th>Action</th>'+
+          '<th>Action Date</th>'+
           '<th>User</th>'+
       '</tr>'+
       '<tr>'+
-          '<td>22/06/2019 10:04</td>'+
-          '<td>Reduction created</td>'+
+          '<td>1.85</td>'+
+          '<td>SPOC Lead</td>'+
+          '<td></td>'+
+          '<td>01/01/2019</td>'+
+          '<td>01/06/2019</td>'+
+          '<td>Reduction Edited</td>'+
+          '<td>12/12/2018</td>'+
+          '<td>Joe Bloggs</td>'+
+      '</tr>'+
+      '<tr>'+
+          '<td>29.6</td>'+
+          '<td>PQiP21 0-6</td>'+
+          '<td></td>'+
+          '<td>01/05/2019</td>'+
+          '<td>01/11/2019</td>'+
+          '<td>Reduction Edited</td>'+
+          '<td>04/03/2019</td>'+
           '<td>Joe Bloggs</td>'+
       '</tr>'+
   '</table>';
@@ -61,7 +81,7 @@ $(document).ready(function () {
         dataSrc: 'reductions',
         error: function (response) {
           $('#reduction-archive-table_processing').hide()
-          alert('An error occurred when searching for claims.') // eslint-disable-line no-undef
+          alert('An error occurred when searching for reductions.') // eslint-disable-line no-undef
         }
       },
       columns: [

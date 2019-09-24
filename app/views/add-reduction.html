@@ -147,7 +147,48 @@
   </ul>
   </div>
   {% endif %}
+  <br>
+  <details>
 
+      <summary><span class="summary">Audit Log</span></summary>
+
+      <table class="sln-table-reductions">
+          <thead>
+              <tr>
+                  <th id="type">Reason</th>
+                  <th id="hours">Hours</th>
+                  <th id="comments">Comments</th>
+                  <th id="start_date">Start Date</th>
+                  <th id="end_date">End Date</th>
+                  <th id="action_performed">Action</th>
+                  <th id="action_date">Action Date</th>
+                  <th id="user">User</th>
+              </tr>
+          </thead>
+          <tbody class="">
+              <tr>
+                  <td headers="type">SPOC Lead</td>
+                  <td headers="hours">1.85</td>
+                  <td headers="comments"></td>
+                  <td headers="start_date">01/01/2019</td>
+                  <td headers="end_date">01/06/2019</td>     
+                  <td headers="action_performed">Reduction Edited</td>                
+                  <td headers="action_date">12/12/2018</td>    
+                  <td headers="user">Joe Bloggs</td>    
+              </tr>
+              <tr>
+                  <td headers="type">PQiP21 0-6</td>
+                  <td headers="hours">29.6</td>
+                  <td headers="comments"></td>
+                  <td headers="start_date">01/05/2019</td>
+                  <td headers="end_date">01/11/2019</td>     
+                  <td headers="action_performed">Reduction Edited</td>                
+                  <td headers="action_date">04/03/2019</td>    
+                  <td headers="user">Joe Bloggs</td>    
+              </tr>
+          </tbody>
+      </table>
+    </details>
 </main>
 {% endblock %} {% block body_end %}
 <script src="/public/javascripts/vendor/jquery.min.js"></script>
