@@ -9,10 +9,10 @@ const determineStyles = require('./helpers/determine-styles')
 const armsCommMultiplier = 4
 const armsLicMultiplier = 2
 const typeTierGroupLength = 4 // the number of fields for each tier and type of case
-const tiersPerType = 8
-const reportColumnStart = 217
+const tiersPerType = 8 // WMT0160: For Licence and Custody only, Community now has 11
+const reportColumnStart = 217 // = WMT0160: Increase this due to new tiers
 const casesColumnStart = 25
-const t2aCasesColumnStart = 121
+const t2aCasesColumnStart = 121 // WMT0160: Increase this due to new tiers: should now be 133
 const numberOfReportColumns = 5
 
 module.exports = function (caseData, t2aCaseData, scenarioData) {

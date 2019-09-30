@@ -85,6 +85,7 @@ module.exports.getCaseloadTotalSummary = function (caseloads) {
   Used to create the bottom most row in the table
 */
 module.exports.calculateTotalsRow = function (caseloads) {
+  // WMT0160: add new tiers
   var totals = {a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, untiered: 0, overall: 0}
   caseloads.forEach(function (val, key) {
     totals.a += val.a
@@ -148,6 +149,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false, is
       var newGradeRecord
       if (calculatePercentage) {
         newGradeRecord = {
+          // WMT0160: add new tiers
           grade: teamGradeRecords[record].grade,
           a: percentageCalculator.calculatePercentage(teamGradeRecords[record].a, caseloadTotalsByTeam[team].a),
           b1: percentageCalculator.calculatePercentage(teamGradeRecords[record].b1, caseloadTotalsByTeam[team].b1),
@@ -164,6 +166,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false, is
         }
       } else {
         newGradeRecord = {
+          // WMT0160: add new tiers
           grade: teamGradeRecords[record].grade,
           a: teamGradeRecords[record].a,
           b1: teamGradeRecords[record].b1,
@@ -186,6 +189,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false, is
   }
   if (calculatePercentage) {
     for (var key in gradeTotals) {
+      // WMT0160: add new tiers
       gradeTotals[key].a = gradeTotals[key].a / gradeTotals[key].numberOfType
       gradeTotals[key].b1 = gradeTotals[key].b1 / gradeTotals[key].numberOfType
       gradeTotals[key].b2 = gradeTotals[key].b2 / gradeTotals[key].numberOfType
@@ -210,6 +214,7 @@ var collectTransformedData = function (caseloadTotalsByGrade, isCsv = false) {
 }
 
 var addGradeTotals = function (gradeTotals, newGradeRecord) {
+  // WMT0160: add new tiers
   if (gradeTotals[newGradeRecord.grade] !== undefined) {
     gradeTotals[newGradeRecord.grade].a += newGradeRecord.a
     gradeTotals[newGradeRecord.grade].b1 += newGradeRecord.b1
@@ -229,6 +234,7 @@ var addGradeTotals = function (gradeTotals, newGradeRecord) {
 }
 
 var groupCaseload = function (caseloads, splitByGrade = false) {
+  // WMT0160: add new tiers
   // Create a mapping for the linkId to do the aggregation
   var linkIdToCaseloadMap = new Map()
   for (var idx = 0; idx < caseloads.length; idx++) {
@@ -258,6 +264,7 @@ var groupCaseload = function (caseloads, splitByGrade = false) {
 }
 
 var groupOverallCaseloadByGrade = function (caseloads) {
+  // WMT0160: add new tiers to selectList
   // Create a mapping for the linkId to do the aggregation
   var linkIdToCaseloadMap = new Map()
   for (var idx = 0; idx < caseloads.length; idx++) {
@@ -284,6 +291,7 @@ var groupOverallCaseloadByGrade = function (caseloads) {
 }
 
 var totalWholeCaseload = function (caseloads) {
+  // WMT0160: add new tiers to tierTotals
   var tierTotals = {a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, untiered: 0, totalCases: 0}
   if (caseloads.length > 0) {
     caseloads.forEach(function (caseload) {
@@ -302,6 +310,7 @@ var totalWholeCaseload = function (caseloads) {
 }
 
 var calculateOverallPercentages = function (overallTotals, overallGradeTotals) {
+  // WMT0160: add new tiers
   // Create a mapping for the linkId to do the aggregation
   var linkIdToCaseloadMap = new Map()
   for (var idx = 0; idx < overallGradeTotals.length; idx++) {

@@ -3,6 +3,7 @@ const knex = require('../../../knex').web
 module.exports = function (workloadPoints) {
   return knex('workload_points')
     .insert({
+      // WMT0160: add new tiers
       comm_tier_1: workloadPoints.commD2,
       comm_tier_2: workloadPoints.commD1,
       comm_tier_3: workloadPoints.commC2,

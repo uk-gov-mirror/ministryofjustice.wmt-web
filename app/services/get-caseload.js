@@ -90,6 +90,7 @@ var parseCaseloadResults = function (organisationLevel, results, isCSV) {
 }
 
 var replaceIncorrectPercentageAverages = function (originalPercentageTotals, correctPercentages) {
+  // WMT0160: add new tiers
   var keys = Object.keys(originalPercentageTotals)
   keys.forEach(function (key) {
     originalPercentageTotals[key].a = correctPercentages[key].a

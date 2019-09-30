@@ -14,6 +14,7 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
   for (var c of cases) {
     inputMainBodyFormulas(ws, rowStart)
     inputOffenderManagerData(ws, c, rowStart)
+    // WMT0160: Change tiersPerType for community cases
     for (var i = 0; i < tiersPerType; i++) {
       var casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
@@ -33,6 +34,7 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
       columnStart = columnStart + typeTierGroupLength
     }
     // t2a
+    // WMT0160: Change tiersPerType for community cases
     for (i = 0; i < tiersPerType; i++) {
       casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
@@ -100,6 +102,7 @@ var inputOffenderManagerData = function (ws, offenderManager, row) {
 }
 
 var totalPointsFormula = function (row) {
+  // WMT0160: Update this
   // return '=SUM(V4*V' + row + ',W4*W' + row + ',X4*X' + row + ',Y4*Y' + row + ',Z4*Z' + row + ',AA4*AA' + row + ',AB4*AB' + row + ',AC4*AC' + row + ',AD4*AD' + row + ',AE4*AE' + row + ',AF4*AF' + row + ',AG4*AG' + row + ',AH4*AH' + row + ',AI4*AI' + row + ',AJ4*AJ' + row + ',AK4*AK' + row + ',AL4*AL' + row + ',AM4*AM' + row + ',AN4*AN' + row + ',AO4*AO' + row + ',AP4*AP' + row + ',AQ4*AQ' + row + ',AR4*AR' + row + ',AS4*AS' + row + ',AT4*AT' + row + ',AU4*AU' + row + ',AV4*AV' + row + ',AW4*AW' + row + ',AX4*AX' + row + ',AY4*AY' + row + ',AZ4*AZ' + row + ',BA4*BA' + row + ',BB4*BB' + row + ',BC4*BC' + row + ',BD4*BD' + row + ',BE4*BE' + row + ',BF4*BF' + row + ',BG4*BG' + row + ',BH4*BH' + row + ',BI4*BI' + row + ',BJ4*BJ' + row + ',BK4*BK' + row + ',BL4*BL' + row + ',BM4*BM' + row + ',BN4*BN' + row + ',BO4*BO' + row + ',BP4*BP' + row + ',BQ4*BQ' + row + ',BR4*BR' + row + ',BS4*BS' + row + ',BT4*BT' + row + ',BU4*BU' + row + ',BV4*BV' + row + ',BW4*BW' + row + ',BX4*BX' + ',BY4*BY' + row + ',BZ4*BZ' + row + ',CA4*CA' + row + ',CB4*CB' + row + ',CC4*CC' + row + ',CD4*CD' + row + ',CE4*CE' + row + ',CF4*CF' + row + ',CG4*CG' + row + ',CH4*CH' + row + ',CI4*CI' + row + ',CJ4*CJ' + row + ',CK4*CK' + row + ',CL4*CL' + row + ',CM4*CM' + row + ',CN4*CN' + row + ',CO4*CO' + row + ',CP4*CP' + row + ',CQ4*CQ' + row + ',CR4*CR' + row + ',CS4*CS' + row + ',CT4*CT' + row + ',CU4*CU' + row + ',CV4*CV' + row + ',CW4*CW' + row + ',CX4*CX' + row + ',CY4*CY' + row + ',CZ4*CZ' + row + ',DA4*DA' + row + ',DB4*DB' + row + ',DC4*DC' + row + ',DD4*DD' + row + ',DE4*DE' + row + ',DF4*DF' + row + ',DG4*DG' + row + ',DH4*DH' + row + ',DI4*DI' + row + ',DJ4*DJ' + row + ',DK4*DK' + row + ',DL4*DL' + row + ',DM4*DM' + row + ',DN4*DN' + row + ',DO4*DO' + row + ',DP4*DP' + row + ',DQ4*DQ' + row + ',DR4*DR' + row + ',DS4*DS' + row + ',DT4*DT' + row + ',DU4*DU' + row + ',DV4*DV' + row + ',DW4*DW' + row + ',DX4*DX' + row + ',DY4*DY' + row + ',DZ4*DZ' + row + ',EA4*EA' + row + ',EB4*EB' + row + ',EC4*EC' + row + ',ED4*ED' + row + ',EE4*EE' + row + ',EF4*EF' + row + ',EG4*EG' + row + ',EH4*EH' + row + ',EI4*EI' + row + ',EJ4*EJ' + row + ',EK4*EK' + row + ',EL4*EL' + row + ',EM4*EM' + row + ',EN4*EN' + row + ',EO4*EO' + row + ',EP4*EP' + row + ',EQ4*EQ' + row + ',ER4*ER' + row + ',ES4*ES' + row + ',ET4*ET' + row + ',EU4*EU' + row + ',EV4*EV' + row + ',EW4*EW' + row + ',EX4*EX' + row + ',EY4*EY' + row + ',EZ4*EZ' + row + ', FA4*FA' + row + ',FB4*FB' + row + ',FC4*FC' + row + ',FD4*FD' + row + ',FE4*FE' + row + ',FF4*FF' + row + ',FG4*FG' + row + ',FH4*FH' + row + ',FI4*FI' + row + ',FJ4*FJ' + row + ',FK4*FK' + row + ',FL4*FL' + row + ',FM4*FM' + row + ',FN4*FN' + row + ',FO4*FO' + row + ',FP4*FP' + row + ',FQ4*FQ' + row + ',FR4*FR' + row + ',FS4*FS' + row + ',FT4*FT' + row + ',FU4*FU' + row + ',FV4*FV' + row + ',FW4*FW' + row + ',FX4*FX' + row + ',FY4*FY' + row + ',FZ4*FZ' + row + ',GA4*GA' + row + ',GB4*GB' + row + ',GC4*GC' + row + ',GD4*GD' + row + ',GE4*GE' + row + ',GF4*GF' + row + ',GG4*GG' + row + ',GH4*GH' + row + ',GI4*GI' + row + ',GJ4*GJ' + row + ',GK4*GK' + row + ',GL4*GL' + row + ',GM4*GM' + row + ',GN4*GN' + row + ',GO4*GO' + row + ',GP4*GP' + row + ',GQ4*GQ' + row + ',GR4*GR' + row + ',GS4*GS' + row + ',GT4*GT' + row + ',GU4*GU' + row + ',GV4*GV' + row + ',GW4*GW' + row + ',GX4*GX' + row + ',GY4*GY' + row + ',GZ4*GZ' + row + ',HA4*HA' + row + ',HB4*HB' + row + ',HC4*HC' + row + ',HD4*HD' + row + ',HE4*HE' + row + ')'
   // Deal with first 5 Columns separately
   var formula = '=SUM($Y$4*Y' + row + ',$Z$4*Z' + row
@@ -127,6 +130,7 @@ var totalPointsFormula = function (row) {
 }
 
 var totalCasesFormula = function (row) {
+  // WMT0160: Update this
   return '=SUM(Y' + row + ',AC' + row + ',AG' + row + ',AK' + row + ',AO' + row + ',AS' + row + ',AW' + row + ',BA' + row + ',BE' + row + ',BI' + row + ',BM' + row + ',BQ' + row + ',BU' + row + ',BY' + row + ',CC' + row + ',CG' + row + ',CK' + row + ',CO' + row + ',CS' + row + ',CW' + row + ',DA' + row + ',DE' + row + ',DI' + row + ',DM' + row + ',DQ' + row + ',DU' + row + ',DY' + row + ',EC' + row + ',EG' + row + ',EK' + row + ',EO' + row + ',ES' + row + ',EW' + row + ',FA' + row + ',FE' + row + ',FI' + row + ',FM' + row + ',FQ' + row + ',FU' + row + ',FY' + row + ',GC' + row + ',GG' + row + ',GK' + row + ',GO' + row + ',GS' + row + ',GW' + row + ',HA' + row + ',HE' + row + ')'
 }
 
@@ -181,6 +185,7 @@ var inputBottomTotals = function (ws, row) {
   var secondLetter
   var char1
   var char2
+  // WMT0160: Update this too
   for (firstLetter = 0; firstLetter < 7; firstLetter++) {
     for (secondLetter = 0; secondLetter < 26; secondLetter++) {
       char1 = String.fromCharCode(firstLetter + 65)

@@ -6,6 +6,7 @@ module.exports = function (id, type) {
   var orgUnit = orgUnitFinder('name', type)
   var table = orgUnit.caseloadView
 
+  // WMT0160: add new tiers to selectList
   var selectList = [
     'link_id AS linkId',
     'grade_code AS grade',

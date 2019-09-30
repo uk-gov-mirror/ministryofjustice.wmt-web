@@ -3,6 +3,7 @@ const knex = require('../../../knex').web
 module.exports = function (isT2A = false) {
   isT2A = (isT2A === true)
 
+  // WMT0160: add new tiers
   return knex('workload_points')
     .first('comm_tier_1 AS commD2',
             'comm_tier_2 AS commD1',

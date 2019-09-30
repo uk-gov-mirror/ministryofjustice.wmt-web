@@ -1,7 +1,7 @@
 const ValidationError = require('../errors/validation-error')
 const ErrorHandler = require('../validators/error-handler')
 const FieldValidator = require('../validators/field-validator')
-
+// WMT0160: add new tiers
 class WorkloadPoints {
   constructor (request, adjustments) {
     this.previousWpId = request.previousWpId
