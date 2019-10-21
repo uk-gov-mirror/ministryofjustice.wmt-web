@@ -66,7 +66,7 @@
             {% for reduction in reductions %}
             <tr>
                 <td headers="reduction_om_name">{{ reduction.omName }}</td>
-                <td headers="manager_responsible">John Smith</td>
+                <td headers="manager_responsible">{{ reduction.managerResponsible }}</td>
                 <td headers="reduction_type">{{ reduction.reductionReason }}</td>
                 <td headers="reduction_hours">{{ reduction.hours }}</td>
                 <td headers="reduction_start_date">{{ reduction.startDate }}</td>

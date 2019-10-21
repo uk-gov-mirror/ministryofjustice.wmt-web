@@ -17,6 +17,8 @@
     {% set Staff=true %}
   {% endif %}
 
+  {% include "includes/validation-error-messages.html" %}
+
   <form action="/admin/user-rights/{{username}}" method="post" id="userRightForm">
     <div class="form-group">
       <fieldset>
@@ -48,7 +50,10 @@
             <p class="lede">What is this user's name?</p>
             <span class="form-hint" id="expiring-reductions-search-field-hint">For Example, John Smith</span>
           </legend>
-            <input type="text" class="form-control">
+          {% if errors['fullname'][0] %}
+            <span class="error-message">{{ errors['fullname'][0] }}</span>
+          {% endif %}
+          <input type="text" class="form-control" name="fullname" id="fullname" value="{{ fullname }}">
       </fieldset>
     </div>
 

@@ -8,7 +8,8 @@ module.exports = function (userId) {
     'amount AS hours', 'start_date AS startDate',
     'end_date AS endDate',
     'reduction_id AS reductionId',
-    'workload_type AS workloadType'
+    'workload_type AS workloadType',
+    'manager_responsible AS managerResponsible'
   ]
 
   return knex('expiring_reductions_view')
