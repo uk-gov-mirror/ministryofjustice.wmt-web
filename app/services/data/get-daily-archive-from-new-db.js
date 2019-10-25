@@ -21,7 +21,10 @@ module.exports = function (archiveDateRange, extraCriteria, archiveDataLimit) {
     'cms_adjustment_points AS cmsPoints',
     'gs_adjustment_points AS gsPoints',
     'arms_total_cases AS armsTotalCases',
-    'paroms_points AS paromsPoints'
+    'paroms_points AS paromsPoints',
+    'sdr_points AS sdrPoints',
+    'sdr_conversion_points AS sdrConversionPoints',
+    'nominal_target AS nominalTarget'
   ]
 
   if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {
