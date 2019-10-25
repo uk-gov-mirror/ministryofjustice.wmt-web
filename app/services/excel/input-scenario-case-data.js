@@ -133,7 +133,7 @@ var totalCasesFormula = function (row) {
 // Add formulas to Cells C to U (Data below "Total Cases" Column to "Current % Capacity" Column in produced spreadsheet)
 var inputMainBodyFormulas = function (ws, row) {
   ws.cell(row, 6).formula(totalCasesFormula(row)).style(this.styles.nonEditableCaseStyle) // Total Cases
-  ws.cell(row, 12).formula('=IFERROR((K' + row + '/U' + row + '),0)').style(this.styles.percentageStyle) // CMS %
+  ws.cell(row, 12).formula('=IFERROR((K' + row + '/V' + row + '),0)').style(this.styles.percentageStyle) // CMS %
   ws.cell(row, 14).formula('=IFERROR((M' + row + '/U' + row + '),0)').style(this.styles.percentageStyle) // GS %
   ws.cell(row, 15).formula('=HI' + row + '*HI4').style(this.styles.nonEditableCaseStyle) // SDR Points
   ws.cell(row, 16).formula('=HJ' + row + '*HJ4').style(this.styles.nonEditableCaseStyle) // FDR Points
@@ -160,7 +160,7 @@ var inputBottomTotals = function (ws, row) {
   ws.cell(row, 9).formula('=SUM($I$' + 5 + ':I' + dataEndRow + ')').style(this.styles.sumStyle)
   ws.cell(row, 10).formula('=SUM($J$' + 5 + ':J' + dataEndRow + ')').style(this.styles.sumStyle)
   ws.cell(row, 11).formula('=SUM($K$' + 5 + ':K' + dataEndRow + ')').style(this.styles.sumStyle)
-  ws.cell(row, 12).formula('=IFERROR((K' + row + '/U' + row + '),0)').style(this.styles.cmsGsPercentageStyle)
+  ws.cell(row, 12).formula('=IFERROR((K' + row + '/v' + row + '),0)').style(this.styles.cmsGsPercentageStyle)
   ws.cell(row, 13).formula('=SUM($M$' + 5 + ':M' + dataEndRow + ')').style(this.styles.sumStyle)
   ws.cell(row, 14).formula('=IFERROR((M' + row + '/U' + row + '),0)').style(this.styles.cmsGsPercentageStyle)
   ws.cell(row, 15).formula('=SUM($O$' + 5 + ':O' + dataEndRow + ')').style(this.styles.sumStyle)
