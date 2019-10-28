@@ -87,9 +87,9 @@
               <td headers="grade om">{{ member.gradeCode }}</td>
             {% endif %}
             {% if member.capacityPercentage > 110 %}
-              <td class="capacity-red" headers="current cap">{{ member.capacityPercentage | round }}%</td>
+              <td class="capacity-red" headers="current cap">{{ member.capacityPercentage | round(1) }}%</td>
             {% else %}
-              <td headers="current cap">{{ member.capacityPercentage | round }}%</td>
+              <td headers="current cap">{{ member.capacityPercentage | round(1) }}%</td>
             {% endif %}
             <td headers="points cap">{{ member.availablePoints }}</td>
             {% if member.capacityPercentage > 110 %}

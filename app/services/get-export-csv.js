@@ -300,7 +300,7 @@ var parseTotalSummaryTable = function (totalSummary) {
 }
 
 var formatCapacityValue = function (capacity) {
-  return Math.round(capacity) + '%'
+  return capacity.toFixed(1) + '%'
 }
 
 var formatCMSPercentage = function (cms) {
