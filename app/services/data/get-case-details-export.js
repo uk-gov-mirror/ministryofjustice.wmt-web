@@ -1,4 +1,5 @@
 const knex = require('../../../knex').web
+const getWorkloadPointsExport = require('./get-workload-points-export')
 
 module.exports = function (id, type) {
   var table = 'case_details_export_view'
@@ -15,6 +16,7 @@ module.exports = function (id, type) {
   ]
 
   var whereString
+  var caseDetails
 
   if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
     whereString = ' WHERE ' + type + 'id = ' + id
@@ -24,6 +26,9 @@ module.exports = function (id, type) {
         ' FROM ' + table +
         whereString)
       .then(function (results) {
-        return results
+        caseDetails = results
+        return getWorkloadPointsExport().then(function (workloadPoints) {
+          return {results: caseDetails, workloadPoints: workloadPoints}
+        })
       })
 }

@@ -13,6 +13,7 @@ const getGroupSupervisionExport = require('../services/data/get-group-supervisio
 const getScenarioExport = require('../services/get-scenario')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
+const caseTypes = require('../constants/case-type')
 
 var lastUpdated
 
@@ -113,10 +114,10 @@ module.exports = function (router) {
         } else {
           formatResults(results, tabType)
           result.date = lastUpdated
-          results.title = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY')
+          results.results.title = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY')
           let dateFileName = null
           dateFileName = result.title
-          var exportCsv = getExportCsv(dateFileName, results, tabType)
+          var exportCsv = getExportCsv(dateFileName, results.results, tabType)
           res.attachment(exportCsv.filename)
           res.send(exportCsv.csv)
         }
@@ -129,7 +130,7 @@ module.exports = function (router) {
 
 var formatResults = function (results, tabType) {
   var newDate, year, month, dt
-  results.forEach(function (result) {
+  results.results.forEach(function (result) {
     if (tabType === tabs.EXPORT.ARMS_EXPORT) {
       newDate = new Date(result.assessmentDate)
       year = newDate.getFullYear()
@@ -144,6 +145,11 @@ var formatResults = function (results, tabType) {
       dt = newDate.getDate()
 
       result.releaseDate = dt + '-' + month + '-' + year
+      if (result.sentencetype === 'Licence') {
+        result.points = results.workloadPoints.weightingArmsLicense
+      } else if (result.sentencetype === 'Community') {
+        result.points = results.workloadPoints.weightingArmsCommunity
+      }
     }
 
     if ((tabType === tabs.EXPORT.GROUP_SUPERVISION_EXPORT) || (tabType === tabs.EXPORT.CMS_EXPORT)) {
@@ -154,6 +160,25 @@ var formatResults = function (results, tabType) {
 
       result.contactDate = dt + '-' + month + '-' + year
     }
+
+    if (tabType === tabs.EXPORT.CASE_DETAILS_EXPORT) {
+      if (result.caseType === caseTypes.COMMUNITY) {
+        result = getPointsForTier(result, results.workloadPoints, 'comm')
+      } else if (result.caseType === caseTypes.LICENSE) {
+        result = getPointsForTier(result, results.workloadPoints, 'lic')
+      } else if (result.caseType === caseTypes.CUSTODY) {
+        result = getPointsForTier(result, results.workloadPoints, 'cus')
+      }
+    }
   })
   return results
+}
+
+var getPointsForTier = function (result, workloadPoints, caseType) {
+  if (workloadPoints[caseType + result.tierCode]) {
+    result.points = workloadPoints[caseType + result.tierCode]
+  } else {
+    result.points = 0
+  }
+  return result
 }

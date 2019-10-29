@@ -25,6 +25,6 @@ module.exports = function (id, type) {
         ' FROM ' + table +
         whereString)
       .then(function (results) {
-        return results
+        return {results: results}
       })
 }
