@@ -58,6 +58,10 @@ describe('services/get-export-csv', function () {
       expect(getExportCsv(orgUnit.TEAM.name, helper.ARMS_EXPORT_RESULT.armsExportDetails, tabs.EXPORT.ARMS_EXPORT).csv).to.eql(helper.ARMS_EXPORT_CSV.csv)
     })
 
+    it('for Workload Percentage Breakdown Export', function () {
+      expect(getExportCsv(orgUnit.TEAM.name, helper.PERCENTAGE_WORKLOAD_EXPORT_RESULT.percentageWorkloadExportDetails, tabs.EXPORT.WORKLOAD_PERCENTAGE_EXPORT).csv).to.eql(helper.PERCENTAGE_WORKLOAD_EXPORT_CSV.csv)
+    })
+
     it('for Case Details Export', function () {
       expect(getExportCsv(orgUnit.TEAM.name, helper.CASE_DETAILS_EXPORT_RESULT.caseDetailsExportDetails, tabs.EXPORT.CASE_DETAILS_EXPORT).csv).to.eql(helper.CASE_DETAILS_EXPORT_CSV.csv)
     })
