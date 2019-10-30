@@ -31,6 +31,8 @@ const GROUP_SUPERVISION_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Tea
 const GROUP_SUPERVISION_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'contactDate', 'CRN', 'omName', 'omGradeCode', 'contactDescription', 'contactCode', 'points']
 const CMS_EXPORT_FIELD_NAMES = ['Contact Region Name', 'Contact LDU Cluster', 'Contact Team Name', 'Contact Date', 'Contact Name', 'Contact Grade', 'OM Region Name', 'OM LDU Cluster', 'OM Team Name', 'CRN', 'OM Name', 'OM Grade', 'Contact Type Description', 'Contact Code', 'Contact Points', 'OM Points']
 const CMS_EXPORT_FIELDS = ['contactRegionName', 'contactLduName', 'contactTeamName', 'contactDate', 'contactName', 'contactGradeCode', 'omRegionName', 'omLduName', 'omTeamName', 'contactId', 'omName', 'omGradeCode', 'contactDescription', 'contactCode', 'contactPoints', 'omPoints']
+const WORKLOAD_PERCENTAGE_BREAKDOWN_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Offender Manager Name', 'Offender Manager Grade', 'Capacity', 'Case Contribution', 'CMS Contribution', 'GS Contribution', 'ARMS Contribution', 'PAROMS Contribution', 'SDR Contribution', 'FDR Contribution']
+const WORKLOAD_PERCENTAGE_BREAKDOWN_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'omName', 'omGrade', 'capacity', 'caseContribution', 'cmsContribution', 'gsContribution', 'armsContribution', 'paromsContribution', 'sdrContribution', 'fdrContribution']
 
 module.exports = function (organisationLevel, result, tab) {
   var filename
@@ -93,6 +95,12 @@ var getFilename = function (orgName, screen) {
       return 'CMS_Export.csv'
     } else {
       return (orgName + ' CMS_Export.csv').replace(replaceSpaces, '_')
+    }
+  } else if (screen === tabs.EXPORT.WORKLOAD_PERCENTAGE_EXPORT) {
+    if (orgName === null) {
+      return 'Percentage_Workload_Breakdown_Export.csv'
+    } else {
+      return (orgName + ' Percentage_Workload_Breakdown_Export.csv').replace(replaceSpaces, '_')
     }
   } else {
     return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
@@ -164,6 +172,10 @@ var getFields = function (organisationLevel, tab) {
     case tabs.EXPORT.CMS_EXPORT:
       fields = CMS_EXPORT_FIELDS
       fieldNames = CMS_EXPORT_FIELD_NAMES
+      break
+    case tabs.EXPORT.WORKLOAD_PERCENTAGE_EXPORT:
+      fields = WORKLOAD_PERCENTAGE_BREAKDOWN_EXPORT_FIELDS
+      fieldNames = WORKLOAD_PERCENTAGE_BREAKDOWN_EXPORT_FIELD_NAMES
       break
   }
   return { fields: fields, fieldNames: fieldNames }
@@ -242,6 +254,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
     case tabs.EXPORT.CASE_DETAILS_EXPORT:
     case tabs.EXPORT.GROUP_SUPERVISION_EXPORT:
     case tabs.EXPORT.CMS_EXPORT:
+    case tabs.EXPORT.WORKLOAD_PERCENTAGE_EXPORT:
       csv = generateCsv(result, fields, fieldNames)
       break
   }

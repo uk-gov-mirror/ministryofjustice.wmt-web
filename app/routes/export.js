@@ -11,6 +11,7 @@ const getCMSExport = require('../services/data/get-cms-export')
 const getCaseDetailsExport = require('../services/data/get-case-details-export')
 const getGroupSupervisionExport = require('../services/data/get-group-supervision-export')
 const getScenarioExport = require('../services/get-scenario')
+const getWorkloadPercentageBreakdown = require('../services/data/get-workload-percentage-breakdown')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 
@@ -77,6 +78,7 @@ module.exports = function (router) {
     var groupSupervisionPromise = getGroupSupervisionExport(id, organisationLevel)
     var cmsPromise = getCMSExport(id, organisationLevel)
     var scenarioPromise = getScenarioExport(id, organisationLevel)
+    var getWorkloadPercentageBreakdownPromise = getWorkloadPercentageBreakdown(id, organisationLevel)
 
     var tabType
 
@@ -99,6 +101,10 @@ module.exports = function (router) {
         break
       case '5':
         exportPromise = scenarioPromise
+        break
+      case '6':
+        exportPromise = getWorkloadPercentageBreakdownPromise
+        tabType = tabs.EXPORT.WORKLOAD_PERCENTAGE_EXPORT
         break
       default:
         exportPromise = Promise.resolve()
