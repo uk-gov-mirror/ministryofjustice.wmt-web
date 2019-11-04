@@ -276,7 +276,8 @@ var addWorkloads = function (inserts) {
         workloads.push(Object.assign({}, defaultWorkload, {
           workload_owner_id: currentWorkloadOwnerId,
           staging_id: upToDateMaxStagingId + (i++),
-          workload_report_id: report.id
+          workload_report_id: report.id,
+          total_filtered_cases: 5
         }))
       })
       return knex('workload').returning('id').insert(workloads)
@@ -338,6 +339,7 @@ var addWorkloads = function (inserts) {
         t2a_unpaid_work_total: 10,
         t2a_warrants_total: 10,
         total_cases: 10,
+        total_filtered_cases: 10,
         location: 'COMMUNITY'
       }
 
@@ -345,7 +347,7 @@ var addWorkloads = function (inserts) {
       var locations = ['COMMUNITY', 'CUSTODY', 'LICENSE']
       locations.forEach(function (location) {
         for (var tierNumber = 0, totalCases = 0; tierNumber < 8; tierNumber++, totalCases++) {
-          tiers.push(Object.assign({}, defaultTier, { tier_number: tierNumber, location: location, total_cases: totalCases }))
+          tiers.push(Object.assign({}, defaultTier, { tier_number: tierNumber, location: location, total_cases: totalCases, total_filtered_cases: totalCases }))
         }
       })
       return knex('tiers').returning('id').insert(tiers)

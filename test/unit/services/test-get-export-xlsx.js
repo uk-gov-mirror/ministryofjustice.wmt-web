@@ -159,9 +159,9 @@ var workloadPointsTester = function (arrayToTest, keysToTest, columnNo) {
   for (let i = 0; i < 24; i++) {
     if (i % 8 !== 0) {
       expect(getCellValue(rowNo, columnNo)).to.eql(arrayToTest[keysToTest[arrayIndex]])
-      expect(getCellValue(rowNo, columnNo + 1)).to.eql(-arrayToTest[keysToTest[arrayIndex]])
+      expect(getCellValue(rowNo, columnNo + 1)).to.eql(0)
       expect(getCellValue(rowNo, columnNo + 2)).to.eql(0)
-      expect(getCellValue(rowNo, columnNo + 3)).to.eql(-arrayToTest[keysToTest[arrayIndex]])
+      expect(getCellValue(rowNo, columnNo + 3)).to.eql(0)
       arrayIndex++
     } else {
       expect(getCellValue(rowNo, columnNo)).to.eql(0)
