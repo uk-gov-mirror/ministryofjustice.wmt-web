@@ -8,14 +8,23 @@ module.exports = function (archiveDateRange, extraCriteria, archiveDataLimit) {
   var selectColumns = [
     'workload_id AS workloadID',
     'workload_date AS workloadDate',
+    'region_name AS regionName',
     'ldu_name AS lduName',
     'team_name AS teamName',
     'om_name AS omName',
+    'grade_code AS grade',
     'total_cases AS totalCases',
     'total_points AS totalPoints',
     'available_points AS availablePoints',
     'contracted_hours AS contractedHours',
-    'hours_reduction AS hoursReduction'
+    'hours_reduction AS hoursReduction',
+    'cms_adjustment_points AS cmsPoints',
+    'gs_adjustment_points AS gsPoints',
+    'arms_total_cases AS armsTotalCases',
+    'paroms_points AS paromsPoints',
+    'sdr_points AS sdrPoints',
+    'sdr_conversion_points AS sdrConversionPoints',
+    'nominal_target AS nominalTarget'
   ]
 
   if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {

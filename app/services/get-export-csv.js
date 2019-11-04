@@ -13,8 +13,8 @@ const REDUCTIONS_FIELDS = ['regionName', 'lduName', 'teamName', 'offenderManager
 const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
 const INACTIVE_CASES_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
 // const DAILY_ARCHIVE_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Offender Manager Name', 'Total Cases', 'Capacity', 'Reductions', 'Comments', 'Reduction Date', 'Reduction Added By']
-const DAILY_ARCHIVE_FIELD_NAMES = ['Workload Date', 'Workload ID', 'LDU Cluster', 'Team Name', 'Offender Manager Name', 'Total Cases', 'Capacity', 'Reductions']
-const DAILY_ARCHIVE_FIELDS = ['workloadDate', 'workloadID', 'lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'hoursReduction']
+const DAILY_ARCHIVE_FIELD_NAMES = ['Workload Date', 'Division', 'LDU', 'Team', 'Offender Manager', 'Grade', 'Total Cases', 'Total Points', 'SDR Points', 'SDR Conversion Points', 'PAROMS Points', 'Nominal Target', 'Contracted Hours', 'Reductions', 'Available Points', 'Capacity', 'CMS Points', 'CMS %', 'GS Points', 'GS %', 'ARMS Total Cases']
+const DAILY_ARCHIVE_FIELDS = ['workloadDate', 'regionName', 'lduName', 'teamName', 'omName', 'grade', 'totalCases', 'totalPoints', 'sdrPoints', 'sdrConversionPoints', 'paromsPoints', 'nominalTarget', 'contractedHours', 'hoursReduction', 'availablePoints', 'capacity', 'cmsPoints', 'cmsPercentage', 'gsPoints', 'gsPercentage', 'armsTotalCases']
 
 const FORTNIGHTLY_ARCHIVE_FIELD_NAMES = ['Start Date', 'End Date', 'LDU Cluster', 'Team Name', 'Offender Manager Name', 'Average Cases', 'Average Capacity', 'Average Reductions']
 const FORTNIGHTLY_ARCHIVE_FIELDS = ['startDate', 'endDate', 'lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'hoursReduction']
