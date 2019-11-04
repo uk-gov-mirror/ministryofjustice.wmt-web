@@ -15,7 +15,8 @@ module.exports = function (id, type) {
     't2a_ow AS t2aOw',
     't2a_ot AS t2aOt',
     't2a_upw AS t2aUpw',
-    'sl'
+    'sl',
+    'sso'
   ]
 
   var requiresWorkloadOwnerName = (type === ORGANISATION_UNIT.TEAM.name)

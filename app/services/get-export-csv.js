@@ -14,8 +14,8 @@ const REDUCTIONS_FIELDS = ['regionName', 'lduName', 'teamName', 'offenderManager
 const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
 const INACTIVE_CASES_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
 // const DAILY_ARCHIVE_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Offender Manager Name', 'Total Cases', 'Capacity', 'Reductions', 'Comments', 'Reduction Date', 'Reduction Added By']
-const DAILY_ARCHIVE_FIELD_NAMES = ['Workload Date', 'Workload ID', 'LDU Cluster', 'Team Name', 'Offender Manager Name', 'Total Cases', 'Capacity', 'Reductions']
-const DAILY_ARCHIVE_FIELDS = ['workloadDate', 'workloadID', 'lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'hoursReduction']
+const DAILY_ARCHIVE_FIELD_NAMES = ['Workload Date', 'Division', 'LDU', 'Team', 'Offender Manager', 'Grade', 'Total Cases', 'Total Points', 'SDR Points', 'SDR Conversion Points', 'PAROMS Points', 'Nominal Target', 'Contracted Hours', 'Reductions', 'Available Points', 'Capacity', 'CMS Points', 'CMS %', 'GS Points', 'GS %', 'ARMS Total Cases']
+const DAILY_ARCHIVE_FIELDS = ['workloadDate', 'regionName', 'lduName', 'teamName', 'omName', 'grade', 'totalCases', 'totalPoints', 'sdrPoints', 'sdrConversionPoints', 'paromsPoints', 'nominalTarget', 'contractedHours', 'hoursReduction', 'availablePoints', 'capacity', 'cmsPoints', 'cmsPercentage', 'gsPoints', 'gsPercentage', 'armsTotalCases']
 
 const FORTNIGHTLY_ARCHIVE_FIELD_NAMES = ['Start Date', 'End Date', 'LDU Cluster', 'Team Name', 'Offender Manager Name', 'Average Cases', 'Average Capacity', 'Average Reductions']
 const FORTNIGHTLY_ARCHIVE_FIELDS = ['startDate', 'endDate', 'lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'hoursReduction']
@@ -28,10 +28,12 @@ const ARMS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Ass
 const ARMS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'assessmentDate', 'CRN', 'omName', 'omGrade', 'sentencetype', 'releaseDate']
 const CASE_DETAILS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Tier Code', 'Row Type', 'CRN', 'Case Type', 'Offender Manager Name', 'Grade Code']
 const CASE_DETAILS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'tierCode', 'rowType', 'caseReferenceNo', 'caseType', 'offenderManagerName', 'gradeCode']
-const GROUP_SUPERVISION_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Contact Date', 'CRN', 'Offender Manager Name', 'Offender Manager Grade', 'Contact Type Description', 'Contact Code', 'Points']
-const GROUP_SUPERVISION_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'contactDate', 'CRN', 'omName', 'omGradeCode', 'contactDescription', 'contactCode', 'points']
-const CMS_EXPORT_FIELD_NAMES = ['Contact Region Name', 'Contact LDU Cluster', 'Contact Team Name', 'Contact Date', 'Contact Name', 'Contact Grade', 'OM Region Name', 'OM LDU Cluster', 'OM Team Name', 'CRN', 'OM Name', 'OM Grade', 'Contact Type Description', 'Contact Code', 'Contact Points', 'OM Points']
-const CMS_EXPORT_FIELDS = ['contactRegionName', 'contactLduName', 'contactTeamName', 'contactDate', 'contactName', 'contactGradeCode', 'omRegionName', 'omLduName', 'omTeamName', 'contactId', 'omName', 'omGradeCode', 'contactDescription', 'contactCode', 'contactPoints', 'omPoints']
+const GROUP_SUPERVISION_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Contact Date', 'CRN', 'Contact ID', 'Offender Manager Name', 'Offender Manager Grade', 'Contact Type Description', 'Contact Code', 'Points']
+const GROUP_SUPERVISION_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'contactDate', 'caseRefNo', 'contactId', 'omName', 'omGradeCode', 'contactDescription', 'contactCode', 'points']
+const CMS_EXPORT_FIELD_NAMES = ['Contact Region Name', 'Contact LDU Cluster', 'Contact Team Name', 'Contact Date', 'Contact Name', 'Contact Grade', 'OM Region Name', 'OM LDU Cluster', 'OM Team Name', 'CRN', 'Contact ID', 'OM Name', 'OM Grade', 'Contact Type Description', 'Contact Code', 'Contact Points', 'OM Points']
+const CMS_EXPORT_FIELDS = ['contactRegionName', 'contactLduName', 'contactTeamName', 'contactDate', 'contactName', 'contactGradeCode', 'omRegionName', 'omLduName', 'omTeamName', 'caseRefNo', 'contactId', 'omName', 'omGradeCode', 'contactDescription', 'contactCode', 'contactPoints', 'omPoints']
+const SUSPENDED_LIFERS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Tier Code', 'Row Type', 'CRN', 'Case Type', 'Offender Manager Name', 'Grade Code', 'In Custody?', 'Register Level', 'Register Category', 'Register Category Description', 'Registration Date']
+const SUSPENDED_LIFERS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'tierCode', 'rowType', 'caseReferenceNo', 'caseType', 'offenderManagerName', 'gradeCode', 'inCustody', 'registerLevel', 'registerCategory', 'registerCategoryDescription', 'registrationDate']
 
 module.exports = function (organisationLevel, result, tab) {
   var filename
@@ -167,6 +169,10 @@ var getFields = function (organisationLevel, tab) {
       fields = CMS_EXPORT_FIELDS
       fieldNames = CMS_EXPORT_FIELD_NAMES
       break
+    case tabs.EXPORT.SUSPENDED_LIFERS_EXPORT:
+      fields = SUSPENDED_LIFERS_EXPORT_FIELDS
+      fieldNames = SUSPENDED_LIFERS_EXPORT_FIELD_NAMES
+      break
   }
   return { fields: fields, fieldNames: fieldNames }
 }
@@ -245,6 +251,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
     case tabs.EXPORT.CASE_DETAILS_EXPORT:
     case tabs.EXPORT.GROUP_SUPERVISION_EXPORT:
     case tabs.EXPORT.CMS_EXPORT:
+    case tabs.EXPORT.SUSPENDED_LIFERS_EXPORT:
       csv = generateCsv(result, fields, fieldNames)
       break
   }
