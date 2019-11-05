@@ -12,6 +12,9 @@ class WorkloadPoints {
     this.commC2 = request.commC2
     this.commD1 = request.commD1
     this.commD2 = request.commD2
+    this.commE = request.commE
+    this.commF = request.commF
+    this.commG = request.commG
     this.cusA = request.cusA
     this.cusB1 = request.cusB1
     this.cusB2 = request.cusB2
@@ -19,6 +22,9 @@ class WorkloadPoints {
     this.cusC2 = request.cusC2
     this.cusD1 = request.cusD1
     this.cusD2 = request.cusD2
+    this.cusE = request.cusE
+    this.cusF = request.cusF
+    this.cusG = request.cusG
     this.licA = request.licA
     this.licB1 = request.licB1
     this.licB2 = request.licB2
@@ -26,6 +32,9 @@ class WorkloadPoints {
     this.licC2 = request.licC2
     this.licD1 = request.licD1
     this.licD2 = request.licD2
+    this.licE = request.licE
+    this.licF = request.licF
+    this.licG = request.licG
     this.userId = request.userId
     this.sdr = request.sdr
     this.sdrConversion = request.sdrConversion
@@ -87,6 +96,15 @@ class WorkloadPoints {
     FieldValidator(this.cusD2, 'cusD2', errors)
       .isRequired()
       .isInt(0, 999)
+    FieldValidator(this.cusE, 'cusE', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.cusF, 'cusF', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.cusG, 'cusG', errors)
+      .isRequired()
+      .isInt(0, 999)
     FieldValidator(this.commA, 'commA', errors)
       .isRequired()
       .isInt(0, 999)
@@ -108,6 +126,15 @@ class WorkloadPoints {
     FieldValidator(this.commD2, 'commD2', errors)
       .isRequired()
       .isInt(0, 999)
+    FieldValidator(this.commE, 'commE', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.commF, 'commF', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.commG, 'commG', errors)
+      .isRequired()
+      .isInt(0, 999)
     FieldValidator(this.licA, 'licA', errors)
       .isRequired()
       .isInt(0, 999)
@@ -127,6 +154,15 @@ class WorkloadPoints {
       .isRequired()
       .isInt(0, 999)
     FieldValidator(this.licD2, 'licD2', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.licE, 'licE', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.licF, 'licF', errors)
+      .isRequired()
+      .isInt(0, 999)
+    FieldValidator(this.licG, 'licG', errors)
       .isRequired()
       .isInt(0, 999)
     FieldValidator(this.weightingOverdue, 'weightingOverdue', errors)
