@@ -9,11 +9,11 @@ const determineStyles = require('./helpers/determine-styles')
 const armsCommMultiplier = 4
 const armsLicMultiplier = 2
 const typeTierGroupLength = 4 // the number of fields for each tier and type of case
-const tiersPerType = 8 // WMT0160: For Licence and Custody only, Community now has 11
-const reportColumnStart = 217 // = WMT0160: Increase this due to new tiers
-const casesColumnStart = 25
-const t2aCasesColumnStart = 121 // WMT0160: Increase this due to new tiers: should now be 133
+const tiersPerType = 11
+const casesColumnStart = 26
+const t2aCasesColumnStart = casesColumnStart + (tiersPerType * typeTierGroupLength * 3)
 const numberOfReportColumns = 5
+const reportColumnStart = t2aCasesColumnStart + (tiersPerType * typeTierGroupLength * 3)
 
 module.exports = function (caseData, t2aCaseData, scenarioData) {
   var wb = new excel.Workbook()
@@ -39,7 +39,7 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   setReportWeightings(ws, styles, caseData)
   inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType, styles)
   ws.row(4).freeze()
-  ws.column(24).freeze()
+  ws.column(25).freeze()
   ws.column(24).setWidth(8)
   ws.column(2).setWidth(12)
   ws.column(3).setWidth(12)
@@ -127,9 +127,9 @@ var setTierWeightings = function (ws, styles, points) {
   }
   var count = 0
   var i
-  for (i = 0; i < 24; i++) {
+  for (i = 0; i < 33; i++) {
     var styleToApply = determineStyles.determineWeightingStyle(start, styles)
-    switch (i % 8) {
+    switch (i % 11) {
       case 0:
         ws.cell(4, start).number(0).style(styleToApply)
         ws.cell(4, start + 1).number(0).style(styleToApply)
