@@ -20,59 +20,99 @@ describe('services/get-export-xlsx', function () {
     })
 
     it('with the correct workload points configuration for t2a and non-t2a', function () {
-      var columnNo = 25
+      var columnNo = 26
 
       workloadPointsTester(workloadPointsConfig.workloadPointsConfig, workloadPointsKeys, columnNo)
-      columnNo = 121
+      columnNo = 158
       workloadPointsTester(workloadPointsConfig.t2aWorkloadPointsConfig, t2aWorkloadPointsKeys, columnNo)
     })
 
     it('with the correct totals for each tier', function () {
       var rowStart = 5
-      var columnStart = 25
-      var tiersPerType = 8
+      var columnStart = 26
+      var tiersPerType = 11
       var typeTierGroupLength = 4
 
       scenarioObjects.forEach(function (scenarioObject) {
-        for (var i = 0; i < tiersPerType; i++) {
+        for (var i = 8; i < tiersPerType; i++) {
           var casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
           columnStart = columnStart + typeTierGroupLength
         }
-        for (i = 0; i < tiersPerType; i++) {
+        for (var i = 0; i < tiersPerType - 3; i++) {
+          var casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
+          casesForThisTier = casesForThisTier[0]
+          caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
+          columnStart = columnStart + typeTierGroupLength
+        }
+
+        for (i = 8; i < tiersPerType; i++) {
           casesForThisTier = scenarioObject.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
           columnStart = columnStart + typeTierGroupLength
         }
-        for (i = 0; i < tiersPerType; i++) {
+        for (i = 0; i < tiersPerType - 3; i++) {
+          casesForThisTier = scenarioObject.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
+          casesForThisTier = casesForThisTier[0]
+          caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
+          columnStart = columnStart + typeTierGroupLength
+        }
+
+        for (i = 8; i < tiersPerType; i++) {
+          casesForThisTier = scenarioObject.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
+          casesForThisTier = casesForThisTier[0]
+          caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
+          columnStart = columnStart + typeTierGroupLength
+        }
+        for (i = 0; i < tiersPerType - 3; i++) {
           casesForThisTier = scenarioObject.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
           columnStart = columnStart + typeTierGroupLength
         }
         // t2a
-        for (i = 0; i < tiersPerType; i++) {
+        for (i = 8; i < tiersPerType; i++) {
           casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
           columnStart = columnStart + typeTierGroupLength
         }
-        for (i = 0; i < tiersPerType; i++) {
+        for (i = 0; i < tiersPerType - 3; i++) {
+          casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
+          casesForThisTier = casesForThisTier[0]
+          caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
+          columnStart = columnStart + typeTierGroupLength
+        }
+
+        for (i = 8; i < tiersPerType; i++) {
           casesForThisTier = scenarioObject.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
           columnStart = columnStart + typeTierGroupLength
         }
-        for (i = 0; i < tiersPerType; i++) {
+        for (i = 0; i < tiersPerType - 3; i++) {
+          casesForThisTier = scenarioObject.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
+          casesForThisTier = casesForThisTier[0]
+          caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
+          columnStart = columnStart + typeTierGroupLength
+        }
+
+        for (i = 8; i < tiersPerType; i++) {
+          casesForThisTier = scenarioObject.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
+          casesForThisTier = casesForThisTier[0]
+          caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
+          columnStart = columnStart + typeTierGroupLength
+        }
+        for (i = 0; i < tiersPerType - 3; i++) {
           casesForThisTier = scenarioObject.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
           columnStart = columnStart + typeTierGroupLength
         }
         rowStart++
-        columnStart = 25
+        columnStart = 26
       })
     })
 
@@ -88,7 +128,9 @@ describe('services/get-export-xlsx', function () {
 
     it('with the correct total points formulas', function () {
       expect(getCellFormula(5, 20)).to.eql(xlsxForumlas.totalPointsFormula1)
+      expect(getCellFormula(5, 21)).to.eql(xlsxForumlas.totalPointsFormulaT2A1)
       expect(getCellFormula(6, 20)).to.eql(xlsxForumlas.totalPointsFormula2)
+      expect(getCellFormula(6, 21)).to.eql(xlsxForumlas.totalPointsFormulaT2A2)
     })
 
     it('with the correct total cases formulas', function () {
@@ -132,23 +174,23 @@ describe('services/get-export-xlsx', function () {
     })
 
     it('with the correct Overall Total Points formulas', function () {
-      expect(getCellFormula(5, 21)).to.eql(xlsxForumlas.overallTotalPointsFormula1)
-      expect(getCellFormula(6, 21)).to.eql(xlsxForumlas.overallTotalPointsFormula2)
+      expect(getCellFormula(5, 22)).to.eql(xlsxForumlas.overallTotalPointsFormula1)
+      expect(getCellFormula(6, 22)).to.eql(xlsxForumlas.overallTotalPointsFormula2)
     })
 
-    it('with the correct Available Total Points formulas', function () {
-      expect(getCellFormula(5, 22)).to.eql(xlsxForumlas.availablePointsFormula1)
-      expect(getCellFormula(6, 22)).to.eql(xlsxForumlas.availablePointsFormula2)
+    it('with the correct Available Points formulas', function () {
+      expect(getCellFormula(5, 23)).to.eql(xlsxForumlas.availablePointsFormula1)
+      expect(getCellFormula(6, 23)).to.eql(xlsxForumlas.availablePointsFormula2)
     })
 
-    it('with the correct Remaining Total Points formulas', function () {
-      expect(getCellFormula(5, 23)).to.eql(xlsxForumlas.remainingPointsFormula1)
-      expect(getCellFormula(6, 23)).to.eql(xlsxForumlas.remainingPointsFormula2)
+    it('with the correct Remaining Points formulas', function () {
+      expect(getCellFormula(5, 24)).to.eql(xlsxForumlas.remainingPointsFormula1)
+      expect(getCellFormula(6, 24)).to.eql(xlsxForumlas.remainingPointsFormula2)
     })
 
     it('with the correct Capacity formulas', function () {
-      expect(getCellFormula(5, 24)).to.eql(xlsxForumlas.capacityFormula1)
-      expect(getCellFormula(6, 24)).to.eql(xlsxForumlas.capacityFormula2)
+      expect(getCellFormula(5, 25)).to.eql(xlsxForumlas.capacityFormula1)
+      expect(getCellFormula(6, 25)).to.eql(xlsxForumlas.capacityFormula2)
     })
   })
 })
@@ -156,8 +198,8 @@ describe('services/get-export-xlsx', function () {
 var workloadPointsTester = function (arrayToTest, keysToTest, columnNo) {
   var rowNo = 4
   var arrayIndex = 0
-  for (let i = 0; i < 24; i++) {
-    if (i % 8 !== 0) {
+  for (let i = 0; i < 33; i++) {
+    if (i % 11 !== 0) {
       expect(getCellValue(rowNo, columnNo)).to.eql(arrayToTest[keysToTest[arrayIndex]])
       expect(getCellValue(rowNo, columnNo + 1)).to.eql(0)
       expect(getCellValue(rowNo, columnNo + 2)).to.eql(0)
