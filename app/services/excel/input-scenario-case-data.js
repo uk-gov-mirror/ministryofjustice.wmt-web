@@ -21,8 +21,8 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
       columnStart = columnStart + typeTierGroupLength
     }
-    for (var i = 0; i < tiersPerType - 3; i++) {
-      var casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
+    for (i = 0; i < tiersPerType - 3; i++) {
+      casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
       columnStart = columnStart + typeTierGroupLength
@@ -80,7 +80,7 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
       columnStart = columnStart + typeTierGroupLength
     }
-  
+
     for (i = 8; i < tiersPerType; i++) {
       casesForThisTier = c.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]

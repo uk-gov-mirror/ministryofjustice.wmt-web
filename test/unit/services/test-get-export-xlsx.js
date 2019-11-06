@@ -40,8 +40,8 @@ describe('services/get-export-xlsx', function () {
           caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
           columnStart = columnStart + typeTierGroupLength
         }
-        for (var i = 0; i < tiersPerType - 3; i++) {
-          var casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
+        for (i = 0; i < tiersPerType - 3; i++) {
+          casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
           columnStart = columnStart + typeTierGroupLength

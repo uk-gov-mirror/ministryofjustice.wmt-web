@@ -203,7 +203,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
         licenseCsv = generateCsv(licenseTable, fields, fieldNames)
 
         var overallByGradeTable = parseCaseloadDetailsTable(result.caseloadDetails.overallCaseloadDetails.detailsPercentages)
-        // WMT0160 - Change this forEach 
+
         overallByGradeTable.forEach(function (row) {
           row.totalCases = row.totalCases.toFixed(2) + '%'
           row.untiered = row.untiered.toFixed(2) + '%'
@@ -270,7 +270,6 @@ var generateCsv = function (data, fields, fieldNames) {
   return json2csv({ data: data, fields: fields, fieldNames: fieldNames })
 }
 
-// WMT0160 - Change this function 
 var parseCaseloadDetailsTable = function (caseloadDetails) {
   var table = []
   var team
