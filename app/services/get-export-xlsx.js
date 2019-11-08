@@ -40,6 +40,7 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType, styles)
   ws.row(4).freeze()
   ws.column(25).freeze()
+  ws.column(25).setWidth(8)
   ws.column(24).setWidth(8)
   ws.column(2).setWidth(12)
   ws.column(3).setWidth(12)
