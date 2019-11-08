@@ -13,7 +13,7 @@ var overview = {
   cmsAdjustmentPoints: 0,
   availablePoints: 25,
   totalPoints: 50,
-  cases: 5,
+  cases: 8,
   contractedHours: 37.5,
   reduction: 3
 }
