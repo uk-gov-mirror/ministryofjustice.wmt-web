@@ -10,7 +10,7 @@ var expectedResult = [{
   lduCluster: 'Test LDU',
   teamName: 'Test Team',
   offenderManager: 'Test_Forename Test_Surname',
-  totalCases: 5,
+  totalCases: 8,
   availablePoints: 25,
   totalPoints: 50,
   contractedHours: 37.5,
