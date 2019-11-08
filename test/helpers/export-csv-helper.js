@@ -7,8 +7,8 @@ module.exports.TEAM_CASELOAD_RESULT = {
   title: 'Test Team',
   caseloadDetails: {
     overallCaseloadDetails: [
-      { linkId: 2767, name: 'John Smith', grade: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' },
-      { linkId: 2771, name: 'Tony Test', grade: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' }
+      { linkId: 2767, name: 'John Smith', grade: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, e: 2, f: 1, g: 0, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' },
+      { linkId: 2771, name: 'Tony Test', grade: 'PO', a: 9, b1: 18, b2: 12, c1: 6, c2: 9, d1: 6, d2: 3, e: 2, f: 1, g: 0, untiered: 0, totalCases: 189, caseType: 'COMMUNITY' }
     ],
     custodyCaseloadDetails: [],
     communityCaseloadDetails: [],
@@ -19,15 +19,15 @@ module.exports.TEAM_CASELOAD_RESULT = {
 module.exports.TEAM_CASELOAD_CSV = {
   filename: ('Test_Team_Caseload ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: 'OVERALL\n' +
-    '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-    '"John Smith","PO",9,18,12,6,9,6,3,0,189\n' +
-    '"Tony Test","PO",9,18,12,6,9,6,3,0,189\n\n\n' +
+    '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+    '"John Smith","PO",9,18,12,6,9,6,3,2,1,0,0,189\n' +
+    '"Tony Test","PO",9,18,12,6,9,6,3,2,1,0,0,189\n\n\n' +
     'CUSTODY\n' +
-    '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+    '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n\n\n' +
     'COMMUNITY\n' +
-    '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n\n\n' +
+    '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n\n\n' +
     'LICENSE\n' +
-    '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"'
+    '"Offender Manager Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"'
 }
 
 module.exports.ARMS_EXPORT_CSV = {
@@ -471,6 +471,9 @@ module.exports.LDU_CASELOAD_RESULT = {
       c2: 21,
       d1: 27,
       d2: 24,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 18,
       totalCases: 207 },
     { grade: 'PSO',
@@ -481,6 +484,9 @@ module.exports.LDU_CASELOAD_RESULT = {
       c2: 14,
       d1: 18,
       d2: 16,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 12,
       totalCases: 138 } ] } ],
     totals:
@@ -493,6 +499,9 @@ module.exports.LDU_CASELOAD_RESULT = {
       c2: 21,
       d1: 27,
       d2: 24,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 18,
       totalCases: 207,
       numberOfType: 1 },
@@ -505,6 +514,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 14,
         d1: 18,
         d2: 16,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 12,
         totalCases: 138,
         numberOfType: 1 } },
@@ -520,6 +532,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 60,
         totalCases: 60 },
       { grade: 'PSO',
@@ -530,6 +545,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 40,
         d1: 40,
         d2: 40,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 40,
         totalCases: 40 } ] } ],
     percentageTotals:
@@ -542,6 +560,9 @@ module.exports.LDU_CASELOAD_RESULT = {
       c2: 60,
       d1: 60,
       d2: 60,
+      e: 0,
+      f: 0,
+      g: 0,
       untiered: 60,
       totalCases: 60,
       numberOfType: 1 },
@@ -554,6 +575,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 40,
         d1: 40,
         d2: 40,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 40,
         totalCases: 40,
         numberOfType: 1 } } },
@@ -570,6 +594,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 9,
         d1: 6,
         d2: 3,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 63 },
       { grade: 'PSO',
@@ -580,6 +607,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 6,
         d1: 4,
         d2: 2,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 42 } ] } ],
       totals:
@@ -592,6 +622,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 9,
         d1: 6,
         d2: 3,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 63,
         numberOfType: 1 },
@@ -604,6 +637,9 @@ module.exports.LDU_CASELOAD_RESULT = {
           c2: 6,
           d1: 4,
           d2: 2,
+          e: 2,
+          f: 1,
+          g: 0,
           untiered: 0,
           totalCases: 42,
           numberOfType: 1 } },
@@ -619,6 +655,9 @@ module.exports.LDU_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 60 },
         { grade: 'PSO',
@@ -629,6 +668,9 @@ module.exports.LDU_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 40 } ] } ],
       percentageTotals:
@@ -641,6 +683,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 0,
         totalCases: 60,
         numberOfType: 1 },
@@ -653,6 +698,9 @@ module.exports.LDU_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 40,
           numberOfType: 1 } } },
@@ -669,6 +717,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 6,
         d1: 9,
         d2: 3,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 3,
         totalCases: 69 },
       { grade: 'PSO',
@@ -679,6 +730,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 4,
         d1: 6,
         d2: 2,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 2,
         totalCases: 46 } ] } ],
       totals:
@@ -691,6 +745,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 6,
         d1: 9,
         d2: 3,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 3,
         totalCases: 69,
         numberOfType: 1 },
@@ -703,6 +760,9 @@ module.exports.LDU_CASELOAD_RESULT = {
           c2: 4,
           d1: 6,
           d2: 2,
+          e: 2,
+          f: 1,
+          g: 0,
           untiered: 2,
           totalCases: 46,
           numberOfType: 1 } },
@@ -718,6 +778,9 @@ module.exports.LDU_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 60,
           totalCases: 60 },
         { grade: 'PSO',
@@ -728,6 +791,9 @@ module.exports.LDU_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40 } ] } ],
       percentageTotals:
@@ -740,6 +806,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 60,
         totalCases: 60,
         numberOfType: 1 },
@@ -752,6 +821,9 @@ module.exports.LDU_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40,
           numberOfType: 1 } } },
@@ -768,6 +840,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 6,
         d1: 12,
         d2: 18,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 15,
         totalCases: 75 },
       { grade: 'PSO',
@@ -778,6 +853,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 4,
         d1: 8,
         d2: 12,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 10,
         totalCases: 50 } ] } ],
       totals:
@@ -790,6 +868,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 6,
         d1: 12,
         d2: 18,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 15,
         totalCases: 75,
         numberOfType: 1 },
@@ -802,6 +883,9 @@ module.exports.LDU_CASELOAD_RESULT = {
           c2: 4,
           d1: 8,
           d2: 12,
+          e: 2,
+          f: 1,
+          g: 0,
           untiered: 10,
           totalCases: 50,
           numberOfType: 1 } },
@@ -817,6 +901,9 @@ module.exports.LDU_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 60,
           totalCases: 60 },
         { grade: 'PSO',
@@ -827,6 +914,9 @@ module.exports.LDU_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40 } ] } ],
       percentageTotals:
@@ -839,6 +929,9 @@ module.exports.LDU_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 60,
         totalCases: 60,
         numberOfType: 1 },
@@ -851,6 +944,9 @@ module.exports.LDU_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40,
           numberOfType: 1 } } },
@@ -872,21 +968,21 @@ module.exports.LDU_CASELOAD_CSV = {
   '"name","custodyCases","communityCases","licenseCases","totalCases"\n' +
   '"Team 2",115,105,125,345\n\n\n' +
   'CUSTODY\n' +
-  '"Team Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-  '"Team 2","PO",18,12,6,12,6,9,3,3,69\n' +
-  '"Team 2","PSO",12,8,4,8,4,6,2,2,46\n\n\n' +
+  '"Team Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Team 2","PO",18,12,6,12,6,9,3,2,1,0,3,69\n' +
+  '"Team 2","PSO",12,8,4,8,4,6,2,2,1,0,2,46\n\n\n' +
   'COMMUNITY\n' +
-  '"Team Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-  '"Team 2","PO",9,18,12,6,9,6,3,0,63\n' +
-  '"Team 2","PSO",6,12,8,4,6,4,2,0,42\n\n\n' +
+  '"Team Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Team 2","PO",9,18,12,6,9,6,3,2,1,0,0,63\n' +
+  '"Team 2","PSO",6,12,8,4,6,4,2,2,1,0,0,42\n\n\n' +
   'LICENSE\n' +
-  '"Team Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-  '"Team 2","PO",6,3,6,9,6,12,18,15,75\n' +
-  '"Team 2","PSO",4,2,4,6,4,8,12,10,50\n\n\n' +
+  '"Team Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Team 2","PO",6,3,6,9,6,12,18,2,1,0,15,75\n' +
+  '"Team 2","PSO",4,2,4,6,4,8,12,2,1,0,10,50\n\n\n' +
   'OVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' +
-  '"Team Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-  '"Team 2","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%"\n' +
-  '"Team 2","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%"'
+  '"Team Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Team 2","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
+  '"Team 2","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"'
 }
 
 module.exports.REGION_CASELOAD_RESULT = {
@@ -906,6 +1002,9 @@ module.exports.REGION_CASELOAD_RESULT = {
       c2: 21,
       d1: 27,
       d2: 24,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 18,
       totalCases: 207 },
     { grade: 'PSO',
@@ -916,6 +1015,9 @@ module.exports.REGION_CASELOAD_RESULT = {
       c2: 14,
       d1: 18,
       d2: 16,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 12,
       totalCases: 138 } ] } ],
     totals:
@@ -928,6 +1030,9 @@ module.exports.REGION_CASELOAD_RESULT = {
       c2: 21,
       d1: 27,
       d2: 24,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 18,
       totalCases: 207,
       numberOfType: 1 },
@@ -940,6 +1045,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 14,
         d1: 18,
         d2: 16,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 12,
         totalCases: 138,
         numberOfType: 1 } },
@@ -955,6 +1063,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 60,
         totalCases: 60 },
       { grade: 'PSO',
@@ -965,6 +1076,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 40,
         d1: 40,
         d2: 40,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 40,
         totalCases: 40 } ] } ],
     percentageTotals:
@@ -977,6 +1091,9 @@ module.exports.REGION_CASELOAD_RESULT = {
       c2: 60,
       d1: 60,
       d2: 60,
+      e: 0,
+      f: 0,
+      g: 0,
       untiered: 60,
       totalCases: 60,
       numberOfType: 1 },
@@ -989,6 +1106,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 40,
         d1: 40,
         d2: 40,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 40,
         totalCases: 40,
         numberOfType: 1 } } },
@@ -1005,6 +1125,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 9,
         d1: 6,
         d2: 3,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 63 },
       { grade: 'PSO',
@@ -1015,6 +1138,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 6,
         d1: 4,
         d2: 2,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 42 } ] } ],
       totals:
@@ -1027,6 +1153,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 9,
         d1: 6,
         d2: 3,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 63,
         numberOfType: 1 },
@@ -1039,6 +1168,9 @@ module.exports.REGION_CASELOAD_RESULT = {
           c2: 6,
           d1: 4,
           d2: 2,
+          e: 2,
+          f: 1,
+          g: 0,
           untiered: 0,
           totalCases: 42,
           numberOfType: 1 } },
@@ -1054,6 +1186,9 @@ module.exports.REGION_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 60 },
         { grade: 'PSO',
@@ -1064,6 +1199,9 @@ module.exports.REGION_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 40 } ] } ],
       percentageTotals:
@@ -1076,6 +1214,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 0,
         totalCases: 60,
         numberOfType: 1 },
@@ -1088,6 +1229,9 @@ module.exports.REGION_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 40,
           numberOfType: 1 } } },
@@ -1104,6 +1248,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 6,
         d1: 9,
         d2: 3,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 3,
         totalCases: 69 },
       { grade: 'PSO',
@@ -1114,6 +1261,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 4,
         d1: 6,
         d2: 2,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 2,
         totalCases: 46 } ] } ],
       totals:
@@ -1126,6 +1276,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 6,
         d1: 9,
         d2: 3,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 3,
         totalCases: 69,
         numberOfType: 1 },
@@ -1138,6 +1291,9 @@ module.exports.REGION_CASELOAD_RESULT = {
           c2: 4,
           d1: 6,
           d2: 2,
+          e: 2,
+          f: 1,
+          g: 0,
           untiered: 2,
           totalCases: 46,
           numberOfType: 1 } },
@@ -1153,6 +1309,9 @@ module.exports.REGION_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 60,
           totalCases: 60 },
         { grade: 'PSO',
@@ -1163,6 +1322,9 @@ module.exports.REGION_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40 } ] } ],
       percentageTotals:
@@ -1175,6 +1337,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 60,
         totalCases: 60,
         numberOfType: 1 },
@@ -1187,6 +1352,9 @@ module.exports.REGION_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40,
           numberOfType: 1 } } },
@@ -1203,6 +1371,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 6,
         d1: 12,
         d2: 18,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 15,
         totalCases: 75 },
       { grade: 'PSO',
@@ -1213,6 +1384,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 4,
         d1: 8,
         d2: 12,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 10,
         totalCases: 50 } ] } ],
       totals:
@@ -1225,6 +1399,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 6,
         d1: 12,
         d2: 18,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 15,
         totalCases: 75,
         numberOfType: 1 },
@@ -1237,6 +1414,9 @@ module.exports.REGION_CASELOAD_RESULT = {
           c2: 4,
           d1: 8,
           d2: 12,
+          e: 2,
+          f: 1,
+          g: 0,
           untiered: 10,
           totalCases: 50,
           numberOfType: 1 } },
@@ -1252,6 +1432,9 @@ module.exports.REGION_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 60,
           totalCases: 60 },
         { grade: 'PSO',
@@ -1262,6 +1445,9 @@ module.exports.REGION_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40 } ] } ],
       percentageTotals:
@@ -1274,6 +1460,9 @@ module.exports.REGION_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 60,
         totalCases: 60,
         numberOfType: 1 },
@@ -1286,6 +1475,9 @@ module.exports.REGION_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40,
           numberOfType: 1 } } },
@@ -1307,21 +1499,21 @@ module.exports.REGION_CASELOAD_CSV = {
   '"name","custodyCases","communityCases","licenseCases","totalCases"\n' +
   '"LDU Cluster 2",115,105,125,345\n\n\n' +
   'CUSTODY\n' +
-  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-  '"LDU Cluster 2","PO",18,12,6,12,6,9,3,3,69\n' +
-  '"LDU Cluster 2","PSO",12,8,4,8,4,6,2,2,46\n\n\n' +
+  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"LDU Cluster 2","PO",18,12,6,12,6,9,3,2,1,0,3,69\n' +
+  '"LDU Cluster 2","PSO",12,8,4,8,4,6,2,2,1,0,2,46\n\n\n' +
   'COMMUNITY\n' +
-  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-  '"LDU Cluster 2","PO",9,18,12,6,9,6,3,0,63\n' +
-  '"LDU Cluster 2","PSO",6,12,8,4,6,4,2,0,42\n\n\n' +
+  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"LDU Cluster 2","PO",9,18,12,6,9,6,3,2,1,0,0,63\n' +
+  '"LDU Cluster 2","PSO",6,12,8,4,6,4,2,2,1,0,0,42\n\n\n' +
   'LICENSE\n' +
-  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-  '"LDU Cluster 2","PO",6,3,6,9,6,12,18,15,75\n' +
-  '"LDU Cluster 2","PSO",4,2,4,6,4,8,12,10,50\n\n\n' +
+  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"LDU Cluster 2","PO",6,3,6,9,6,12,18,2,1,0,15,75\n' +
+  '"LDU Cluster 2","PSO",4,2,4,6,4,8,12,2,1,0,10,50\n\n\n' +
   'OVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' +
-  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-  '"LDU Cluster 2","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%"\n' +
-  '"LDU Cluster 2","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%"'
+  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"LDU Cluster 2","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
+  '"LDU Cluster 2","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"'
 }
 
 module.exports.NATIONAL_CASELOAD_RESULT = {
@@ -1341,6 +1533,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       c2: 42,
       d1: 54,
       d2: 48,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 36,
       totalCases: 414 },
     { grade: 'PSO',
@@ -1351,6 +1546,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       c2: 28,
       d1: 36,
       d2: 32,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 24,
       totalCases: 276 } ] },
   { linkId: 64,
@@ -1364,6 +1562,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       c2: 21,
       d1: 27,
       d2: 24,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 18,
       totalCases: 207 },
     { grade: 'PSO',
@@ -1374,6 +1575,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       c2: 14,
       d1: 18,
       d2: 16,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 12,
       totalCases: 138 } ] },
   { linkId: 65,
@@ -1387,6 +1591,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       c2: 21,
       d1: 27,
       d2: 24,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 18,
       totalCases: 207 },
     { grade: 'PSO',
@@ -1397,6 +1604,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       c2: 14,
       d1: 18,
       d2: 16,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 12,
       totalCases: 138 } ] } ],
     totals:
@@ -1409,6 +1619,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       c2: 84,
       d1: 108,
       d2: 96,
+      e: 2,
+      f: 1,
+      g: 0,
       untiered: 72,
       totalCases: 828,
       numberOfType: 3 },
@@ -1421,6 +1634,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 56,
         d1: 72,
         d2: 64,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 48,
         totalCases: 552,
         numberOfType: 3 } },
@@ -1436,6 +1652,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 60,
         totalCases: 60 },
       { grade: 'PSO',
@@ -1446,6 +1665,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 40,
         d1: 40,
         d2: 40,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 40,
         totalCases: 40 } ] },
     { linkId: 64,
@@ -1459,6 +1681,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 60,
         totalCases: 60 },
       { grade: 'PSO',
@@ -1469,6 +1694,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 40,
         d1: 40,
         d2: 40,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 40,
         totalCases: 40 } ] },
     { linkId: 65,
@@ -1482,6 +1710,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 60,
         totalCases: 60 },
       { grade: 'PSO',
@@ -1492,6 +1723,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 40,
         d1: 40,
         d2: 40,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 40,
         totalCases: 40 } ] } ],
     percentageTotals:
@@ -1504,6 +1738,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       c2: 60,
       d1: 60,
       d2: 60,
+      e: 0,
+      f: 0,
+      g: 0,
       untiered: 60,
       totalCases: 60,
       numberOfType: 3 },
@@ -1516,6 +1753,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 40,
         d1: 40,
         d2: 40,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 40,
         totalCases: 40,
         numberOfType: 3 } } },
@@ -1532,6 +1772,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 18,
         d1: 12,
         d2: 6,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 126 },
       { grade: 'PSO',
@@ -1542,6 +1785,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 12,
         d1: 8,
         d2: 4,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 84 } ] },
     { linkId: 64,
@@ -1555,6 +1801,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 9,
         d1: 6,
         d2: 3,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 63 },
       { grade: 'PSO',
@@ -1565,6 +1814,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 6,
         d1: 4,
         d2: 2,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 42 } ] },
     { linkId: 65,
@@ -1578,6 +1830,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 9,
         d1: 6,
         d2: 3,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 63 },
       { grade: 'PSO',
@@ -1588,6 +1843,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 6,
         d1: 4,
         d2: 2,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 42 } ] } ],
       totals:
@@ -1600,6 +1858,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 36,
         d1: 24,
         d2: 12,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 0,
         totalCases: 252,
         numberOfType: 3 },
@@ -1612,6 +1873,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 24,
           d1: 16,
           d2: 8,
+          e: 2,
+          f: 1,
+          g: 0,
           untiered: 0,
           totalCases: 168,
           numberOfType: 3 } },
@@ -1627,6 +1891,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 60 },
         { grade: 'PSO',
@@ -1637,6 +1904,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 40 } ] },
       { linkId: 64,
@@ -1650,6 +1920,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 60 },
         { grade: 'PSO',
@@ -1660,6 +1933,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 40 } ] },
       { linkId: 65,
@@ -1673,6 +1949,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 60 },
         { grade: 'PSO',
@@ -1683,6 +1962,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 40 } ] } ],
       percentageTotals:
@@ -1695,6 +1977,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 0,
         totalCases: 60,
         numberOfType: 3 },
@@ -1707,6 +1992,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 0,
           totalCases: 40,
           numberOfType: 3 } } },
@@ -1723,6 +2011,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 12,
         d1: 18,
         d2: 6,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 6,
         totalCases: 138 },
       { grade: 'PSO',
@@ -1733,6 +2024,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 8,
         d1: 12,
         d2: 4,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 4,
         totalCases: 92 } ] },
     { linkId: 64,
@@ -1746,6 +2040,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 6,
         d1: 9,
         d2: 3,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 3,
         totalCases: 69 },
       { grade: 'PSO',
@@ -1756,6 +2053,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 4,
         d1: 6,
         d2: 2,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 2,
         totalCases: 46 } ] },
     { linkId: 65,
@@ -1769,6 +2069,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 6,
         d1: 9,
         d2: 3,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 3,
         totalCases: 69 },
       { grade: 'PSO',
@@ -1779,6 +2082,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 4,
         d1: 6,
         d2: 2,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 2,
         totalCases: 46 } ] } ],
       totals:
@@ -1791,6 +2097,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 24,
         d1: 36,
         d2: 12,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 12,
         totalCases: 276,
         numberOfType: 3 },
@@ -1803,6 +2112,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 16,
           d1: 24,
           d2: 8,
+          e: 2,
+          f: 1,
+          g: 0,
           untiered: 8,
           totalCases: 184,
           numberOfType: 3 } },
@@ -1818,6 +2130,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 60,
           totalCases: 60 },
         { grade: 'PSO',
@@ -1828,6 +2143,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40 } ] },
       { linkId: 64,
@@ -1841,6 +2159,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 60,
           totalCases: 60 },
         { grade: 'PSO',
@@ -1851,6 +2172,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40 } ] },
       { linkId: 65,
@@ -1864,6 +2188,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 60,
           totalCases: 60 },
         { grade: 'PSO',
@@ -1874,6 +2201,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40 } ] } ],
       percentageTotals:
@@ -1886,6 +2216,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 60,
         totalCases: 60,
         numberOfType: 3 },
@@ -1898,6 +2231,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40,
           numberOfType: 3 } } },
@@ -1914,6 +2250,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 12,
         d1: 24,
         d2: 36,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 30,
         totalCases: 150 },
       { grade: 'PSO',
@@ -1924,6 +2263,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 8,
         d1: 16,
         d2: 24,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 20,
         totalCases: 100 } ] },
     { linkId: 64,
@@ -1937,6 +2279,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 6,
         d1: 12,
         d2: 18,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 15,
         totalCases: 75 },
       { grade: 'PSO',
@@ -1947,6 +2292,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 4,
         d1: 8,
         d2: 12,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 10,
         totalCases: 50 } ] },
     { linkId: 65,
@@ -1960,6 +2308,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 6,
         d1: 12,
         d2: 18,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 15,
         totalCases: 75 },
       { grade: 'PSO',
@@ -1970,6 +2321,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 4,
         d1: 8,
         d2: 12,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 10,
         totalCases: 50 } ] } ],
       totals:
@@ -1982,6 +2336,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 24,
         d1: 48,
         d2: 72,
+        e: 2,
+        f: 1,
+        g: 0,
         untiered: 60,
         totalCases: 300,
         numberOfType: 3 },
@@ -1994,6 +2351,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 16,
           d1: 32,
           d2: 48,
+          e: 2,
+          f: 1,
+          g: 0,
           untiered: 40,
           totalCases: 200,
           numberOfType: 3 } },
@@ -2009,6 +2369,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 60,
           totalCases: 60 },
         { grade: 'PSO',
@@ -2019,6 +2382,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40 } ] },
       { linkId: 64,
@@ -2032,6 +2398,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 60,
           totalCases: 60 },
         { grade: 'PSO',
@@ -2042,6 +2411,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40 } ] },
       { linkId: 65,
@@ -2055,6 +2427,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 60,
           d1: 60,
           d2: 60,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 60,
           totalCases: 60 },
         { grade: 'PSO',
@@ -2065,6 +2440,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40 } ] } ],
       percentageTotals:
@@ -2077,6 +2455,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         c2: 60,
         d1: 60,
         d2: 60,
+        e: 0,
+        f: 0,
+        g: 0,
         untiered: 60,
         totalCases: 60,
         numberOfType: 3 },
@@ -2089,6 +2470,9 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           c2: 40,
           d1: 40,
           d2: 40,
+          e: 0,
+          f: 0,
+          g: 0,
           untiered: 40,
           totalCases: 40,
           numberOfType: 3 } } },
@@ -2124,37 +2508,37 @@ module.exports.NATIONAL_CASELOAD_CSV = {
   '"Division 2",115,105,125,345\n' +
   '"Division 3",115,105,125,345\n\n\n' +
   'CUSTODY\n' +
-  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-  '"Division 1","PO",36,24,12,24,12,18,6,6,138\n' +
-  '"Division 1","PSO",24,16,8,16,8,12,4,4,92\n' +
-  '"Division 2","PO",18,12,6,12,6,9,3,3,69\n' +
-  '"Division 2","PSO",12,8,4,8,4,6,2,2,46\n' +
-  '"Division 3","PO",18,12,6,12,6,9,3,3,69\n' +
-  '"Division 3","PSO",12,8,4,8,4,6,2,2,46\n\n\n' +
+  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Division 1","PO",36,24,12,24,12,18,6,2,1,0,6,138\n' +
+  '"Division 1","PSO",24,16,8,16,8,12,4,2,1,0,4,92\n' +
+  '"Division 2","PO",18,12,6,12,6,9,3,2,1,0,3,69\n' +
+  '"Division 2","PSO",12,8,4,8,4,6,2,2,1,0,2,46\n' +
+  '"Division 3","PO",18,12,6,12,6,9,3,2,1,0,3,69\n' +
+  '"Division 3","PSO",12,8,4,8,4,6,2,2,1,0,2,46\n\n\n' +
   'COMMUNITY\n' +
-  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-  '"Division 1","PO",18,36,24,12,18,12,6,0,126\n' +
-  '"Division 1","PSO",12,24,16,8,12,8,4,0,84\n' +
-  '"Division 2","PO",9,18,12,6,9,6,3,0,63\n' +
-  '"Division 2","PSO",6,12,8,4,6,4,2,0,42\n' +
-  '"Division 3","PO",9,18,12,6,9,6,3,0,63\n' +
-  '"Division 3","PSO",6,12,8,4,6,4,2,0,42\n\n\n' +
+  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Division 1","PO",18,36,24,12,18,12,6,2,1,0,0,126\n' +
+  '"Division 1","PSO",12,24,16,8,12,8,4,2,1,0,0,84\n' +
+  '"Division 2","PO",9,18,12,6,9,6,3,2,1,0,0,63\n' +
+  '"Division 2","PSO",6,12,8,4,6,4,2,2,1,0,0,42\n' +
+  '"Division 3","PO",9,18,12,6,9,6,3,2,1,0,0,63\n' +
+  '"Division 3","PSO",6,12,8,4,6,4,2,2,1,0,0,42\n\n\n' +
   'LICENSE\n' +
-  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-  '"Division 1","PO",12,6,12,18,12,24,36,30,150\n' +
-  '"Division 1","PSO",8,4,8,12,8,16,24,20,100\n' +
-  '"Division 2","PO",6,3,6,9,6,12,18,15,75\n' +
-  '"Division 2","PSO",4,2,4,6,4,8,12,10,50\n' +
-  '"Division 3","PO",6,3,6,9,6,12,18,15,75\n' +
-  '"Division 3","PSO",4,2,4,6,4,8,12,10,50\n\n\n' +
+  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Division 1","PO",12,6,12,18,12,24,36,2,1,0,30,150\n' +
+  '"Division 1","PSO",8,4,8,12,8,16,24,2,1,0,20,100\n' +
+  '"Division 2","PO",6,3,6,9,6,12,18,2,1,0,15,75\n' +
+  '"Division 2","PSO",4,2,4,6,4,8,12,2,1,0,10,50\n' +
+  '"Division 3","PO",6,3,6,9,6,12,18,2,1,0,15,75\n' +
+  '"Division 3","PSO",4,2,4,6,4,8,12,2,1,0,10,50\n\n\n' +
   'OVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' +
-  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","Untiered","Overall"\n' +
-  '"Division 1","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%"\n' +
-  '"Division 1","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%"\n' +
-  '"Division 2","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%"\n' +
-  '"Division 2","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%"\n' +
-  '"Division 3","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%"\n' +
-  '"Division 3","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%"'
+  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Division 1","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
+  '"Division 1","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"\n' +
+  '"Division 2","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
+  '"Division 2","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"\n' +
+  '"Division 3","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
+  '"Division 3","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"'
 }
 
 module.exports.OM_OVERVIEW_RESULT = {
