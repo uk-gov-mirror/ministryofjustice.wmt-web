@@ -3,6 +3,7 @@ const knex = require('../../../knex').web
 module.exports = function (isT2A = false) {
   isT2A = (isT2A === true)
 
+  // WMT0160: add new tiers
   return knex('workload_points')
     .first('id AS workloadPointsId',
             'comm_tier_1 AS commD2',
@@ -12,6 +13,9 @@ module.exports = function (isT2A = false) {
             'comm_tier_5 AS commB2',
             'comm_tier_6 AS commB1',
             'comm_tier_7 AS commA',
+            'comm_tier_8 AS commE',
+            'comm_tier_9 AS commF',
+            'comm_tier_10 AS commG',
             'cust_tier_1 AS cusD2',
             'cust_tier_2 AS cusD1',
             'cust_tier_3 AS cusC2',
@@ -19,6 +23,9 @@ module.exports = function (isT2A = false) {
             'cust_tier_5 AS cusB2',
             'cust_tier_6 AS cusB1',
             'cust_tier_7 AS cusA',
+            'cust_tier_8 AS cusE',
+            'cust_tier_9 AS cusF',
+            'cust_tier_10 AS cusG',
             'lic_tier_1 AS licD2',
             'lic_tier_2 AS licD1',
             'lic_tier_3 AS licC2',
@@ -26,6 +33,9 @@ module.exports = function (isT2A = false) {
             'lic_tier_5 AS licB2',
             'lic_tier_6 AS licB1',
             'lic_tier_7 AS licA',
+            'lic_tier_8 AS licE',
+            'lic_tier_9 AS licF',
+            'lic_tier_10 AS licG',
             'user_id AS updatedByUserId',
             'sdr AS sdr',
             'sdr_conversion AS sdrConversion',

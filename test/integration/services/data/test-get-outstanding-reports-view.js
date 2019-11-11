@@ -26,6 +26,7 @@ describe('services/data/get-outstanding-reports-view', function () {
         expect(results[0].ot).to.be.greaterThan(0)
         expect(results[0].upw).to.be.greaterThan(0)
         expect(results[0].sl).to.be.greaterThan(0)
+        expect(results[0].sso).to.be.greaterThan(0)
       })
   })
 
@@ -36,6 +37,7 @@ describe('services/data/get-outstanding-reports-view', function () {
         expect(results[0].ot).to.be.greaterThan(0)
         expect(results[0].upw).to.be.greaterThan(0)
         expect(results[0].sl).to.be.greaterThan(0)
+        expect(results[0].sso).to.be.greaterThan(0)
       })
   })
 
@@ -46,6 +48,7 @@ describe('services/data/get-outstanding-reports-view', function () {
         expect(results[0].ot).to.be.greaterThan(0)
         expect(results[0].upw).to.be.greaterThan(0)
         expect(results[0].sl).to.be.greaterThan(0)
+        expect(results[0].sso).to.be.greaterThan(0)
       })
   })
 

@@ -16,7 +16,7 @@ $.fn.dataTable.moment = function ( format, locale ) {
 
 $(document).ready(function() {
     $.fn.dataTable.moment( 'DD-MM-YYYY');
-    $('.js-data-table').dataTable({
+    $('#daily-caseload-table').dataTable({
       paging: true,
       "pageLength": 100,
       searching: true,

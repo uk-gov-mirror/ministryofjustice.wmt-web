@@ -9,6 +9,7 @@ const dateFormatter = require('../services/date-formatter')
 const getArmsExport = require('../services/data/get-arms-export')
 const getCMSExport = require('../services/data/get-cms-export')
 const getCaseDetailsExport = require('../services/data/get-case-details-export')
+const getSuspendedLifersExport = require('../services/data/get-suspended-lifers-export')
 const getGroupSupervisionExport = require('../services/data/get-group-supervision-export')
 const getScenarioExport = require('../services/get-scenario')
 const getExportCsv = require('../services/get-export-csv')
@@ -78,6 +79,7 @@ module.exports = function (router) {
     var groupSupervisionPromise = getGroupSupervisionExport(id, organisationLevel)
     var cmsPromise = getCMSExport(id, organisationLevel)
     var scenarioPromise = getScenarioExport(id, organisationLevel)
+    var suspendedLifersPromise = getSuspendedLifersExport(id, organisationLevel)
 
     var tabType
 
@@ -100,6 +102,10 @@ module.exports = function (router) {
         break
       case '5':
         exportPromise = scenarioPromise
+        break
+      case '6':
+        exportPromise = suspendedLifersPromise
+        tabType = tabs.EXPORT.SUSPENDED_LIFERS_EXPORT
         break
       default:
         exportPromise = Promise.resolve()

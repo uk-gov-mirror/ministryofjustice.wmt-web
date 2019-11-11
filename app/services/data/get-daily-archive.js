@@ -10,6 +10,8 @@ module.exports = function (archiveDateRange, extraCriteria) {
     'workload_id AS workloadID',
     'workload_date AS workloadDate',
     'ldu_name AS lduName',
+    'region_name AS regionName',
+    'grade AS grade',
     'team_name AS teamName',
     'om_name AS omName',
     'total_cases AS totalCases',
