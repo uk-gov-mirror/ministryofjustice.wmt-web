@@ -182,7 +182,11 @@ var formatResults = function (results, tabType) {
 
 var getPointsForTier = function (result, workloadPoints, caseType) {
   if (workloadPoints[caseType + result.tierCode]) {
-    result.points = workloadPoints[caseType + result.tierCode]
+    if (result.rowType === 'Normal' || result.rowType === 'Unpaid Work') {
+      result.points = workloadPoints[caseType + result.tierCode]
+    } else {
+      result.points = 0
+    }
   } else {
     result.points = 0
   }
