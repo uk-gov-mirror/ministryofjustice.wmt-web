@@ -129,6 +129,39 @@
                       <input class="form-control" id="cus-d2" name="cusD2" type="number" value="{{ wp.cusD2 }}">
                     </td>
                   </tr>
+                  <tr>
+                    <th scope="row">
+                      {% if errors['cusE'][0] %}
+                        <span class="error-message">{{ errors['cusE'][0] }}</span>
+                      {% endif %}
+                      <label class="form-label-bold" for="cus-e">Cus E</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="cus-e" name="cusE" type="number" value="{{ wp.cusE }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% if errors['cusF'][0] %}
+                        <span class="error-message">{{ errors['cusF'][0] }}</span>
+                      {% endif %}
+                      <label class="form-label-bold" for="cus-f">Cus F</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="cus-f" name="cusF" type="number" value="{{ wp.cusF }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% if errors['cusG'][0] %}
+                        <span class="error-message">{{ errors['cusG'][0] }}</span>
+                      {% endif %}
+                      <label class="form-label-bold" for="cus-f">Cus G</label>
+                    </th>
+                    <td class="numeric">
+                      <input class="form-control" id="cus-g" name="cusG" type="number" value="{{ wp.cusG }}">
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -217,12 +250,46 @@
                     <input class="form-control" id="lic-d2" name="licD2" type="number" value="{{ wp.licD2 }}">
                   </td>
                 </tr>
+                <tr>
+                  <th scope="row">
+                    {% if errors['licE'][0] %}
+                      <span class="error-message">{{ errors['licE'][0] }}</span>
+                    {% endif %}
+                    <label class="form-label-bold" for="lic-e">Lic E</label>
+                  </th>
+                  <td class="numeric">
+                    <input class="form-control" id="lic-e" name="licE" type="number" value="{{ wp.licE }}">
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    {% if errors['licF'][0] %}
+                      <span class="error-message">{{ errors['licF'][0] }}</span>
+                    {% endif %}
+                    <label class="form-label-bold" for="lic-f">Lic F</label>
+                  </th>
+                  <td class="numeric">
+                    <input class="form-control" id="lic-f" name="licF" type="number" value="{{ wp.licF }}">
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    {% if errors['licG'][0] %}
+                      <span class="error-message">{{ errors['licG'][0] }}</span>
+                    {% endif %}
+                    <label class="form-label-bold" for="lic-f">Lic G</label>
+                  </th>
+                  <td class="numeric">
+                    <input class="form-control" id="lic-g" name="licG" type="number" value="{{ wp.licG }}">
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
+      {# WMT0160: add new tiers #}
       <div id="community">
         <div class="grid-row">
             <div class="column-two-thirds">
@@ -303,6 +370,39 @@
                       </th>
                       <td class="numeric">
                         <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commE'][0] %}
+                          <span class="error-message">{{ errors['commE'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-e">Comm E</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-e" name="commE" type="number" value="{{ wp.commE }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commF'][0] %}
+                          <span class="error-message">{{ errors['commF'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-f">Comm F</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-f" name="commF" type="number" value="{{ wp.commF }}">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {% if errors['commG'][0] %}
+                          <span class="error-message">{{ errors['commG'][0] }}</span>
+                        {% endif %}
+                        <label class="form-label-bold" for="comm-f">Comm G</label>
+                      </th>
+                      <td class="numeric">
+                        <input class="form-control" id="comm-g" name="commG" type="number" value="{{ wp.commG }}">
                       </td>
                     </tr>
                   </tbody>

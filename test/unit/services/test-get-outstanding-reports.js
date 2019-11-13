@@ -15,7 +15,8 @@ const TEAM_RESULTS = [
     t2aOw: 39,
     t2aOt: 29,
     t2aUpw: 19,
-    sl: 90
+    sl: 90,
+    sso: 100
   }
 ]
 
@@ -27,14 +28,16 @@ const EXPECTED_TEAM_RESULT = [
     ow: 78,
     ot: 58,
     upw: 38,
-    sl: 90
+    sl: 90,
+    sso: 100
   },
   {
     name: 'Total',
     totalOW: 78,
     totalOT: 58,
     totalUPW: 38,
-    totalSL: 90
+    totalSL: 90,
+    totalSSO: 100
   }
 ]
 
@@ -49,7 +52,8 @@ const LDU_RESULTS = [
     t2aOw: 3,
     t2aOt: 3,
     t2aUpw: 3,
-    sl: 90
+    sl: 90,
+    sso: 99
   },
   {
     linkId: 2,
@@ -61,7 +65,8 @@ const LDU_RESULTS = [
     t2aOw: 3,
     t2aOt: 3,
     t2aUpw: 3,
-    sl: 91
+    sl: 91,
+    sso: 100
   }
 ]
 
@@ -75,7 +80,8 @@ const EXPECTED_LDU_RESULT = [
         ot: 32,
         ow: 42,
         sl: 90,
-        upw: 22
+        upw: 22,
+        sso: 99
       }
     ],
     linkId: 1,
@@ -90,7 +96,8 @@ const EXPECTED_LDU_RESULT = [
         ot: 33,
         ow: 43,
         sl: 91,
-        upw: 23
+        upw: 23,
+        sso: 100
       }
     ],
     linkId: 2,
@@ -101,7 +108,8 @@ const EXPECTED_LDU_RESULT = [
     totalOT: 65,
     totalOW: 85,
     totalSL: 181,
-    totalUPW: 45
+    totalUPW: 45,
+    totalSSO: 199
   }
 ]
 
@@ -116,7 +124,8 @@ const REGION_RESULTS = [
     t2aOw: 3,
     t2aOt: 23,
     t2aUpw: 1,
-    sl: 9
+    sl: 9,
+    sso: 16
   },
   {
     linkId: 2,
@@ -128,7 +137,8 @@ const REGION_RESULTS = [
     t2aOw: 12,
     t2aOt: 23,
     t2aUpw: 23,
-    sl: 11
+    sl: 11,
+    sso: 21
   }
 ]
 
@@ -142,7 +152,8 @@ const EXPECTED_REGION_RESULT = [
         ot: 53,
         ow: 22,
         sl: 9,
-        upw: 3
+        upw: 3,
+        sso: 16
       }
     ],
     linkId: 1,
@@ -157,7 +168,8 @@ const EXPECTED_REGION_RESULT = [
         ot: 25,
         ow: 20,
         sl: 11,
-        upw: 57
+        upw: 57,
+        sso: 21
       }
     ],
     linkId: 2,
@@ -168,7 +180,8 @@ const EXPECTED_REGION_RESULT = [
     totalOT: 78,
     totalOW: 42,
     totalSL: 20,
-    totalUPW: 60
+    totalUPW: 60,
+    totalSSO: 37
   }
 ]
 

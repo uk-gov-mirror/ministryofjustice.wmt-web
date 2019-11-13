@@ -18,7 +18,8 @@ module.exports = function (id, type) {
     'contactCMS.contactDescription',
     'contactCMS.contactCode',
     'contactCMS.contactPoints',
-    'omCMS.omPoints'
+    'omCMS.omPoints',
+    'contactCMS.caseRefNo'
   ]
 
   var table2 = 'om_cms_export_view AS omCMS'
