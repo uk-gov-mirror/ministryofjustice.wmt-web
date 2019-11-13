@@ -9,6 +9,7 @@ const dateFormatter = require('../services/date-formatter')
 const getArmsExport = require('../services/data/get-arms-export')
 const getCMSExport = require('../services/data/get-cms-export')
 const getCaseDetailsExport = require('../services/data/get-case-details-export')
+const getSuspendedLifersExport = require('../services/data/get-suspended-lifers-export')
 const getGroupSupervisionExport = require('../services/data/get-group-supervision-export')
 const getScenarioExport = require('../services/get-scenario')
 const getWorkloadPercentageBreakdown = require('../services/data/get-workload-percentage-breakdown')
@@ -79,6 +80,7 @@ module.exports = function (router) {
     var cmsPromise = getCMSExport(id, organisationLevel)
     var scenarioPromise = getScenarioExport(id, organisationLevel)
     var getWorkloadPercentageBreakdownPromise = getWorkloadPercentageBreakdown(id, organisationLevel)
+    var suspendedLifersPromise = getSuspendedLifersExport(id, organisationLevel)
 
     var tabType
 
@@ -103,6 +105,10 @@ module.exports = function (router) {
         exportPromise = scenarioPromise
         break
       case '6':
+        exportPromise = suspendedLifersPromise
+        tabType = tabs.EXPORT.SUSPENDED_LIFERS_EXPORT
+        break
+      case '7':         
         exportPromise = getWorkloadPercentageBreakdownPromise
         tabType = tabs.EXPORT.WORKLOAD_PERCENTAGE_EXPORT
         break
