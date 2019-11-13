@@ -32,12 +32,12 @@ module.exports.TEAM_CASELOAD_CSV = {
 
 module.exports.ARMS_EXPORT_CSV = {
   filename: ('Test_Arms_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region Name","LDU Cluster","Team Name","Assessment Date","CRN","Offender Manager Name","Offender Manager Grade","Sentence Type","Sentence or Release Date"\n' +
-    '"NPS North West","Cumbria","NPS - Carlisle 1","4-10-2018","CASEREF30134","A.N. Offender Manager CMBY478NPSM","PO","Licence","14-9-2018"\n' +
-    '"NPS North West","Cumbria","NPS - Carlisle 1","9-10-2018","CASEREF30154","A.N. Offender Manager CMBY478NPSM","PO","Community","22-2-2017"\n' +
-    '"NPS North West","Cumbria","NPS - Carlisle 1","28-9-2018","CASEREF30098","A.N. Offender Manager CMBE297NPSM","PO","Community","1-1-1800"\n' +
-    '"NPS North West","Cumbria","Rehabilitation","10-9-2018","CASEREF30027","A.N. Offender Manager N01B324NPSM","PO","Community","25-7-2018"\n' +
-    '"NPS North West","Cumbria","Rehabilitation","19-9-2018","CASEREF30065","A.N. Offender Manager N01B324NPSM","PO","Community","16-12-2016"'
+  csv: '"Region Name","LDU Cluster","Team Name","Assessment Date","CRN","Offender Manager Name","Offender Manager Grade","Sentence Type","Sentence or Release Date","Points"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","4-10-2018","CASEREF30134","A.N. Offender Manager CMBY478NPSM","PO","Licence","14-9-2018",10\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","9-10-2018","CASEREF30154","A.N. Offender Manager CMBY478NPSM","PO","Community","22-2-2017",30\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","28-9-2018","CASEREF30098","A.N. Offender Manager CMBE297NPSM","PO","Community","1-1-1800",100\n' +
+    '"NPS North West","Cumbria","Rehabilitation","10-9-2018","CASEREF30027","A.N. Offender Manager N01B324NPSM","PO","Community","25-7-2018",60\n' +
+    '"NPS North West","Cumbria","Rehabilitation","19-9-2018","CASEREF30065","A.N. Offender Manager N01B324NPSM","PO","Community","16-12-2016",16'
 }
 
 module.exports.ARMS_EXPORT_RESULT = {
@@ -52,7 +52,8 @@ module.exports.ARMS_EXPORT_RESULT = {
     omName: 'A.N. Offender Manager CMBY478NPSM',
     omGrade: 'PO',
     sentencetype: 'Licence',
-    releaseDate: '14-9-2018'
+    releaseDate: '14-9-2018',
+    points: 10
   },
   {
     regionName: 'NPS North West',
@@ -63,7 +64,8 @@ module.exports.ARMS_EXPORT_RESULT = {
     omName: 'A.N. Offender Manager CMBY478NPSM',
     omGrade: 'PO',
     sentencetype: 'Community',
-    releaseDate: '22-2-2017'
+    releaseDate: '22-2-2017',
+    points: 30
   },
   {
     regionName: 'NPS North West',
@@ -74,7 +76,8 @@ module.exports.ARMS_EXPORT_RESULT = {
     omName: 'A.N. Offender Manager CMBE297NPSM',
     omGrade: 'PO',
     sentencetype: 'Community',
-    releaseDate: '1-1-1800'
+    releaseDate: '1-1-1800',
+    points: 100
   },
   {
     regionName: 'NPS North West',
@@ -85,7 +88,8 @@ module.exports.ARMS_EXPORT_RESULT = {
     omName: 'A.N. Offender Manager N01B324NPSM',
     omGrade: 'PO',
     sentencetype: 'Community',
-    releaseDate: '25-7-2018'
+    releaseDate: '25-7-2018',
+    points: 60
   },
   {
     regionName: 'NPS North West',
@@ -96,18 +100,19 @@ module.exports.ARMS_EXPORT_RESULT = {
     omName: 'A.N. Offender Manager N01B324NPSM',
     omGrade: 'PO',
     sentencetype: 'Community',
-    releaseDate: '16-12-2016'
+    releaseDate: '16-12-2016',
+    points: 16
   }]
 }
 
 module.exports.CASE_DETAILS_EXPORT_CSV = {
   filename: ('Test_Case_Details_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region Name","LDU Cluster","Team Name","Tier Code","Row Type","CRN","Case Type","Offender Manager Name","Grade Code"\n' +
-  '"NPS North West","Cheshire","Crewe NPS OMU","D2","N","CASEREF5448","COMMUNITY","A.N. Offender Manager N01CA1U","DMY"\n' +
-  '"NPS North West","Cheshire","Warrington NPS OMU","B1","N","CASEREF67","COMMUNITY","A.N. Offender Manager CHSZ943NPSM","PO"\n' +
-    '"NPS North West","Cheshire","Warrington NPS OMU","C1","N","CASEREF2413","COMMUNITY","A.N. Offender Manager CHSZ943NPSM","PO"\n' +
-    '"NPS North West","Cheshire","Warrington NPS OMU","C1","N","CASEREF2479","COMMUNITY","A.N. Offender Manager CHSZ943NPSM","PO"\n' +
-    '"NPS North West","Cheshire","Warrington NPS OMU","C1","N","CASEREF6008","COMMUNITY","A.N. Offender Manager CHSZ943NPSM","PO"'
+  csv: '"Region Name","LDU Cluster","Team Name","Tier Code","Row Type","CRN","Case Type","Offender Manager Name","Grade Code","Points"\n' +
+  '"NPS North West","Cheshire","Crewe NPS OMU","D2","N","CASEREF5448","COMMUNITY","A.N. Offender Manager N01CA1U","DMY",96\n' +
+  '"NPS North West","Cheshire","Warrington NPS OMU","B1","N","CASEREF67","COMMUNITY","A.N. Offender Manager CHSZ943NPSM","PO",21\n' +
+    '"NPS North West","Cheshire","Warrington NPS OMU","C1","N","CASEREF2413","COMMUNITY","A.N. Offender Manager CHSZ943NPSM","PO",45\n' +
+    '"NPS North West","Cheshire","Warrington NPS OMU","C1","N","CASEREF2479","COMMUNITY","A.N. Offender Manager CHSZ943NPSM","PO",63\n' +
+    '"NPS North West","Cheshire","Warrington NPS OMU","C1","N","CASEREF6008","COMMUNITY","A.N. Offender Manager CHSZ943NPSM","PO",6'
 }
 
 module.exports.CASE_DETAILS_EXPORT_RESULT = {
@@ -122,7 +127,8 @@ module.exports.CASE_DETAILS_EXPORT_RESULT = {
     caseReferenceNo: 'CASEREF5448',
     caseType: 'COMMUNITY',
     offenderManagerName: 'A.N. Offender Manager N01CA1U',
-    gradeCode: 'DMY'
+    gradeCode: 'DMY',
+    points: 96,
   },
   {
     regionName: 'NPS North West',
@@ -133,7 +139,8 @@ module.exports.CASE_DETAILS_EXPORT_RESULT = {
     caseReferenceNo: 'CASEREF67',
     caseType: 'COMMUNITY',
     offenderManagerName: 'A.N. Offender Manager CHSZ943NPSM',
-    gradeCode: 'PO'
+    gradeCode: 'PO',
+    points: 21
   },
   {
     regionName: 'NPS North West',
@@ -144,7 +151,8 @@ module.exports.CASE_DETAILS_EXPORT_RESULT = {
     caseReferenceNo: 'CASEREF2413',
     caseType: 'COMMUNITY',
     offenderManagerName: 'A.N. Offender Manager CHSZ943NPSM',
-    gradeCode: 'PO'
+    gradeCode: 'PO',
+    points: 45
   },
   {
     regionName: 'NPS North West',
@@ -155,7 +163,8 @@ module.exports.CASE_DETAILS_EXPORT_RESULT = {
     caseReferenceNo: 'CASEREF2479',
     caseType: 'COMMUNITY',
     offenderManagerName: 'A.N. Offender Manager CHSZ943NPSM',
-    gradeCode: 'PO'
+    gradeCode: 'PO',
+    points: 63
   },
   {
     regionName: 'NPS North West',
@@ -166,7 +175,8 @@ module.exports.CASE_DETAILS_EXPORT_RESULT = {
     caseReferenceNo: 'CASEREF6008',
     caseType: 'COMMUNITY',
     offenderManagerName: 'A.N. Offender Manager CHSZ943NPSM',
-    gradeCode: 'PO'
+    gradeCode: 'PO',
+    points: 6
   }]
 }
 
