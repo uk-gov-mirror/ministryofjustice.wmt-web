@@ -15,6 +15,8 @@ const getScenarioExport = require('../services/get-scenario')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const caseTypes = require('../constants/case-type')
+const armsCommMultiplier = require('../../config').ARMS_COMMUNITY_MULTIPLIER
+const armsLicMultiplier = require('../../config').ARMS_LICENCE_MULTIPLIER
 
 var lastUpdated
 
@@ -152,9 +154,9 @@ var formatResults = function (results, tabType) {
 
       result.releaseDate = dt + '-' + month + '-' + year
       if (result.sentencetype === 'Licence') {
-        result.points = results.workloadPoints.weightingArmsLicense
+        result.points = results.workloadPoints.weightingArmsLicense * armsLicMultiplier
       } else if (result.sentencetype === 'Community') {
-        result.points = results.workloadPoints.weightingArmsCommunity
+        result.points = results.workloadPoints.weightingArmsCommunity * armsCommMultiplier
       }
     }
 
