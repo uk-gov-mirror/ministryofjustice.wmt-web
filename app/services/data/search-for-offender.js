@@ -7,7 +7,7 @@ module.exports = function (surname) {
     'team',
     'ldu',
     'region',
-    'workload_owner_id AS workloadOwnerId',
+    'workload_owner_id AS workloadOwnerId'
   ]
   return knex('offender_manager_search_view').columns(columns).where('surname', surname)
 }
