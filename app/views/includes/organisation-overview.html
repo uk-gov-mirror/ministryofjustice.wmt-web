@@ -112,7 +112,7 @@
             {% if organisationLevel === 'team' %}  
               <td headers="grade om">{{ member.gradeCode }}</td>
             {% endif %}
-            <td headers="current cap">{{ member.totalCapacityPercentage | round }}%</td>
+            <td headers="current cap">{{ member.totalCapacityPercentage | round(1) }}%</td>
             <td headers="points cap">{{ member.totalAvailablePoints }}</td>
             <td headers="remaining cap">{{ member.totalRemainingPoints}}</td>
             <td headers="hrs contracted">{{ member.totalContractedHours }}</td>
