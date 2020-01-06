@@ -108,7 +108,7 @@ module.exports = function (router) {
         exportPromise = suspendedLifersPromise
         tabType = tabs.EXPORT.SUSPENDED_LIFERS_EXPORT
         break
-      case '7':         
+      case '7':
         exportPromise = getWorkloadPercentageBreakdownPromise
         tabType = tabs.EXPORT.WORKLOAD_PERCENTAGE_EXPORT
         break
