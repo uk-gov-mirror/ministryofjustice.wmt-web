@@ -121,11 +121,6 @@
             <th id="rowType">Case Type</th>
             <th id="crn">Case Reference No</th>
             <th id="CaseType">Case Category</th>
-            <th id="InCustody">In Custody?</th>
-            <th id="RegisterLevel">Register Level</th>
-            <th id="RegisterCategory">Register Category</th>
-            <th id="RegisterCategoryDescription">Register Category Description</th>
-            <th id="RegistrationDate">Registration Date</th>
         </tr>
         </thead>
         <tbody>
@@ -143,21 +138,6 @@
                         </td>
                         <td>
                             {{ row.caseType | capitalize }}
-                        </td>
-                        <td>
-                            {{ row.inCustody }}
-                        </td>
-                        <td>
-                            {{ row.registerLevel }}
-                        </td>
-                        <td>
-                            {{ row.registerCategory }}
-                        </td>
-                        <td>
-                            {{ row.registerCategoryDescription }}
-                        </td>
-                        <td>
-                            {{ row.registrationDate }}
                         </td>
                     </tr>
                 {% endfor %}
