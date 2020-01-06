@@ -100,6 +100,96 @@ module.exports.ARMS_EXPORT_RESULT = {
   }]
 }
 
+module.exports.PERCENTAGE_WORKLOAD_EXPORT_RESULT = {
+  title: 'Percentage Workload Breakdown Export',
+  percentageWorkloadExportDetails:
+  [{
+    regionName: 'NPS North West',
+    lduName: 'Cumbria',
+    teamName: 'NPS - Carlisle 1',
+    omName: 'A.N. Offender Manager CMBY478NPSM',
+    omGrade: 'PO',
+    capacity: '100%',
+    caseContribution: '99%',
+    cmsContribution: '98%',
+    gsContribution: '97%',
+    armsContribution: '96%',
+    paromsContribution: '95%',
+    sdrContribution: '94%',
+    fdrContribution: '93%'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Cumbria',
+    teamName: 'NPS - Carlisle 1',
+    omName: 'A.N. Offender Manager CMBY478NPSM',
+    omGrade: 'PO',
+    capacity: '99%',
+    caseContribution: '98%',
+    cmsContribution: '97%',
+    gsContribution: '96%',
+    armsContribution: '95%',
+    paromsContribution: '94%',
+    sdrContribution: '93%',
+    fdrContribution: '92%'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Cumbria',
+    teamName: 'NPS - Carlisle 1',
+    omName: 'A.N. Offender Manager CMBE297NPSM',
+    omGrade: 'PO',
+    capacity: '98%',
+    caseContribution: '97%',
+    cmsContribution: '96%',
+    gsContribution: '95%',
+    armsContribution: '94%',
+    paromsContribution: '93%',
+    sdrContribution: '92%',
+    fdrContribution: '91%'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Cumbria',
+    teamName: 'Rehabilitation',
+    omName: 'A.N. Offender Manager N01B324NPSM',
+    omGrade: 'PO',
+    capacity: '97%',
+    caseContribution: '96%',
+    cmsContribution: '95%',
+    gsContribution: '94%',
+    armsContribution: '93%',
+    paromsContribution: '92%',
+    sdrContribution: '91%',
+    fdrContribution: '90%'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Cumbria',
+    teamName: 'Rehabilitation',
+    omName: 'A.N. Offender Manager N01B324NPSM',
+    omGrade: 'PO',
+    capacity: '96%',
+    caseContribution: '95%',
+    cmsContribution: '94%',
+    gsContribution: '93%',
+    armsContribution: '92%',
+    paromsContribution: '91%',
+    sdrContribution: '90%',
+    fdrContribution: '89%'
+  }]
+}
+
+module.exports.PERCENTAGE_WORKLOAD_EXPORT_CSV = {
+  filename: ('Test_Percentage_Workload_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
+  csv: '"Region Name","LDU Cluster","Team Name","Offender Manager Name","Offender Manager Grade","Capacity","Case Contribution","CMS Contribution","GS Contribution","ARMS Contribution","PAROMS Contribution","SDR Contribution","FDR Contribution"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","A.N. Offender Manager CMBY478NPSM","PO","100%","99%","98%","97%","96%","95%","94%","93%"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","A.N. Offender Manager CMBY478NPSM","PO","99%","98%","97%","96%","95%","94%","93%","92%"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","A.N. Offender Manager CMBE297NPSM","PO","98%","97%","96%","95%","94%","93%","92%","91%"\n' +
+    '"NPS North West","Cumbria","Rehabilitation","A.N. Offender Manager N01B324NPSM","PO","97%","96%","95%","94%","93%","92%","91%","90%"\n' +
+    '"NPS North West","Cumbria","Rehabilitation","A.N. Offender Manager N01B324NPSM","PO","96%","95%","94%","93%","92%","91%","90%","89%"'
+}
+
 module.exports.CASE_DETAILS_EXPORT_CSV = {
   filename: ('Test_Case_Details_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Region Name","LDU Cluster","Team Name","Tier Code","Row Type","CRN","Case Type","Offender Manager Name","Grade Code"\n' +
