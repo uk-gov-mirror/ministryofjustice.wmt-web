@@ -67,7 +67,7 @@
           <tbody class="">
             {% for member in caseType.array %}
               <tr>
-                <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+                <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
                 <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grade }}</td>
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ member.a }}</td>
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ member.b1 }}</td>
@@ -117,7 +117,7 @@
           <tbody class="">
             {% for member in caseType.array %}
               <tr>
-                <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+                <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
                 <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grade }}</td>
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.e }}</td>
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ member.f }}</td>
@@ -164,7 +164,7 @@
               {% if org.name === 'Total' %}
               <td headers="name org">{{ org.name }}</td>
               {% else %}
-              <td headers="name org"><a href="/probation/{{ childOrganisationLevel }}/{{ org.linkId }}">{{ org.name }}</a></td>
+              <td headers="name org"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ org.linkId }}">{{ org.name }}</a></td>
               {% endif %}
               <td headers="community totals">{{ org.communityTotalCases }}</td>
               <td headers="license totals">{{ org.licenseTotalCases }}</td>
@@ -210,7 +210,7 @@
             {% for i in range(0, member.grades.length) %}
             <tr>
               {% if i === 0 %}
-              <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
               {% endif %}
               <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>            
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ member.grades[i].a | round(1) }}%</td>
@@ -266,7 +266,7 @@
             {% for i in range(0, member.grades.length) %}
             <tr>
               {% if i === 0 %}
-              <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
               {% endif %}
               <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>            
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.grades[i].e | round(1) }}%</td>
@@ -318,7 +318,7 @@
             {% for i in range(0, member.grades.length) %}
               <tr>
                 {% if i === 0 %}
-                <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+                <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
                 {% endif %}
                 <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>            
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ member.grades[i].a | round(1) }}</td>
@@ -374,7 +374,7 @@
             {% for i in range(0, member.grades.length) %}
               <tr>
                 {% if i === 0 %}
-                <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+                <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
                 {% endif %}
                 <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.grades[i].e | round(1) }}</td>
@@ -424,7 +424,7 @@
             {% for i in range(0, member.grades.length) %}
             <tr>
               {% if i === 0 %}
-              <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
               {% endif %}
               <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>            
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ member.grades[i].a | round(1) }}%</td>
@@ -480,7 +480,7 @@
             {% for i in range(0, member.grades.length) %}
             <tr>
               {% if i === 0 %}
-              <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
               {% endif %}
               <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>            
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.grades[i].e | round(1) }}%</td>

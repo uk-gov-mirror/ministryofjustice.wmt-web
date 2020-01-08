@@ -6,14 +6,14 @@ const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
-const workloadTypes = require('../../app/constants/workload-type')
+const workloadTypes = require('../constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 
 var lastUpdated
 
 module.exports = function (router) {
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload', function (req, res, next) {
+  router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/caseload', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -45,7 +45,7 @@ module.exports = function (router) {
           title: result.title,
           subTitle: result.subTitle,
           breadcrumbs: result.breadcrumbs,
-          subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
+          subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole),
           organisationLevel: organisationLevel,
           childOrganisationLevel: orgUnit.childOrganisationLevel,
           childOrganisationLevelDisplayText: childOrgUnit.displayText,
@@ -53,7 +53,7 @@ module.exports = function (router) {
           date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
           authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
-          workloadType: workloadTypes.PROBATION
+          workloadType: workloadTypes.OMIC
         })
       })
     }).catch(function (error) {
@@ -61,7 +61,7 @@ module.exports = function (router) {
     })
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload/caseload-csv', function (req, res, next) {
+  router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/caseload/caseload-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {

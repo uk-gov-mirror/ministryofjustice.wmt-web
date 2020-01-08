@@ -6,18 +6,18 @@ const getFullOverview = require('./data/get-full-overview')
 const orgUnit = require('../constants/organisation-unit')
 const calculateOverviewValues = require('./helpers/calculate-overview-values')
 
-module.exports = function (id, organisationLevel, isCSV = false) {
+module.exports = function (id, organisationLevel, isCSV = false, workloadType = 'probation') {
   var result = {}
   var overviewPromise = {}
   var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
 
   if (organisationLevel === orgUnit.OFFENDER_MANAGER.name) {
-    overviewPromise = getIndividualOverview(id, organisationLevel)
+    overviewPromise = getIndividualOverview(id, workloadType)
   } else {
     if (isCSV) {
-      overviewPromise = getFullOverview(id, organisationLevel)
+      overviewPromise = getFullOverview(id, organisationLevel, workloadType)
     } else {
-      overviewPromise = getOrganisationOverview(id, organisationLevel)
+      overviewPromise = getOrganisationOverview(id, organisationLevel, workloadType)
     }
   }
 

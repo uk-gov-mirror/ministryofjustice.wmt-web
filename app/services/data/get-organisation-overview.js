@@ -2,10 +2,14 @@ const knex = require('../../../knex').web
 const orgUnitFinder = require('../helpers/org-unit-finder')
 const orgUnitConstants = require('../../constants/organisation-unit')
 
-module.exports = function (id, type) {
+module.exports = function (id, type, workloadType) {
   var orgUnit = orgUnitFinder('name', type)
   var table = orgUnit.overviewView
   var whereClause = ''
+
+  if (workloadType === 'omic') {
+    table = 'omic_' + table
+  }
 
   if (id !== undefined) {
     whereClause = ' WHERE id = ' + id

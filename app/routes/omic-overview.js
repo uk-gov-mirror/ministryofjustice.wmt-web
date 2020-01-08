@@ -9,7 +9,7 @@ const tabs = require('../constants/wmt-tabs')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
-const workloadTypes = require('../../app/constants/workload-type')
+const workloadTypes = require('../constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const messages = require('../constants/messages')
@@ -17,23 +17,7 @@ const messages = require('../constants/messages')
 var lastUpdated
 
 module.exports = function (router) {
-  router.get('/', function (req, res, next) {
-    try {
-      authorisation.assertUserAuthenticated(req)
-    } catch (error) {
-      if (error instanceof Unauthorized) {
-        return res.status(error.statusCode).redirect(error.redirect)
-      }
-    }
-    if (Object.keys(req.query).length !== 0) {
-      return next()
-    }
-    req.params.id = '0'
-    req.params.organisationLevel = 'hmpps'
-    return renderOverview(req, res, next)
-  })
-
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview', function (req, res, next) {
+  router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/overview', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -44,7 +28,7 @@ module.exports = function (router) {
     return renderOverview(req, res, next)
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/', function (req, res, next) {
+  router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -55,7 +39,7 @@ module.exports = function (router) {
     return renderOverview(req, res, next)
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview/caseload-csv', function (req, res, next) {
+  router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/overview/caseload-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -79,7 +63,7 @@ module.exports = function (router) {
     })
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/overview/reductions-csv', function (req, res, next) {
+  router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/overview/reductions-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.MANAGER, roles.DATA_ADMIN, roles.SYSTEM_ADMIN])
@@ -134,7 +118,7 @@ var renderOverview = function (req, res, next) {
 
   var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-  var overviewPromise = getOverview(id, organisationLevel)
+  var overviewPromise = getOverview(id, organisationLevel, false, workloadTypes.OMIC)
   return getLastUpdated().then(function (result) {
     lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return overviewPromise.then(function (result) {
@@ -148,12 +132,12 @@ var renderOverview = function (req, res, next) {
         screen: 'overview',
         childOrganisationLevel: childOrganisationLevel,
         childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
-        subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
+        subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole),
         overviewDetails: result.overviewDetails,
         date: result.date,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
         authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
-        workloadType: workloadTypes.PROBATION
+        workloadType: workloadTypes.OMIC
       })
     })
   }).catch(function (error) {

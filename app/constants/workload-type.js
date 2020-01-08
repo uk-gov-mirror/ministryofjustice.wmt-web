@@ -1,4 +1,5 @@
 module.exports = {
   PROBATION: 'probation',
-  COURT_REPORTS: 'court-reports'
+  COURT_REPORTS: 'court-reports',
+  OMIC: 'omic'
 }

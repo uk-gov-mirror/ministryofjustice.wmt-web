@@ -1,11 +1,15 @@
 const knex = require('../../../knex').web
 
-module.exports = function (id) {
+module.exports = function (id, workloadType) {
   var table = 'individual_case_overview'
   var whereClause = ''
 
   if (id !== undefined) {
     whereClause = ' WHERE workload_owner_id = ' + id
+  }
+
+  if (workloadType === 'omic') {
+    table = 'omic_' + table
   }
 
   var selectColumns = [
