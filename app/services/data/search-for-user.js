@@ -4,7 +4,7 @@ module.exports = function (name) {
   var columns = [
     'id',
     'username',
-    'name',
+    'name'
   ]
   if (name) {
     return knex('users').columns(columns).where('name', 'like', '%' + name + '%')

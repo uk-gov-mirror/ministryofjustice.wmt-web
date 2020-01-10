@@ -106,7 +106,6 @@ module.exports = function (router) {
     var username = req.params.username
     var loggedInUsername = req.user.username
 
-
     var thisUser
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     try {
@@ -138,7 +137,6 @@ module.exports = function (router) {
       addUpdateUserRole(username, rights, loggedInUsername, thisUser.name)
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return res.render('user', {
       title: 'User rights',
       userRights: { username: username, rights: rights },
