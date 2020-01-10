@@ -8,7 +8,7 @@ const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1',
 const CASELOAD_TEAM_FIELDS = ['name', 'grade', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'e', 'f', 'g', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['regionName', 'lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction', 'cmsAdjustmentPoints', 'cmsPercentage']
 const OM_OVERVIEW_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours', 'CMS Points', 'CMS Percentage']
-const ORG_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'offenderManager', 'gradeCode', 'capacityPercentage', 'availablePoints', 'remainingPoints', 'contractedHours', 'reductionHours', 'totalCases', 'cmsAdjustmentPoints', 'cmsPercentage']
+const ORG_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'offenderManager', 'gradeCode', 'capacityPercentage', 'availablePoints', 'totalPoints', 'remainingPoints', 'contractedHours', 'reductionHours', 'totalCases', 'cmsAdjustmentPoints', 'cmsPercentage']
 const REDUCTIONS_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team', 'Offender Manager', 'Grade Code', 'Contracted Hours', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes']
 const REDUCTIONS_FIELDS = ['regionName', 'lduName', 'teamName', 'offenderManager', 'gradeCode', 'contractedHours', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
 const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
@@ -134,7 +134,7 @@ var getFields = function (organisationLevel, tab) {
       } else {
         childOrgForFieldName = getChildOrgForFieldName(organisationLevel)
         fields = Object.assign([], ORG_OVERVIEW_FIELDS)
-        fieldNames = ['LDU Cluster', 'Team Name', 'Offender Manager', 'Grade Code', 'Capacity Percentage', 'Capacity Points', 'Remaining Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases', 'CMS Points', 'CMS Percentage']
+        fieldNames = ['LDU Cluster', 'Team Name', 'Offender Manager', 'Grade Code', 'Capacity Percentage', 'Capacity Points', 'Total Points Used', 'Remaining Points', 'Contracted Hours', 'Reduction Hours', 'Total Cases', 'CMS Points', 'CMS Percentage']
 
         if (organisationLevel === organisationUnitConstants.REGION.name || organisationLevel === organisationUnitConstants.NATIONAL.name) {
           fields.unshift('regionName')
