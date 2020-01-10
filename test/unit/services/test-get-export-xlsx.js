@@ -34,78 +34,109 @@ describe('services/get-export-xlsx', function () {
       var typeTierGroupLength = 4
 
       scenarioObjects.forEach(function (scenarioObject) {
-        for (var i = 8; i < tiersPerType; i++) {
-          var casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
+        var casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === 0)
+        casesForThisTier = casesForThisTier[0]
+        caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
+        columnStart = columnStart + typeTierGroupLength
+
+        for (var i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
+          casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
           columnStart = columnStart + typeTierGroupLength
         }
-        for (i = 0; i < tiersPerType - 3; i++) {
+        for (i = 1; i < tiersPerType - 3; i++) {
           casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
           columnStart = columnStart + typeTierGroupLength
         }
 
-        for (i = 8; i < tiersPerType; i++) {
+        casesForThisTier = scenarioObject.licenceCaseNumbers.filter(thisCase => thisCase.tier === 0)
+        casesForThisTier = casesForThisTier[0]
+        caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
+        columnStart = columnStart + typeTierGroupLength
+
+        for (i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
           casesForThisTier = scenarioObject.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
           columnStart = columnStart + typeTierGroupLength
         }
-        for (i = 0; i < tiersPerType - 3; i++) {
+        for (i = 1; i < tiersPerType - 3; i++) {
           casesForThisTier = scenarioObject.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
           columnStart = columnStart + typeTierGroupLength
         }
 
-        for (i = 8; i < tiersPerType; i++) {
+        casesForThisTier = scenarioObject.custodyCaseNumbers.filter(thisCase => thisCase.tier === 0)
+        casesForThisTier = casesForThisTier[0]
+        caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
+        columnStart = columnStart + typeTierGroupLength
+
+        for (i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
           casesForThisTier = scenarioObject.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
           columnStart = columnStart + typeTierGroupLength
         }
-        for (i = 0; i < tiersPerType - 3; i++) {
+        for (i = 1; i < tiersPerType - 3; i++) {
           casesForThisTier = scenarioObject.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, false)
           columnStart = columnStart + typeTierGroupLength
         }
+
         // t2a
-        for (i = 8; i < tiersPerType; i++) {
+        casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === 0)
+        casesForThisTier = casesForThisTier[0]
+        caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
+        columnStart = columnStart + typeTierGroupLength
+
+        for (i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
           casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
           columnStart = columnStart + typeTierGroupLength
         }
-        for (i = 0; i < tiersPerType - 3; i++) {
+        for (i = 1; i < tiersPerType - 3; i++) {
           casesForThisTier = scenarioObject.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
           columnStart = columnStart + typeTierGroupLength
         }
 
-        for (i = 8; i < tiersPerType; i++) {
+        casesForThisTier = scenarioObject.licenceCaseNumbers.filter(thisCase => thisCase.tier === 0)
+        casesForThisTier = casesForThisTier[0]
+        caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
+        columnStart = columnStart + typeTierGroupLength
+
+        for (i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
           casesForThisTier = scenarioObject.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
           columnStart = columnStart + typeTierGroupLength
         }
-        for (i = 0; i < tiersPerType - 3; i++) {
+        for (i = 1; i < tiersPerType - 3; i++) {
           casesForThisTier = scenarioObject.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
           columnStart = columnStart + typeTierGroupLength
         }
 
-        for (i = 8; i < tiersPerType; i++) {
+        casesForThisTier = scenarioObject.custodyCaseNumbers.filter(thisCase => thisCase.tier === 0)
+        casesForThisTier = casesForThisTier[0]
+        caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
+        columnStart = columnStart + typeTierGroupLength
+
+        for (i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
           casesForThisTier = scenarioObject.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
           columnStart = columnStart + typeTierGroupLength
         }
-        for (i = 0; i < tiersPerType - 3; i++) {
+        for (i = 1; i < tiersPerType - 3; i++) {
           casesForThisTier = scenarioObject.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
           casesForThisTier = casesForThisTier[0]
           caseTotalsTester(rowStart, columnStart, casesForThisTier, true)
