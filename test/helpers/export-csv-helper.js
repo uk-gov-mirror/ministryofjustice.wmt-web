@@ -100,6 +100,96 @@ module.exports.ARMS_EXPORT_RESULT = {
   }]
 }
 
+module.exports.PERCENTAGE_WORKLOAD_EXPORT_RESULT = {
+  title: 'Percentage Workload Breakdown Export',
+  percentageWorkloadExportDetails:
+  [{
+    regionName: 'NPS North West',
+    lduName: 'Cumbria',
+    teamName: 'NPS - Carlisle 1',
+    omName: 'A.N. Offender Manager CMBY478NPSM',
+    omGrade: 'PO',
+    capacity: '100%',
+    caseContribution: '99%',
+    cmsContribution: '98%',
+    gsContribution: '97%',
+    armsContribution: '96%',
+    paromsContribution: '95%',
+    sdrContribution: '94%',
+    fdrContribution: '93%'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Cumbria',
+    teamName: 'NPS - Carlisle 1',
+    omName: 'A.N. Offender Manager CMBY478NPSM',
+    omGrade: 'PO',
+    capacity: '99%',
+    caseContribution: '98%',
+    cmsContribution: '97%',
+    gsContribution: '96%',
+    armsContribution: '95%',
+    paromsContribution: '94%',
+    sdrContribution: '93%',
+    fdrContribution: '92%'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Cumbria',
+    teamName: 'NPS - Carlisle 1',
+    omName: 'A.N. Offender Manager CMBE297NPSM',
+    omGrade: 'PO',
+    capacity: '98%',
+    caseContribution: '97%',
+    cmsContribution: '96%',
+    gsContribution: '95%',
+    armsContribution: '94%',
+    paromsContribution: '93%',
+    sdrContribution: '92%',
+    fdrContribution: '91%'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Cumbria',
+    teamName: 'Rehabilitation',
+    omName: 'A.N. Offender Manager N01B324NPSM',
+    omGrade: 'PO',
+    capacity: '97%',
+    caseContribution: '96%',
+    cmsContribution: '95%',
+    gsContribution: '94%',
+    armsContribution: '93%',
+    paromsContribution: '92%',
+    sdrContribution: '91%',
+    fdrContribution: '90%'
+  },
+  {
+    regionName: 'NPS North West',
+    lduName: 'Cumbria',
+    teamName: 'Rehabilitation',
+    omName: 'A.N. Offender Manager N01B324NPSM',
+    omGrade: 'PO',
+    capacity: '96%',
+    caseContribution: '95%',
+    cmsContribution: '94%',
+    gsContribution: '93%',
+    armsContribution: '92%',
+    paromsContribution: '91%',
+    sdrContribution: '90%',
+    fdrContribution: '89%'
+  }]
+}
+
+module.exports.PERCENTAGE_WORKLOAD_EXPORT_CSV = {
+  filename: ('Test_Percentage_Workload_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
+  csv: '"Region Name","LDU Cluster","Team Name","Offender Manager Name","Offender Manager Grade","Capacity","Case Contribution","CMS Contribution","GS Contribution","ARMS Contribution","PAROMS Contribution","SDR Contribution","FDR Contribution"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","A.N. Offender Manager CMBY478NPSM","PO","100%","99%","98%","97%","96%","95%","94%","93%"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","A.N. Offender Manager CMBY478NPSM","PO","99%","98%","97%","96%","95%","94%","93%","92%"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","A.N. Offender Manager CMBE297NPSM","PO","98%","97%","96%","95%","94%","93%","92%","91%"\n' +
+    '"NPS North West","Cumbria","Rehabilitation","A.N. Offender Manager N01B324NPSM","PO","97%","96%","95%","94%","93%","92%","91%","90%"\n' +
+    '"NPS North West","Cumbria","Rehabilitation","A.N. Offender Manager N01B324NPSM","PO","96%","95%","94%","93%","92%","91%","90%","89%"'
+}
+
 module.exports.CASE_DETAILS_EXPORT_CSV = {
   filename: ('Test_Case_Details_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Region Name","LDU Cluster","Team Name","Tier Code","Row Type","CRN","Case Type","Offender Manager Name","Grade Code"\n' +
@@ -172,12 +262,12 @@ module.exports.CASE_DETAILS_EXPORT_RESULT = {
 
 module.exports.CMS_EXPORT_CSV = {
   filename: ('Test_CMS_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Contact Region Name","Contact LDU Cluster","Contact Team Name","Contact Date","Contact Name","Contact Grade","OM Region Name","OM LDU Cluster","OM Team Name","CRN","Contact ID","OM Name","OM Grade","Contact Type Description","Contact Code","Contact Points","OM Points"\n' +
-  '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-9-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1000",1659864416,"A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High","CMS30",18,-18\n' +
-    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-9-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1001",1659864416,"A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High","CMS30",18,-18\n' +
-    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-9-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1002",1659864416,"A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High","CMS30",18,-18\n' +
-    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","4-10-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1003",1660958873,"A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - Low","CMS30",5,-5\n' +
-    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","4-10-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1004",1660958873,"A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - Low","CMS30",5,-5'
+  csv: '"Contact Region Name","Contact LDU Cluster","Contact Team Name","Contact Date","Contact Name","Contact Grade","OM Region Name","OM LDU Cluster","OM Team Name","CRN","OM Name","OM Grade","Contact Type Description","Contact Code","Contact Points","OM Points"\n' +
+  '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-9-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1000","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High","CMS30",18,-18\n' +
+    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-9-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1001","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High","CMS30",18,-18\n' +
+    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-9-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1002","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High","CMS30",18,-18\n' +
+    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","4-10-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1003","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - Low","CMS30",5,-5\n' +
+    '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","4-10-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1004","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - Low","CMS30",5,-5'
 }
 
 module.exports.CMS_EXPORT_RESULT = {
@@ -282,12 +372,12 @@ module.exports.CMS_EXPORT_RESULT = {
 
 module.exports.GS_EXPORT_CSV = {
   filename: ('Test_Group_Supervision_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region Name","LDU Cluster","Team Name","Contact Date","CRN","Contact ID","Offender Manager Name","Offender Manager Grade","Contact Type Description","Contact Code","Points"\n' +
-  '"NPS North West","Lancashire SE","NPS - Burnley 1","10-10-2018","GS2000",1660883167,"A.N. Offender Manager N01B320NPSM","PO","GS Employment session NS","NGS006",-15\n' +
-    '"NPS North West","Lancashire SE","NPS - Burnley 1","10-10-2018","GS2001",1660858807,"A.N. Offender Manager N01B320NPSM","PO","GS Employment session NS","NGS006",-15\n' +
-    '"NPS North West","Lancashire SE","NPS - Burnley 2","10-10-2018","GS2002",1661654096,"A.N. Offender Manager N01C411NPSN","PO","GS Employment session NS","NGS006",-15\n' +
-    '"NPS North West","Lancashire SE","NPS - Burnley 2","10-10-2018","GS2003",1660908486,"A.N. Offender Manager N01B911NPSM","PO","GS Employment session NS","NGS006",-15\n' +
-    '"NPS North West","Lancashire SE","NPS - Burnley 2","10-10-2018","GS2004",1660902791,"A.N. Offender Manager N01C411NPSN","PO","GS Employment session NS","NGS006",-15'
+  csv: '"Region Name","LDU Cluster","Team Name","Contact Date","CRN","Offender Manager Name","Offender Manager Grade","Contact Type Description","Contact Code","Points"\n' +
+  '"NPS North West","Lancashire SE","NPS - Burnley 1","10-10-2018","GS2000","A.N. Offender Manager N01B320NPSM","PO","GS Employment session NS","NGS006",-15\n' +
+    '"NPS North West","Lancashire SE","NPS - Burnley 1","10-10-2018","GS2001","A.N. Offender Manager N01B320NPSM","PO","GS Employment session NS","NGS006",-15\n' +
+    '"NPS North West","Lancashire SE","NPS - Burnley 2","10-10-2018","GS2002","A.N. Offender Manager N01C411NPSN","PO","GS Employment session NS","NGS006",-15\n' +
+    '"NPS North West","Lancashire SE","NPS - Burnley 2","10-10-2018","GS2003","A.N. Offender Manager N01B911NPSM","PO","GS Employment session NS","NGS006",-15\n' +
+    '"NPS North West","Lancashire SE","NPS - Burnley 2","10-10-2018","GS2004","A.N. Offender Manager N01C411NPSN","PO","GS Employment session NS","NGS006",-15'
 }
 
 module.exports.GS_EXPORT_RESULT = {
@@ -2659,12 +2749,12 @@ module.exports.TEAM_OVERVIEW_RESULT = {
 
 module.exports.TEAM_OVERVIEW_CSV = {
   filename: ('Team_1_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
-  '\n"LDU Cluster 1","Team 1","John Smith","PO","115%",190,-29,37.5,6,69,0,"0.0%"' +
-  '\n"LDU Cluster 1","Team 1","Tony Test","PSO","114%",190,-26,37.5,3,69,-176,"-6.4%"' +
-  '\n"LDU Cluster 1","Team 1","Jane Doe","PO","117%",190,-32,37.5,1,69,121,"19.8%"' +
-  '\n"LDU Cluster 1","Team 1","Marcin Martin","PSO","107%",190,-14,37.5,6,69,167,"29.2%"' +
-  '\n"LDU Cluster 1","Team 1","Courtney Larry","PO","117%",190,-33,37.5,3,69,-9,"-0.5%"'
+  csv: '"LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
+  '\n"LDU Cluster 1","Team 1","John Smith","PO","115%",190,219,-29,37.5,6,69,0,"0.0%"' +
+  '\n"LDU Cluster 1","Team 1","Tony Test","PSO","114%",190,216,-26,37.5,3,69,-176,"-6.4%"' +
+  '\n"LDU Cluster 1","Team 1","Jane Doe","PO","117%",190,222,-32,37.5,1,69,121,"19.8%"' +
+  '\n"LDU Cluster 1","Team 1","Marcin Martin","PSO","107%",190,204,-14,37.5,6,69,167,"29.2%"' +
+  '\n"LDU Cluster 1","Team 1","Courtney Larry","PO","117%",190,223,-33,37.5,3,69,-9,"-0.5%"'
 }
 
 module.exports.LDU_OVERVIEW_RESULT = {
@@ -2814,17 +2904,17 @@ module.exports.LDU_OVERVIEW_RESULT = {
 
 module.exports.LDU_OVERVIEW_CSV = {
   filename: ('LDU_Cluster_1_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
-  '\n"LDU Cluster 1","Team 1","John Smith","PO","115%",190,-29,37.5,6,69,0,"0.0%"' +
-  '\n"LDU Cluster 1","Team 1","Tony Test","PSO","114%",190,-26,37.5,3,69,-176,"-6.4%"' +
-  '\n"LDU Cluster 1","Team 1","Jane Doe","PO","117%",190,-32,37.5,1,69,121,"19.8%"' +
-  '\n"LDU Cluster 1","Team 1","Marcin Martin","PSO","107%",190,-14,37.5,6,69,0,"0.0%"' +
-  '\n"LDU Cluster 1","Team 1","Courtney Larry","PO","117%",190,-33,37.5,3,69,0,"0.0%"' +
-  '\n"LDU Cluster 1","Team 4","Courtney Larry","PO","118%",190,-34,37.5,6,69,-9,"-0.5%"' +
-  '\n"LDU Cluster 1","Team 4","Marcin Martin","PSO","113%",190,-25,37.5,6,69,0,"0.0%"' +
-  '\n"LDU Cluster 1","Team 4","Jane Doe","PO","106%",190,-12,37.5,4,69,-9,"-0.5%"' +
-  '\n"LDU Cluster 1","Team 4","Tony Test","PSO","106%",190,-11,37.5,3,69,0,"0.0%"' +
-  '\n"LDU Cluster 1","Team 4","John Smith","PO","117%",190,-33,37.5,3,69,-9,"-0.5%"'
+  csv: '"LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
+  '\n"LDU Cluster 1","Team 1","John Smith","PO","115%",190,219,-29,37.5,6,69,0,"0.0%"' +
+  '\n"LDU Cluster 1","Team 1","Tony Test","PSO","114%",190,216,-26,37.5,3,69,-176,"-6.4%"' +
+  '\n"LDU Cluster 1","Team 1","Jane Doe","PO","117%",190,222,-32,37.5,1,69,121,"19.8%"' +
+  '\n"LDU Cluster 1","Team 1","Marcin Martin","PSO","107%",190,204,-14,37.5,6,69,0,"0.0%"' +
+  '\n"LDU Cluster 1","Team 1","Courtney Larry","PO","117%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"LDU Cluster 1","Team 4","Courtney Larry","PO","118%",190,224,-34,37.5,6,69,-9,"-0.5%"' +
+  '\n"LDU Cluster 1","Team 4","Marcin Martin","PSO","113%",190,215,-25,37.5,6,69,0,"0.0%"' +
+  '\n"LDU Cluster 1","Team 4","Jane Doe","PO","106%",190,202,-12,37.5,4,69,-9,"-0.5%"' +
+  '\n"LDU Cluster 1","Team 4","Tony Test","PSO","106%",190,201,-11,37.5,3,69,0,"0.0%"' +
+  '\n"LDU Cluster 1","Team 4","John Smith","PO","117%",190,223,-33,37.5,3,69,-9,"-0.5%"'
 }
 
 module.exports.REGION_OVERVIEW_RESULT = {
@@ -2981,17 +3071,17 @@ module.exports.REGION_OVERVIEW_RESULT = {
 
 module.exports.REGION_OVERVIEW_CSV = {
   filename: ('Division_1_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region","LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","John Smith","PO","115%",190,-29,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Tony Test","PSO","114%",190,-26,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Jane Doe","PO","117%",190,-32,37.5,1,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Marcin Martin","PSO","107%",190,-14,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Courtney Larry","PO","117%",190,-33,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Courtney Larry","PO","118%",190,-34,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Marcin Martin","PSO","113%",190,-25,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Jane Doe","PO","106%",190,-12,37.5,4,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Tony Test","PSO","106%",190,-11,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","John Smith","PO","117%",190,-33,37.5,3,69,0,"0.0%"'
+  csv: '"Region","LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
+  '\n"Division 1","LDU Cluster 1","Team 1","John Smith","PO","115%",190,219,-29,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 1","Tony Test","PSO","114%",190,216,-26,37.5,3,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 1","Jane Doe","PO","117%",190,222,-32,37.5,1,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 1","Marcin Martin","PSO","107%",190,204,-14,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 1","Courtney Larry","PO","117%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 4","Courtney Larry","PO","118%",190,224,-34,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 4","Marcin Martin","PSO","113%",190,215,-25,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 4","Jane Doe","PO","106%",190,202,-12,37.5,4,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 4","Tony Test","PSO","106%",190,201,-11,37.5,3,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 4","John Smith","PO","117%",190,223,-33,37.5,3,69,0,"0.0%"'
 }
 
 module.exports.NATIONAL_OVERVIEW_RESULT = {
@@ -3284,27 +3374,27 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
 
 module.exports.NATIONAL_OVERVIEW_CSV = {
   filename: ('HMPPS_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region","LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","John Smith","PO","115%",190,-29,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Tony Test","PSO","114%",190,-26,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Jane Doe","PO","117%",190,-32,37.5,1,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Marcin Martin","PSO","107%",190,-14,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Courtney Larry","PO","117%",190,-33,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Courtney Larry","PO","118%",190,-34,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Jane Doe","PO","106%",190,-12,37.5,4,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Marcin Martin","PSO","113%",190,-25,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","John Smith","PO","117%",190,-33,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Tony Test","PSO","106%",190,-11,37.5,3,69,0,"0.0%"' +
-  '\n"Division 2","LDU Cluster 2","Team 2","Jane Doe","PO","117%",190,-33,37.5,3,69,0,"0.0%"' +
-  '\n"Division 2","LDU Cluster 2","Team 2","Tony Test","PSO","117%",190,-33,37.5,4,69,0,"0.0%"' +
-  '\n"Division 2","LDU Cluster 2","Team 2","John Smith","PO","110%",190,-19,37.5,4,69,0,"0.0%"' +
-  '\n"Division 2","LDU Cluster 2","Team 2","Marcin Martin","PSO","105%",190,-10,37.5,2,69,0,"0.0%"' +
-  '\n"Division 2","LDU Cluster 2","Team 2","Courtney Larry","PO","114%",190,-27,37.5,3,69,0,"0.0%"' +
-  '\n"Division 3","LDU Cluster 3","Team 3","Courtney Larry","PO","113%",190,-24,37.5,2,69,0,"0.0%"' +
-  '\n"Division 3","LDU Cluster 3","Team 3","Marcin Martin","PSO","117%",190,-33,37.5,1,69,0,"0.0%"' +
-  '\n"Division 3","LDU Cluster 3","Team 3","John Smith","PO","107%",190,-14,37.5,6,69,0,"0.0%"' +
-  '\n"Division 3","LDU Cluster 3","Team 3","Tony Test","PSO","109%",190,-18,37.5,1,69,0,"0.0%"' +
-  '\n"Division 3","LDU Cluster 3","Team 3","Jane Doe","PO","106%",190,-11,37.5,2,69,0,"0.0%"'
+  csv: '"Region","LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
+  '\n"Division 1","LDU Cluster 1","Team 1","John Smith","PO","115%",190,219,-29,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 1","Tony Test","PSO","114%",190,216,-26,37.5,3,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 1","Jane Doe","PO","117%",190,222,-32,37.5,1,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 1","Marcin Martin","PSO","107%",190,204,-14,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 1","Courtney Larry","PO","117%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 4","Courtney Larry","PO","118%",190,224,-34,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 4","Jane Doe","PO","106%",190,202,-12,37.5,4,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 4","Marcin Martin","PSO","113%",190,215,-25,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 4","John Smith","PO","117%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Division 1","LDU Cluster 1","Team 4","Tony Test","PSO","106%",190,201,-11,37.5,3,69,0,"0.0%"' +
+  '\n"Division 2","LDU Cluster 2","Team 2","Jane Doe","PO","117%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Division 2","LDU Cluster 2","Team 2","Tony Test","PSO","117%",190,223,-33,37.5,4,69,0,"0.0%"' +
+  '\n"Division 2","LDU Cluster 2","Team 2","John Smith","PO","110%",190,209,-19,37.5,4,69,0,"0.0%"' +
+  '\n"Division 2","LDU Cluster 2","Team 2","Marcin Martin","PSO","105%",190,200,-10,37.5,2,69,0,"0.0%"' +
+  '\n"Division 2","LDU Cluster 2","Team 2","Courtney Larry","PO","114%",190,217,-27,37.5,3,69,0,"0.0%"' +
+  '\n"Division 3","LDU Cluster 3","Team 3","Courtney Larry","PO","113%",190,214,-24,37.5,2,69,0,"0.0%"' +
+  '\n"Division 3","LDU Cluster 3","Team 3","Marcin Martin","PSO","117%",190,223,-33,37.5,1,69,0,"0.0%"' +
+  '\n"Division 3","LDU Cluster 3","Team 3","John Smith","PO","107%",190,204,-14,37.5,6,69,0,"0.0%"' +
+  '\n"Division 3","LDU Cluster 3","Team 3","Tony Test","PSO","109%",190,208,-18,37.5,1,69,0,"0.0%"' +
+  '\n"Division 3","LDU Cluster 3","Team 3","Jane Doe","PO","106%",190,201,-11,37.5,2,69,0,"0.0%"'
 }
 
 module.exports.PERCENTAGE_FORMAT_TEST = {

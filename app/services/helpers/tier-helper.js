@@ -24,6 +24,15 @@ module.exports.getTierType = function (tierNumber) {
     case 7:
       tier = TierType.SEVEN
       break
+    case 8:
+      tier = TierType.EIGHT
+      break
+    case 9:
+      tier = TierType.NINE
+      break
+    case 10:
+      tier = TierType.TEN
+      break
   }
   return tier
 }
