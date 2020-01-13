@@ -11,6 +11,8 @@ const OM_OVERVIEW_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team Name', 'Grade Co
 const ORG_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'offenderManager', 'gradeCode', 'capacityPercentage', 'availablePoints', 'totalPoints', 'remainingPoints', 'contractedHours', 'reductionHours', 'totalCases', 'cmsAdjustmentPoints', 'cmsPercentage']
 const REDUCTIONS_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team', 'Offender Manager', 'Grade Code', 'Contracted Hours', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes']
 const REDUCTIONS_FIELDS = ['regionName', 'lduName', 'teamName', 'offenderManager', 'gradeCode', 'contractedHours', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes']
+const EXPIRING_REDUCTIONS_FIELD_NAMES = ['Region', 'LDU Cluster', 'Team', 'Offender Manager', 'Grade Code', 'Contracted Hours', 'Reason', 'Hours', 'Start Date', 'End Date', 'Status', 'Additional Notes', 'Manager Responsible']
+const EXPIRING_REDUCTIONS_FIELDS = ['regionName', 'lduName', 'teamName', 'offenderManager', 'gradeCode', 'contractedHours', 'reason', 'amount', 'startDate', 'endDate', 'status', 'additionalNotes', 'managerResponsible']
 const INACTIVE_CASES_FIELDS = ['lduName', 'teamName', 'name', 'gradeCode', 'inactiveCaseType', 'crn', 'location', 'tier']
 const INACTIVE_CASES_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Name', 'Grade Code', 'Inactive Case Type', 'CRN', 'Location', 'Tier']
 // const DAILY_ARCHIVE_FIELD_NAMES = ['LDU Cluster', 'Team Name', 'Offender Manager Name', 'Total Cases', 'Capacity', 'Reductions', 'Comments', 'Reduction Date', 'Reduction Added By']
@@ -106,6 +108,12 @@ var getFilename = function (orgName, screen) {
     } else {
       return (orgName + ' Percentage_Workload_Breakdown_Export.csv').replace(replaceSpaces, '_')
     }
+  }  else if (screen === tabs.EXPORT.EXPIRING_REDUCTIONS) {
+    if (orgName === null) {
+      return 'Expiring_Reductions.csv'
+    } else {
+      return (orgName + ' Expiring_Reductions.csv').replace(replaceSpaces, '_')
+    }
   } else {
     return (orgName + ' ' + screen + '.csv').replace(replaceSpaces, '_')
   }
@@ -185,6 +193,10 @@ var getFields = function (organisationLevel, tab) {
     case tabs.EXPORT.SUSPENDED_LIFERS_EXPORT:
       fields = SUSPENDED_LIFERS_EXPORT_FIELDS
       fieldNames = SUSPENDED_LIFERS_EXPORT_FIELD_NAMES
+      break
+    case tabs.EXPORT.EXPIRING_REDUCTIONS:
+      fields = EXPIRING_REDUCTIONS_FIELDS
+      fieldNames = EXPIRING_REDUCTIONS_FIELD_NAMES
       break
   }
   return { fields: fields, fieldNames: fieldNames }
@@ -269,6 +281,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
     case tabs.EXPORT.CMS_EXPORT:
     case tabs.EXPORT.WORKLOAD_PERCENTAGE_EXPORT:
     case tabs.EXPORT.SUSPENDED_LIFERS_EXPORT:
+    case tabs.EXPORT.EXPIRING_REDUCTIONS:
       csv = generateCsv(result, fields, fieldNames)
       break
   }

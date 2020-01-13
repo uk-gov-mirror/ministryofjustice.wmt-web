@@ -77,6 +77,10 @@ describe('services/get-export-csv', function () {
     it('for Suspended Lifers Export', function () {
       expect(getExportCsv(orgUnit.TEAM.name, helper.SUSPENDED_LIFER_EXPORT_RESULT.suspendedLiferExportDetails, tabs.EXPORT.SUSPENDED_LIFERS_EXPORT).csv).to.eql(helper.SUSPENDED_LIFER_CSV.csv)
     })
+
+    it('for Expiring Reductions Export', function () {
+      expect(getExportCsv(orgUnit.TEAM.name, helper.TEAM_EXPIRING_REDUCTIONS_RESULT.reductionNotes, tabs.EXPORT.EXPIRING_REDUCTIONS).csv).to.eql(helper.TEAM_EXPIRING_REDUCTIONS_CSV.csv)
+    })
   })
   describe('should format the capacity percentage when exporting overviews', function () {
     it('to a whole number with a percentage symbol', function () {
