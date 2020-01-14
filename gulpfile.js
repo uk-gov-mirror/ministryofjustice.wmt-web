@@ -31,10 +31,10 @@ gulp.task('vendorJS', function () {
     .pipe(gulp.dest('app/assets/javascripts/vendor/'))
 })
 
-gulp.task('sync', ['vendorJS'], function () {
+gulp.task('sync', gulp.series(gulp.series('vendorJS', function () {
   return gulp.src('app/assets/javascripts/**/*.js')
           .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
-})
+})))
 
 gulp.task('syncAssets', function () {
   return gulp.src('app/assets/images/**/*')
@@ -58,18 +58,14 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('app/public/stylesheets'))
 })
 
-gulp.task('generate-assets', ['assets', 'templates', 'sync', 'sass', 'syncAssets'])
-
-gulp.task('generate-assets-and-start', ['generate-assets', 'server'], function () {
-
-})
+gulp.task('generate-assets', gulp.series(gulp.series('assets', 'templates', 'sync', 'sass', 'syncAssets')))
 
 gulp.task('nsp', function (cb) {
   gulpNSP({package: path.join(__dirname, '/package.json')}, cb)
 })
 
 gulp.task('watch', function () {
-  gulp.watch(['app/app.js', 'app/services/**/*', 'app/assets/**/*', 'app/routes/**/*'], ['generate-assets-and-start'])
+  gulp.watch(['app/app.js', 'app/services/**/*', 'app/assets/**/*', 'app/routes/**/*'], gulp.series(gulp.series('generate-assets-and-start')))
 })
 
 gulp.task('server', function () {
@@ -82,4 +78,6 @@ gulp.task('server', function () {
   })
 })
 
-gulp.task('default', ['generate-assets-and-start', 'watch'])
+gulp.task('generate-assets-and-start', gulp.series(gulp.parallel('generate-assets', 'server')))
+
+gulp.task('default', gulp.series(gulp.parallel('generate-assets-and-start', 'watch')))

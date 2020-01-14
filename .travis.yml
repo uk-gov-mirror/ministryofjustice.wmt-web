@@ -4,6 +4,6 @@ before_install:
 
 language: node_js
 node_js:
-- '8'
+- '12'
 cache: yarn
 script: yarn install && yarn unit-test
