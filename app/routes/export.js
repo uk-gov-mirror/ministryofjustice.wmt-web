@@ -15,6 +15,10 @@ const getScenarioExport = require('../services/get-scenario')
 const getWorkloadPercentageBreakdown = require('../services/data/get-workload-percentage-breakdown')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
+const getExpiringReductions = require('../services/data/get-expiring-reductions-for-export')
+const Forbidden = require('../services/errors/authentication-error').Forbidden
+const roles = require('../constants/user-roles')
+const messages = require('../constants/messages')
 
 var lastUpdated
 
@@ -84,6 +88,26 @@ module.exports = function (router) {
 
     var tabType
 
+    if (radioButton === '8') {
+      try {
+        authorisation.assertUserAuthenticated(req)
+        authorisation.hasRole(req, [roles.DATA_ADMIN, roles.MANAGER])
+      } catch (error) {
+        if (error instanceof Unauthorized) {
+          return res.status(error.statusCode).redirect(error.redirect)
+        } else if (error instanceof Forbidden) {
+          return res.status(error.statusCode).render(error.redirect, {
+            heading: messages.ACCESS_DENIED,
+            message: messages.MANAGER_ROLES_REQUIRED
+          })
+        } else {
+          throw error
+        }
+      }
+    }
+
+    var expiringReductionsPromise = getExpiringReductions(id, organisationLevel)
+
     switch (radioButton) {
       case '1':
         exportPromise = armsPromise
@@ -111,6 +135,10 @@ module.exports = function (router) {
       case '7':
         exportPromise = getWorkloadPercentageBreakdownPromise
         tabType = tabs.EXPORT.WORKLOAD_PERCENTAGE_EXPORT
+        break
+      case '8':
+        exportPromise = expiringReductionsPromise
+        tabType = tabs.EXPORT.EXPIRING_REDUCTIONS
         break
       default:
         exportPromise = Promise.resolve()

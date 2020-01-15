@@ -17,6 +17,8 @@
     {% set Staff=true %}
   {% endif %}
 
+  {% include "includes/validation-error-messages.html" %}
+
   <form action="/admin/user-rights/{{username}}" method="post" id="userRightForm">
     <div class="form-group">
       <fieldset>
@@ -41,6 +43,17 @@
           <input id="staffRadio" type="radio" name="rights" value="Staff" {% if Staff %} checked {% endif %}>
           <label for="staffRadio">Staff</label>
         </div>
+      </fieldset>
+      <br>
+      <fieldset>
+          <legend>
+            <p class="lede">What is this user's name?</p>
+            <span class="form-hint" id="expiring-reductions-search-field-hint">For Example, John Smith</span>
+          </legend>
+          {% if errors['fullname'][0] %}
+            <span class="error-message">{{ errors['fullname'][0] }}</span>
+          {% endif %}
+          <input type="text" class="form-control" name="fullname" id="fullname" value="{{ fullname }}">
       </fieldset>
     </div>
 

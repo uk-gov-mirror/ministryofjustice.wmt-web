@@ -3,6 +3,7 @@
 $path: "/public/images/";
 // This includes entire govuk-elements from _govuk-elements.scss
 @import 'govuk-elements';
+@import 'select2.scss';
 // Take a look at in app/assets/sass/patterns/ to see which files are imported.
 // Autocomplete styles from https://github.com/ministryofjustice/prison-visits-public
 
