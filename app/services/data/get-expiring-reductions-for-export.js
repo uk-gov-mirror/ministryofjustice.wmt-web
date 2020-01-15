@@ -11,7 +11,7 @@ module.exports = function (id, organisationLevel) {
     'name AS offenderManager',
     'contracted_hours AS contractedHours',
     'reduction_reason AS reason',
-    'amount', 
+    'amount',
     'start_date AS startDate',
     'end_date AS endDate',
     'reduction_id AS reductionId',

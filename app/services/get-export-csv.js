@@ -108,7 +108,7 @@ var getFilename = function (orgName, screen) {
     } else {
       return (orgName + ' Percentage_Workload_Breakdown_Export.csv').replace(replaceSpaces, '_')
     }
-  }  else if (screen === tabs.EXPORT.EXPIRING_REDUCTIONS) {
+  } else if (screen === tabs.EXPORT.EXPIRING_REDUCTIONS) {
     if (orgName === null) {
       return 'Expiring_Reductions.csv'
     } else {
