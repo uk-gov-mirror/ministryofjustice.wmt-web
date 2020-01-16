@@ -83,9 +83,9 @@ describe('services/get-export-csv', function () {
     })
   })
   describe('should format the capacity percentage when exporting overviews', function () {
-    it('to a whole number with a percentage symbol', function () {
+    it('to a 1DP number with a percentage symbol', function () {
       var capacityExport = getExportCsv(orgUnit.REGION.name, helper.PERCENTAGE_FORMAT_TEST, tabs.OVERVIEW).csv
-      expect(capacityExport).to.include('115%')
+      expect(capacityExport).to.include('115.3%')
     })
   })
 })
