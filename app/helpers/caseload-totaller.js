@@ -19,7 +19,7 @@ module.exports = function (caseloadArray) {
       detail.grades.push(total)
     }
   })
-  
+
   var totalRow = {grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0}
   Object.keys(caseloadArray.totals).forEach(function (grade) {
     totalRow.a += caseloadArray.totals[grade].a
