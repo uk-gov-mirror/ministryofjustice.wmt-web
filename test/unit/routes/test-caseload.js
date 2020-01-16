@@ -119,6 +119,56 @@ const ORG_CASELOAD = {
     licenseTotalSummary: 0
   }
 }
+const BASE_CASELOAD_DETAILS = {
+  details: [
+    {
+      linkId: 1278,
+      name: 'BEX NPS1',
+      grades: [
+        { grade: 'PO', a: 5, b1: 27, b2: 43, c1: 6, c2: 7, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 88 },
+        { grade: 'PSO', a: 0, b1: 0, b2: 0, c1: 37, c2: 29, d1: 2, d2: 8, e: 0, f: 0, g: 0, untiered: 0, totalCases: 76 },
+        { grade: 'TPO', a: 0, b1: 0, b2: 0, c1: 7, c2: 27, d1: 3, d2: 8, e: 0, f: 0, g: 1, untiered: 0, totalCases: 46 }
+      ]
+    }
+  ],
+  totals: {
+    PO: { grade: 'PO', a: 5, b1: 27, b2: 43, c1: 6, c2: 7, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 88 },
+    PSO: { grade: 'PSO', a: 0, b1: 0, b2: 0, c1: 37, c2: 29, d1: 2, d2: 8, e: 0, f: 0, g: 0, untiered: 0, totalCases: 76 },
+    TPO: { grade: 'TPO', a: 0, b1: 0, b2: 0, c1: 7, c2: 27, d1: 3, d2: 8, e: 0, f: 0, g: 1, untiered: 0, totalCases: 46 }
+  },
+  detailsPercentages: [
+    {
+      linkId: 1278,
+      name: 'BEX NPS1',
+      grades: [
+        { grade: 'PO', a: 100, b1: 100, b2: 100, c1: 12, c2: 11.11111111111111, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 41.904761904761905 },
+        { grade: 'PSO', a: 0, b1: 0, b2: 0, c1: 74, c2: 46.03174603174603, d1: 40, d2: 50, e: 0, f: 0, g: 0, untiered: 0, totalCases: 36.19047619047619 },
+        { grade: 'TPO', a: 0, b1: 0, b2: 0, c1: 14.000000000000002, c2: 42.857142857142854, d1: 60, d2: 50, e: 0, f: 0, g: 100, untiered: 0, totalCases: 21.904761904761905 }
+      ]
+    }
+  ],
+  percentageTotals: {
+    PO: { grade: 'PO', a: 95.65217391304348, b1: 98.7012987012987, b2: 98.30508474576271, c1: 65.55555555555556, c2: 27.68166089965398, d1: 12.5, d2: 3.571428571428571, e: 0, f: 0, g: 0, untiered: 0, totalCases: 66.0377358490566 },
+    PSO: { grade: 'PSO', a: 4.3478260869565215, b1: 0.6493506493506493, b2: 1.3559322033898304, c1: 24.444444444444443, c2: 48.78892733564014, d1: 50, d2: 66.07142857142857, e: 0, f: 0, g: 0, untiered: 0, totalCases: 23.038728897715988 },
+    TPO: { grade: 'TPO', a: 0, b1: 0, b2: 0, c1: 7, c2: 27, d1: 3, d2: 8, e: 0, f: 0, g: 1, untiered: 0, totalCases: 46 }
+  },
+}
+
+const LDU_CASELOAD = {
+  title: 'Bexley, Bromley, Greenwich',
+  subTitle: 'LDU Cluster',
+  breadcrumbs: [{ title: 'Bexley, Bromley, Greenwich', link: '/probation/ldu/645' }, { title: 'NPS London', link: '/probation/region/1'}, { title: 'HMPPS', link: '/probation/hmpps/0' }],
+  caseloadDetails: {
+    overallCaseloadDetails: Object.assign({}, BASE_CASELOAD_DETAILS),
+    communityCaseloadDetails: Object.assign({}, BASE_CASELOAD_DETAILS),
+    custodyCaseloadDetails: Object.assign({}, BASE_CASELOAD_DETAILS),
+    licenseCaseloadDetails: Object.assign({}, BASE_CASELOAD_DETAILS),
+    overallTotalSummary: [{ name: 'BEX NPS1', linkId: 1278, totalCases: 210, custodyTotalCases: 58, communityTotalCases: 37, licenseTotalCases: 115, totals: { totalCommunity: 141, totalLicense: 401, totalCustody: 465, totalTotalCases: 1007 } }],
+    custodyTotalSummary: 465,
+    communityTotalSummary: 141,
+    licenseTotalSummary: 401
+  }
+}
 
 const EXPORT_CSV_FILENAME = 'Test CSV File.csv'
 
@@ -164,17 +214,17 @@ describe('caseload route', function () {
   })
 
   it('should repsond with 200 for LDU URL', function () {
-    getCaseload.resolves(ORG_CASELOAD)
+    getCaseload.resolves(LDU_CASELOAD)
     return supertest(app).get(LDU_CASELOAD_URL).expect(200)
   })
 
   it('should repsond with 200 for Region URL', function () {
-    getCaseload.resolves(ORG_CASELOAD)
+    getCaseload.resolves(LDU_CASELOAD)
     return supertest(app).get(REGION_CASELOAD_URL).expect(200)
   })
 
   it('should repsond with 200 for National URL', function () {
-    getCaseload.resolves(ORG_CASELOAD)
+    getCaseload.resolves(LDU_CASELOAD)
     return supertest(app).get(NATIONAL_CASELOAD_URL).expect(200)
   })
 
@@ -195,7 +245,7 @@ describe('caseload route', function () {
   })
 
   it('should call the getSubNav with the correct parameters for LDU', function () {
-    getCaseload.resolves(ORG_CASELOAD)
+    getCaseload.resolves(LDU_CASELOAD)
     return supertest(app)
       .get(LDU_CASELOAD_URL)
       .expect(200)
@@ -207,7 +257,7 @@ describe('caseload route', function () {
 
   // REGION Level
   it('should call the getSubNav with the correct parameters for REGION', function () {
-    getCaseload.resolves(ORG_CASELOAD)
+    getCaseload.resolves(LDU_CASELOAD)
     return supertest(app)
       .get(REGION_CASELOAD_URL)
       .expect(200)
@@ -219,7 +269,7 @@ describe('caseload route', function () {
 
   // NATIONAL Level
   it('should call the getSubNav with the correct parameters for NATIONAL', function () {
-    getCaseload.resolves(ORG_CASELOAD)
+    getCaseload.resolves(LDU_CASELOAD)
     return supertest(app)
       .get(NATIONAL_CASELOAD_URL)
       .expect(200)
