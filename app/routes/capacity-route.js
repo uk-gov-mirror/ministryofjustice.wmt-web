@@ -162,6 +162,9 @@ var getCaseTypeDescription = function (inactiveCaseType) {
       description = 'Active Warrants'
       break
     case 'S':
+      description = 'Suspended Sentence Orders'
+      break
+    case 'L':
       description = 'Suspended Lifers'
       break
   }

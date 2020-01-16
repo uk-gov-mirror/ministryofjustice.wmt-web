@@ -10,8 +10,7 @@ module.exports = function (username) {
     .join('roles', 'roles.id', 'user_role.role_id')
     .join('users', 'users.id', 'user_role.user_id')
     .where('users.username', username)
-    .select('roles.id AS roleId',
-            'roles.role')
+    .select('roles.id AS roleId', 'roles.role', 'users.name AS fullname')
     .then(function (result) {
       var role = result[0]
       if (!role) {
