@@ -88,9 +88,9 @@
               <td headers="grade om">{{ member.gradeCode }}</td>
             {% endif %}
             {% if member.capacityPercentage > 110 %}
-              <td class="capacity-red" headers="current cap">{{ member.capacityPercentage | round }}%</td>
+              <td class="capacity-red" headers="current cap">{{ member.capacityPercentage | round(1) }}%</td>
             {% else %}
-              <td headers="current cap">{{ member.capacityPercentage | round }}%</td>
+              <td headers="current cap">{{ member.capacityPercentage | round(1) }}%</td>
             {% endif %}
             <td headers="points cap">{{ member.availablePoints }}</td>
             <td headers="totalPoints cap">{{ member.totalPoints }}</td>
@@ -114,7 +114,7 @@
             {% if organisationLevel === 'team' %}  
               <td headers="grade om">{{ member.gradeCode }}</td>
             {% endif %}
-            <td headers="current cap">{{ member.totalCapacityPercentage | round }}%</td>
+            <td headers="current cap">{{ member.totalCapacityPercentage | round(1) }}%</td>
             <td headers="points cap">{{ member.totalAvailablePoints }}</td>
             <td headers="totalPoints cap">{{ member.totalPoints }}</td>
             <td headers="remaining cap">{{ member.totalRemainingPoints}}</td>
