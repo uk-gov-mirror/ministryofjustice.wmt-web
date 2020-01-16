@@ -16,7 +16,7 @@
             <span class="form-label-bold">Search by Surname</span>
             <span class="form-hint">For example, Smith</span>
             <label class="form-label-bold" for="surname">Surname</label>
-            <input class="form-control" id="surname" name="surnameBox" style="width: 256px; margin-bottom: 16px">
+            <input class="form-control" id="surname" name="surnameBox" value="{{ surname }}"style="width: 256px; margin-bottom: 16px">
             </legend>
         </fieldset>
 
@@ -35,6 +35,7 @@
                 <th id="team">Team</th>
                 <th id="surname">Surname</th>
                 <th id="forename">Forename</th>
+                <th id="link">Link</th>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +47,7 @@
                     <td>{{ result.team }}</td>
                     <td>{{ result.surname }}</td>
                     <td>{{ result.forename }}</td>
+                    <td><a href="/probation/offender-manager/{{ result.workloadOwnerId }}">View</a></td>
                 </tr>
                 {% endfor %}
             {% endif %}

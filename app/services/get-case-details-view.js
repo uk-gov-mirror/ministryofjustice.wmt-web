@@ -48,6 +48,15 @@ var formatTier = function (results) {
       case '7':
         result.tierCode = 'A'
         break
+      case '8':
+        result.tierCode = 'E'
+        break
+      case '9':
+        result.tierCode = 'F'
+        break
+      case '10':
+        result.tierCode = 'G'
+        break
       case 0:
         result.tierCode = 'Untiered'
         break
@@ -71,6 +80,15 @@ var formatTier = function (results) {
         break
       case 7:
         result.tierCode = 'A'
+        break
+      case 8:
+        result.tierCode = 'E'
+        break
+      case 9:
+        result.tierCode = 'F'
+        break
+      case 10:
+        result.tierCode = 'G'
         break
     }
   })

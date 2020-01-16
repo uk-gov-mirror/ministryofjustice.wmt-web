@@ -2,6 +2,9 @@ module.exports.determineCaseStyle = function (header, styles) {
   var styleToApply
   switch (header) {
     case 'Com Untiered':
+    case 'Com G':
+    case 'Com F':
+    case 'Com E':
     case 'Com D2':
     case 'Com D1':
     case 'Com C2':
@@ -12,6 +15,9 @@ module.exports.determineCaseStyle = function (header, styles) {
       styleToApply = styles.commStyle
       break
     case 'Lic Untiered':
+    case 'Lic G':
+    case 'Lic F':
+    case 'Lic E':
     case 'Lic D2':
     case 'Lic D1':
     case 'Lic C2':
@@ -22,6 +28,9 @@ module.exports.determineCaseStyle = function (header, styles) {
       styleToApply = styles.licStyle
       break
     case 'Cus Untiered':
+    case 'Cus G':
+    case 'Cus F':
+    case 'Cus E':
     case 'Cus D2':
     case 'Cus D1':
     case 'Cus C2':
@@ -32,6 +41,9 @@ module.exports.determineCaseStyle = function (header, styles) {
       styleToApply = styles.cusStyle
       break
     case 'T2A Com Untiered':
+    case 'T2A Com G':
+    case 'T2A Com F':
+    case 'T2A Com E':
     case 'T2A Com D2':
     case 'T2A Com D1':
     case 'T2A Com C2':
@@ -42,6 +54,9 @@ module.exports.determineCaseStyle = function (header, styles) {
       styleToApply = styles.t2aCommStyle
       break
     case 'T2A Lic Untiered':
+    case 'T2A Lic G':
+    case 'T2A Lic F':
+    case 'T2A Lic E':
     case 'T2A Lic D2':
     case 'T2A Lic D1':
     case 'T2A Lic C2':
@@ -52,6 +67,9 @@ module.exports.determineCaseStyle = function (header, styles) {
       styleToApply = styles.t2aLicStyle
       break
     case 'T2A Cus Untiered':
+    case 'T2A Cus G':
+    case 'T2A Cus F':
+    case 'T2A Cus E':
     case 'T2A Cus D2':
     case 'T2A Cus D1':
     case 'T2A Cus C2':
@@ -70,13 +88,13 @@ module.exports.determineCaseStyle = function (header, styles) {
 
 module.exports.determineWeightingStyle = function (columnNo, styles) {
   var styleToApply
-  var commRange = { start: 25, end: 56 }
-  var licRange = { start: 57, end: 88 }
-  var cusRange = { start: 89, end: 120 }
-  var t2aCommRage = { start: 121, end: 152 }
-  var t2aLicRange = { start: 153, end: 184 }
-  var t2aCusRange = { start: 185, end: 216 }
-  var reportsRange = { start: 217, end: 221 }
+  var commRange = { start: 26, end: 69 }
+  var licRange = { start: 70, end: 113 }
+  var cusRange = { start: 114, end: 157 }
+  var t2aCommRage = { start: 158, end: 201 }
+  var t2aLicRange = { start: 202, end: 245 }
+  var t2aCusRange = { start: 246, end: 289 }
+  var reportsRange = { start: 290, end: 294 }
 
   if (columnNo >= commRange.start && columnNo <= commRange.end) {
     styleToApply = styles.commStyle

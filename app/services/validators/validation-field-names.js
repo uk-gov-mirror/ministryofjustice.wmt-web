@@ -15,6 +15,9 @@ module.exports = {
   'cusC2': 'Cus C2',
   'cusD1': 'Cus D1',
   'cusD2': 'Cus D2',
+  'cusE': 'Cus E',
+  'cusF': 'Cus F',
+  'cusG': 'Cus G',
   'licA': 'Lic A',
   'licB1': 'Lic B1',
   'licB2': 'Lic B2',
@@ -22,6 +25,9 @@ module.exports = {
   'licC2': 'Lic C2',
   'licD1': 'Lic D1',
   'licD2': 'Lic D2',
+  'licE': 'Lic E',
+  'licF': 'Lic F',
+  'licG': 'Lic G',
   'commA': 'Comm A',
   'commB1': 'Comm B1',
   'commB2': 'Comm B2',
@@ -29,6 +35,9 @@ module.exports = {
   'commC2': 'Comm C2',
   'commD1': 'Comm D1',
   'commD2': 'Comm D2',
+  'commE': 'Comm E',
+  'commF': 'Comm F',
+  'commG': 'Comm G',
   'sdr': 'SDR',
   'sdrConversion': 'FDR (SDR Conversion)',
   'parom': 'PAROM',
@@ -95,5 +104,6 @@ module.exports = {
   'maxAllowancePercentage': 'Maximum Allowance Percentage',
   'allowancePercentage': 'Allowance Percentage',
   'monthsToExpiry': 'Months to Expiry',
-  'isEnabled': 'Reduction Reason Status'
+  'isEnabled': 'Reduction Reason Status',
+  'fullname': 'User\'s Full Name'
 }
