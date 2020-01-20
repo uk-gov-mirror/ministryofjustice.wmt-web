@@ -5,5 +5,8 @@ module.exports = {
   FOUR: 'C1',
   FIVE: 'B2',
   SIX: 'B1',
-  SEVEN: 'A'
+  SEVEN: 'A',
+  EIGHT: 'E',
+  NINE: 'F',
+  TEN: 'G'
 }

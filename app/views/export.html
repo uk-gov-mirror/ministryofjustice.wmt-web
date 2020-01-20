@@ -15,37 +15,70 @@
     <form method="post">
 
         {% include "includes/csrf-hidden-input.html"%}
-
-        <div class="form-group">
-            <fieldset class="inline">
-                <h2 class="heading-medium">
-                    Please select the type of export to download:
-                </h2>
-                <div class="multiple-choice">
-                    <input id="radio-inline-1" type="radio" name="radioInlineGroup" value="1" checked="checked">
-                    <label for="radio-inline-1">ARMS</label>
+        <h2 class="heading-medium">
+                Please select the type of export to download:
+            </h2>
+        <div class="grid-row form-group">
+            <fieldset class="inline-block">
+                <div class="column-one-third">
+                    <div class="multiple-choice">
+                        <input id="radio-inline-1" type="radio" name="radioInlineGroup" value="1" checked="checked">
+                        <label class="inline-block" for="radio-inline-1">ARMS</label>
+                    </div>
                 </div>
-                <div class="multiple-choice">
-                    <input id="radio-inline-2" type="radio" name="radioInlineGroup" value="2">
-                    <label for="radio-inline-2">Case Details</label>
+                <div class="column-one-third">
+                    <div class="multiple-choice">
+                        <input id="radio-inline-2" type="radio" name="radioInlineGroup" value="2">
+                        <label class="inline-block" for="radio-inline-2">Case Details</label>
+                    </div>
                 </div>
-                <div class="multiple-choice">
-                    <input id="radio-inline-3" type="radio" name="radioInlineGroup" value="3">
-                    <label for="radio-inline-3">Case Management Support</label>
-                </div>
-                <div class="multiple-choice">
-                    <input id="radio-inline-4" type="radio" name="radioInlineGroup" value="4">
-                    <label for="radio-inline-4">Group Supervision</label>
+                <div class="column-one-third">
+                    <div class="multiple-choice">
+                        <input id="radio-inline-3" type="radio" name="radioInlineGroup" value="3">
+                        <label class="inline-block" for="radio-inline-3">Case Management Support</label>
+                    </div>
                 </div>
             </fieldset>
         </div>
 
-        <div class="form-group">
-            <fieldset class="inline">
-                <div class="multiple-choice">
-                    <input id="radio-inline-5" type="radio" name="radioInlineGroup" value="5">
-                    <label for="radio-inline-5">Scenario</label>
+        <div class="grid-row form-group">
+            <fieldset class="inline-block">
+                <div class="column-one-third">
+                    <div class="multiple-choice">
+                        <input id="radio-inline-4" type="radio" name="radioInlineGroup" value="4">
+                        <label class="inline-block" for="radio-inline-4">Group Supervision</label>
+                    </div>
                 </div>
+                <div class="column-one-third">
+                    <div class="multiple-choice">
+                        <input id="radio-inline-5" type="radio" name="radioInlineGroup" value="5">
+                        <label class="inline-block" for="radio-inline-5">Scenario</label>
+                    </div>
+                </div>
+                <div class="column-one-third">
+                    <div class="multiple-choice">
+                        <input id="radio-inline-6" type="radio" name="radioInlineGroup" value="6">
+                        <label class="inline-block" for="radio-inline-6">Suspended Lifers</label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="grid-row form-group">
+            <fieldset class="inline-block">
+                <div class="column-one-third">
+                    <div class="multiple-choice">
+                        <input id="radio-inline-7" type="radio" name="radioInlineGroup" value="7">
+                        <label class="inline-block" for="radio-inline-7">Percentage Capacity Breakdown</label>
+                    </div>
+                </div>
+                {% if authorisation===false or userRole==='System Admin' or userRole==='Data Admin' or userRole==='Manager'%}
+                    <div class="column-one-third">
+                        <div class="multiple-choice">
+                            <input id="radio-inline-8" type="radio" name="radioInlineGroup" value="8">
+                            <label class="inline-block" for="radio-inline-8">Expiring Reductions</label>
+                        </div>
+                    </div>
+                {% endif %}
             </fieldset>
         </div>
         

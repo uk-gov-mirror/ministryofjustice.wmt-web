@@ -265,7 +265,7 @@ module.exports = function (wb) {
 
   var averagePercentageStyle = wb.createStyle({
     font: baseFontStyle,
-    numberFormat: '#%; -#%; 0%',
+    numberFormat: '0.0%; -0.0%; 0%',
     fill: {
       type: 'pattern',
       patternType: patternType,
@@ -287,7 +287,7 @@ module.exports = function (wb) {
 
   var percentageStyle = wb.createStyle({
     font: baseFontStyle,
-    numberFormat: '#%; -#%; 0%',
+    numberFormat: '0.0%; -0.0%; 0%',
     border: baseLightBorderStyle,
     fill: {
       type: 'pattern',

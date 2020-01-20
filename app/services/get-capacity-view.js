@@ -105,7 +105,7 @@ var addTotals = function (totals, capacityBreakdown) {
 var averageTotals = function (totals, totalNumberOfGrades) {
   totals.capacity = percentageCalculator.calculatePercentage(totals.totalPoints, totals.availablePoints)
   totals.totalGs = percentageCalculator.calculatePercentage(totals.totalGSPoints, totals.totalPoints)
-  totals.totalCMS = percentageCalculator.calculatePercentage(totals.totalCMSPoints, totals.totalPoints)
+  totals.totalCMS = percentageCalculator.calculatePercentage(totals.totalCMSPoints, totals.availablePoints)
   return totals
 }
 
@@ -114,7 +114,7 @@ var buildCapacityBreakdownEntry = function (workloadReport) {
   // changed from "if (workloadReport.cmsAdjustmentPoints > 0)" to allow dividing by negative
   // numbers and allow negative cms adjustment points to be shown for CMS adjsutments
   if (workloadReport.cmsAdjustmentPoints !== 0) {
-    cmsPercentageValue = percentageCalculator.calculatePercentage(workloadReport.cmsAdjustmentPoints, workloadReport.totalPoints)
+    cmsPercentageValue = percentageCalculator.calculatePercentage(workloadReport.cmsAdjustmentPoints, workloadReport.availablePoints)
   }
 
   return {

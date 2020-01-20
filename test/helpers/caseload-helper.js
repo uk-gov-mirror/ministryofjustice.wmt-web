@@ -7,6 +7,9 @@ const CASELOAD = {
   id: 1,
   totalCases: 3,
   untiered: 1,
+  g: 0,
+  f: 0,
+  e: 0,
   d2: 1,
   d1: 0,
   c2: 0,
@@ -84,20 +87,20 @@ module.exports.LDU_CUSTODY_AGGREGATED_RESULTS = {
   [ { linkId: 2,
     name: 'Todd Umptious',
     grades: [
-    {grade: CUSTODY_CASELOAD_PO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0},
-    {grade: CUSTODY_CASELOAD_PSO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0}
+    {grade: CUSTODY_CASELOAD_PO_0.grade, totalCases: 3, untiered: 1, g: 0, f: 0, e: 0, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0},
+    {grade: CUSTODY_CASELOAD_PSO_0.grade, totalCases: 3, untiered: 1, g: 0, f: 0, e: 0, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0}
     ] },
   { linkId: 3,
     name: 'Jerry Twig',
     grades: [
-      {grade: CUSTODY_CASELOAD_PO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0},
-      {grade: CUSTODY_CASELOAD_PSO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0}
+      {grade: CUSTODY_CASELOAD_PO_0.grade, totalCases: 3, untiered: 1, g: 0, f: 0, e: 0, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0},
+      {grade: CUSTODY_CASELOAD_PSO_0.grade, totalCases: 3, untiered: 1, g: 0, f: 0, e: 0, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0}
     ] },
   { linkId: 4,
     name: 'Jemima Racktool',
     grades: [
-      {grade: CUSTODY_CASELOAD_PO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0},
-      {grade: CUSTODY_CASELOAD_PSO_0.grade, totalCases: 3, untiered: 1, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0}
+      {grade: CUSTODY_CASELOAD_PO_0.grade, totalCases: 3, untiered: 1, g: 0, f: 0, e: 0, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0},
+      {grade: CUSTODY_CASELOAD_PSO_0.grade, totalCases: 3, untiered: 1, g: 0, f: 0, e: 0, d2: 1, d1: 0, c2: 0, c1: 1, b2: 0, b1: 1, a: 0}
     ] } ],
   totals:
   { PO:
@@ -109,6 +112,9 @@ module.exports.LDU_CUSTODY_AGGREGATED_RESULTS = {
     c2: 0,
     d1: 0,
     d2: 3,
+    g: 0,
+    f: 0,
+    e: 0,
     untiered: 3,
     totalCases: 9,
     numberOfType: 3 },
@@ -121,22 +127,25 @@ module.exports.LDU_CUSTODY_AGGREGATED_RESULTS = {
       c2: 0,
       d1: 0,
       d2: 3,
+      g: 0,
+      f: 0,
+      e: 0,
       untiered: 3,
       totalCases: 9,
       numberOfType: 3 } },
   detailsPercentages:
   [ { linkId: 2,
     name: 'Todd Umptious',
-    grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 },
-{ grade: 'PSO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 } ] },
+    grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, g: 0, f: 0, e: 0, untiered: 50, totalCases: 50 },
+{ grade: 'PSO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, g: 0, f: 0, e: 0, untiered: 50, totalCases: 50 } ] },
   { linkId: 3,
     name: 'Jerry Twig',
-    grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 },
-    { grade: 'PSO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 } ] },
+    grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, g: 0, f: 0, e: 0, untiered: 50, totalCases: 50 },
+    { grade: 'PSO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, g: 0, f: 0, e: 0, untiered: 50, totalCases: 50 } ] },
   { linkId: 4,
     name: 'Jemima Racktool',
-    grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 },
-    { grade: 'PSO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, untiered: 50, totalCases: 50 } ] } ],
+    grades: [ { grade: 'PO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, g: 0, f: 0, e: 0, untiered: 50, totalCases: 50 },
+    { grade: 'PSO', a: 0, b1: 50, b2: 0, c1: 50, c2: 0, d1: 0, d2: 50, g: 0, f: 0, e: 0, untiered: 50, totalCases: 50 } ] } ],
   percentageTotals:
   { PO:
   { grade: 'PO',
@@ -147,6 +156,9 @@ module.exports.LDU_CUSTODY_AGGREGATED_RESULTS = {
     c2: 0,
     d1: 0,
     d2: 50,
+    g: 0,
+    f: 0,
+    e: 0,
     untiered: 50,
     totalCases: 50,
     numberOfType: 3 },
@@ -159,6 +171,9 @@ module.exports.LDU_CUSTODY_AGGREGATED_RESULTS = {
       c2: 0,
       d1: 0,
       d2: 50,
+      g: 0,
+      f: 0,
+      e: 0,
       untiered: 50,
       totalCases: 50,
       numberOfType: 3 } }

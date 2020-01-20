@@ -7,11 +7,6 @@ $(document).ready(function() {
       searching: true,
       info: false,
       "aaSorting": [],
-      columnDefs: [{
-        "width": "25%", 
-        "targets": 1,
-        orderable: true
-      }
-      ]
+      "ordering": false
     });    
 });
