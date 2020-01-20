@@ -55,70 +55,6 @@ const TEAM_CASELOAD = {
   }
 }
 
-const ORG_CASELOAD = {
-  title: 'Title',
-  subTitle: 'SubTitle',
-  breadcrumbs: [{}],
-  subNav: {},
-  caseloadDetails: {
-    overallCaseloadDetails: {
-      details: [
-        { name: 'Zoe Johnson' },
-        { name: 'Aaron George' },
-        { name: 'Bernard Bloggs' }
-      ],
-      detailsPercentages: [
-        { name: 'Zoe Johnson' },
-        { name: 'Aaron George' },
-        { name: 'Bernard Bloggs' }
-      ]
-    },
-    communityCaseloadDetails: {
-      details: [
-        { name: 'Zoe Johnson' },
-        { name: 'Aaron George' },
-        { name: 'Bernard Bloggs' }
-      ],
-      detailsPercentages: [
-        { name: 'Zoe Johnson' },
-        { name: 'Aaron George' },
-        { name: 'Bernard Bloggs' }
-      ]
-    },
-    custodyCaseloadDetails: {
-      details: [
-        { name: 'Zoe Johnson' },
-        { name: 'Aaron George' },
-        { name: 'Bernard Bloggs' }
-      ],
-      detailsPercentages: [
-        { name: 'Zoe Johnson' },
-        { name: 'Aaron George' },
-        { name: 'Bernard Bloggs' }
-      ]
-    },
-    licenseCaseloadDetails: {
-      details: [
-        { name: 'Zoe Johnson' },
-        { name: 'Aaron George' },
-        { name: 'Bernard Bloggs' }
-      ],
-      detailsPercentages: [
-        { name: 'Zoe Johnson' },
-        { name: 'Aaron George' },
-        { name: 'Bernard Bloggs' }
-      ]
-    },
-    overallTotalSummary: [
-      { name: 'Zoe Johnson' },
-      { name: 'Aaron George' },
-      { name: 'Bernard Bloggs' }
-    ],
-    custodyTotalSummary: 0,
-    communityTotalSummary: 0,
-    licenseTotalSummary: 0
-  }
-}
 const BASE_CASELOAD_DETAILS = {
   details: [
     {
@@ -151,13 +87,13 @@ const BASE_CASELOAD_DETAILS = {
     PO: { grade: 'PO', a: 95.65217391304348, b1: 98.7012987012987, b2: 98.30508474576271, c1: 65.55555555555556, c2: 27.68166089965398, d1: 12.5, d2: 3.571428571428571, e: 0, f: 0, g: 0, untiered: 0, totalCases: 66.0377358490566 },
     PSO: { grade: 'PSO', a: 4.3478260869565215, b1: 0.6493506493506493, b2: 1.3559322033898304, c1: 24.444444444444443, c2: 48.78892733564014, d1: 50, d2: 66.07142857142857, e: 0, f: 0, g: 0, untiered: 0, totalCases: 23.038728897715988 },
     TPO: { grade: 'TPO', a: 0, b1: 0, b2: 0, c1: 7, c2: 27, d1: 3, d2: 8, e: 0, f: 0, g: 1, untiered: 0, totalCases: 46 }
-  },
+  }
 }
 
 const LDU_CASELOAD = {
   title: 'Bexley, Bromley, Greenwich',
   subTitle: 'LDU Cluster',
-  breadcrumbs: [{ title: 'Bexley, Bromley, Greenwich', link: '/probation/ldu/645' }, { title: 'NPS London', link: '/probation/region/1'}, { title: 'HMPPS', link: '/probation/hmpps/0' }],
+  breadcrumbs: [{ title: 'Bexley, Bromley, Greenwich', link: '/probation/ldu/645' }, { title: 'NPS London', link: '/probation/region/1' }, { title: 'HMPPS', link: '/probation/hmpps/0' }],
   caseloadDetails: {
     overallCaseloadDetails: Object.assign({}, BASE_CASELOAD_DETAILS),
     communityCaseloadDetails: Object.assign({}, BASE_CASELOAD_DETAILS),
