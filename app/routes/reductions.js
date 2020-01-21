@@ -334,11 +334,15 @@ module.exports = function (router) {
         }
       }
 
-      return reductionsService.updateReduction(id, reductionId, reduction, workloadType)
-      .then(function () {
-        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions')
-      }).catch(function (error) {
-        next(error)
+      return reductionsService.getOldReductionForHistory(reductionId).then(function (oldReduction) {
+        return reductionsService.addOldReductionToHistory(oldReduction).then(function () {
+          return reductionsService.updateReduction(id, reductionId, reduction, workloadType)
+          .then(function () {
+            return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions')
+          }).catch(function (error) {
+            next(error)
+          })
+        })
       })
     })
     .catch(function (error) {

@@ -14,6 +14,8 @@ const reductionHelper = require('./helpers/reduction-helper')
 const workloadTypes = require('../../app/constants/workload-type')
 const createCourtReportsCalculationTask = require('./data/create-court-reports-calculation-task')
 const getLatestIdsForCourtReportsCalc = require('./data/get-latest-court-reports-staging-id-and-workload-report-id')
+const getOldReductionForHistory = require('./data/get-old-reduction-for-history')
+const insertOldReductionToHistory = require('./data/insert-old-reduction-to-history')
 
 module.exports.getReductions = function (id, organisationLevel, workloadType) {
   var result = {}
@@ -108,4 +110,12 @@ module.exports.getReductionByReductionId = function (reductionId) {
     reduction = getReductionById(reductionId)
   }
   return reduction
+}
+
+module.exports.getOldReductionForHistory = function (reductionId) {
+  return getOldReductionForHistory(reductionId)
+}
+
+module.exports.addOldReductionToHistory = function (reduction) {
+  return insertOldReductionToHistory(reduction)
 }
