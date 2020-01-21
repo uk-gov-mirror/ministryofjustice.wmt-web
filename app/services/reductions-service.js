@@ -16,6 +16,7 @@ const createCourtReportsCalculationTask = require('./data/create-court-reports-c
 const getLatestIdsForCourtReportsCalc = require('./data/get-latest-court-reports-staging-id-and-workload-report-id')
 const getOldReductionForHistory = require('./data/get-old-reduction-for-history')
 const insertOldReductionToHistory = require('./data/insert-old-reduction-to-history')
+const getReductionsHistory = require('./data/get-reductions-history')
 
 module.exports.getReductions = function (id, organisationLevel, workloadType) {
   var result = {}
@@ -118,4 +119,8 @@ module.exports.getOldReductionForHistory = function (reductionId) {
 
 module.exports.addOldReductionToHistory = function (reduction) {
   return insertOldReductionToHistory(reduction)
+}
+
+module.exports.getReductionsHistory = function (reductionId) {
+  return getReductionsHistory(reductionId)
 }

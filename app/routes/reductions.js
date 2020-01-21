@@ -158,20 +158,23 @@ module.exports = function (router) {
       .then(function (result) {
         return reductionsService.getReductionByReductionId(reductionId)
           .then(function (reduction) {
-            if (reduction !== undefined && reduction.workloadOwnerId !== id) {
-              reduction = undefined
-            }
-            return res.render('add-reduction', {
-              breadcrumbs: result.breadcrumbs,
-              linkId: id,
-              title: result.title,
-              subTitle: result.subTitle,
-              subNav: getSubNav(id, organisationLevel, req.path, workloadType),
-              referenceData: result.referenceData,
-              reduction: mapReductionToViewModel(reduction),
-              workloadType: workloadType,
-              userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-              authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+            return reductionsService.getReductionsHistory(reductionId).then(function (reductionsHistory) {
+              if (reduction !== undefined && reduction.workloadOwnerId !== id) {
+                reduction = undefined
+              }
+              return res.render('add-reduction', {
+                breadcrumbs: result.breadcrumbs,
+                linkId: id,
+                title: result.title,
+                subTitle: result.subTitle,
+                subNav: getSubNav(id, organisationLevel, req.path, workloadType),
+                referenceData: result.referenceData,
+                reduction: mapReductionToViewModel(reduction),
+                workloadType: workloadType,
+                userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+                authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
+                reductionsHistory: reductionsHistory
+              })
             })
           }).catch(function (error) {
             next(error)
