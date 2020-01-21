@@ -394,11 +394,15 @@ module.exports = function (router) {
       successType = '?deleted=true'
     }
 
-    return reductionsService.updateReductionStatus(id, reductionId, reductionStatus, workloadType)
-    .then(function () {
-      return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions' + successType)
-    }).catch(function (error) {
-      next(error)
+    return reductionsService.getOldReductionForHistory(reductionId).then(function (oldReduction) {
+      return reductionsService.addOldReductionToHistory(oldReduction).then(function () {
+        return reductionsService.updateReductionStatus(id, reductionId, reductionStatus, workloadType)
+        .then(function () {
+          return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions' + successType)
+        }).catch(function (error) {
+          next(error)
+        })
+      })
     })
   })
 
@@ -420,7 +424,6 @@ module.exports = function (router) {
     var reductionStartDate = [requestBody.redStartDay, requestBody.redStartMonth, requestBody.redStartYear]
     var reductionEndDate = [requestBody.redEndDay, requestBody.redEndMonth, requestBody.redEndYear]
     var reasonId = requestBody.reasonForReductionId
-    console.log('reasonId ' + reasonId)
     return new Reduction(reasonId, requestBody.reductionHours, reductionStartDate, reductionEndDate, requestBody.notes, reductionReason, submitterId)
   }
 

@@ -22,6 +22,12 @@ module.exports = function (reductionId) {
     .join('reduction_reason', 'reductions_history.reduction_reason_id', 'reduction_reason.id')
     .where(whereObject)
     .columns(columns)
+    .unionAll(function () {
+      this.first(columns)
+        .from('reductions').join('users', 'reductions.user_id', 'users.id')
+        .join('reduction_reason', 'reductions.reduction_reason_id', 'reduction_reason.id')
+        .where('reductions.id', reductionId)
+    })
     .then(function (reductions) {
       reductions.forEach(function (reduction) {
         reduction.reductionStartDate = dateFormatter.formatDate(reduction.reductionStartDate, 'DD/MM/YYYY')
