@@ -20,7 +20,6 @@ module.exports = function (id, organisationalUnitName, currentPath, workloadType
       break
 
     case workloadConstants.PROBATION:
-    case workloadConstants.OMIC:
       if (isOffenderManager) {
         navigation.push(new Link('Overview', baseLink + '/overview'))
         navigation.push(new Link('Capacity', baseLink + '/caseload-capacity'))
@@ -41,6 +40,9 @@ module.exports = function (id, organisationalUnitName, currentPath, workloadType
         }
       }
       break
+    case workloadConstants.OMIC:
+      navigation.push(new Link('OMIC Overview', baseLink + '/overview'))
+      navigation.push(new Link('OMIC Caseload', baseLink + '/caseload'))
   }
 
   navigation[0].active = true

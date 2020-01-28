@@ -123,7 +123,7 @@ var renderOverview = function (req, res, next) {
     lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return overviewPromise.then(function (result) {
       result.date = lastUpdated
-      return res.render('overview', {
+      return res.render('omic-overview', {
         title: result.title,
         subTitle: result.subTitle,
         breadcrumbs: result.breadcrumbs,

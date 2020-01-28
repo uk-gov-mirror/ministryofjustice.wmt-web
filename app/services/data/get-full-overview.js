@@ -12,9 +12,9 @@ module.exports = function (id, type, workloadType) {
     whereClause = 'WHERE ' + orgUnit.name + '_id = ' + id
   }
 
-  if (workloadType === 'omic') {
-    table = 'omic_' + table
-  }
+  // if (workloadType === 'omic') {
+  //   table = 'omic_' + table
+  // }
 
   var selectColumns = [
     'ldu_name AS lduCluster',

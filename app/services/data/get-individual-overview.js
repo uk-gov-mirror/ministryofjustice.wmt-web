@@ -8,9 +8,9 @@ module.exports = function (id, workloadType) {
     whereClause = ' WHERE workload_owner_id = ' + id
   }
 
-  if (workloadType === 'omic') {
-    table = 'omic_' + table
-  }
+  // if (workloadType === 'omic') {
+  //   table = 'omic_' + table
+  // }
 
   var selectColumns = [
     'grade_code AS grade',

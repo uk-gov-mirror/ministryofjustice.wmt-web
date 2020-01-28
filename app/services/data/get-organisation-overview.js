@@ -7,9 +7,9 @@ module.exports = function (id, type, workloadType) {
   var table = orgUnit.overviewView
   var whereClause = ''
 
-  if (workloadType === 'omic') {
-    table = 'omic_' + table
-  }
+  // if (workloadType === 'omic') {
+  //   table = 'omic_' + table
+  // }
 
   if (id !== undefined) {
     whereClause = ' WHERE id = ' + id
