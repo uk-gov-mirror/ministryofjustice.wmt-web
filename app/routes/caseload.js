@@ -10,6 +10,7 @@ const workloadTypes = require('../../app/constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const caseloadTotaller = require('../helpers/caseload-totaller')
+const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
 var lastUpdated
 
 module.exports = function (router) {
@@ -56,7 +57,12 @@ module.exports = function (router) {
         })
       })
     }).catch(function (error) {
-      next(error)
+      if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
+        var subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+        renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
+      } else {
+        next(error)
+      }
     })
   })
 
