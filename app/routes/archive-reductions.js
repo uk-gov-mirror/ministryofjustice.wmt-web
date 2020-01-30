@@ -14,6 +14,7 @@ const renderResults = require('../helpers/render-results')
 const viewTemplate = 'reduction-archive-data'
 const title = 'Archived Reductions'
 const heDecode = require('he')
+const getReductionsHistory = require('../services/data/get-reductions-history')
 
 var archiveDateRange
 
@@ -204,6 +205,30 @@ module.exports = function (router) {
       res.send(exportCsv.csv)
     }).catch(function (error) {
       next(error)
+    })
+  })
+
+  router.post('/archive-data/reductions-history', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+      authorisation.hasRole(req, [roles.DATA_ADMIN])
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      } else if (error instanceof Forbidden) {
+        return res.status(error.statusCode).render(error.redirect, {
+          heading: messages.ACCESS_DENIED,
+          message: messages.ADMIN_ROLES_REQUIRED
+        })
+      }
+    }
+
+    var reductionId = heDecode.decode(req.body['reductionId'])
+
+    return getReductionsHistory(reductionId).then(function (reductionsHistory) {
+      return res.json({
+        reductionsHistory: reductionsHistory
+      })
     })
   })
 }

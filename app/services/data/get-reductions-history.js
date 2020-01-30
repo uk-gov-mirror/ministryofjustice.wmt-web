@@ -2,11 +2,6 @@ const knex = require('../../../knex').web
 const dateFormatter = require('../date-formatter')
 
 module.exports = function (reductionId) {
-  var whereObject = {}
-  if (reductionId !== undefined) {
-    whereObject.reduction_id = reductionId
-  }
-
   var columns = [
     'reduction_reason.reason_short_name AS reasonShortName',
     'hours',
@@ -20,13 +15,13 @@ module.exports = function (reductionId) {
   return knex('reductions_history')
     .join('users', 'reductions_history.user_id', 'users.id')
     .join('reduction_reason', 'reductions_history.reduction_reason_id', 'reduction_reason.id')
-    .where(whereObject)
-    .columns(columns)
+    .whereIn('reductions_history.reduction_id', reductionId)
+    .columns(columns.concat(['reductions_history.reduction_id AS reductionId']))
     .unionAll(function () {
-      this.first(columns)
+      this.columns(columns.concat(['reductions.id AS reductionId']))
         .from('reductions').join('users', 'reductions.user_id', 'users.id')
         .join('reduction_reason', 'reductions.reduction_reason_id', 'reduction_reason.id')
-        .where('reductions.id', reductionId)
+        .whereIn('reductions.id', reductionId)
     })
     .then(function (reductions) {
       reductions.forEach(function (reduction) {

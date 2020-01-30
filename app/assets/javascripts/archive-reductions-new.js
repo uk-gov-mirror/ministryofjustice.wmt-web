@@ -1,3 +1,4 @@
+var search
 $.fn.dataTable.moment = function ( format, locale ) {
   var types = $.fn.dataTable.ext.type;
 
@@ -19,44 +20,81 @@ function cleanColumnOutput (data, type, row) {
   return data.replace(unsafeOutputPattern, '')
 }
 // https://datatables.net/examples/api/row_details.html
-function format ( d ) {
-  // `d` is the original data object for the row
-  return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-      '<tr>'+
+async function format ( d, row, tr ) {
+  search.reductionId = d.reductionId
+  console.log(search)
+  $.post("/archive-data/reductions-history",
+  search,
+  function(reductionsHistory, status){
+    console.log(status);
+    console.log(reductionsHistory.reductionsHistory);
+    var nestedTable = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+    '<tr>'+
           '<th>Hours</th>'+
           '<th>Reason</th>'+
           '<th>Comments</th>'+
           '<th>Start Date</th>'+
           '<th>End Date</th>'+
-          '<th>Action</th>'+
+          '<th>Status</th>'+
           '<th>Action Date</th>'+
           '<th>User</th>'+
-      '</tr>'+
+      '</tr>'
+    reductionsHistory.reductionsHistory.forEach(function (history) {
+      console.log(history)
+      nestedTable = nestedTable +
       '<tr>'+
-          '<td>1.85</td>'+
-          '<td>SPOC Lead</td>'+
-          '<td></td>'+
-          '<td>01/01/2019</td>'+
-          '<td>01/06/2019</td>'+
-          '<td>Reduction Edited</td>'+
-          '<td>12/12/2018</td>'+
-          '<td>Joe Bloggs</td>'+
-      '</tr>'+
-      '<tr>'+
-          '<td>29.6</td>'+
-          '<td>PQiP21 0-6</td>'+
-          '<td></td>'+
-          '<td>01/05/2019</td>'+
-          '<td>01/11/2019</td>'+
-          '<td>Reduction Edited</td>'+
-          '<td>04/03/2019</td>'+
-          '<td>Joe Bloggs</td>'+
-      '</tr>'+
-  '</table>';
+          '<td>' + history.hours +'</td>'+
+          '<td>' + history.reasonShortName +'</td>'+
+          '<td>' + history.notes +'</td>'+
+          '<td>' + history.reductionStartDate +'</td>'+
+          '<td>' + history.reductionEndDate +'</td>'+
+          '<td>' + history.status +'</td>'+
+          '<td>' + history.updatedDate +'</td>'+
+          '<td>' + history.name +'</td>'+
+      '</tr>'
+    })
+    nestedTable = nestedTable + '</table>';
+    row.child( nestedTable ).show();
+    tr.addClass('shown');
+    return nestedTable
+  });
+  // `d` is the original data object for the row
+  // return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+  //     '<tr>'+
+  //         '<th>Hours</th>'+
+  //         '<th>Reason</th>'+
+  //         '<th>Comments</th>'+
+  //         '<th>Start Date</th>'+
+  //         '<th>End Date</th>'+
+  //         '<th>Action</th>'+
+  //         '<th>Action Date</th>'+
+  //         '<th>User</th>'+
+  //     '</tr>'+
+  //     '<tr>'+
+  //         '<td>1.85</td>'+
+  //         '<td>SPOC Lead</td>'+
+  //         '<td></td>'+
+  //         '<td>01/01/2019</td>'+
+  //         '<td>01/06/2019</td>'+
+  //         '<td>Reduction Edited</td>'+
+  //         '<td>12/12/2018</td>'+
+  //         '<td>Joe Bloggs</td>'+
+  //     '</tr>'+
+  //     '<tr>'+
+  //         '<td>29.6</td>'+
+  //         '<td>PQiP21 0-6</td>'+
+  //         '<td></td>'+
+  //         '<td>01/05/2019</td>'+
+  //         '<td>01/11/2019</td>'+
+  //         '<td>Reduction Edited</td>'+
+  //         '<td>04/03/2019</td>'+
+  //         '<td>Joe Bloggs</td>'+
+  //     '</tr>'+
+  // '</table>';
 }
 
 $(document).ready(function () {
-  var search = document.getElementById('rawQuery').value
+  search = document.getElementById('rawQuery').value
   if (search) {
     search = JSON.parse(search)
   }
@@ -72,7 +110,7 @@ $(document).ready(function () {
       processing: true,
       serverSide: true,
       searching: false,
-      lengthChange: false,
+      lengthChange: true,
       order: [],
       ajax: {
         url: dataReference,
@@ -126,7 +164,7 @@ $(document).ready(function () {
     })
   }
   // Add event listener for opening and closing details
-  $('#reduction-archive-table tbody').on('click', 'td.details-control', function () {
+  $('#reduction-archive-table tbody').on('click', 'td.details-control', async function () {
     var tr = $(this).closest('tr');
     var row = table.row( tr );
 
@@ -134,11 +172,15 @@ $(document).ready(function () {
         // This row is already open - close it
         row.child.hide();
         tr.removeClass('shown');
+        return Promise.resolve()
     }
     else {
         // Open this row
-        row.child( format(row.data()) ).show();
-        tr.addClass('shown');
+        format(row.data(), row, tr)
+        // .then(function (child) {
+        //   row.child( child ).show();
+        //   tr.addClass('shown');
+        // })
     }
 } );
 })
