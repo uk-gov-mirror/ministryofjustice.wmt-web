@@ -17,6 +17,7 @@ const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const getCaseDetailsView = require('../services/get-case-details-view')
 const getBreadcrumbs = require('../services/get-breadcrumbs')
+const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
 
 var lastUpdated
 
@@ -92,7 +93,12 @@ module.exports = function (router) {
         })
       })
     }).catch(function (error) {
-      next(error)
+      if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
+        var subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+        renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
+      } else {
+        next(error)
+      }
     })
   })
 
