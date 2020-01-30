@@ -13,13 +13,13 @@ module.exports = function (reductionId) {
     'users.name'
   ]
   return knex('reductions_history')
-    .join('users', 'reductions_history.user_id', 'users.id')
+    .leftJoin('users', 'reductions_history.user_id', 'users.id')
     .join('reduction_reason', 'reductions_history.reduction_reason_id', 'reduction_reason.id')
     .whereIn('reductions_history.reduction_id', reductionId)
     .columns(columns.concat(['reductions_history.reduction_id AS reductionId']))
     .unionAll(function () {
       this.columns(columns.concat(['reductions.id AS reductionId']))
-        .from('reductions').join('users', 'reductions.user_id', 'users.id')
+        .from('reductions').leftJoin('users', 'reductions.user_id', 'users.id')
         .join('reduction_reason', 'reductions.reduction_reason_id', 'reduction_reason.id')
         .whereIn('reductions.id', reductionId)
     })
