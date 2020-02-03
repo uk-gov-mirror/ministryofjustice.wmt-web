@@ -82,6 +82,18 @@ const failureDataToPost = {
   workloadType: workloadType.COURT_REPORTS
 }
 
+const reductionsHistory = [{
+  reasonShortName: 'SPOC lead',
+  hours: 1.8,
+  notes: '',
+  reductionStartDate: '11/06/2018',
+  reductionEndDate: '21/06/2021',
+  status: 'ACTIVE',
+  updatedDate: '16/12/2019 17:50',
+  name: '',
+  reductionId: 32716
+}]
+
 const returnedId = 1
 
 var app
@@ -116,7 +128,7 @@ var initaliseApp = function (middleware) {
   reductionsService.updateReductionStatus = sinon.stub()
   reductionsService.getReductionByReductionId = sinon.stub()
   reductionsService.getOldReductionForHistory = sinon.stub()
-  reductionsService.insertOldReductionToHistory = sinon.stub()
+  reductionsService.addOldReductionToHistory = sinon.stub()
   reductionsService.getReductionsHistory = sinon.stub()
   route = proxyquire('../../../app/routes/reductions', {
     '../services/data/get-last-updated': getLastUpdated,
@@ -248,9 +260,9 @@ describe('court-reports reductions route', function () {
     it('should post the correct data and respond with 200 for existing reduction', function () {
       reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
       reductionsService.updateReduction.resolves(returnedId)
-      reductionsService.getOldReductionForHistory.resolves()
-      reductionsService.insertOldReductionToHistory.resolves()
-      reductionsService.getReductionsHistory.resolves()
+      reductionsService.getReductionsHistory.resolves(reductionsHistory)
+      reductionsService.getOldReductionForHistory.resolves(reductionsHistory[0])
+      reductionsService.addOldReductionToHistory.resolves()
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(successDataToPost)
@@ -263,7 +275,7 @@ describe('court-reports reductions route', function () {
       reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
       reductionsService.updateReduction.resolves(returnedId)
       reductionsService.getOldReductionForHistory.resolves()
-      reductionsService.insertOldReductionToHistory.resolves()
+      reductionsService.addOldReductionToHistory.resolves()
       reductionsService.getReductionsHistory.resolves()
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
