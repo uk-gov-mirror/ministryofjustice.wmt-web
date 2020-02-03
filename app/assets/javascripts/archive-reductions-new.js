@@ -21,76 +21,49 @@ function cleanColumnOutput (data, type, row) {
 }
 // https://datatables.net/examples/api/row_details.html
 async function format ( d, row, tr ) {
-  search.reductionId = d.reductionId
-  console.log(search)
-  $.post("/archive-data/reductions-history",
-  search,
-  function(reductionsHistory, status){
-    console.log(status);
-    console.log(reductionsHistory.reductionsHistory);
-    var nestedTable = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-    '<tr>'+
-          '<th>Hours</th>'+
-          '<th>Reason</th>'+
-          '<th>Comments</th>'+
-          '<th>Start Date</th>'+
-          '<th>End Date</th>'+
-          '<th>Status</th>'+
-          '<th>Action Date</th>'+
-          '<th>User</th>'+
-      '</tr>'
-    reductionsHistory.reductionsHistory.forEach(function (history) {
-      console.log(history)
-      nestedTable = nestedTable +
+  row.child('').show();
+  tr.addClass('shown');
+  var nestedTable = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
       '<tr>'+
-          '<td>' + history.hours +'</td>'+
-          '<td>' + history.reasonShortName +'</td>'+
-          '<td>' + history.notes +'</td>'+
-          '<td>' + history.reductionStartDate +'</td>'+
-          '<td>' + history.reductionEndDate +'</td>'+
-          '<td>' + history.status +'</td>'+
-          '<td>' + history.updatedDate +'</td>'+
-          '<td>' + history.name +'</td>'+
-      '</tr>'
-    })
-    nestedTable = nestedTable + '</table>';
+            '<th>Hours</th>'+
+            '<th>Reason</th>'+
+            '<th>Comments</th>'+
+            '<th>Start Date</th>'+
+            '<th>End Date</th>'+
+            '<th>Status</th>'+
+            '<th>Action Date</th>'+
+            '<th>User</th>'+
+        '</tr>'
+  search.reductionId = d.reductionId
+  if (d.reductionId) {
+    $.post("/archive-data/reductions-history",
+    search,
+    function(reductionsHistory, status){      
+      reductionsHistory.reductionsHistory.forEach(function (history) {
+        nestedTable = nestedTable +
+        '<tr>'+
+            '<td>' + history.hours +'</td>'+
+            '<td>' + history.reasonShortName +'</td>'+
+            '<td>' + history.notes +'</td>'+
+            '<td>' + history.reductionStartDate +'</td>'+
+            '<td>' + history.reductionEndDate +'</td>'+
+            '<td>' + history.status +'</td>'+
+            '<td>' + history.updatedDate +'</td>'+
+            '<td>' + history.name +'</td>'+
+        '</tr>'
+      })
+      nestedTable = nestedTable + '</table>';
+      row.child( nestedTable ).show();
+      tr.addClass('shown');
+      return nestedTable
+    });
+  } else {
+    nestedTable = nestedTable + 
+    '<tr><td colspan="8">No history is available for this reduction</td></tr></table>'
     row.child( nestedTable ).show();
     tr.addClass('shown');
     return nestedTable
-  });
-  // `d` is the original data object for the row
-  // return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-  //     '<tr>'+
-  //         '<th>Hours</th>'+
-  //         '<th>Reason</th>'+
-  //         '<th>Comments</th>'+
-  //         '<th>Start Date</th>'+
-  //         '<th>End Date</th>'+
-  //         '<th>Action</th>'+
-  //         '<th>Action Date</th>'+
-  //         '<th>User</th>'+
-  //     '</tr>'+
-  //     '<tr>'+
-  //         '<td>1.85</td>'+
-  //         '<td>SPOC Lead</td>'+
-  //         '<td></td>'+
-  //         '<td>01/01/2019</td>'+
-  //         '<td>01/06/2019</td>'+
-  //         '<td>Reduction Edited</td>'+
-  //         '<td>12/12/2018</td>'+
-  //         '<td>Joe Bloggs</td>'+
-  //     '</tr>'+
-  //     '<tr>'+
-  //         '<td>29.6</td>'+
-  //         '<td>PQiP21 0-6</td>'+
-  //         '<td></td>'+
-  //         '<td>01/05/2019</td>'+
-  //         '<td>01/11/2019</td>'+
-  //         '<td>Reduction Edited</td>'+
-  //         '<td>04/03/2019</td>'+
-  //         '<td>Joe Bloggs</td>'+
-  //     '</tr>'+
-  // '</table>';
+  }
 }
 
 $(document).ready(function () {
@@ -98,7 +71,6 @@ $(document).ready(function () {
   if (search) {
     search = JSON.parse(search)
   }
-  console.log(search)
 
   var startSearching = document.getElementById('startSearching').value
   if (startSearching === 'true') {
@@ -169,18 +141,14 @@ $(document).ready(function () {
     var row = table.row( tr );
 
     if ( row.child.isShown() ) {
-        // This row is already open - close it
-        row.child.hide();
-        tr.removeClass('shown');
-        return Promise.resolve()
+      // This row is already open - close it
+      row.child.hide();
+      tr.removeClass('shown');
+      return Promise.resolve()
     }
     else {
-        // Open this row
-        format(row.data(), row, tr)
-        // .then(function (child) {
-        //   row.child( child ).show();
-        //   tr.addClass('shown');
-        // })
+      // Open this row
+      format(row.data(), row, tr)
     }
-} );
+  });
 })

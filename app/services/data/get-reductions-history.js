@@ -28,6 +28,12 @@ module.exports = function (reductionId) {
         reduction.reductionStartDate = dateFormatter.formatDate(reduction.reductionStartDate, 'DD/MM/YYYY')
         reduction.reductionEndDate = dateFormatter.formatDate(reduction.reductionEndDate, 'DD/MM/YYYY')
         reduction.updatedDate = dateFormatter.formatDate(reduction.updatedDate, 'DD/MM/YYYY HH:mm')
+        if (!reduction.notes) {
+          reduction.notes = ''
+        }
+        if (!reduction.name) {
+          reduction.name = ''
+        }
       })
       return reductions
     })
