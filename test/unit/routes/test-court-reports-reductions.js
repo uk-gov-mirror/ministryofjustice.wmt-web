@@ -115,6 +115,9 @@ var initaliseApp = function (middleware) {
   reductionsService.updateReduction = sinon.stub()
   reductionsService.updateReductionStatus = sinon.stub()
   reductionsService.getReductionByReductionId = sinon.stub()
+  reductionsService.getOldReductionForHistory = sinon.stub()
+  reductionsService.insertOldReductionToHistory = sinon.stub()
+  reductionsService.getReductionsHistory = sinon.stub()
   route = proxyquire('../../../app/routes/reductions', {
     '../services/data/get-last-updated': getLastUpdated,
     '../services/reductions-service': reductionsService,
@@ -187,6 +190,7 @@ describe('court-reports reductions route', function () {
     it('should respond with 200 and the correct data and an existing reduction', function () {
       reductionsService.getAddReductionsRefData.resolves(addReduction)
       reductionsService.getReductionByReductionId.resolves(existingReduction)
+      reductionsService.getReductionsHistory.resolves()
       var url = EDIT_REDUCTION_PAGE_URL + '?reductionId=' + existingReduction.id
       return superTest(app)
       .get(url)
@@ -244,6 +248,8 @@ describe('court-reports reductions route', function () {
     it('should post the correct data and respond with 200 for existing reduction', function () {
       reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
       reductionsService.updateReduction.resolves(returnedId)
+      reductionsService.getOldReductionForHistory.resolves()
+      reductionsService.insertOldReductionToHistory.resolves()
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(successDataToPost)
@@ -255,6 +261,8 @@ describe('court-reports reductions route', function () {
     it('should post incorrect data and validation errors should be populated', function () {
       reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
       reductionsService.updateReduction.resolves(returnedId)
+      reductionsService.getOldReductionForHistory.resolves()
+      reductionsService.insertOldReductionToHistory.resolves()
       return superTest(app)
         .post(EDIT_REDUCTION_POST_URL)
         .send(failureDataToPost)
