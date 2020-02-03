@@ -7,6 +7,7 @@ module.exports = function (archiveDateRange, extraCriteria) {
   }
 
   var selectColumns = [
+    'reduction_id AS reductionId',
     'om_name AS omName',
     'hours_reduced AS hoursReduced',
     'comments',
