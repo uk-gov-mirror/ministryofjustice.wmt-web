@@ -8,6 +8,7 @@ const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
+const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
 
 var lastUpdated
 
@@ -75,6 +76,11 @@ var renderOverview = function (req, res, next) {
       })
     })
   }).catch(function (error) {
-    next(error)
+    if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
+      var subNav = getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+      renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
+    } else {
+      next(error)
+    }
   })
 }

@@ -35,7 +35,8 @@ module.exports = function (router) {
       res.render('search-for-officer', {
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
         authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
-        results: result
+        results: result,
+        surname: req.body.surnameBox
       })
     })
   })

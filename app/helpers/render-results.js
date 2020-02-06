@@ -1,6 +1,6 @@
 const Link = require('../services/domain/link')
 
-module.exports = function (page, title, res, errors, results, authorisedUserRole, dateRange, extraSearchCriteria) {
+module.exports = function (page, title, res, errors, results, authorisedUserRole, dateRange, extraSearchCriteria, startSearching = false, stringifiedBody = '') {
   var breadcrumbs = [
     getTopLink(title),
     new Link('Archive Data Options', '/archive-options'),
@@ -15,7 +15,9 @@ module.exports = function (page, title, res, errors, results, authorisedUserRole
     userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
     noAuth: authorisedUserRole.noAuth,  // used by proposition-link for the admin role
     dateRange: dateRange,
-    extraSearchCriteria: extraSearchCriteria
+    extraSearchCriteria: extraSearchCriteria,
+    stringifiedBody: stringifiedBody,
+    startSearching: startSearching
   })
 }
 

@@ -8,6 +8,9 @@ const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
 const Forbidden = require('../services/errors/authentication-error').Forbidden
+const User = require('../services/domain/user')
+const ValidationError = require('../services/errors/validation-error')
+const log = require('../logger')
 
 module.exports = function (router) {
   router.get('/admin/user', function (req, res) {
@@ -74,6 +77,7 @@ module.exports = function (router) {
       return res.render('user-rights', {
         title: 'User rights',
         username: username,
+        fullname: role.fullname,
         rights: role.role,
         breadcrumbs: breadcrumbs,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
@@ -101,13 +105,38 @@ module.exports = function (router) {
     var rights = req.body.rights
     var username = req.params.username
     var loggedInUsername = req.user.username
+
+    var thisUser
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    try {
+      thisUser = new User(req.body.fullname)
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        var breadcrumbs = [
+          new Link('User Rights', '/admin/user-rights'),
+          new Link('Admin', '/admin')
+        ]
+        return res.render('user-rights', {
+          title: 'User rights',
+          username: username,
+          fullname: req.body.fullname,
+          rights: req.body.rights,
+          errors: error.validationErrors,
+          breadcrumbs: breadcrumbs,
+          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        })
+      } else {
+        next(error)
+      }
+    }
+
     if (rights === roles.STAFF) {
       removeUserRole(username, next)
     } else {
-      addUpdateUserRole(username, rights, loggedInUsername)
+      addUpdateUserRole(username, rights, loggedInUsername, thisUser.name)
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return res.render('user', {
       title: 'User rights',
       userRights: { username: username, rights: rights },
@@ -129,20 +158,23 @@ var removeUserRole = function (username, next) {
   })
 }
 
-var addUpdateUserRole = function (username, rights, loggedInUsername) {
+var addUpdateUserRole = function (username, rights, loggedInUsername, fullname) {
   return userRoleService.getUserByUsername(loggedInUsername).then(function (result) {
     var loggedInUser = result
     return userRoleService.getUserByUsername(userRoleService.removeDomainFromUsername(username)).then(function (result) {
       var user = result
-      return userRoleService.getRole(rights).then(function (role) {
-        return userRoleService.updateUserRole(user.id, role.id, loggedInUser.id).then(function (result) {
-          return result
+      return userRoleService.updateUser(user.id, fullname).then(function () {
+        return userRoleService.getRole(rights).then(function (role) {
+          return userRoleService.updateUserRole(user.id, role.id, loggedInUser.id).then(function (result) {
+            return result
+          })
         })
       })
     }).catch(function (noUserExist) {
+      log.error(noUserExist)
       return userRoleService.getRole(rights).then(function (result) {
         var role = result
-        return userRoleService.addUser(userRoleService.removeDomainFromUsername(username)).then(function (userId) {
+        return userRoleService.addUser(userRoleService.removeDomainFromUsername(username), fullname).then(function (userId) {
           var newUserRole = new UserRole(userId, role.id, new Date(), loggedInUser.id)
           return userRoleService.addUserRole(newUserRole).then(function (result) {
             return result

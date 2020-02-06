@@ -320,16 +320,16 @@
                 {% if i === 0 %}
                 <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
                 {% endif %}
-                <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>            
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ member.grades[i].a | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ member.grades[i].b1 | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b2">{{ member.grades[i].b2 | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ member.grades[i].c1 | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ member.grades[i].c2 | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ member.grades[i].d1 | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ member.grades[i].d2 | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ member.grades[i].untiered | round(1) }}</td>   
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_overall" >{{ member.grades[i].totalCases | round(1) }}</td>              
+                <td class="align-centre {% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>
+                <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ member.grades[i].a | round(1) }}</td>
+                <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ member.grades[i].b1 | round(1) }}</td>
+                <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b2">{{ member.grades[i].b2 | round(1) }}</td>
+                <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ member.grades[i].c1 | round(1) }}</td>
+                <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ member.grades[i].c2 | round(1) }}</td>
+                <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ member.grades[i].d1 | round(1) }}</td>
+                <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ member.grades[i].d2 | round(1) }}</td>
+                <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ member.grades[i].untiered | round(1) }}</td>
+                <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_overall" >{{ member.grades[i].totalCases | round(1) }}</td>
               </tr>
             {% endfor %}
             {% endfor %}
@@ -338,16 +338,16 @@
             <tr>
                 <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name">Total</td>
                 {% for grade, total in caseType.array.totals %}
-                <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ total.a  | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ total.b1 | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b2">{{ total.b2 | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ total.c1 | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ total.c2 | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ total.d1 | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ total.d2 | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ total.untiered | round(1) }}</td>   
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total" >{{ total.totalCases | round(1) }}</td>   
+                <td class="align-centre {% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_a">{{ total.a  | round(1) }}</td>
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b1">{{ total.b1 | round(1) }}</td>
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_b2">{{ total.b2 | round(1) }}</td>
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ total.c1 | round(1) }}</td>
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ total.c2 | round(1) }}</td>
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ total.d1 | round(1) }}</td>
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ total.d2 | round(1) }}</td>
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ total.untiered | round(1) }}</td>   
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total" >{{ total.totalCases | round(1) }}</td>   
             </tr>
             <tr>
           {% endfor %}
@@ -371,27 +371,27 @@
           </thead>
           <tbody class="">
             {% for member in caseType.array.details %}
-            {% for i in range(0, member.grades.length) %}
-              <tr>
-                {% if i === 0 %}
-                <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
-                {% endif %}
-                <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.grades[i].e | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ member.grades[i].f | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ member.grades[i].g | round(1) }}</td>           
-              </tr>
-            {% endfor %}
+              {% for i in range(0, member.grades.length) %}
+                <tr>
+                  {% if i === 0 %}
+                  <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+                  {% endif %}
+                  <td class="align-centre {% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>
+                  <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.grades[i].e | round(1) }}</td>
+                  <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ member.grades[i].f | round(1) }}</td>
+                  <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ member.grades[i].g | round(1) }}</td>           
+                </tr>
+              {% endfor %}
             {% endfor %}
           </tbody>
           <tfoot>
             <tr>
                 <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name">Total</td>
                 {% for grade, total in caseType.array.totals %}
-                <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ total.e | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ total.f | round(1) }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ total.g | round(1) }}</td>
+                <td class="align-centre {% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ total.e | round(1) }}</td>
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ total.f | round(1) }}</td>
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ total.g | round(1) }}</td>
             </tr>
             <tr>
           {% endfor %}

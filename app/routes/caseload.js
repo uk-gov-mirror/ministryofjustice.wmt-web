@@ -9,7 +9,8 @@ const Unauthorized = require('../services/errors/authentication-error').Unauthor
 const workloadTypes = require('../../app/constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
-
+const caseloadTotaller = require('../helpers/caseload-totaller')
+const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
 var lastUpdated
 
 module.exports = function (router) {
@@ -56,7 +57,12 @@ module.exports = function (router) {
         })
       })
     }).catch(function (error) {
-      next(error)
+      if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
+        var subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+        renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
+      } else {
+        next(error)
+      }
     })
   })
 
@@ -120,10 +126,13 @@ module.exports = function (router) {
       details[0].totalsRow = details[0].totalSummary[0].totals
       details[0].totalSummary.sort(function (a, b) { return a.name.localeCompare(b.name) })
       details[1].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      caseloadTotaller(details[1].array)
       details[1].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
       details[2].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      caseloadTotaller(details[2].array)
       details[2].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
       details[3].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
+      caseloadTotaller(details[3].array)
       details[3].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
     } else if (organisationLevel === organisationUnitConstants.TEAM.name) {
       details[0].array.sort(function (a, b) { return a.name.localeCompare(b.name) })

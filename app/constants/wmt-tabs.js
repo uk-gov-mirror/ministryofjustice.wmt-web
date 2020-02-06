@@ -17,6 +17,8 @@ module.exports = {
     CASE_DETAILS_EXPORT: 'Case Details Export',
     GROUP_SUPERVISION_EXPORT: 'Group Supervision Export',
     CMS_EXPORT: 'CMS Export',
-    SUSPENDED_LIFERS_EXPORT: 'Suspended Lifers'
+    WORKLOAD_PERCENTAGE_EXPORT: 'Percentage Workload Breakdown Export',
+    SUSPENDED_LIFERS_EXPORT: 'Suspended Lifers',
+    EXPIRING_REDUCTIONS: 'Expiring Reductions'
   }
 }
