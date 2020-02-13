@@ -73,3 +73,7 @@ tr.shown td.details-control {
 
 @import '_vendor/dataTable';
 @import '_vendor/button';
+
+#content, #global-header-bar, #global-cookie-message p, #footer .footer-wrapper {
+  max-width: 1100px;
+}
