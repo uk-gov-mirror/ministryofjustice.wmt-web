@@ -1,5 +1,6 @@
 const knex = require('../../../knex').web
 const getWorkloadPointsExport = require('./get-workload-points-export')
+// const groupCaseReferenceNumbers = require('../helpers/group-case-reference-numbers')
 
 module.exports = function (id, type) {
   var table = 'case_details_export_view'
@@ -27,6 +28,7 @@ module.exports = function (id, type) {
         whereString)
       .then(function (results) {
         caseDetails = results
+        // groupCaseReferenceNumbers(results)
         return getWorkloadPointsExport().then(function (workloadPoints) {
           return {results: caseDetails, workloadPoints: workloadPoints}
         })
