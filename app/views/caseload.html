@@ -47,7 +47,7 @@
           <thead>
             <tr>
               <th colspan="2" id="{{caseType.displayName}}_om">{{ childOrganisationLevelDisplayText }}</th>
-              <th colspan="9" id="{{caseType.displayName}}_tiers">Case tiers</th>
+              <th colspan="12" id="{{caseType.displayName}}_tiers">Case tiers</th>
             </tr>
             <tr>
               <th id="{{caseType.displayName}}_name">Name</th>
@@ -59,6 +59,9 @@
               <th id="{{caseType.displayName}}_c2">C2</th>
               <th id="{{caseType.displayName}}_d1">D1</th>
               <th id="{{caseType.displayName}}_d2">D2</th>
+              <th id="{{caseType.displayName}}_e">E</th>
+              <th id="{{caseType.displayName}}_f">F</th>
+              <th id="{{caseType.displayName}}_g">G</th>
               <th id="{{caseType.displayName}}_untiered">Untiered</th>              
               <th id="{{caseType.displayName}}_total">Total</th>
             </tr>
@@ -76,6 +79,9 @@
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ member.c2 }}</td>
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ member.d1 }}</td>
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ member.d2 }}</td>
+                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.e }}</td>
+                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ member.f }}</td>
+                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ member.g }}</td>
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ member.untiered }}</td>                
                 <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total">{{ member.totalCases }}</td>
               </tr>
@@ -90,47 +96,12 @@
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ caseType.array.totals.c1 | round(1) }}</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ caseType.array.totals.c2 | round(1) }}</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ caseType.array.totals.d1 | round(1) }}</td>
-              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ caseType.array.totals.d2 | round(1) }}</td>
-              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ caseType.array.totals.untiered | round(1) }}</td>   
-              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total" >{{ caseType.array.totals.overall | round(1) }}</td>   
-            </tr>
-          </tfoot>
-        </table>
-
-        <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by tier - E, F and G cases</h3>
-
-        <table class="sln-table-caseload-{{caseType.displayName.toLowerCase()}} data-table">
-          <thead>
-            <tr>
-              <th colspan="2" id="{{caseType.displayName}}_om">{{ childOrganisationLevelDisplayText }}</th>
-              <th colspan="3" id="{{caseType.displayName}}_tiers">Case tiers</th>
-            </tr>
-            <tr>
-              <th id="{{caseType.displayName}}_name">Name</th>
-              <th id="{{caseType.displayName}}_grade">Grade</th>
-              <th id="{{caseType.displayName}}_e">E</th>
-              <th id="{{caseType.displayName}}_f">F</th>
-              <th id="{{caseType.displayName}}_g">G</th>
-            </tr>
-          </thead>
-
-          <tbody class="">
-            {% for member in caseType.array %}
-              <tr>
-                <td headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
-                <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grade }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.e }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ member.f }}</td>
-                <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ member.g }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="2" headers="{{caseType.displayName}}_om">Total</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ caseType.array.totals.d2 | round(1) }}</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ caseType.array.totals.e | round(1) }}</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ caseType.array.totals.f | round(1) }}</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ caseType.array.totals.g | round(1) }}</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ caseType.array.totals.untiered | round(1) }}</td>   
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total" >{{ caseType.array.totals.overall | round(1) }}</td>   
             </tr>
           </tfoot>
         </table>
@@ -189,7 +160,7 @@
           <thead>
             <tr>
               <th colspan="2" id="{{caseType.displayName}}_om">{{ childOrganisationLevelDisplayText }}</th>
-              <th colspan="9" id="{{caseType.displayName}}_tiers">Case tiers</th>
+              <th colspan="12" id="{{caseType.displayName}}_tiers">Case tiers</th>
           </tr>
           <tr>
             <th id="{{caseType.displayName}}_name">Name</th>
@@ -201,6 +172,9 @@
             <th id="{{caseType.displayName}}_c2">C2</th>
             <th id="{{caseType.displayName}}_d1">D1</th>
             <th id="{{caseType.displayName}}_d2">D2</th>
+            <th id="{{caseType.displayName}}_e">E</th>
+            <th id="{{caseType.displayName}}_f">F</th>
+            <th id="{{caseType.displayName}}_g">G</th>
             <th id="{{caseType.displayName}}_untiered">Untiered</th>          
             <th id="{{caseType.displayName}}_overall">Overall</th>            
           </tr>
@@ -220,6 +194,9 @@
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ member.grades[i].c2 | round(1) }}%</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ member.grades[i].d1 | round(1) }}%</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ member.grades[i].d2 | round(1) }}%</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.grades[i].e | round(1) }}%</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ member.grades[i].f | round(1) }}%</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ member.grades[i].g | round(1) }}%</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ member.grades[i].untiered | round(1) }}%</td>            
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_overall" >{{ member.grades[i].totalCases | round(1) }}%</td>              
             </tr>
@@ -237,53 +214,12 @@
             <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ total.c1 | round(1) }}%</td>
             <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ total.c2 | round(1) }}%</td>
             <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ total.d1 | round(1) }}%</td>
-            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ total.d2 | round(1) }}%</td>
-            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ total.untiered | round(1) }}%</td>   
-            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total" >{{ total.totalCases | round(1) }}%</td>   
-          </tr>
-          <tr>
-          {% endfor %}
-        </tfoot>
-      </table>
-
-      <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by grade - E, F and G cases</h3>
-        <table class="sln-table-caseload-by-grade data-table">
-          <thead>
-            <tr>
-              <th colspan="2" id="{{caseType.displayName}}_om">{{ childOrganisationLevelDisplayText }}</th>
-              <th colspan="3" id="{{caseType.displayName}}_tiers">Case tiers</th>
-          </tr>
-          <tr>
-            <th id="{{caseType.displayName}}_name">Name</th>
-            <th id="{{caseType.displayName}}_grade">Grade</th>
-            <th id="{{caseType.displayName}}_e">E</th>
-            <th id="{{caseType.displayName}}_f">F</th>
-            <th id="{{caseType.displayName}}_g">G</th>           
-          </tr>
-        </thead>
-        <tbody class="">
-          {% for member in caseType.array.detailsPercentages %}
-            {% for i in range(0, member.grades.length) %}
-            <tr>
-              {% if i === 0 %}
-              <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
-              {% endif %}
-              <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>            
-              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.grades[i].e | round(1) }}%</td>
-              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ member.grades[i].f | round(1) }}%</td>
-              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ member.grades[i].g | round(1) }}%</td>         
-            </tr>
-            {% endfor %}
-          {% endfor %}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om">Average</td>
-            {% for grade, total in caseType.array.percentageTotals %}
-            <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
+            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ total.d2 | round(1) }}%</td>
             <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ total.e | round(1) }}%</td>
             <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ total.f | round(1) }}%</td>
             <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ total.g | round(1) }}%</td>
+            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ total.untiered | round(1) }}%</td>   
+            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total" >{{ total.totalCases | round(1) }}%</td>   
           </tr>
           <tr>
           {% endfor %}
@@ -297,7 +233,7 @@
           <thead>
             <tr>
               <th colspan="2" id="{{caseType.displayName}}_om">{{ childOrganisationLevelDisplayText }}</th>
-              <th colspan="9" id="{{caseType.displayName}}_tiers">Case tiers</th>
+              <th colspan="12" id="{{caseType.displayName}}_tiers">Case tiers</th>
             </tr>
             <tr>
               <th id="{{caseType.displayName}}_name">Name</th>
@@ -309,6 +245,9 @@
               <th id="{{caseType.displayName}}_c2">C2</th>
               <th id="{{caseType.displayName}}_d1">D1</th>
               <th id="{{caseType.displayName}}_d2">D2</th>
+              <th id="{{caseType.displayName}}_e">E</th>
+              <th id="{{caseType.displayName}}_f">F</th>
+              <th id="{{caseType.displayName}}_g">G</th>
               <th id="{{caseType.displayName}}_untiered">Untiered</th>              
               <th id="{{caseType.displayName}}_overall">Overall</th>            
             </tr>
@@ -328,6 +267,9 @@
                 <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ member.grades[i].c2 | round(1) }}</td>
                 <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ member.grades[i].d1 | round(1) }}</td>
                 <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ member.grades[i].d2 | round(1) }}</td>
+                <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.grades[i].e | round(1) }}</td>
+                <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ member.grades[i].f | round(1) }}</td>
+                <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ member.grades[i].g | round(1) }}</td>
                 <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ member.grades[i].untiered | round(1) }}</td>
                 <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_overall" >{{ member.grades[i].totalCases | round(1) }}</td>
               </tr>
@@ -345,53 +287,12 @@
                 <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ total.c1 | round(1) }}</td>
                 <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ total.c2 | round(1) }}</td>
                 <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ total.d1 | round(1) }}</td>
-                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ total.d2 | round(1) }}</td>
-                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ total.untiered | round(1) }}</td>   
-                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total" >{{ total.totalCases | round(1) }}</td>   
-            </tr>
-            <tr>
-          {% endfor %}
-        </tfoot>
-        </table>
-
-        <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by tier - E, F and G cases</h3>
-        <table class="sln-table-caseload-{{caseType.displayName.toLowerCase()}} data-table">
-          <thead>
-            <tr>
-              <th colspan="2" id="{{caseType.displayName}}_om">{{ childOrganisationLevelDisplayText }}</th>
-              <th colspan="3" id="{{caseType.displayName}}_tiers">Case tiers</th>
-            </tr>
-            <tr>
-              <th id="{{caseType.displayName}}_name">Name</th>
-              <th id="{{caseType.displayName}}_grade">Grade</th>
-              <th id="{{caseType.displayName}}_e">E</th>
-              <th id="{{caseType.displayName}}_f">F</th>
-              <th id="{{caseType.displayName}}_g">G</th>           
-            </tr>
-          </thead>
-          <tbody class="">
-            {% for member in caseType.array.details %}
-              {% for i in range(0, member.grades.length) %}
-                <tr>
-                  {% if i === 0 %}
-                  <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
-                  {% endif %}
-                  <td class="align-centre {% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>
-                  <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.grades[i].e | round(1) }}</td>
-                  <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ member.grades[i].f | round(1) }}</td>
-                  <td class="{% if member.grades[i].grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ member.grades[i].g | round(1) }}</td>           
-                </tr>
-              {% endfor %}
-            {% endfor %}
-          </tbody>
-          <tfoot>
-            <tr>
-                <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name">Total</td>
-                {% for grade, total in caseType.array.totals %}
-                <td class="align-centre {% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ total.d2 | round(1) }}</td>
                 <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ total.e | round(1) }}</td>
                 <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ total.f | round(1) }}</td>
                 <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ total.g | round(1) }}</td>
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ total.untiered | round(1) }}</td>   
+                <td class="{% if grade == 'Total' %} bold {% endif %}" headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total" >{{ total.totalCases | round(1) }}</td>   
             </tr>
             <tr>
           {% endfor %}
@@ -403,7 +304,7 @@
           <thead>
             <tr>
               <th colspan="2" id="{{caseType.displayName}}_om">{{ childOrganisationLevelDisplayText }}</th>
-              <th colspan="9" id="{{caseType.displayName}}_tiers">Case tiers</th>
+              <th colspan="12" id="{{caseType.displayName}}_tiers">Case tiers</th>
           </tr>
           <tr>
             <th id="{{caseType.displayName}}_name">Name</th>
@@ -415,6 +316,9 @@
             <th id="{{caseType.displayName}}_c2">C2</th>
             <th id="{{caseType.displayName}}_d1">D1</th>
             <th id="{{caseType.displayName}}_d2">D2</th>
+            <th id="{{caseType.displayName}}_e">E</th>
+            <th id="{{caseType.displayName}}_f">F</th>
+            <th id="{{caseType.displayName}}_g">G</th>
             <th id="{{caseType.displayName}}_untiered">Untiered</th>          
             <th id="{{caseType.displayName}}_overall">Overall</th>            
           </tr>
@@ -434,6 +338,9 @@
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ member.grades[i].c2 | round(1) }}%</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ member.grades[i].d1 | round(1) }}%</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ member.grades[i].d2 | round(1) }}%</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.grades[i].e | round(1) }}%</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ member.grades[i].f | round(1) }}%</td>
+              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ member.grades[i].g | round(1) }}%</td>
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ member.grades[i].untiered | round(1) }}%</td>            
               <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_overall" >{{ member.grades[i].totalCases | round(1) }}%</td>              
             </tr>
@@ -451,7 +358,10 @@
             <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c1">{{ total.c1 | round(1) }}%</td>
             <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_c2">{{ total.c2 | round(1) }}%</td>
             <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ total.d1 | round(1) }}%</td>
-            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d1">{{ total.d2 | round(1) }}%</td>
+            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_d2">{{ total.d2 | round(1) }}%</td>
+            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ total.e | round(1) }}%</td>
+            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ total.f | round(1) }}%</td>
+            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ total.g | round(1) }}%</td>
             <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_untiered">{{ total.untiered | round(1) }}%</td>   
             <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_total" >{{ total.totalCases | round(1) }}%</td>   
           </tr>
@@ -460,49 +370,6 @@
         </tfoot>
       </table>
 
-      <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by grade - E, F and G cases</h3>
-        <table class="sln-table-caseload-by-grade data-table">
-          <thead>
-            <tr>
-              <th colspan="2" id="{{caseType.displayName}}_om">{{ childOrganisationLevelDisplayText }}</th>
-              <th colspan="3" id="{{caseType.displayName}}_tiers">Case tiers</th>
-          </tr>
-          <tr>
-            <th id="{{caseType.displayName}}_name">Name</th>
-            <th id="{{caseType.displayName}}_grade">Grade</th>
-            <th id="{{caseType.displayName}}_e">E</th>
-            <th id="{{caseType.displayName}}_f">F</th>
-            <th id="{{caseType.displayName}}_g">G</th>          
-          </tr>
-        </thead>
-        <tbody class="">
-          {% for member in caseType.array.detailsPercentages %}
-            {% for i in range(0, member.grades.length) %}
-            <tr>
-              {% if i === 0 %}
-              <td rowspan="{{ member.grades.length }}" headers="{{caseType.displayName}}_om {{caseType.displayName}}_name"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
-              {% endif %}
-              <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ member.grades[i].grade }}</td>            
-              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ member.grades[i].e | round(1) }}%</td>
-              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ member.grades[i].f | round(1) }}%</td>
-              <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ member.grades[i].g | round(1) }}%</td>           
-            </tr>
-            {% endfor %}
-          {% endfor %}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td rowspan="{{caseType.array.totals | length}}" headers="{{caseType.displayName}}_om">Average</td>
-            {% for grade, total in caseType.array.percentageTotals %}
-            <td class="align-centre" headers="{{caseType.displayName}}_om {{caseType.displayName}}_grade">{{ grade }}</td> 
-            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_e">{{ total.e | round(1) }}%</td>
-            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_f">{{ total.f | round(1) }}%</td>
-            <td headers="{{caseType.displayName}}_tiers {{caseType.displayName}}_g">{{ total.g | round(1) }}%</td>
-          </tr>
-          <tr>
-          {% endfor %}
-        </tfoot>
-      </table>
       </div>
     {% endif %}
     {% endfor %}

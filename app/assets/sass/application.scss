@@ -13,6 +13,7 @@ $path: "/public/images/";
   width: 1px;
   overflow: hidden;
   position: absolute !important;
+  display: none;
 }
 
 table th,
@@ -29,8 +30,9 @@ a.button:visited{
 }
 
 div.lastUpdated{
-    position: relative;
-    left: 65%;
+  position: relative;
+  left: 70%;
+  width: fit-content;
 }
 
 td.details-control {
@@ -73,3 +75,7 @@ tr.shown td.details-control {
 
 @import '_vendor/dataTable';
 @import '_vendor/button';
+
+#content, #global-header-bar, #global-cookie-message p, #footer .footer-wrapper {
+  max-width: 1100px;
+}
