@@ -18,7 +18,9 @@ module.exports = function (id, organisationLevel) {
     'sdr_points AS sdrPoints',
     'sdr_conversion_points AS sdrConversionPoints',
     'available_points AS availablePoints',
-    'total_points_overall AS totalPointsOverall'
+    'total_points_overall AS totalPointsOverall',
+    'contracted_hours AS contractedHours',
+    'reduction_hours AS reductionHours'
   ]
 
   return knex('workload_percentage_breakdown_view')

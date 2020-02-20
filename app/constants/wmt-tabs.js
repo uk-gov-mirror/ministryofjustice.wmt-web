@@ -18,6 +18,7 @@ module.exports = {
     GROUP_SUPERVISION_EXPORT: 'Group Supervision Export',
     CMS_EXPORT: 'CMS Export',
     WORKLOAD_PERCENTAGE_EXPORT: 'Percentage Workload Breakdown Export',
-    SUSPENDED_LIFERS_EXPORT: 'Suspended Lifers'
+    SUSPENDED_LIFERS_EXPORT: 'Suspended Lifers',
+    EXPIRING_REDUCTIONS: 'Expiring Reductions'
   }
 }

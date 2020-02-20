@@ -3,6 +3,7 @@
 $path: "/public/images/";
 // This includes entire govuk-elements from _govuk-elements.scss
 @import 'govuk-elements';
+@import 'select2.scss';
 // Take a look at in app/assets/sass/patterns/ to see which files are imported.
 // Autocomplete styles from https://github.com/ministryofjustice/prison-visits-public
 
@@ -12,6 +13,7 @@ $path: "/public/images/";
   width: 1px;
   overflow: hidden;
   position: absolute !important;
+  display: none;
 }
 
 table th,
@@ -28,8 +30,17 @@ a.button:visited{
 }
 
 div.lastUpdated{
-    position: relative;
-    left: 65%;
+  position: relative;
+  left: 70%;
+  width: fit-content;
+}
+
+td.details-control {
+  background: url('../images/details_open.png') no-repeat center center;
+  cursor: pointer;
+}
+tr.shown td.details-control {
+  background: url('../images/details_close.png') no-repeat center center;
 }
 
 @mixin respond-to($media) {
@@ -64,3 +75,7 @@ div.lastUpdated{
 
 @import '_vendor/dataTable';
 @import '_vendor/button';
+
+#content, #global-header-bar, #global-cookie-message p, #footer .footer-wrapper {
+  max-width: 1100px;
+}

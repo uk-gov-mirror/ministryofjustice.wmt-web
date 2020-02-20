@@ -147,7 +147,40 @@
   </ul>
   </div>
   {% endif %}
+  <br>
+  <details>
 
+      <summary><span class="summary">Audit Log</span></summary>
+
+      <table class="">
+          <thead>
+              <tr>
+                  <th id="type">Reason</th>
+                  <th id="hours">Hours</th>
+                  <th id="comments">Comments</th>
+                  <th id="start_date">Start Date</th>
+                  <th id="end_date">End Date</th>
+                  <th id="status">Status</th>
+                  <th id="action_date">Date</th>
+                  <th id="user">User</th>
+              </tr>
+          </thead>
+          <tbody class="">
+              {% for reduction in reductionsHistory %}
+              <tr>
+                  <td headers="type">{{ reduction.reasonShortName }}</td>
+                  <td headers="hours">{{ reduction.hours }}</td>
+                  <td headers="comments">{{ reduction.notes }}</td>
+                  <td headers="start_date">{{ reduction.reductionStartDate }}</td>
+                  <td headers="end_date">{{ reduction.reductionEndDate }}</td>     
+                  <td headers="status">{{ reduction.status }}</td>                
+                  <td headers="action_date">{{ reduction.updatedDate }}</td>    
+                  <td headers="user">{{ reduction.name }}</td>    
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+    </details>
 </main>
 {% endblock %} {% block body_end %}
 <script src="/public/javascripts/vendor/jquery.min.js"></script>

@@ -104,5 +104,6 @@ module.exports = {
   'maxAllowancePercentage': 'Maximum Allowance Percentage',
   'allowancePercentage': 'Allowance Percentage',
   'monthsToExpiry': 'Months to Expiry',
-  'isEnabled': 'Reduction Reason Status'
+  'isEnabled': 'Reduction Reason Status',
+  'fullname': 'User\'s Full Name'
 }
