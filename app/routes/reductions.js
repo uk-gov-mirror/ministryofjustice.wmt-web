@@ -158,7 +158,7 @@ module.exports = function (router) {
       .then(function (result) {
         return reductionsService.getReductionByReductionId(reductionId)
           .then(function (reduction) {
-            return reductionsService.getReductionsHistory(reductionId).then(function (reductionsHistory) {
+            return reductionsService.getReductionsHistory([reductionId]).then(function (reductionsHistory) {
               if (reduction !== undefined && reduction.workloadOwnerId !== id) {
                 reduction = undefined
               }
