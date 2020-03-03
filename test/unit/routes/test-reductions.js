@@ -4,7 +4,6 @@ const proxyquire = require('proxyquire').noPreserveCache()
 const roles = require('../../..//app/constants/user-roles')
 const hasRoleFunction = require('../../../app/authorisation').hasRole
 const sinon = require('sinon')
-require('sinon-bluebird')
 const workloadTypes = require('../../../app/constants/workload-type')
 
 const GET_REDUCTIONS_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/reductions'

@@ -3,7 +3,6 @@ const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
 const sinon = require('sinon')
-require('sinon-bluebird')
 const workloadTypes = require('../../../app/constants/workload-type')
 
 const OFFENDER_MANAGER_CASE_PROGRESS_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/case-progress'

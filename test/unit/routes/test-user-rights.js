@@ -3,7 +3,6 @@ const supertest = require('supertest')
 const proxyquire = require('proxyquire')
 const sinon = require('sinon')
 const config = require('../../../config')
-require('sinon-bluebird')
 
 const USER_URL = '/admin/user'
 const USER_RIGHT_URL = '/admin/user-rights'

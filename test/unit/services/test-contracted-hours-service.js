@@ -1,7 +1,6 @@
 const expect = require('chai').expect
 const assert = require('chai').assert
 const sinon = require('sinon')
-require('sinon-bluebird')
 const proxyquire = require('proxyquire')
 const orgUnitConstant = require('../../../app/constants/organisation-unit.js')
 const orgUnitFinder = require('../../../app/services/helpers/org-unit-finder')
