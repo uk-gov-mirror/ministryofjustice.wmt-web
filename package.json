@@ -43,7 +43,7 @@
     "selenium-standalone": "6.17.0",
     "sinon": "^9.0.0",
     "bluebird": "^3.7.2",
-    "standard": "^10.0.2",
+    "standard": "^14.3.1",
     "supertest": "4.0.x",
     "@wdio/mocha-framework": "^5.18.7",
     "@wdio/sauce-service": "^5.16.10",
