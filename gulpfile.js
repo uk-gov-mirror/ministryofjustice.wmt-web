@@ -5,7 +5,7 @@ var sass = require('gulp-sass')
 var spawn = require('child_process').spawn
 var node
 
-gulp.task('assets', function () {
+gulp.task('assets', function (done) {
   gulp.src('node_modules/govuk_frontend_toolkit/javascripts/**/*')
     .pipe(gulp.dest('app/govuk_modules/govuk_frontend_toolkit/javascripts', { overwrite: true }))
 
@@ -14,34 +14,37 @@ gulp.task('assets', function () {
 
   gulp.src('node_modules/govuk_template_jinja/assets/**/*')
     .pipe(gulp.dest('app/govuk_modules/govuk_template/', { overwrite: true }))
+  done()
 })
 
-gulp.task('templates', function () {
+gulp.task('templates', function (done) {
   gulp.src('node_modules/govuk_template_jinja/views/layouts/govuk_template.html')
     .pipe(gulp.dest('app/views/', { overwrite: true }))
+  done()
 })
 
-gulp.task('vendorJS', function () {
+gulp.task('vendorJS', function (done) {
   const vendorJSFiles = [
     'node_modules/jquery/dist/jquery.min.js',
     'node_modules/plotly.js/dist/plotly.min.js'
   ]
 
-  gulp.src(vendorJSFiles)
+  gulp.src(vendorJSFiles, { allowEmpty: true })
     .pipe(gulp.dest('app/assets/javascripts/vendor/'))
+  done()
 })
 
-gulp.task('sync', gulp.series(gulp.series('vendorJS', function () {
+gulp.task('sync', gulp.series('vendorJS', function () {
   return gulp.src('app/assets/javascripts/**/*.js')
           .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
-})))
+}))
 
 gulp.task('syncAssets', function () {
   return gulp.src('app/assets/images/**/*')
           .pipe(gulp.dest('app/public/images/', { overwrite: true }))
 })
 
-gulp.task('sass', function () {
+gulp.task('sass', function (done) {
   gulp.src('app/assets/sass/**/*.scss')
     .pipe(sass({
       style: 'expanded',
@@ -56,16 +59,17 @@ gulp.task('sass', function () {
       outputStyle: 'expanded'
     }).on('error', sass.logError))
     .pipe(gulp.dest('app/public/stylesheets'))
+  done()
 })
 
-gulp.task('generate-assets', gulp.series(gulp.series('assets', 'templates', 'sync', 'sass', 'syncAssets')))
+gulp.task('generate-assets', gulp.series('assets', 'templates', 'sync', 'sass', 'syncAssets'))
 
 gulp.task('nsp', function (cb) {
   gulpNSP({package: path.join(__dirname, '/package.json')}, cb)
 })
 
 gulp.task('watch', function () {
-  gulp.watch(['app/app.js', 'app/services/**/*', 'app/assets/**/*', 'app/routes/**/*'], gulp.series(gulp.series('generate-assets-and-start')))
+  gulp.watch(['app/app.js', 'app/services/**/*', 'app/assets/**/*', 'app/routes/**/*'], gulp.series('generate-assets-and-start'))
 })
 
 gulp.task('server', function () {
@@ -78,6 +82,6 @@ gulp.task('server', function () {
   })
 })
 
-gulp.task('generate-assets-and-start', gulp.series(gulp.parallel('generate-assets', 'server')))
+gulp.task('generate-assets-and-start', gulp.series('generate-assets', 'server'))
 
-gulp.task('default', gulp.series(gulp.parallel('generate-assets-and-start', 'watch')))
+gulp.task('default', gulp.series('generate-assets-and-start', 'watch'))
