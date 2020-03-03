@@ -223,7 +223,7 @@ module.exports = function (router) {
       }
     }
 
-    var reductionId = heDecode.decode(req.body['reductionId'])
+    var reductionId = heDecode.decode(req.body.reductionId)
 
     return getReductionsHistory(reductionId).then(function (reductionsHistory) {
       return res.json({

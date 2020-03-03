@@ -32,7 +32,7 @@ module.exports = function (id) {
         ' FROM ' + table +
         noExpandHint +
         whereString)
-        .then(function (results) {
-          return results
-        })
+    .then(function (results) {
+      return results
+    })
 }

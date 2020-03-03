@@ -210,7 +210,7 @@ describe('reductions route', function () {
       reductionsService.getReductionsHistory.resolves()
       return superTest(app)
         .post(UPDATE_REDUCTION_STATUS_POST_URL)
-        .send(Object.assign({}, successDataToPost, {status: 'ARCHIVED'}))
+        .send(Object.assign({}, successDataToPost, { status: 'ARCHIVED' }))
         .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions?archived=true')
     })
 
@@ -222,7 +222,7 @@ describe('reductions route', function () {
       reductionsService.getReductionsHistory.resolves()
       return superTest(app)
         .post(UPDATE_REDUCTION_STATUS_POST_URL)
-        .send(Object.assign({}, successDataToPost, {status: 'DELETED'}))
+        .send(Object.assign({}, successDataToPost, { status: 'DELETED' }))
         .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions?deleted=true')
     })
 

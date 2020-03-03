@@ -147,26 +147,26 @@ describe('court-reports reductions route', function () {
     it('should respond with 200 when correct role is passed', function () {
       reductionsService.getReductions.resolves(getReductionNoTextResult)
       return superTest(app)
-      .get(GET_REDUCTIONS_URL)
-      .expect(200)
-      .then(function () {
+        .get(GET_REDUCTIONS_URL)
+        .expect(200)
+        .then(function () {
         expect(getSubNavStub.calledWith('1', orgUnit.OFFENDER_MANAGER.name, GET_REDUCTIONS_URL, workloadType.COURT_REPORTS)).to.be.true //eslint-disable-line
         expect(reductionsService.getReductions.calledWith('1', orgUnit.OFFENDER_MANAGER.name, workloadType.COURT_REPORTS)).to.be.true //eslint-disable-line
-      })
+        })
     })
 
     it('should respond with 500 when non OM orgunit passed', function () {
       reductionsService.getReductions.resolves(getReductionNoTextResult)
       return superTest(app)
-      .get(TEAM_GET_REDUCTIONS_URL)
-      .expect(500)
+        .get(TEAM_GET_REDUCTIONS_URL)
+        .expect(500)
     })
 
     it('should respond with 500 when no OM id is passed', function () {
       reductionsService.getReductions.resolves(getReductionNoTextResult)
       return superTest(app)
-      .get(INVALID_GET_REDUCTIONS_URL)
-      .expect(500)
+        .get(INVALID_GET_REDUCTIONS_URL)
+        .expect(500)
     })
   })
 
@@ -174,26 +174,26 @@ describe('court-reports reductions route', function () {
     it('should respond with 200 and the correct data and no existing reduction', function () {
       reductionsService.getAddReductionsRefData.resolves(addReduction)
       return superTest(app)
-      .get(ADD_REDUCTION_PAGE_URL)
-      .expect(200)
-      .then(function (results) {
+        .get(ADD_REDUCTION_PAGE_URL)
+        .expect(200)
+        .then(function (results) {
         expect(getSubNavStub.calledWith(1, orgUnit.OFFENDER_MANAGER.name, ADD_REDUCTION_PAGE_URL, workloadType.COURT_REPORTS)).to.be.true //eslint-disable-line
-        expect(reductionsService.getAddReductionsRefData.calledWith(1, orgUnit.OFFENDER_MANAGER.name, workloadType.COURT_REPORTS))
-      })
+          expect(reductionsService.getAddReductionsRefData.calledWith(1, orgUnit.OFFENDER_MANAGER.name, workloadType.COURT_REPORTS))
+        })
     })
 
     it('should respond with 500 when non OM orgunit passed', function () {
       reductionsService.getReductions.resolves(getReductionNoTextResult)
       return superTest(app)
-      .get(TEAM_ADD_REDUCTION_PAGE_URL)
-      .expect(500)
+        .get(TEAM_ADD_REDUCTION_PAGE_URL)
+        .expect(500)
     })
 
     it('should respond with 500 when no OM id is passed', function () {
       reductionsService.getReductions.resolves(getReductionNoTextResult)
       return superTest(app)
-      .get(INVALID_ADD_REDUCTION_PAGE_URL)
-      .expect(500)
+        .get(INVALID_ADD_REDUCTION_PAGE_URL)
+        .expect(500)
     })
   })
 
@@ -204,27 +204,27 @@ describe('court-reports reductions route', function () {
       reductionsService.getReductionsHistory.resolves()
       var url = EDIT_REDUCTION_PAGE_URL + '?reductionId=' + existingReduction.id
       return superTest(app)
-      .get(url)
-      .expect(200)
-      .then(function (results) {
+        .get(url)
+        .expect(200)
+        .then(function (results) {
         expect(getSubNavStub.calledWith(1, orgUnit.OFFENDER_MANAGER.name, EDIT_REDUCTION_PAGE_URL, workloadType.COURT_REPORTS)).to.be.true //eslint-disable-line
-        expect(reductionsService.getAddReductionsRefData.calledWith(1, orgUnit.OFFENDER_MANAGER.name, workloadType.COURT_REPORTS))
-        expect(reductionsService.getReductionByReductionId.calledWith(existingReduction.id)).to.be.eql(true)
-      })
+          expect(reductionsService.getAddReductionsRefData.calledWith(1, orgUnit.OFFENDER_MANAGER.name, workloadType.COURT_REPORTS))
+          expect(reductionsService.getReductionByReductionId.calledWith(existingReduction.id)).to.be.eql(true)
+        })
     })
 
     it('should respond with 500 when non OM orgunit passed', function () {
       reductionsService.getReductions.resolves(getReductionNoTextResult)
       return superTest(app)
-      .get(TEAM_EDIT_REDUCTION_PAGE_URL)
-      .expect(500)
+        .get(TEAM_EDIT_REDUCTION_PAGE_URL)
+        .expect(500)
     })
 
     it('should respond with 500 when no OM id is passed', function () {
       reductionsService.getReductions.resolves(getReductionNoTextResult)
       return superTest(app)
-      .get(INVALID_EDIT_REDUCTION_PAGE_URL)
-      .expect(500)
+        .get(INVALID_EDIT_REDUCTION_PAGE_URL)
+        .expect(500)
     })
   })
 
@@ -233,25 +233,25 @@ describe('court-reports reductions route', function () {
       reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
       reductionsService.addReduction.resolves(returnedId)
       return superTest(app)
-      .post(ADD_REDUCTION_POST_URL)
-      .send(successDataToPost)
-      .expect(302, 'Found. Redirecting to /' + workloadType.COURT_REPORTS + '/offender-manager/1/reductions')
-      .then(function (results) {
-        expect(reductionsService.addReduction.called).to.be.eql(true)
-      })
+        .post(ADD_REDUCTION_POST_URL)
+        .send(successDataToPost)
+        .expect(302, 'Found. Redirecting to /' + workloadType.COURT_REPORTS + '/offender-manager/1/reductions')
+        .then(function (results) {
+          expect(reductionsService.addReduction.called).to.be.eql(true)
+        })
     })
 
     it('should post incorrect data and validation errors should be populated', function () {
       reductionsService.getAddReductionsRefData.resolves(addReductionsRefData)
       reductionsService.addReduction.resolves(returnedId)
       return superTest(app)
-      .post(ADD_REDUCTION_POST_URL)
-      .send(failureDataToPost)
-      .expect(400)
-      .then(function (results) {
-        expect(reductionsService.addReduction.called).to.be.eql(false)
+        .post(ADD_REDUCTION_POST_URL)
+        .send(failureDataToPost)
+        .expect(400)
+        .then(function (results) {
+          expect(reductionsService.addReduction.called).to.be.eql(false)
         expect(getSubNavStub.called).to.be.true //eslint-disable-line
-      })
+        })
     })
   })
 

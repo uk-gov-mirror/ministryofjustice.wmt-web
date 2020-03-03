@@ -42,7 +42,7 @@ module.exports = function (router) {
       breadcrumbs: breadcrumbs,
       failureText: failureText,
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+      authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
     })
   })
 
@@ -81,7 +81,7 @@ module.exports = function (router) {
         rights: role.role,
         breadcrumbs: breadcrumbs,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
       })
     }).catch(function (error) {
       next(error)
@@ -124,7 +124,7 @@ module.exports = function (router) {
           errors: error.validationErrors,
           breadcrumbs: breadcrumbs,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
         })
       } else {
         next(error)
@@ -141,7 +141,7 @@ module.exports = function (router) {
       title: 'User rights',
       userRights: { username: username, rights: rights },
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+      authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
     })
   })
 }
@@ -179,7 +179,7 @@ var addUpdateUserRole = function (username, rights, loggedInUsername, fullname) 
           return userRoleService.addUserRole(newUserRole).then(function (result) {
             return result
           }).catch(function (unableToAddUserRole) {
-                        // If its not able to add the user role then the added user needs to be removed
+            // If its not able to add the user role then the added user needs to be removed
             return userRoleService.removeUserByUsername(userRoleService.removeDomainFromUsername(username)).then(function (result) {
               return result
             })
@@ -194,7 +194,7 @@ var isValidUsername = function (username) {
   var errors = errorHandler()
 
   fieldValidator(username, 'username', errors)
-        .isValidUsername(username)
+    .isValidUsername(username)
 
   if (errors.get()) {
     return false

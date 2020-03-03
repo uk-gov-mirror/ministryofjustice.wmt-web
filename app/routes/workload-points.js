@@ -45,7 +45,7 @@ module.exports = function (router) {
                   updatedBy: result.updatedBy,
                   successText: successText,
                   userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-                  authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+                  authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
                 })
               })
           })
@@ -79,7 +79,7 @@ module.exports = function (router) {
           updatedBy: result.updatedBy,
           successText: successText,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
         })
       })
   })
@@ -148,7 +148,7 @@ module.exports = function (router) {
                       updatedBy: result.updatedBy,
                       errors: error.validationErrors,
                       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-                      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+                      authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
                     })
                   })
               })
@@ -195,7 +195,7 @@ module.exports = function (router) {
               updatedBy: result.updatedBy,
               errors: error.validationErrors,
               userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-              authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+              authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
             })
           })
       }

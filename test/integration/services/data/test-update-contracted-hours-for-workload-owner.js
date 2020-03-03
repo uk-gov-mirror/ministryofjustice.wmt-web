@@ -22,20 +22,20 @@ describe('services/data/update-contracted-hours-for-workload-owner', function ()
         expect(results).to.be.a('number')
         expect(results).to.eql(1)
         return getContractedHoursForWorkloadOwner(woId)
-        .then(function (contractedHours) {
-          expect(contractedHours).to.eql(UPDATED_HOURS)
-        })
+          .then(function (contractedHours) {
+            expect(contractedHours).to.eql(UPDATED_HOURS)
+          })
       })
   })
 
   it('should return count of zero when workload owner does not exist', function () {
     return dataHelper.generateNonExistantWorkloadOwnerId()
-    .then(function (woId) {
-      return updateContractedHoursForWorkloadOwner(woId, UPDATED_HOURS)
-      .then(function (results) {
-        expect(results).to.eql(0)
+      .then(function (woId) {
+        return updateContractedHoursForWorkloadOwner(woId, UPDATED_HOURS)
+          .then(function (results) {
+            expect(results).to.eql(0)
+          })
       })
-    })
   })
 
   after(function () {

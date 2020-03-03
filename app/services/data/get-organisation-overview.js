@@ -26,7 +26,7 @@ module.exports = function (id, type) {
   }
 
   return knex.raw(
-      'SELECT ' + selectColumns.join(', ') +
+    'SELECT ' + selectColumns.join(', ') +
       ' FROM ' + table + ' WITH (NOEXPAND)' +
       whereClause)
     .then(function (results) {

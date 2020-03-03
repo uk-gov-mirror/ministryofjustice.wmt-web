@@ -9,6 +9,6 @@ module.exports = function (name) {
     .where('description', name)
     .first('id')
     .then(function (ldu) {
-      return ldu['id']
+      return ldu.id
     })
 }

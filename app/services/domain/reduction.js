@@ -28,7 +28,7 @@ class Reduction {
 
     if (reductionReason.maxAllowanceHours !== 0) {
       FieldValidator(this.hours, 'reductionHours', errors)
-      .isFloat(0, reductionReason.maxAllowanceHours)
+        .isFloat(0, reductionReason.maxAllowanceHours)
     }
 
     var startDate = FieldSetValidator(this.reductionStartDateFields, 'reductionStartDate', errors)

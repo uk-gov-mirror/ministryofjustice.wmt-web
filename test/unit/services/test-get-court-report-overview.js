@@ -34,8 +34,10 @@ beforeEach(function () {
   getBreadcrumbs = sinon.stub()
   getCourtReportOverview =
       proxyquire('../../../app/services/get-court-report-overview',
-        {'./data/get-court-report-overview': getCourtReportOverviewData,
-          './get-breadcrumbs': getBreadcrumbs})
+        {
+          './data/get-court-report-overview': getCourtReportOverviewData,
+          './get-breadcrumbs': getBreadcrumbs
+        })
 })
 
 describe('services/get-court-report-overview', function () {
@@ -48,14 +50,14 @@ describe('services/get-court-report-overview', function () {
     getBreadcrumbs.returns(breadcrumbs)
 
     return getCourtReportOverview(id, omName)
-    .then(function (result) {
-      var omSubtitle = orgUnitFinder('name', omName).displayText
+      .then(function (result) {
+        var omSubtitle = orgUnitFinder('name', omName).displayText
       expect(getBreadcrumbs.calledWith(id, omName, workloadTypes.COURT_REPORTS)).to.be.true //eslint-disable-line
-      expect(result.breadcrumbs).to.eql(breadcrumbs)
-      expect(result.subTitle).to.eql(omSubtitle)
-      expect(result.title).to.eql(expectedTitle)
-      expect(result.overviewDetails).to.eql(OVERVIEW)
-    })
+        expect(result.breadcrumbs).to.eql(breadcrumbs)
+        expect(result.subTitle).to.eql(omSubtitle)
+        expect(result.title).to.eql(expectedTitle)
+        expect(result.overviewDetails).to.eql(OVERVIEW)
+      })
   })
 
   it('should return a results object with the correct overview details for a court-reporter team', function () {

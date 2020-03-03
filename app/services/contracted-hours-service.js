@@ -34,22 +34,22 @@ module.exports.updateContractedHours = function (id, organisationLevel, hours, w
   }
 
   return updateContractedHoursForWorkloadOwner(id, hours)
-  .then(function (count) {
-    if (count === 0) {
-      throw new Error('Offender manager with id: ' + id + ' has not had contracted hours updated')
-    }
-    if (workloadType === workloadTypes.PROBATION) {
-      return getLatestIdsForWorkloadPointsRecalc(id)
-      .then(function (ids) {
-        return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
-      })
-    } else {
-      return getLatestIdsForCourtReportsCalc(id)
-      .then(function (ids) {
-        return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
-      })
-    }
-  }).catch(function (err) {
-    throw err
-  })
+    .then(function (count) {
+      if (count === 0) {
+        throw new Error('Offender manager with id: ' + id + ' has not had contracted hours updated')
+      }
+      if (workloadType === workloadTypes.PROBATION) {
+        return getLatestIdsForWorkloadPointsRecalc(id)
+          .then(function (ids) {
+            return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
+          })
+      } else {
+        return getLatestIdsForCourtReportsCalc(id)
+          .then(function (ids) {
+            return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
+          })
+      }
+    }).catch(function (err) {
+      throw err
+    })
 }

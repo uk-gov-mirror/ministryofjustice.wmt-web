@@ -14,7 +14,7 @@ module.exports = function (res, userRole, authorisation, subNav) {
     }
     return res.render('etl_in_progress', {
       userRole: userRole, // used by proposition-link for the admin role
-      authorisation: authorisation,  // used by proposition-link for the admin role
+      authorisation: authorisation, // used by proposition-link for the admin role
       subNav: subNav,
       title: 'WMT Updating',
       subTitle: 'WMT Updating',

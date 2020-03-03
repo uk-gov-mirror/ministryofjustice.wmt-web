@@ -83,7 +83,7 @@ app.use(csurf({ cookie: { httpOnly: true, secure: config.SECURE_COOKIE === 'true
 
 // Generate CSRF tokens to be sent in POST requests
 app.use(function (req, res, next) {
-  if (req.hasOwnProperty('csrfToken')) {
+  if (Object.prototype.hasOwnProperty.call(req, 'csrfToken')) {
     res.locals.csrfToken = req.csrfToken()
   }
   next()
@@ -114,7 +114,7 @@ app.use(function (err, req, res, next) {
 
 // Development error handler.
 app.use(function (err, req, res, next) {
-  logger.error({error: err})
+  logger.error({ error: err })
   res.status(err.status || 500)
   if (err.status === 404) {
     res.render('includes/error-404')

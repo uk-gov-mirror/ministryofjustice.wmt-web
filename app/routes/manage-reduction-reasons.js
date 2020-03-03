@@ -47,7 +47,7 @@ module.exports = function (router) {
         successText: successText,
         subTitle: getSubtitle(true),
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
       })
     })
   })
@@ -78,7 +78,7 @@ module.exports = function (router) {
         title: 'Add Reduction Reason',
         subTitle: getSubtitle(false),
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
       })
     })
   })
@@ -115,7 +115,7 @@ module.exports = function (router) {
           title: 'Edit Reduction Reason',
           subTitle: getSubtitle(false),
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
         })
       })
     })
@@ -169,7 +169,7 @@ module.exports = function (router) {
             errors: error.validationErrors,
             categories: categories,
             userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-            authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
           })
         } else {
           next(error)
@@ -232,7 +232,7 @@ module.exports = function (router) {
             errors: error.validationErrors,
             categories: categories,
             userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-            authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
           })
         } else {
           next(error)

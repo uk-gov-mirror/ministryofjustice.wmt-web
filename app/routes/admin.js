@@ -25,7 +25,7 @@ module.exports = function (router) {
     return res.render('admin', {
       title: 'Admin',
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+      authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
     })
   })
 }

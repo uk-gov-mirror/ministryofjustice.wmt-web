@@ -38,7 +38,7 @@ module.exports.buildApp = function (route, middleware) {
 
   // Generate CSRF tokens to be sent in POST requests
   app.use(function (req, res, next) {
-    if (req.hasOwnProperty('csrfToken')) {
+    if (Object.prototype.hasOwnProperty.call(req, 'csrfToken')) {
       res.locals.csrfToken = req.csrfToken()
     }
     next()

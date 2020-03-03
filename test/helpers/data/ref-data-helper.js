@@ -9,19 +9,19 @@ module.exports.addReductionsRefData = function (maxId) {
   ]
 
   return knex('reduction_category').returning('id').insert(reductionCategories)
-  .then(function (ids) {
-    ids.forEach((id) => {
-      inserts.push({table: 'reduction_category', id: id})
-    })
-    var tableName = 'reduction_reason'
-    var insertStatement = 'INSERT INTO app.' + tableName + ' (id, reason, reason_short_name, category_id, allowance_percentage, max_allowance_percentage, months_to_expiry) VALUES '
-    var sql = 'SET IDENTITY_INSERT app.' + tableName + ' ON;' +
+    .then(function (ids) {
+      ids.forEach((id) => {
+        inserts.push({ table: 'reduction_category', id: id })
+      })
+      var tableName = 'reduction_reason'
+      var insertStatement = 'INSERT INTO app.' + tableName + ' (id, reason, reason_short_name, category_id, allowance_percentage, max_allowance_percentage, months_to_expiry) VALUES '
+      var sql = 'SET IDENTITY_INSERT app.' + tableName + ' ON;' +
       insertStatement + '(' + (maxId + 1) + ',\'Test Reason 1\',1,' + ids[0] + ',20,null,6)'
-    return knex.raw(sql).then(function () {
-      inserts.push({table: 'reduction_reason', id: (maxId + 1)})
-      return inserts
+      return knex.raw(sql).then(function () {
+        inserts.push({ table: 'reduction_reason', id: (maxId + 1) })
+        return inserts
+      })
     })
-  })
 }
 
 module.exports.removeInsertedData = function (inserts) {
@@ -33,7 +33,7 @@ module.exports.removeInsertedData = function (inserts) {
 
 module.exports.getMaxReductionReasonId = function () {
   return knex('reduction_reason')
-  .max('id AS maxId')
+    .max('id AS maxId')
     .then(function (maxId) {
       return maxId[0].maxId
     })

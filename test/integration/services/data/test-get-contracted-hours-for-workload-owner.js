@@ -9,13 +9,13 @@ var inserts = []
 describe('services/data/get-contracted-hours-for-workload-owner', function () {
   before(function () {
     return dataHelper.addWorkloadCapacitiesForOffenderManager()
-    .then(function (result) {
-      inserts = result
-      return dataHelper.getAnyExistingWorkloadOwnerId()
-      .then(function (id) {
-        workloadOwnerId = id
+      .then(function (result) {
+        inserts = result
+        return dataHelper.getAnyExistingWorkloadOwnerId()
+          .then(function (id) {
+            workloadOwnerId = id
+          })
       })
-    })
   })
 
   it('should retrieve contracted hours for a valid workload owner id', function () {

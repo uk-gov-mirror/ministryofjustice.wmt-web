@@ -5,7 +5,7 @@ const TEST_MONTH_HEADING = 'April'
 const TEST_ROW_VALUE = 118
 const CAPACITY_RESULTS = {
   headings:
-  [ 'January',
+  ['January',
     'February',
     'March',
     'April',
@@ -18,9 +18,11 @@ const CAPACITY_RESULTS = {
     'November',
     'December'],
   rows:
-  [{ label: 'Offender Manager 1',
+  [{
+    label: 'Offender Manager 1',
     values:
-        [90, 100, 115, 100, 110, 118, 100, 93, 97, 101, 110, 99]}]
+        [90, 100, 115, 100, 110, 118, 100, 93, 97, 101, 110, 99]
+  }]
 }
 
 describe('services/domain/display-table', function () {

@@ -42,10 +42,10 @@ module.exports = function (archiveOption, archiveDateRange, extraCriteria) {
     return getFortnightlyArchive(archiveDateRange, extraCriteria).then(function (results) {
       return calculateCapacity(results)
     })
-    .catch(function (error) {
-      log.error(error)
-      throw error
-    })
+      .catch(function (error) {
+        log.error(error)
+        throw error
+      })
   } else if (archiveOption === archiveOptions.REDUCTIONS) {
     return getReductionArchive(archiveDateRange, extraCriteria).then(function (oldReductions) {
       oldReductions.forEach(function (oldReduction) {
@@ -75,15 +75,15 @@ var calculateCapacity = function (results) {
   results.forEach(function (result) {
     if (result.contractedHours === 0 || result.contractedHours === null) {
       result.capacity = '0%'
-      let defaultContractedHours = new DefaultContractedHours(37.5, 37.5, 37.5)
-      let availablePoints = calculateAvailablePoints(result.nominalTarget, result.omTypeId, result.contractedHours, result.hoursReduction, defaultContractedHours)
-      let acquiredPoints = calculateAcquiredPoints(result.totalPoints, result.sdrPoints, result.sdrConversionPoints, result.paromsPoints)
+      const defaultContractedHours = new DefaultContractedHours(37.5, 37.5, 37.5)
+      const availablePoints = calculateAvailablePoints(result.nominalTarget, result.omTypeId, result.contractedHours, result.hoursReduction, defaultContractedHours)
+      const acquiredPoints = calculateAcquiredPoints(result.totalPoints, result.sdrPoints, result.sdrConversionPoints, result.paromsPoints)
       result.totalPoints = acquiredPoints
       result.availablePoints = availablePoints
     } else {
-      let defaultContractedHours = new DefaultContractedHours(37.5, 37.5, 37.5)
-      let availablePoints = calculateAvailablePoints(result.nominalTarget, result.omTypeId, result.contractedHours, result.hoursReduction, defaultContractedHours)
-      let acquiredPoints = calculateAcquiredPoints(result.totalPoints, result.sdrPoints, result.sdrConversionPoints, result.paromsPoints)
+      const defaultContractedHours = new DefaultContractedHours(37.5, 37.5, 37.5)
+      const availablePoints = calculateAvailablePoints(result.nominalTarget, result.omTypeId, result.contractedHours, result.hoursReduction, defaultContractedHours)
+      const acquiredPoints = calculateAcquiredPoints(result.totalPoints, result.sdrPoints, result.sdrConversionPoints, result.paromsPoints)
       result.totalPoints = acquiredPoints
       result.availablePoints = availablePoints
       if (availablePoints !== 0) {

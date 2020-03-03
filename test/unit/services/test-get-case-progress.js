@@ -28,8 +28,10 @@ before(function () {
   getBreadcrumbs = sinon.stub().returns(breadcrumbs)
   getCaseProgress =
       proxyquire('../../../app/services/get-case-progress',
-        {'./data/get-caseload-progress': getCaseProgressList,
-          './get-breadcrumbs': getBreadcrumbs})
+        {
+          './data/get-caseload-progress': getCaseProgressList,
+          './get-breadcrumbs': getBreadcrumbs
+        })
   getCaseProgressList.resolves(CASE_PROGRESS)
 })
 

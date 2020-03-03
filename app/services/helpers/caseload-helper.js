@@ -86,7 +86,7 @@ module.exports.getCaseloadTotalSummary = function (caseloads) {
 */
 module.exports.calculateTotalsRow = function (caseloads) {
   // WMT0160: add new tiers
-  var totals = {a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, overall: 0}
+  var totals = { a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, overall: 0 }
   caseloads.forEach(function (val, key) {
     totals.a += val.a
     totals.b1 += val.b1
@@ -105,7 +105,7 @@ module.exports.calculateTotalsRow = function (caseloads) {
 }
 
 module.exports.calculateTotalTiersRow = function (summary) {
-  var totals = {totalCommunity: 0, totalLicense: 0, totalCustody: 0, totalTotalCases: 0}
+  var totals = { totalCommunity: 0, totalLicense: 0, totalCustody: 0, totalTotalCases: 0 }
   summary.forEach(function (val, key) {
     totals.totalCommunity += val.communityTotalCases
     totals.totalLicense += val.licenseTotalCases
@@ -193,7 +193,7 @@ var transform = function (caseloadTotalsByGrade, calculatePercentage = false, is
       }
       gradeRecords.push(newGradeRecord)
     }
-    newTeamEntry = Object.assign({}, newTeamEntry, {grades: gradeRecords})
+    newTeamEntry = Object.assign({}, newTeamEntry, { grades: gradeRecords })
     transformedData.push(newTeamEntry)
   }
   if (calculatePercentage) {
@@ -313,21 +313,21 @@ var groupOverallCaseloadByGrade = function (caseloads) {
 
 var totalWholeCaseload = function (caseloads) {
   // WMT0160: add new tiers to tierTotals
-  var tierTotals = {a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0}
+  var tierTotals = { a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0 }
   if (caseloads.length > 0) {
     caseloads.forEach(function (caseload) {
-      tierTotals['a'] += caseload.a
-      tierTotals['b1'] += caseload.b1
-      tierTotals['b2'] += caseload.b2
-      tierTotals['c1'] += caseload.c1
-      tierTotals['c2'] += caseload.c2
-      tierTotals['d1'] += caseload.d1
-      tierTotals['d2'] += caseload.d2
-      tierTotals['e'] += caseload.e
-      tierTotals['f'] += caseload.f
-      tierTotals['g'] += caseload.g
-      tierTotals['untiered'] += caseload.untiered
-      tierTotals['totalCases'] += caseload.totalCases
+      tierTotals.a += caseload.a
+      tierTotals.b1 += caseload.b1
+      tierTotals.b2 += caseload.b2
+      tierTotals.c1 += caseload.c1
+      tierTotals.c2 += caseload.c2
+      tierTotals.d1 += caseload.d1
+      tierTotals.d2 += caseload.d2
+      tierTotals.e += caseload.e
+      tierTotals.f += caseload.f
+      tierTotals.g += caseload.g
+      tierTotals.untiered += caseload.untiered
+      tierTotals.totalCases += caseload.totalCases
     })
   }
   return tierTotals

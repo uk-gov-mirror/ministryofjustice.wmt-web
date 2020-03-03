@@ -153,7 +153,7 @@ var renderOverview = function (req, res, next) {
         overviewDetails: result.overviewDetails,
         date: result.date,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
       })
     })
   }).catch(function (error) {

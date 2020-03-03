@@ -20,13 +20,13 @@ var insertedId
 describe('services/data/get-reduction-reasons', function () {
   before(function () {
     return helper.getMaxReductionReasonId()
-    .then(function (maxId) {
-      insertedId = (maxId + 1)
-      return helper.addReductionsRefData(maxId)
-        .then(function (builtInserts) {
-          inserts = builtInserts
-        })
-    })
+      .then(function (maxId) {
+        insertedId = (maxId + 1)
+        return helper.addReductionsRefData(maxId)
+          .then(function (builtInserts) {
+            inserts = builtInserts
+          })
+      })
   })
 
   it('should return an array of reductions reasons ref data', function () {

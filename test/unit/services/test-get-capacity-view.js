@@ -6,7 +6,8 @@ const CapacityDateRange = require('../../../app/services/domain/capacity-date-ra
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 
 const CAPACITY_RESULTS = [
-  { effectiveFrom: '2017-01-01',
+  {
+    effectiveFrom: '2017-01-01',
     totalPoints: 100,
     availablePoints: 100,
     reductionHours: 6,
@@ -19,7 +20,8 @@ const CAPACITY_RESULTS = [
 ]
 
 const TEAM_RESULTS = [
-  { name: 'Test name',
+  {
+    name: 'Test name',
     grade: 'Test grade',
     totalCases: 39,
     totalT2aCases: 29,
@@ -73,7 +75,8 @@ const LDU_RESULTS = [
 ]
 
 const EXPECTED_TEAM_BREAKDOWN = [
-  { name: 'Test name',
+  {
+    name: 'Test name',
     grade: 'Test grade',
     availablePoints: 100,
     totalPoints: 40,

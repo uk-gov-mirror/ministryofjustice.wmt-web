@@ -13,7 +13,7 @@ before(function () {
     get: sinon.stub().returns(ohDataHelper.ORGANISATIONAL_HIERARCHY_TREE_MULTIPLE_BRANCHES)
   }
   getBreadcrumbs = proxyquire('../../../app/services/get-breadcrumbs',
-    {'./organisational-hierarchy-tree': getTree}
+    { './organisational-hierarchy-tree': getTree }
   )
 })
 

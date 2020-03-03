@@ -55,8 +55,8 @@ module.exports.addRoles = function () {
 
 module.exports.getAnyExistingUsernameWithExistingRole = function () {
   return knex('users')
-  .join('user_role', 'user_role.user_id', 'users.id')
-  .first('users.username')
+    .join('user_role', 'user_role.user_id', 'users.id')
+    .first('users.username')
 }
 
 module.exports.removeInsertedData = function (inserts) {

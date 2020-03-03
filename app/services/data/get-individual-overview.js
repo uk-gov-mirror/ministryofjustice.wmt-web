@@ -27,7 +27,7 @@ module.exports = function (id) {
     ' FROM ' + table + ' WITH (NOEXPAND)' +
     whereClause
   )
-  .then(function (results) {
-    return results[0]
-  })
+    .then(function (results) {
+      return results[0]
+    })
 }

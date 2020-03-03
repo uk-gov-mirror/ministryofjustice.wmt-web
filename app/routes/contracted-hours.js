@@ -41,22 +41,22 @@ module.exports = function (router) {
     var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return contractedHoursService.getContractedHours(id, organisationLevel, workloadType)
-    .then(function (result) {
-      return res.render('contracted-hours', {
-        title: result.title,
-        subTitle: result.subTitle,
-        breadcrumbs: result.breadcrumbs,
-        subNav: getSubNav(id, organisationLevel, req.path, workloadType, authorisedUserRole.authorisation, authorisedUserRole.userRole),
-        contractedHours: result.contractedHours,
-        woId: id,
-        hoursUpdatedSuccess: req.query.hoursUpdatedSuccess,
-        workloadType: workloadType,
-        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+      .then(function (result) {
+        return res.render('contracted-hours', {
+          title: result.title,
+          subTitle: result.subTitle,
+          breadcrumbs: result.breadcrumbs,
+          subNav: getSubNav(id, organisationLevel, req.path, workloadType, authorisedUserRole.authorisation, authorisedUserRole.userRole),
+          contractedHours: result.contractedHours,
+          woId: id,
+          hoursUpdatedSuccess: req.query.hoursUpdatedSuccess,
+          workloadType: workloadType,
+          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
+        })
+      }).catch(function (error) {
+        next(error)
       })
-    }).catch(function (error) {
-      next(error)
-    })
   })
 
   router.post('/:workloadType/:organisationLevel/:id/contracted-hours', function (req, res, next) {
@@ -103,7 +103,7 @@ module.exports = function (router) {
               workloadType: workloadType,
               woId: id,
               userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-              authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+              authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
             })
           }).catch(function (error) {
             next(error)
@@ -114,11 +114,11 @@ module.exports = function (router) {
     }
 
     return contractedHoursService.updateContractedHours(id, organisationLevel, updatedHours, workloadType)
-    .then(function () {
-      return res.redirect('/' + workloadType + '/offender-manager/' + id + '/contracted-hours?hoursUpdatedSuccess=true')
-    }).catch(function (error) {
-      next(error)
-    })
+      .then(function () {
+        return res.redirect('/' + workloadType + '/offender-manager/' + id + '/contracted-hours?hoursUpdatedSuccess=true')
+      }).catch(function (error) {
+        next(error)
+      })
   })
 
   function isValid (updatedHours, next) {

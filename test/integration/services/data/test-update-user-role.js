@@ -25,9 +25,9 @@ describe('/services/data/update-user-role', function () {
             userRole.roleId = addedRole[0].id
             newRole = addedRole[1].id
             return insertUserRole(userRole)
-            .then(function (id) {
-              insertedData = insertedData.concat([{table: 'user_role', id: id}])
-            })
+              .then(function (id) {
+                insertedData = insertedData.concat([{ table: 'user_role', id: id }])
+              })
           })
       })
   })
@@ -37,10 +37,10 @@ describe('/services/data/update-user-role', function () {
       .then(function (result) {
         expect(result).to.be.a('number')
         return getUserRoleByUsername(username)
-        .then(function (results) {
-          expect(results.roleId).to.be.a('number')
-          expect(results.roleId).to.equal(newRole)
-        })
+          .then(function (results) {
+            expect(results.roleId).to.be.a('number')
+            expect(results.roleId).to.equal(newRole)
+          })
       })
   })
 

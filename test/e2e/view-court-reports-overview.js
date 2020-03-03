@@ -27,9 +27,9 @@ describe('View court-reports overview', function () {
       })
       .then(function (builtInserts) {
         dataHelper.selectGradeForWorkloadOwner(workloadOwnerId)
-        .then(function (gradeResult) {
-          workloadOwnerGrade = gradeResult
-        })
+          .then(function (gradeResult) {
+            workloadOwnerGrade = gradeResult
+          })
       })
   })
 
@@ -134,34 +134,34 @@ describe('View court-reports overview', function () {
 
   it('should contain breadcrumbs which allow the user to navigate up the org hierarchy', function () {
     return browser.url(workloadOwnerDefaultUrl)
-    .getText('.sln-page-subtitle')
-    .then(function (text) {
-      expect(text).to.equal('Offender Manager')
-    })
-    .waitForExist('[href="' + teamDefaultUrl + '"]')
-    .waitForExist('[href="' + lduDefaultUrl + '"]')
-    .waitForExist('[href="' + regionDefaultUrl + '"]')
-    .waitForExist('[href="' + nationalDefaultUrl + '"]')
-    .click('[href="' + teamDefaultUrl + '"]')
-    .getText('.sln-page-subtitle')
-    .then(function (text) {
-      expect(text).to.equal('Team')
-    })
-    .click('[href="' + lduDefaultUrl + '"]')
-    .getText('.sln-page-subtitle')
-    .then(function (text) {
-      expect(text).to.equal('LDU Cluster')
-    })
-    .click('[href="' + regionDefaultUrl + '"]')
-    .getText('.sln-page-subtitle')
-    .then(function (text) {
-      expect(text).to.equal('Division')
-    })
-    .click('[href="' + nationalDefaultUrl + '"]')
-    .getText('.sln-page-subtitle')
-    .then(function (text) {
-      expect(text).to.equal('National')
-    })
+      .getText('.sln-page-subtitle')
+      .then(function (text) {
+        expect(text).to.equal('Offender Manager')
+      })
+      .waitForExist('[href="' + teamDefaultUrl + '"]')
+      .waitForExist('[href="' + lduDefaultUrl + '"]')
+      .waitForExist('[href="' + regionDefaultUrl + '"]')
+      .waitForExist('[href="' + nationalDefaultUrl + '"]')
+      .click('[href="' + teamDefaultUrl + '"]')
+      .getText('.sln-page-subtitle')
+      .then(function (text) {
+        expect(text).to.equal('Team')
+      })
+      .click('[href="' + lduDefaultUrl + '"]')
+      .getText('.sln-page-subtitle')
+      .then(function (text) {
+        expect(text).to.equal('LDU Cluster')
+      })
+      .click('[href="' + regionDefaultUrl + '"]')
+      .getText('.sln-page-subtitle')
+      .then(function (text) {
+        expect(text).to.equal('Division')
+      })
+      .click('[href="' + nationalDefaultUrl + '"]')
+      .getText('.sln-page-subtitle')
+      .then(function (text) {
+        expect(text).to.equal('National')
+      })
   })
 
   after(function () {

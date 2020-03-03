@@ -72,17 +72,17 @@ describe('View your caseload capacity flow', () => {
 
   it('should navigate to the region caseload capacity screen', () => {
     return browser.url(regionDefaultUrl + '/caseload-capacity')
-    .waitForExist('.breadcrumbs')
-    .waitForExist('.sln-subnav')
-    .waitForExist('[href="' + regionDefaultUrl + '/caseload-capacity"]')
-    .waitForExist('[href="' + regionDefaultUrl + '/case-progress"]')
-    .waitForExist('.plot-container.plotly')
-    .waitForExist('#capacity-breakdown')
-    .waitForExist('.sln-page-subtitle')
-    .getText('.sln-page-subtitle')
-    .then(function (text) {
-      expect(text).to.equal('Division')
-    })
+      .waitForExist('.breadcrumbs')
+      .waitForExist('.sln-subnav')
+      .waitForExist('[href="' + regionDefaultUrl + '/caseload-capacity"]')
+      .waitForExist('[href="' + regionDefaultUrl + '/case-progress"]')
+      .waitForExist('.plot-container.plotly')
+      .waitForExist('#capacity-breakdown')
+      .waitForExist('.sln-page-subtitle')
+      .getText('.sln-page-subtitle')
+      .then(function (text) {
+        expect(text).to.equal('Division')
+      })
   })
 
   it('should navigate to the national caseload capacity screen', () => {

@@ -52,7 +52,7 @@ module.exports = function (router) {
           subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
           date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
         })
       })
     }).catch(function (error) {
@@ -91,8 +91,8 @@ module.exports = function (router) {
         throw new Error('Unable to find file')
       }
     })
-    .catch(function (error) {
-      next(error)
-    })
+      .catch(function (error) {
+        next(error)
+      })
   })
 }

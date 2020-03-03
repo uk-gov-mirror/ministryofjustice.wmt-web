@@ -31,7 +31,7 @@ module.exports = function (router) {
       title: 'Archive Data Options',
       breadcrumbs: breadcrumbs,
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+      authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
     })
   })
 }

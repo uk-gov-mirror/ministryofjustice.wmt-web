@@ -10,7 +10,7 @@ var logger = bunyan.createLogger({
   name: 'wmt-web',
   streams: [],
   serializers: {
-    'error': errorSerializer
+    error: errorSerializer
   }
 })
 

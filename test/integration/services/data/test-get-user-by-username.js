@@ -11,12 +11,12 @@ var name
 describe('/services/data/get-user-by-username', function () {
   before(function () {
     return userRoleHelper.addUsers()
-       .then(function (users) {
-         insertedData = users
-         username = users[0].username
-         userId = users[0].id
-         name = users[0].name
-       })
+      .then(function (users) {
+        insertedData = users
+        username = users[0].username
+        userId = users[0].id
+        name = users[0].name
+      })
   })
 
   it('should get user by the username', function () {

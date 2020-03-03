@@ -26,22 +26,22 @@ module.exports = function (archiveDateRange, extraCriteria) {
 
   if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {
     return knex('daily_archive_data')
-    .limit(parseInt(archiveDataLimit))
-    .select(selectColumns)
-    .whereBetween('workload_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
-      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
-    .andWhere(function () {
-      this.where('team_name', 'like', '%' + extraCriteria + '%')
-      .orWhere('ldu_name', 'like', '%' + extraCriteria + '%')
-      .orWhere('om_name', 'like', '%' + extraCriteria + '%')
-    })
-    .orderBy('workload_id', 'ASC')
+      .limit(parseInt(archiveDataLimit))
+      .select(selectColumns)
+      .whereBetween('workload_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+        archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+      .andWhere(function () {
+        this.where('team_name', 'like', '%' + extraCriteria + '%')
+          .orWhere('ldu_name', 'like', '%' + extraCriteria + '%')
+          .orWhere('om_name', 'like', '%' + extraCriteria + '%')
+      })
+      .orderBy('workload_id', 'ASC')
   } else {
     return knex('daily_archive_data')
-    .limit(parseInt(archiveDataLimit))
-    .select(selectColumns)
-    .whereBetween('workload_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
-      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
-    .orderBy('workload_id', 'ASC')
+      .limit(parseInt(archiveDataLimit))
+      .select(selectColumns)
+      .whereBetween('workload_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+        archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+      .orderBy('workload_id', 'ASC')
   }
 }

@@ -27,7 +27,7 @@ describe('/caseload-capacity', function () {
   var getOutstandingReportsStub
   var getSubNavStub
   var getLastUpdated
-  var capacityStubResult = {title: 'Test', capacityTable: {}, subNav: [{}]}
+  var capacityStubResult = { title: 'Test', capacityTable: {}, subNav: [{}] }
   var authorisationService
   var getCaseDetailsStub
   authorisationService = {

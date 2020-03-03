@@ -16,7 +16,7 @@ module.exports = function (id, organisationLevel) {
     .then(function (outstandingReports) {
       var result = []
       if (organisationLevel === organisationConstant.TEAM.name) {
-        var totals = {name: 'Total', totalOW: 0, totalOT: 0, totalUPW: 0, totalSL: 0, totalSSO: 0}
+        var totals = { name: 'Total', totalOW: 0, totalOT: 0, totalUPW: 0, totalSL: 0, totalSSO: 0 }
         outstandingReports.forEach((report) => {
           result.push(addT2aCases(report))
           addTotals(totals, addT2aCases(report))
@@ -48,7 +48,7 @@ var addT2aCases = function (report) {
 
 var groupReportsByOrgName = function (outstandingReports) {
   var result = []
-  var totals = {name: 'Total', totalOW: 0, totalOT: 0, totalUPW: 0, totalSL: 0, totalSSO: 0}
+  var totals = { name: 'Total', totalOW: 0, totalOT: 0, totalUPW: 0, totalSL: 0, totalSSO: 0 }
   var organisationMap = new Map()
   outstandingReports.forEach(function (outstandingReport) {
     var report = addT2aCases(outstandingReport)

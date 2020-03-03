@@ -23,7 +23,7 @@ module.exports = function (id, type) {
   return knex.schema.raw('SELECT ' + selectList.join(', ') +
         ' FROM ' + table +
         whereString)
-      .then(function (results) {
-        return results
-      })
+    .then(function (results) {
+      return results
+    })
 }

@@ -8,12 +8,12 @@ module.exports = function (fileId) {
   const DASHBOARD = 'DASHBOARD'
 
   var whereString = {
-    'file_type': DASHBOARD,
-    'is_enabled': true
+    file_type: DASHBOARD,
+    is_enabled: true
   }
 
   if (fileId) {
-    whereString['id'] = fileId
+    whereString.id = fileId
   }
 
   const columns = [

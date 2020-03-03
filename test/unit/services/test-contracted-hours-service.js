@@ -53,21 +53,21 @@ describe('services/contracted-hours-service', function () {
     it('should call get-breadcrumbs and return a results object with breadcrumbs, title, subtitle and contracted hours', function () {
       getContractedHoursForWorkloadOwner.withArgs(id).resolves(CONTRACTED_HOURS)
       return contractedHoursService.getContractedHours(id, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.PROBATION)
-      .then(function (result) {
-        assert(getBreadcrumbs.calledWith(id, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.PROBATION))
-        expect(result.breadcrumbs).to.eql(breadcrumbs)
-        expect(result.subTitle).to.eql(expectedSubTitile)
-        expect(result.title).to.eql(expectedTitle)
-        expect(result.contractedHours).to.eql(CONTRACTED_HOURS)
-      })
+        .then(function (result) {
+          assert(getBreadcrumbs.calledWith(id, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.PROBATION))
+          expect(result.breadcrumbs).to.eql(breadcrumbs)
+          expect(result.subTitle).to.eql(expectedSubTitile)
+          expect(result.title).to.eql(expectedTitle)
+          expect(result.contractedHours).to.eql(CONTRACTED_HOURS)
+        })
     })
 
     it('should call get-contracted-hours-for-workload-owner with the correct parameters', function () {
       getContractedHoursForWorkloadOwner.withArgs(id).resolves(CONTRACTED_HOURS)
       return contractedHoursService.getContractedHours(id, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.PROBATION)
-      .then(function (result) {
+        .then(function (result) {
         expect(getContractedHoursForWorkloadOwner.calledWith(id)).to.be.true //eslint-disable-line
-      })
+        })
     })
 
     it('should throw error when called with team organisational unit', function () {
@@ -80,11 +80,11 @@ describe('services/contracted-hours-service', function () {
     it('should call update-contracted-hours-for-workload-owner with correct parameters', function () {
       updateContractedHoursForWorkloadOwner.withArgs(id, UPDATED_CONTRACTED_HOURS).resolves(1)
       return contractedHoursService.updateContractedHours(id, orgUnitConstant.OFFENDER_MANAGER.name, UPDATED_CONTRACTED_HOURS, workloadTypes.PROBATION)
-      .then(function (result) {
+        .then(function (result) {
         expect(updateContractedHoursForWorkloadOwner.calledWith(id, UPDATED_CONTRACTED_HOURS)).to.be.true //eslint-disable-line
         expect(getLatestIdsForWpRecalc.calledWith(id)).to.be.true //eslint-disable-line
         expect(createWorkloadPointsRecalculationTask.calledWith(3, 2)).to.be.true //eslint-disable-line
-      })
+        })
     })
 
     it('should throw error when called with team organisational unit', function () {
@@ -95,12 +95,12 @@ describe('services/contracted-hours-service', function () {
     it('should throw error when no record is updated', function () {
       updateContractedHoursForWorkloadOwner.withArgs(id, UPDATED_CONTRACTED_HOURS).resolves(0)
       return contractedHoursService.updateContractedHours(id, orgUnitConstant.OFFENDER_MANAGER.name, UPDATED_CONTRACTED_HOURS, workloadTypes.PROBATION)
-      .then(function () {
-        assert.fail()
-      })
-      .catch(function (err) {
-        expect(err.message).to.eql('Offender manager with id: 1 has not had contracted hours updated')
-      })
+        .then(function () {
+          assert.fail()
+        })
+        .catch(function (err) {
+          expect(err.message).to.eql('Offender manager with id: 1 has not had contracted hours updated')
+        })
     })
   })
 
@@ -108,21 +108,21 @@ describe('services/contracted-hours-service', function () {
     it('should call get-breadcrumbs and return a results object with breadcrumbs, title, subtitle and contracted hours', function () {
       getContractedHoursForWorkloadOwner.withArgs(id).resolves(CONTRACTED_HOURS)
       return contractedHoursService.getContractedHours(id, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS)
-      .then(function (result) {
-        assert(getBreadcrumbs.calledWith(id, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS))
-        expect(result.breadcrumbs).to.eql(breadcrumbs)
-        expect(result.subTitle).to.eql(expectedSubTitile)
-        expect(result.title).to.eql(expectedTitle)
-        expect(result.contractedHours).to.eql(CONTRACTED_HOURS)
-      })
+        .then(function (result) {
+          assert(getBreadcrumbs.calledWith(id, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS))
+          expect(result.breadcrumbs).to.eql(breadcrumbs)
+          expect(result.subTitle).to.eql(expectedSubTitile)
+          expect(result.title).to.eql(expectedTitle)
+          expect(result.contractedHours).to.eql(CONTRACTED_HOURS)
+        })
     })
 
     it('should call get-contracted-hours-for-workload-owner with the correct parameters', function () {
       getContractedHoursForWorkloadOwner.withArgs(id).resolves(CONTRACTED_HOURS)
       return contractedHoursService.getContractedHours(id, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS)
-      .then(function (result) {
+        .then(function (result) {
         expect(getContractedHoursForWorkloadOwner.calledWith(id)).to.be.true //eslint-disable-line
-      })
+        })
     })
 
     it('should throw error when called with team organisational unit', function () {
@@ -135,11 +135,11 @@ describe('services/contracted-hours-service', function () {
     it('should call update-contracted-hours-for-workload-owner with correct parameters', function () {
       updateContractedHoursForWorkloadOwner.withArgs(id, UPDATED_CONTRACTED_HOURS).resolves(1)
       return contractedHoursService.updateContractedHours(id, orgUnitConstant.OFFENDER_MANAGER.name, UPDATED_CONTRACTED_HOURS, workloadTypes.COURT_REPORTS)
-      .then(function (result) {
+        .then(function (result) {
         expect(updateContractedHoursForWorkloadOwner.calledWith(id, UPDATED_CONTRACTED_HOURS)).to.be.true //eslint-disable-line
         expect(getLatestIdsForCourtReportsCalc.calledWith(id)).to.be.true //eslint-disable-line
         expect(createCourtReportsCalculationTask.calledWith(3, 1)).to.be.true //eslint-disable-line
-      })
+        })
     })
 
     it('should throw error when called with team organisational unit', function () {
@@ -150,12 +150,12 @@ describe('services/contracted-hours-service', function () {
     it('should throw error when no record is updated', function () {
       updateContractedHoursForWorkloadOwner.withArgs(id, UPDATED_CONTRACTED_HOURS).resolves(0)
       return contractedHoursService.updateContractedHours(id, orgUnitConstant.OFFENDER_MANAGER.name, UPDATED_CONTRACTED_HOURS, workloadTypes.COURT_REPORTS)
-      .then(function () {
-        assert.fail()
-      })
-      .catch(function (err) {
-        expect(err.message).to.eql('Offender manager with id: 1 has not had contracted hours updated')
-      })
+        .then(function () {
+          assert.fail()
+        })
+        .catch(function (err) {
+          expect(err.message).to.eql('Offender manager with id: 1 has not had contracted hours updated')
+        })
     })
   })
 })

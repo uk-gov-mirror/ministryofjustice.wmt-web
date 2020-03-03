@@ -6,9 +6,9 @@ module.exports = function (username) {
   }
 
   return knex('users')
-        .where('username', username)
-        .del()
-        .then(function (count) {
-          return count
-        })
+    .where('username', username)
+    .del()
+    .then(function (count) {
+      return count
+    })
 }

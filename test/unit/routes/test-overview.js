@@ -119,11 +119,11 @@ describe('overview route', function () {
   it('should call the getSubNav with the correct parameters', function () {
     getOverview.resolves(OVERVIEW)
     return supertest(app)
-        .get(OM_OVERVIEW_URL)
-        .expect(200)
-        .then(function () {
+      .get(OM_OVERVIEW_URL)
+      .expect(200)
+      .then(function () {
           expect(getSubNavStub.calledWith('1', orgUnit.OFFENDER_MANAGER.name, OM_OVERVIEW_URL)).to.be.true //eslint-disable-line
-        })
+      })
   })
 })
 

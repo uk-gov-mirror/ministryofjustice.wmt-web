@@ -20,17 +20,17 @@ var inserts = []
 describe('/services/data/insert-reduction', function () {
   before(function () {
     return dataHelper.addWorkloadCapacitiesForOffenderManager()
-    .then(function (result) {
-      inserts = result
-      return dataHelper.getAnyExistingWorkloadOwnerId()
-        .then(function (id) {
-          workloadOwnerId = id
-          return dataHelper.getAnyExistingReductionReasonId()
-            .then(function (id) {
-              testReduction.reasonForReductionId = id
-            })
-        })
-    })
+      .then(function (result) {
+        inserts = result
+        return dataHelper.getAnyExistingWorkloadOwnerId()
+          .then(function (id) {
+            workloadOwnerId = id
+            return dataHelper.getAnyExistingReductionReasonId()
+              .then(function (id) {
+                testReduction.reasonForReductionId = id
+              })
+          })
+      })
   })
 
   it('should return an id when a valid reduction has been added', function () {

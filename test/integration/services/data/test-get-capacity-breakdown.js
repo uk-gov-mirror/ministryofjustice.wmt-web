@@ -41,40 +41,40 @@ describe('services/data/get-capacity-breakdown', function () {
 
   it('should retrieve summed capacity breakdown data for teams within ldu', function () {
     return getCapacityBreakdown(inserts.filter((item) => item.table === 'ldu')[0].id, 'ldu')
-    .then(function (results) {
-      var expectedEntry = Object.assign(capacityBreakdown,
-        {
-          linkId: inserts.filter((item) => item.table === 'team')[0].id,
-          name: 'Test Team'
-        })
-      expect(results.length).to.be.eql(1)
-      expect(results).to.contain(expectedEntry)
-    })
+      .then(function (results) {
+        var expectedEntry = Object.assign(capacityBreakdown,
+          {
+            linkId: inserts.filter((item) => item.table === 'team')[0].id,
+            name: 'Test Team'
+          })
+        expect(results.length).to.be.eql(1)
+        expect(results).to.contain(expectedEntry)
+      })
   })
 
   it('should retrieve summed capacity breakdown data for ldus within region', function () {
     return getCapacityBreakdown(inserts.filter((item) => item.table === 'region')[0].id, 'region')
-    .then(function (results) {
-      var expectedEntry = Object.assign(capacityBreakdown,
-        {
-          linkId: inserts.filter((item) => item.table === 'ldu')[0].id,
-          name: 'Test LDU'
-        })
-      expect(results.length).to.be.eql(1)
-      expect(results).to.contain(expectedEntry)
-    })
+      .then(function (results) {
+        var expectedEntry = Object.assign(capacityBreakdown,
+          {
+            linkId: inserts.filter((item) => item.table === 'ldu')[0].id,
+            name: 'Test LDU'
+          })
+        expect(results.length).to.be.eql(1)
+        expect(results).to.contain(expectedEntry)
+      })
   })
 
   it('should retrieve summed capacity breakdown data for regions within national', function () {
     return getCapacityBreakdown(undefined, 'hmpps')
-    .then(function (results) {
-      var expectedEntry = Object.assign(capacityBreakdown,
-        {
-          linkId: inserts.filter((item) => item.table === 'region')[0].id,
-          name: 'Test Region'
-        })
-      expect(results).to.contain(expectedEntry)
-    })
+      .then(function (results) {
+        var expectedEntry = Object.assign(capacityBreakdown,
+          {
+            linkId: inserts.filter((item) => item.table === 'region')[0].id,
+            name: 'Test Region'
+          })
+        expect(results).to.contain(expectedEntry)
+      })
   })
 
   after(function () {

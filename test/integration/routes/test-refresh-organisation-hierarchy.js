@@ -19,12 +19,12 @@ describe(REFRESH_ORG_HIERARCHY_URI, function () {
   it('should refresh the hierarchy and the new inserts should appear', function () {
     var oldTree = organisationalHierarchyTree.get()
     return supertest(app)
-        .get(REFRESH_ORG_HIERARCHY_URI)
-        .expect(200)
-        .then(function () {
-          var tree = organisationalHierarchyTree.get()
-          expect(oldTree).to.not.eql(tree)
-        })
+      .get(REFRESH_ORG_HIERARCHY_URI)
+      .expect(200)
+      .then(function () {
+        var tree = organisationalHierarchyTree.get()
+        expect(oldTree).to.not.eql(tree)
+      })
   })
 
   after(function () {

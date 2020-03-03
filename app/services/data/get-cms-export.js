@@ -35,7 +35,7 @@ module.exports = function (id, type) {
       ' FROM ' + table +
       ' JOIN ' + table2 + ' ON contactCMS.contactId = omCMS.contactId' +
         whereString)
-      .then(function (results) {
-        return results
-      })
+    .then(function (results) {
+      return results
+    })
 }

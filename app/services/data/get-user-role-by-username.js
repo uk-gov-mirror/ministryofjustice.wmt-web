@@ -14,7 +14,7 @@ module.exports = function (username) {
     .then(function (result) {
       var role = result[0]
       if (!role) {
-        role = {roleId: 0, role: Roles.STAFF}
+        role = { roleId: 0, role: Roles.STAFF }
       }
       return role
     })

@@ -34,12 +34,12 @@ describe('/services/data/remove-user-role-by-user-id', function () {
       .then(function (count) {
         expect(count).to.be.greaterThan(0)
         return getUserRoleByUsername(username)
-        .then(function (results) {
+          .then(function (results) {
           // The default role, Staff, role should be returned.
-          expect(results.roleId).to.be.a('number')
-          expect(results.roleId).to.equal(0)
-          expect(results.role).to.equal('Staff')
-        })
+            expect(results.roleId).to.be.a('number')
+            expect(results.roleId).to.equal(0)
+            expect(results.role).to.equal('Staff')
+          })
       })
   })
 

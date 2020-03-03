@@ -49,7 +49,7 @@ describe('services/data/insert-new-workload-points', function () {
   it('should return an id when a valid workload points object has been added, and the row should exist in the DB', function () {
     return insertWorkloadPoints(defaultWorkloadPoints)
       .then(function (id) {
-        workloadPointsResult.push({table: 'workload_points', id: id[0]})
+        workloadPointsResult.push({ table: 'workload_points', id: id[0] })
         expect(id[0]).to.be.a('number')
         return dataHelper.getAllWorkloadPointsForTest()
           .then(function (workloadPoints) {
@@ -61,7 +61,7 @@ describe('services/data/insert-new-workload-points', function () {
   it('should return an id when a valid t2a workload points object has been added, and the row should exist in the DB', function () {
     return insertWorkloadPoints(defaultWorkloadPointsT2A)
       .then(function (id) {
-        workloadPointsResult.push({table: 'workload_points', id: id[0]})
+        workloadPointsResult.push({ table: 'workload_points', id: id[0] })
         expect(id[0]).to.be.a('number')
         return dataHelper.getAllWorkloadPointsForTest()
           .then(function (workloadPoints) {

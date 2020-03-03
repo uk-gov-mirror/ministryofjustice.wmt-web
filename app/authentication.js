@@ -23,7 +23,7 @@ module.exports = function (app) {
     // Get the role for the user
     return userRoleService.getUserByUsername(username).then(function (result) {
       var user = {
-        id: 0  // assume its a Staff user
+        id: 0 // assume its a Staff user
       }
       if (result) {
         user.id = result.id // actual user exists

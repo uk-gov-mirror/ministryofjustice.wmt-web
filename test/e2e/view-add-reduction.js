@@ -10,12 +10,12 @@ describe('View adding a new reduction', () => {
   before(function () {
     authenticationHerlp.login(authenticationHerlp.users.Manager)
     return dataHelper.getAnyExistingWorkloadOwnerId()
-        .then(function (results) {
-          offenderManagerId = results
-          offenderManagerUrl = '/' + workloadTypes.PROBATION + '/offender-manager/' + offenderManagerId + '/add-reduction'
-        }).then(function () {
-          return browser.url(offenderManagerUrl).waitForExist('.breadcrumbs')
-        })
+      .then(function (results) {
+        offenderManagerId = results
+        offenderManagerUrl = '/' + workloadTypes.PROBATION + '/offender-manager/' + offenderManagerId + '/add-reduction'
+      }).then(function () {
+        return browser.url(offenderManagerUrl).waitForExist('.breadcrumbs')
+      })
   })
 
   describe('should navigate to the add reduction screen', () => {

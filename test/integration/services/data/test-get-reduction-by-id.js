@@ -23,21 +23,21 @@ var inserts = []
 describe('/services/data/get-reduction-by-id', function () {
   before(function () {
     return dataHelper.addWorkloadCapacitiesForOffenderManager()
-    .then(function (result) {
-      inserts = result
-      return dataHelper.getAnyExistingWorkloadOwnerId()
-        .then(function (id) {
-          workloadOwnerId = id
-          return dataHelper.getAnyExistingReductionReasonId()
-            .then(function (id) {
-              testReduction.reasonForReductionId = id
-              return insertReduction(workloadOwnerId, testReduction)
-                .then(function (reductionId) {
-                  addedReductionId = reductionId
-                })
-            })
-        })
-    })
+      .then(function (result) {
+        inserts = result
+        return dataHelper.getAnyExistingWorkloadOwnerId()
+          .then(function (id) {
+            workloadOwnerId = id
+            return dataHelper.getAnyExistingReductionReasonId()
+              .then(function (id) {
+                testReduction.reasonForReductionId = id
+                return insertReduction(workloadOwnerId, testReduction)
+                  .then(function (reductionId) {
+                    addedReductionId = reductionId
+                  })
+              })
+          })
+      })
   })
 
   it('should get reduction by id', function () {

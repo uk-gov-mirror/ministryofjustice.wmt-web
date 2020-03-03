@@ -87,7 +87,7 @@ const EXPECTED_LDU_RESULT = [
     name: 'Test ldu 1'
   },
   {
-    'grades': [
+    grades: [
       {
         grade: 'Test grade 2',
         linkId: 2,
@@ -159,7 +159,7 @@ const EXPECTED_REGION_RESULT = [
     name: 'Test region 1'
   },
   {
-    'grades': [
+    grades: [
       {
         grade: 'Test grade 2',
         linkId: 2,

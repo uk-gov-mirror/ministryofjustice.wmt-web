@@ -36,12 +36,12 @@ gulp.task('vendorJS', function (done) {
 
 gulp.task('sync', gulp.series('vendorJS', function () {
   return gulp.src('app/assets/javascripts/**/*.js')
-          .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
+    .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
 }))
 
 gulp.task('syncAssets', function () {
   return gulp.src('app/assets/images/**/*')
-          .pipe(gulp.dest('app/public/images/', { overwrite: true }))
+    .pipe(gulp.dest('app/public/images/', { overwrite: true }))
 })
 
 gulp.task('sass', function (done) {
@@ -65,7 +65,7 @@ gulp.task('sass', function (done) {
 gulp.task('generate-assets', gulp.series('assets', 'templates', 'sync', 'sass', 'syncAssets'))
 
 gulp.task('nsp', function (cb) {
-  gulpNSP({package: path.join(__dirname, '/package.json')}, cb)
+  gulpNSP({ package: path.join(__dirname, '/package.json') }, cb)
 })
 
 gulp.task('watch', function () {

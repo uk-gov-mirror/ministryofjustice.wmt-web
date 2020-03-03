@@ -29,7 +29,7 @@ module.exports = function (results, isCSV) {
   } else {
     var capacityPercentage = calculatePercentage(results.totalPoints, results.availablePoints)
     var cmsPercentage = calculatePercentage(results.cmsAdjustmentPoints, results.availablePoints)
-    totalsToReturn = Object.assign({}, results, {capacity: capacityPercentage, cmsPercentage: cmsPercentage})
+    totalsToReturn = Object.assign({}, results, { capacity: capacityPercentage, cmsPercentage: cmsPercentage })
   }
   return totalsToReturn
 }

@@ -58,23 +58,23 @@ var renderOverview = function (req, res, next) {
   return getLastUpdated().then(function (result) {
     lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return getCourtReportOverview(id, organisationLevel)
-    .then(function (result) {
-      result.date = lastUpdated
-      result.overviewDetails.sort(function (a, b) { return a.name.localeCompare(b.name) })
-      return res.render('court-reports-overview', {
-        title: result.title,
-        subTitle: result.subTitle,
-        breadcrumbs: result.breadcrumbs,
-        organisationLevel: organisationLevel,
-        childOrganisationLevel: childOrganisationLevel,
-        childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
-        subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS, authorisedUserRole.authorisation, authorisedUserRole.userRole),
-        overviewDetails: result.overviewDetails,
-        date: result.date,
-        userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+      .then(function (result) {
+        result.date = lastUpdated
+        result.overviewDetails.sort(function (a, b) { return a.name.localeCompare(b.name) })
+        return res.render('court-reports-overview', {
+          title: result.title,
+          subTitle: result.subTitle,
+          breadcrumbs: result.breadcrumbs,
+          organisationLevel: organisationLevel,
+          childOrganisationLevel: childOrganisationLevel,
+          childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
+          subNav: getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS, authorisedUserRole.authorisation, authorisedUserRole.userRole),
+          overviewDetails: result.overviewDetails,
+          date: result.date,
+          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
+        })
       })
-    })
   }).catch(function (error) {
     if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
       var subNav = getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS, authorisedUserRole.authorisation, authorisedUserRole.userRole)

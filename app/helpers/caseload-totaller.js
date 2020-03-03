@@ -1,7 +1,7 @@
 module.exports = function (caseloadArray) {
   caseloadArray.details.forEach(function (detail) {
     if (detail.grades.length > 0) {
-      var total = {grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0}
+      var total = { grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0 }
       detail.grades.forEach(function (grade) {
         total.a += grade.a
         total.b1 += grade.b1
@@ -20,7 +20,7 @@ module.exports = function (caseloadArray) {
     }
   })
 
-  var totalRow = {grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0}
+  var totalRow = { grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0 }
   Object.keys(caseloadArray.totals).forEach(function (grade) {
     totalRow.a += caseloadArray.totals[grade].a
     totalRow.b1 += caseloadArray.totals[grade].b1

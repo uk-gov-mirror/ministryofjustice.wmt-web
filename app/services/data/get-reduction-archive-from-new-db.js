@@ -21,21 +21,21 @@ module.exports = function (archiveDateRange, extraCriteria) {
 
   if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {
     return knex('reductions_archive_view')
-    .limit(parseInt(archiveDataLimit))
-    .select(selectColumns)
-    .whereBetween('end_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
-      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
-    .andWhere(function () {
-      this.where('om_name', 'like', '%' + extraCriteria + '%')
-      .orWhere('reduction_added_by', 'like', '%' + extraCriteria + '%')
-    })
-    .orderBy('last_updated_date', 'ASC')
+      .limit(parseInt(archiveDataLimit))
+      .select(selectColumns)
+      .whereBetween('end_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+        archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+      .andWhere(function () {
+        this.where('om_name', 'like', '%' + extraCriteria + '%')
+          .orWhere('reduction_added_by', 'like', '%' + extraCriteria + '%')
+      })
+      .orderBy('last_updated_date', 'ASC')
   } else {
     return knex('reductions_archive_view')
-    .limit(parseInt(archiveDataLimit))
-    .select(selectColumns)
-    .whereBetween('end_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
-      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
-    .orderBy('last_updated_date', 'ASC')
+      .limit(parseInt(archiveDataLimit))
+      .select(selectColumns)
+      .whereBetween('end_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+        archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+      .orderBy('last_updated_date', 'ASC')
   }
 }

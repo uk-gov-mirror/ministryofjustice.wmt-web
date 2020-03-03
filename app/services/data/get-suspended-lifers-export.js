@@ -28,26 +28,26 @@ module.exports = function (id, type) {
   return knex.schema.raw('SELECT ' + selectList.join(', ') +
         ' FROM ' + table +
         whereString)
-      .then(function (results) {
-        if (results.length > 0) {
-          results.forEach(function (result) {
-            if (result.inCustody === 'N') {
-              result.inCustody = 'No'
-            } else if (result.inCustody === 'Y') {
-              result.inCustody = 'Yes'
+    .then(function (results) {
+      if (results.length > 0) {
+        results.forEach(function (result) {
+          if (result.inCustody === 'N') {
+            result.inCustody = 'No'
+          } else if (result.inCustody === 'Y') {
+            result.inCustody = 'Yes'
+          }
+          if (result.registrationDate) {
+            var newDate = new Date(result.registrationDate)
+            var year = newDate.getFullYear()
+            var month = newDate.getMonth() + 1
+            var dt = newDate.getDate()
+            if (month < 10) {
+              month = '0' + month
             }
-            if (result.registrationDate) {
-              var newDate = new Date(result.registrationDate)
-              var year = newDate.getFullYear()
-              var month = newDate.getMonth() + 1
-              var dt = newDate.getDate()
-              if (month < 10) {
-                month = '0' + month
-              }
-              result.registrationDate = dt + '/' + month + '/' + year
-            }
-          })
-        }
-        return results
-      })
+            result.registrationDate = dt + '/' + month + '/' + year
+          }
+        })
+      }
+      return results
+    })
 }

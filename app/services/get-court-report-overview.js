@@ -8,11 +8,11 @@ module.exports = function (id, organisationLevel) {
   var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
 
   return getCourtReportOverview(id, organisationLevel)
-  .then(function (courtReportOverview) {
-    result.breadcrumbs = getBreadcrumbs(id, organisationLevel, workloadTypeConst.COURT_REPORTS)
-    result.overviewDetails = courtReportOverview
-    result.title = result.breadcrumbs[0].title
-    result.subTitle = organisationalUnitType.displayText
-    return result
-  })
+    .then(function (courtReportOverview) {
+      result.breadcrumbs = getBreadcrumbs(id, organisationLevel, workloadTypeConst.COURT_REPORTS)
+      result.overviewDetails = courtReportOverview
+      result.title = result.breadcrumbs[0].title
+      result.subTitle = organisationalUnitType.displayText
+      return result
+    })
 }

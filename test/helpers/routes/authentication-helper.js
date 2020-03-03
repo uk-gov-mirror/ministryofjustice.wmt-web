@@ -25,7 +25,7 @@ var login = function (user) {
 
 var logout = function () {
   return browser.url('/logout')
-  .pause(1000)
+    .pause(1000)
 }
 
 module.exports.login = login

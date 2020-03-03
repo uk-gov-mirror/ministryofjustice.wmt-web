@@ -46,7 +46,7 @@ class FieldValidator {
   }
 
   isInt (min, max) {
-    let options = { allow_leading_zeroes: false, min: min, max: max }
+    const options = { allow_leading_zeroes: false, min: min, max: max }
     if (this.data && !validator.isInt(this.data.toString(), options)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getIsIntegerMessage, options)
     }
@@ -54,7 +54,7 @@ class FieldValidator {
   }
 
   isFloat (min, max) {
-    let options = { min: min, max: max }
+    const options = { min: min, max: max }
     if (this.data && !validator.isFloat(this.data, options)) {
       this.errors.add(this.fieldName, ERROR_MESSAGES.getIsFloatMessage, options)
     }

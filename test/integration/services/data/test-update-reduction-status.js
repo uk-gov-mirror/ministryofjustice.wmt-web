@@ -24,22 +24,22 @@ var inserts = []
 describe('/services/data/update-reduction-status', function () {
   before(function () {
     return dataHelper.addWorkloadCapacitiesForOffenderManager()
-    .then(function (result) {
-      inserts = result
-      return dataHelper.getAnyExistingWorkloadOwnerId()
-        .then(function (id) {
-          workloadOwnerId = id
-          return dataHelper.getAnyExistingReductionReasonId()
-            .then(function (id) {
-              testReduction.reasonForReductionId = id
-              return insertReduction(workloadOwnerId, testReduction)
-                .then(function (reductionId) {
-                  addedReductionId = reductionId
-                  reductionResult.id = addedReductionId[0]
-                })
-            })
-        })
-    })
+      .then(function (result) {
+        inserts = result
+        return dataHelper.getAnyExistingWorkloadOwnerId()
+          .then(function (id) {
+            workloadOwnerId = id
+            return dataHelper.getAnyExistingReductionReasonId()
+              .then(function (id) {
+                testReduction.reasonForReductionId = id
+                return insertReduction(workloadOwnerId, testReduction)
+                  .then(function (reductionId) {
+                    addedReductionId = reductionId
+                    reductionResult.id = addedReductionId[0]
+                  })
+              })
+          })
+      })
   })
 
   it('should update a reduction status and return an id ', function () {

@@ -11,13 +11,13 @@ describe('View contracted hours for court reporter', function () {
   before(function () {
     authenticationHelper.login(authenticationHelper.users.Manager)
     return crDataHelper.selectIdsForCourtReporterWorkloadOwner()
-    .then(function (results) {
-      workloadOwnerIds = results
-      workloadOwnerId = workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
-      workloadOwnerDefaultUrl = '/' + workloadTypes.COURT_REPORTS + '/offender-manager/' + workloadOwnerId
-    }).then(function () {
-      return browser.url(workloadOwnerDefaultUrl + '/contracted-hours').waitForExist('.breadcrumbs')
-    })
+      .then(function (results) {
+        workloadOwnerIds = results
+        workloadOwnerId = workloadOwnerIds.filter((item) => item.table === 'workload_owner')[0].id
+        workloadOwnerDefaultUrl = '/' + workloadTypes.COURT_REPORTS + '/offender-manager/' + workloadOwnerId
+      }).then(function () {
+        return browser.url(workloadOwnerDefaultUrl + '/contracted-hours').waitForExist('.breadcrumbs')
+      })
   })
 
   it('should navigate to the court reporter contracted-hours page', function () {

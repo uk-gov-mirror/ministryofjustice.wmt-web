@@ -56,53 +56,53 @@ module.exports.getAddReductionsRefData = function (id, organisationLevel, worklo
 
 module.exports.addReduction = function (id, reduction, workloadType) {
   return addReduction(id, reduction)
-  .then(function () {
-    if (workloadType === workloadTypes.PROBATION) {
-      return getLatestIdsForWorkloadPointsRecalc(id)
-      .then(function (ids) {
-        return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
-      })
-    } else {
-      return getLatestIdsForCourtReportsCalc(id)
-      .then(function (ids) {
-        return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
-      })
-    }
-  })
+    .then(function () {
+      if (workloadType === workloadTypes.PROBATION) {
+        return getLatestIdsForWorkloadPointsRecalc(id)
+          .then(function (ids) {
+            return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
+          })
+      } else {
+        return getLatestIdsForCourtReportsCalc(id)
+          .then(function (ids) {
+            return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
+          })
+      }
+    })
 }
 
 module.exports.updateReduction = function (id, reductionId, reduction, workloadType) {
   return updateReduction(reductionId, id, reduction)
-  .then(function (result) {
-    if (workloadType === workloadTypes.PROBATION) {
-      return getLatestIdsForWorkloadPointsRecalc(id)
-      .then(function (ids) {
-        return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
-      })
-    } else {
-      return getLatestIdsForCourtReportsCalc(id)
-      .then(function (ids) {
-        return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
-      })
-    }
-  })
+    .then(function (result) {
+      if (workloadType === workloadTypes.PROBATION) {
+        return getLatestIdsForWorkloadPointsRecalc(id)
+          .then(function (ids) {
+            return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
+          })
+      } else {
+        return getLatestIdsForCourtReportsCalc(id)
+          .then(function (ids) {
+            return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
+          })
+      }
+    })
 }
 
 module.exports.updateReductionStatus = function (id, reductionId, reductionStatus, workloadType) {
   return updateReductionStatus(reductionId, reductionStatus)
-  .then(function (result) {
-    if (workloadType === workloadTypes.PROBATION) {
-      return getLatestIdsForWorkloadPointsRecalc(id)
-      .then(function (ids) {
-        return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
-      })
-    } else {
-      return getLatestIdsForCourtReportsCalc(id)
-      .then(function (ids) {
-        return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
-      })
-    }
-  })
+    .then(function (result) {
+      if (workloadType === workloadTypes.PROBATION) {
+        return getLatestIdsForWorkloadPointsRecalc(id)
+          .then(function (ids) {
+            return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
+          })
+      } else {
+        return getLatestIdsForCourtReportsCalc(id)
+          .then(function (ids) {
+            return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
+          })
+      }
+    })
 }
 
 module.exports.getReductionByReductionId = function (reductionId) {

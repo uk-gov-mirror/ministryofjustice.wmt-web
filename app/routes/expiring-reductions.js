@@ -41,7 +41,7 @@ module.exports = function (router) {
           breadcrumbs: breadcrumbs,
           reductions: reductions,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
           subNav: getSubNav(req.path)
         })
       })
