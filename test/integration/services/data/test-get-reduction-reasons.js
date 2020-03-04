@@ -36,7 +36,7 @@ describe('services/data/get-reduction-reasons', function () {
         results.forEach(function (reason) {
           reasonIds.push(reason.id)
         })
-        expect(results).to.contain(Object.assign({}, reductionReasonsRow, { id: insertedId }))
+        expect(results).to.deep.contain(Object.assign({}, reductionReasonsRow, { id: insertedId }))
       })
   })
 

@@ -48,7 +48,7 @@ describe('services/data/get-capacity-breakdown', function () {
             name: 'Test Team'
           })
         expect(results.length).to.be.eql(1)
-        expect(results).to.contain(expectedEntry)
+        expect(results).to.deep.contain(expectedEntry)
       })
   })
 
@@ -61,7 +61,7 @@ describe('services/data/get-capacity-breakdown', function () {
             name: 'Test LDU'
           })
         expect(results.length).to.be.eql(1)
-        expect(results).to.contain(expectedEntry)
+        expect(results).to.deep.contain(expectedEntry)
       })
   })
 
@@ -73,7 +73,7 @@ describe('services/data/get-capacity-breakdown', function () {
             linkId: inserts.filter((item) => item.table === 'region')[0].id,
             name: 'Test Region'
           })
-        expect(results).to.contain(expectedEntry)
+        expect(results).to.deep.contain(expectedEntry)
       })
   })
 

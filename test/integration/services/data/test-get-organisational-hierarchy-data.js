@@ -26,7 +26,7 @@ describe('services/data/get-organisational-hierarchy-data', function () {
         offender_manager_forename: 'OH Forename',
         offender_manager_surname: 'OH Surname'
       }
-      expect(results).to.include(expectedResults)
+      expect(results).to.deep.include(expectedResults)
     })
   })
 

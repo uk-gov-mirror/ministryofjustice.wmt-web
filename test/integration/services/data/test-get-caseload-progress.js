@@ -94,8 +94,8 @@ describe('services/data/get-org-unit-caseload-progress', function () {
     return getCaseProgress(undefined, 'hmpps')
       .then(function (results) {
         expect(results.length).to.be.greaterThan(1)
-        expect(results).to.contain(helper.rowGenerator('Test Region', baseCaseProgressRow, 4))
-        expect(results).to.contain(helper.rowGenerator('Test Region', baseCaseProgressRow))
+        expect(results).to.deep.contain(helper.rowGenerator('Test Region', baseCaseProgressRow, 4))
+        expect(results).to.deep.contain(helper.rowGenerator('Test Region', baseCaseProgressRow))
       })
   })
 
