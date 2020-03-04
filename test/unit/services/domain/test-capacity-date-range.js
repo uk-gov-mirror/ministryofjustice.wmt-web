@@ -1,5 +1,4 @@
 const expect = require('chai').expect
-const ValidationError = require('../../../../app/services/errors/validation-error')
 const ERROR_MESSAGES = require('../../../../app/services/validators/validation-error-messages')
 const FIELD_NAMES = require('../../../../app/services/validators/validation-field-names')
 const dateFormatter = require('../../../../app/services/date-formatter')
@@ -57,7 +56,7 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_MONTH,
         VALID_TO_YEAR
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityFromDate')
       .that.contains(ERROR_MESSAGES.getPastDateMessage(FIELD_NAMES.capacityFromDate))
@@ -73,7 +72,7 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_MONTH,
         VALID_FUTURE_YEAR
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityToDate')
       .that.contains(ERROR_MESSAGES.getPastOrPresentDateMessage(FIELD_NAMES.capacityToDate))
@@ -89,7 +88,7 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_MONTH,
         VALID_FUTURE_YEAR
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityFromDate')
       .that.contains(ERROR_MESSAGES.getIsDateLaterThanMessage(FIELD_NAMES.capacityFromDate, { secondaryDisplayName: FIELD_NAMES.maxCapacityHistory }))
@@ -105,7 +104,7 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_MONTH,
         dateFormatter.now().year() - (CASELOAD_CAPACITY.MAX_HISTORY + 1)
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityToDate')
       .that.contains(ERROR_MESSAGES.getIsDateLaterThanMessage(FIELD_NAMES.capacityToDate, { secondaryDisplayName: FIELD_NAMES.capacityFromDate }))
@@ -121,7 +120,7 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_MONTH,
         VALID_TO_YEAR
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityFromDate')
       .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityFromDate))
@@ -137,7 +136,7 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_MONTH,
         VALID_TO_YEAR
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityFromDate')
       .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityFromDate))
@@ -153,7 +152,7 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_MONTH,
         VALID_TO_YEAR
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityFromDate')
       .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityFromDate))
@@ -169,7 +168,7 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_MONTH,
         VALID_TO_YEAR
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityToDate')
       .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityToDate))
@@ -185,7 +184,7 @@ describe('services/domain/capacity-date-range', function () {
         INVALID_MONTH,
         VALID_TO_YEAR
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityToDate')
       .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityToDate))
@@ -201,7 +200,7 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_MONTH,
         INVALID_YEAR
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityToDate')
       .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityToDate))
@@ -217,7 +216,7 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_MONTH,
         VALID_TO_YEAR
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityFromDate')
       .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityFromDate))
@@ -233,7 +232,7 @@ describe('services/domain/capacity-date-range', function () {
         INVALID_MONTH,
         INVALID_YEAR
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityToDate')
       .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityToDate))
@@ -249,7 +248,7 @@ describe('services/domain/capacity-date-range', function () {
         VALID_FROM_MONTH,
         VALID_FROM_YEAR
       )
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.contains.a.property('validationErrors')
       .that.contains.a.property('capacityToDate')
       .that.contains(ERROR_MESSAGES.getIsDateLaterThanMessage(FIELD_NAMES.capacityToDate, { secondaryDisplayName: FIELD_NAMES.capacityFromDate }))

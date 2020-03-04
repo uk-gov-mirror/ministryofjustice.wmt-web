@@ -1,4 +1,4 @@
-const expect = require('chai').expect
+var chai = require('chai')
 const assert = require('chai').assert
 const sinon = require('sinon')
 const proxyquire = require('proxyquire')
@@ -6,6 +6,9 @@ const orgUnitConstant = require('../../../app/constants/organisation-unit.js')
 const orgUnitFinder = require('../../../app/services/helpers/org-unit-finder')
 
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
+
+chai.use(require('sinon-chai'))
+var expect = chai.expect
 
 const OVERVIEW = {
   grade: 'PO',

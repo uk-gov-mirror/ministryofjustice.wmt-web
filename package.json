@@ -33,21 +33,22 @@
     ]
   },
   "devDependencies": {
-    "chai": "3.5.x",
+    "@wdio/cli": "^5.18.7",
+    "@wdio/mocha-framework": "^5.18.7",
+    "@wdio/sauce-service": "^5.16.10",
+    "bluebird": "^3.7.2",
+    "chai": "4.2.x",
     "cheerio": "^1.0.0-rc.2",
     "gulp-mocha": "7.0.x",
-    "gulp-standard": "9.0.x",
+    "gulp-standard": "14.0.x",
     "gulp-webdriver": "^3.0.0",
     "mocha": "7.1.x",
     "proxyquire": "2.1.x",
     "selenium-standalone": "6.17.0",
     "sinon": "^9.0.0",
-    "bluebird": "^3.7.2",
+    "sinon-chai": "^3.5.0",
     "standard": "^14.3.1",
     "supertest": "4.0.x",
-    "@wdio/mocha-framework": "^5.18.7",
-    "@wdio/sauce-service": "^5.16.10",
-    "@wdio/cli": "^5.18.7",
     "webdriverio": "^5.18.7"
   },
   "dependencies": {
