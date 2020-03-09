@@ -38,8 +38,6 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   setTierWeightings(ws, styles, t2aCaseData)
   setReportWeightings(ws, styles, caseData)
   inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType, styles)
-  ws.row(4).freeze()
-  ws.column(25).freeze()
   ws.column(25).setWidth(8)
   ws.column(24).setWidth(8)
   ws.column(2).setWidth(12)
