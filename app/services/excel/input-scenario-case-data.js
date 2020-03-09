@@ -151,9 +151,9 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     'W5:' + 'W' + endRow,
     'X5:' + 'X' + endRow
   ]
-  lockedCellRanges.forEach(function (lockedCellRange) {
-    lockCells(ws, lockedCellRange)
-  })
+  // lockedCellRanges.forEach(function (lockedCellRange) {
+  //   lockCells(ws, lockedCellRange)
+  // })
 }
 
 // Input Offender Manager Name, Grade to the left side of the produced spreadsheet
@@ -309,15 +309,15 @@ var setTierTotals = function (ws, rowStart, columnStart, casesForThisTier, t2a) 
   }
 }
 
-const lockCells = (ws, range) => {
-  ws.addDataValidation({
-    type: 'textLength',
-    error: 'This cell is locked',
-    operator: 'equal',
-    sqref: range,
-    formulas: ['']
-  })
-}
+// const lockCells = (ws, range) => {
+//   ws.addDataValidation({
+//     type: 'textLength',
+//     error: 'This cell is locked',
+//     operator: 'equal',
+//     sqref: range,
+//     formulas: ['']
+//   })
+// }
 
 module.exports = function (ws, scenarioData, typeTierGroupLength, tiersPerType, styles) {
   this.styles = styles
