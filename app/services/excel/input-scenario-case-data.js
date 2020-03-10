@@ -133,27 +133,27 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     rowStart = rowStart + 1
   }
   inputBottomTotals(ws, rowStart)
-  var endRow = rowStart - 1
-  var lockedCellRanges = [
-    'F5:' + 'F' + endRow,
-    'K5:' + 'K' + endRow,
-    'L5:' + 'L' + endRow,
-    'M5:' + 'M' + endRow,
-    'N5:' + 'N' + endRow,
-    'O5:' + 'O' + endRow,
-    'P5:' + 'P' + endRow,
-    'Q5:' + 'Q' + endRow,
-    'R5:' + 'R' + endRow,
-    'S5:' + 'S' + endRow,
-    'T5:' + 'T' + endRow,
-    'U5:' + 'U' + endRow,
-    'V5:' + 'V' + endRow,
-    'W5:' + 'W' + endRow,
-    'X5:' + 'X' + endRow
-  ]
-  lockedCellRanges.forEach(function (lockedCellRange) {
-    lockCells(ws, lockedCellRange)
-  })
+  // var endRow = rowStart - 1
+  // var lockedCellRanges = [
+  //   'F5:' + 'F' + endRow,
+  //   'K5:' + 'K' + endRow,
+  //   'L5:' + 'L' + endRow,
+  //   'M5:' + 'M' + endRow,
+  //   'N5:' + 'N' + endRow,
+  //   'O5:' + 'O' + endRow,
+  //   'P5:' + 'P' + endRow,
+  //   'Q5:' + 'Q' + endRow,
+  //   'R5:' + 'R' + endRow,
+  //   'S5:' + 'S' + endRow,
+  //   'T5:' + 'T' + endRow,
+  //   'U5:' + 'U' + endRow,
+  //   'V5:' + 'V' + endRow,
+  //   'W5:' + 'W' + endRow,
+  //   'X5:' + 'X' + endRow
+  // ]
+  // lockedCellRanges.forEach(function (lockedCellRange) {
+  //   lockCells(ws, lockedCellRange)
+  // })
 }
 
 // Input Offender Manager Name, Grade to the left side of the produced spreadsheet
@@ -231,11 +231,11 @@ var inputMainBodyFormulas = function (ws, row) {
   ws.cell(row, 6).formula(totalCasesFormula(row)).style(this.styles.nonEditableCaseStyle) // Total Cases
   ws.cell(row, 12).formula('=IFERROR((K' + row + '/W' + row + '),0)').style(this.styles.percentageStyle) // CMS %
   ws.cell(row, 14).formula('=IFERROR((M' + row + '/V' + row + '),0)').style(this.styles.percentageStyle) // GS %
-  ws.cell(row, 15).formula('=KD' + row + '*KD4').style(this.styles.nonEditableCaseStyle) // SDR Points
-  ws.cell(row, 16).formula('=KE' + row + '*KE4').style(this.styles.nonEditableCaseStyle) // FDR Points
-  ws.cell(row, 17).formula('=KF' + row + '*KF4').style(this.styles.nonEditableCaseStyle) // Parom Points
-  ws.cell(row, 18).formula('=KG' + row + '*KG4').style(this.styles.nonEditableCaseStyle) // ARMS Comm Points
-  ws.cell(row, 19).formula('=KH' + row + '*KH4').style(this.styles.nonEditableCaseStyle) // ARMS Licence Points
+  ws.cell(row, 15).formula('=KD' + row + '*$KD$4').style(this.styles.nonEditableCaseStyle) // SDR Points
+  ws.cell(row, 16).formula('=KE' + row + '*$KE$4').style(this.styles.nonEditableCaseStyle) // FDR Points
+  ws.cell(row, 17).formula('=KF' + row + '*$KF$4').style(this.styles.nonEditableCaseStyle) // Parom Points
+  ws.cell(row, 18).formula('=KG' + row + '*$KG$4').style(this.styles.nonEditableCaseStyle) // ARMS Comm Points
+  ws.cell(row, 19).formula('=KH' + row + '*$KH$4').style(this.styles.nonEditableCaseStyle) // ARMS Licence Points
   ws.cell(row, 20).formula(totalPointsFormulaPart1(row)).style(this.styles.nonEditableCaseStyle) // Total Caseload Points - Non T2A
   ws.cell(row, 21).formula(totalPointsFormulaPart2(row)).style(this.styles.nonEditableCaseStyle) // Total Caseload Points - T2A
   ws.cell(row, 22).formula('=SUM(K' + row + ',M' + row + ',O' + row + ':U' + row + ')').style(this.styles.nonEditableCaseStyle) // Overall Total Points
@@ -309,15 +309,15 @@ var setTierTotals = function (ws, rowStart, columnStart, casesForThisTier, t2a) 
   }
 }
 
-const lockCells = (ws, range) => {
-  ws.addDataValidation({
-    type: 'textLength',
-    error: 'This cell is locked',
-    operator: 'equal',
-    sqref: range,
-    formulas: ['']
-  })
-}
+// const lockCells = (ws, range) => {
+//   ws.addDataValidation({
+//     type: 'textLength',
+//     error: 'This cell is locked',
+//     operator: 'equal',
+//     sqref: range,
+//     formulas: ['']
+//   })
+// }
 
 module.exports = function (ws, scenarioData, typeTierGroupLength, tiersPerType, styles) {
   this.styles = styles
