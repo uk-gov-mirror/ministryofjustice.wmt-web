@@ -1,0 +1,57 @@
+{% extends "includes/layout.html" %}
+
+
+{% block content %}
+<main id="content" role="main">
+
+  {% include "includes/breadcrumbs.html" %}
+  {% include "includes/title-subtitle.html" %}
+  {% include "includes/validation-error-messages.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+    {% include "includes/validation-error-messages.html" %}
+
+      <h2 id="upload" class="heading-medium">Upload dashboard template</h2>
+      <p>The file must be named “dashboard_template” and the file type must be “.xlsx”</p>
+      <form action="{{ URL }}" method="post" class="form" enctype="multipart/form-data">
+
+      {% include "includes/csrf-hidden-input.html" %}
+        <div>
+          <div>
+            <p id='document-name' class="column-two-quarter"></p>
+            <a id="remove-file-upload" class="link pull-right remove-upload" href="{{ URL }}">remove</a>
+          </div>
+          <div>
+              <input id="document" type="file" name="document" class="inputfile"/>
+              <label id="label" class="custom-file-upload" for="document">Choose File</label>
+          </div>
+
+        </div>
+        <br>
+        <div class="form-group">
+          <details>
+            <summary><span class="summary">How to upload a file</span>
+              <span class="visually-hidden">If using a screen reader such as JAWS if having difficulty accessing this list then try pressing control + space to expand the list then L + down to read list items</span>
+            </summary>
+            <div class="panel panel-border-narrow">
+              <ul class="list list-number">
+                <li>Go to “choose file” above and find the file named “dashboard_template.xlsx”</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <div class="form-group">
+          <input id="file-upload-submit"
+                 type="submit"
+                 name="commit"
+                 value="Continue"
+                 class="button">
+        </div>
+      </form>
+      <a href="/admin" class="link">Cancel</a>
+    </div>
+  </div>
+</main>
+{% endblock %}
