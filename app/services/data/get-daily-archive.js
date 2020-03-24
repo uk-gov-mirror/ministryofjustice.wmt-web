@@ -21,7 +21,8 @@ module.exports = function (archiveDateRange, extraCriteria) {
     'paroms_points AS paromsPoints',
     'nominal_target AS nominalTarget',
     'contracted_hours AS contractedHours',
-    'hours_reduction AS hoursReduction'
+    'hours_reduction AS hoursReduction',
+    'workload_report_id AS workloadReportId'
   ]
 
   if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {

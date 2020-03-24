@@ -8,6 +8,7 @@ module.exports = function (archiveDateRange, extraCriteria, archiveDataLimit) {
   var selectColumns = [
     'workload_id AS workloadID',
     'workload_date AS workloadDate',
+    'workload_report_id AS workloadReportId',
     'region_name AS regionName',
     'ldu_name AS lduName',
     'team_name AS teamName',

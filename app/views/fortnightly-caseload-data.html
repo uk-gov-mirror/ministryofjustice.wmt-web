@@ -13,20 +13,20 @@
 <form method="post" class "archive-form">
         {% include "includes/csrf-hidden-input.html"%}
         
-         <div class="form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}" id="from">
+         <div class="grid-row form-group {% if errors['archiveFromDate'][0] %} form-group-error {% endif %}" id="from">
             {% if errors %}
                 <span class="error-message">{{ errors['archiveFromDate'][0] }}</span>
             {% endif %}
             <fieldset id="archiveFromDate">
-                <legend>
+                <legend class="column-full">
                     <span class="form-label-bold">
                         Show archive data from:
                     </span>
                     <span class="form-hint" id="fortnightly-archive-from-hint">
-                        For example, 30 1 2015 - Must be between 05/06/2014 and 11/08/2016
+                        For example, 30 1 2015 - This date must be on or after 18/06/2014
                     </span>
                 </legend>
-                <div class="form-date" aria-describedby="fortnightly-archive-from-hint">
+                <div class="column-full form-date" aria-describedby="fortnightly-archive-from-hint">
                     <div class="form-group form-group-day">
                         <label class="form-label" for="fortnightly-archive-from-day">Day</label>
                         <input class="form-control" id="fortnightly-archive-from-day" name="fortnightly-archive-from-day" 
@@ -45,17 +45,17 @@
                 </div>
             </fieldset>
         </div>
-        <div class="form-group {% if errors['archiveToDate'][0] %} form-group-error {% endif %}" id="to">
+        <div class="grid-row form-group {% if errors['archiveToDate'][0] %} form-group-error {% endif %}" id="to">
             {% if errors %}
                  <span class="error-message">{{ errors['archiveToDate'][0] }}</span> 
             {% endif %}
-            <fieldset id="archiveToDate">
+            <fieldset class="column-full" id="archiveToDate">
                 <legend>
                     <span class="form-label-bold">
                         Show archive data to:
                     </span>
                     <span class="form-hint" id="fortnightly-archive-to-hint">
-                        For example, 31 3 2015 - Must be between 19/06/2014 and 25/08/2016
+                        For example, 31 3 2015 - This date must be on or after 27/06/2014
                     </span>
                 </legend>
                 <div class="form-date" aria-describedby="fortnightly-archive-to-hint">
@@ -78,8 +78,8 @@
             </fieldset>
         </div>
 
-        <div class="form-group" id="fortnightly-multi-search-field">
-            <fieldset id="multiSearchDate">
+        <div class="grid-row form-group" id="fortnightly-multi-search-field">
+            <fieldset class="column-full" id="multiSearchDate">
                 <legend>
                     <span class="form-label-bold">
                         Search by Offender Manager, Team or LDU Cluster
@@ -94,9 +94,49 @@
                 </div>
             </fieldset>
         </div>
+        
+        <div class="grid-row form-group">
+            <fieldset class="column-full inline">
+              <legend>
+                <span class="form-label-bold">
+                  How would you like this data grouped?
+                </span>
+              </legend>
+          
+              <div class="column-one-quarter multiple-choice">
+                <input id="radio-inline-1" type="radio" name="radio-inline-group-2" value="Yes" checked>
+                <label for="radio-inline-1">Offender Manager</label>
+              </div>
+              <div class="column-one-quarter multiple-choice">
+                <input id="radio-inline-2" type="radio" name="radio-inline-group-2" value="No">
+                <label for="radio-inline-2">Team</label>
+              </div>
+          
+            </fieldset>
+          </div>
 
-        <input id="archive-fortnightly-filter-submit" type="submit" value="Search" class="button" formaction="/archive-data/fortnightly-caseload-data">
-        <input id="archive-fortnightly-csv-submit" type="submit" class="button sln-export" style="float: right; margin-left:10px; margin-bottom: 10px" value="Export Archive Data" formaction="/archive-data/fortnightly-caseload-data/archive-csv">
+          <div class="grid-row form-group">
+            <fieldset class="column-full inline">
+              <legend>
+                <span class="form-label-bold">
+                  At what intervals would you like this data grouped?
+                </span>
+              </legend>
+          
+              <div class="column-one-quarter multiple-choice">
+                <input id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes" checked>
+                <label for="radio-inline-1">Weekly</label>
+              </div>
+              <div class="column-one-quarter multiple-choice">
+                <input id="radio-inline-2" type="radio" name="radio-inline-group" value="No">
+                <label for="radio-inline-2">Monthly</label>
+              </div>
+          
+            </fieldset>
+          </div>
+
+        <input id="archive-fortnightly-filter-submit" type="submit" value="Search" class="button" formaction="/archive-data/average-caseload-data">
+        <input id="archive-fortnightly-csv-submit" type="submit" class="button sln-export" style="float: right; margin-left:10px; margin-bottom: 10px" value="Export Archive Data" formaction="/archive-data/average-caseload-data/archive-csv">
 </form>
 <br/>
 

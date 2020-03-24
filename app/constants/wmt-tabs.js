@@ -10,7 +10,8 @@ module.exports = {
   ADMIN: {
     DAILY_ARCHIVE: 'Daily Archive',
     FORTNIGHTLY_ARCHIVE: 'Fortnightly Archive',
-    REDUCTION_ARCHIVE: 'Reduction Archive'
+    REDUCTION_ARCHIVE: 'Reduction Archive',
+    GROUPED_ARCHIVE: 'Grouped Archive'
   },
   EXPORT: {
     ARMS_EXPORT: 'ARMS Export',

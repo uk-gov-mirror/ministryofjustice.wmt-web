@@ -12,14 +12,14 @@ const dateFormatter = require('../services/date-formatter')
 const archiveOptions = require('../constants/archive-options')
 const renderResults = require('../helpers/render-results')
 const viewTemplate = 'fortnightly-caseload-data'
-const title = 'Archived Fortnightly Caseload Data'
+const title = 'Averaged Caseload Data'
 const log = require('../logger')
 const heDecode = require('he')
 
 var archiveDateRange
 
 module.exports = function (router) {
-  router.get('/archive-data/fortnightly-caseload-data', function (req, res, next) {
+  router.get('/archive-data/average-caseload-data', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.DATA_ADMIN])
@@ -38,7 +38,7 @@ module.exports = function (router) {
     return renderResults(viewTemplate, title, res, null, null, authorisedUserRole)
   })
 
-  router.post('/archive-data/fortnightly-caseload-data', function (req, res, next) {
+  router.post('/archive-data/average-caseload-data', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.DATA_ADMIN])
@@ -83,7 +83,7 @@ module.exports = function (router) {
     })
   })
 
-  router.post('/archive-data/fortnightly-caseload-data/archive-csv', function (req, res, next) {
+  router.post('/archive-data/average-caseload-data/archive-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
       authorisation.hasRole(req, [roles.DATA_ADMIN])

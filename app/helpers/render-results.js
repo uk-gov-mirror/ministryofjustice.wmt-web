@@ -27,8 +27,8 @@ var getTopLink = function (title) {
     case 'Archived Reductions':
       link = new Link(title, '/archive-data/reductions')
       break
-    case 'Archived Fortnightly Caseload Data':
-      link = new Link(title, '/archive-data/fortnightly-caseload-data')
+    case 'Averaged Caseload Data':
+      link = new Link(title, '/archive-data/average-caseload-data')
       break
     case 'Archived Daily Caseload Data':
       link = new Link(title, '/archive-data/daily-caseload-data')
