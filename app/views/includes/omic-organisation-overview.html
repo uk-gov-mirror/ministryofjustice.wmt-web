@@ -42,8 +42,8 @@
             <tr>
                 <th class="sln-table-org-level" id="name">{{ childOrganisationLevelDisplayText }}</th>
                 <th id="cases">OMIC Cases</th>
-                <th id="hrs">Total Points while in Custody</th>
-                <th id="cases">Anticipated Points while on Licence</th>
+                <th id="custody">Total Points while in Custody</th>
+                <th id="licence">Anticipated Points while on Licence</th>
             </tr>
         </thead>
         <tbody>
@@ -51,9 +51,9 @@
             {% if member.name !== 'Total / Average' %}
             <tr>
               <td headers="name"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
-              <td>100</td>
-              <td>3000</td>
-              <td>6000</td>
+              <td headers="cases total">{{ member.totalCases }}</td>
+              <td headers="custody total">{{ member.custodyPoints }}</td>
+              <td headers="licence total">{{ member.licencePoints }}</td>
           </tr>
           {% endif %}
           {% endfor%}
@@ -63,9 +63,9 @@
         {% if member.name === 'Total / Average' %}
             <tr>
             <td headers="name om">{{ member.name }}</td>
-            <td>100</td>
-            <td>3000</td>
-            <td>6000</td>
+            <td headers="cases total">{{ member.totalTotalCases }}</td>
+            <td headers="custody total">{{ member.totalCustodyPoints }}</td>
+            <td headers="licence total">{{ member.totalLicencePoints }}</td>
             </tr>
             {% endif %}
             {% endfor %}
