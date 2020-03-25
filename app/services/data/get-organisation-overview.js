@@ -19,7 +19,6 @@ module.exports = function (id, type, workloadType = workloadTypes.PROBATION) {
       'link_id AS linkId'
     ]
   } else {
-    table = table + ' WITH (NOEXPAND)'
     selectColumns = [
       'name',
       'total_cases AS totalCases',
@@ -42,7 +41,7 @@ module.exports = function (id, type, workloadType = workloadTypes.PROBATION) {
 
   return knex.raw(
       'SELECT ' + selectColumns.join(', ') +
-      ' FROM ' + table +
+      ' FROM ' + table + ' WITH (NOEXPAND)' +
       whereClause)
     .then(function (results) {
       return results

@@ -50,7 +50,7 @@
             {% for member in overviewDetails %}
             {% if member.name !== 'Total / Average' %}
             <tr>
-              <td headers="name"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
+              <td headers="name">{% if childOrganisationLevelDisplayText !== 'Team' and childOrganisationLevelDisplayText !== 'Offender Manager' %} <a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a> {% else %} {{ member.name }} {% endif %}</td>
               <td headers="cases total">{{ member.totalCases }}</td>
               <td headers="custody total">{{ member.custodyPoints }}</td>
               <td headers="licence total">{{ member.licencePoints }}</td>

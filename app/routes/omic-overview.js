@@ -38,62 +38,6 @@ module.exports = function (router) {
     }
     return renderOverview(req, res, next)
   })
-
-  router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/overview/caseload-csv', function (req, res, next) {
-    try {
-      authorisation.assertUserAuthenticated(req)
-    } catch (error) {
-      if (error instanceof Unauthorized) {
-        return res.status(error.statusCode).redirect(error.redirect)
-      }
-    }
-    var organisationLevel = req.params.organisationLevel
-    var id
-    if (organisationLevel !== organisationUnitConstants.NATIONAL.name) {
-      id = req.params.id
-    }
-
-    var isCSV = true
-    return getOverview(id, organisationLevel, isCSV).then(function (result) {
-      var exportCsv = getExportCsv(organisationLevel, result, tabs.OVERVIEW)
-      res.attachment(exportCsv.filename)
-      res.send(exportCsv.csv)
-    }).catch(function (error) {
-      next(error)
-    })
-  })
-
-  router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/overview/reductions-csv', function (req, res, next) {
-    try {
-      authorisation.assertUserAuthenticated(req)
-      authorisation.hasRole(req, [roles.MANAGER, roles.DATA_ADMIN, roles.SYSTEM_ADMIN])
-    } catch (error) {
-      if (error instanceof Unauthorized) {
-        return res.status(error.statusCode).redirect(error.redirect)
-      } else if (error instanceof Forbidden) {
-        return res.status(error.statusCode).render(error.redirect, {
-          heading: messages.ACCESS_DENIED,
-          message: messages.MANAGER_ROLES_REQUIRED
-        })
-      }
-    }
-    var organisationLevel = req.params.organisationLevel
-    var id = req.params.id
-
-    if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
-      throw new Error('Not available for offender-manager')
-    } else if (organisationLevel === organisationUnitConstants.NATIONAL.name) {
-      throw new Error('Not available at national level')
-    }
-
-    return getReductionsExport(id, organisationLevel).then(function (result) {
-      var reductionsExportCsv = getExportCsv(organisationLevel, result, tabs.REDUCTIONS_EXPORT)
-      res.attachment(reductionsExportCsv.filename)
-      res.send(reductionsExportCsv.csv)
-    }).catch(function (error) {
-      next(error)
-    })
-  })
 }
 
 var renderOverview = function (req, res, next) {
