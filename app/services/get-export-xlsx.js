@@ -6,8 +6,8 @@ const caseTypeHeaders = require('../constants/excel-headings').caseTypeHeaders
 const inputScenarioCaseData = require('./excel/input-scenario-case-data')
 const createStyles = require('./helpers/create-styles')
 const determineStyles = require('./helpers/determine-styles')
-const armsCommMultiplier = 4
-const armsLicMultiplier = 2
+const armsCommMultiplier = require('../../config').ARMS_COMMUNITY_MULTIPLIER
+const armsLicMultiplier = require('../../config').ARMS_LICENCE_MULTIPLIER
 const typeTierGroupLength = 4 // the number of fields for each tier and type of case
 const tiersPerType = 11
 const casesColumnStart = 26
@@ -38,8 +38,6 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   setTierWeightings(ws, styles, t2aCaseData)
   setReportWeightings(ws, styles, caseData)
   inputScenarioCaseData(ws, scenarioData, typeTierGroupLength, tiersPerType, styles)
-  ws.row(4).freeze()
-  ws.column(25).freeze()
   ws.column(25).setWidth(8)
   ws.column(24).setWidth(8)
   ws.column(2).setWidth(12)

@@ -13,6 +13,7 @@ const workloadTypes = require('../../app/constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const messages = require('../constants/messages')
+const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
 
 var lastUpdated
 
@@ -157,6 +158,11 @@ var renderOverview = function (req, res, next) {
       })
     })
   }).catch(function (error) {
-    next(error)
+    if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
+      var subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+      return renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
+    } else {
+      next(error)
+    }
   })
 }

@@ -7,6 +7,7 @@ const addUserRole = require('./data/insert-user-role')
 const getUserById = require('./data/get-user-by-id')
 const addUser = require('./data/insert-user')
 const getRole = require('./data/get-role')
+const updateUser = require('./data/update-user')
 
 module.exports.getRoleByUsername = function (username) {
   return getRoleByUsername(username).then(function (result) {
@@ -46,6 +47,12 @@ module.exports.getUserById = function (userId) {
 
 module.exports.addUser = function (username, name) {
   return addUser(username, name).then(function (result) {
+    return result
+  })
+}
+
+module.exports.updateUser = function (userId, name) {
+  return updateUser(userId, name).then(function (result) {
     return result
   })
 }
