@@ -2,10 +2,12 @@ const calculatePercentage = require('./percentage-calculator').calculatePercenta
 const totalsRounder = require('./totals-rounder')
 const workloadTypes = require('../../constants/workload-type')
 
-module.exports = function (results, isCSV, workloadType = workloadTypes.PROBATION ) {
+module.exports = function (results, isCSV, workloadType = workloadTypes.PROBATION) {
+  var totals
+  var totalsToReturn
   if (workloadType === workloadTypes.PROBATION) {
-    var totals = { name: 'Total / Average', totalCapacityPercentage: 0, totalPoints: 0, totalAvailablePoints: 0, totalContractedHours: 0, totalReduction: 0, totalTotalCases: 0, totalRemainingPoints: 0, totalCMSPoints: 0, totalCMSPercentage: 0 }
-    var totalsToReturn = {}
+    totals = { name: 'Total / Average', totalCapacityPercentage: 0, totalPoints: 0, totalAvailablePoints: 0, totalContractedHours: 0, totalReduction: 0, totalTotalCases: 0, totalRemainingPoints: 0, totalCMSPoints: 0, totalCMSPercentage: 0 }
+    totalsToReturn = {}
     if (results.length !== undefined) {
       results.forEach(function (result) {
         result.remainingPoints = result.availablePoints - result.totalPoints
@@ -35,8 +37,8 @@ module.exports = function (results, isCSV, workloadType = workloadTypes.PROBATIO
     }
     return totalsToReturn
   } else {
-    var totals = { name: 'Total / Average', totalLicencePoints: 0, totalCustodyPoints: 0, totalTotalCases: 0 }
-    var totalsToReturn = {}
+    totals = { name: 'Total / Average', totalLicencePoints: 0, totalCustodyPoints: 0, totalTotalCases: 0 }
+    totalsToReturn = {}
     if (results.length !== undefined) {
       totalsToReturn = results
       if (!isCSV) {

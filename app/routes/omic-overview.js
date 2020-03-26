@@ -1,18 +1,12 @@
 const getOverview = require('../services/get-overview')
-const getReductionsExport = require('../services/get-reductions-export')
 const getSubNav = require('../services/get-sub-nav')
 const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
-const roles = require('../constants/user-roles')
-const getExportCsv = require('../services/get-export-csv')
-const tabs = require('../constants/wmt-tabs')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
-const Forbidden = require('../services/errors/authentication-error').Forbidden
 const workloadTypes = require('../constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
-const messages = require('../constants/messages')
 
 var lastUpdated
 
