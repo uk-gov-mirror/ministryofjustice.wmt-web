@@ -6,15 +6,14 @@ const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
-const workloadTypes = require('../../app/constants/workload-type')
+const workloadTypes = require('../constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
-const caseloadTotaller = require('../helpers/caseload-totaller')
-const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
+
 var lastUpdated
 
 module.exports = function (router) {
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload', function (req, res, next) {
+  router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/caseload', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -46,7 +45,7 @@ module.exports = function (router) {
           title: result.title,
           subTitle: result.subTitle,
           breadcrumbs: result.breadcrumbs,
-          subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
+          subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole),
           organisationLevel: organisationLevel,
           childOrganisationLevel: orgUnit.childOrganisationLevel,
           childOrganisationLevelDisplayText: childOrgUnit.displayText,
@@ -54,20 +53,15 @@ module.exports = function (router) {
           date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
           authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
-          workloadType: workloadTypes.PROBATION
+          workloadType: workloadTypes.OMIC
         })
       })
     }).catch(function (error) {
-      if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
-        var subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
-        renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
-      } else {
-        next(error)
-      }
+      next(error)
     })
   })
 
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload/caseload-csv', function (req, res, next) {
+  router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/caseload/caseload-csv', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -127,13 +121,10 @@ module.exports = function (router) {
       details[0].totalsRow = details[0].totalSummary[0].totals
       details[0].totalSummary.sort(function (a, b) { return a.name.localeCompare(b.name) })
       details[1].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
-      caseloadTotaller(details[1].array)
       details[1].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
       details[2].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
-      caseloadTotaller(details[2].array)
       details[2].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
       details[3].array.details.sort(function (a, b) { return a.name.localeCompare(b.name) })
-      caseloadTotaller(details[3].array)
       details[3].array.detailsPercentages.sort(function (a, b) { return a.name.localeCompare(b.name) })
     } else if (organisationLevel === organisationUnitConstants.TEAM.name) {
       details[0].array.sort(function (a, b) { return a.name.localeCompare(b.name) })
