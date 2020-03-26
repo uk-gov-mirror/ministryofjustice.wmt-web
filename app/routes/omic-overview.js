@@ -7,6 +7,7 @@ const Unauthorized = require('../services/errors/authentication-error').Unauthor
 const workloadTypes = require('../constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
+const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
 
 var lastUpdated
 
@@ -54,6 +55,10 @@ var renderOverview = function (req, res, next) {
     childOrganisationLevelDisplayText = getOrganisationUnit('name', childOrganisationLevel).displayText
   }
 
+  if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name || organisationLevel === organisationUnitConstants.TEAM.name) {
+    throw new Error('Only available at National, Divisional and LDU Cluster level')
+  }
+
   var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
   var overviewPromise = getOverview(id, organisationLevel, false, workloadTypes.OMIC)
@@ -79,6 +84,11 @@ var renderOverview = function (req, res, next) {
       })
     })
   }).catch(function (error) {
-    next(error)
+    if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
+      var subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+      return renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
+    } else {
+      next(error)
+    }
   })
 }
