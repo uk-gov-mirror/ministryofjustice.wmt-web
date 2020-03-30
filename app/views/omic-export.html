@@ -1,0 +1,41 @@
+{% extends "includes/layout.html" %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/breadcrumbs.html" %}
+
+    {% include "includes/validation-error-messages.html" %}
+
+    {% include "includes/title-subtitle.html" %}
+
+    {% include "includes/sub-nav.html" %}    
+
+    <form method="post">
+
+        {% include "includes/csrf-hidden-input.html"%}
+        <h2 class="heading-medium">
+                Please select the type of export to download:
+            </h2>
+        <div class="grid-row form-group">
+            <fieldset class="inline-block">
+                <div class="column-one-third">
+                    <div class="multiple-choice">
+                        <input id="radio-inline-1" type="radio" name="radioInlineGroup" value="1" checked="checked">
+                        <label class="inline-block" for="radio-inline-1">Scenario</label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        
+        <input type="submit" class="button sln-export" style="float: left; margin-left:10px; margin-bottom: 10px" value="Export" formaction="/omic/{{ organisationLevel }}/{{ linkId }}/export">
+
+    </form>
+</main>
+
+<div class="lastUpdated">
+    <p>Last updated on  <span class="bold">{{date}}</span></p>
+</div>
+
+{% endblock %}
