@@ -1,3 +1,4 @@
+const moment = require('moment')
 const authorisation = require('../authorisation')
 const messages = require('../constants/messages')
 const roles = require('../constants/user-roles')
@@ -13,11 +14,11 @@ const archiveOptions = require('../constants/archive-options')
 const renderResults = require('../helpers/render-results')
 const viewTemplate = 'daily-caseload-data'
 const title = 'Archived Daily Caseload Data'
-const newDataStartDay = require('../../config').NEW_DATABASE_START_DAY
-const newDataStartMonth = require('../../config').NEW_DATABASE_START_MONTH
-const newDataStartYear = require('../../config').NEW_DATABASE_START_YEAR
+const newDataStartDateString = require('../../config').NEW_DATABASE_START_DATE
+const newArchiveDataStartDateString = require('../../config').NEW_ARCHIVE_DATABASE_START_DATE
 const heDecode = require('he')
-const newDataStartDate = dateFormatter.build(newDataStartDay, newDataStartMonth, newDataStartYear)
+const newArchiveDataStartDate = new moment(newArchiveDataStartDateString, 'DD/MM/YYYY')
+const newDataStartDate = new moment(newDataStartDateString, 'DD/MM/YYYY')
 
 var archiveDateRange
 
@@ -76,6 +77,9 @@ module.exports = function (router) {
     }
 
     var thisArchiveOption = archiveOptions.DAILY
+    if (archiveDateRange.archiveFromDate.isSameOrAfter(newArchiveDataStartDate)) {
+      thisArchiveOption = archiveOptions.NEW_DAILY_ARCHIVE
+    }
     if (archiveDateRange.archiveFromDate.isSameOrAfter(newDataStartDate)) {
       thisArchiveOption = archiveOptions.NEW_DAILY
     }
@@ -124,6 +128,9 @@ module.exports = function (router) {
     }
 
     var thisArchiveOption = archiveOptions.DAILY
+    if (archiveDateRange.archiveFromDate.isSameOrAfter(newArchiveDataStartDate)) {
+      thisArchiveOption = archiveOptions.NEW_DAILY_ARCHIVE
+    }
     if (archiveDateRange.archiveFromDate.isSameOrAfter(newDataStartDate)) {
       thisArchiveOption = archiveOptions.NEW_DAILY
     }

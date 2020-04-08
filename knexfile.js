@@ -18,6 +18,23 @@ module.exports = {
       max: 500
     }
   },
+  newArchive: {
+    client: 'mssql',
+    connection: {
+      host: config.DATABASE_SERVER,
+      user: config.WEB_APP_DATABASE_USERNAME,
+      password: config.WEB_APP_DATABASE_PASSWORD,
+      database: config.NEW_ARCHIVE_DATABASE,
+      options: {
+        encrypt: true,
+        requestTimeout: 120000
+      }
+    },
+    debug: false,
+    pool: {
+      max: 500
+    }
+  },
   archive: {
     client: 'mssql',
     connection: {
