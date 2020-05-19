@@ -16,6 +16,7 @@ module.exports = function (id) {
     'region_name AS regionName',
     'available_points AS availablePoints',
     'total_points AS totalPoints',
+    'total_covid_points AS totalCovidPoints',
     'total_cases AS cases',
     'contracted_hours AS contractedHours',
     'cms_adjustment_points as cmsAdjustmentPoints',
