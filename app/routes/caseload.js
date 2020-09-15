@@ -172,7 +172,7 @@ var defaultTotals = { a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0
 var defaultCaseload = [
   {
     displayName: 'Overall',
-    array: { details: [], totals: {}, detailsPercentages: [],percentageTotals: {'': {grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0}}},
+    array: {details: [], totals: {}, detailsPercentages: [], percentageTotals: {'': {grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0}}},
     totalSummary: [],
     totalsRow: {totalCommunity: 0, totalLicense: 0, totalCustody: 0, totalTotalCases: 0}
   },
