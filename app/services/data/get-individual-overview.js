@@ -28,6 +28,20 @@ module.exports = function (id) {
     whereClause
   )
   .then(function (results) {
-    return results[0]
+    if (results.length > 0) {
+      return results[0]
+    } else {
+      return knex('workload_owner')
+        .join('offender_manager', 'workload_owner.offender_manager_id', 'offender_manager.id')
+        .join('offender_manager_type', 'offender_manager.type_id', 'offender_manager_type.id')
+        .join('team', 'workload_owner.team_id', 'team.id')
+        .join('ldu', 'team.ldu_id', 'ldu.id')
+        .join('region', 'ldu.region_id', 'region.id')
+        .first('offender_manager_type.grade_code AS grade', 'team.id AS teamId', 'team.description AS teamName', 'ldu.description AS lduCluster', 'region.description AS regionName', 'workload_owner.contracted_hours AS contractedHours')
+        .then(function (results) {
+          results.noCaseload = true
+          return results
+        })
+    }
   })
 }
