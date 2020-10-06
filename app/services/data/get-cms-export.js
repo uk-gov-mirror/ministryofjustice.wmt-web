@@ -7,6 +7,7 @@ module.exports = function (id, type) {
     'contactLduName',
     'contactTeamName',
     'contactDate',
+    'omContactDate',
     'contactName',
     'contactGradeCode',
     'omRegionName',
@@ -19,7 +20,10 @@ module.exports = function (id, type) {
     'contactCMS.contactCode',
     'contactCMS.contactPoints',
     'omCMS.omPoints',
-    'contactCMS.caseRefNo'
+    'contactCMS.caseRefNo',
+    'omCMS.caseRefNo AS omCaseRefNo',
+    'omCMS.contactDescription AS omContactDescription',
+    'omCMS.contactCode AS omContactCode',
   ]
 
   var table2 = 'om_cms_export_view AS omCMS'
@@ -33,9 +37,23 @@ module.exports = function (id, type) {
 
   return knex.schema.raw('SELECT ' + selectList.join(', ') +
       ' FROM ' + table +
-      ' JOIN ' + table2 + ' ON contactCMS.contactId = omCMS.contactId' +
+      ' FULL OUTER JOIN ' + table2 + ' ON contactCMS.contactId = omCMS.contactId' +
         whereString)
       .then(function (results) {
+        results.forEach(function (result) {
+          if (!result.caseRefNo) {
+            result.caseRefNo = result.omCaseRefNo
+          }
+          if (!result.contactDescription) {
+            result.contactDescription = result.omContactDescription
+          }
+          if (!result.contactCode) {
+            result.contactCode = result.omContactCode
+          }
+          if (!result.contactDate) {
+            result.contactDate = result.omContactDate
+          }
+        })
         return results
       })
 }
