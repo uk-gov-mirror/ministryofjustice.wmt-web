@@ -23,7 +23,7 @@ module.exports = function (id, type) {
     'contactCMS.caseRefNo',
     'omCMS.caseRefNo AS omCaseRefNo',
     'omCMS.contactDescription AS omContactDescription',
-    'omCMS.contactCode AS omContactCode',
+    'omCMS.contactCode AS omContactCode'
   ]
 
   var table2 = 'om_cms_export_view AS omCMS'
