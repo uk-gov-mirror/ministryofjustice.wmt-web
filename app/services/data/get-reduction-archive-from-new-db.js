@@ -45,7 +45,7 @@ module.exports = function (archiveDateRange, extraCriteria) {
     .orWhereBetween('start_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
       archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
     .orWhereBetween('end_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
-        archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
     .orderBy('last_updated_date', 'ASC')
   }
 }
