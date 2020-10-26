@@ -23,8 +23,14 @@ module.exports = function (archiveDateRange, extraCriteria) {
     return knex('reductions_archive_view')
     .limit(parseInt(archiveDataLimit))
     .select(selectColumns)
-    .whereBetween('end_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
-      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+    .where(function () {
+      this.where('start_date', '<=', archiveDateRange.archiveFromDate.toISOString().substring(0, 10))
+      .where('end_date', '>=', archiveDateRange.archiveToDate.toISOString().substring(0, 10))
+      .orWhereBetween('start_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+        archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+      .orWhereBetween('end_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+        archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+    })
     .andWhere(function () {
       this.where('om_name', 'like', '%' + extraCriteria + '%')
       .orWhere('reduction_added_by', 'like', '%' + extraCriteria + '%')
@@ -34,7 +40,11 @@ module.exports = function (archiveDateRange, extraCriteria) {
     return knex('reductions_archive_view')
     .limit(parseInt(archiveDataLimit))
     .select(selectColumns)
-    .whereBetween('end_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+    .where('start_date', '<=', archiveDateRange.archiveFromDate.toISOString().substring(0, 10))
+    .where('end_date', '>=', archiveDateRange.archiveToDate.toISOString().substring(0, 10))
+    .orWhereBetween('start_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+    .orWhereBetween('end_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
       archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
     .orderBy('last_updated_date', 'ASC')
   }

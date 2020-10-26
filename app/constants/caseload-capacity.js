@@ -1,3 +1,3 @@
 module.exports = {
-  MAX_HISTORY: 6
+  MAX_HISTORY: 7
 }
