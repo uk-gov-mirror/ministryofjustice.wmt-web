@@ -10,7 +10,8 @@ module.exports = {
       database: config.DATABASE,
       options: {
         encrypt: true,
-        requestTimeout: 120000
+        requestTimeout: 120000,
+        enableArithAbort: true
       }
     },
     debug: false,
@@ -27,7 +28,8 @@ module.exports = {
       database: config.ARCHIVE_DATABASE,
       options: {
         encrypt: true,
-        requestTimeout: 120000
+        requestTimeout: 120000,
+        enableArithAbort: true
       }
     },
     debug: false
@@ -41,7 +43,8 @@ module.exports = {
       database: config.DATABASE,
       options: {
         encrypt: true,
-        requestTimeout: 60000
+        requestTimeout: 60000,
+        enableArithAbort: true
       }
     },
     debug: false
