@@ -3,28 +3,28 @@ const expect = require('chai').expect
 const getIdsForWpRecalc = require('../../../../app/services/data/get-ids-for-workload-points-recalc')
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 
-var previousWpId
-var previousT2aWpId
-var inserts = []
+let previousWpId
+let previousT2aWpId
+let inserts = []
 
-var expectedWorkloadReportId
-var expectedMinWorkloadStagingId
-var expectedMaxWorkloadStagingId
+let expectedWorkloadReportId
+let expectedMinWorkloadStagingId
+let expectedMaxWorkloadStagingId
 
 describe('/services/data/get-ids-for-workload-points-recalc', function () {
   before(function () {
     return dataHelper.addWorkloadCapacitiesForOffenderManager()
-    .then(function (builtInserts) {
-      return dataHelper.addPoOffenderManager(builtInserts)
-      .then(function (insertsWithTwoWo) {
-        inserts = insertsWithTwoWo
-        previousWpId = inserts.filter((item) => item.table === 'workload_points')[0].id
-        previousT2aWpId = inserts.filter((item) => item.table === 'workload_points')[2].id
-        expectedWorkloadReportId = inserts.filter((item) => item.table === 'workload_report')[1].id
-        expectedMinWorkloadStagingId = dataHelper.maxStagingId
-        expectedMaxWorkloadStagingId = dataHelper.maxStagingId + 2
+      .then(function (builtInserts) {
+        return dataHelper.addPoOffenderManager(builtInserts)
+          .then(function (insertsWithTwoWo) {
+            inserts = insertsWithTwoWo
+            previousWpId = inserts.filter((item) => item.table === 'workload_points')[0].id
+            previousT2aWpId = inserts.filter((item) => item.table === 'workload_points')[2].id
+            expectedWorkloadReportId = inserts.filter((item) => item.table === 'workload_report')[1].id
+            expectedMinWorkloadStagingId = dataHelper.maxStagingId
+            expectedMaxWorkloadStagingId = dataHelper.maxStagingId + 2
+          })
       })
-    })
   })
 
   it('should return the correct min and max workload ids and workload report id', function () {

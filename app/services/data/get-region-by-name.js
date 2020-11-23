@@ -9,6 +9,6 @@ module.exports = function (name) {
     .where('description', name)
     .first('id')
     .then(function (region) {
-      return region['id']
+      return region.id
     })
 }

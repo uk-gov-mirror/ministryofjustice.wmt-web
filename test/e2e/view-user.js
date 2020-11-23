@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 const authenticationHerlp = require('../helpers/routes/authentication-helper')
 
-var adminUserURL
+let adminUserURL
 
 describe('View adding a new user role', () => {
   before(function () {

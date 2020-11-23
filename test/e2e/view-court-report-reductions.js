@@ -2,10 +2,10 @@ const expect = require('chai').expect
 const authenticationHelper = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/court-reports-aggregated-data-helper')
 const workloadTypes = require('../../app/constants/workload-type')
-var offenderManagerId
-var offenderManagerUrl
-var reductionId
-var reductionUrl
+let offenderManagerId
+let offenderManagerUrl
+let reductionId
+let reductionUrl
 
 describe('View reductions page for court-reporter', () => {
   before(function () {

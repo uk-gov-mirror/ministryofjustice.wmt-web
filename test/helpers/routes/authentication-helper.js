@@ -1,15 +1,15 @@
 const config = require('../../../config')
 
-var USERS = {
+const USERS = {
   DataAdmin: 'Data.AdminTest',
   SystemAdmin: 'System.AdminTest',
   Manager: 'Manager.Test',
   Staff: 'Staff.Test'
 }
 
-var login = function (user) {
-  var password = process.env.WMT_E2E_TEST_PWD
-  var username = user + '@' + config.ACTIVE_DIRECTORY_DOMAIN
+const login = function (user) {
+  const password = process.env.WMT_E2E_TEST_PWD
+  const username = user + '@' + config.ACTIVE_DIRECTORY_DOMAIN
 
   return browser.url('/login')
     .waitForExist('#i0116')
@@ -23,9 +23,9 @@ var login = function (user) {
     .click('#idSIButton9')
 }
 
-var logout = function () {
+const logout = function () {
   return browser.url('/logout')
-  .pause(1000)
+    .pause(1000)
 }
 
 module.exports.login = login

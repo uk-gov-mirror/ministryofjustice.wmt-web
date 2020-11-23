@@ -1,7 +1,7 @@
-var dateFormatter = require('../../app/services/date-formatter')
+const dateFormatter = require('../../app/services/date-formatter')
 
-var replaceSpaces = / /g
-var timestamp = dateFormatter.formatDate(new Date(), 'DD MM YYYY THH mm').toString()
+const replaceSpaces = / /g
+const timestamp = dateFormatter.formatDate(new Date(), 'DD MM YYYY THH mm').toString()
 
 module.exports.TEAM_CASELOAD_RESULT = {
   title: 'Test Team',
@@ -535,7 +535,8 @@ module.exports.SUSPENDED_LIFER_EXPORT_RESULT = {
     registerLevel: 'L2',
     registerCategory: 'LF03',
     registerCategoryDescription: 'Lifer - Life Imprisonment',
-    registrationDate: '14/02/2019' },
+    registrationDate: '14/02/2019'
+  },
   {
     regionName: 'NPS North West',
     lduName: 'Lancashire SE',
@@ -558,12 +559,16 @@ module.exports.LDU_CASELOAD_RESULT = {
   title: 'LDU Cluster 2',
   subTitle: 'LDU Cluster',
   caseloadDetails:
-  { overallCaseloadDetails:
-  { details:
-  [ { linkId: 71,
+  {
+    overallCaseloadDetails:
+  {
+    details:
+  [{
+    linkId: 71,
     name: 'Team 2',
     grades:
-    [ { grade: 'PO',
+    [{
+      grade: 'PO',
       a: 33,
       b1: 33,
       b2: 24,
@@ -575,8 +580,10 @@ module.exports.LDU_CASELOAD_RESULT = {
       f: 1,
       g: 0,
       untiered: 18,
-      totalCases: 207 },
-    { grade: 'PSO',
+      totalCases: 207
+    },
+    {
+      grade: 'PSO',
       a: 22,
       b1: 22,
       b2: 16,
@@ -588,10 +595,14 @@ module.exports.LDU_CASELOAD_RESULT = {
       f: 1,
       g: 0,
       untiered: 12,
-      totalCases: 138 } ] } ],
+      totalCases: 138
+    }]
+  }],
     totals:
-    { PO:
-    { grade: 'PO',
+    {
+      PO:
+    {
+      grade: 'PO',
       a: 33,
       b1: 33,
       b2: 24,
@@ -604,9 +615,11 @@ module.exports.LDU_CASELOAD_RESULT = {
       g: 0,
       untiered: 18,
       totalCases: 207,
-      numberOfType: 1 },
+      numberOfType: 1
+    },
       PSO:
-      { grade: 'PSO',
+      {
+        grade: 'PSO',
         a: 22,
         b1: 22,
         b2: 16,
@@ -619,12 +632,16 @@ module.exports.LDU_CASELOAD_RESULT = {
         g: 0,
         untiered: 12,
         totalCases: 138,
-        numberOfType: 1 } },
+        numberOfType: 1
+      }
+    },
     detailsPercentages:
-    [ { linkId: 71,
+    [{
+      linkId: 71,
       name: 'Team 2',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -636,8 +653,10 @@ module.exports.LDU_CASELOAD_RESULT = {
         f: 0,
         g: 0,
         untiered: 60,
-        totalCases: 60 },
-      { grade: 'PSO',
+        totalCases: 60
+      },
+      {
+        grade: 'PSO',
         a: 40,
         b1: 40,
         b2: 40,
@@ -649,10 +668,14 @@ module.exports.LDU_CASELOAD_RESULT = {
         f: 0,
         g: 0,
         untiered: 40,
-        totalCases: 40 } ] } ],
+        totalCases: 40
+      }]
+    }],
     percentageTotals:
-    { PO:
-    { grade: 'PO',
+    {
+      PO:
+    {
+      grade: 'PO',
       a: 60,
       b1: 60,
       b2: 60,
@@ -665,9 +688,11 @@ module.exports.LDU_CASELOAD_RESULT = {
       g: 0,
       untiered: 60,
       totalCases: 60,
-      numberOfType: 1 },
+      numberOfType: 1
+    },
       PSO:
-      { grade: 'PSO',
+      {
+        grade: 'PSO',
         a: 40,
         b1: 40,
         b2: 40,
@@ -680,13 +705,19 @@ module.exports.LDU_CASELOAD_RESULT = {
         g: 0,
         untiered: 40,
         totalCases: 40,
-        numberOfType: 1 } } },
+        numberOfType: 1
+      }
+    }
+  },
     communityCaseloadDetails:
-    { details:
-    [ { linkId: 71,
+    {
+      details:
+    [{
+      linkId: 71,
       name: 'Team 2',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 9,
         b1: 18,
         b2: 12,
@@ -698,8 +729,10 @@ module.exports.LDU_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 0,
-        totalCases: 63 },
-      { grade: 'PSO',
+        totalCases: 63
+      },
+      {
+        grade: 'PSO',
         a: 6,
         b1: 12,
         b2: 8,
@@ -711,10 +744,14 @@ module.exports.LDU_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 0,
-        totalCases: 42 } ] } ],
+        totalCases: 42
+      }]
+    }],
       totals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 9,
         b1: 18,
         b2: 12,
@@ -727,9 +764,11 @@ module.exports.LDU_CASELOAD_RESULT = {
         g: 0,
         untiered: 0,
         totalCases: 63,
-        numberOfType: 1 },
+        numberOfType: 1
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 6,
           b1: 12,
           b2: 8,
@@ -742,12 +781,16 @@ module.exports.LDU_CASELOAD_RESULT = {
           g: 0,
           untiered: 0,
           totalCases: 42,
-          numberOfType: 1 } },
+          numberOfType: 1
+        }
+      },
       detailsPercentages:
-      [ { linkId: 71,
+      [{
+        linkId: 71,
         name: 'Team 2',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -759,8 +802,10 @@ module.exports.LDU_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 0,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -772,10 +817,14 @@ module.exports.LDU_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 0,
-          totalCases: 40 } ] } ],
+          totalCases: 40
+        }]
+      }],
       percentageTotals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -788,9 +837,11 @@ module.exports.LDU_CASELOAD_RESULT = {
         g: 0,
         untiered: 0,
         totalCases: 60,
-        numberOfType: 1 },
+        numberOfType: 1
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -803,13 +854,19 @@ module.exports.LDU_CASELOAD_RESULT = {
           g: 0,
           untiered: 0,
           totalCases: 40,
-          numberOfType: 1 } } },
+          numberOfType: 1
+        }
+      }
+    },
     custodyCaseloadDetails:
-    { details:
-    [ { linkId: 71,
+    {
+      details:
+    [{
+      linkId: 71,
       name: 'Team 2',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 18,
         b1: 12,
         b2: 6,
@@ -821,8 +878,10 @@ module.exports.LDU_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 3,
-        totalCases: 69 },
-      { grade: 'PSO',
+        totalCases: 69
+      },
+      {
+        grade: 'PSO',
         a: 12,
         b1: 8,
         b2: 4,
@@ -834,10 +893,14 @@ module.exports.LDU_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 2,
-        totalCases: 46 } ] } ],
+        totalCases: 46
+      }]
+    }],
       totals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 18,
         b1: 12,
         b2: 6,
@@ -850,9 +913,11 @@ module.exports.LDU_CASELOAD_RESULT = {
         g: 0,
         untiered: 3,
         totalCases: 69,
-        numberOfType: 1 },
+        numberOfType: 1
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 12,
           b1: 8,
           b2: 4,
@@ -865,12 +930,16 @@ module.exports.LDU_CASELOAD_RESULT = {
           g: 0,
           untiered: 2,
           totalCases: 46,
-          numberOfType: 1 } },
+          numberOfType: 1
+        }
+      },
       detailsPercentages:
-      [ { linkId: 71,
+      [{
+        linkId: 71,
         name: 'Team 2',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -882,8 +951,10 @@ module.exports.LDU_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 60,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -895,10 +966,14 @@ module.exports.LDU_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] } ],
+          totalCases: 40
+        }]
+      }],
       percentageTotals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -911,9 +986,11 @@ module.exports.LDU_CASELOAD_RESULT = {
         g: 0,
         untiered: 60,
         totalCases: 60,
-        numberOfType: 1 },
+        numberOfType: 1
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -926,13 +1003,19 @@ module.exports.LDU_CASELOAD_RESULT = {
           g: 0,
           untiered: 40,
           totalCases: 40,
-          numberOfType: 1 } } },
+          numberOfType: 1
+        }
+      }
+    },
     licenseCaseloadDetails:
-    { details:
-    [ { linkId: 71,
+    {
+      details:
+    [{
+      linkId: 71,
       name: 'Team 2',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 6,
         b1: 3,
         b2: 6,
@@ -944,8 +1027,10 @@ module.exports.LDU_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 15,
-        totalCases: 75 },
-      { grade: 'PSO',
+        totalCases: 75
+      },
+      {
+        grade: 'PSO',
         a: 4,
         b1: 2,
         b2: 4,
@@ -957,10 +1042,14 @@ module.exports.LDU_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 10,
-        totalCases: 50 } ] } ],
+        totalCases: 50
+      }]
+    }],
       totals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 6,
         b1: 3,
         b2: 6,
@@ -973,9 +1062,11 @@ module.exports.LDU_CASELOAD_RESULT = {
         g: 0,
         untiered: 15,
         totalCases: 75,
-        numberOfType: 1 },
+        numberOfType: 1
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 4,
           b1: 2,
           b2: 4,
@@ -988,12 +1079,16 @@ module.exports.LDU_CASELOAD_RESULT = {
           g: 0,
           untiered: 10,
           totalCases: 50,
-          numberOfType: 1 } },
+          numberOfType: 1
+        }
+      },
       detailsPercentages:
-      [ { linkId: 71,
+      [{
+        linkId: 71,
         name: 'Team 2',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -1005,8 +1100,10 @@ module.exports.LDU_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 60,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -1018,10 +1115,14 @@ module.exports.LDU_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] } ],
+          totalCases: 40
+        }]
+      }],
       percentageTotals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -1034,9 +1135,11 @@ module.exports.LDU_CASELOAD_RESULT = {
         g: 0,
         untiered: 60,
         totalCases: 60,
-        numberOfType: 1 },
+        numberOfType: 1
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -1049,17 +1152,23 @@ module.exports.LDU_CASELOAD_RESULT = {
           g: 0,
           untiered: 40,
           totalCases: 40,
-          numberOfType: 1 } } },
+          numberOfType: 1
+        }
+      }
+    },
     overallTotalSummary:
-    [ { name: 'Team 2',
+    [{
+      name: 'Team 2',
       linkId: 71,
       totalCases: 345,
       custodyTotalCases: 115,
       communityTotalCases: 105,
-      licenseTotalCases: 125 } ],
+      licenseTotalCases: 125
+    }],
     custodyTotalSummary: 115,
     communityTotalSummary: 105,
-    licenseTotalSummary: 125 }
+    licenseTotalSummary: 125
+  }
 }
 
 module.exports.LDU_CASELOAD_CSV = {
@@ -1089,12 +1198,16 @@ module.exports.REGION_CASELOAD_RESULT = {
   title: 'Division 2',
   subTitle: 'Division',
   caseloadDetails:
-  { overallCaseloadDetails:
-  { details:
-  [ { linkId: 70,
+  {
+    overallCaseloadDetails:
+  {
+    details:
+  [{
+    linkId: 70,
     name: 'LDU Cluster 2',
     grades:
-    [ { grade: 'PO',
+    [{
+      grade: 'PO',
       a: 33,
       b1: 33,
       b2: 24,
@@ -1106,8 +1219,10 @@ module.exports.REGION_CASELOAD_RESULT = {
       f: 1,
       g: 0,
       untiered: 18,
-      totalCases: 207 },
-    { grade: 'PSO',
+      totalCases: 207
+    },
+    {
+      grade: 'PSO',
       a: 22,
       b1: 22,
       b2: 16,
@@ -1119,10 +1234,14 @@ module.exports.REGION_CASELOAD_RESULT = {
       f: 1,
       g: 0,
       untiered: 12,
-      totalCases: 138 } ] } ],
+      totalCases: 138
+    }]
+  }],
     totals:
-    { PO:
-    { grade: 'PO',
+    {
+      PO:
+    {
+      grade: 'PO',
       a: 33,
       b1: 33,
       b2: 24,
@@ -1135,9 +1254,11 @@ module.exports.REGION_CASELOAD_RESULT = {
       g: 0,
       untiered: 18,
       totalCases: 207,
-      numberOfType: 1 },
+      numberOfType: 1
+    },
       PSO:
-      { grade: 'PSO',
+      {
+        grade: 'PSO',
         a: 22,
         b1: 22,
         b2: 16,
@@ -1150,12 +1271,16 @@ module.exports.REGION_CASELOAD_RESULT = {
         g: 0,
         untiered: 12,
         totalCases: 138,
-        numberOfType: 1 } },
+        numberOfType: 1
+      }
+    },
     detailsPercentages:
-    [ { linkId: 70,
+    [{
+      linkId: 70,
       name: 'LDU Cluster 2',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -1167,8 +1292,10 @@ module.exports.REGION_CASELOAD_RESULT = {
         f: 0,
         g: 0,
         untiered: 60,
-        totalCases: 60 },
-      { grade: 'PSO',
+        totalCases: 60
+      },
+      {
+        grade: 'PSO',
         a: 40,
         b1: 40,
         b2: 40,
@@ -1180,10 +1307,14 @@ module.exports.REGION_CASELOAD_RESULT = {
         f: 0,
         g: 0,
         untiered: 40,
-        totalCases: 40 } ] } ],
+        totalCases: 40
+      }]
+    }],
     percentageTotals:
-    { PO:
-    { grade: 'PO',
+    {
+      PO:
+    {
+      grade: 'PO',
       a: 60,
       b1: 60,
       b2: 60,
@@ -1196,9 +1327,11 @@ module.exports.REGION_CASELOAD_RESULT = {
       g: 0,
       untiered: 60,
       totalCases: 60,
-      numberOfType: 1 },
+      numberOfType: 1
+    },
       PSO:
-      { grade: 'PSO',
+      {
+        grade: 'PSO',
         a: 40,
         b1: 40,
         b2: 40,
@@ -1211,13 +1344,19 @@ module.exports.REGION_CASELOAD_RESULT = {
         g: 0,
         untiered: 40,
         totalCases: 40,
-        numberOfType: 1 } } },
+        numberOfType: 1
+      }
+    }
+  },
     communityCaseloadDetails:
-    { details:
-    [ { linkId: 70,
+    {
+      details:
+    [{
+      linkId: 70,
       name: 'LDU Cluster 2',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 9,
         b1: 18,
         b2: 12,
@@ -1229,8 +1368,10 @@ module.exports.REGION_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 0,
-        totalCases: 63 },
-      { grade: 'PSO',
+        totalCases: 63
+      },
+      {
+        grade: 'PSO',
         a: 6,
         b1: 12,
         b2: 8,
@@ -1242,10 +1383,14 @@ module.exports.REGION_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 0,
-        totalCases: 42 } ] } ],
+        totalCases: 42
+      }]
+    }],
       totals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 9,
         b1: 18,
         b2: 12,
@@ -1258,9 +1403,11 @@ module.exports.REGION_CASELOAD_RESULT = {
         g: 0,
         untiered: 0,
         totalCases: 63,
-        numberOfType: 1 },
+        numberOfType: 1
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 6,
           b1: 12,
           b2: 8,
@@ -1273,12 +1420,16 @@ module.exports.REGION_CASELOAD_RESULT = {
           g: 0,
           untiered: 0,
           totalCases: 42,
-          numberOfType: 1 } },
+          numberOfType: 1
+        }
+      },
       detailsPercentages:
-      [ { linkId: 70,
+      [{
+        linkId: 70,
         name: 'LDU Cluster 2',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -1290,8 +1441,10 @@ module.exports.REGION_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 0,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -1303,10 +1456,14 @@ module.exports.REGION_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 0,
-          totalCases: 40 } ] } ],
+          totalCases: 40
+        }]
+      }],
       percentageTotals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -1319,9 +1476,11 @@ module.exports.REGION_CASELOAD_RESULT = {
         g: 0,
         untiered: 0,
         totalCases: 60,
-        numberOfType: 1 },
+        numberOfType: 1
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -1334,13 +1493,19 @@ module.exports.REGION_CASELOAD_RESULT = {
           g: 0,
           untiered: 0,
           totalCases: 40,
-          numberOfType: 1 } } },
+          numberOfType: 1
+        }
+      }
+    },
     custodyCaseloadDetails:
-    { details:
-    [ { linkId: 70,
+    {
+      details:
+    [{
+      linkId: 70,
       name: 'LDU Cluster 2',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 18,
         b1: 12,
         b2: 6,
@@ -1352,8 +1517,10 @@ module.exports.REGION_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 3,
-        totalCases: 69 },
-      { grade: 'PSO',
+        totalCases: 69
+      },
+      {
+        grade: 'PSO',
         a: 12,
         b1: 8,
         b2: 4,
@@ -1365,10 +1532,14 @@ module.exports.REGION_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 2,
-        totalCases: 46 } ] } ],
+        totalCases: 46
+      }]
+    }],
       totals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 18,
         b1: 12,
         b2: 6,
@@ -1381,9 +1552,11 @@ module.exports.REGION_CASELOAD_RESULT = {
         g: 0,
         untiered: 3,
         totalCases: 69,
-        numberOfType: 1 },
+        numberOfType: 1
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 12,
           b1: 8,
           b2: 4,
@@ -1396,12 +1569,16 @@ module.exports.REGION_CASELOAD_RESULT = {
           g: 0,
           untiered: 2,
           totalCases: 46,
-          numberOfType: 1 } },
+          numberOfType: 1
+        }
+      },
       detailsPercentages:
-      [ { linkId: 70,
+      [{
+        linkId: 70,
         name: 'LDU Cluster 2',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -1413,8 +1590,10 @@ module.exports.REGION_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 60,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -1426,10 +1605,14 @@ module.exports.REGION_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] } ],
+          totalCases: 40
+        }]
+      }],
       percentageTotals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -1442,9 +1625,11 @@ module.exports.REGION_CASELOAD_RESULT = {
         g: 0,
         untiered: 60,
         totalCases: 60,
-        numberOfType: 1 },
+        numberOfType: 1
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -1457,13 +1642,19 @@ module.exports.REGION_CASELOAD_RESULT = {
           g: 0,
           untiered: 40,
           totalCases: 40,
-          numberOfType: 1 } } },
+          numberOfType: 1
+        }
+      }
+    },
     licenseCaseloadDetails:
-    { details:
-    [ { linkId: 70,
+    {
+      details:
+    [{
+      linkId: 70,
       name: 'LDU Cluster 2',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 6,
         b1: 3,
         b2: 6,
@@ -1475,8 +1666,10 @@ module.exports.REGION_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 15,
-        totalCases: 75 },
-      { grade: 'PSO',
+        totalCases: 75
+      },
+      {
+        grade: 'PSO',
         a: 4,
         b1: 2,
         b2: 4,
@@ -1488,10 +1681,14 @@ module.exports.REGION_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 10,
-        totalCases: 50 } ] } ],
+        totalCases: 50
+      }]
+    }],
       totals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 6,
         b1: 3,
         b2: 6,
@@ -1504,9 +1701,11 @@ module.exports.REGION_CASELOAD_RESULT = {
         g: 0,
         untiered: 15,
         totalCases: 75,
-        numberOfType: 1 },
+        numberOfType: 1
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 4,
           b1: 2,
           b2: 4,
@@ -1519,12 +1718,16 @@ module.exports.REGION_CASELOAD_RESULT = {
           g: 0,
           untiered: 10,
           totalCases: 50,
-          numberOfType: 1 } },
+          numberOfType: 1
+        }
+      },
       detailsPercentages:
-      [ { linkId: 70,
+      [{
+        linkId: 70,
         name: 'LDU Cluster 2',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -1536,8 +1739,10 @@ module.exports.REGION_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 60,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -1549,10 +1754,14 @@ module.exports.REGION_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] } ],
+          totalCases: 40
+        }]
+      }],
       percentageTotals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -1565,9 +1774,11 @@ module.exports.REGION_CASELOAD_RESULT = {
         g: 0,
         untiered: 60,
         totalCases: 60,
-        numberOfType: 1 },
+        numberOfType: 1
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -1580,17 +1791,23 @@ module.exports.REGION_CASELOAD_RESULT = {
           g: 0,
           untiered: 40,
           totalCases: 40,
-          numberOfType: 1 } } },
+          numberOfType: 1
+        }
+      }
+    },
     overallTotalSummary:
-    [ { name: 'LDU Cluster 2',
+    [{
+      name: 'LDU Cluster 2',
       linkId: 70,
       totalCases: 345,
       custodyTotalCases: 115,
       communityTotalCases: 105,
-      licenseTotalCases: 125 } ],
+      licenseTotalCases: 125
+    }],
     custodyTotalSummary: 115,
     communityTotalSummary: 105,
-    licenseTotalSummary: 125 }
+    licenseTotalSummary: 125
+  }
 }
 
 module.exports.REGION_CASELOAD_CSV = {
@@ -1620,12 +1837,16 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
   title: 'HMPPS',
   subTitle: 'National',
   caseloadDetails:
-  { overallCaseloadDetails:
-  { details:
-  [ { linkId: 63,
+  {
+    overallCaseloadDetails:
+  {
+    details:
+  [{
+    linkId: 63,
     name: 'Division 1',
     grades:
-    [ { grade: 'PO',
+    [{
+      grade: 'PO',
       a: 66,
       b1: 66,
       b2: 48,
@@ -1637,8 +1858,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       f: 1,
       g: 0,
       untiered: 36,
-      totalCases: 414 },
-    { grade: 'PSO',
+      totalCases: 414
+    },
+    {
+      grade: 'PSO',
       a: 44,
       b1: 44,
       b2: 32,
@@ -1650,11 +1873,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       f: 1,
       g: 0,
       untiered: 24,
-      totalCases: 276 } ] },
-  { linkId: 64,
+      totalCases: 276
+    }]
+  },
+  {
+    linkId: 64,
     name: 'Division 2',
     grades:
-    [ { grade: 'PO',
+    [{
+      grade: 'PO',
       a: 33,
       b1: 33,
       b2: 24,
@@ -1666,8 +1893,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       f: 1,
       g: 0,
       untiered: 18,
-      totalCases: 207 },
-    { grade: 'PSO',
+      totalCases: 207
+    },
+    {
+      grade: 'PSO',
       a: 22,
       b1: 22,
       b2: 16,
@@ -1679,11 +1908,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       f: 1,
       g: 0,
       untiered: 12,
-      totalCases: 138 } ] },
-  { linkId: 65,
+      totalCases: 138
+    }]
+  },
+  {
+    linkId: 65,
     name: 'Division 3',
     grades:
-    [ { grade: 'PO',
+    [{
+      grade: 'PO',
       a: 33,
       b1: 33,
       b2: 24,
@@ -1695,8 +1928,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       f: 1,
       g: 0,
       untiered: 18,
-      totalCases: 207 },
-    { grade: 'PSO',
+      totalCases: 207
+    },
+    {
+      grade: 'PSO',
       a: 22,
       b1: 22,
       b2: 16,
@@ -1708,10 +1943,14 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       f: 1,
       g: 0,
       untiered: 12,
-      totalCases: 138 } ] } ],
+      totalCases: 138
+    }]
+  }],
     totals:
-    { PO:
-    { grade: 'PO',
+    {
+      PO:
+    {
+      grade: 'PO',
       a: 132,
       b1: 132,
       b2: 96,
@@ -1724,9 +1963,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       g: 0,
       untiered: 72,
       totalCases: 828,
-      numberOfType: 3 },
+      numberOfType: 3
+    },
       PSO:
-      { grade: 'PSO',
+      {
+        grade: 'PSO',
         a: 88,
         b1: 88,
         b2: 64,
@@ -1739,12 +1980,16 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         g: 0,
         untiered: 48,
         totalCases: 552,
-        numberOfType: 3 } },
+        numberOfType: 3
+      }
+    },
     detailsPercentages:
-    [ { linkId: 63,
+    [{
+      linkId: 63,
       name: 'Division 1',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -1756,8 +2001,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 0,
         g: 0,
         untiered: 60,
-        totalCases: 60 },
-      { grade: 'PSO',
+        totalCases: 60
+      },
+      {
+        grade: 'PSO',
         a: 40,
         b1: 40,
         b2: 40,
@@ -1769,11 +2016,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 0,
         g: 0,
         untiered: 40,
-        totalCases: 40 } ] },
-    { linkId: 64,
+        totalCases: 40
+      }]
+    },
+    {
+      linkId: 64,
       name: 'Division 2',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -1785,8 +2036,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 0,
         g: 0,
         untiered: 60,
-        totalCases: 60 },
-      { grade: 'PSO',
+        totalCases: 60
+      },
+      {
+        grade: 'PSO',
         a: 40,
         b1: 40,
         b2: 40,
@@ -1798,11 +2051,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 0,
         g: 0,
         untiered: 40,
-        totalCases: 40 } ] },
-    { linkId: 65,
+        totalCases: 40
+      }]
+    },
+    {
+      linkId: 65,
       name: 'Division 3',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -1814,8 +2071,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 0,
         g: 0,
         untiered: 60,
-        totalCases: 60 },
-      { grade: 'PSO',
+        totalCases: 60
+      },
+      {
+        grade: 'PSO',
         a: 40,
         b1: 40,
         b2: 40,
@@ -1827,10 +2086,14 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 0,
         g: 0,
         untiered: 40,
-        totalCases: 40 } ] } ],
+        totalCases: 40
+      }]
+    }],
     percentageTotals:
-    { PO:
-    { grade: 'PO',
+    {
+      PO:
+    {
+      grade: 'PO',
       a: 60,
       b1: 60,
       b2: 60,
@@ -1843,9 +2106,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       g: 0,
       untiered: 60,
       totalCases: 60,
-      numberOfType: 3 },
+      numberOfType: 3
+    },
       PSO:
-      { grade: 'PSO',
+      {
+        grade: 'PSO',
         a: 40,
         b1: 40,
         b2: 40,
@@ -1858,13 +2123,19 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         g: 0,
         untiered: 40,
         totalCases: 40,
-        numberOfType: 3 } } },
+        numberOfType: 3
+      }
+    }
+  },
     communityCaseloadDetails:
-    { details:
-    [ { linkId: 63,
+    {
+      details:
+    [{
+      linkId: 63,
       name: 'Division 1',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 18,
         b1: 36,
         b2: 24,
@@ -1876,8 +2147,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 0,
-        totalCases: 126 },
-      { grade: 'PSO',
+        totalCases: 126
+      },
+      {
+        grade: 'PSO',
         a: 12,
         b1: 24,
         b2: 16,
@@ -1889,11 +2162,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 0,
-        totalCases: 84 } ] },
-    { linkId: 64,
+        totalCases: 84
+      }]
+    },
+    {
+      linkId: 64,
       name: 'Division 2',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 9,
         b1: 18,
         b2: 12,
@@ -1905,8 +2182,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 0,
-        totalCases: 63 },
-      { grade: 'PSO',
+        totalCases: 63
+      },
+      {
+        grade: 'PSO',
         a: 6,
         b1: 12,
         b2: 8,
@@ -1918,11 +2197,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 0,
-        totalCases: 42 } ] },
-    { linkId: 65,
+        totalCases: 42
+      }]
+    },
+    {
+      linkId: 65,
       name: 'Division 3',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 9,
         b1: 18,
         b2: 12,
@@ -1934,8 +2217,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 0,
-        totalCases: 63 },
-      { grade: 'PSO',
+        totalCases: 63
+      },
+      {
+        grade: 'PSO',
         a: 6,
         b1: 12,
         b2: 8,
@@ -1947,10 +2232,14 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 0,
-        totalCases: 42 } ] } ],
+        totalCases: 42
+      }]
+    }],
       totals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 36,
         b1: 72,
         b2: 48,
@@ -1963,9 +2252,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         g: 0,
         untiered: 0,
         totalCases: 252,
-        numberOfType: 3 },
+        numberOfType: 3
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 24,
           b1: 48,
           b2: 32,
@@ -1978,12 +2269,16 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           g: 0,
           untiered: 0,
           totalCases: 168,
-          numberOfType: 3 } },
+          numberOfType: 3
+        }
+      },
       detailsPercentages:
-      [ { linkId: 63,
+      [{
+        linkId: 63,
         name: 'Division 1',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -1995,8 +2290,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 0,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -2008,11 +2305,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 0,
-          totalCases: 40 } ] },
-      { linkId: 64,
+          totalCases: 40
+        }]
+      },
+      {
+        linkId: 64,
         name: 'Division 2',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -2024,8 +2325,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 0,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -2037,11 +2340,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 0,
-          totalCases: 40 } ] },
-      { linkId: 65,
+          totalCases: 40
+        }]
+      },
+      {
+        linkId: 65,
         name: 'Division 3',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -2053,8 +2360,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 0,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -2066,10 +2375,14 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 0,
-          totalCases: 40 } ] } ],
+          totalCases: 40
+        }]
+      }],
       percentageTotals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -2082,9 +2395,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         g: 0,
         untiered: 0,
         totalCases: 60,
-        numberOfType: 3 },
+        numberOfType: 3
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -2097,13 +2412,19 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           g: 0,
           untiered: 0,
           totalCases: 40,
-          numberOfType: 3 } } },
+          numberOfType: 3
+        }
+      }
+    },
     custodyCaseloadDetails:
-    { details:
-    [ { linkId: 63,
+    {
+      details:
+    [{
+      linkId: 63,
       name: 'Division 1',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 36,
         b1: 24,
         b2: 12,
@@ -2115,8 +2436,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 6,
-        totalCases: 138 },
-      { grade: 'PSO',
+        totalCases: 138
+      },
+      {
+        grade: 'PSO',
         a: 24,
         b1: 16,
         b2: 8,
@@ -2128,11 +2451,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 4,
-        totalCases: 92 } ] },
-    { linkId: 64,
+        totalCases: 92
+      }]
+    },
+    {
+      linkId: 64,
       name: 'Division 2',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 18,
         b1: 12,
         b2: 6,
@@ -2144,8 +2471,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 3,
-        totalCases: 69 },
-      { grade: 'PSO',
+        totalCases: 69
+      },
+      {
+        grade: 'PSO',
         a: 12,
         b1: 8,
         b2: 4,
@@ -2157,11 +2486,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 2,
-        totalCases: 46 } ] },
-    { linkId: 65,
+        totalCases: 46
+      }]
+    },
+    {
+      linkId: 65,
       name: 'Division 3',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 18,
         b1: 12,
         b2: 6,
@@ -2173,8 +2506,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 3,
-        totalCases: 69 },
-      { grade: 'PSO',
+        totalCases: 69
+      },
+      {
+        grade: 'PSO',
         a: 12,
         b1: 8,
         b2: 4,
@@ -2186,10 +2521,14 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 2,
-        totalCases: 46 } ] } ],
+        totalCases: 46
+      }]
+    }],
       totals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 72,
         b1: 48,
         b2: 24,
@@ -2202,9 +2541,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         g: 0,
         untiered: 12,
         totalCases: 276,
-        numberOfType: 3 },
+        numberOfType: 3
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 48,
           b1: 32,
           b2: 16,
@@ -2217,12 +2558,16 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           g: 0,
           untiered: 8,
           totalCases: 184,
-          numberOfType: 3 } },
+          numberOfType: 3
+        }
+      },
       detailsPercentages:
-      [ { linkId: 63,
+      [{
+        linkId: 63,
         name: 'Division 1',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -2234,8 +2579,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 60,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -2247,11 +2594,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] },
-      { linkId: 64,
+          totalCases: 40
+        }]
+      },
+      {
+        linkId: 64,
         name: 'Division 2',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -2263,8 +2614,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 60,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -2276,11 +2629,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] },
-      { linkId: 65,
+          totalCases: 40
+        }]
+      },
+      {
+        linkId: 65,
         name: 'Division 3',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -2292,8 +2649,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 60,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -2305,10 +2664,14 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] } ],
+          totalCases: 40
+        }]
+      }],
       percentageTotals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -2321,9 +2684,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         g: 0,
         untiered: 60,
         totalCases: 60,
-        numberOfType: 3 },
+        numberOfType: 3
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -2336,13 +2701,19 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           g: 0,
           untiered: 40,
           totalCases: 40,
-          numberOfType: 3 } } },
+          numberOfType: 3
+        }
+      }
+    },
     licenseCaseloadDetails:
-    { details:
-    [ { linkId: 63,
+    {
+      details:
+    [{
+      linkId: 63,
       name: 'Division 1',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 12,
         b1: 6,
         b2: 12,
@@ -2354,8 +2725,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 30,
-        totalCases: 150 },
-      { grade: 'PSO',
+        totalCases: 150
+      },
+      {
+        grade: 'PSO',
         a: 8,
         b1: 4,
         b2: 8,
@@ -2367,11 +2740,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 20,
-        totalCases: 100 } ] },
-    { linkId: 64,
+        totalCases: 100
+      }]
+    },
+    {
+      linkId: 64,
       name: 'Division 2',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 6,
         b1: 3,
         b2: 6,
@@ -2383,8 +2760,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 15,
-        totalCases: 75 },
-      { grade: 'PSO',
+        totalCases: 75
+      },
+      {
+        grade: 'PSO',
         a: 4,
         b1: 2,
         b2: 4,
@@ -2396,11 +2775,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 10,
-        totalCases: 50 } ] },
-    { linkId: 65,
+        totalCases: 50
+      }]
+    },
+    {
+      linkId: 65,
       name: 'Division 3',
       grades:
-      [ { grade: 'PO',
+      [{
+        grade: 'PO',
         a: 6,
         b1: 3,
         b2: 6,
@@ -2412,8 +2795,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 15,
-        totalCases: 75 },
-      { grade: 'PSO',
+        totalCases: 75
+      },
+      {
+        grade: 'PSO',
         a: 4,
         b1: 2,
         b2: 4,
@@ -2425,10 +2810,14 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 10,
-        totalCases: 50 } ] } ],
+        totalCases: 50
+      }]
+    }],
       totals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 24,
         b1: 12,
         b2: 24,
@@ -2441,9 +2830,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         g: 0,
         untiered: 60,
         totalCases: 300,
-        numberOfType: 3 },
+        numberOfType: 3
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 16,
           b1: 8,
           b2: 16,
@@ -2456,12 +2847,16 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           g: 0,
           untiered: 40,
           totalCases: 200,
-          numberOfType: 3 } },
+          numberOfType: 3
+        }
+      },
       detailsPercentages:
-      [ { linkId: 63,
+      [{
+        linkId: 63,
         name: 'Division 1',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -2473,8 +2868,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 60,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -2486,11 +2883,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] },
-      { linkId: 64,
+          totalCases: 40
+        }]
+      },
+      {
+        linkId: 64,
         name: 'Division 2',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -2502,8 +2903,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 60,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -2515,11 +2918,15 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] },
-      { linkId: 65,
+          totalCases: 40
+        }]
+      },
+      {
+        linkId: 65,
         name: 'Division 3',
         grades:
-        [ { grade: 'PO',
+        [{
+          grade: 'PO',
           a: 60,
           b1: 60,
           b2: 60,
@@ -2531,8 +2938,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 60,
-          totalCases: 60 },
-        { grade: 'PSO',
+          totalCases: 60
+        },
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -2544,10 +2953,14 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] } ],
+          totalCases: 40
+        }]
+      }],
       percentageTotals:
-      { PO:
-      { grade: 'PO',
+      {
+        PO:
+      {
+        grade: 'PO',
         a: 60,
         b1: 60,
         b2: 60,
@@ -2560,9 +2973,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         g: 0,
         untiered: 60,
         totalCases: 60,
-        numberOfType: 3 },
+        numberOfType: 3
+      },
         PSO:
-        { grade: 'PSO',
+        {
+          grade: 'PSO',
           a: 40,
           b1: 40,
           b2: 40,
@@ -2575,29 +2990,39 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           g: 0,
           untiered: 40,
           totalCases: 40,
-          numberOfType: 3 } } },
+          numberOfType: 3
+        }
+      }
+    },
     overallTotalSummary:
-    [ { name: 'Division 1',
+    [{
+      name: 'Division 1',
       linkId: 63,
       totalCases: 690,
       custodyTotalCases: 230,
       communityTotalCases: 210,
-      licenseTotalCases: 250 },
-    { name: 'Division 2',
+      licenseTotalCases: 250
+    },
+    {
+      name: 'Division 2',
       linkId: 64,
       totalCases: 345,
       custodyTotalCases: 115,
       communityTotalCases: 105,
-      licenseTotalCases: 125 },
-    { name: 'Division 3',
+      licenseTotalCases: 125
+    },
+    {
+      name: 'Division 3',
       linkId: 65,
       totalCases: 345,
       custodyTotalCases: 115,
       communityTotalCases: 105,
-      licenseTotalCases: 125 } ],
+      licenseTotalCases: 125
+    }],
     custodyTotalSummary: 460,
     communityTotalSummary: 420,
-    licenseTotalSummary: 500 }
+    licenseTotalSummary: 500
+  }
 }
 
 module.exports.NATIONAL_CASELOAD_CSV = {
@@ -2643,9 +3068,9 @@ module.exports.NATIONAL_CASELOAD_CSV = {
 
 module.exports.OM_OVERVIEW_RESULT = {
   breadcrumbs:
-  [{title: 'John Smith'},
-  {title: 'Team 1'},
-  {title: 'Test Cluster'}],
+  [{ title: 'John Smith' },
+    { title: 'Team 1' },
+    { title: 'Test Cluster' }],
   title: 'John Smith',
   overviewDetails: {
     grade: 'PO',
@@ -2677,18 +3102,22 @@ module.exports.TEAM_OVERVIEW_RESULT = {
   breadcrumbs: [{
     title: 'Team 1',
     link: '/probation/team/95',
-    active: undefined },
+    active: undefined
+  },
   {
     title: 'LDU Cluster 1',
     link: '/probation/ldu/85',
-    active: undefined },
+    active: undefined
+  },
   {
     title: 'Division 1',
     link: '/probation/region/43',
-    active: undefined },
-    { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
+    active: undefined
+  },
+  { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   overviewDetails:
-  [ { lduCluster: 'LDU Cluster 1',
+  [{
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -2700,8 +3129,10 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     capacityPercentage: 115.26315789473685,
     remainingPoints: -29,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: 0
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -2713,8 +3144,10 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     capacityPercentage: 113.68421052631578,
     remainingPoints: -26,
     cmsAdjustmentPoints: -176,
-    cmsPercentage: -6.379122870605292 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: -6.379122870605292
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -2726,8 +3159,10 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     capacityPercentage: 116.8421052631579,
     remainingPoints: -32,
     cmsAdjustmentPoints: 121,
-    cmsPercentage: 19.803600654664486 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: 19.803600654664486
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -2739,8 +3174,10 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     capacityPercentage: 107.36842105263158,
     remainingPoints: -14,
     cmsAdjustmentPoints: 167,
-    cmsPercentage: 29.246935201401055 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: 29.246935201401055
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -2752,7 +3189,8 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: -9,
-    cmsPercentage: -0.5096262740656852 } ],
+    cmsPercentage: -0.5096262740656852
+  }],
   title: 'Team 1',
   subTitle: 'Team'
 }
@@ -2771,14 +3209,17 @@ module.exports.LDU_OVERVIEW_RESULT = {
   breadcrumbs: [{
     title: 'LDU Cluster 1',
     link: '/probation/ldu/85',
-    active: undefined },
+    active: undefined
+  },
   {
     title: 'Division 1',
     link: '/probation/region/43',
-    active: undefined },
-  { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
+    active: undefined
+  },
+  { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   overviewDetails:
-  [ { lduCluster: 'LDU Cluster 1',
+  [{
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -2790,8 +3231,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 115.26315789473685,
     remainingPoints: -29,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: 0
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -2803,8 +3246,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 113.68421052631578,
     remainingPoints: -26,
     cmsAdjustmentPoints: -176,
-    cmsPercentage: -6.379122870605292 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: -6.379122870605292
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -2816,8 +3261,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 116.8421052631579,
     remainingPoints: -32,
     cmsAdjustmentPoints: 121,
-    cmsPercentage: 19.803600654664486 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: 19.803600654664486
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -2829,8 +3276,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 107.36842105263158,
     remainingPoints: -14,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: 0
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -2842,8 +3291,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: 0
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -2855,8 +3306,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 117.89473684210525,
     remainingPoints: -34,
     cmsAdjustmentPoints: -9,
-    cmsPercentage: -0.5096262740656852 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: -0.5096262740656852
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -2868,8 +3321,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 113.1578947368421,
     remainingPoints: -25,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: 0
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -2881,8 +3336,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 106.3157894736842,
     remainingPoints: -12,
     cmsAdjustmentPoints: -9,
-    cmsPercentage: -0.5096262740656852 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: -0.5096262740656852
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -2894,8 +3351,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 105.78947368421052,
     remainingPoints: -11,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { lduCluster: 'LDU Cluster 1',
+    cmsPercentage: 0
+  },
+  {
+    lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -2907,7 +3366,8 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: -9,
-    cmsPercentage: -0.5096262740656852 } ],
+    cmsPercentage: -0.5096262740656852
+  }],
   title: 'LDU Cluster 1',
   subTitle: 'LDU Cluster'
 }
@@ -2932,8 +3392,9 @@ module.exports.REGION_OVERVIEW_RESULT = {
   [{
     title: 'Division 1',
     link: '/probation/region/43',
-    active: undefined },
-  { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
+    active: undefined
+  },
+  { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   overviewDetails: [{
     regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
@@ -2948,8 +3409,10 @@ module.exports.REGION_OVERVIEW_RESULT = {
     capacityPercentage: 115.26315789473685,
     remainingPoints: -29,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
@@ -2962,8 +3425,10 @@ module.exports.REGION_OVERVIEW_RESULT = {
     capacityPercentage: 113.68421052631578,
     remainingPoints: -26,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
@@ -2976,8 +3441,10 @@ module.exports.REGION_OVERVIEW_RESULT = {
     capacityPercentage: 116.8421052631579,
     remainingPoints: -32,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0},
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
@@ -2990,8 +3457,10 @@ module.exports.REGION_OVERVIEW_RESULT = {
     capacityPercentage: 107.36842105263158,
     remainingPoints: -14,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
@@ -3004,8 +3473,10 @@ module.exports.REGION_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'Courtney Larry',
@@ -3018,8 +3489,10 @@ module.exports.REGION_OVERVIEW_RESULT = {
     capacityPercentage: 117.89473684210525,
     remainingPoints: -34,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'Marcin Martin',
@@ -3032,8 +3505,10 @@ module.exports.REGION_OVERVIEW_RESULT = {
     capacityPercentage: 113.1578947368421,
     remainingPoints: -25,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'Jane Doe',
@@ -3046,8 +3521,10 @@ module.exports.REGION_OVERVIEW_RESULT = {
     capacityPercentage: 106.3157894736842,
     remainingPoints: -12,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'Tony Test',
@@ -3060,8 +3537,10 @@ module.exports.REGION_OVERVIEW_RESULT = {
     capacityPercentage: 105.78947368421052,
     remainingPoints: -11,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'John Smith',
@@ -3074,7 +3553,8 @@ module.exports.REGION_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 } ],
+    cmsPercentage: 0
+  }],
   title: 'Division 1',
   subTitle: 'Division'
 }
@@ -3095,8 +3575,7 @@ module.exports.REGION_OVERVIEW_CSV = {
 }
 
 module.exports.NATIONAL_OVERVIEW_RESULT = {
-  breadcrumbs: [{
-    title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
+  breadcrumbs: [{ title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   overviewDetails: [{
     regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
@@ -3111,8 +3590,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 115.26315789473685,
     remainingPoints: -29,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
@@ -3125,8 +3606,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 113.68421052631578,
     remainingPoints: -26,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
@@ -3139,8 +3622,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 116.8421052631579,
     remainingPoints: -32,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
@@ -3153,8 +3638,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 107.36842105263158,
     remainingPoints: -14,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
@@ -3167,8 +3654,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'Courtney Larry',
@@ -3181,8 +3670,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 117.89473684210525,
     remainingPoints: -34,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'Jane Doe',
@@ -3195,8 +3686,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 106.3157894736842,
     remainingPoints: -12,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'Marcin Martin',
@@ -3209,8 +3702,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 113.1578947368421,
     remainingPoints: -25,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'John Smith',
@@ -3223,8 +3718,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
     teamName: 'Team 4',
     offenderManager: 'Tony Test',
@@ -3237,8 +3734,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 105.78947368421052,
     remainingPoints: -11,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 2',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 2',
     lduCluster: 'LDU Cluster 2',
     teamName: 'Team 2',
     offenderManager: 'Jane Doe',
@@ -3251,8 +3750,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 2',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 2',
     lduCluster: 'LDU Cluster 2',
     teamName: 'Team 2',
     offenderManager: 'Tony Test',
@@ -3265,8 +3766,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 2',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 2',
     lduCluster: 'LDU Cluster 2',
     teamName: 'Team 2',
     offenderManager: 'John Smith',
@@ -3279,8 +3782,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 110.00000000000001,
     remainingPoints: -19,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 2',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 2',
     lduCluster: 'LDU Cluster 2',
     teamName: 'Team 2',
     offenderManager: 'Marcin Martin',
@@ -3293,8 +3798,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 105.26315789473684,
     remainingPoints: -10,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 2',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 2',
     lduCluster: 'LDU Cluster 2',
     teamName: 'Team 2',
     offenderManager: 'Courtney Larry',
@@ -3307,8 +3814,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 114.21052631578948,
     remainingPoints: -27,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 3',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 3',
     lduCluster: 'LDU Cluster 3',
     teamName: 'Team 3',
     offenderManager: 'Courtney Larry',
@@ -3321,8 +3830,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 112.63157894736841,
     remainingPoints: -24,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 3',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 3',
     lduCluster: 'LDU Cluster 3',
     teamName: 'Team 3',
     offenderManager: 'Marcin Martin',
@@ -3335,8 +3846,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 3',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 3',
     lduCluster: 'LDU Cluster 3',
     teamName: 'Team 3',
     offenderManager: 'John Smith',
@@ -3349,8 +3862,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 107.36842105263158,
     remainingPoints: -14,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 3',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 3',
     lduCluster: 'LDU Cluster 3',
     teamName: 'Team 3',
     offenderManager: 'Tony Test',
@@ -3363,8 +3878,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 109.47368421052633,
     remainingPoints: -18,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Division 3',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Division 3',
     lduCluster: 'LDU Cluster 3',
     teamName: 'Team 3',
     offenderManager: 'Jane Doe',
@@ -3377,7 +3894,8 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 105.78947368421052,
     remainingPoints: -11,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 } ],
+    cmsPercentage: 0
+  }],
   title: 'HMPPS',
   subTitle: 'National'
 }
@@ -3408,8 +3926,7 @@ module.exports.NATIONAL_OVERVIEW_CSV = {
 }
 
 module.exports.PERCENTAGE_FORMAT_TEST = {
-  breadcrumbs: [{
-    title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
+  breadcrumbs: [{ title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   overviewDetails: [{
     regionName: 'Division 1',
     lduCluster: 'LDU Cluster 1',
@@ -3424,7 +3941,8 @@ module.exports.PERCENTAGE_FORMAT_TEST = {
     capacityPercentage: 115.26315789473685,
     remainingPoints: -29,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 }]
+    cmsPercentage: 0
+  }]
 
 }
 
@@ -3432,18 +3950,22 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
   breadcrumbs: [{
     title: 'Team 1',
     link: '/probation/team/240',
-    active: undefined },
+    active: undefined
+  },
   {
     title: 'LDU Cluster 1',
     link: '/probation/ldu/218',
-    active: undefined },
+    active: undefined
+  },
   {
     title: 'Division 1',
     link: '/probation/region/146',
-    active: undefined },
-    { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
+    active: undefined
+  },
+  { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   reductionNotes:
-  [ { regionName: 'Division 1',
+  [{
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3454,8 +3976,10 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'ACTIVE',
     additionalNotes: null,
-    gradeCode: 'PO' },
-  { regionName: 'Division 1',
+    gradeCode: 'PO'
+  },
+  {
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3466,8 +3990,10 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'SCHEDULED',
     additionalNotes: null,
-    gradeCode: 'SPO' },
-  { regionName: 'Division 1',
+    gradeCode: 'SPO'
+  },
+  {
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3478,8 +4004,10 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     endDate: '28 11 2016, 16:15',
     status: 'ARCHIVED',
     additionalNotes: null,
-    gradeCode: 'PSO' },
-  { regionName: 'Division 1',
+    gradeCode: 'PSO'
+  },
+  {
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3490,9 +4018,11 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'DELETED',
     additionalNotes: null,
-    gradeCode: 'PO' } ],
+    gradeCode: 'PO'
+  }],
   title: 'Team 1',
-  subTitle: 'Team' }
+  subTitle: 'Team'
+}
 
 module.exports.TEAM_REDUCTIONS_CSV = {
   filename: ('Team_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
@@ -3505,7 +4035,8 @@ module.exports.TEAM_REDUCTIONS_CSV = {
 
 module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
   reductionNotes:
-  [ { regionName: 'Division 1',
+  [{
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3517,8 +4048,10 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     status: 'ACTIVE',
     additionalNotes: null,
     gradeCode: 'PO',
-    managerResponsible: 'Joe Bloggs' },
-  { regionName: 'Division 1',
+    managerResponsible: 'Joe Bloggs'
+  },
+  {
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3530,8 +4063,10 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     status: 'SCHEDULED',
     additionalNotes: null,
     gradeCode: 'SPO',
-    managerResponsible: 'Frank Jones' },
-  { regionName: 'Division 1',
+    managerResponsible: 'Frank Jones'
+  },
+  {
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3543,8 +4078,10 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     status: 'ARCHIVED',
     additionalNotes: null,
     gradeCode: 'PSO',
-    managerResponsible: 'Mary Brown' },
-  { regionName: 'Division 1',
+    managerResponsible: 'Mary Brown'
+  },
+  {
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3556,7 +4093,8 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     status: 'DELETED',
     additionalNotes: null,
     gradeCode: 'PO',
-    managerResponsible: 'Jane Green' } ]
+    managerResponsible: 'Jane Green'
+  }]
 }
 
 module.exports.TEAM_EXPIRING_REDUCTIONS_CSV = {
@@ -3573,14 +4111,17 @@ module.exports.LDU_REDUCTIONS_RESULT = {
   [{
     title: 'LDU Cluster 1',
     link: '/probation/ldu/218',
-    active: undefined },
+    active: undefined
+  },
   {
     title: 'Division 1',
     link: '/probation/region/146',
-    active: undefined },
-      { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
+    active: undefined
+  },
+  { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   reductionNotes:
-  [ { regionName: 'Division 1',
+  [{
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3591,8 +4132,10 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'ACTIVE',
     additionalNotes: null,
-    gradeCode: 'PO' },
-  { regionName: 'Division 1',
+    gradeCode: 'PO'
+  },
+  {
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3603,8 +4146,10 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'SCHEDULED',
     additionalNotes: null,
-    gradeCode: 'SPO' },
-  { regionName: 'Division 1',
+    gradeCode: 'SPO'
+  },
+  {
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3615,8 +4160,10 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     endDate: '28 11 2016, 16:15',
     status: 'ARCHIVED',
     additionalNotes: null,
-    gradeCode: 'PSO' },
-  { regionName: 'Division 1',
+    gradeCode: 'PSO'
+  },
+  {
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3627,9 +4174,11 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'DELETED',
     additionalNotes: null,
-    gradeCode: 'PO' } ],
+    gradeCode: 'PO'
+  }],
   title: 'LDU Cluster 1',
-  subTitle: 'LDU Cluster' }
+  subTitle: 'LDU Cluster'
+}
 
 module.exports.LDU_REDUCTIONS_CSV = {
   filename: ('LDU_Cluster_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
@@ -3645,10 +4194,12 @@ module.exports.REGION_REDUCTIONS_RESULT = {
   [{
     title: 'Division 1',
     link: '/probation/region/146',
-    active: undefined },
-  { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
+    active: undefined
+  },
+  { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   reductionNotes:
-  [ { regionName: 'Division 1',
+  [{
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3659,8 +4210,10 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'ACTIVE',
     additionalNotes: null,
-    gradeCode: 'PO' },
-  { regionName: 'Division 1',
+    gradeCode: 'PO'
+  },
+  {
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3671,8 +4224,10 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'SCHEDULED',
     additionalNotes: null,
-    gradeCode: 'SPO' },
-  { regionName: 'Division 1',
+    gradeCode: 'SPO'
+  },
+  {
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3683,8 +4238,10 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     endDate: '28 11 2016, 16:15',
     status: 'ARCHIVED',
     additionalNotes: null,
-    gradeCode: 'PSO' },
-  { regionName: 'Division 1',
+    gradeCode: 'PSO'
+  },
+  {
+    regionName: 'Division 1',
     lduName: 'LDU Cluster 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3695,9 +4252,11 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'DELETED',
     additionalNotes: null,
-    gradeCode: 'PO' } ],
+    gradeCode: 'PO'
+  }],
   title: 'Division 1',
-  subTitle: 'Division' }
+  subTitle: 'Division'
+}
 
 module.exports.REGION_REDUCTIONS_CSV = {
   filename: ('Division_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),

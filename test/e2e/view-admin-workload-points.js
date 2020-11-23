@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 const authenticationHerlp = require('../helpers/routes/authentication-helper')
 
-var workloadPointsUrl = '/admin/workload-points'
+const workloadPointsUrl = '/admin/workload-points'
 
 describe('View / edit Workload Points', () => {
   before(function () {

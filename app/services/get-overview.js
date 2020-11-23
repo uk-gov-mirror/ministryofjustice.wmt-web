@@ -7,9 +7,9 @@ const orgUnit = require('../constants/organisation-unit')
 const calculateOverviewValues = require('./helpers/calculate-overview-values')
 
 module.exports = function (id, organisationLevel, isCSV = false) {
-  var result = {}
-  var overviewPromise = {}
-  var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
+  const result = {}
+  let overviewPromise = {}
+  const organisationalUnitType = getOrganisationUnit('name', organisationLevel)
 
   if (organisationLevel === orgUnit.OFFENDER_MANAGER.name) {
     overviewPromise = getIndividualOverview(id, organisationLevel)

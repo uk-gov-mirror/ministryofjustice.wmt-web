@@ -2,7 +2,7 @@ const expect = require('chai').expect
 const getOutstandingReportsView = require('../../../../app/services/data/get-outstanding-reports-view')
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 
-var inserts = []
+let inserts = []
 
 describe('services/data/get-outstanding-reports-view', function () {
   before(function () {

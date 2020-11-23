@@ -1,7 +1,7 @@
 const knex = require('../../../knex').web
 
 module.exports = function (workloadOwnerId) {
-  var whereObject = {}
+  const whereObject = {}
   if (workloadOwnerId !== undefined) {
     whereObject.workload_owner_id = workloadOwnerId
   }
@@ -11,15 +11,15 @@ module.exports = function (workloadOwnerId) {
     .join('reduction_category', 'reduction_reason.category_id', 'reduction_category.id')
     .where(whereObject)
     .select('reductions.id',
-            'workload_owner_id AS workloadOwnerId',
-            'hours',
-            'reduction_reason_id AS reductionReasonId',
-            'reduction_category.id AS categoryId',
-            'reduction_reason.reason_short_name AS reasonShortName',
-            'reduction_reason.allowance_percentage AS allowancePercentage',
-            'effective_from AS reductionStartDate',
-            'effective_to AS reductionEndDate',
-            'notes',
-            'status'
-          )
+      'workload_owner_id AS workloadOwnerId',
+      'hours',
+      'reduction_reason_id AS reductionReasonId',
+      'reduction_category.id AS categoryId',
+      'reduction_reason.reason_short_name AS reasonShortName',
+      'reduction_reason.allowance_percentage AS allowancePercentage',
+      'effective_from AS reductionStartDate',
+      'effective_to AS reductionEndDate',
+      'notes',
+      'status'
+    )
 }

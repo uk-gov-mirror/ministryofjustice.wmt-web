@@ -1,7 +1,7 @@
 const knex = require('../../../knex').web
 
 module.exports = function (previousWorkloadPointsId, isT2A) {
-  var whereColumnName = 'workload_points_calculations.workload_points_id'
+  let whereColumnName = 'workload_points_calculations.workload_points_id'
   if (isT2A === true) {
     whereColumnName = 'workload_points_calculations.t2a_workload_points_id'
   }

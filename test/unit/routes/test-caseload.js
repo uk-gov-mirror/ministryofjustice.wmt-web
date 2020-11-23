@@ -112,13 +112,13 @@ const EXPORT_CSV = '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1",
       '"Test Team 1","PO",50,0,50,25,10,0,50,50,50\n' +
       '"Test Team 1","PSO",50,0,50,75,90,100,50,50,50'
 
-var app
-var route
-var getCaseload
-var getLastUpdated
-var getSubNavStub
-var getExportCsv
-var authorisationService
+let app
+let route
+let getCaseload
+let getLastUpdated
+let getSubNavStub
+let getExportCsv
+let authorisationService
 
 before(function () {
   authorisationService = {

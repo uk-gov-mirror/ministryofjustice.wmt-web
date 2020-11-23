@@ -3,10 +3,10 @@ const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 const workloadTypes = require('../../app/constants/workload-type')
 
-var offenderManagerId
-var offenderManagerUrl
-var reductionId
-var reductionUrl
+let offenderManagerId
+let offenderManagerUrl
+let reductionId
+let reductionUrl
 
 describe('View adding a new reduction', () => {
   before(function () {

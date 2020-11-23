@@ -3,9 +3,9 @@ const expect = require('chai').expect
 const helper = require('../../../helpers/data/aggregated-data-helper')
 const getCaseProgress = require('../../../../app/services/data/get-caseload-progress')
 
-var inserts = []
+let inserts = []
 
-var baseCaseProgressRow = {
+const baseCaseProgressRow = {
   communityLast16Weeks: 10,
   licenseLast16Weeks: 9,
   totalCases: 5,
@@ -25,7 +25,7 @@ describe('services/data/get-org-unit-caseload-progress', function () {
   it('should retrieve current caseload progress for an offender manager', function () {
     return getCaseProgress(inserts.filter((item) => item.table === 'workload_owner')[0].id, 'offender-manager')
       .then(function (results) {
-        var omResults = [
+        const omResults = [
           helper.rowGenerator('Test_Forename Test_Surname', baseCaseProgressRow)
         ]
         expect(results).to.eql(omResults)
@@ -33,7 +33,7 @@ describe('services/data/get-org-unit-caseload-progress', function () {
   })
 
   it('should retrieve current caseload progress for all workload owners on a team with one OM', function () {
-    var teamWithOneOffenderManager = [
+    const teamWithOneOffenderManager = [
       helper.rowGenerator('Test_Forename Test_Surname', baseCaseProgressRow)
     ]
     return getCaseProgress(inserts.filter((item) => item.table === 'team')[1].id, 'team')
@@ -44,7 +44,7 @@ describe('services/data/get-org-unit-caseload-progress', function () {
   })
 
   it('should retrieve current caseload progress for all workload owners on a team with mutiple OMs', function () {
-    var teamWithMultipleOffenderManagers = [
+    const teamWithMultipleOffenderManagers = [
       helper.rowGenerator('Test_Forename Test_Surname', baseCaseProgressRow),
       helper.rowGenerator('Test_Forename Test_Surname', baseCaseProgressRow)
     ]
@@ -56,7 +56,7 @@ describe('services/data/get-org-unit-caseload-progress', function () {
   })
 
   it('should retrieve current caseload progress for all teams in an LDU with multiple teams', function () {
-    var lduWithMultipleTeams = [
+    const lduWithMultipleTeams = [
       helper.rowGenerator('Test Team', baseCaseProgressRow, 2),
       helper.rowGenerator('Test Team', baseCaseProgressRow)
     ]
@@ -68,7 +68,7 @@ describe('services/data/get-org-unit-caseload-progress', function () {
   })
 
   it('should retrieve current caseload progress for all teams in an LDU with one team', function () {
-    var lduWithOneTeam = [
+    const lduWithOneTeam = [
       helper.rowGenerator('Test Team', baseCaseProgressRow)
     ]
     return getCaseProgress(inserts.filter((item) => item.table === 'ldu')[1].id, 'ldu')
@@ -79,7 +79,7 @@ describe('services/data/get-org-unit-caseload-progress', function () {
   })
 
   it('should retrieve current caseload progress for all LDUs in a region', function () {
-    var regionWithTwoLdus = [
+    const regionWithTwoLdus = [
       helper.rowGenerator('Test LDU', baseCaseProgressRow, 3),
       helper.rowGenerator('Test LDU', baseCaseProgressRow)
     ]

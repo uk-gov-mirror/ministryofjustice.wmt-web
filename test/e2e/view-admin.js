@@ -1,8 +1,8 @@
 const expect = require('chai').expect
 const authenticationHelper = require('../helpers/routes/authentication-helper')
 
-var adminURL
-var workloadPointsURL
+let adminURL
+let workloadPointsURL
 
 describe('View admin role', () => {
   before(function () {

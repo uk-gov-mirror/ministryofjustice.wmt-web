@@ -3,14 +3,14 @@ const bunyan = require('bunyan')
 const PrettyStream = require('bunyan-prettystream')
 
 // Add logging
-var prettyStream = new PrettyStream()
+const prettyStream = new PrettyStream()
 prettyStream.pipe(process.stdout)
 
-var logger = bunyan.createLogger({
+const logger = bunyan.createLogger({
   name: 'wmt-web',
   streams: [],
   serializers: {
-    'error': errorSerializer
+    error: errorSerializer
   }
 })
 

@@ -3,12 +3,12 @@ const authenticationHelper = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 const workloadTypes = require('../../app/constants/workload-type')
 
-var workloadOwnerIds = []
-var workloadOwnerId
-var workloadOwnerDefaultUrl
-var teamDefaultUrl
-var lduDefaultUrl
-var nationalDefaultUrl
+let workloadOwnerIds = []
+let workloadOwnerId
+let workloadOwnerDefaultUrl
+let teamDefaultUrl
+let lduDefaultUrl
+let nationalDefaultUrl
 
 describe('View reductions export for a System Admin', function () {
   before(function () {

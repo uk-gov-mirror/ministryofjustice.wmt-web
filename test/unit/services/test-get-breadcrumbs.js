@@ -6,15 +6,15 @@ const ohDataHelper = require('../../helpers/organisational-hierarchy-helper')
 const breadcrumbDataHelper = require('../../helpers/breadcrumb-helper')
 const workloadTypes = require('../../../app/constants/workload-type')
 
-var getTree
-var getBreadcrumbs
+let getTree
+let getBreadcrumbs
 
 before(function () {
   getTree = {
     get: sinon.stub().returns(ohDataHelper.ORGANISATIONAL_HIERARCHY_TREE_MULTIPLE_BRANCHES)
   }
   getBreadcrumbs = proxyquire('../../../app/services/get-breadcrumbs',
-    {'./organisational-hierarchy-tree': getTree}
+    { './organisational-hierarchy-tree': getTree }
   )
 })
 

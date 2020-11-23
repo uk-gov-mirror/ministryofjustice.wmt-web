@@ -3,12 +3,12 @@ const authenticationHelper = require('../helpers/routes/authentication-helper')
 const workloadCapacityHelper = require('../helpers/data/aggregated-data-helper')
 const workloadTypes = require('../../app/constants/workload-type')
 
-var workloadOwnerIds = []
-var workloadOwnerDefaultUrl
-var teamDefaultUrl
-var lduDefaultUrl
-var regionDefaultUrl
-var nationalDefaultUrl
+let workloadOwnerIds = []
+let workloadOwnerDefaultUrl
+let teamDefaultUrl
+let lduDefaultUrl
+let regionDefaultUrl
+let nationalDefaultUrl
 
 describe('View your caseload capacity flow', () => {
   before(function () {
@@ -72,17 +72,17 @@ describe('View your caseload capacity flow', () => {
 
   it('should navigate to the region caseload capacity screen', () => {
     return browser.url(regionDefaultUrl + '/caseload-capacity')
-    .waitForExist('.breadcrumbs')
-    .waitForExist('.sln-subnav')
-    .waitForExist('[href="' + regionDefaultUrl + '/caseload-capacity"]')
-    .waitForExist('[href="' + regionDefaultUrl + '/case-progress"]')
-    .waitForExist('.plot-container.plotly')
-    .waitForExist('#capacity-breakdown')
-    .waitForExist('.sln-page-subtitle')
-    .getText('.sln-page-subtitle')
-    .then(function (text) {
-      expect(text).to.equal('Division')
-    })
+      .waitForExist('.breadcrumbs')
+      .waitForExist('.sln-subnav')
+      .waitForExist('[href="' + regionDefaultUrl + '/caseload-capacity"]')
+      .waitForExist('[href="' + regionDefaultUrl + '/case-progress"]')
+      .waitForExist('.plot-container.plotly')
+      .waitForExist('#capacity-breakdown')
+      .waitForExist('.sln-page-subtitle')
+      .getText('.sln-page-subtitle')
+      .then(function (text) {
+        expect(text).to.equal('Division')
+      })
   })
 
   it('should navigate to the national caseload capacity screen', () => {

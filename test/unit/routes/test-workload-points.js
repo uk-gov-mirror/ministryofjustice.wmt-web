@@ -17,7 +17,7 @@ const WORKLOAD_POINTS = {
   workloadPoints: []
 }
 
-var WORKLOAD_POINTS_TO_POST = {
+const WORKLOAD_POINTS_TO_POST = {
   previousWpId: '2',
   commA: '111',
   commB1: '101',
@@ -112,7 +112,7 @@ var WORKLOAD_POINTS_TO_POST = {
   adjustment45: '46'
 }
 
-var WORKLOAD_POINTS_T2A_TO_POST = {
+const WORKLOAD_POINTS_T2A_TO_POST = {
   previousWpId: '3',
   commA: '111',
   commB1: '101',
@@ -159,13 +159,13 @@ const MOCK_USER = {
   user: MOCK_USERNAME
 }
 
-var app
-var route
-var workloadPointsService
-var authorisationService
-var hasRoleResult = true
-var getAdjustmentPointsConfig
-var updateAdjustmentPointsConfig
+let app
+let route
+let workloadPointsService
+let authorisationService
+const hasRoleResult = true
+let getAdjustmentPointsConfig
+let updateAdjustmentPointsConfig
 
 before(function () {
   authorisationService = {
@@ -198,9 +198,9 @@ before(function () {
 describe('Admin Workload Points route', function () {
   it('should respond with 200 when the correct admin/workload-points url is called', function () {
     return supertest(app).get(WORKLOAD_POINTS_URL).expect(200)
-    .then(function () {
+      .then(function () {
       expect(workloadPointsService.getWorkloadPoints.calledWith(false)).to.be.true //eslint-disable-line
-    })
+      })
   })
 
   it('should respond with 500 when an incorrect url is called', function () {
@@ -219,9 +219,9 @@ describe('Admin Workload Points route', function () {
 describe('Admin Workload Points T2A route', function () {
   it('should respond with 200 when the correct admin/workload-points/t2a url is called', function () {
     return supertest(app).get(WORKLOAD_POINTS_T2A_URL).expect(200)
-    .then(function () {
+      .then(function () {
       expect(workloadPointsService.getWorkloadPoints.calledWith(true)).to.be.true //eslint-disable-line
-    })
+      })
   })
 
   it('should respond with 500 when an incorrect url is called for t2a', function () {

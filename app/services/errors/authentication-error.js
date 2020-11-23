@@ -1,10 +1,10 @@
-var Unauthorized = function (message, redirect) {
+const Unauthorized = function (message, redirect) {
   this.message = message
   this.statusCode = 401
   this.redirect = redirect
 }
 
-var Forbidden = function (message, redirect) {
+const Forbidden = function (message, redirect) {
   this.message = message
   this.statusCode = 403
   this.redirect = redirect

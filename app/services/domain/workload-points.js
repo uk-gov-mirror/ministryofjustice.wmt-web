@@ -51,7 +51,7 @@ class WorkloadPoints {
     this.parom = request.parom
     this.paroms_enabled = 1
     this.isT2A = request.isT2A
-    var newAdjustments = {}
+    const newAdjustments = {}
     if (adjustments) {
       Object.keys(adjustments).forEach(function (key) {
         newAdjustments[key] = adjustments[key]
@@ -61,14 +61,14 @@ class WorkloadPoints {
   }
 
   isValid (newAdjustments) {
-    var errors = ErrorHandler()
+    const errors = ErrorHandler()
     this.isValidCommonPoints(errors)
     if (this.isT2A === 'true') {
       this.initializeStandardPoints()
     }
     this.isValidStandardPoints(errors)
     this.isAdjustmentPointsValid(newAdjustments, errors)
-    var validationErrors = errors.get()
+    const validationErrors = errors.get()
     if (validationErrors) {
       throw new ValidationError(validationErrors)
     }

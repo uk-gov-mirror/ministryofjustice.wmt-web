@@ -18,7 +18,8 @@ module.exports = {
     caseloadView: 'team_caseload_view',
     outstandingReportsView: 'team_outstanding_reports_view',
     courtReporterOverview: 'team_court_reporter_overview',
-    childOrganisationLevel: 'offender-manager' },
+    childOrganisationLevel: 'offender-manager'
+  },
   LDU: {
     name: 'ldu',
     ref: 'L',
@@ -30,7 +31,8 @@ module.exports = {
     caseloadView: 'ldu_caseload_view',
     outstandingReportsView: 'ldu_outstanding_reports_view',
     courtReporterOverview: 'ldu_court_reporter_overview',
-    childOrganisationLevel: 'team' },
+    childOrganisationLevel: 'team'
+  },
   REGION: {
     name: 'region',
     ref: 'R',
@@ -42,7 +44,8 @@ module.exports = {
     caseloadView: 'region_caseload_view',
     outstandingReportsView: 'region_outstanding_reports_view',
     courtReporterOverview: 'region_court_reporter_overview',
-    childOrganisationLevel: 'ldu' },
+    childOrganisationLevel: 'ldu'
+  },
   NATIONAL: {
     name: 'hmpps',
     ref: 'N',
@@ -54,5 +57,6 @@ module.exports = {
     caseloadView: 'national_caseload_view',
     outstandingReportsView: 'national_outstanding_reports_view',
     courtReporterOverview: 'national_court_reporter_overview',
-    childOrganisationLevel: 'region' }
+    childOrganisationLevel: 'region'
+  }
 }

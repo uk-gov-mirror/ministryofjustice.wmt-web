@@ -4,8 +4,8 @@ const removeUserByUsername = require('../../../../app/services/data/remove-user-
 const userRoleHelper = require('../../../helpers/data/user-role-helper')
 const getUserByUsername = require('../../../..//app/services/data/get-user-by-username')
 
-var username
-var insertedData = []
+let username
+let insertedData = []
 
 describe('/services/data/remove-user-by-username', function () {
   before(function () {

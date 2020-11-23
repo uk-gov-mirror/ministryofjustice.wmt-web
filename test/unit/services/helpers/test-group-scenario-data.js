@@ -2,7 +2,7 @@ const expect = require('chai').expect
 const groupScenarioData = require('../../../../app/services/helpers/group-scenario-data')
 const scenarioData = require('../../../helpers/data/raw-scenario-data')
 
-var scenarioObjectsArray
+let scenarioObjectsArray
 
 describe('services/helpers/group-scenario-data', function () {
   before(function () {

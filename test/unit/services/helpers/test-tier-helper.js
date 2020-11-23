@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 const tierHelper = require('../../../../app/services/helpers/tier-helper')
 
-var EXPECTED_TIER_TYPES = { ONE: 'D2', TWO: 'D1', THREE: 'C2', FOUR: 'C1', FIVE: 'B2', SIX: 'B1', SEVEN: 'A' }
+const EXPECTED_TIER_TYPES = { ONE: 'D2', TWO: 'D1', THREE: 'C2', FOUR: 'C1', FIVE: 'B2', SIX: 'B1', SEVEN: 'A' }
 
 describe('services/helpers/tier-helper', function () {
   describe('getTierType', function () {

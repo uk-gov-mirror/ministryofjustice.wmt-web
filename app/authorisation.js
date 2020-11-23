@@ -2,7 +2,7 @@ const config = require('../config')
 const Unauthorized = require('./services/errors/authentication-error').Unauthorized
 const Forbidden = require('./services/errors/authentication-error').Forbidden
 
-var assertUserAuthenticated = function (req) {
+const assertUserAuthenticated = function (req) {
   if (isAuthenticationEnabled()) {
     if (!req.user) {
       // To handle bookmarks we need to store unauthenticated requests only
@@ -14,7 +14,7 @@ var assertUserAuthenticated = function (req) {
   }
 }
 
-var hasRole = function (req, roles) {
+const hasRole = function (req, roles) {
   if (isAuthenticationEnabled()) {
     if (roles instanceof Array) {
       if (!roles.includes(req.user.user_role)) {
@@ -26,12 +26,12 @@ var hasRole = function (req, roles) {
   }
 }
 
-var isAuthenticationEnabled = function () {
+const isAuthenticationEnabled = function () {
   return (config.AUTHENTICATION_ENABLED === 'true')
 }
 
-var getAuthorisedUserRole = function (req) {
-  var result = {
+const getAuthorisedUserRole = function (req) {
+  const result = {
     authorisation: isAuthenticationEnabled(),
     userRole: ''
   }

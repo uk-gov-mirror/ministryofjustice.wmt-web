@@ -12,9 +12,9 @@ module.exports = function (username) {
     .where('users.username', username)
     .select('roles.id AS roleId', 'roles.role', 'users.name AS fullname')
     .then(function (result) {
-      var role = result[0]
+      let role = result[0]
       if (!role) {
-        role = {roleId: 0, role: Roles.STAFF}
+        role = { roleId: 0, role: Roles.STAFF }
       }
       return role
     })

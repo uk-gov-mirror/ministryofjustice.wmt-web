@@ -3,15 +3,15 @@ const orgUnitFinder = require('../helpers/org-unit-finder')
 const orgUnitConstants = require('../../constants/organisation-unit')
 
 module.exports = function (id, type) {
-  var orgUnit = orgUnitFinder('name', type)
-  var table = orgUnit.overviewView
-  var whereClause = ''
+  const orgUnit = orgUnitFinder('name', type)
+  const table = orgUnit.overviewView
+  let whereClause = ''
 
   if (id !== undefined) {
     whereClause = ' WHERE id = ' + id
   }
 
-  var selectColumns = [
+  const selectColumns = [
     'name',
     'total_cases AS totalCases',
     'available_points AS availablePoints',
@@ -26,7 +26,7 @@ module.exports = function (id, type) {
   }
 
   return knex.raw(
-      'SELECT ' + selectColumns.join(', ') +
+    'SELECT ' + selectColumns.join(', ') +
       ' FROM ' + table + ' WITH (NOEXPAND)' +
       whereClause)
     .then(function (results) {

@@ -3,12 +3,12 @@ const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 const workloadTypes = require('../../app/constants/workload-type')
 
-var workloadOwnerIds = []
-var workloadOwnerDefaultUrl
-var teamDefaultUrl
-var lduDefaultUrl
-var regionDefaultUrl
-var nationalDefaultUrl
+let workloadOwnerIds = []
+let workloadOwnerDefaultUrl
+let teamDefaultUrl
+let lduDefaultUrl
+let regionDefaultUrl
+let nationalDefaultUrl
 
 describe('View your caseload flow', () => {
   before(function () {
@@ -47,19 +47,19 @@ describe('View your caseload flow', () => {
       return browser.url(teamDefaultUrl + '/caseload')
         .getText('#custodyTotal')
         .then(function (text) {
-          var textTotal = text.split('\n')
+          const textTotal = text.split('\n')
           expect(Number(textTotal[0])).to.not.be.empty // eslint-disable-line
           expect(textTotal[1]).to.eql('Custody cases')
         })
         .getText('#communityTotal')
         .then(function (text) {
-          var textTotal = text.split('\n')
+          const textTotal = text.split('\n')
           expect(Number(textTotal[0])).to.not.be.empty // eslint-disable-line
           expect(textTotal[1]).to.eql('Community cases')
         })
         .getText('#licenseTotal')
         .then(function (text) {
-          var textTotal = text.split('\n')
+          const textTotal = text.split('\n')
           expect(Number(textTotal[0])).to.not.be.empty // eslint-disable-line
           expect(textTotal[1]).to.eql('License cases')
         })

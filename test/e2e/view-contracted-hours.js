@@ -3,9 +3,9 @@ const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/aggregated-data-helper')
 const workloadTypes = require('../../app/constants/workload-type')
 
-var workloadOwnerIds = []
-var workloadOwnerId
-var workloadOwnerDefaultUrl
+let workloadOwnerIds = []
+let workloadOwnerId
+let workloadOwnerDefaultUrl
 
 describe('View contracted hours', function () {
   before(function () {

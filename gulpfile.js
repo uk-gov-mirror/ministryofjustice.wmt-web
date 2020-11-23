@@ -1,8 +1,8 @@
-var gulp = require('gulp')
-var path = require('path')
-var gulpNSP = require('gulp-nsp')
-var sass = require('gulp-sass')
-var spawn = require('child_process').spawn
+const gulp = require('gulp')
+const path = require('path')
+const gulpNSP = require('gulp-nsp')
+const sass = require('gulp-sass')
+const spawn = require('child_process').spawn
 
 gulp.task('assets', function (done) {
   gulp.src('node_modules/govuk_frontend_toolkit/javascripts/**/*')
@@ -27,12 +27,12 @@ gulp.task('sync', function (done) {
     'node_modules/jquery/dist/jquery.min.js',
     'node_modules/plotly.js/dist/plotly.min.js'
   ]
-  gulp.src(vendorJSFiles, {allowEmpty: true})
+  gulp.src(vendorJSFiles, { allowEmpty: true })
     .pipe(gulp.dest('app/assets/javascripts/vendor/'))
 
   gulp.src('app/assets/javascripts/**/*.js')
     .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
-  
+
   gulp.src('app/assets/images/**/*')
     .pipe(gulp.dest('app/public/images/', { overwrite: true }))
   done()
@@ -57,7 +57,7 @@ gulp.task('sass', function (done) {
 })
 
 gulp.task('nsp', function (cb) {
-  gulpNSP({package: path.join(__dirname, '/package.json')}, cb)
+  gulpNSP({ package: path.join(__dirname, '/package.json') }, cb)
 })
 
 gulp.task('generate-assets', gulp.series(gulp.parallel('assets', 'templates', 'sync', 'sass')))

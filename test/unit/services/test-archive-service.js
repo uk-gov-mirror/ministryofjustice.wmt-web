@@ -59,9 +59,9 @@ const expectedArchiveRecord = {
   capacity: '55.2%'
 }
 
-var archiveService
-var getArchive
-var getArchiveNewDB
+let archiveService
+let getArchive
+let getArchiveNewDB
 
 before(function () {
   getArchive = sinon.stub()

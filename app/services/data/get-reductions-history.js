@@ -2,7 +2,7 @@ const knex = require('../../../knex').web
 const dateFormatter = require('../date-formatter')
 
 module.exports = function (reductionId) {
-  var columns = [
+  const columns = [
     'reduction_reason.reason_short_name AS reasonShortName',
     'hours',
     'notes',

@@ -20,13 +20,13 @@ const ROLE = {
   role: 'Manager'
 }
 
-var app
-var route
-var userRoleService
-var authorisationService
-var hasRoleStub = sinon.stub()
+let app
+let route
+let userRoleService
+let authorisationService
+const hasRoleStub = sinon.stub()
 
-var initaliseApp = function () {
+const initaliseApp = function () {
   userRoleService = sinon.stub()
   authorisationService = {
     assertUserAuthenticated: sinon.stub(),

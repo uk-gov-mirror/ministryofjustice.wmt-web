@@ -24,13 +24,13 @@ const OVERVIEW = {
   overviewDetails: [{}]
 }
 
-var app
-var route
-var getCourtReportOverview
-var getLastUpdated
-var getSubNavStub
-var authorisationService
-var hasRoleResult = true
+let app
+let route
+let getCourtReportOverview
+let getLastUpdated
+let getSubNavStub
+let authorisationService
+const hasRoleResult = true
 
 before(function () {
   authorisationService = {
@@ -81,11 +81,11 @@ describe('court reports overview route', function () {
 
   it('should call the getSubNav and getCourtReportOverview with the correct parameters', function () {
     return supertest(app)
-        .get(OM_OVERVIEW_URL)
-        .expect(200)
-        .then(function () {
+      .get(OM_OVERVIEW_URL)
+      .expect(200)
+      .then(function () {
           expect(getSubNavStub.calledWith('1', orgUnit.OFFENDER_MANAGER.name, OM_OVERVIEW_URL, workloadType.COURT_REPORTS)).to.be.true //eslint-disable-line
           expect(getCourtReportOverview.calledWith('1', orgUnit.OFFENDER_MANAGER.name)).to.be.true //eslint-disable-line
-        })
+      })
   })
 })

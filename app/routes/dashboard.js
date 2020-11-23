@@ -11,7 +11,7 @@ const roles = require('../constants/user-roles')
 const Forbidden = require('../services/errors/authentication-error').Forbidden
 const messages = require('../constants/messages')
 
-var lastUpdated
+let lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/dashboard', function (req, res, next) {
@@ -28,18 +28,18 @@ module.exports = function (router) {
         })
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var id = req.params.id
+    const organisationLevel = req.params.organisationLevel
+    const id = req.params.id
 
     if (organisationLevel !== organisationUnit.NATIONAL.name) {
       throw new Error('Only available for National Level')
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return getLastUpdated().then(function (lastUpdatedDate) {
       lastUpdated = dateFormatter.formatDate(lastUpdatedDate.date_processed, 'DD-MM-YYYY HH:mm')
-      var result = getExport(id, organisationLevel)
+      const result = getExport(id, organisationLevel)
       result.date = lastUpdated
       return getDashboardFiles().then(function (dashboardFiles) {
         return res.render('dashboard', {
@@ -52,7 +52,7 @@ module.exports = function (router) {
           subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
           date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
         })
       })
     }).catch(function (error) {
@@ -74,8 +74,8 @@ module.exports = function (router) {
         })
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var fileId = req.query.id
+    const organisationLevel = req.params.organisationLevel
+    const fileId = req.query.id
 
     if (organisationLevel !== organisationUnit.NATIONAL.name) {
       throw new Error('Only available for National Level')
@@ -91,8 +91,8 @@ module.exports = function (router) {
         throw new Error('Unable to find file')
       }
     })
-    .catch(function (error) {
-      next(error)
-    })
+      .catch(function (error) {
+        next(error)
+      })
   })
 }

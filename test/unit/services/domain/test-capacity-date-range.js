@@ -6,7 +6,7 @@ const dateFormatter = require('../../../../app/services/date-formatter')
 const CapacityDateRange = require('../../../../app/services/domain/capacity-date-range')
 const CASELOAD_CAPACITY = require('../../../../app/constants/caseload-capacity')
 
-var capacityDateRange
+let capacityDateRange
 
 describe('services/domain/capacity-date-range', function () {
   const VALID_FROM_DAY = '01'
@@ -58,9 +58,9 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_YEAR
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityFromDate')
-    .that.contains(ERROR_MESSAGES.getPastDateMessage(FIELD_NAMES['capacityFromDate']))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityFromDate')
+      .that.contains(ERROR_MESSAGES.getPastDateMessage(FIELD_NAMES.capacityFromDate))
   })
 
   it('should throw ValidationError if a future date was given for capacity to date', function () {
@@ -74,9 +74,9 @@ describe('services/domain/capacity-date-range', function () {
         VALID_FUTURE_YEAR
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityToDate')
-    .that.contains(ERROR_MESSAGES.getPastOrPresentDateMessage(FIELD_NAMES['capacityToDate']))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityToDate')
+      .that.contains(ERROR_MESSAGES.getPastOrPresentDateMessage(FIELD_NAMES.capacityToDate))
   })
 
   it('should throw ValidationError if capacity from date is more than 6 years old', function () {
@@ -90,9 +90,9 @@ describe('services/domain/capacity-date-range', function () {
         VALID_FUTURE_YEAR
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityFromDate')
-    .that.contains(ERROR_MESSAGES.getIsDateLaterThanMessage(FIELD_NAMES['capacityFromDate'], {secondaryDisplayName: FIELD_NAMES['maxCapacityHistory']}))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityFromDate')
+      .that.contains(ERROR_MESSAGES.getIsDateLaterThanMessage(FIELD_NAMES.capacityFromDate, { secondaryDisplayName: FIELD_NAMES.maxCapacityHistory }))
   })
 
   it('should throw ValidationError if capacity to date is more than 6 years old', function () {
@@ -106,9 +106,9 @@ describe('services/domain/capacity-date-range', function () {
         dateFormatter.now().year() - (CASELOAD_CAPACITY.MAX_HISTORY + 1)
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityToDate')
-    .that.contains(ERROR_MESSAGES.getIsDateLaterThanMessage(FIELD_NAMES['capacityToDate'], {secondaryDisplayName: FIELD_NAMES['capacityFromDate']}))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityToDate')
+      .that.contains(ERROR_MESSAGES.getIsDateLaterThanMessage(FIELD_NAMES.capacityToDate, { secondaryDisplayName: FIELD_NAMES.capacityFromDate }))
   })
 
   it('should throw ValidationError if given invalid day for capacity from date', function () {
@@ -122,9 +122,9 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_YEAR
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityFromDate')
-    .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES['capacityFromDate']))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityFromDate')
+      .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityFromDate))
   })
 
   it('should throw ValidationError if given invalid month for capacity from date', function () {
@@ -138,9 +138,9 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_YEAR
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityFromDate')
-    .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES['capacityFromDate']))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityFromDate')
+      .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityFromDate))
   })
 
   it('should throw ValidationError if given invalid year for capacity from date', function () {
@@ -154,9 +154,9 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_YEAR
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityFromDate')
-    .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES['capacityFromDate']))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityFromDate')
+      .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityFromDate))
   })
 
   it('should throw ValidationError if given invalid day for capacity to date', function () {
@@ -170,9 +170,9 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_YEAR
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityToDate')
-    .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES['capacityToDate']))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityToDate')
+      .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityToDate))
   })
 
   it('should throw ValidationError if given invalid month for capacity to date', function () {
@@ -186,9 +186,9 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_YEAR
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityToDate')
-    .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES['capacityToDate']))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityToDate')
+      .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityToDate))
   })
 
   it('should throw ValidationError if given invalid year for capacity to date', function () {
@@ -202,9 +202,9 @@ describe('services/domain/capacity-date-range', function () {
         INVALID_YEAR
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityToDate')
-    .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES['capacityToDate']))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityToDate')
+      .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityToDate))
   })
 
   it('should throw ValidationError if given invalid day, month, and year for capacity from date', function () {
@@ -218,9 +218,9 @@ describe('services/domain/capacity-date-range', function () {
         VALID_TO_YEAR
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityFromDate')
-    .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES['capacityFromDate']))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityFromDate')
+      .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityFromDate))
   })
 
   it('should throw ValidationError if given invalid day, month, and year for capacity to date', function () {
@@ -234,9 +234,9 @@ describe('services/domain/capacity-date-range', function () {
         INVALID_YEAR
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityToDate')
-    .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES['capacityToDate']))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityToDate')
+      .that.contains(ERROR_MESSAGES.getInvalidDateFormatMessage(FIELD_NAMES.capacityToDate))
   })
 
   it('should throw ValidationError if given a capacity from date that is greater than the capacity to date', function () {
@@ -250,8 +250,8 @@ describe('services/domain/capacity-date-range', function () {
         VALID_FROM_YEAR
       )
     }).to.throw(ValidationError)
-    .that.contains.a.property('validationErrors')
-    .that.contains.a.property('capacityToDate')
-    .that.contains(ERROR_MESSAGES.getIsDateLaterThanMessage(FIELD_NAMES['capacityToDate'], {secondaryDisplayName: FIELD_NAMES['capacityFromDate']}))
+      .that.contains.a.property('validationErrors')
+      .that.contains.a.property('capacityToDate')
+      .that.contains(ERROR_MESSAGES.getIsDateLaterThanMessage(FIELD_NAMES.capacityToDate, { secondaryDisplayName: FIELD_NAMES.capacityFromDate }))
   })
 })

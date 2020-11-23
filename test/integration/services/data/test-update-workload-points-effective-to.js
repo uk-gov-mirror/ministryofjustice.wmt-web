@@ -3,7 +3,7 @@ const expect = require('chai').expect
 const updateWorkloadPointsEffectiveTo = require('../../../../app/services/data/update-workload-points-effective-to')
 const workloadCapacityHelper = require('../../../helpers/data/aggregated-data-helper')
 
-var workloadPointsInserts
+let workloadPointsInserts
 
 describe('/services/data/update-workload-points-effective-to', function () {
   before(function () {

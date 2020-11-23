@@ -29,14 +29,14 @@ const result = {
   ]
 }
 
-var app
-var route
-var userRoleService
-var authorisationService
-var hasRoleStub = sinon.stub()
-var expiringReductionsStub
+let app
+let route
+let userRoleService
+let authorisationService
+const hasRoleStub = sinon.stub()
+let expiringReductionsStub
 
-var initaliseApp = function () {
+const initaliseApp = function () {
   userRoleService = sinon.stub()
   authorisationService = {
     assertUserAuthenticated: sinon.stub(),

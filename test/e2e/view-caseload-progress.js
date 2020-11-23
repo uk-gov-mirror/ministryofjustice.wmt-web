@@ -3,12 +3,12 @@ const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const caseProgressDataHelper = require('../helpers/data/aggregated-data-helper')
 const workloadTypes = require('../../app/constants/workload-type')
 
-var workloadOwnerIds = []
-var workloadOwnerDefaultUrl
-var teamDefaultUrl
-var lduDefaultUrl
-var regionDefaultUrl
-var nationalDefaultUrl
+let workloadOwnerIds = []
+let workloadOwnerDefaultUrl
+let teamDefaultUrl
+let lduDefaultUrl
+let regionDefaultUrl
+let nationalDefaultUrl
 
 describe('View caseload progress flow', () => {
   before(function () {

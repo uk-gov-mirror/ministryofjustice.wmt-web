@@ -15,7 +15,7 @@ class ReductionReason {
   }
 
   isValid () {
-    var errors = ErrorHandler()
+    const errors = ErrorHandler()
 
     FieldValidator(this.reason, 'reductionName', errors)
       .isRequired()
@@ -53,7 +53,7 @@ class ReductionReason {
     this.category = parseFloat(this.category)
     this.isEnabled = this.isEnabled === 'true'
 
-    var validationErrors = errors.get()
+    const validationErrors = errors.get()
 
     if (validationErrors) {
       throw new ValidationError(validationErrors)

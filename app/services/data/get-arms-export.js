@@ -1,8 +1,8 @@
 const knex = require('../../../knex').web
 
 module.exports = function (id, type) {
-  var table = 'arms_export_view'
-  var selectList = [
+  const table = 'arms_export_view'
+  const selectList = [
     'regionName',
     'lduName',
     'teamName',
@@ -14,7 +14,7 @@ module.exports = function (id, type) {
     'releaseDate'
   ]
 
-  var whereString
+  let whereString
 
   if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
     whereString = ' WHERE ' + type + 'id = ' + id
@@ -23,7 +23,7 @@ module.exports = function (id, type) {
   return knex.schema.raw('SELECT ' + selectList.join(', ') +
         ' FROM ' + table +
         whereString)
-      .then(function (results) {
-        return results
-      })
+    .then(function (results) {
+      return results
+    })
 }

@@ -2,8 +2,8 @@ const expect = require('chai').expect
 const authenticationHerlp = require('../helpers/routes/authentication-helper')
 const config = require('../../config')
 
-var adminUserURL
-var username = 'John.Doe@' + config.ACTIVE_DIRECTORY_DOMAIN
+let adminUserURL
+const username = 'John.Doe@' + config.ACTIVE_DIRECTORY_DOMAIN
 
 describe('View adding a new user role', () => {
   before(function () {

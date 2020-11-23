@@ -6,9 +6,9 @@ require('sinon-bluebird')
 
 const COOKIES_URL = '/cookies'
 
-var app
-var route
-var authorisationService
+let app
+let route
+let authorisationService
 
 before(function () {
   authorisationService = {

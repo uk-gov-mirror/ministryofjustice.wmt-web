@@ -7,7 +7,7 @@ module.exports = function (archiveDateRange, extraCriteria) {
     extraCriteria = extraCriteria.trim()
   }
 
-  var selectColumns = [
+  const selectColumns = [
     'start_date AS startDate',
     'end_date AS endDate',
     'ldu_name AS lduName',
@@ -25,30 +25,30 @@ module.exports = function (archiveDateRange, extraCriteria) {
 
   if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {
     return knex('fortnightly_archive_data')
-    .limit(parseInt(archiveDataLimit))
-    .select(selectColumns)
-    .where('start_date', '>=', archiveDateRange.archiveFromDate.toISOString().substring(0, 10))
-    .andWhere('end_date', '<=', archiveDateRange.archiveToDate.toISOString().substring(0, 10))
-    .andWhere(function () {
-      this.where('team_name', 'like', '%' + extraCriteria + '%')
-      .orWhere('ldu_name', 'like', '%' + extraCriteria + '%')
-      .orWhere('om_name', 'like', '%' + extraCriteria + '%')
-    })
-    .orderBy('start_date', 'ASC')
-    .catch(function (error) {
-      log.error(error)
-      throw error
-    })
+      .limit(parseInt(archiveDataLimit))
+      .select(selectColumns)
+      .where('start_date', '>=', archiveDateRange.archiveFromDate.toISOString().substring(0, 10))
+      .andWhere('end_date', '<=', archiveDateRange.archiveToDate.toISOString().substring(0, 10))
+      .andWhere(function () {
+        this.where('team_name', 'like', '%' + extraCriteria + '%')
+          .orWhere('ldu_name', 'like', '%' + extraCriteria + '%')
+          .orWhere('om_name', 'like', '%' + extraCriteria + '%')
+      })
+      .orderBy('start_date', 'ASC')
+      .catch(function (error) {
+        log.error(error)
+        throw error
+      })
   } else {
     return knex('fortnightly_archive_data')
-    .limit(parseInt(archiveDataLimit))
-    .select(selectColumns)
-    .where('start_date', '>=', archiveDateRange.archiveFromDate.toISOString().substring(0, 10))
-    .andWhere('end_date', '<=', archiveDateRange.archiveToDate.toISOString().substring(0, 10))
-    .orderBy('start_date', 'ASC')
-    .catch(function (error) {
-      log.error(error)
-      throw error
-    })
+      .limit(parseInt(archiveDataLimit))
+      .select(selectColumns)
+      .where('start_date', '>=', archiveDateRange.archiveFromDate.toISOString().substring(0, 10))
+      .andWhere('end_date', '<=', archiveDateRange.archiveToDate.toISOString().substring(0, 10))
+      .orderBy('start_date', 'ASC')
+      .catch(function (error) {
+        log.error(error)
+        throw error
+      })
   }
 }

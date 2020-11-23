@@ -18,12 +18,12 @@ const CASE_PROGRESS = {
   caseProgress: [{}]
 }
 
-var app
-var route
-var getCaseProgress
-var getLastUpdated
-var getSubNavStub
-var authorisationService
+let app
+let route
+let getCaseProgress
+let getLastUpdated
+let getSubNavStub
+let authorisationService
 
 before(function () {
   authorisationService = {
@@ -36,7 +36,8 @@ before(function () {
     '../services/get-case-progress': getCaseProgress,
     '../services/data/get-last-updated': getLastUpdated,
     '../authorisation': authorisationService,
-    '../services/get-sub-nav': getSubNavStub})
+    '../services/get-sub-nav': getSubNavStub
+  })
   app = routeHelper.buildApp(route)
 })
 
@@ -59,10 +60,10 @@ describe('case-progress route', function () {
   it('should call the getSubNav with the correct parameters', function () {
     getCaseProgress.resolves(CASE_PROGRESS)
     return supertest(app)
-        .get(OFFENDER_MANAGER_CASE_PROGRESS_URL)
-        .expect(200)
-        .then(function () {
+      .get(OFFENDER_MANAGER_CASE_PROGRESS_URL)
+      .expect(200)
+      .then(function () {
           expect(getSubNavStub.calledWith('1', 'offender-manager', OFFENDER_MANAGER_CASE_PROGRESS_URL)).to.be.true //eslint-disable-line
-        })
+      })
   })
 })

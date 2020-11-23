@@ -14,16 +14,16 @@ module.exports = function (app) {
   }
 
   passport.serializeUser(function (user, done) {
-    var name = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
-    var displayName = user['http://schemas.microsoft.com/identity/claims/displayname']
-    var nameID = user.nameID
-    var nameIDFormat = user.nameIDFormat
+    const name = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+    const displayName = user['http://schemas.microsoft.com/identity/claims/displayname']
+    const nameID = user.nameID
+    const nameIDFormat = user.nameIDFormat
     // Remove the domain from the username
-    var username = userRoleService.removeDomainFromUsername(name)
+    const username = userRoleService.removeDomainFromUsername(name)
     // Get the role for the user
     return userRoleService.getUserByUsername(username).then(function (result) {
-      var user = {
-        id: 0  // assume its a Staff user
+      const user = {
+        id: 0 // assume its a Staff user
       }
       if (result) {
         user.id = result.id // actual user exists
@@ -52,7 +52,7 @@ module.exports = function (app) {
     })
   })
 
-  var sessionOptions = {
+  const sessionOptions = {
     name: 'wmt-application',
     secret: config.APPLICATION_SECRET,
     resave: config.RESAVE_SESSION,
@@ -67,7 +67,7 @@ module.exports = function (app) {
   app.use(passport.initialize())
   app.use(passport.session())
 
-  var samlStrategy = new SamlStrategy(
+  const samlStrategy = new SamlStrategy(
     {
       path: config.ACTIVE_DIRECTORY_RETURN_ADDRESS,
       entryPoint: config.ACTIVE_DIRECTORY_ENTRY_POINT,
@@ -87,7 +87,7 @@ module.exports = function (app) {
     if (!req.user) {
       return res.redirect('/')
     }
-    var saml = {
+    const saml = {
       nameID: req.user.username + '@' + config.ACTIVE_DIRECTORY_DOMAIN,
       nameIDFormat: req.user.nameIDFormat
     }

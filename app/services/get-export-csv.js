@@ -41,23 +41,23 @@ const SUSPENDED_LIFERS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team
 const SUSPENDED_LIFERS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'tierCode', 'rowType', 'caseReferenceNo', 'caseType', 'offenderManagerName', 'gradeCode', 'inCustody', 'registerLevel', 'registerCategory', 'registerCategoryDescription', 'registrationDate']
 
 module.exports = function (organisationLevel, result, tab) {
-  var filename
+  let filename
   if (tab === tabs.ADMIN.DAILY_ARCHIVE || tab === tabs.ADMIN.FORTNIGHTLY_ARCHIVE || tab === tabs.ADMIN.REDUCTION_ARCHIVE) {
     filename = getFilename(organisationLevel, tab)
   } else {
     filename = getFilename(result.title, tab)
   }
-  var fieldsObject = getFields(organisationLevel, tab)
-  var fields = fieldsObject.fields
-  var fieldNames = fieldsObject.fieldNames
+  const fieldsObject = getFields(organisationLevel, tab)
+  const fields = fieldsObject.fields
+  const fieldNames = fieldsObject.fieldNames
 
-  var csv = getCsv(organisationLevel, result, tab, fields, fieldNames)
+  const csv = getCsv(organisationLevel, result, tab, fields, fieldNames)
 
   return { filename: filename, csv: csv }
 }
 
-var getFilename = function (orgName, screen) {
-  var replaceSpaces = / /g
+const getFilename = function (orgName, screen) {
+  const replaceSpaces = / /g
   if (screen === tabs.REDUCTIONS_EXPORT) {
     return (orgName + ' Reductions Notes.csv').replace(replaceSpaces, '_')
   } else if (screen === tabs.ADMIN.DAILY_ARCHIVE) {
@@ -119,10 +119,10 @@ var getFilename = function (orgName, screen) {
   }
 }
 
-var getFields = function (organisationLevel, tab) {
-  var childOrgForFieldName
-  var fields
-  var fieldNames
+const getFields = function (organisationLevel, tab) {
+  let childOrgForFieldName
+  let fields
+  let fieldNames
 
   switch (tab) {
     case tabs.CASELOAD:
@@ -202,12 +202,11 @@ var getFields = function (organisationLevel, tab) {
   return { fields: fields, fieldNames: fieldNames }
 }
 
-var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
-  var csv
-
+const getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
+  let csv
+  let overallCsv, custodyCsv, communityCsv, licenseCsv
   switch (tab) {
     case tabs.CASELOAD:
-      var overallCsv, custodyCsv, communityCsv, licenseCsv
       if (organisationLevel === organisationUnitConstants.TEAM.name) {
         overallCsv = generateCsv(result.caseloadDetails.overallCaseloadDetails, fields, fieldNames)
         custodyCsv = generateCsv(result.caseloadDetails.custodyCaseloadDetails, fields, fieldNames)
@@ -217,17 +216,17 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
         csv = ('OVERALL\n' + overallCsv + '\n\n\nCUSTODY\n' + custodyCsv +
         '\n\n\nCOMMUNITY\n' + communityCsv + '\n\n\nLICENSE\n' + licenseCsv)
       } else {
-        var overallTable = parseTotalSummaryTable(result.caseloadDetails.overallTotalSummary)
-        var custodyTable = parseCaseloadDetailsTable(result.caseloadDetails.custodyCaseloadDetails.details)
-        var communityTable = parseCaseloadDetailsTable(result.caseloadDetails.communityCaseloadDetails.details)
-        var licenseTable = parseCaseloadDetailsTable(result.caseloadDetails.licenseCaseloadDetails.details)
+        const overallTable = parseTotalSummaryTable(result.caseloadDetails.overallTotalSummary)
+        const custodyTable = parseCaseloadDetailsTable(result.caseloadDetails.custodyCaseloadDetails.details)
+        const communityTable = parseCaseloadDetailsTable(result.caseloadDetails.communityCaseloadDetails.details)
+        const licenseTable = parseCaseloadDetailsTable(result.caseloadDetails.licenseCaseloadDetails.details)
 
         overallCsv = generateCsv(overallTable)
         custodyCsv = generateCsv(custodyTable, fields, fieldNames)
         communityCsv = generateCsv(communityTable, fields, fieldNames)
         licenseCsv = generateCsv(licenseTable, fields, fieldNames)
 
-        var overallByGradeTable = parseCaseloadDetailsTable(result.caseloadDetails.overallCaseloadDetails.detailsPercentages)
+        const overallByGradeTable = parseCaseloadDetailsTable(result.caseloadDetails.overallCaseloadDetails.detailsPercentages)
 
         overallByGradeTable.forEach(function (row) {
           row.totalCases = row.totalCases.toFixed(2) + '%'
@@ -243,7 +242,7 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
           row.b1 = row.b1.toFixed(2) + '%'
           row.a = row.a.toFixed(2) + '%'
         })
-        var overallByGradeCsv = generateCsv(overallByGradeTable, fields, fieldNames)
+        const overallByGradeCsv = generateCsv(overallByGradeTable, fields, fieldNames)
 
         csv = ('OVERALL\n' + overallCsv + '\n\n\nCUSTODY\n' + custodyCsv +
         '\n\n\nCOMMUNITY\n' + communityCsv + '\n\n\nLICENSE\n' + licenseCsv +
@@ -288,23 +287,23 @@ var getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
   return csv
 }
 
-var getChildOrgForFieldName = function (organisationLevel) {
-  var organisationUnit = getOrganisationUnit('name', organisationLevel)
+const getChildOrgForFieldName = function (organisationLevel) {
+  const organisationUnit = getOrganisationUnit('name', organisationLevel)
   return (getOrganisationUnit('name', organisationUnit.childOrganisationLevel).displayText)
 }
 
-var generateCsv = function (data, fields, fieldNames) {
+const generateCsv = function (data, fields, fieldNames) {
   return json2csv({ data: data, fields: fields, fieldNames: fieldNames })
 }
 
-var parseCaseloadDetailsTable = function (caseloadDetails) {
-  var table = []
-  var team
-  var teamGrade
+const parseCaseloadDetailsTable = function (caseloadDetails) {
+  const table = []
+  let team
+  let teamGrade
 
-  for (var linkId in caseloadDetails) {
+  for (const linkId in caseloadDetails) {
     team = caseloadDetails[linkId]
-    for (var grade in team.grades) {
+    for (const grade in team.grades) {
       teamGrade = team.grades[grade]
       table.push({
         name: team.name,
@@ -327,8 +326,8 @@ var parseCaseloadDetailsTable = function (caseloadDetails) {
   return table
 }
 
-var parseTotalSummaryTable = function (totalSummary) {
-  var table = []
+const parseTotalSummaryTable = function (totalSummary) {
+  const table = []
   totalSummary.forEach(function (member) {
     table.push({
       name: member.name,
@@ -342,10 +341,10 @@ var parseTotalSummaryTable = function (totalSummary) {
   return table
 }
 
-var formatCapacityValue = function (capacity) {
+const formatCapacityValue = function (capacity) {
   return capacity.toFixed(1) + '%'
 }
 
-var formatCMSPercentage = function (cms) {
+const formatCMSPercentage = function (cms) {
   return cms.toFixed(1) + '%'
 }

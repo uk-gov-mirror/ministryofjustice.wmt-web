@@ -25,27 +25,27 @@ class Scenario {
   }
 }
 
-var collateCaseTypes = function (results) {
-  var caseNumbers = []
+const collateCaseTypes = function (results) {
+  const caseNumbers = []
   results.forEach(function (result) {
     caseNumbers.push({
-      'tier': result.tier_number,
-      'location': result.location,
-      'totalCases': result.total_cases,
-      't2aTotalCases': result.t2a_total_cases,
-      'warrantsTotal': result.warrants_total,
-      't2aWarrantsTotal': result.t2a_warrants_total,
-      'overdueTerminationsTotal': result.overdue_terminations_total,
-      't2aOverdueTerminationsTotal': result.t2a_overdue_terminations_total,
-      'UPW': result.unpaid_work_total,
-      't2aUPW': result.t2a_unpaid_work_total
+      tier: result.tier_number,
+      location: result.location,
+      totalCases: result.total_cases,
+      t2aTotalCases: result.t2a_total_cases,
+      warrantsTotal: result.warrants_total,
+      t2aWarrantsTotal: result.t2a_warrants_total,
+      overdueTerminationsTotal: result.overdue_terminations_total,
+      t2aOverdueTerminationsTotal: result.t2a_overdue_terminations_total,
+      UPW: result.unpaid_work_total,
+      t2aUPW: result.t2a_unpaid_work_total
     })
   })
   return caseNumbers
 }
 
-var determineDefaultContractedHours = function (result) {
-  var defaultContractedHours = 37
+const determineDefaultContractedHours = function (result) {
+  let defaultContractedHours = 37
   switch (result.grade_code) {
     case grades.DMY:
       defaultContractedHours = 0

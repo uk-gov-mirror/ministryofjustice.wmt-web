@@ -3,9 +3,9 @@ const authenticationHelper = require('../helpers/routes/authentication-helper')
 const dataHelper = require('../helpers/data/court-reports-aggregated-data-helper')
 const workloadTypes = require('../../app/constants/workload-type')
 
-var offenderManagerId
-var reductionId
-var reductionUrl
+let offenderManagerId
+let reductionId
+let reductionUrl
 
 describe('View update status of reduction court-reports', () => {
   before(function () {
