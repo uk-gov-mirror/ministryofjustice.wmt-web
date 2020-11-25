@@ -43,7 +43,7 @@ describe('/services/data/create-calculate-workload-points-task', function () {
         insertedTask.id = result
         expect(result[0]).to.be.a('number')
         return dataHelper.getAllTasks().then(function (allTasks) {
-          expect(allTasks).to.contain(task)
+          expect(allTasks).to.deep.contain(task)
         })
       })
   })

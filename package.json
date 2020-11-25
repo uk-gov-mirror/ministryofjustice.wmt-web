@@ -5,13 +5,13 @@
   "scripts": {
     "start": "gulp",
     "build": "yarn install && gulp generate-assets && gulp sync",
-    "unit-test": "standard && mocha --recursive test/unit/",
-    "integration-test": "gulp assets && mocha --recursive test/integration --timeout=60000",
+    "unit-test": "standard && mocha --recursive test/unit/ --exit",
+    "integration-test": "gulp assets && mocha --recursive test/integration --timeout=60000 --exit",
     "test": "yarn unit-test && yarn integration-test",
     "test-e2e": "gulp --gulpfile gulpfile-e2e.js",
     "test-e2e-firefox": "wdio test/wdio.conf.sauce.firefox.js",
     "test-e2e-firefox-jenkins": "wdio test/wdio.conf.sauce.firefox.jenkins.js",
-    "accessibility-test": "mocha --recursive test/accessibility --timeout=100000"
+    "accessibility-test": "mocha --recursive test/accessibility --timeout=100000 --exit"
   },
   "standard": {
     "ignore": [
@@ -42,16 +42,16 @@
     "gulp-standard": "14.0.x",
     "gulp-webdriver": "^4.0.0",
     "mocha": "8.2.x",
+    "nodemon": "^2.0.3",
     "proxyquire": "2.1.x",
     "selenium-standalone": "6.20.1",
     "sinon": "^9.2.1",
-    "sinon-bluebird": "^3.1.1",
     "standard": "^16.0.3",
     "supertest": "6.0.x",
-    "webdriverio": "^5.22.5",
-    "nodemon": "^2.0.3"
+    "webdriverio": "^5.22.5"
   },
   "dependencies": {
+    "bluebird": "^3.7.2",
     "body-parser": "1.19.x",
     "bunyan": "^1.8.14",
     "bunyan-prettystream": "^0.1.3",
@@ -85,7 +85,6 @@
     "nunjucks-date-filter": "^0.1.1",
     "passport": "^0.4.1",
     "passport-saml": "^2.0.2",
-    "proxyquire": "2.1.x",
     "serve-favicon": "2.5.x",
     "underscore": "^1.11.0",
     "util": "^0.12.3",

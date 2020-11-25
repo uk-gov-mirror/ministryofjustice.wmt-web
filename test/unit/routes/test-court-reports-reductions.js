@@ -8,7 +8,6 @@ const orgUnit = require('../../../app/constants/organisation-unit')
 const workloadType = require('../../../app/constants/workload-type')
 
 const sinon = require('sinon')
-require('sinon-bluebird')
 
 const GET_REDUCTIONS_URL = '/' + workloadType.COURT_REPORTS + '/offender-manager/1/reductions'
 const TEAM_GET_REDUCTIONS_URL = '/' + workloadType.COURT_REPORTS + '/team/1/reductions'

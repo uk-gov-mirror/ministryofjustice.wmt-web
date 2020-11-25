@@ -3,7 +3,6 @@ const supertest = require('supertest')
 const proxyquire = require('proxyquire')
 const sinon = require('sinon')
 const log = require('../../../app/logger')
-require('sinon-bluebird')
 
 const PAGE_URL = '/expiring-reductions'
 

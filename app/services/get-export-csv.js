@@ -1,6 +1,6 @@
 const organisationUnitConstants = require('../constants/organisation-unit')
 const getOrganisationUnit = require('./helpers/org-unit-finder')
-const json2csv = require('json2csv')
+const { Parser } = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
 
 // WMT0160 - Change next 2 lines
@@ -293,7 +293,14 @@ const getChildOrgForFieldName = function (organisationLevel) {
 }
 
 const generateCsv = function (data, fields, fieldNames) {
-  return json2csv({ data: data, fields: fields, fieldNames: fieldNames })
+  const fieldObjects = combineFieldAndFieldName(fields, fieldNames)
+  let json2csvParser
+  if (fieldObjects) {
+    json2csvParser = new Parser({ fields: fieldObjects })
+  } else {
+    json2csvParser = new Parser()
+  }
+  return json2csvParser.parse(data)
 }
 
 const parseCaseloadDetailsTable = function (caseloadDetails) {
@@ -347,4 +354,16 @@ const formatCapacityValue = function (capacity) {
 
 const formatCMSPercentage = function (cms) {
   return cms.toFixed(1) + '%'
+}
+
+const combineFieldAndFieldName = function (fields, fieldNames) {
+  const fieldObjects = []
+  if (fields && fieldNames) {
+    for (let i = 0; i < fields.length; i++) {
+      fieldObjects.push({ label: fieldNames[i], value: fields[i] })
+    }
+    return fieldObjects
+  } else {
+    return null
+  }
 }

@@ -53,7 +53,7 @@ describe('services/data/insert-new-workload-points', function () {
         expect(id[0]).to.be.a('number')
         return dataHelper.getAllWorkloadPointsForTest()
           .then(function (workloadPoints) {
-            expect(workloadPoints).to.contain(defaultWorkloadPoints)
+            expect(workloadPoints).to.deep.contain(defaultWorkloadPoints)
           })
       })
   })
@@ -65,7 +65,7 @@ describe('services/data/insert-new-workload-points', function () {
         expect(id[0]).to.be.a('number')
         return dataHelper.getAllWorkloadPointsForTest()
           .then(function (workloadPoints) {
-            expect(workloadPoints).to.contain(defaultWorkloadPointsT2A)
+            expect(workloadPoints).to.deep.contain(defaultWorkloadPointsT2A)
           })
       })
   })

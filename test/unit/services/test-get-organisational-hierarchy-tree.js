@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 const assert = require('chai').assert
 const sinon = require('sinon')
-require('sinon-bluebird')
+
 const proxyquire = require('proxyquire')
 const dataHelper = require('../../helpers/organisational-hierarchy-helper')
 
@@ -14,7 +14,7 @@ describe('services/organisational-hierarchy-tree', function () {
 
       getOrganisationalHierarchyData.resolves([])
       organisationalHierarchyTree.build().then(function () {
-        expect(getOrganisationalHierarchyData).to.have.been.called //eslint-disable-line
+        sinon.assert.calledOnce(getOrganisationalHierarchyData)
         done()
       })
     })

@@ -1,7 +1,6 @@
 /* eslint-disable no-new */
 const expect = require('chai').expect
 const WorkloadPoints = require('../../../../app/services/domain/workload-points')
-const ValidationError = require('../../../../app/services/errors/validation-error')
 
 const VALID_WORKLOAD_POINTS = {
   previousWpId: '2',
@@ -98,7 +97,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if a Community Weighting field is not set', function () {
@@ -107,7 +106,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if a Custody Weighting field is out of range', function () {
@@ -116,7 +115,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if a Custody Weighting field is not set', function () {
@@ -125,7 +124,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if a License Weighting field is out of range', function () {
@@ -134,7 +133,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if a License Weighting field is not set', function () {
@@ -143,7 +142,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Default Contracted Hours PO field is not set', function () {
@@ -152,7 +151,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Default Contracted Hours PSO field is not set', function () {
@@ -161,7 +160,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Default Contracted Hours SPO field is not set', function () {
@@ -170,7 +169,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Default Contracted Hours PO field is outside valid range', function () {
@@ -179,7 +178,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Default Contracted Hours PSO field is outside valid range', function () {
@@ -188,7 +187,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Default Contracted Hours SPO field is outside valid range', function () {
@@ -197,7 +196,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if SDR field is outside valid range', function () {
@@ -206,7 +205,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if SDR field is not set', function () {
@@ -215,7 +214,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if SDR Conversion field is outside valid range', function () {
@@ -224,7 +223,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if SDR Conversion field is not set', function () {
@@ -233,7 +232,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if PAROM field is outside valid range', function () {
@@ -242,7 +241,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if PAROM field is not set', function () {
@@ -251,7 +250,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Nominal Target PO field is outside valid range', function () {
@@ -260,7 +259,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Nominal Target PSO field is not set', function () {
@@ -269,7 +268,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Weighting Overdue field is outside valid range', function () {
@@ -278,7 +277,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Weighting Overdue field is not set', function () {
@@ -287,7 +286,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Weighting Upw field is outside valid range', function () {
@@ -296,7 +295,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Weighting Upw field is not set', function () {
@@ -305,7 +304,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Weighting Warrants field is outside valid range', function () {
@@ -314,7 +313,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Weighting Warrants field is not set', function () {
@@ -323,7 +322,7 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if T2A flag is not set', function () {
@@ -332,6 +331,6 @@ describe('services/domain/workload-points', function () {
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 })

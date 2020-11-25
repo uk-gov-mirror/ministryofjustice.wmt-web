@@ -3,7 +3,6 @@ const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
 const sinon = require('sinon')
-require('sinon-bluebird')
 
 const WORKLOAD_POINTS_T2A_URL = '/admin/workload-points/t2a'
 const INVALID_WORKLOAD_POINTS_T2A_URL = '/admin/workload-points/t2s'

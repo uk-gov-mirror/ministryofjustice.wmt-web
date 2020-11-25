@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 const sinon = require('sinon')
-require('sinon-bluebird')
+
 const proxyquire = require('proxyquire')
 const workloadTypes = require('../../../app/constants/workload-type')
 const orgUnitConstant = require('../../../app/constants/organisation-unit.js')

@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 const assert = require('chai').assert
 const sinon = require('sinon')
-require('sinon-bluebird')
+
 const proxyquire = require('proxyquire')
 
 const Link = require('../../../app/services/domain/link')

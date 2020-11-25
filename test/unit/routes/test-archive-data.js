@@ -2,7 +2,6 @@ const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
 const sinon = require('sinon')
-require('sinon-bluebird')
 
 const ARCHIVE_DATA_URL = '/archive-data/daily-caseload-data'
 const INVALID_URL = '/fake-url'

@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 const assert = require('chai').assert
 const sinon = require('sinon')
-require('sinon-bluebird')
+
 const proxyquire = require('proxyquire')
 const orgUnitConstant = require('../../../app/constants/organisation-unit.js')
 const orgUnitFinder = require('../../../app/services/helpers/org-unit-finder')
@@ -60,7 +60,7 @@ describe('services/get-overview', function () {
 
     return getOverview(id, omName).then(function (result) {
       const omSubtitle = orgUnitFinder('name', omName).displayText
-      expect(getBreadcrumbs).to.have.been.called //eslint-disable-line
+      sinon.assert.calledOnce(getBreadcrumbs)
       expect(result.breadcrumbs).to.eql(breadcrumbs)
       expect(result.subTitle).to.eql(omSubtitle)
       expect(result.title).to.eql(expectedTitle)
