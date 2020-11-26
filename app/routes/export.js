@@ -184,6 +184,13 @@ var formatResults = function (results, tabType) {
       dt = newDate.getDate()
 
       result.releaseDate = dt + '-' + month + '-' + year
+
+      newDate = new Date(result.completedDate)
+      year = newDate.getFullYear()
+      month = newDate.getMonth() + 1
+      dt = newDate.getDate()
+
+      result.completedDate = dt + '-' + month + '-' + year
     }
 
     if ((tabType === tabs.EXPORT.GROUP_SUPERVISION_EXPORT) || (tabType === tabs.EXPORT.CMS_EXPORT)) {

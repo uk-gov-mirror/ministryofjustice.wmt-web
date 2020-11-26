@@ -26,8 +26,8 @@ const REDUCTION_ARCHIVE_FIELD_NAMES = ['Offender Manager Name', 'Reduction Hours
 const REDUCTION_ARCHIVE_FIELDS = ['omName', 'hoursReduced', 'reductionReason', 'comments', 'startDate', 'endDate', 'lastUpdatedDate', 'reductionAddedBy']
 // const DAILY_ARCHIVE_FIELDS = ['lduName', 'teamName', 'omName', 'totalCases', 'capacity', 'reduction', 'comments', 'reductionDate', 'reductionAddedBy']
 
-const ARMS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Assessment Date', 'CRN', 'Offender Manager Name', 'Offender Manager Grade', 'Sentence Type', 'Sentence or Release Date']
-const ARMS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'assessmentDate', 'CRN', 'omName', 'omGrade', 'sentencetype', 'releaseDate']
+const ARMS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Assessment Date', 'CRN', 'Offender Manager Name', 'Offender Manager Grade', 'Sentence Type', 'Sentence or Release Date', 'Completion Date']
+const ARMS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'assessmentDate', 'CRN', 'omName', 'omGrade', 'sentencetype', 'releaseDate', 'completedDate']
 const CASE_DETAILS_EXPORT_FIELD_NAMES = ['Region Name', 'LDU Cluster', 'Team Name', 'Tier Code', 'Row Type', 'CRN', 'Case Type', 'Offender Manager Name', 'Grade Code']
 const CASE_DETAILS_EXPORT_FIELDS = ['regionName', 'lduName', 'teamName', 'tierCode', 'rowType', 'caseReferenceNo', 'caseType', 'offenderManagerName', 'gradeCode']
 

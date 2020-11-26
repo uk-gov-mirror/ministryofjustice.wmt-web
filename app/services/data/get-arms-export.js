@@ -11,7 +11,8 @@ module.exports = function (id, type) {
     'omName',
     'grade_code AS omGrade',
     'sentencetype',
-    'releaseDate'
+    'releaseDate',
+    'completedDate'
   ]
 
   var whereString
