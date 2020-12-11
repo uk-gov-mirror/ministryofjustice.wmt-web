@@ -96,12 +96,12 @@
         </div>
 
         <input id="archive-fortnightly-filter-submit" type="submit" value="Search" class="button" formaction="/archive-data/fortnightly-caseload-data">
-        <input id="archive-fortnightly-csv-submit" type="submit" class="button sln-export" style="float: right; margin-left:10px; margin-bottom: 10px" value="Export Archive Data" formaction="/archive-data/fortnightly-caseload-data/archive-csv">
+        <input id="archive-fortnightly-csv-submit" type="submit" class="button sln-export floatRightBottom10 marginLeft10" value="Export Archive Data" formaction="/archive-data/fortnightly-caseload-data/archive-csv">
 </form>
 <br/>
 
 {% if (results) %}
-<table id="fortnightly-caseload-table" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+<table id="fortnightly-caseload-table" class="js-data-table data-table dataTable width100Percent" cellspacing="0" width="100%" role="grid" aria-describedby="example_info">
     <thead>
         <tr class="headers">
             <th id="workloadID">Start Date</th>

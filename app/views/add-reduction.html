@@ -35,17 +35,21 @@
 
   {% include "includes/validation-error-messages.html" %}
 
-  <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">{{ headerText }}</header>
+  <header class="heading-xlarge reductionHeader">{{ headerText }}</header>
   <p class="lede">{{ reductionText }}<span class="bold">{{ title }}</span></p>
   {% set first = true %}
   <form action="{{ formAction }}" method="{{formMethod}}" id="reductionForm">
     <input type="hidden" name="reductionId" value="{{reduction.id}}"/>
+    <input type="hidden" id="refData" name="refData" value="{{stringifiedReferenceData}}"/>
+    <input type="hidden" id="reductionToPopulate" name="reductionToPopulate" value="{{reductionToPopulate}}"/>
+    <input type="hidden" id="reductionEnabled" name="reductionEnabled" value="{{reductionEnabled}}"/>
+    <input type="hidden" id="reductionStatus" name="reductionStatus" value="{{reductionStatus}}"/>
     <div class="form-group" id="reduction_reason_selection">
       <label class="form-label-bold" for="select-box">Reason for reduction</label>
       {% if errors['reasonForReductionId'][0] %}
         <span class="error-message">{{ errors['reasonForReductionId'][0] }}</span>
       {% endif %}
-      <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}" onChange="populateHours(), calculateExpiry(), enableAddReduction()"> 
+      <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}"> 
         <option value="select" disabled selected>Please select a reason...</option>
         {% for reason in referenceData %}
         <option value="{{ reason.id }}" {% if reason.id == reduction.reasonId %} selected {% endif %}>{{ reason.reasonShortName }}</option>
@@ -58,7 +62,7 @@
         <span class="error-message">{{ errors['reductionHours'][0] }}</span>
       {% endif %}
       <label class="form-label-bold" for="hours">Hours</label>
-      <input class="form-control" id="hours" name="reductionHours" style="width: 100px" value="{{reduction.hours}}">
+      <input class="form-control width100" id="hours" name="reductionHours" value="{{reduction.hours}}">
     </div>
 
     <div class="form-group" id="reductionStartDate">
@@ -184,37 +188,5 @@
 </main>
 {% endblock %} {% block body_end %}
 <script src="/public/javascripts/vendor/jquery.min.js"></script>
-<script type="text/javascript">
-  var refData = {{ referenceData | dump | safe }}
-</script>
 <script src="/public/javascripts/add-reduction.js"></script>
-{% if not reduction %}
-<script>
-  $(function(){
-    $('#submit-button').prop('disabled', true);
-  });
-</script>
-{% endif %}
-{% if not reduction.isEnabled %}
-<script>
-  $(function(){
-    $('#submit-button').prop('disabled', true);
-  });
-</script>
-{% endif %}
-{% if reduction.status === 'ARCHIVED' %}
-<script>
-    $(function(){
-      $('#select-box').prop('disabled', true);
-      $('#end-year').prop('readonly', true);
-      $('#end-month').prop('readonly', true);
-      $('#end-day').prop('readonly', true);
-      $('#start-year').prop('readonly', true);
-      $('#start-month').prop('readonly', true);
-      $('#start-day').prop('readonly', true);
-      $('#hours').prop('readonly', true);
-      $('#textarea').prop('readonly', true);
-    });
-</script>
-{% endif %}
 {% endblock %}
