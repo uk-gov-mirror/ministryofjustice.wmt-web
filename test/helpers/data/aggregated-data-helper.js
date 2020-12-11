@@ -400,7 +400,7 @@ module.exports.getAnyExistingWorkloadId = function () {
 
 module.exports.getAnyExistingWorkloadOwnerId = function () {
   const promise = knex('workload_owner')
-    .first('id')
+    .first()
     .then(function (result) {
       return result.id
     })
@@ -575,6 +575,24 @@ module.exports.getAllWorkloadPointsForTest = function () {
       'effective_to AS effectiveTo',
       'is_t2a AS isT2A'
     )
+}
+
+module.exports.deleteLastRecordFromTables = function (tables) {
+  return Promise.each(tables, function (table) {
+    return knex(table)
+      .orderBy('id', 'desc')
+      .first()
+      .del()
+  })
+}
+
+module.exports.getLastRecordFromTable = function (table) {
+  return knex(table)
+    .orderBy('id', 'desc')
+    .first()
+    .then((results) => {
+      return results
+    })
 }
 
 const getMaxStagingId = function () {

@@ -59,7 +59,6 @@ before(function () {
 
 describe('expiring reductions route', function () {
   it('should respond with 200 when the route is called as an admin', function () {
-    log.info(result)
     return supertest(app).get(PAGE_URL).expect(200)
   })
 })

@@ -81,6 +81,33 @@ module.exports.getAnyExistingWorkloadOwnerIdWithActiveReduction = function () {
       'reductions.id AS reductionId')
 }
 
+module.exports.getAnyExistingWorkloadOwnerId = function () {
+  return knex('workload_owner')
+    .join('court_reports', 'court_reports.workload_owner_id', 'workload_owner.id')
+    .first()
+    .then(function (result) {
+      return result.workload_owner_id
+    })
+}
+
+module.exports.getLastRecordFromTable = function (table) {
+  return knex(table)
+    .orderBy('id', 'desc')
+    .first()
+    .then((results) => {
+      return results
+    })
+}
+
+module.exports.deleteLastRecordFromTables = function (tables) {
+  return Promise.each(tables, function (table) {
+    return knex(table)
+      .orderBy('id', 'desc')
+      .first()
+      .del()
+  })
+}
+
 const addCrWorkloadPointsCalculation = function (inserts) {
   // Add workload points calc
   const crWorkloadIdFrist = inserts.filter((item) => item.table === 'court_reports')[0].id
