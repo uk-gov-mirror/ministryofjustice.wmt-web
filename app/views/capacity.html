@@ -12,7 +12,7 @@
 {% include "includes/validation-error-messages.html" %}
 
 <form method="get">
-
+    <input id="capacityTable" type="hidden" name="capacityTable" value="{{ stringifiedCapacity }}">
     <div class="form-group {% if errors['capacityFromDate'][0] %} form-group-error {% endif %}">
         {% if errors %}
             <span class="error-message">{{ errors['capacityFromDate'][0] }}</span>
@@ -365,14 +365,11 @@
 {% endblock %}
 
 {% block body_end %}
-    <script type="text/javascript">
-        var capacityTable = {{ capacity | dump | safe }}
-    </script>
     <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
     <script src="/public/javascripts/plotly-latest.min.js"></script>
     <script src="/public/javascripts/caseload-capacity.js"></script>
-    <script src="/public/javascripts/floatThead.js"></script>
-    <script src="/public/javascripts/jquery.floatThead.js"></script>
     <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
     <script src="{{ asset_path }}javascripts/case-details.js"></script>
+    <script src="/public/javascripts/floatThead.js"></script>
+    <script src="/public/javascripts/jquery.floatThead.js"></script>
 {% endblock %}

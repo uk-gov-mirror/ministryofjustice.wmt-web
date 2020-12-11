@@ -18,7 +18,7 @@ const dateFormatter = require('../services/date-formatter')
 const getCaseDetailsView = require('../services/get-case-details-view')
 const getBreadcrumbs = require('../services/get-breadcrumbs')
 const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
-
+const log = require('../logger')
 let lastUpdated
 
 module.exports = function (router) {
@@ -77,6 +77,7 @@ module.exports = function (router) {
               subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
               breadcrumbs: capacityBreakdown.breadcrumbs,
               capacity: capacityBreakdown.capacityTable,
+              stringifiedCapacity: stringifyCapacityData(capacityBreakdown.capacityTable),
               errors: errors,
               query: req.query,
               capacityBreakdown: capacityBreakdown.capacityBreakdown,
@@ -175,4 +176,9 @@ const getCaseTypeDescription = function (inactiveCaseType) {
       break
   }
   return description
+}
+
+const stringifyCapacityData = function (capacity) {
+  const capacityData = Object.assign({}, capacity)
+  return JSON.stringify(capacityData)
 }

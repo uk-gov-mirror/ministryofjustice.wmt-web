@@ -1,3 +1,7 @@
+let capacityTable = document.getElementById('capacityTable').value
+if (capacityTable) {
+    capacityTable = JSON.parse(capacityTable)
+}
 trace1 = {
     x: capacityTable.headings,
     y: capacityTable.rows[0].values,
