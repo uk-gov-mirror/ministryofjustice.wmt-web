@@ -8,7 +8,10 @@ namesY = []
 
 heightOfGraph = 500
 legendY = -0.117923557914
-
+caseProgress = document.getElementById('caseProgressList').value
+if (caseProgress) {
+  caseProgress = JSON.parse(caseProgress)
+}
 caseProgress.forEach(function (caseInfo) {
   commLast16WeeksX.push(caseInfo.communityLast16Weeks)
   licenseLast16WeeksX.push(caseInfo.licenseLast16Weeks)
