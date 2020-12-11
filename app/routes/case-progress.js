@@ -7,6 +7,7 @@ const workloadTypes = require('../../app/constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
+const log = require('../logger')
 
 let lastUpdated
 
@@ -34,12 +35,15 @@ module.exports = function (router) {
       lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
       return caseProgressPromise.then(function (result) {
         result.date = lastUpdated
+        let stringifiedCaseProgressList = Object.assign([], result.caseProgressList)
+        stringifiedCaseProgressList = JSON.stringify(stringifiedCaseProgressList)
         return res.render('case-progress', {
           title: result.title,
           subTitle: result.subTitle,
           breadcrumbs: result.breadcrumbs,
           subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
           caseProgressList: result.caseProgressList,
+          stringifiedCaseProgressList: stringifiedCaseProgressList,
           date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
           authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role

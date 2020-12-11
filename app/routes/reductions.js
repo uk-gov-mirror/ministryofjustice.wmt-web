@@ -15,6 +15,7 @@ const dateFormatter = require('../services/date-formatter')
 const ErrorHandler = require('../services/validators/error-handler')
 const ERROR_MESSAGES = require('../services/validators/validation-error-messages')
 let lastUpdated
+const log = require('../logger')
 
 module.exports = function (router) {
   router.get('/:workloadType/:organisationLevel/:id/reductions', function (req, res, next) {
@@ -115,8 +116,11 @@ module.exports = function (router) {
             subTitle: result.subTitle,
             subNav: getSubNav(id, organisationLevel, req.path, workloadType, authorisedUserRole.authorisation, authorisedUserRole.userRole),
             referenceData: result.referenceData,
+            stringifiedReferenceData: stringifyReductionsData(result.referenceData),
             errors: errors,
             workloadType: workloadType,
+            reductionToPopulate: false,
+            reductionEnabled: false,
             userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
             authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
           })
@@ -162,6 +166,14 @@ module.exports = function (router) {
               if (reduction !== undefined && reduction.workloadOwnerId !== id) {
                 reduction = undefined
               }
+              let reductionEnabled, reductionStatus
+              if (!reduction) {
+                reductionEnabled = false
+                reductionStatus = ''
+              } else {
+                reductionEnabled = reduction.isEnabled
+                reductionStatus = reduction.status
+              }
               return res.render('add-reduction', {
                 breadcrumbs: result.breadcrumbs,
                 linkId: id,
@@ -169,7 +181,11 @@ module.exports = function (router) {
                 subTitle: result.subTitle,
                 subNav: getSubNav(id, organisationLevel, req.path, workloadType),
                 referenceData: result.referenceData,
+                stringifiedReferenceData: stringifyReductionsData(result.referenceData),
                 reduction: mapReductionToViewModel(reduction),
+                reductionToPopulate: true,
+                reductionEnabled: reductionEnabled,
+                reductionStatus: reductionStatus,
                 workloadType: workloadType,
                 userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
                 authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
@@ -231,6 +247,7 @@ module.exports = function (router) {
               subTitle: result.subTitle,
               subNav: getSubNav(id, organisationLevel, req.path, workloadType),
               referenceData: result.referenceData,
+              stringifiedReferenceData: stringifyReductionsData(result.referenceData),
               reduction: {
                 id: req.body.reductionId,
                 reasonId: req.body.reasonForReductionId,
@@ -244,6 +261,8 @@ module.exports = function (router) {
                 notes: req.body.notes,
                 isEnabled: reductionReason.isEnabled
               },
+              reductionToPopulate: true,
+              reductionEnabled: reductionReason.isEnabled,
               errors: error.validationErrors,
               workloadType: workloadType,
               userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
@@ -315,6 +334,7 @@ module.exports = function (router) {
                 subTitle: result.subTitle,
                 subNav: getSubNav(id, organisationLevel, req.path, workloadType),
                 referenceData: result.referenceData,
+                stringifiedReferenceData: stringifyReductionsData(result.referenceData),
                 reduction: {
                   id: req.body.reductionId,
                   reasonId: req.body.reasonForReductionId,
@@ -328,6 +348,8 @@ module.exports = function (router) {
                   notes: req.body.notes,
                   isEnabled: reductionReason.isEnabled
                 },
+                reductionToPopulate: true,
+                reductionEnabled: reductionReason.isEnabled,
                 errors: error.validationErrors,
                 workloadType: workloadType,
                 userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
@@ -485,5 +507,10 @@ module.exports = function (router) {
       displayJson.errors = error.validationErrors
     }
     return res.render('reductions', displayJson)
+  }
+
+  const stringifyReductionsData = function (reductionsRefData) {
+    const reductionsData = Object.assign([], reductionsRefData)
+    return JSON.stringify(reductionsData)
   }
 }
