@@ -14,5 +14,5 @@ module.exports = function (userId) {
 
   return knex('expiring_reductions_view')
     .columns(columns)
-    .whereIn('user_id', userId)
+    .whereIn('user_id', [userId])
 }

@@ -22,6 +22,19 @@ const app = express()
 app.use(helmet())
 app.use(helmet.hsts({ maxAge: 31536000 }))
 
+// Configure Content Security Policy
+// Hashes for inline Gov Template script entries
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'",
+      "'unsafe-inline'", "'unsafe-eval'"],
+    styleSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+    fontSrc: ["'self'", 'data:'],
+    imgSrc: ["'self'", 'data:']
+  }
+}))
+
 const developmentMode = app.get('env') === 'development'
 
 app.set('view engine', 'html')

@@ -14,8 +14,8 @@ gulp.task('selenium', (done) => {
   })
 })
 
-gulp.task('e2e', ['selenium'], () => {
-  return gulp.src('test/e2e.conf.js')
+gulp.task('e2e', gulp.series('selenium', (done) => {
+  gulp.src('test/e2e.conf.js')
     .pipe(webdriver()).on('error', () => {
       seleniumServer.kill()
       process.exit(1)
@@ -28,6 +28,7 @@ gulp.task('e2e', ['selenium'], () => {
       seleniumServer.kill()
       process.exit()
     })
-})
+  done()
+}))
 
-gulp.task('default', ['e2e'])
+gulp.task('default', gulp.series('e2e'))
