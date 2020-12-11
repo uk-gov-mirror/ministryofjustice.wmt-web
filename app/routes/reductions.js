@@ -15,7 +15,6 @@ const dateFormatter = require('../services/date-formatter')
 const ErrorHandler = require('../services/validators/error-handler')
 const ERROR_MESSAGES = require('../services/validators/validation-error-messages')
 let lastUpdated
-const log = require('../logger')
 
 module.exports = function (router) {
   router.get('/:workloadType/:organisationLevel/:id/reductions', function (req, res, next) {

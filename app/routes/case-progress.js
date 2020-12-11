@@ -7,7 +7,6 @@ const workloadTypes = require('../../app/constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
-const log = require('../logger')
 
 let lastUpdated
 

@@ -2,7 +2,6 @@ const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
 const sinon = require('sinon')
-const log = require('../../../app/logger')
 
 const PAGE_URL = '/expiring-reductions'
 
