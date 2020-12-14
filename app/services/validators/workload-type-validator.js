@@ -3,7 +3,8 @@ const workloadTypes = require('../../../app/constants/workload-type')
 module.exports.validate = function (workloadType) {
   const validWorkloadTypes = [
     workloadTypes.COURT_REPORTS,
-    workloadTypes.PROBATION
+    workloadTypes.PROBATION,
+    workloadTypes.OMIC
   ]
 
   if (!validWorkloadTypes.includes(workloadType)) {

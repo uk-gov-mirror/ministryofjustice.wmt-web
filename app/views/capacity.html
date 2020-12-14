@@ -200,7 +200,7 @@
         </tfoot>
           {% else %}
           <tr>
-          <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+          <td headers="name org"><a href="/{{ workloadType }}/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade org">{{ member.grade }}</td>
           {% if member.capacityPercentage > 110 %}
             <td class="capacity-red" headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
@@ -230,7 +230,7 @@
         {% for i in range(0, member.grades.length) %}
           <tr>
             {% if i === 0 %}
-              <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
             {% endif %}
           <td class="align-centre" headers="grade org">{{ member.grades[i].grade }}</td>
           {% if member.grades[i].capacityPercentage > 110 %}
@@ -275,7 +275,7 @@
   <br>
   <h3 class="heading-medium">Inactive & UPW cases</h3>
   {% if organisationLevel === 'team' %}
-  <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/outstanding-csv" class="button sln-export floatRightBottom10">Export</a>
+  <a href="/{{ workloadType }}/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/outstanding-csv" class="button sln-export floatRightBottom10">Export</a>
   {% endif %}
   <table id="outstandingReports" class="data-table dataTable">
     <thead>
@@ -310,7 +310,7 @@
     </tfoot>
       {% else %}
       <tr>
-          <td headers="name org"><a href="/probation/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+          <td headers="name org"><a href="/{{ workloadType }}/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade org">{{ member.grade }}</td>
           <td headers="outstanding warrants">{{ member.ow }}</td>
           <td headers="unpaid work">{{ member.upw }}</td>
@@ -327,7 +327,7 @@
         {% for i in range(0, member.grades.length) %}
         <tr>
           {% if i === 0 %}
-            <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+            <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
           {% endif %}
           <td class="align-centre" headers="grade org">{{ member.grades[i].grade }}</td>
           <td headers="outstanding warrants">{{ member.grades[i].ow }}</td>

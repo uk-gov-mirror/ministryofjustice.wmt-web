@@ -1,0 +1,83 @@
+    {% if organisationLevel === "offender-manager" %}
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <table>
+                <tbody>
+                    <tr>
+                        <th scope="row">Grade</th>
+                        <td class="sln-grade numeric">{{ overviewDetails.grade }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Team</th>
+                        <td class="numeric"><a href="/{{ workloadType }}/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Capacity</th>
+                        {% if overviewDetails.capacity > 110 %}
+                        <td class="numeric capacity-red"> {{ overviewDetails.capacity | round }}%</td>
+                        {% else %}
+                        <td class="numeric"> {{ overviewDetails.capacity | round }}%</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th scope="row">Cases</th>
+                        <td class="numeric">{{ overviewDetails.cases }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Contracted hours</th>
+                        <td class="numeric">{{ overviewDetails.contractedHours }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Reduction</th>
+                        <td class="numeric">{{ overviewDetails.reduction }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+    
+    <table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+        <thead>
+            <tr>
+                <th class="sln-table-org-level" id="name">{{ childOrganisationLevelDisplayText }}</th>
+                <th id="cases">OMIC Cases</th>
+                <th id="custody">Total Points while in Custody</th>
+                <th id="licence">Anticipated Points while on Licence</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in overviewDetails %}
+            {% if member.name !== 'Total / Average' %}
+            <tr>
+              <td headers="name">{% if childOrganisationLevelDisplayText !== 'Team' and childOrganisationLevelDisplayText !== 'Offender Manager' %} <a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a> {% else %} {{ member.name }} {% endif %}</td>
+              <td headers="cases total">{{ member.totalCases }}</td>
+              <td headers="custody total">{{ member.custodyPoints }}</td>
+              <td headers="licence total">{{ member.licencePoints }}</td>
+          </tr>
+          {% endif %}
+          {% endfor%}
+        </tbody>
+        <tfoot>
+        {% for member in overviewDetails %}
+        {% if member.name === 'Total / Average' %}
+            <tr>
+            <td headers="name om">{{ member.name }}</td>
+            <td headers="cases total">{{ member.totalTotalCases }}</td>
+            <td headers="custody total">{{ member.totalCustodyPoints }}</td>
+            <td headers="licence total">{{ member.totalLicencePoints }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tfoot>
+      </table>
+    {% endif %}
+    
+    {% block page_specific_scripts %}
+    
+        <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
+        <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
+        <script src="{{ asset_path }}javascripts/fixed-overview-header.js"></script>
+        <script src="{{ asset_path }}javascripts/case-overview.js"></script>
+       
+    {% endblock %}

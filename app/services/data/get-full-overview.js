@@ -2,7 +2,7 @@ const knex = require('../../../knex').web
 const orgUnitFinder = require('../helpers/org-unit-finder')
 const orgUnitConstants = require('../../constants/organisation-unit')
 
-module.exports = function (id, type) {
+module.exports = function (id, type, workloadType) {
   const orgUnit = orgUnitFinder('name', type)
   const table = 'individual_case_overview'
   let whereClause = ''
@@ -11,6 +11,10 @@ module.exports = function (id, type) {
   if (id !== undefined) {
     whereClause = 'WHERE ' + orgUnit.name + '_id = ' + id
   }
+
+  // if (workloadType === 'omic') {
+  //   table = 'omic_' + table
+  // }
 
   const selectColumns = [
     'ldu_name AS lduCluster',

@@ -9,7 +9,7 @@ const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
-const workloadTypes = require('../../app/constants/workload-type')
+const workloadTypes = require('../constants/workload-type')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const tierHelper = require('../services/helpers/tier-helper')
@@ -17,11 +17,11 @@ const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const getCaseDetailsView = require('../services/get-case-details-view')
 const getBreadcrumbs = require('../services/get-breadcrumbs')
-const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
-let lastUpdated
+
+var lastUpdated
 
 module.exports = function (router) {
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload-capacity', function (req, res, next) {
+  router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/caseload-capacity', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -30,8 +30,8 @@ module.exports = function (router) {
       }
     }
 
-    let capacityDateRange
-    let errors
+    var capacityDateRange
+    var errors
 
     try {
       capacityDateRange = dateRangeHelper.createCapacityDateRange(req.query)
@@ -44,27 +44,27 @@ module.exports = function (router) {
       }
     }
 
-    const organisationLevel = req.params.organisationLevel
-    let id
+    var organisationLevel = req.params.organisationLevel
+    var id
 
     if (organisationLevel !== organisationUnit.NATIONAL.name) {
       id = req.params.id
     }
 
-    const orgUnit = getOrganisationUnit('name', organisationLevel)
-    let childOrgUnitDisplayText
+    var orgUnit = getOrganisationUnit('name', organisationLevel)
+    var childOrgUnitDisplayText
     if (organisationLevel !== organisationUnit.OFFENDER_MANAGER.name) {
       childOrgUnitDisplayText = getOrganisationUnit('name', orgUnit.childOrganisationLevel).displayText
     }
 
-    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return getCapacityView(id, capacityDateRange, organisationLevel).then(function (result) {
-      const capacityBreakdown = result
+      var capacityBreakdown = result
       return getOutstandingReports(id, organisationLevel).then(function (result) {
-        const outstandingReports = result
+        var outstandingReports = result
         return getCaseDetailsView(id, organisationLevel).then(function (result) {
-          const caseDetails = result
+          var caseDetails = result
           return getLastUpdated().then(function (result) {
             lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
             result.date = lastUpdated
@@ -73,10 +73,9 @@ module.exports = function (router) {
               linkId: id,
               title: capacityBreakdown.title,
               subTitle: capacityBreakdown.subTitle,
-              subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
+              subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole),
               breadcrumbs: capacityBreakdown.breadcrumbs,
               capacity: capacityBreakdown.capacityTable,
-              stringifiedCapacity: stringifyCapacityData(capacityBreakdown.capacityTable),
               errors: errors,
               query: req.query,
               capacityBreakdown: capacityBreakdown.capacityBreakdown,
@@ -88,18 +87,13 @@ module.exports = function (router) {
               date: result.date,
               userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
               authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
-              workloadType: workloadTypes.PROBATION
+              workloadType: workloadTypes.OMIC
             })
           })
         })
       })
     }).catch(function (error) {
-      if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
-        const subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
-        renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
-      } else {
-        next(error)
-      }
+      next(error)
     })
   })
 
@@ -112,22 +106,22 @@ module.exports = function (router) {
       }
     }
 
-    const organisationLevel = req.params.organisationLevel
-    const id = req.params.id
+    var organisationLevel = req.params.organisationLevel
+    var id = req.params.id
 
     if (organisationLevel !== organisationUnitConstants.TEAM.name) {
       throw new Error('Only available for a team')
     }
 
-    const breadcrumbs = getBreadcrumbs(id, organisationLevel)
+    var breadcrumbs = getBreadcrumbs(id, organisationLevel)
 
     return getCaseDetailsReports(id, organisationLevel).then(function (caseDetails) {
-      const formatedCaseDetails = formatCaseDetailsForExport(caseDetails)
-      const result = {
+      var formatedCaseDetails = formatCaseDetailsForExport(caseDetails)
+      var result = {
         title: breadcrumbs[0].title,
         inactiveCaseDetails: formatedCaseDetails
       }
-      const exportCsv = getExportCsv(organisationLevel, result, tabs.CAPACITY.INACTIVE)
+      var exportCsv = getExportCsv(organisationLevel, result, tabs.CAPACITY.INACTIVE)
       res.attachment(exportCsv.filename)
       return res.send(exportCsv.csv)
     }).catch(function (error) {
@@ -136,12 +130,12 @@ module.exports = function (router) {
   })
 }
 
-const formatCaseDetailsForExport = function (caseDetails) {
-  const result = []
+var formatCaseDetailsForExport = function (caseDetails) {
+  var result = []
   caseDetails.forEach(function (caseDetail) {
-    const caseType = getCaseTypeDescription(caseDetail.inactiveCaseType)
-    const tier = tierHelper.getTierType(caseDetail.tierNumber)
-    const formattedCaseDetails = {
+    var caseType = getCaseTypeDescription(caseDetail.inactiveCaseType)
+    var tier = tierHelper.getTierType(caseDetail.tierNumber)
+    var formattedCaseDetails = {
       lduName: caseDetail.lduDescription,
       teamName: caseDetail.teamDescription,
       name: caseDetail.name,
@@ -156,8 +150,8 @@ const formatCaseDetailsForExport = function (caseDetails) {
   return result
 }
 
-const getCaseTypeDescription = function (inactiveCaseType) {
-  let description
+var getCaseTypeDescription = function (inactiveCaseType) {
+  var description
   switch (inactiveCaseType) {
     case 'U':
       description = 'Unpaid Work'
@@ -176,9 +170,4 @@ const getCaseTypeDescription = function (inactiveCaseType) {
       break
   }
   return description
-}
-
-const stringifyCapacityData = function (capacity) {
-  const capacityData = Object.assign({}, capacity)
-  return JSON.stringify(capacityData)
 }
