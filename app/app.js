@@ -38,7 +38,7 @@ app.use(helmet.contentSecurityPolicy({
 const developmentMode = app.get('env') === 'development'
 
 app.set('view engine', 'html')
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', [path.join(__dirname, 'views'), 'node_modules/govuk-frontend/'])
 
 const nunjucksObj = nunjucks(app, {
   watch: developmentMode,

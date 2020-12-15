@@ -3,6 +3,7 @@ const path = require('path')
 const gulpNSP = require('gulp-nsp')
 const sass = require('gulp-sass')
 const spawn = require('child_process').spawn
+const rename = require('gulp-rename')
 
 gulp.task('assets', function (done) {
   gulp.src('node_modules/govuk_frontend_toolkit/javascripts/**/*')
@@ -29,12 +30,25 @@ gulp.task('sync', function (done) {
   ]
   gulp.src(vendorJSFiles, { allowEmpty: true })
     .pipe(gulp.dest('app/assets/javascripts/vendor/'))
+  
+  gulp.src('node_modules/govuk-frontend/govuk/all.js')
+    .pipe(rename('gov-uk.js'))
+    .pipe(gulp.dest('app/assets/javascripts/', { overwrite: true }))
+  
+  gulp.src('node_modules/govuk-frontend/govuk/assets/images/**/*')
+    .pipe(gulp.dest('app/assets/images/', { overwrite: true }))
+
+  gulp.src('node_modules/govuk-frontend/govuk/assets/fonts/**/*')
+    .pipe(gulp.dest('app/assets/fonts/', { overwrite: true }))
 
   gulp.src('app/assets/javascripts/**/*.js')
     .pipe(gulp.dest('app/public/javascripts/', { overwrite: true }))
 
   gulp.src('app/assets/images/**/*')
     .pipe(gulp.dest('app/public/images/', { overwrite: true }))
+  
+  gulp.src('app/assets/fonts/**/*')
+    .pipe(gulp.dest('app/public/fonts/', { overwrite: true }))
   done()
 })
 
