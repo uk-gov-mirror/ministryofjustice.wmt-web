@@ -35,8 +35,8 @@
 
   {% include "includes/validation-error-messages.html" %}
 
-  <header class="heading-xlarge reductionHeader">{{ headerText }}</header>
-  <p class="lede">{{ reductionText }}<span class="bold">{{ title }}</span></p>
+  <header class="govuk-heading-xl reductionHeader">{{ headerText }}</header>
+  <p class="govuk-body-l">{{ reductionText }}<strong class="bold">{{title}}</strong></p>
   {% set first = true %}
   <form action="{{ formAction }}" method="{{formMethod}}" id="reductionForm">
     <input type="hidden" name="reductionId" value="{{reduction.id}}"/>
@@ -170,7 +170,7 @@
     <input id="submit-button" class="govuk-button" data-module="govuk-button" type="submit" value="{{ submitButtonText }}">
   </form>
   {% if reduction %}
-  <h2 class="heading-small">Other options</h2>
+  <h2 class="govuk-heading-s">Other options</h2>
   <form name="archiveReduction" method="POST" action="/{{ workloadType }}/offender-manager/{{ linkId }}/update-reduction-status">
     <!-- Including the csrf-hidden-input.html hides the links -->
     <input type="hidden"  name="_csrf"  value="{{ csrfToken }}">
@@ -187,9 +187,9 @@
   <div>
   <ul>
     {% if reduction.status !== 'ARCHIVED' %}
-    <li><a  href="javascript:document.archiveReduction.submit()">Archive reduction</a></li>
+    <li><a  class="govuk-link" href="javascript:document.archiveReduction.submit()">Archive reduction</a></li>
     {% endif %}
-    <li><a  href="javascript:document.deleteReduction.submit()">Delete reduction</a></li>
+    <li><a  class="govuk-link" href="javascript:document.deleteReduction.submit()">Delete reduction</a></li>
   </ul>
   </div>
   {% endif %}
