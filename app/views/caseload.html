@@ -13,11 +13,11 @@
 
 {% include "includes/sub-nav.html" %}
 
-  <h2 class="heading-large">Caseload totals</h2>
-  <div id="caseloadSummary" class="grid-row">              
+  <h2 class="govuk-heading-l">Caseload totals</h2>
+  <div id="caseloadSummary" class="govuk-grid-row">              
   {% for caseType in caseloadDetails %}
     {% if caseType.displayName !== 'Overall' %}
-      <div class="column-one-third">
+      <div class="govuk-grid-column-one-third">
         <div id="{{ caseType.displayName.toLowerCase() }}Total" class="data">
           <span class="data-item bold-xlarge">{{ caseType.totalSummary }}</span>
           <span class="data-item bold-xsmall">{{ caseType.displayName }} cases</span>
@@ -29,7 +29,7 @@
 
   {% include "includes/export-caseload.html" %}
 
-  <h2 class="heading-large">Caseload type breakdown</h2>
+  <h2 class="govuk-heading-l">Caseload type breakdown</h2>
   <div class="js-tabs">
     <ul class="js-tabs-links">
       {% for caseType in caseloadDetails %}
@@ -41,7 +41,7 @@
     <div class="js-tabs-content">
     {% for caseType in caseloadDetails %}
       <div id="{{caseType.displayName.toLowerCase()}}">
-        <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by tier</h3>
+        <h3 class="govuk-heading-m">{{ caseType.displayName | title }} caseload by tier</h3>
 
         <table class="sln-table-caseload-{{caseType.displayName.toLowerCase()}} data-table">
           <thead>
@@ -114,7 +114,7 @@
     {% for caseType in caseloadDetails %}
     {% if caseType.displayName === 'Overall' %}
       <div id="{{caseType.displayName.toLowerCase()}}">
-        <h3 class="heading-medium">{{ caseType.displayName | title }} caseload</h3>        
+        <h3 class="govuk-heading-m">{{ caseType.displayName | title }} caseload</h3>        
         <table class="sln-table-caseload-overall-summary data-table">
           <thead>
             <tr>
@@ -154,8 +154,8 @@
           </tr>
         </tfoot> 
         </table>
-
-        <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by grade</h3>
+<br/>
+        <h3 class="govuk-heading-m">{{ caseType.displayName | title }} caseload by grade</h3>
         <table class="sln-table-caseload-by-grade data-table">
           <thead>
             <tr>
@@ -228,7 +228,7 @@
       </div>
     {% else %}
       <div id="{{caseType.displayName.toLowerCase()}}">
-        <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by tier</h3>
+        <h3 class="govuk-heading-m">{{ caseType.displayName | title }} caseload by tier</h3>
         <table class="sln-table-caseload-{{caseType.displayName.toLowerCase()}} data-table">
           <thead>
             <tr>
@@ -298,8 +298,8 @@
           {% endfor %}
         </tfoot>
         </table>
-
-        <h3 class="heading-medium">{{ caseType.displayName | title }} caseload by grade</h3>
+<br/>
+        <h3 class="govuk-heading-m">{{ caseType.displayName | title }} caseload by grade</h3>
         <table class="sln-table-caseload-by-grade data-table">
           <thead>
             <tr>
