@@ -47,7 +47,7 @@ module.exports = function (results, isCSV, workloadType = workloadTypes.PROBATIO
       if (!isCSV) {
         totalsToReturn.forEach(function (val, key) {
           totals.totalLicencePoints += val.licencePoints
-          totals.totalCustodyPoints += val.custodyPoin*ts
+          totals.totalCustodyPoints += val.custodyPoints
           totals.totalTotalCases += val.totalCases
         })
         totalsToReturn.push(totals)
