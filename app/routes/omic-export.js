@@ -7,7 +7,6 @@ const workloadTypes = require('../constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const getScenarioExport = require('../services/get-omic-scenario')
-const tabs = require('../constants/wmt-tabs')
 
 var lastUpdated
 
