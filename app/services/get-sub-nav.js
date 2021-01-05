@@ -43,6 +43,9 @@ module.exports = function (id, organisationalUnitName, currentPath, workloadType
     case workloadConstants.OMIC:
       navigation.push(new Link('OMIC Overview', baseLink + '/overview'))
       // navigation.push(new Link('OMIC Caseload', baseLink + '/caseload'))
+      if (organisationalUnitName !== organisationUnitConstants.NATIONAL.name) {
+        navigation.push(new Link('Export', baseLink + '/export'))
+      }
       break
   }
 
