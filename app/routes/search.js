@@ -20,7 +20,7 @@ module.exports = function (router) {
     })
   })
 
-  router.post('/officer-search/search', function (req, res, next) {
+  router.post('/officer-search', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {

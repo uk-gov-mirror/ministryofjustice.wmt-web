@@ -25,68 +25,72 @@ module.exports = function (id, organisationLevel, isCSV = false) {
 }
 
 var parseCaseloadResults = function (organisationLevel, results, isCSV) {
-  // Overall cases
-  var allTotals = caseloadHelper.totalAllCases(results)
-  var caseloadGroupedByGrade = caseloadHelper.groupCaseloadByGrade(results)
-  var overallPercentages = caseloadHelper.calculateOverallPercentages(allTotals, caseloadGroupedByGrade)
+  if (results.length > 0) {
+    // Overall cases
+    var allTotals = caseloadHelper.totalAllCases(results)
+    var caseloadGroupedByGrade = caseloadHelper.groupCaseloadByGrade(results)
+    var overallPercentages = caseloadHelper.calculateOverallPercentages(allTotals, caseloadGroupedByGrade)
 
-  var overallResults = caseloadHelper.getCaseloadTierTotalsByTeamByGrade(results)
-  var overallSummary = caseloadHelper.getCaseloadSummaryTotalsByTeam(results)
-  // Custody cases
-  var custodyResults = caseloadHelper.getCaseloadByType(results, caseType.CUSTODY)
-  var custodySummary = caseloadHelper.getCaseloadTotalSummary(custodyResults)
-  // Community cases
-  var communityResults = caseloadHelper.getCaseloadByType(results, caseType.COMMUNITY)
-  var communitySummary = caseloadHelper.getCaseloadTotalSummary(communityResults)
-  // License cases
-  var licenseResults = caseloadHelper.getCaseloadByType(results, caseType.LICENSE)
-  var licenseSummary = caseloadHelper.getCaseloadTotalSummary(licenseResults)
+    var overallResults = caseloadHelper.getCaseloadTierTotalsByTeamByGrade(results)
+    var overallSummary = caseloadHelper.getCaseloadSummaryTotalsByTeam(results)
+    // Custody cases
+    var custodyResults = caseloadHelper.getCaseloadByType(results, caseType.CUSTODY)
+    var custodySummary = caseloadHelper.getCaseloadTotalSummary(custodyResults)
+    // Community cases
+    var communityResults = caseloadHelper.getCaseloadByType(results, caseType.COMMUNITY)
+    var communitySummary = caseloadHelper.getCaseloadTotalSummary(communityResults)
+    // License cases
+    var licenseResults = caseloadHelper.getCaseloadByType(results, caseType.LICENSE)
+    var licenseSummary = caseloadHelper.getCaseloadTotalSummary(licenseResults)
 
-  var custodyTotals = caseloadHelper.totalAllCases(custodyResults)
-  var custodyGroupedByGrade = caseloadHelper.groupCaseloadByGrade(custodyResults)
-  var custodyPercentages = caseloadHelper.calculateOverallPercentages(custodyTotals, custodyGroupedByGrade)
+    var custodyTotals = caseloadHelper.totalAllCases(custodyResults)
+    var custodyGroupedByGrade = caseloadHelper.groupCaseloadByGrade(custodyResults)
+    var custodyPercentages = caseloadHelper.calculateOverallPercentages(custodyTotals, custodyGroupedByGrade)
 
-  var communityTotals = caseloadHelper.totalAllCases(communityResults)
-  var communityGroupedByGrade = caseloadHelper.groupCaseloadByGrade(communityResults)
-  var communityPercentages = caseloadHelper.calculateOverallPercentages(communityTotals, communityGroupedByGrade)
+    var communityTotals = caseloadHelper.totalAllCases(communityResults)
+    var communityGroupedByGrade = caseloadHelper.groupCaseloadByGrade(communityResults)
+    var communityPercentages = caseloadHelper.calculateOverallPercentages(communityTotals, communityGroupedByGrade)
 
-  var licenseTotals = caseloadHelper.totalAllCases(licenseResults)
-  var licenseGroupedByGrade = caseloadHelper.groupCaseloadByGrade(licenseResults)
-  var licensePercentages = caseloadHelper.calculateOverallPercentages(licenseTotals, licenseGroupedByGrade)
+    var licenseTotals = caseloadHelper.totalAllCases(licenseResults)
+    var licenseGroupedByGrade = caseloadHelper.groupCaseloadByGrade(licenseResults)
+    var licensePercentages = caseloadHelper.calculateOverallPercentages(licenseTotals, licenseGroupedByGrade)
 
-  if (organisationLevel !== organistaionUnit.TEAM.name) {
-    overallResults = caseloadHelper.calculateTeamTierPercentages(overallResults)
-    replaceIncorrectPercentageAverages(overallResults.percentageTotals, overallPercentages)
+    if (organisationLevel !== organistaionUnit.TEAM.name) {
+      overallResults = caseloadHelper.calculateTeamTierPercentages(overallResults)
+      replaceIncorrectPercentageAverages(overallResults.percentageTotals, overallPercentages)
 
-    custodyResults = caseloadHelper.aggregateTeamTierTotals(custodyResults)
-    replaceIncorrectPercentageAverages(custodyResults.percentageTotals, custodyPercentages)
+      custodyResults = caseloadHelper.aggregateTeamTierTotals(custodyResults)
+      replaceIncorrectPercentageAverages(custodyResults.percentageTotals, custodyPercentages)
 
-    communityResults = caseloadHelper.aggregateTeamTierTotals(communityResults)
-    replaceIncorrectPercentageAverages(communityResults.percentageTotals, communityPercentages)
+      communityResults = caseloadHelper.aggregateTeamTierTotals(communityResults)
+      replaceIncorrectPercentageAverages(communityResults.percentageTotals, communityPercentages)
 
-    licenseResults = caseloadHelper.aggregateTeamTierTotals(licenseResults)
-    replaceIncorrectPercentageAverages(licenseResults.percentageTotals, licensePercentages)
-  } else if (!isCSV) {
-    overallResults.totals = caseloadHelper.calculateTotalsRow(overallResults)
-    communityResults.totals = caseloadHelper.calculateTotalsRow(communityResults)
-    custodyResults.totals = caseloadHelper.calculateTotalsRow(custodyResults)
-    licenseResults.totals = caseloadHelper.calculateTotalsRow(licenseResults)
+      licenseResults = caseloadHelper.aggregateTeamTierTotals(licenseResults)
+      replaceIncorrectPercentageAverages(licenseResults.percentageTotals, licensePercentages)
+    } else if (!isCSV) {
+      overallResults.totals = caseloadHelper.calculateTotalsRow(overallResults)
+      communityResults.totals = caseloadHelper.calculateTotalsRow(communityResults)
+      custodyResults.totals = caseloadHelper.calculateTotalsRow(custodyResults)
+      licenseResults.totals = caseloadHelper.calculateTotalsRow(licenseResults)
+    }
+    if (!isCSV) {
+      overallSummary[0].totals = caseloadHelper.calculateTotalTiersRow(overallSummary)
+    }
+
+    var caseloadResults = {
+      overallCaseloadDetails: overallResults,
+      communityCaseloadDetails: communityResults,
+      custodyCaseloadDetails: custodyResults,
+      licenseCaseloadDetails: licenseResults,
+      overallTotalSummary: overallSummary,
+      custodyTotalSummary: custodySummary,
+      communityTotalSummary: communitySummary,
+      licenseTotalSummary: licenseSummary
+    }
+    return caseloadResults
+  } else {
+    return undefined
   }
-  if (!isCSV) {
-    overallSummary[0].totals = caseloadHelper.calculateTotalTiersRow(overallSummary)
-  }
-
-  var caseloadResults = {
-    overallCaseloadDetails: overallResults,
-    communityCaseloadDetails: communityResults,
-    custodyCaseloadDetails: custodyResults,
-    licenseCaseloadDetails: licenseResults,
-    overallTotalSummary: overallSummary,
-    custodyTotalSummary: custodySummary,
-    communityTotalSummary: communitySummary,
-    licenseTotalSummary: licenseSummary
-  }
-  return caseloadResults
 }
 
 var replaceIncorrectPercentageAverages = function (originalPercentageTotals, correctPercentages) {

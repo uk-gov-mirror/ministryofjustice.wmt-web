@@ -39,7 +39,20 @@ module.exports = function (router) {
       lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
       return getCaseload(id, organisationLevel)
       .then(function (result) {
-        result.date = lastUpdated
+        var caseloadDetailsData
+        if (result.caseloadDetails) {
+          caseloadDetailsData = caseloadDetails(organisationLevel, result)
+        } else {
+          if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name && organisationLevel !== organisationUnitConstants.TEAM.name) {
+            caseloadDetailsData = defaultCaseload
+          } else {
+            caseloadDetailsData = defaultTeamCaseload
+            caseloadDetailsData[0].array.totals = defaultTotals
+            caseloadDetailsData[1].array.totals = defaultTotals
+            caseloadDetailsData[2].array.totals = defaultTotals
+            caseloadDetailsData[3].array.totals = defaultTotals
+          }
+        }
         return res.render('caseload', {
           screen: 'caseload',
           linkId: req.params.id,
@@ -50,8 +63,8 @@ module.exports = function (router) {
           organisationLevel: organisationLevel,
           childOrganisationLevel: orgUnit.childOrganisationLevel,
           childOrganisationLevelDisplayText: childOrgUnit.displayText,
-          caseloadDetails: caseloadDetails(organisationLevel, result),
-          date: result.date,
+          caseloadDetails: caseloadDetailsData,
+          date: lastUpdated,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
           authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
           workloadType: workloadTypes.PROBATION
@@ -146,3 +159,51 @@ module.exports = function (router) {
     return details
   }
 }
+
+var defaultTeamCaseload = [
+  {displayName: 'Overall', array: [], totalSummary: [], totalsRow: { totalCommunity: 0, totalLicense: 0, totalCustody: 0, totalTotalCases: 0 }},
+  {displayName: 'Community', totalSummary: 0, array: []},
+  {displayName: 'License', totalSummary: 0, array: []},
+  {displayName: 'Custody', totalSummary: 0, array: []}
+]
+
+var defaultTotals = { a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, overall: 0 }
+
+var defaultCaseload = [
+  {
+    displayName: 'Overall',
+    array: {details: [], totals: {}, detailsPercentages: [], percentageTotals: {'': {grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0}}},
+    totalSummary: [],
+    totalsRow: {totalCommunity: 0, totalLicense: 0, totalCustody: 0, totalTotalCases: 0}
+  },
+  {
+    displayName: 'Community',
+    totalSummary: 0,
+    array: {
+      details: [],
+      totals: {'': { grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 }},
+      detailsPercentages: [],
+      percentageTotals: {'': {grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0}}
+    }
+  },
+  {
+    displayName: 'License',
+    totalSummary: 0,
+    array: {
+      details: [],
+      totals: {'': { grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 }},
+      detailsPercentages: [],
+      percentageTotals: {'': {grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0}}
+    }
+  },
+  {
+    displayName: 'Custody',
+    totalSummary: 0,
+    array: {
+      details: [],
+      totals: {'': { grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 }},
+      detailsPercentages: [],
+      percentageTotals: {'': {grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0}}
+    }
+  }
+]
