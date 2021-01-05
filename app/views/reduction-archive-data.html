@@ -93,8 +93,8 @@
             </fieldset>
         </div>
 
-        <input id="archive-reductions-filter-submit" type="submit" value="Search" class="button" formaction="/archive-data/reductions-search">
-        <input id="archive-reductions-csv-submit" type="submit" class="button sln-export floatRightBottom10 marginLeft10" value="Export Archived Reductions" formaction="/archive-data/reductions/archive-csv">
+        <input id="archive-reductions-filter-submit" type="submit" value="Search" class="govuk-button" data-module="govuk-button"  formaction="/archive-data/reductions-search">
+        <input id="archive-reductions-csv-submit" type="submit" class="govuk-button sln-export floatRightBottom10 marginLeft10" value="Export Archived Reductions" formaction="/archive-data/reductions/archive-csv" data-module="govuk-button">
 </form>
 <br/>
 <table id="reduction-archive-table" class="js-data-table data-table dataTable width100Percent" cellspacing="0" width="100%" role="grid" hidden>
@@ -114,9 +114,9 @@
 </table>
 </main>
 
-<script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
-<script src="{{ asset_path }}javascripts/moment.min.js"></script>
-<script src="{{ asset_path }}javascripts/datatables.min.js"></script>
-<script src="{{ asset_path }}javascripts/archive-reductions-new.js"></script>
+<script src="{{ assetPath }}javascripts/vendor/jquery.min.js"></script>
+<script src="{{ assetPath }}javascripts/moment.min.js"></script>
+<script src="{{ assetPath }}javascripts/datatables.min.js"></script>
+<script src="{{ assetPath }}javascripts/archive-reductions-new.js"></script>
 
 {% endblock %}

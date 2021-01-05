@@ -92,7 +92,7 @@ module.exports = function (router) {
         return contractedHoursService.getContractedHours(id, organisationLevel, workloadType)
           .then(function (result) {
             const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-
+            console.log(error.validationErrors)
             return res.render('contracted-hours', {
               errors: error.validationErrors,
               title: result.title,

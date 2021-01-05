@@ -13,24 +13,24 @@
 {% include "includes/sub-nav.html" %}
 
 {% if organisationLevel === "offender-manager" %}
-<div class="grid-row">
-  <div class="column-two-thirds">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
     <table>
     <tbody>
       <tr>
-        <th scope="row">Grade</th>
+        <th class="bold" scope="row">Grade</th>
         <td class="sln-grade numeric">{{ overviewDetails[0].grade }}</td>
       </tr>
       <tr>
-        <th scope="row">Team</th>
+        <th class="bold" scope="row">Team</th>
         <td class="numeric"><a href="/court-reports/team/{{ overviewDetails[0].linkId }}">{{ overviewDetails[0].name }}</a></td>
       </tr>
       <tr>
-        <th scope="row">Contracted hours</th>
+        <th class="bold" scope="row">Contracted hours</th>
         <td class="numeric">{{ overviewDetails[0].contractedHours }}</td>
       </tr>
       <tr>
-        <th scope="row">Reduction</th>
+        <th class="bold" scope="row">Reduction</th>
         <td class="numeric">{{ overviewDetails[0].reduction }}</td>
       </tr>
     </tbody>
@@ -76,13 +76,13 @@
 {% endif %}
 </main>
 <div class="lastUpdated">
-        <p>Last updated on  <span class="bold">{{date}}</span></p>
+        <p>Last updated on <strong>{{date}}</strong></p>
  </div>
 {% endblock %}
 
 {% block page_specific_scripts %}
 
-    <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
+    <script src="{{ assetPath }}javascripts/vendor/jquery.min.js"></script>
     <script src="/public/javascripts/floatThead.js"></script>
     <script src="/public/javascripts/jquery.floatThead.js"></script>
    

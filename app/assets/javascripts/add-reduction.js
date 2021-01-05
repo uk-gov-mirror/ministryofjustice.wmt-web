@@ -26,7 +26,13 @@ $(document).ready(function() {
     calculateExpiry()
   })
 
-  if (!document.getElementById("reductionToPopulate").value || !document.getElementById("reductionEnabled").value) {
+  console.log(typeof document.getElementById("reductionToPopulate").value)
+  console.log(typeof document.getElementById("reductionEnabled").value)
+  if (document.getElementById("reductionToPopulate").value !== 'true') {
+    $('#submit-button').prop('disabled', true);
+  }
+
+  if (document.getElementById("reductionEnabled").value !== 'true') {
     $('#submit-button').prop('disabled', true);
   }
 

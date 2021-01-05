@@ -95,8 +95,8 @@
             </fieldset>
         </div>
 
-        <input id="archive-fortnightly-filter-submit" type="submit" value="Search" class="button" formaction="/archive-data/fortnightly-caseload-data">
-        <input id="archive-fortnightly-csv-submit" type="submit" class="button sln-export floatRightBottom10 marginLeft10" value="Export Archive Data" formaction="/archive-data/fortnightly-caseload-data/archive-csv">
+        <input id="archive-fortnightly-filter-submit" type="submit" value="Search" class="govuk-button" data-module="govuk-button"  formaction="/archive-data/fortnightly-caseload-data">
+        <input id="archive-fortnightly-csv-submit" type="submit" class="govuk-button sln-export floatRightBottom10 marginLeft10" value="Export Archive Data" formaction="/archive-data/fortnightly-caseload-data/archive-csv" data-module="govuk-button">
 </form>
 <br/>
 
@@ -132,8 +132,8 @@
 {% endif %}
 </main>
 
-<script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
-<script src="{{ asset_path }}javascripts/datatables.min.js"></script>
-<script src="{{ asset_path }}javascripts/archive-data-fortnightly.js"></script>
+<script src="{{ assetPath }}javascripts/vendor/jquery.min.js"></script>
+<script src="{{ assetPath }}javascripts/datatables.min.js"></script>
+<script src="{{ assetPath }}javascripts/archive-data-fortnightly.js"></script>
 
 {% endblock %}

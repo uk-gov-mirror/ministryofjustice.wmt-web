@@ -13,7 +13,7 @@
     {% include "includes/sub-nav.html" %}
     
 
-    <table class="sln-table-reductions">
+    <table class="govuk-table sln-table-reductions">
         <colgroup>
             <col class="width35Percent" span="1">
         </colgroup>
@@ -30,7 +30,7 @@
             <tr>
                 <td headers="time_generated">{{ dashboardFile.file_type | capitalize}}</td>
                 <td headers="time_generated">{{ dashboardFile.date_created }}</td>
-                <td><a href="/probation/{{ organisationLevel }}/{{ linkId }}/dashboard/download?id={{ dashboardFile.id }}">Download a copy</a></td>
+                <td><a class="govuk-link" href="/probation/{{ organisationLevel }}/{{ linkId }}/dashboard/download?id={{ dashboardFile.id }}">Download a copy</a></td>
             </tr>
             {% endfor %}
         </tbody>

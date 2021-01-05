@@ -21,7 +21,7 @@
         </fieldset>
 
         {% include "includes/csrf-hidden-input.html"%}
-        <input id="search-button" class="button officerSearchButton" type="submit" value="Search">
+        <input id="search-button" class="govuk-button officerSearchButton" type="submit" value="Search" data-module="govuk-button">
     </div>
   </form>
   <div class="results">
@@ -56,6 +56,6 @@
   </div>
 </main>
 <script src="/public/javascripts/vendor/jquery.min.js"></script>
-<script src="{{ asset_path }}javascripts/datatables.min.js"></script>
-<script src="{{ asset_path }}javascripts/search-data.js"></script>
+<script src="{{ assetPath }}javascripts/datatables.min.js"></script>
+<script src="{{ assetPath }}javascripts/search-data.js"></script>
 {% endblock %}

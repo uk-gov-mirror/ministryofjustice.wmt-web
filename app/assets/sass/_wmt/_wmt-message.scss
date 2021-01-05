@@ -1,12 +1,12 @@
 .message {
 
-    @include box-sizing(border-box);
+    // @include box-sizing(border-box);
 
-    border-left-color: $grey-2;
+    border-left-color: #BFC1C3;
     border-left-width: 4px;
     border-left-style: solid;
-    background-color: $grey-4;
-    margin: 0 0 $gutter;
+    background-color: #F8F8F8;
+    margin: 0 0 $govuk-gutter;
 
     >ol > li,
     >ul > li,
@@ -18,29 +18,29 @@
 
 // SUPPORTED >= IE7 http://css-tricks.com/attribute-selectors/
 [class*='message'] + [class*='message'] {
-    margin-top: -$gutter + 5px;
+    margin-top: -$govuk-gutter + 5px;
 }
 
 .message {
-    padding: $gutter-half $gutter-half $gutter-half $gutter;
+    padding: $govuk-gutter-half $govuk-gutter-half $govuk-gutter-half $govuk-gutter;
 }
 
 .message--failure,
 .message--success,
 .message--information,
 .message--important {
-    padding: $gutter-half $gutter-half $gutter-half 60px;
+    padding: $govuk-gutter-half $govuk-gutter-half $govuk-gutter-half 60px;
 }
 
 
 .message__heading {
-    @include bold-24;
+    @include govuk-font(24, $weight: bold);
     max-width: 30em; // Like the .text class
 }
 
 .message--success {
-  border-left-color: $button-colour;
-  background-color: mix($white, $button-colour, 90%);
+  border-left-color: #00823B;
+  background-color: mix(#fff, #00823B, 90%);
 }
 .message--success:before { @include iconHelper('tick'); }
 

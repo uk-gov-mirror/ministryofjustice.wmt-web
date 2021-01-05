@@ -3,8 +3,8 @@ $(document).ready(function() {
     $('.js-tabs').tabs();
   });
 
-  $('.form-control').each(function(i, textbox) {
-    textbox.setAttribute('class', 'form-control workloadPointsNoBorder')
+  $('.govuk-input').each(function(i, textbox) {
+    textbox.setAttribute('class', 'govuk-input govuk-input--width-4 workloadPointsNoBorder')
     textbox.setAttribute('readonly', true)
   });
 
@@ -12,9 +12,9 @@ $(document).ready(function() {
   document.getElementById('save-notice').setAttribute('class', 'notice displayNone')
 
   $('#edit-button').click(function() {
-    $('.form-control').each(function(i, textbox) {
+    $('.govuk-input').each(function(i, textbox) {
       textbox.removeAttribute('readonly')
-      textbox.setAttribute('class', 'form-control workloadPointsTextboxEdit')
+      textbox.setAttribute('class', 'govuk-input govuk-input--width-4 workloadPointsTextboxEdit')
     });
 
     document.getElementById('edit-button').setAttribute('class', 'button displayNone')

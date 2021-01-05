@@ -42,7 +42,7 @@
                 </div>
             </div>
         </fieldset>
-        <input id="expiring-reductions-submit" type="submit" value="Search" class="button" formaction="/expiring-reductions-other">
+        <input id="expiring-reductions-submit" type="submit" value="Search" class="govuk-button" data-module="govuk-button"  formaction="/expiring-reductions-other">
     </div>
 
     {% if reductions %}
@@ -81,8 +81,8 @@
 
 </main>
 
-<script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
-<script src="{{ asset_path }}javascripts/select2.min.js"></script>
-<script src="{{ asset_path }}javascripts/expiring-reductions.js"></script>
+<script src="{{ assetPath }}javascripts/vendor/jquery.min.js"></script>
+<script src="{{ assetPath }}javascripts/select2.min.js"></script>
+<script src="{{ assetPath }}javascripts/expiring-reductions.js"></script>
 
 {% endblock %}

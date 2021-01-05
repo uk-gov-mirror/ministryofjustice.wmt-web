@@ -15,24 +15,24 @@
     <form method="post">
 
         {% include "includes/csrf-hidden-input.html"%}
-        <h2 class="heading-medium">
+        <h2 class="govuk-heading-m">
                 Please select the type of export to download:
             </h2>
-        <div class="grid-row form-group">
+        <div class="govuk-grid-row form-group">
             <fieldset class="inline-block">
-                <div class="column-one-third">
+                <div class="govuk-grid-column-one-third">
                     <div class="multiple-choice">
                         <input id="radio-inline-1" type="radio" name="radioInlineGroup" value="1" checked="checked">
                         <label class="inline-block" for="radio-inline-1">ARMS</label>
                     </div>
                 </div>
-                <div class="column-one-third">
+                <div class="govuk-grid-column-one-third">
                     <div class="multiple-choice">
                         <input id="radio-inline-2" type="radio" name="radioInlineGroup" value="2">
                         <label class="inline-block" for="radio-inline-2">Case Details</label>
                     </div>
                 </div>
-                <div class="column-one-third">
+                <div class="govuk-grid-column-one-third">
                     <div class="multiple-choice">
                         <input id="radio-inline-3" type="radio" name="radioInlineGroup" value="3">
                         <label class="inline-block" for="radio-inline-3">Case Management Support</label>
@@ -43,19 +43,19 @@
 
         <div class="grid-row form-group">
             <fieldset class="inline-block">
-                <div class="column-one-third">
+                <div class="govuk-grid-column-one-third">
                     <div class="multiple-choice">
                         <input id="radio-inline-4" type="radio" name="radioInlineGroup" value="4">
                         <label class="inline-block" for="radio-inline-4">Group Supervision</label>
                     </div>
                 </div>
-                <div class="column-one-third">
+                <div class="govuk-grid-column-one-third">
                     <div class="multiple-choice">
                         <input id="radio-inline-5" type="radio" name="radioInlineGroup" value="5">
                         <label class="inline-block" for="radio-inline-5">Scenario</label>
                     </div>
                 </div>
-                <div class="column-one-third">
+                <div class="govuk-grid-column-one-third">
                     <div class="multiple-choice">
                         <input id="radio-inline-6" type="radio" name="radioInlineGroup" value="6">
                         <label class="inline-block" for="radio-inline-6">Suspended Lifers</label>
@@ -65,14 +65,14 @@
         </div>
         <div class="grid-row form-group">
             <fieldset class="inline-block">
-                <div class="column-one-third">
+                <div class="govuk-grid-column-one-third">
                     <div class="multiple-choice">
                         <input id="radio-inline-7" type="radio" name="radioInlineGroup" value="7">
                         <label class="inline-block" for="radio-inline-7">Percentage Capacity Breakdown</label>
                     </div>
                 </div>
                 {% if authorisation===false or userRole==='System Admin' or userRole==='Data Admin' or userRole==='Manager'%}
-                    <div class="column-one-third">
+                    <div class="govuk-grid-column-one-third">
                         <div class="multiple-choice">
                             <input id="radio-inline-8" type="radio" name="radioInlineGroup" value="8">
                             <label class="inline-block" for="radio-inline-8">Expiring Reductions</label>
@@ -82,7 +82,7 @@
             </fieldset>
         </div>
         
-        <input type="submit" class="button sln-export floatLeftBottom10 marginLeft10" value="Export" formaction="/probation/{{ organisationLevel }}/{{ linkId }}/export">
+        <input type="submit" class="govuk-button sln-export floatLeftBottom10 marginLeft10" value="Export" formaction="/probation/{{ organisationLevel }}/{{ linkId }}/export" data-module="govuk-button">
 
     </form>
 </main>

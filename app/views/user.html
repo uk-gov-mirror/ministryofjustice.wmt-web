@@ -21,11 +21,13 @@
   {% endif %}
 
   <form action="/admin/user-rights" method="post" id="userForm">
-    <div class="form-group">
-        <label class="form-label" for="username">Username</label>
-        <input class="form-control" id="username" type="text" name="username">
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">  
+        <label class="govuk-label govuk-label--m" for="username">Username</label>
+      </h1>
+      <input class="govuk-input" id="username" type="text" name="username">
     </div>
-    <input class="button" type="submit" value="Continue">
+    <input class="govuk-button" data-module="govuk-button"  type="submit" value="Continue">
     {% include "includes/csrf-hidden-input.html"%}
   </form>
   
