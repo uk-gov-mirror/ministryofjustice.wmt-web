@@ -71,7 +71,6 @@ module.exports = function (router) {
     switch (radioButton) {
       case '1':
         exportPromise = scenarioPromise
-        tabType = tabs.EXPORT.ARMS_EXPORT
         break
       default:
         exportPromise = Promise.resolve()
