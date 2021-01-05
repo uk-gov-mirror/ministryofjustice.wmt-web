@@ -39,6 +39,11 @@ module.exports = function (id, organisationalUnitName, currentPath, workloadType
           }
         }
       }
+      break
+    case workloadConstants.OMIC:
+      navigation.push(new Link('OMIC Overview', baseLink + '/overview'))
+      // navigation.push(new Link('OMIC Caseload', baseLink + '/caseload'))
+      break
   }
 
   navigation[0].active = true
