@@ -53,9 +53,9 @@ module.exports = function (router) {
             caseloadDetailsData[3].array.totals = defaultTotals
           }
         }
-        var childOrgUnitDisplayText
+        var childOrgUnitDisplayText = childOrgUnit.displayText.repeat(1)
         if (childOrgUnit.displayText === 'LDU Cluster' && result.title === 'NPS Kent Surrey Sussex Region') {
-          childOrgUnitDisplayText = 'PDU Cluster'
+          childOrgUnitDisplayText = 'Probation Delivery Unit'
         }
         return res.render('caseload', {
           screen: 'caseload',

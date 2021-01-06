@@ -39,9 +39,9 @@ module.exports = function (router) {
       return getCaseload(id, organisationLevel)
       .then(function (result) {
         result.date = lastUpdated
-        var childOrganisationLevelDisplayText
+        var childOrganisationLevelDisplayText = childOrgUnit.displayText.repeat(1)
         if (childOrgUnit.displayText === 'LDU Cluster' && result.title === 'NPS Kent Surrey Sussex Region') {
-          childOrganisationLevelDisplayText = 'PDU Cluster'
+          childOrganisationLevelDisplayText = 'Probation Delivery Unit'
         }
         return res.render('caseload', {
           screen: 'caseload',
