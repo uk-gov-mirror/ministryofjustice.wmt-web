@@ -60,6 +60,9 @@ var renderOverview = function (req, res, next) {
     return getCourtReportOverview(id, organisationLevel)
     .then(function (result) {
       result.date = lastUpdated
+      if (childOrganisationLevelDisplayText === 'LDU Cluster' && result.title === 'NPS Kent Surrey Sussex Region') {
+        childOrganisationLevelDisplayText = 'PDU Cluster'
+      }
       result.overviewDetails.sort(function (a, b) { return a.name.localeCompare(b.name) })
       return res.render('court-reports-overview', {
         title: result.title,
