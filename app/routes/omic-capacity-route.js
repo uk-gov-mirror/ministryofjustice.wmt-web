@@ -69,7 +69,7 @@ module.exports = function (router) {
             lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
             result.date = lastUpdated
             if (childOrgUnitDisplayText === 'LDU Cluster' && capacityBreakdown.title === 'NPS Kent Surrey Sussex Region') {
-              childOrgUnitDisplayText = 'PDU Cluster'
+              childOrgUnitDisplayText = 'Probation Delivery Unit'
             }
             return res.render('capacity', {
               screen: 'capacity',
