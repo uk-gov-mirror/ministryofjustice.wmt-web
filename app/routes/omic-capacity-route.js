@@ -9,7 +9,7 @@ const getOrganisationUnit = require('../services/helpers/org-unit-finder')
 const organisationUnitConstants = require('../constants/organisation-unit')
 const authorisation = require('../authorisation')
 const Unauthorized = require('../services/errors/authentication-error').Unauthorized
-const workloadTypes = require('../../app/constants/workload-type')
+const workloadTypes = require('../constants/workload-type')
 const getExportCsv = require('../services/get-export-csv')
 const tabs = require('../constants/wmt-tabs')
 const tierHelper = require('../services/helpers/tier-helper')
@@ -17,11 +17,11 @@ const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const getCaseDetailsView = require('../services/get-case-details-view')
 const getBreadcrumbs = require('../services/get-breadcrumbs')
-const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
+
 let lastUpdated
 
 module.exports = function (router) {
-  router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload-capacity', function (req, res, next) {
+  router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/caseload-capacity', function (req, res, next) {
     try {
       authorisation.assertUserAuthenticated(req)
     } catch (error) {
@@ -76,10 +76,9 @@ module.exports = function (router) {
               linkId: id,
               title: capacityBreakdown.title,
               subTitle: capacityBreakdown.subTitle,
-              subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
+              subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole),
               breadcrumbs: capacityBreakdown.breadcrumbs,
               capacity: capacityBreakdown.capacityTable,
-              stringifiedCapacity: stringifyCapacityData(capacityBreakdown.capacityTable),
               errors: errors,
               query: req.query,
               capacityBreakdown: capacityBreakdown.capacityBreakdown,
@@ -91,18 +90,13 @@ module.exports = function (router) {
               date: result.date,
               userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
               authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
-              workloadType: workloadTypes.PROBATION
+              workloadType: workloadTypes.OMIC
             })
           })
         })
       })
     }).catch(function (error) {
-      if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
-        const subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
-        renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
-      } else {
-        next(error)
-      }
+      next(error)
     })
   })
 
@@ -179,9 +173,4 @@ const getCaseTypeDescription = function (inactiveCaseType) {
       break
   }
   return description
-}
-
-const stringifyCapacityData = function (capacity) {
-  const capacityData = Object.assign({}, capacity)
-  return JSON.stringify(capacityData)
 }

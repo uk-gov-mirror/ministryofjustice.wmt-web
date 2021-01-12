@@ -32,12 +32,12 @@ module.exports.TEAM_CASELOAD_CSV = {
 
 module.exports.ARMS_EXPORT_CSV = {
   filename: ('Test_Arms_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region Name","LDU Cluster","Team Name","Assessment Date","CRN","Offender Manager Name","Offender Manager Grade","Sentence Type","Sentence or Release Date"\n' +
-    '"NPS North West","Cumbria","NPS - Carlisle 1","4-10-2018","CASEREF30134","A.N. Offender Manager CMBY478NPSM","PO","Licence","14-9-2018"\n' +
-    '"NPS North West","Cumbria","NPS - Carlisle 1","9-10-2018","CASEREF30154","A.N. Offender Manager CMBY478NPSM","PO","Community","22-2-2017"\n' +
-    '"NPS North West","Cumbria","NPS - Carlisle 1","28-9-2018","CASEREF30098","A.N. Offender Manager CMBE297NPSM","PO","Community","1-1-1800"\n' +
-    '"NPS North West","Cumbria","Rehabilitation","10-9-2018","CASEREF30027","A.N. Offender Manager N01B324NPSM","PO","Community","25-7-2018"\n' +
-    '"NPS North West","Cumbria","Rehabilitation","19-9-2018","CASEREF30065","A.N. Offender Manager N01B324NPSM","PO","Community","16-12-2016"'
+  csv: '"Region Name","LDU Cluster","Team Name","Assessment Date","CRN","Offender Manager Name","Offender Manager Grade","Sentence Type","Sentence or Release Date","Completion Date"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","4-10-2018","CASEREF30134","A.N. Offender Manager CMBY478NPSM","PO","Licence","14-9-2018","21-9-2018"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","9-10-2018","CASEREF30154","A.N. Offender Manager CMBY478NPSM","PO","Community","22-2-2017","22-8-2017"\n' +
+    '"NPS North West","Cumbria","NPS - Carlisle 1","28-9-2018","CASEREF30098","A.N. Offender Manager CMBE297NPSM","PO","Community","1-1-1800","1-10-1800"\n' +
+    '"NPS North West","Cumbria","Rehabilitation","10-9-2018","CASEREF30027","A.N. Offender Manager N01B324NPSM","PO","Community","25-7-2018","01-01-2019"\n' +
+    '"NPS North West","Cumbria","Rehabilitation","19-9-2018","CASEREF30065","A.N. Offender Manager N01B324NPSM","PO","Community","16-12-2016","16-12-2020"'
 }
 
 module.exports.ARMS_EXPORT_RESULT = {
@@ -52,7 +52,8 @@ module.exports.ARMS_EXPORT_RESULT = {
     omName: 'A.N. Offender Manager CMBY478NPSM',
     omGrade: 'PO',
     sentencetype: 'Licence',
-    releaseDate: '14-9-2018'
+    releaseDate: '14-9-2018',
+    completedDate: '21-9-2018'
   },
   {
     regionName: 'NPS North West',
@@ -63,7 +64,8 @@ module.exports.ARMS_EXPORT_RESULT = {
     omName: 'A.N. Offender Manager CMBY478NPSM',
     omGrade: 'PO',
     sentencetype: 'Community',
-    releaseDate: '22-2-2017'
+    releaseDate: '22-2-2017',
+    completedDate: '22-8-2017'
   },
   {
     regionName: 'NPS North West',
@@ -74,7 +76,8 @@ module.exports.ARMS_EXPORT_RESULT = {
     omName: 'A.N. Offender Manager CMBE297NPSM',
     omGrade: 'PO',
     sentencetype: 'Community',
-    releaseDate: '1-1-1800'
+    releaseDate: '1-1-1800',
+    completedDate: '1-10-1800'
   },
   {
     regionName: 'NPS North West',
@@ -85,7 +88,8 @@ module.exports.ARMS_EXPORT_RESULT = {
     omName: 'A.N. Offender Manager N01B324NPSM',
     omGrade: 'PO',
     sentencetype: 'Community',
-    releaseDate: '25-7-2018'
+    releaseDate: '25-7-2018',
+    completedDate: '01-01-2019'
   },
   {
     regionName: 'NPS North West',
@@ -96,7 +100,8 @@ module.exports.ARMS_EXPORT_RESULT = {
     omName: 'A.N. Offender Manager N01B324NPSM',
     omGrade: 'PO',
     sentencetype: 'Community',
-    releaseDate: '16-12-2016'
+    releaseDate: '16-12-2016',
+    completedDate: '16-12-2020'
   }]
 }
 

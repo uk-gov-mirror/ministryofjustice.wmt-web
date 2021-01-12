@@ -2,7 +2,7 @@ const knex = require('../../../knex').web
 const orgUnitFinder = require('../helpers/org-unit-finder')
 const orgUnitConstants = require('../../constants/organisation-unit')
 
-module.exports = function (id, type) {
+module.exports = function (id, type, workloadType) {
   const orgUnit = orgUnitFinder('name', type)
   const table = 'individual_case_overview'
   let whereClause = ''

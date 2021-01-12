@@ -140,6 +140,9 @@ const renderOverview = function (req, res, next) {
     lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return overviewPromise.then(function (result) {
       result.date = lastUpdated
+      if (childOrganisationLevelDisplayText === 'LDU Cluster' && result.title === 'NPS Kent Surrey Sussex Region') {
+        childOrganisationLevelDisplayText = 'Probation Delivery Unit'
+      }
       return res.render('overview', {
         title: result.title,
         subTitle: result.subTitle,
@@ -153,7 +156,8 @@ const renderOverview = function (req, res, next) {
         overviewDetails: result.overviewDetails,
         date: result.date,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
+        workloadType: workloadTypes.PROBATION
       })
     })
   }).catch(function (error) {

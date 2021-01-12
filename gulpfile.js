@@ -30,11 +30,11 @@ gulp.task('sync', function (done) {
   ]
   gulp.src(vendorJSFiles, { allowEmpty: true })
     .pipe(gulp.dest('app/assets/javascripts/vendor/'))
-  
+
   gulp.src('node_modules/govuk-frontend/govuk/all.js')
     .pipe(rename('gov-uk.js'))
     .pipe(gulp.dest('app/assets/javascripts/', { overwrite: true }))
-  
+
   gulp.src('node_modules/govuk-frontend/govuk/assets/images/**/*')
     .pipe(gulp.dest('app/assets/images/', { overwrite: true }))
 
@@ -46,7 +46,7 @@ gulp.task('sync', function (done) {
 
   gulp.src('app/assets/images/**/*')
     .pipe(gulp.dest('app/public/images/', { overwrite: true }))
-  
+
   gulp.src('app/assets/fonts/**/*')
     .pipe(gulp.dest('app/public/fonts/', { overwrite: true }))
   done()

@@ -1,0 +1,23 @@
+{% extends "includes/layout.html" %}  
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/breadcrumbs.html" %}
+
+{% include "includes/validation-error-messages.html" %}
+
+{% include "includes/title-subtitle.html" %}
+
+{% include "includes/sub-nav.html" %}
+
+{% include "includes/omic-organisation-overview.html"%}
+
+</main>
+
+<div class="lastUpdated">
+<p>Last updated on  <span class="bold">{{date}}</span></p>
+</div>
+
+{% endblock %}

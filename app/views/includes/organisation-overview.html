@@ -5,11 +5,11 @@
 
             {% ifAsync ((organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
                 {% if authorisation===false or userRole==='System Admin' or userRole==='Data Admin' or userRole==='Manager'%}
-                    <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/reductions-csv" class="govuk-button reduction-export floatRightBottom10 marginLeft10" data-module="govuk-button">Export Reductions</a>
+                    <a href="/{{ workloadType }}/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/reductions-csv" class="govuk-button reduction-export floatRightBottom10 marginLeft10" data-module="govuk-button">Export Reductions</a>
                 {% endif %}
             {% endif %}
             {% ifAsync ((organisationLevel === 'hmpps') or (organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
-                <a href="/probation/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="govuk-button sln-export floatRightBottom10" data-module="govuk-button">Export Overview</a>
+                <a href="/{{ workloadType }}/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="govuk-button sln-export floatRightBottom10" data-module="govuk-button">Export Overview</a>
             {% endif %}
         </div>
 </div>
@@ -26,7 +26,7 @@
                     </tr>
                     <tr>
                         <th class="bold" scope="row">Team</th>
-                        <td class="numeric"><a href="/probation/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
+                        <td class="numeric"><a href="/{{ workloadType }}/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
                     </tr>
                     <tr>
                         <th class="bold" scope="row">Capacity</th>
@@ -85,7 +85,7 @@
             {% for member in overviewDetails %}
             {% if member.name !== 'Total / Average' %}
             <tr>
-              <td headers="name om"><a class="govuk-link" href="/probation/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
+              <td headers="name om"><a class="govuk-link" href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
             {% if organisationLevel === 'team' %}  
               <td headers="grade om">{{ member.gradeCode }}</td>
             {% endif %}
