@@ -285,9 +285,9 @@
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@ungap/promise-all-settled/-/promise-all-settled-1.1.2.tgz#aa58042711d6e3275dd37dc597e5d31e8c290a44"
 
-"@wdio/cli@^6.10.6":
-  version "6.11.3"
-  resolved "https://registry.yarnpkg.com/@wdio/cli/-/cli-6.11.3.tgz#af3b9d9b752c902c9c4b3d57c04bd8011897fb36"
+"@wdio/cli@^6.12.0":
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/@wdio/cli/-/cli-6.12.0.tgz#6445bbf9ab7b916fadae01d6a94cb525146e057b"
   dependencies:
     "@types/ejs" "^3.0.5"
     "@types/fs-extra" "^9.0.4"
@@ -311,7 +311,7 @@
     lodash.union "^4.6.0"
     mkdirp "^1.0.4"
     recursive-readdir "^2.2.2"
-    webdriverio "6.11.3"
+    webdriverio "6.12.0"
     yargs "^16.0.3"
     yarn-install "^1.0.0"
 
@@ -323,14 +323,14 @@
     deepmerge "^4.0.0"
     glob "^7.1.2"
 
-"@wdio/local-runner@^6.10.6":
-  version "6.11.3"
-  resolved "https://registry.yarnpkg.com/@wdio/local-runner/-/local-runner-6.11.3.tgz#d89860d8b0c0ba288a9007638fdb473e05b9f351"
+"@wdio/local-runner@^6.12.0":
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/@wdio/local-runner/-/local-runner-6.12.0.tgz#1031567d0966f67069ee59199d203c9f1fa0660b"
   dependencies:
     "@types/stream-buffers" "^3.0.3"
     "@wdio/logger" "6.10.10"
     "@wdio/repl" "6.11.0"
-    "@wdio/runner" "6.11.3"
+    "@wdio/runner" "6.12.0"
     async-exit-hook "^2.0.1"
     stream-buffers "^3.0.2"
 
@@ -343,7 +343,7 @@
     loglevel-plugin-prefix "^0.8.4"
     strip-ansi "^6.0.0"
 
-"@wdio/mocha-framework@^6.10.6":
+"@wdio/mocha-framework@^6.11.0":
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/@wdio/mocha-framework/-/mocha-framework-6.11.0.tgz#ef247495b656cb079073ec48a7d6218741c2557d"
   dependencies:
@@ -353,9 +353,9 @@
     expect-webdriverio "^1.1.5"
     mocha "^8.0.1"
 
-"@wdio/protocols@6.10.6":
-  version "6.10.6"
-  resolved "https://registry.yarnpkg.com/@wdio/protocols/-/protocols-6.10.6.tgz#8d1deed6651a5ca0a185ea334fc1a371dc4c700c"
+"@wdio/protocols@6.12.0":
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/@wdio/protocols/-/protocols-6.12.0.tgz#e40850be62c42c82dd2c486655d6419cd9ec1e3e"
 
 "@wdio/repl@6.11.0":
   version "6.11.0"
@@ -363,21 +363,21 @@
   dependencies:
     "@wdio/utils" "6.11.0"
 
-"@wdio/runner@6.11.3":
-  version "6.11.3"
-  resolved "https://registry.yarnpkg.com/@wdio/runner/-/runner-6.11.3.tgz#59243d70da51ba4f9d0c7bab07345ec7199bf567"
+"@wdio/runner@6.12.0":
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/@wdio/runner/-/runner-6.12.0.tgz#e287621e9d65268d19833307a2e7a58994daa2e0"
   dependencies:
     "@wdio/config" "6.11.0"
     "@wdio/logger" "6.10.10"
     "@wdio/utils" "6.11.0"
     deepmerge "^4.0.0"
     gaze "^1.1.2"
-    webdriver "6.11.0"
-    webdriverio "6.11.3"
+    webdriver "6.12.0"
+    webdriverio "6.12.0"
 
-"@wdio/sauce-service@^6.10.6":
-  version "6.11.0"
-  resolved "https://registry.yarnpkg.com/@wdio/sauce-service/-/sauce-service-6.11.0.tgz#9aec6ba985a77160b45e7ecdaa4075ea7067ea33"
+"@wdio/sauce-service@^6.12.0":
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/@wdio/sauce-service/-/sauce-service-6.12.0.tgz#d45428d85af77443ed6a2196d68549a808947606"
   dependencies:
     "@wdio/logger" "6.10.10"
     "@wdio/utils" "6.11.0"
@@ -1032,7 +1032,7 @@ bunyan-prettystream@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/bunyan-prettystream/-/bunyan-prettystream-0.1.3.tgz#6c3b713266f6ad32007c7b6ab1e998a245349d98"
 
-bunyan@^1.8.14:
+bunyan@^1.8.15:
   version "1.8.15"
   resolved "https://registry.yarnpkg.com/bunyan/-/bunyan-1.8.15.tgz#8ce34ca908a17d0776576ca1b2f6cbd916e93b46"
   optionalDependencies:
@@ -1266,7 +1266,7 @@ cheerio-select-tmp@^0.1.0:
     domhandler "^4.0.0"
     domutils "^2.4.4"
 
-cheerio@^1.0.0-rc.2:
+cheerio@^1.0.0-rc.5:
   version "1.0.0-rc.5"
   resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-1.0.0-rc.5.tgz#88907e1828674e8f9fee375188b27dadd4f0fa2f"
   dependencies:
@@ -1776,7 +1776,7 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-datatables.net@^1.10.22:
+datatables.net@^1.10.23:
   version "1.10.23"
   resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.10.23.tgz#59f7d7b12845183b1b379530d1385077e113ec01"
   dependencies:
@@ -1996,13 +1996,13 @@ devtools-protocol@0.0.818844:
   version "0.0.818844"
   resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.818844.tgz#d1947278ec85b53e4c8ca598f607a28fa785ba9e"
 
-devtools@6.11.0:
-  version "6.11.0"
-  resolved "https://registry.yarnpkg.com/devtools/-/devtools-6.11.0.tgz#d20f1d1bb42357d3f2e424d7103fdd3e0d339879"
+devtools@6.12.0:
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/devtools/-/devtools-6.12.0.tgz#f4e01cba622a5bace6b36fcee755435a08eef1b5"
   dependencies:
     "@wdio/config" "6.11.0"
     "@wdio/logger" "6.10.10"
-    "@wdio/protocols" "6.10.6"
+    "@wdio/protocols" "6.12.0"
     "@wdio/utils" "6.11.0"
     chrome-launcher "^0.13.1"
     edge-paths "^2.1.0"
@@ -3482,7 +3482,7 @@ govuk-elements-sass@^3.1.3:
   dependencies:
     govuk_frontend_toolkit "^7.1.0"
 
-govuk-frontend@^3.10.1:
+govuk-frontend@^3.10.2:
   version "3.10.2"
   resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-3.10.2.tgz#6589401e4adad1ab1dc340a18057ec88c9435a84"
 
@@ -3723,7 +3723,7 @@ header-case@^2.0.4:
     capital-case "^1.0.4"
     tslib "^2.0.3"
 
-helmet@^4.2.0:
+helmet@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/helmet/-/helmet-4.3.1.tgz#e374e2fb3f8da045d0233f13299b1fde6e59e4e1"
 
@@ -4531,7 +4531,7 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
 
-knex@^0.21.12:
+knex@^0.21.15:
   version "0.21.15"
   resolved "https://registry.yarnpkg.com/knex/-/knex-0.21.15.tgz#4f5cb5c147ee354c93d3edbf3643ef248360e77f"
   dependencies:
@@ -4746,7 +4746,7 @@ lodash@^3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.4, lodash@^4.3.0, lodash@~4.17.10:
+lodash@^4.0.0, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.3.0, lodash@~4.17.10:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
 
@@ -5078,7 +5078,7 @@ module-not-found-error@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/module-not-found-error/-/module-not-found-error-1.0.1.tgz#cf8b4ff4f29640674d6cdd02b0e3bc523c2bbdc0"
 
-moment@^2.19.2, moment@^2.19.3, moment@^2.29.1, moment@^2.9.0:
+moment@^2.19.3, moment@^2.29.1, moment@^2.9.0:
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
 
@@ -5098,7 +5098,7 @@ ms@^2.1.1:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
 
-mssql@^6.2.3:
+mssql@^6.3.1:
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/mssql/-/mssql-6.3.1.tgz#b6da02f9d4dc8f105ef54528a806922bac4aa20d"
   dependencies:
@@ -5245,7 +5245,7 @@ node-sass@^4.8.3:
     stdout-stream "^1.4.0"
     "true-case-path" "^1.0.2"
 
-nodemon@^2.0.6:
+nodemon@^2.0.7:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-2.0.7.tgz#6f030a0a0ebe3ea1ba2a38f71bf9bab4841ced32"
   dependencies:
@@ -6524,7 +6524,7 @@ sass-graph@2.2.5:
     scss-tokenizer "^0.2.3"
     yargs "^13.3.2"
 
-sass@^1.30.0:
+sass@^1.32.4:
   version "1.32.4"
   resolved "https://registry.yarnpkg.com/sass/-/sass-1.32.4.tgz#308bf29dd7f53d44ae4f06580e9a910ad9aa411e"
   dependencies:
@@ -6726,7 +6726,7 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
 
-sinon@^9.2.1:
+sinon@^9.2.3:
   version "9.2.3"
   resolved "https://registry.yarnpkg.com/sinon/-/sinon-9.2.3.tgz#f68ce414e843e2fd638703043c97f260697caa52"
   dependencies:
@@ -7749,20 +7749,20 @@ vinyl@^2.0.0:
     remove-trailing-separator "^1.0.1"
     replace-ext "^1.0.0"
 
-webdriver@6.11.0:
-  version "6.11.0"
-  resolved "https://registry.yarnpkg.com/webdriver/-/webdriver-6.11.0.tgz#2997bf4ff6c1dcb4e58b4ae9e2b83af8b938f643"
+webdriver@6.12.0:
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/webdriver/-/webdriver-6.12.0.tgz#c9a42b4b01575eb33e96fa6d79e9fb8514c8eb0d"
   dependencies:
     "@wdio/config" "6.11.0"
     "@wdio/logger" "6.10.10"
-    "@wdio/protocols" "6.10.6"
+    "@wdio/protocols" "6.12.0"
     "@wdio/utils" "6.11.0"
     got "^11.0.2"
     lodash.merge "^4.6.1"
 
-webdriverio@6.11.3, webdriverio@^6.10.6:
-  version "6.11.3"
-  resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-6.11.3.tgz#043bc98514d7410264fbf14991bc0546fa119779"
+webdriverio@6.12.0, webdriverio@^6.12.0:
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-6.12.0.tgz#03bf708d470aaebab669fd0d3de281dafbc09992"
   dependencies:
     "@types/puppeteer-core" "^5.4.0"
     "@wdio/config" "6.11.0"
@@ -7773,7 +7773,7 @@ webdriverio@6.11.3, webdriverio@^6.10.6:
     atob "^2.1.2"
     css-shorthand-properties "^1.1.1"
     css-value "^0.0.1"
-    devtools "6.11.0"
+    devtools "6.12.0"
     fs-extra "^9.0.1"
     get-port "^5.1.1"
     grapheme-splitter "^1.0.2"
@@ -7786,7 +7786,7 @@ webdriverio@6.11.3, webdriverio@^6.10.6:
     resq "^1.9.1"
     rgb2hex "0.2.3"
     serialize-error "^7.0.0"
-    webdriver "6.11.0"
+    webdriver "6.12.0"
 
 which-module@^1.0.0:
   version "1.0.0"
@@ -7832,12 +7832,12 @@ widest-line@^3.1.0:
   dependencies:
     string-width "^4.0.0"
 
-wmt-probation-rules@ministryofjustice/wmt-probation-rules.git#v0.9.8:
-  version "0.9.8"
-  resolved "https://codeload.github.com/ministryofjustice/wmt-probation-rules/tar.gz/1a7b214831227721e6815e8b84fb4d4ceb290c0c"
+wmt-probation-rules@ministryofjustice/wmt-probation-rules.git#v1.0.1:
+  version "1.0.1"
+  resolved "https://codeload.github.com/ministryofjustice/wmt-probation-rules/tar.gz/5c6c91f3154db27a5477b8b027ce6374c2aad8b1"
   dependencies:
-    lodash "^4.17.4"
-    moment "^2.19.2"
+    lodash "^4.17.20"
+    moment "^2.29.1"
 
 word-wrap@^1.2.3, word-wrap@~1.2.3:
   version "1.2.3"
