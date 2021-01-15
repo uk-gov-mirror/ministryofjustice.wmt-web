@@ -8,7 +8,7 @@ $(document).ready(function() {
     textbox.setAttribute('readonly', true)
   });
 
-  document.getElementById('save-button').setAttribute('class', 'button displayNone')
+  document.getElementById('save-button').setAttribute('class', 'govuk-button displayNone')
   document.getElementById('save-notice').setAttribute('class', 'notice displayNone')
 
   $('#edit-button').click(function() {
@@ -17,8 +17,8 @@ $(document).ready(function() {
       textbox.setAttribute('class', 'govuk-input govuk-input--width-4 workloadPointsTextboxEdit')
     });
 
-    document.getElementById('edit-button').setAttribute('class', 'button displayNone')
-    document.getElementById('save-button').setAttribute('class', 'button displayInlineBlock')
+    document.getElementById('edit-button').setAttribute('class', 'govuk-button displayNone')
+    document.getElementById('save-button').setAttribute('class', 'govuk-button displayInlineBlock')
     document.getElementById('save-notice').setAttribute('class', 'notice displayBlock')
   })
 })

@@ -24,7 +24,7 @@
     
     <h2 id="headingActive" class="govuk-heading-l">Active<span class="visuallyhidden"> reductions</span></h2>
     
-    <table class="sln-table-reductions">
+    <table class="govuk-table sln-table-reductions" id= "override-govuk-table">
         <colgroup>
             <col class="width35Percent" span="1">
         </colgroup>
@@ -62,7 +62,7 @@
 
     <h2 id="headingScheduled" class="govuk-heading-l">Scheduled<span class="visuallyhidden"> reductions</span></h2>
 
-    <table class="sln-table-reductions">
+    <table class="govuk-table sln-table-reductions" id= "override-govuk-table">
         <colgroup>
             <col class="width35Percent" span="1">
         </colgroup>
@@ -90,7 +90,7 @@
 
     <h2 id="headingArchived" class="govuk-heading-l">Archived<span class="visuallyhidden"> reductions</span></h2>
 
-    <table class="sln-table-reductions">
+    <table class="govuk-table sln-table-reductions" id= "override-govuk-table">
         <colgroup>
             <col class="width35Percent" span="1">
         </colgroup>
@@ -118,8 +118,6 @@
 
 </main>
 
-<div class="lastUpdated">
-        <p>Last updated on  <span class="bold">{{date}}</span></p>
-        </div>
+{% include "includes/last-updated.html" %}
 
 {% endblock %}

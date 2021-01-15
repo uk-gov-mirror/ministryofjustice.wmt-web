@@ -151,6 +151,7 @@ module.exports = function (router) {
 
     // If date range has errors don't search database
     if (errors) {
+      console.log(errors['archiveFromDate'][0])
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
     }
     let stringifiedBody = Object.assign({}, req.body)

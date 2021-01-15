@@ -14,9 +14,9 @@
 <div class="message message--success">{{ successText }}</div>
 {% endif %}
 
-<p>Workload points are set here and are used to calculate capacity points for all Offender Managers throughout the Workload Measurement Tool.</p>
+<p class="govuk-body">Workload points are set here and are used to calculate capacity points for all Offender Managers throughout the Workload Measurement Tool.</p>
 
-<p>Current Workload Points created by <span class="bold">{{ updatedBy }}</span> on <span class="bold">{{ wp.effectiveFrom }}</span></p> 
+<p class="govuk-body">Current Workload Points created by <strong>{{ updatedBy }}</strong> on <strong class="bold">{{ wp.effectiveFrom }}</strong></p> 
 
 {% if wp.isT2A===true %}
 {% set isT2A=1 %}
@@ -35,22 +35,22 @@
 
   <div class="js-tabs">
     <ul class="js-tabs-links">
-      <li><a href="#custody" role="anchor-div">Custody</a></li>
-      <li><a href="#license" role="anchor-div">License</a></li>
-      <li><a href="#community" role="anchor-div">Community</a></li>
+      <li><a class="govuk-link" href="#custody" role="anchor-div">Custody</a></li>
+      <li><a class="govuk-link" href="#license" role="anchor-div">License</a></li>
+      <li><a class="govuk-link" href="#community" role="anchor-div">Community</a></li>
       {% if not wp.isT2A or wp.isT2A === false or wp.isT2A === 'false' %}
-        <li><a href="#cms" role="anchor-div">CMS</a></li>
-        <li><a href="#gs" role="anchor-div">GS</a></li>
+        <li><a class="govuk-link" href="#cms" role="anchor-div">CMS</a></li>
+        <li><a class="govuk-link" href="#gs" role="anchor-div">GS</a></li>
       {% endif %}
-      <li><a href="#other" role="anchor-div">Other</a></li>
+      <li><a class="govuk-link" href="#other" role="anchor-div">Other</a></li>
     </ul>
 
     <div class="js-tabs-content">
 
       <div id="custody">
         <div class="govuk-grid-row">
-            <div class="column-two-thirds">
-              <table class="govuk-table">
+            <div class="govuk-grid-column-two-thirds">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                   <tr>
                     <th scope="row">
@@ -170,8 +170,8 @@
 
       <div id="license">
         <div class="govuk-grid-row">
-          <div class="column-two-thirds">
-            <table class="govuk-table">
+          <div class="govuk-grid-column-two-thirds">
+            <table class="govuk-table" id="override-govuk-table">
               <tbody>
                 <tr>
                   <th scope="row">
@@ -292,8 +292,8 @@
       {# WMT0160: add new tiers #}
       <div id="community">
         <div class="govuk-grid-row">
-            <div class="column-two-thirds">
-              <table class="govuk-table">
+            <div class="govuk-grid-column-two-thirds">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                     <tr>
                       <th scope="row">
@@ -413,8 +413,8 @@
       {% if not wp.isT2A or wp.isT2A === false or wp.isT2A === 'false' %}
       <div id="cms">
         <div class="govuk-grid-row">
-            <div class="column-full">
-              <table class="govuk-table">
+            <div class="govuk-grid-column-full">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                   {% for c in cms %}
                   {% set cmsId = 'adjustment' + c.adjustmentId %}
@@ -439,8 +439,8 @@
 
       <div id="gs">
         <div class="govuk-grid-row">
-            <div class="column-full">
-              <table class="govuk-table">
+            <div class="govuk-grid-column-full">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                     {% for g in gs %}
                       {% set gsId = 'adjustment' + g.adjustmentId %}
@@ -464,10 +464,11 @@
       {% endif %}
       <div id="other">
           {% if not isT2A %}
-          <p><span class="bold">Delivery Report Workload Points</span></p>
+          <h2 class="govuk-heading-l">Delivery Report Workload Points</h2>
+<br/>
           <div class="govuk-grid-row">
-            <div class="column-two-thirds">
-              <table class="govuk-table">
+            <div class="govuk-grid-column-two-thirds">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                   <tr>
                     <th scope="row">
@@ -508,10 +509,11 @@
           </div>
           {% endif %}
           <br>
-          <p><span class="bold">Weighting</span></p>
+         <h2 class="govuk-heading-l">Weighting</h2>
+<br/>
           <div class="govuk-grid-row">
-            <div class="column-two-thirds">
-              <table class="govuk-table">
+            <div class="govuk-grid-column-two-thirds">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                   <tr>
                     <th scope="row">
@@ -576,10 +578,11 @@
           </div>
           {% if not isT2A %}
           <br>
-          <p><span class="bold">Nominal Target (Points)</span></p>
+         <h2 class="govuk-heading-l">Nominal Target (Points)</h2>
+<br/>
           <div class="govuk-grid-row">
-            <div class="column-two-thirds">
-              <table class="govuk-table">
+            <div class="govuk-grid-column-two-thirds">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                   <tr>
                     <th scope="row">
@@ -609,10 +612,11 @@
           </div>
          
           <br>
-          <p><span class="bold">Default Contracted Hours</span></p>
+         <h2 class="govuk-heading-l">Default Contracted Hours</h2>
+<br/>
           <div class="govuk-grid-row">
-            <div class="column-two-thirds">
-              <table class="govuk-table">
+            <div class="govuk-grid-column-two-thirds">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                   <tr>
                     <th scope="row">
@@ -661,9 +665,11 @@
 
   <div class="notice" id="save-notice">
       <i class="icon icon-important"></i>
-      <strong class="bold-small">
-        Saving changes made here will cause reports to be updated. The report update process can take 30 minutes to complete, in which time no further changes can be saved.
-      </strong>
+      <p class="govuk-body">
+        <strong class="govuk-!-font-size-19 govuk-!-font-weight-bold">
+          Saving changes made here will cause reports to be updated. The report update process can take 30 minutes to complete, in which time no further changes can be saved.
+        </strong>
+      </p>
   </div>
   <br>
   <input class="govuk-button" data-module="govuk-button"  type="submit" id="save-button" value="Save">

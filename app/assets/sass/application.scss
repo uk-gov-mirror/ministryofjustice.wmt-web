@@ -36,10 +36,11 @@ a.button:visited{
     color:white !important;
 }
 
-div.lastUpdated{
-  position: relative;
-  left: 70%;
-  width: fit-content;
+p.lastUpdated{
+  // position: relative;
+  // left: 80%;
+  // width: fit-content;
+  float: right;
 }
 
 td.details-control {
@@ -159,4 +160,48 @@ tr.shown td.details-control {
 
 .govuk-table {
   max-width: 1100px;
+}
+
+.data-item {
+  display: block;
+  line-height: 1;
+}
+
+.data {
+  margin-top: 0.3125em;
+  margin-bottom: 1.25em;
+}
+
+.bold-xlarge {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  font-size: 48px;
+  line-height: 1.09375;
+}
+
+.bold-xsmall {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  font-size: 16px;
+  line-height: 1.14286;
+}
+
+#override-govuk-table {
+  text-align: left;
+  font-size: 19px; 
+  line-height: 1.31579;
+}
+
+#override-govuk-table tr{
+  line-height: 40px;
+}
+
+.wmt-option {
+  font-family: "nta", Arial, sans-serif;
+}
+
+.dataTables_info, .dataTables_length, .dataTables_paginate, .dataTables_processing, .dataTables_filter, .select2-selection__choice, .select2-results__option {
+  font-family: "nta", Arial, sans-serif;
 }

@@ -15,7 +15,7 @@
 {% if organisationLevel === "offender-manager" %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <table>
+    <table class="govuk-table" id="override-govuk-table">
     <tbody>
       <tr>
         <th class="bold" scope="row">Grade</th>
@@ -23,7 +23,7 @@
       </tr>
       <tr>
         <th class="bold" scope="row">Team</th>
-        <td class="numeric"><a href="/court-reports/team/{{ overviewDetails[0].linkId }}">{{ overviewDetails[0].name }}</a></td>
+        <td class="numeric"><a class="govuk-link" href="/court-reports/team/{{ overviewDetails[0].linkId }}">{{ overviewDetails[0].name }}</a></td>
       </tr>
       <tr>
         <th class="bold" scope="row">Contracted hours</th>
@@ -40,7 +40,7 @@
 {% else %}
 <div>
   <div id="{{ organisationLevel }}">
-    <table class="sln-table-overview data-table">
+    <table class="govuk-table sln-table-overview data-table">
       <thead>
         <tr>
           <th class="sln-table-org-level" id="name">{{ childOrganisationLevelDisplayText }}</th>
@@ -57,7 +57,7 @@
       <tbody>
         {% for member in overviewDetails %}
         <tr>
-          <td headers="name"><a href="/court-reports/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+          <td headers="name"><a class="govuk-link" href="/court-reports/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
           {% if organisationLevel === "team" %}
             <td headers="grade">{{ member.grade }}</td>
           {% endif %}
@@ -75,9 +75,9 @@
 
 {% endif %}
 </main>
-<div class="lastUpdated">
-        <p>Last updated on <strong>{{date}}</strong></p>
- </div>
+
+{% include "includes/last-updated.html" %}
+
 {% endblock %}
 
 {% block page_specific_scripts %}

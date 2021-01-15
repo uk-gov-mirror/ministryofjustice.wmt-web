@@ -23,7 +23,7 @@ function cleanColumnOutput (data, type, row) {
 async function format ( d, row, tr ) {
   row.child('').show();
   tr.addClass('shown');
-  var nestedTable = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+  var nestedTable = '<table class="govuk-table" cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
       '<tr>'+
             '<th>Hours</th>'+
             '<th>Reason</th>'+

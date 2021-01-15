@@ -4,30 +4,26 @@
 
 <main id="content" role="main">
   {% include "includes/breadcrumbs.html" %}
-  <header class="heading-xlarge officerSearchHeader">Search for an Offender Manager</header>
+  <header class="govuk-heading-xl officerSearchHeader">Search for an Offender Manager</header>
     {% include "includes/validation-error-messages.html" %}
    <form method="POST">
-    {% if errors %}
-        <span class="error-message">{{ errors['search'][0] }}</span>
-    {% endif %}
-    <div class="search-group {% if errors['search'][0] %} form-group-error {% endif %}">
-        <fieldset id="search">
-            <legend>
-            <span class="form-label-bold">Search by Surname</span>
-            <span class="form-hint">For example, Smith</span>
-            <label class="form-label-bold" for="surname">Surname</label>
-            <input class="form-control" id="surname" name="surnameBox" value="{{ surname }}"style="width: 256px; margin-bottom: 16px">
-            </legend>
-        </fieldset>
-
-        {% include "includes/csrf-hidden-input.html"%}
-        <input id="search-button" class="govuk-button officerSearchButton" type="submit" value="Search" data-module="govuk-button">
-    </div>
+    <div class="govuk-form-group">
+        <h1 class="govuk-label-wrapper"><label class="govuk-label govuk-label--l" for="surname">
+            Search by Surname
+          </label>
+        </h1>
+        <div id="surname-hint" class="govuk-hint">
+            For example, Smith
+        </div>
+        <input class="govuk-input" id="surname" name="surnameBox" value="{{ surname }}" type="text" aria-describedby="surname-hint">
+      </div>
+      {% include "includes/csrf-hidden-input.html" %}
+    <input id="search-button" class="govuk-button officerSearchButton" type="submit" value="Search" data-module="govuk-button">
   </form>
   <div class="results">
 
 
-    <table id="results-table" class="js-data-table data-table dataTable width100Percent" cellspacing="0" width="100%" role="grid" aria-describedby="example_info">
+    <table id="results-table" class="govuk-table js-data-table data-table dataTable width100Percent" cellspacing="0" width="100%" role="grid" aria-describedby="example_info">
         <thead>
             <tr class="headers">
                 <th id="division">Division</th>
