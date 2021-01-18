@@ -17,7 +17,7 @@ class Reduction {
   }
 
   isValid (reductionReason) {
-    var errors = ErrorHandler()
+    const errors = ErrorHandler()
 
     FieldValidator(this.reasonForReductionId, 'reasonForReductionId', errors)
       .isRequired()
@@ -28,15 +28,15 @@ class Reduction {
 
     if (reductionReason.maxAllowanceHours !== 0) {
       FieldValidator(this.hours, 'reductionHours', errors)
-      .isFloat(0, reductionReason.maxAllowanceHours)
+        .isFloat(0, reductionReason.maxAllowanceHours)
     }
 
-    var startDate = FieldSetValidator(this.reductionStartDateFields, 'reductionStartDate', errors)
+    const startDate = FieldSetValidator(this.reductionStartDateFields, 'reductionStartDate', errors)
       .isRequired()
       .isValidDate()
       .getFormattedDate()
 
-    var endDate = FieldSetValidator(this.reductionEndDateFields, 'reductionEndDate', errors)
+    const endDate = FieldSetValidator(this.reductionEndDateFields, 'reductionEndDate', errors)
       .isRequired()
       .isValidDate()
       .isLaterThan(startDate, 'reductionStartDate')
@@ -47,7 +47,7 @@ class Reduction {
         .isLessThanLength(4000)
     }
 
-    var validationErrors = errors.get()
+    const validationErrors = errors.get()
 
     if (validationErrors) {
       throw new ValidationError(validationErrors)
@@ -60,8 +60,8 @@ class Reduction {
   }
 
   setReductionStatus () {
-    var currentDate = new Date()
-    var status = reductionStatusType.ACTIVE
+    const currentDate = new Date()
+    let status = reductionStatusType.ACTIVE
     if (this.reductionStartDate > currentDate) {
       status = reductionStatusType.SCHEDULED
     } else if (this.reductionEndDate < currentDate) {

@@ -1,19 +1,19 @@
 const Scenario = require('../domain/scenario')
 
 module.exports = function (results) {
-  var scenarioMap = new Map()
-  var scenarioArray = []
+  const scenarioMap = new Map()
+  const scenarioArray = []
   results.forEach(function (result) {
-    scenarioMap.set(result['workload_id'], [])
+    scenarioMap.set(result.workload_id, [])
   })
   results.forEach(function (result) {
-    var temporaryMappedItems = []
-    temporaryMappedItems = scenarioMap.get(result['workload_id'])
+    let temporaryMappedItems = []
+    temporaryMappedItems = scenarioMap.get(result.workload_id)
     temporaryMappedItems.push(result)
-    scenarioMap.set(result['workload_id'], temporaryMappedItems)
+    scenarioMap.set(result.workload_id, temporaryMappedItems)
   })
-  for (var value of scenarioMap.values()) {
-    var scenarioObj = new Scenario(value)
+  for (const value of scenarioMap.values()) {
+    const scenarioObj = new Scenario(value)
     scenarioArray.push(scenarioObj)
   }
   scenarioArray.sort(fieldSorter(['ldu', 'team', 'name']))
@@ -24,7 +24,7 @@ function fieldSorter (fields) {
   return function (a, b) {
     return fields
       .map(function (o) {
-        var dir = 1
+        let dir = 1
         if (o[0] === '-') {
           dir = -1
           o = o.substring(1)

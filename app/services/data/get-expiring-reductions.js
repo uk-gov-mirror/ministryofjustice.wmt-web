@@ -1,7 +1,7 @@
 const knex = require('../../../knex').web
 
 module.exports = function (userId) {
-  var columns = [
+  const columns = [
     'workload_owner_id AS workloadOwnerId',
     'name AS omName',
     'reduction_reason AS reductionReason',
@@ -14,5 +14,5 @@ module.exports = function (userId) {
 
   return knex('expiring_reductions_view')
     .columns(columns)
-    .whereIn('user_id', userId)
+    .whereIn('user_id', [userId])
 }

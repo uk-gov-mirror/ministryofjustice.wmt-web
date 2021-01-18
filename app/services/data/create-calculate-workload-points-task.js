@@ -1,7 +1,7 @@
 const knex = require('../../../knex').web
 
 module.exports = function (workloadStagingId, workloadReportId, batchSize) {
-  var newTask = {
+  const newTask = {
     submitting_agent: 'WEB',
     type: 'CALCULATE-WORKLOAD-POINTS',
     additional_data: JSON.stringify(

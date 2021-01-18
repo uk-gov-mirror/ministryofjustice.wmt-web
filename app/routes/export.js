@@ -20,7 +20,7 @@ const Forbidden = require('../services/errors/authentication-error').Forbidden
 const roles = require('../constants/user-roles')
 const messages = require('../constants/messages')
 
-var lastUpdated
+let lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/export', function (req, res, next) {
@@ -31,18 +31,18 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var id
+    const organisationLevel = req.params.organisationLevel
+    let id
 
     if (organisationLevel !== organisationUnit.NATIONAL.name) {
       id = req.params.id
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return getLastUpdated().then(function (lastUpdatedDate) {
       lastUpdated = dateFormatter.formatDate(lastUpdatedDate.date_processed, 'DD-MM-YYYY HH:mm')
-      var result = getExport(id, organisationLevel)
+      const result = getExport(id, organisationLevel)
       result.date = lastUpdated
       return res.render('export', {
         organisationLevel: organisationLevel,
@@ -53,7 +53,7 @@ module.exports = function (router) {
         subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
         date: result.date,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
       })
     }).catch(function (error) {
       next(error)
@@ -68,25 +68,25 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var id
-    var exportPromise
+    const organisationLevel = req.params.organisationLevel
+    let id
+    let exportPromise
 
     if (organisationLevel !== organisationUnit.NATIONAL.name) {
       id = req.params.id
     }
 
-    var radioButton = req.body.radioInlineGroup
+    const radioButton = req.body.radioInlineGroup
 
-    var armsPromise = getArmsExport(id, organisationLevel)
-    var caseDetailsPromise = getCaseDetailsExport(id, organisationLevel)
-    var groupSupervisionPromise = getGroupSupervisionExport(id, organisationLevel)
-    var cmsPromise = getCMSExport(id, organisationLevel)
-    var scenarioPromise = getScenarioExport(id, organisationLevel)
-    var getWorkloadPercentageBreakdownPromise = getWorkloadPercentageBreakdown(id, organisationLevel)
-    var suspendedLifersPromise = getSuspendedLifersExport(id, organisationLevel)
+    const armsPromise = getArmsExport(id, organisationLevel)
+    const caseDetailsPromise = getCaseDetailsExport(id, organisationLevel)
+    const groupSupervisionPromise = getGroupSupervisionExport(id, organisationLevel)
+    const cmsPromise = getCMSExport(id, organisationLevel)
+    const scenarioPromise = getScenarioExport(id, organisationLevel)
+    const getWorkloadPercentageBreakdownPromise = getWorkloadPercentageBreakdown(id, organisationLevel)
+    const suspendedLifersPromise = getSuspendedLifersExport(id, organisationLevel)
 
-    var tabType
+    let tabType
 
     if (radioButton === '8') {
       try {
@@ -106,7 +106,7 @@ module.exports = function (router) {
       }
     }
 
-    var expiringReductionsPromise = getExpiringReductions(id, organisationLevel)
+    const expiringReductionsPromise = getExpiringReductions(id, organisationLevel)
 
     switch (radioButton) {
       case '1':
@@ -148,7 +148,7 @@ module.exports = function (router) {
       lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
       return exportPromise.then(function (results) {
         if (radioButton === '5') {
-          var scenarioFileName = organisationLevel + '_Scenario_' + dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY') + '.xlsx'
+          const scenarioFileName = organisationLevel + '_Scenario_' + dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY') + '.xlsx'
           results.write(scenarioFileName, res)
         } else {
           formatResults(results, tabType)
@@ -156,7 +156,7 @@ module.exports = function (router) {
           results.title = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY')
           let dateFileName = null
           dateFileName = result.title
-          var exportCsv = getExportCsv(dateFileName, results, tabType)
+          const exportCsv = getExportCsv(dateFileName, results, tabType)
           res.attachment(exportCsv.filename)
           res.send(exportCsv.csv)
         }
@@ -167,8 +167,8 @@ module.exports = function (router) {
   })
 }
 
-var formatResults = function (results, tabType) {
-  var newDate, year, month, dt
+const formatResults = function (results, tabType) {
+  let newDate, year, month, dt
   results.forEach(function (result) {
     if (tabType === tabs.EXPORT.ARMS_EXPORT) {
       newDate = new Date(result.assessmentDate)

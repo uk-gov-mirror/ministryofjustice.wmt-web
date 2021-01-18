@@ -22,7 +22,7 @@ class ArchiveDateRange {
   }
 
   isValid () {
-    var errors = ErrorHandler()
+    const errors = ErrorHandler()
 
     this.archiveFromDate = FieldSetValidator(this.fromFields, 'archiveFromDate', errors)
       .isRequired()
@@ -38,7 +38,7 @@ class ArchiveDateRange {
       .isLaterThan(this.archiveFromDate, 'archiveFromDate')
       .getFormattedDate()
 
-    var validationErrors = errors.get()
+    const validationErrors = errors.get()
 
     if (validationErrors) {
       throw new ValidationError(validationErrors)

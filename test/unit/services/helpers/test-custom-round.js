@@ -3,7 +3,7 @@ const customRound = require('../../../../app/services/helpers/custom-round')
 
 describe('services/helpers/custom round', function () {
   it('should return undefined when passed an undefined value', function () {
-    var empty
+    let empty
     expect(customRound(empty)).to.eql(undefined)
   })
 

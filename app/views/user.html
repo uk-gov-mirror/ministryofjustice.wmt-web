@@ -14,18 +14,31 @@
   <p class="message message--failure">{{ failureText }}</p>
   {% endif %}
 
-  <p class="lede">Enter the username you would like to add or amend user rights for</p>
+  <p class="govuk-body-l">Enter the username you would like to add or amend user rights for</p>
 
   {% if userRights %}
-    <div class="message message--success">You have successfully assigned <span class="bold">{{userRights.rights}}</span> user rights to <span class="bold">{{userRights.username}}</span></div>
-  {% endif %}
+    <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+      <div class="govuk-notification-banner__header">
+        <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+          Success
+        </h2>
+      </div>
+      <div class="govuk-notification-banner__content">
+        <p class="govuk-notification-banner__heading">
+          You have successfully assigned <strong>{{userRights.rights}}</strong> user rights to <strong class="bold">{{userRights.username}}</strong>
+        </p>
+      </div>
+    </div>
+    {% endif %}
 
   <form action="/admin/user-rights" method="post" id="userForm">
-    <div class="form-group">
-        <label class="form-label" for="username">Username</label>
-        <input class="form-control" id="username" type="text" name="username">
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">  
+        <label class="govuk-label govuk-label--m" for="username">Username</label>
+      </h1>
+      <input class="govuk-input" id="username" type="text" name="username">
     </div>
-    <input class="button" type="submit" value="Continue">
+    <input class="govuk-button" data-module="govuk-button"  type="submit" value="Continue">
     {% include "includes/csrf-hidden-input.html"%}
   </form>
   

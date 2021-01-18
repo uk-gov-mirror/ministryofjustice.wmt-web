@@ -22,8 +22,8 @@ class FieldsetValidator {
   }
 
   isRequired (specificMessage) {
-    var message = (!specificMessage) ? ERROR_MESSAGES.getIsRequiredMessage : specificMessage
-    var self = this
+    const message = (!specificMessage) ? ERROR_MESSAGES.getIsRequiredMessage : specificMessage
+    const self = this
     if (this.data instanceof Array && this.data.length === 3) {
       this.data.forEach(function (data) {
         if (!data) {
@@ -66,7 +66,7 @@ class FieldsetValidator {
 
   isLaterThan (dateToCompare, dateToCompareFieldName) {
     if (!isDateAfter(this.formattedDate, dateToCompare)) {
-      var options = { secondaryFieldName: dateToCompareFieldName }
+      const options = { secondaryFieldName: dateToCompareFieldName }
       this.errors.add(this.fieldName, ERROR_MESSAGES.getIsDateLaterThanMessage, options)
     }
     return this
@@ -74,7 +74,7 @@ class FieldsetValidator {
 
   isOnOrAfter (dateToCompare, dateToCompareFieldName) {
     if (!isDateOnOrAfter(this.formattedDate, dateToCompare)) {
-      var options = { secondaryFieldName: dateToCompareFieldName }
+      const options = { secondaryFieldName: dateToCompareFieldName }
       this.errors.add(this.fieldName, ERROR_MESSAGES.getPresentOrFutureMessage, options)
     }
     return this

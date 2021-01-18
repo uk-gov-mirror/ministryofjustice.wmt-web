@@ -25,46 +25,46 @@ class Scenario {
   }
 }
 
-var collateCaseTypes = function (results) {
-  var caseNumbers = []
+const collateCaseTypes = function (results) {
+  const caseNumbers = []
   results.forEach(function (result) {
     caseNumbers.push({
-      'tier': result.tier_number,
-      'location': result.location,
-      'totalCases': result.total_cases,
-      't2aTotalCases': 0,
-      'warrantsTotal': result.warrants_total,
-      't2aWarrantsTotal': 0,
-      'overdueTerminationsTotal': result.overdue_terminations_total,
-      't2aOverdueTerminationsTotal': 0,
-      'UPW': result.unpaid_work_total,
-      't2aUPW': 0
+      tier: result.tier_number,
+      location: result.location,
+      totalCases: result.total_cases,
+      t2aTotalCases: 0,
+      warrantsTotal: result.warrants_total,
+      t2aWarrantsTotal: 0,
+      overdueTerminationsTotal: result.overdue_terminations_total,
+      t2aOverdueTerminationsTotal: 0,
+      UPW: result.unpaid_work_total,
+      t2aUPW: 0
     })
   })
   return caseNumbers
 }
 
-var collateCaseTypesCommunity = function (results) {
-  var caseNumbers = []
+const collateCaseTypesCommunity = function (results) {
+  const caseNumbers = []
   results.forEach(function (result) {
     caseNumbers.push({
-      'tier': result.tier_number,
-      'location': result.location,
-      'totalCases': 0,
-      't2aTotalCases': 0,
-      'warrantsTotal': 0,
-      't2aWarrantsTotal': 0,
-      'overdueTerminationsTotal': 0,
-      't2aOverdueTerminationsTotal': 0,
-      'UPW': 0,
-      't2aUPW': 0
+      tier: result.tier_number,
+      location: result.location,
+      totalCases: 0,
+      t2aTotalCases: 0,
+      warrantsTotal: 0,
+      t2aWarrantsTotal: 0,
+      overdueTerminationsTotal: 0,
+      t2aOverdueTerminationsTotal: 0,
+      UPW: 0,
+      t2aUPW: 0
     })
   })
   return caseNumbers
 }
 
-var determineDefaultContractedHours = function (result) {
-  var defaultContractedHours = 37
+const determineDefaultContractedHours = function (result) {
+  let defaultContractedHours = 37
   switch (result.grade_code) {
     case grades.DMY:
       defaultContractedHours = 0

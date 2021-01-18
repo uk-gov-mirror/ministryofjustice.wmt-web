@@ -22,7 +22,7 @@ class CapacityDateRange {
   }
 
   isValid () {
-    var errors = ErrorHandler()
+    const errors = ErrorHandler()
 
     this.capacityFromDate = FieldSetValidator(this.fromFields, 'capacityFromDate', errors)
       .isRequired()
@@ -38,7 +38,7 @@ class CapacityDateRange {
       .isLaterThan(this.capacityFromDate, 'capacityFromDate')
       .getFormattedDate()
 
-    var validationErrors = errors.get()
+    const validationErrors = errors.get()
 
     if (validationErrors) {
       throw new ValidationError(validationErrors)

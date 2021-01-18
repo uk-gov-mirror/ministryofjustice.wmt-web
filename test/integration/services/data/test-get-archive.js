@@ -3,7 +3,7 @@ const expect = require('chai').expect
 const getArchive = require('../../../../app/services/data/get-daily-archive')
 const ArchiveDateRange = require('../../../../app/services/domain/archive-date-range')
 
-var expectedResult = {
+const expectedResult = {
   workloadID: 2745,
   workloadDate: new Date('2014-06-18T14:18:46.000Z'),
   lduName: 'All NPS North West',
@@ -19,9 +19,9 @@ var expectedResult = {
   hoursReduction: 0
 }
 
-var archiveData
+let archiveData
 
-var archiveDateRange = new ArchiveDateRange(18, 6, 2014, 26, 8, 2016)
+const archiveDateRange = new ArchiveDateRange(18, 6, 2014, 26, 8, 2016)
 
 describe('services/data/get-daily-archive', function () {
   before(function () {

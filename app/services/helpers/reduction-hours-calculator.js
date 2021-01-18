@@ -1,8 +1,8 @@
 module.exports = function (reductionReasonsQueryResults, woContractedHours) {
-  var reasonsWithHours = []
+  const reasonsWithHours = []
 
-  var reasonUpdatedWithHours
-  for (var reason in reductionReasonsQueryResults) {
+  let reasonUpdatedWithHours
+  for (const reason in reductionReasonsQueryResults) {
     reasonUpdatedWithHours = Object.assign({}, reductionReasonsQueryResults[reason], {
       allowanceHours: calculateHours(woContractedHours, reductionReasonsQueryResults[reason].allowancePercentage),
       maxAllowanceHours: calculateHours(woContractedHours, reductionReasonsQueryResults[reason].maxAllowancePercentage)
@@ -12,8 +12,8 @@ module.exports = function (reductionReasonsQueryResults, woContractedHours) {
   return reasonsWithHours
 }
 
-var calculateHours = function (woContractedHours, percentage) {
-  var result
+const calculateHours = function (woContractedHours, percentage) {
+  let result
   if (percentage === null || percentage === undefined) {
     result = woContractedHours
   } else {

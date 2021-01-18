@@ -1,7 +1,7 @@
 const knex = require('../../../knex').web
 
 module.exports = function (id, organisationLevel) {
-  var columns = [
+  const columns = [
     'region_name',
     'ldu_name',
     'team_name',

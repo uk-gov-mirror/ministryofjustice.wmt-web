@@ -12,73 +12,97 @@
 {% include "includes/validation-error-messages.html" %}
 
 <form method="get">
+    <input id="capacityTable" type="hidden" name="capacityTable" value="{{ stringifiedCapacity }}">
 
-    <div class="form-group {% if errors['capacityFromDate'][0] %} form-group-error {% endif %}">
-        {% if errors %}
-            <span class="error-message">{{ errors['capacityFromDate'][0] }}</span>
+    <div class="govuk-form-group  {% if errors['capacityFromDate'][0] %} govuk-form-group--error {% endif %}">
+      <fieldset id="capacityFromDate" class="govuk-fieldset" role="group" aria-describedby="capacity-from-date-hint  {% if errors['capacityFromDate'][0] %} capacity-from-date-error {% endif %}">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          <h6 class="govuk-fieldset__heading">
+            Show capacity from: 
+          </h6>
+        </legend>
+        <div id="capacity-from-date-hint" class="govuk-hint">
+          For example, 30 1 2017
+        </div>
+        {% if errors['capacityFromDate'][0] %}
+          <span id="capacity-from-date-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ errors['capacityFromDate'][0] }}
+          </span>
         {% endif %}
-        <fieldset id="capacityFromDate" >
-            <legend>
-                <span class="form-label-bold">
-                    Show capacity from:
-                </span>
-                <span class="form-hint" id="capacity-from-hint">For example, 30 1 2017</span>
-            </legend>
-            <div class="form-date" aria-describedby="capacity-from-hint">
-                <div class="form-group form-group-day">
-                    <label class="form-label" for="capacity-from-day">Day</label>
-                    <input class="form-control" id="capacity-from-day" name="capacity-from-day"
-                        value={{query['capacity-from-day'] | int}}>
-                </div>
-                <div class="form-group form-group-month">
-                    <label class="form-label" for="capacity-from-month">Month</label>
-                    <input class="form-control" id="capacity-from-month" name="capacity-from-month"
-                        value={{query['capacity-from-month'] | int}}>
-                </div>
-                <div class="form-group form-group-year">
-                    <label class="form-label" for="capacity-from-year">Year</label>
-                    <input class="form-control" id="capacity-from-year" name="capacity-from-year"
-                        value={{query['capacity-from-year'] | int}}>
-                </div>
-            </div>
-        </fieldset>
-    </div>
-    <div class="form-group {% if errors['capacityToDate'][0] %} form-group-error {% endif %}">
-        {% if errors %}
-            <span class="error-message">{{ errors['capacityToDate'][0] }}</span>
-        {% endif %}
-        <fieldset id="capacityToDate">
-            <legend>
-                <span class="form-label-bold">
-                    Show capacity to:
-                </span>
-                <span class="form-hint" id="capacity-to-hint">For example, 31 3 2017</span>
-            </legend>
-            <div class="form-date" aria-describedby="capacity-to-hint">
-                <div class="form-group form-group-day">
-                    <label class="form-label" for="capacity-to-day">Day</label>
-                    <input class="form-control" id="capacity-to-day" name="capacity-to-day"
-                        value={{query['capacity-to-day'] | int}}>
-                </div>
-                <div class="form-group form-group-month">
-                    <label class="form-label" for="capacity-to-month">Month</label>
-                    <input class="form-control" id="capacity-to-month" name="capacity-to-month"
-                        value={{query['capacity-to-month'] | int}}>
-                </div>
-                <div class="form-group form-group-year">
-                    <label class="form-label" for="capacity-to-year">Year</label>
-                    <input class="form-control" id="capacity-to-year" name="capacity-to-year"
-                        value={{query['capacity-to-year'] | int}}>
-                </div>
-            </div>
-        </fieldset>
+        <div class="govuk-date-input" id="capacity-from-date">
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="capacity-from-day">
+                Day
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['capacityFromDate'][0] %} govuk-input--error {% endif %}" id="capacity-from-day" name="capacity-from-day" type="text" pattern="[0-9]*" inputmode="numeric" value={{query['capacity-from-day'] | int}}></div>
+          </div>
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="capacity-from-month">
+                Month
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['capacityFromDate'][0] %} govuk-input--error {% endif %}"  id="capacity-from-month" name="capacity-from-month" type="text" pattern="[0-9]*" inputmode="numeric"  value={{query['capacity-from-month'] | int}}></div>
+          </div>
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="capacity-from-year">
+                Year
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-4 {% if errors['capacityFromDate'][0] %} govuk-input--error {% endif %}" id="capacity-from-year" name="capacity-from-year" type="text" pattern="[0-9]*" inputmode="numeric"  value={{query['capacity-from-year'] | int}}></div>
+          </div>
+        </div>
+    
+      </fieldset>
     </div>
 
-    <input id="caseload-filter-submit" type="submit" value="Filter" class="button">
+    <div class="govuk-form-group  {% if errors['capacityToDate'][0] %} govuk-form-group--error {% endif %}">
+      <fieldset id="capacityToDate" class="govuk-fieldset" role="group" aria-describedby="capacity-to-date-hint  {% if errors['capacityToDate'][0] %} capacity-to-date-error {% endif %}">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          <h6 class="govuk-fieldset__heading">
+            Show capacity to: 
+          </h6>
+        </legend>
+        <div id="capacity-to-date-hint" class="govuk-hint">
+          For example, 30 1 2017
+        </div>
+        {% if errors['capacityToDate'][0] %}
+          <span id="capacity-to-date-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ errors['capacityToDate'][0] }}
+          </span>
+        {% endif %}
+        <div class="govuk-date-input" id="capacity-to-date">
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="capacity-to-day">
+                Day
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['capacityToDate'][0] %} govuk-input--error {% endif %}" id="capacity-to-day" name="capacity-to-day" type="text" pattern="[0-9]*" inputmode="numeric" value={{query['capacity-to-day'] | int}}></div>
+          </div>
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="capacity-to-month">
+                Month
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['capacityToDate'][0] %} govuk-input--error {% endif %}"  id="capacity-to-month" name="capacity-to-month" type="text" pattern="[0-9]*" inputmode="numeric"  value={{query['capacity-to-month'] | int}}></div>
+          </div>
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="capacity-to-year">
+                Year
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-4 {% if errors['capacityToDate'][0] %} govuk-input--error {% endif %}" id="capacity-to-year" name="capacity-to-year" type="text" pattern="[0-9]*" inputmode="numeric"  value={{query['capacity-to-year'] | int}}></div>
+          </div>
+        </div>
+    
+      </fieldset>
+    </div>
+
+    <input id="caseload-filter-submit" type="submit" value="Filter" class="govuk-button" data-module="govuk-button" >
 </form>
 <br>
 {% if capacity.headings.length === 0 %}
-<span class="error-message">There is no data for this period ({{query['capacity-from-day'] | int}}/{{query['capacity-from-month'] | int}}/{{query['capacity-from-year'] | int}} - {{query['capacity-to-day'] | int}}/{{query['capacity-to-month'] | int}}/{{query['capacity-to-year'] | int}})</span>
+<span class="govuk-error-message">There is no data for this period ({{query['capacity-from-day'] | int}}/{{query['capacity-from-month'] | int}}/{{query['capacity-from-year'] | int}} - {{query['capacity-to-day'] | int}}/{{query['capacity-to-month'] | int}}/{{query['capacity-to-year'] | int}})</span>
 {% endif %}
 
 <table class="non-javascript">
@@ -112,9 +136,9 @@
 
 {% if organisationLevel === 'offender-manager' %}
 
-    <h3 class="heading-medium">Case Details</h3>
+    <h3 class="govuk-heading-m">Case Details</h3>
 
-    <table id="case-details" class="js-data-table data-table dataTable">
+    <table id="case-details" class="govuk-table js-data-table data-table dataTable">
         <thead>
         <tr>
             <th id="tierCode">Tier Code</th>
@@ -152,9 +176,9 @@
     </table>
 {% endif %}
 {% if organisationLevel !== 'offender-manager' %}
-  <h3 class="heading-medium">Capacity breakdown</h3>
+  <h3 class="govuk-heading-m">Capacity breakdown</h3>
 
-  <table id="capacity-breakdown" class="data-table dataTable">
+  <table id="capacity-breakdown" class="govuk-table data-table dataTable">
     <thead>
       <tr>
         <th colspan="2" id="org">{{ childOrganisationLevelDisplayText }}</th>
@@ -200,7 +224,7 @@
         </tfoot>
           {% else %}
           <tr>
-          <td headers="name org"><a href="/{{ workloadType }}/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+          <td headers="name org"><a class="govuk-link" href="/{{ workloadType }}/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade org">{{ member.grade }}</td>
           {% if member.capacityPercentage > 110 %}
             <td class="capacity-red" headers="capacity breakdown">{{ member.capacityPercentage | round(1) }}%</td>
@@ -230,7 +254,7 @@
         {% for i in range(0, member.grades.length) %}
           <tr>
             {% if i === 0 %}
-              <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+              <td rowspan="{{ member.grades.length }}" headers="name org"><a class="govuk-link" href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
             {% endif %}
           <td class="align-centre" headers="grade org">{{ member.grades[i].grade }}</td>
           {% if member.grades[i].capacityPercentage > 110 %}
@@ -273,11 +297,11 @@
     </table>
   {% endif %}
   <br>
-  <h3 class="heading-medium">Inactive & UPW cases</h3>
+  <h3 class="govuk-heading-m">Inactive & UPW cases</h3>
   {% if organisationLevel === 'team' %}
-  <a href="/{{ workloadType }}/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/outstanding-csv" class="button sln-export" style="float: right; margin-bottom: 10px">Export</a>
+  <a class="govuk-link" href="/{{ workloadType }}/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/outstanding-csv" class="govuk-button sln-export floatRightBottom10" data-module="govuk-button">Export</a>
   {% endif %}
-  <table id="outstandingReports" class="data-table dataTable">
+  <table id="outstandingReports" class="govuk-table data-table dataTable">
     <thead>
       <tr>
         <th colspan="2">{{ childOrganisationLevelDisplayText }}</th>
@@ -310,7 +334,7 @@
     </tfoot>
       {% else %}
       <tr>
-          <td headers="name org"><a href="/{{ workloadType }}/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
+          <td headers="name org"><a class="govuk-link" href="/{{ workloadType }}/offender-manager/{{ member.linkId }}">{{ member.name }}</a></td>
           <td headers="grade org">{{ member.grade }}</td>
           <td headers="outstanding warrants">{{ member.ow }}</td>
           <td headers="unpaid work">{{ member.upw }}</td>
@@ -327,7 +351,7 @@
         {% for i in range(0, member.grades.length) %}
         <tr>
           {% if i === 0 %}
-            <td rowspan="{{ member.grades.length }}" headers="name org"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+            <td rowspan="{{ member.grades.length }}" headers="name org"><a class="govuk-link" href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
           {% endif %}
           <td class="align-centre" headers="grade org">{{ member.grades[i].grade }}</td>
           <td headers="outstanding warrants">{{ member.grades[i].ow }}</td>
@@ -358,21 +382,16 @@
   
 </main>
 
-<div class="lastUpdated">
-        <p>Last updated on  <span class="bold">{{date}}</span></p>
-        </div>
+{% include "includes/last-updated.html" %}
 
 {% endblock %}
 
-{% block body_end %}
-    <script type="text/javascript">
-        var capacityTable = {{ capacity | dump | safe }}
-    </script>
-    <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
+{% block bodyEnd %}
+    <script src="{{ assetPath }}javascripts/vendor/jquery.min.js"></script>
     <script src="/public/javascripts/plotly-latest.min.js"></script>
     <script src="/public/javascripts/caseload-capacity.js"></script>
+    <script src="{{ assetPath }}javascripts/datatables.min.js"></script>
+    <script src="{{ assetPath }}javascripts/case-details.js"></script>
     <script src="/public/javascripts/floatThead.js"></script>
     <script src="/public/javascripts/jquery.floatThead.js"></script>
-    <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
-    <script src="{{ asset_path }}javascripts/case-details.js"></script>
 {% endblock %}

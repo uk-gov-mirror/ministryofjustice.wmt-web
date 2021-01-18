@@ -1,7 +1,7 @@
 const getOrganisationalHierarchyData = require('./data/get-organisational-hierarchy-data')
 const ROOT_REF = 'N'
 
-var tree
+let tree
 
 module.exports.build = function () {
   tree = {}
@@ -9,20 +9,20 @@ module.exports.build = function () {
 
   return getOrganisationalHierarchyData().then(function (result) {
     result.forEach(function (row) {
-      var branch = [{name: row.region_description, ref: 'R' + row.region_id},
-        {name: row.ldu_description, ref: 'L' + row.ldu_id},
-        {name: row.team_description, ref: 'T' + row.team_id},
-        {name: getFullName(row.offender_manager_forename, row.offender_manager_surname), ref: 'I' + row.workload_owner_id}
+      const branch = [{ name: row.region_description, ref: 'R' + row.region_id },
+        { name: row.ldu_description, ref: 'L' + row.ldu_id },
+        { name: row.team_description, ref: 'T' + row.team_id },
+        { name: getFullName(row.offender_manager_forename, row.offender_manager_surname), ref: 'I' + row.workload_owner_id }
       ]
       createBranch(ROOT_REF, branch)
     })
   })
 }
 
-var createBranch = function (parentRef, branch) {
-  var currentNode = branch.shift()
+const createBranch = function (parentRef, branch) {
+  const currentNode = branch.shift()
   if (tree[currentNode.ref] === undefined) {
-    tree[currentNode.ref] = {name: currentNode.name, parent: parentRef, children: []}
+    tree[currentNode.ref] = { name: currentNode.name, parent: parentRef, children: [] }
     tree[parentRef].children.push(currentNode.ref)
   }
   if (branch.length > 0) {
@@ -30,8 +30,8 @@ var createBranch = function (parentRef, branch) {
   }
 }
 
-var getFullName = function (forename, surname) {
-  var fullName
+const getFullName = function (forename, surname) {
+  let fullName
 
   switch (true) {
     case surname === undefined && forename === undefined:

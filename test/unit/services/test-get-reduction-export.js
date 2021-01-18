@@ -1,18 +1,17 @@
 const moment = require('moment')
 const expect = require('chai').expect
 const sinon = require('sinon')
-require('sinon-bluebird')
 
 const proxyquire = require('proxyquire')
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
 const orgUnitConstant = require('../../../app/constants/organisation-unit.js')
 
-var activeStartDate = moment('25-12-2017', 'DD-MM-YYYY').toDate() // 2017-12-25T00:00:00.000Z
-var activeEndDate = moment('25-12-2018', 'DD-MM-YYYY').toDate() // 2018-12-25T00:00:00.000Z
+const activeStartDate = moment('25-12-2017', 'DD-MM-YYYY').toDate() // 2017-12-25T00:00:00.000Z
+const activeEndDate = moment('25-12-2018', 'DD-MM-YYYY').toDate() // 2018-12-25T00:00:00.000Z
 
-var breadcrumbs = breadcrumbHelper.TEAM_BREADCRUMBS
+const breadcrumbs = breadcrumbHelper.TEAM_BREADCRUMBS
 
-var expectedReductionExport = [
+const expectedReductionExport = [
   {
     offenderManager: 'Test_Forename Test_Surname',
     reason: 'Disability',
@@ -23,9 +22,9 @@ var expectedReductionExport = [
     additionalNotes: 'New Test Note'
   }]
 
-var getReductionsData
-var exportReductionService
-var getBreadcrumbsStub
+let getReductionsData
+let exportReductionService
+let getBreadcrumbsStub
 
 beforeEach(function () {
   getReductionsData = sinon.stub()

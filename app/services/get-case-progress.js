@@ -3,9 +3,9 @@ const getOrganisationUnit = require('./helpers/org-unit-finder')
 const getCaseProgress = require('./data/get-caseload-progress')
 
 module.exports = function (id, organisationLevel) {
-  var result = {}
-  var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
-  var caseProgressPromise = getCaseProgress(id, organisationLevel)
+  const result = {}
+  const organisationalUnitType = getOrganisationUnit('name', organisationLevel)
+  const caseProgressPromise = getCaseProgress(id, organisationLevel)
 
   return caseProgressPromise.then(function (results) {
     result.caseProgressList = results

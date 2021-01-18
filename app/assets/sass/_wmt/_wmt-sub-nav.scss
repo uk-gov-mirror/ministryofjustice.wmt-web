@@ -1,4 +1,5 @@
 .wmt-sub-nav {
+  font-family: "GDS Transport",arial,sans-serif;
   background-color: #fff;
   border-bottom: 1px solid #bfc1c3;
   padding: 0;
@@ -11,7 +12,7 @@
   }
 
   .wmt-sub-nav__link:link {
-    color: $black;
+    color: govuk-colour("black");
     display: inline-block;
     margin: 0;
     outline: 0;
@@ -20,11 +21,11 @@
   }
 
   a:visited {
-    color:$black;
+    color: govuk-colour("black");
   }
 
   .wmt-sub-nav__link.is-active {
-    color: $govuk-blue;
+    color: govuk-colour("blue");
 
     &:after {
       position: absolute;
@@ -33,7 +34,7 @@
       bottom: -1px;
       left: 0;
       height: 4px;
-      background-color: $govuk-blue;
+      background-color: govuk-colour("blue");
     }
 
     &:hover {

@@ -1,7 +1,7 @@
 const knex = require('../../../knex').web
 
 module.exports = function (id) {
-  var selectList = [
+  const selectList = [
     'tierCode',
     'rowType',
     'caseReferenceNo',
@@ -26,7 +26,7 @@ module.exports = function (id) {
     })
 }
 
-var formatSuspendedLiferFields = function (result) {
+const formatSuspendedLiferFields = function (result) {
   if (result.rowType !== 'Suspended Lifer') {
     result.inCustody = 'N/A'
     result.registerLevel = 'N/A'
@@ -40,10 +40,10 @@ var formatSuspendedLiferFields = function (result) {
       result.inCustody = 'Yes'
     }
     if (result.registrationDate) {
-      var newDate = new Date(result.registrationDate)
-      var year = newDate.getFullYear()
-      var month = newDate.getMonth() + 1
-      var dt = newDate.getDate()
+      const newDate = new Date(result.registrationDate)
+      const year = newDate.getFullYear()
+      let month = newDate.getMonth() + 1
+      const dt = newDate.getDate()
       if (month < 10) {
         month = '0' + month
       }

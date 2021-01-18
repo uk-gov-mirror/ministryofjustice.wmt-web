@@ -2,13 +2,12 @@ const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
 const sinon = require('sinon')
-require('sinon-bluebird')
 
 const COOKIES_URL = '/cookies'
 
-var app
-var route
-var authorisationService
+let app
+let route
+let authorisationService
 
 before(function () {
   authorisationService = {

@@ -1,31 +1,37 @@
 const config = require('../../../config')
 
-var USERS = {
-  DataAdmin: 'Data.AdminTest',
-  SystemAdmin: 'System.AdminTest',
-  Manager: 'Manager.Test',
-  Staff: 'Staff.Test'
+const USERS = {
+  DataAdmin: 'test.E2E.DataAdmin',
+  SystemAdmin: 'test.E2E.SystemAdmin',
+  Manager: 'test.E2E.Manager',
+  Staff: 'test.E2E.Staff'
 }
 
-var login = function (user) {
-  var password = process.env.WMT_E2E_TEST_PWD
-  var username = user + '@' + config.ACTIVE_DIRECTORY_DOMAIN
+const login = async function (user) {
+  let submit
+  const password = process.env.WMT_E2E_TEST_PWD
+  const username = user + '@' + config.ACTIVE_DIRECTORY_DOMAIN
 
-  return browser.url('/login')
-    .waitForExist('#i0116')
-    .setValue('#i0116', username)
-    .click('#idSIButton9')
-    .pause(1000)
-    .setValue('#i0118', password)
-    .pause(1000)
-    .click('#idSIButton9')
-    .pause(1000)
-    .click('#idSIButton9')
+  await browser.url('/')
+
+  // Username
+  const usernameInput = await $('#i0116')
+  submit = await $('#idSIButton9')
+  await usernameInput.setValue(username)
+  await submit.click()
+
+  await browser.pause(2000)
+  // Password
+  const passwordInput = await $('#i0118')
+  submit = await $('#idSIButton9')
+  await passwordInput.setValue(password)
+  await submit.click()
+  await browser.pause(2000)
 }
 
-var logout = function () {
-  return browser.url('/logout')
-  .pause(1000)
+const logout = async function () {
+  await browser.url('/logout')
+  await browser.pause(1000)
 }
 
 module.exports.login = login

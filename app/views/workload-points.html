@@ -11,12 +11,23 @@
 {% include "includes/title-subtitle.html" %}
 
 {% if successText %}
-<div class="message message--success">{{ successText }}</div>
+<div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+  <div class="govuk-notification-banner__header">
+    <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+      Success
+    </h2>
+  </div>
+  <div class="govuk-notification-banner__content">
+    <p class="govuk-notification-banner__heading">
+      {{successText}}
+    </p>
+  </div>
+</div>
 {% endif %}
 
-<p>Workload points are set here and are used to calculate capacity points for all Offender Managers throughout the Workload Measurement Tool.</p>
+<p class="govuk-body">Workload points are set here and are used to calculate capacity points for all Offender Managers throughout the Workload Measurement Tool.</p>
 
-<p>Current Workload Points created by <span class="bold">{{ updatedBy }}</span> on <span class="bold">{{ wp.effectiveFrom }}</span></p> 
+<p class="govuk-body">Current Workload Points created by <strong>{{ updatedBy }}</strong> on <strong class="bold">{{ wp.effectiveFrom }}</strong></p> 
 
 {% if wp.isT2A===true %}
 {% set isT2A=1 %}
@@ -35,131 +46,131 @@
 
   <div class="js-tabs">
     <ul class="js-tabs-links">
-      <li><a href="#custody" role="anchor-div">Custody</a></li>
-      <li><a href="#license" role="anchor-div">License</a></li>
-      <li><a href="#community" role="anchor-div">Community</a></li>
+      <li><a class="govuk-link" href="#custody" role="anchor-div">Custody</a></li>
+      <li><a class="govuk-link" href="#license" role="anchor-div">License</a></li>
+      <li><a class="govuk-link" href="#community" role="anchor-div">Community</a></li>
       {% if not wp.isT2A or wp.isT2A === false or wp.isT2A === 'false' %}
-        <li><a href="#cms" role="anchor-div">CMS</a></li>
-        <li><a href="#gs" role="anchor-div">GS</a></li>
+        <li><a class="govuk-link" href="#cms" role="anchor-div">CMS</a></li>
+        <li><a class="govuk-link" href="#gs" role="anchor-div">GS</a></li>
       {% endif %}
-      <li><a href="#other" role="anchor-div">Other</a></li>
+      <li><a class="govuk-link" href="#other" role="anchor-div">Other</a></li>
     </ul>
 
     <div class="js-tabs-content">
 
       <div id="custody">
-        <div class="grid-row">
-            <div class="column-two-thirds">
-              <table>
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                   <tr>
                     <th scope="row">
                       {% if errors['cusA'][0] %}
-                        <span class="error-message">{{ errors['cusA'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['cusA'][0] }}</span>
                       {% endif %}
                       <label class="form-label-bold" for="cus-a">Cus A</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="cus-a" name="cusA" type="number" value="{{ wp.cusA }}">
+                      <input class="govuk-input govuk-input--width-4" id="cus-a" name="cusA" type="number" value="{{ wp.cusA }}">
                     </td>
                   </tr>
                   <tr>            
                     <th scope="row">
                       {% if errors['cusB1'][0] %}
-                        <span class="error-message">{{ errors['cusB1'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['cusB1'][0] }}</span>
                       {% endif %}
                       <label class="form-label-bold" for="cus-b1">Cus B1</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="cus-b1" name="cusB1" type="number" value="{{ wp.cusB1 }}">
+                      <input class="govuk-input govuk-input--width-4" id="cus-b1" name="cusB1" type="number" value="{{ wp.cusB1 }}">
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['cusB2'][0] %}
-                        <span class="error-message">{{ errors['cusB2'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['cusB2'][0] }}</span>
                       {% endif %}
                       <label class="form-label-bold" for="cus-b2">Cus B2</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="cus-b2" name="cusB2" type="number" value="{{ wp.cusB2 }}">
+                      <input class="govuk-input govuk-input--width-4" id="cus-b2" name="cusB2" type="number" value="{{ wp.cusB2 }}">
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['cusC1'][0] %}
-                        <span class="error-message">{{ errors['cusC1'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['cusC1'][0] }}</span>
                       {% endif %}
                       <label class="form-label-bold" for="cus-c1">Cus C1</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="cus-c1" name="cusC1" type="number" value="{{ wp.cusC1 }}">
+                      <input class="govuk-input govuk-input--width-4" id="cus-c1" name="cusC1" type="number" value="{{ wp.cusC1 }}">
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['cusC2'][0] %}
-                        <span class="error-message">{{ errors['cusC2'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['cusC2'][0] }}</span>
                       {% endif %}
                       <label class="form-label-bold" for="cus-c2">Cus C2</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="cus-c2" name="cusC2" type="number" value="{{ wp.cusC2 }}">
+                      <input class="govuk-input govuk-input--width-4" id="cus-c2" name="cusC2" type="number" value="{{ wp.cusC2 }}">
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['cusD1'][0] %}
-                        <span class="error-message">{{ errors['cusD1'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['cusD1'][0] }}</span>
                       {% endif %}
                       <label class="form-label-bold" for="cus-d1">Cus D1</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="cus-d1" name="cusD1" type="number" value="{{ wp.cusD1 }}">
+                      <input class="govuk-input govuk-input--width-4" id="cus-d1" name="cusD1" type="number" value="{{ wp.cusD1 }}">
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['cusD2'][0] %}
-                        <span class="error-message">{{ errors['cusD2'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['cusD2'][0] }}</span>
                       {% endif %}
                       <label class="form-label-bold" for="cus-d2">Cus D2</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="cus-d2" name="cusD2" type="number" value="{{ wp.cusD2 }}">
+                      <input class="govuk-input govuk-input--width-4" id="cus-d2" name="cusD2" type="number" value="{{ wp.cusD2 }}">
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['cusE'][0] %}
-                        <span class="error-message">{{ errors['cusE'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['cusE'][0] }}</span>
                       {% endif %}
                       <label class="form-label-bold" for="cus-e">Cus E</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="cus-e" name="cusE" type="number" value="{{ wp.cusE }}">
+                      <input class="govuk-input govuk-input--width-4" id="cus-e" name="cusE" type="number" value="{{ wp.cusE }}">
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['cusF'][0] %}
-                        <span class="error-message">{{ errors['cusF'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['cusF'][0] }}</span>
                       {% endif %}
                       <label class="form-label-bold" for="cus-f">Cus F</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="cus-f" name="cusF" type="number" value="{{ wp.cusF }}">
+                      <input class="govuk-input govuk-input--width-4" id="cus-f" name="cusF" type="number" value="{{ wp.cusF }}">
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['cusG'][0] %}
-                        <span class="error-message">{{ errors['cusG'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['cusG'][0] }}</span>
                       {% endif %}
                       <label class="form-label-bold" for="cus-f">Cus G</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="cus-g" name="cusG" type="number" value="{{ wp.cusG }}">
+                      <input class="govuk-input govuk-input--width-4" id="cus-g" name="cusG" type="number" value="{{ wp.cusG }}">
                     </td>
                   </tr>
                 </tbody>
@@ -169,118 +180,118 @@
       </div>
 
       <div id="license">
-        <div class="grid-row">
-          <div class="column-two-thirds">
-            <table>
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
+            <table class="govuk-table" id="override-govuk-table">
               <tbody>
                 <tr>
                   <th scope="row">
                     {% if errors['licA'][0] %}
-                      <span class="error-message">{{ errors['licA'][0] }}</span>
+                      <span class="govuk-error-message">{{ errors['licA'][0] }}</span>
                     {% endif %}
                     <label class="form-label-bold" for="lic-a">Lic A</label>
                   </th>
                   <td class="numeric">
-                    <input class="form-control" id="lic-a" name="licA" type="number" value="{{ wp.licA }}">
+                    <input class="govuk-input govuk-input--width-4" id="lic-a" name="licA" type="number" value="{{ wp.licA }}">
                   </td>
                 </tr>
                 <tr>            
                   <th scope="row">
                     {% if errors['licB1'][0] %}
-                      <span class="error-message">{{ errors['licB1'][0] }}</span>
+                      <span class="govuk-error-message">{{ errors['licB1'][0] }}</span>
                     {% endif %}
                     <label class="form-label-bold" for="lic-b1">Lic B1</label>
                   </th>
                   <td class="numeric">
-                    <input class="form-control" id="lic-b1" name="licB1" type="number" value="{{ wp.licB1 }}">
+                    <input class="govuk-input govuk-input--width-4" id="lic-b1" name="licB1" type="number" value="{{ wp.licB1 }}">
                   </td>
                 </tr>
                 <tr>
                   <th scope="row">
                     {% if errors['licB2'][0] %}
-                      <span class="error-message">{{ errors['licB2'][0] }}</span>
+                      <span class="govuk-error-message">{{ errors['licB2'][0] }}</span>
                     {% endif %}
                     <label class="form-label-bold" for="lic-b2">Lic B2</label>
                   </th>
                   <td class="numeric">
-                    <input class="form-control" id="lic-b2" name="licB2" type="number" value="{{ wp.licB2 }}">
+                    <input class="govuk-input govuk-input--width-4" id="lic-b2" name="licB2" type="number" value="{{ wp.licB2 }}">
                   </td>
                 </tr>
                 <tr>
                   <th scope="row">
                     {% if errors['licC1'][0] %}
-                      <span class="error-message">{{ errors['licC1'][0] }}</span>
+                      <span class="govuk-error-message">{{ errors['licC1'][0] }}</span>
                     {% endif %}
                     <label class="form-label-bold" for="lic-c1">Lic C1</label>
                   </th>
                   <td class="numeric">
-                    <input class="form-control" id="lic-c1" name="licC1" type="number" value="{{ wp.licC1 }}">
+                    <input class="govuk-input govuk-input--width-4" id="lic-c1" name="licC1" type="number" value="{{ wp.licC1 }}">
                   </td>
                 </tr>
                 <tr>
                   <th scope="row">
                     {% if errors['licC2'][0] %}
-                      <span class="error-message">{{ errors['licC2'][0] }}</span>
+                      <span class="govuk-error-message">{{ errors['licC2'][0] }}</span>
                     {% endif %}
                     <label class="form-label-bold" for="lic-c2">Lic C2</label>
                   </th>
                   <td class="numeric">
-                    <input class="form-control" id="lic-c2" name="licC2" type="number" value="{{ wp.licC2 }}">
+                    <input class="govuk-input govuk-input--width-4" id="lic-c2" name="licC2" type="number" value="{{ wp.licC2 }}">
                   </td>
                 </tr>
                 <tr>
                   <th scope="row">
                     {% if errors['licD1'][0] %}
-                      <span class="error-message">{{ errors['licD1'][0] }}</span>
+                      <span class="govuk-error-message">{{ errors['licD1'][0] }}</span>
                     {% endif %}
                     <label class="form-label-bold" for="lic-d1">Lic D1</label>
                   </th>
                   <td class="numeric">
-                    <input class="form-control" id="lic-d1" name="licD1" type="number" value="{{ wp.licD1 }}">
+                    <input class="govuk-input govuk-input--width-4" id="lic-d1" name="licD1" type="number" value="{{ wp.licD1 }}">
                   </td>
                 </tr>
                 <tr>
                   <th scope="row">
                     {% if errors['licD2'][0] %}
-                      <span class="error-message">{{ errors['licD2'][0] }}</span>
+                      <span class="govuk-error-message">{{ errors['licD2'][0] }}</span>
                     {% endif %}
                     <label class="form-label-bold" for="lic-d2">Lic D2</label>
                   </th>
                   <td class="numeric">
-                    <input class="form-control" id="lic-d2" name="licD2" type="number" value="{{ wp.licD2 }}">
+                    <input class="govuk-input govuk-input--width-4" id="lic-d2" name="licD2" type="number" value="{{ wp.licD2 }}">
                   </td>
                 </tr>
                 <tr>
                   <th scope="row">
                     {% if errors['licE'][0] %}
-                      <span class="error-message">{{ errors['licE'][0] }}</span>
+                      <span class="govuk-error-message">{{ errors['licE'][0] }}</span>
                     {% endif %}
                     <label class="form-label-bold" for="lic-e">Lic E</label>
                   </th>
                   <td class="numeric">
-                    <input class="form-control" id="lic-e" name="licE" type="number" value="{{ wp.licE }}">
+                    <input class="govuk-input govuk-input--width-4" id="lic-e" name="licE" type="number" value="{{ wp.licE }}">
                   </td>
                 </tr>
                 <tr>
                   <th scope="row">
                     {% if errors['licF'][0] %}
-                      <span class="error-message">{{ errors['licF'][0] }}</span>
+                      <span class="govuk-error-message">{{ errors['licF'][0] }}</span>
                     {% endif %}
                     <label class="form-label-bold" for="lic-f">Lic F</label>
                   </th>
                   <td class="numeric">
-                    <input class="form-control" id="lic-f" name="licF" type="number" value="{{ wp.licF }}">
+                    <input class="govuk-input govuk-input--width-4" id="lic-f" name="licF" type="number" value="{{ wp.licF }}">
                   </td>
                 </tr>
                 <tr>
                   <th scope="row">
                     {% if errors['licG'][0] %}
-                      <span class="error-message">{{ errors['licG'][0] }}</span>
+                      <span class="govuk-error-message">{{ errors['licG'][0] }}</span>
                     {% endif %}
                     <label class="form-label-bold" for="lic-f">Lic G</label>
                   </th>
                   <td class="numeric">
-                    <input class="form-control" id="lic-g" name="licG" type="number" value="{{ wp.licG }}">
+                    <input class="govuk-input govuk-input--width-4" id="lic-g" name="licG" type="number" value="{{ wp.licG }}">
                   </td>
                 </tr>
               </tbody>
@@ -291,118 +302,118 @@
 
       {# WMT0160: add new tiers #}
       <div id="community">
-        <div class="grid-row">
-            <div class="column-two-thirds">
-              <table>
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                     <tr>
                       <th scope="row">
                         {% if errors['commA'][0] %}
-                          <span class="error-message">{{ errors['commA'][0] }}</span>
+                          <span class="govuk-error-message">{{ errors['commA'][0] }}</span>
                         {% endif %}
                         <label class="form-label-bold" for="comm-a">Comm A</label>
                       </th>
                       <td class="numeric">
-                        <input class="form-control" id="comm-a" name="commA" type="number" value="{{ wp.commA }}">
+                        <input class="govuk-input govuk-input--width-4" id="comm-a" name="commA" type="number" value="{{ wp.commA }}">
                       </td>
                     </tr>
                     <tr>           
                       <th scope="row">
                         {% if errors['commB1'][0] %}
-                          <span class="error-message">{{ errors['commB1'][0] }}</span>
+                          <span class="govuk-error-message">{{ errors['commB1'][0] }}</span>
                         {% endif %} 
                         <label class="form-label-bold" for="comm-b1">Comm B1</label>
                       </th>
                       <td class="numeric">
-                        <input class="form-control" id="comm-b1" name="commB1" type="number" value="{{ wp.commB1 }}">
+                        <input class="govuk-input govuk-input--width-4" id="comm-b1" name="commB1" type="number" value="{{ wp.commB1 }}">
                       </td>
                     </tr>
                     <tr>  
                       <th scope="row">
                         {% if errors['commB2'][0] %}
-                          <span class="error-message">{{ errors['commB2'][0] }}</span>
+                          <span class="govuk-error-message">{{ errors['commB2'][0] }}</span>
                         {% endif %} 
                         <label class="form-label-bold" for="comm-b2">Comm B2</label>
                       </th>
                       <td class="numeric">
-                        <input class="form-control" id="comm-b2" name="commB2" type="number" value="{{ wp.commB2 }}">
+                        <input class="govuk-input govuk-input--width-4" id="comm-b2" name="commB2" type="number" value="{{ wp.commB2 }}">
                       </td>
                     </tr>
                     <tr> 
                       <th scope="row">
                         {% if errors['commC1'][0] %}
-                          <span class="error-message">{{ errors['commC1'][0] }}</span>
+                          <span class="govuk-error-message">{{ errors['commC1'][0] }}</span>
                         {% endif %}  
                         <label class="form-label-bold" for="comm-c1">Comm C1</label>
                       </th>
                       <td class="numeric">
-                        <input class="form-control" id="comm-c1" name="commC1" type="number" value="{{ wp.commC1 }}">
+                        <input class="govuk-input govuk-input--width-4" id="comm-c1" name="commC1" type="number" value="{{ wp.commC1 }}">
                       </td>
                     </tr>
                     <tr> 
                       <th scope="row">
                         {% if errors['commC2'][0] %}
-                          <span class="error-message">{{ errors['commC2'][0] }}</span>
+                          <span class="govuk-error-message">{{ errors['commC2'][0] }}</span>
                         {% endif %}  
                         <label class="form-label-bold" for="comm-c2">Comm C2</label>
                       </th>
                       <td class="numeric">
-                        <input class="form-control" id="comm-c2" name="commC2" type="number" value="{{ wp.commC2 }}">
+                        <input class="govuk-input govuk-input--width-4" id="comm-c2" name="commC2" type="number" value="{{ wp.commC2 }}">
                       </td>
                     </tr>
                     <tr> 
                       <th scope="row">
                         {% if errors['commD1'][0] %}
-                          <span class="error-message">{{ errors['commD1'][0] }}</span>
+                          <span class="govuk-error-message">{{ errors['commD1'][0] }}</span>
                         {% endif %}  
                         <label class="form-label-bold" for="comm-d1">Comm D1</label>
                       </th>
                       <td class="numeric">
-                        <input class="form-control" id="comm-d1" name="commD1" type="number" value="{{ wp.commD1 }}">
+                        <input class="govuk-input govuk-input--width-4" id="comm-d1" name="commD1" type="number" value="{{ wp.commD1 }}">
                       </td>
                     </tr>
                     <tr>
                       <th scope="row">
                         {% if errors['commD2'][0] %}
-                          <span class="error-message">{{ errors['commD2'][0] }}</span>
+                          <span class="govuk-error-message">{{ errors['commD2'][0] }}</span>
                         {% endif %}   
                         <label class="form-label-bold" for="comm-d2">Comm D2</label>
                       </th>
                       <td class="numeric">
-                        <input class="form-control" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
+                        <input class="govuk-input govuk-input--width-4" id="comm-d2" name="commD2" type="number" value="{{ wp.commD2 }}">
                       </td>
                     </tr>
                     <tr>
                       <th scope="row">
                         {% if errors['commE'][0] %}
-                          <span class="error-message">{{ errors['commE'][0] }}</span>
+                          <span class="govuk-error-message">{{ errors['commE'][0] }}</span>
                         {% endif %}
                         <label class="form-label-bold" for="comm-e">Comm E</label>
                       </th>
                       <td class="numeric">
-                        <input class="form-control" id="comm-e" name="commE" type="number" value="{{ wp.commE }}">
+                        <input class="govuk-input govuk-input--width-4" id="comm-e" name="commE" type="number" value="{{ wp.commE }}">
                       </td>
                     </tr>
                     <tr>
                       <th scope="row">
                         {% if errors['commF'][0] %}
-                          <span class="error-message">{{ errors['commF'][0] }}</span>
+                          <span class="govuk-error-message">{{ errors['commF'][0] }}</span>
                         {% endif %}
                         <label class="form-label-bold" for="comm-f">Comm F</label>
                       </th>
                       <td class="numeric">
-                        <input class="form-control" id="comm-f" name="commF" type="number" value="{{ wp.commF }}">
+                        <input class="govuk-input govuk-input--width-4" id="comm-f" name="commF" type="number" value="{{ wp.commF }}">
                       </td>
                     </tr>
                     <tr>
                       <th scope="row">
                         {% if errors['commG'][0] %}
-                          <span class="error-message">{{ errors['commG'][0] }}</span>
+                          <span class="govuk-error-message">{{ errors['commG'][0] }}</span>
                         {% endif %}
                         <label class="form-label-bold" for="comm-f">Comm G</label>
                       </th>
                       <td class="numeric">
-                        <input class="form-control" id="comm-g" name="commG" type="number" value="{{ wp.commG }}">
+                        <input class="govuk-input govuk-input--width-4" id="comm-g" name="commG" type="number" value="{{ wp.commG }}">
                       </td>
                     </tr>
                   </tbody>
@@ -412,21 +423,21 @@
       </div>
       {% if not wp.isT2A or wp.isT2A === false or wp.isT2A === 'false' %}
       <div id="cms">
-        <div class="grid-row">
-            <div class="column-full">
-              <table>
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                   {% for c in cms %}
                   {% set cmsId = 'adjustment' + c.adjustmentId %}
                     <tr class="{% if errors[cmsId][0] %} border-error {% endif %}">
                       <th scope="row">
                         {% if errors[cmsId][0] %}
-                          <span class="error-message">{{ errors[cmsId][0] }}</span>
+                          <span class="govuk-error-message">{{ errors[cmsId][0] }}</span>
                         {% endif %}
                         <label class="form-label-bold" for="{{ cmsId }}">{{ c.contactCode }} &nbsp; - &nbsp; {{ c.contactDescription }}</label>
                       </th>
                       <td class="numeric">
-                        <input class="form-control {% if errors[cmsId] %} form-control-error {% endif %}" id="{{ cmsId }}" name="{{ cmsId }}" type="number" value="{{ c.points }}">
+                        <input class="govuk-input govuk-input--width-4 {% if errors[cmsId] %} govuk-input govuk-input--width-4-error {% endif %}" id="{{ cmsId }}" name="{{ cmsId }}" type="number" value="{{ c.points }}">
                       </td>
                     </tr>
                   {% endfor %}
@@ -438,21 +449,21 @@
       </div>
 
       <div id="gs">
-        <div class="grid-row">
-            <div class="column-full">
-              <table>
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                     {% for g in gs %}
                       {% set gsId = 'adjustment' + g.adjustmentId %}
                       <tr>
                         <th scope="row">
                           {% if errors[gsId][0] %}
-                            <span class="error-message">{{ errors[gsId][0] }}</span>
+                            <span class="govuk-error-message">{{ errors[gsId][0] }}</span>
                           {% endif %}
                           <label class="form-label-bold" for="{{ gsId }}">{{ g.contactCode }} &nbsp; - &nbsp; {{ g.contactDescription }}</label>
                         </th>
                         <td class="numeric">
-                          <input class="form-control {% if errors[gsId] %} form-control-error {% endif %}" id="{{ gsId }}" name="{{ gsId }}" type="number" value="{{ g.points }}">
+                          <input class="govuk-input govuk-input--width-4 {% if errors[gsId] %} govuk-input govuk-input--width-4-error {% endif %}" id="{{ gsId }}" name="{{ gsId }}" type="number" value="{{ g.points }}">
                         </td>
                     </tr>
                     {% endfor %}
@@ -464,42 +475,43 @@
       {% endif %}
       <div id="other">
           {% if not isT2A %}
-          <p><span class="bold">Delivery Report Workload Points</span></p>
-          <div class="grid-row">
-            <div class="column-two-thirds">
-              <table>
+          <h2 class="govuk-heading-l">Delivery Report Workload Points</h2>
+<br/>
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                   <tr>
                     <th scope="row">
                       {% if errors['sdr'][0] %}
-                        <span class="error-message">{{ errors['sdr'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['sdr'][0] }}</span>
                       {% endif %}   
                       <label class="form-label-bold" for="sdr">SDR</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="sdr" name="sdr" type="number" value="{{ wp.sdr }}">
+                      <input class="govuk-input govuk-input--width-4" id="sdr" name="sdr" type="number" value="{{ wp.sdr }}">
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['sdrConversion'][0] %}
-                        <span class="error-message">{{ errors['sdrConversion'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['sdrConversion'][0] }}</span>
                       {% endif %}  
                       <label class="form-label-bold" for="sdrConversion">FDR (SDR Conversion)</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="sdrConversion" name="sdrConversion" type="number" value="{{ wp.sdrConversion }}">
+                      <input class="govuk-input govuk-input--width-4" id="sdrConversion" name="sdrConversion" type="number" value="{{ wp.sdrConversion }}">
                     </td>                    
                   </tr>
                   <tr> 
                     <th scope="row">
                       {% if errors['parom'][0] %}
-                        <span class="error-message">{{ errors['parom'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['parom'][0] }}</span>
                       {% endif %} 
                       <label class="form-label-bold" for="parom">PAROM</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="parom" name="parom" type="number" value="{{ wp.parom }}">
+                      <input class="govuk-input govuk-input--width-4" id="parom" name="parom" type="number" value="{{ wp.parom }}">
                     </td>                       
                   </tr>
                 </tbody>
@@ -508,65 +520,66 @@
           </div>
           {% endif %}
           <br>
-          <p><span class="bold">Weighting</span></p>
-          <div class="grid-row">
-            <div class="column-two-thirds">
-              <table>
+         <h2 class="govuk-heading-l">Weighting</h2>
+<br/>
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                   <tr>
                     <th scope="row">
                       {% if errors['weightingOverdue'][0] %}
-                        <span class="error-message">{{ errors['weightingOverdue'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['weightingOverdue'][0] }}</span>
                       {% endif %}  
                       <label class="form-label-bold" for="weightingOverdue">Overdue Terminations</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="weightingOverdue" name="weightingOverdue" type="number" value="{{ wp.weightingOverdue }}">
+                      <input class="govuk-input govuk-input--width-4" id="weightingOverdue" name="weightingOverdue" type="number" value="{{ wp.weightingOverdue }}">
                     </td>                       
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['weightingWarrants'][0] %}
-                        <span class="error-message">{{ errors['weightingWarrants'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['weightingWarrants'][0] }}</span>
                       {% endif %}  
                       <label class="form-label-bold" for="weightingWarrants">Active Warrants</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="weightingWarrants" name="weightingWarrants" type="number" value="{{ wp.weightingWarrants }}">
+                      <input class="govuk-input govuk-input--width-4" id="weightingWarrants" name="weightingWarrants" type="number" value="{{ wp.weightingWarrants }}">
                     </td>                       
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['weightingUpw'][0] %}
-                        <span class="error-message">{{ errors['weightingUpw'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['weightingUpw'][0] }}</span>
                       {% endif %}  
                       <label class="form-label-bold" for="weightingUpw">Only UPW Outstanding</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="weightingUpw" name="weightingUpw" type="number" value="{{ wp.weightingUpw }}">
+                      <input class="govuk-input govuk-input--width-4" id="weightingUpw" name="weightingUpw" type="number" value="{{ wp.weightingUpw }}">
                     </td>   
                   </tr>
                   {% if not isT2A %}
                   <tr>
                     <th scope="row">
                       {% if errors['weightingArmsCommunity'][0] %}
-                        <span class="error-message">{{ errors['weightingArmsCommunity'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['weightingArmsCommunity'][0] }}</span>
                       {% endif %}  
                       <label class="form-label-bold" for="weightingArmsCommunity">ARMS Community Cases</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="weightingArmsCommunity" name="weightingArmsCommunity" type="number" value="{{ wp.weightingArmsCommunity }}">
+                      <input class="govuk-input govuk-input--width-4" id="weightingArmsCommunity" name="weightingArmsCommunity" type="number" value="{{ wp.weightingArmsCommunity }}">
                     </td>   
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['weightingArmsLicense'][0] %}
-                        <span class="error-message">{{ errors['weightingArmsLicense'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['weightingArmsLicense'][0] }}</span>
                       {% endif %}  
                       <label class="form-label-bold" for="weightingArmsLicense">ARMS License Cases</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="weightingArmsLicense" name="weightingArmsLicense" type="number" value="{{ wp.weightingArmsLicense }}">
+                      <input class="govuk-input govuk-input--width-4" id="weightingArmsLicense" name="weightingArmsLicense" type="number" value="{{ wp.weightingArmsLicense }}">
                     </td>   
                   </tr>
                   {% endif %}
@@ -576,31 +589,32 @@
           </div>
           {% if not isT2A %}
           <br>
-          <p><span class="bold">Nominal Target (Points)</span></p>
-          <div class="grid-row">
-            <div class="column-two-thirds">
-              <table>
+         <h2 class="govuk-heading-l">Nominal Target (Points)</h2>
+<br/>
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                   <tr>
                     <th scope="row">
                       {% if errors['nominalTargetPo'][0] %}
-                        <span class="error-message">{{ errors['nominalTargetPo'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['nominalTargetPo'][0] }}</span>
                       {% endif %}  
                       <label class="form-label-bold" for="nominalTargetPo">PO</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="nominalTargetPo" name="nominalTargetPo" type="number" value="{{ wp.nominalTargetPo }}">
+                      <input class="govuk-input govuk-input--width-4" id="nominalTargetPo" name="nominalTargetPo" type="number" value="{{ wp.nominalTargetPo }}">
                     </td>                       
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['nominalTargetPso'][0] %}
-                        <span class="error-message">{{ errors['nominalTargetPso'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['nominalTargetPso'][0] }}</span>
                       {% endif %}  
                       <label class="form-label-bold" for="nominalTargetPso">PSO</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="nominalTargetPso" name="nominalTargetPso" type="number" value="{{ wp.nominalTargetPso }}">
+                      <input class="govuk-input govuk-input--width-4" id="nominalTargetPso" name="nominalTargetPso" type="number" value="{{ wp.nominalTargetPso }}">
                     </td>   
                   </tr>
                 </tbody>
@@ -609,42 +623,43 @@
           </div>
          
           <br>
-          <p><span class="bold">Default Contracted Hours</span></p>
-          <div class="grid-row">
-            <div class="column-two-thirds">
-              <table>
+         <h2 class="govuk-heading-l">Default Contracted Hours</h2>
+<br/>
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+              <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                   <tr>
                     <th scope="row">
                       {% if errors['defaultContractedHoursPo'][0] %}
-                        <span class="error-message">{{ errors['defaultContractedHoursPo'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['defaultContractedHoursPo'][0] }}</span>
                       {% endif %}  
                       <label class="form-label-bold" for="defaultContractedHoursPo">PO</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="defaultContractedHoursPo" name="defaultContractedHoursPo" type="number" value="{{ wp.defaultContractedHoursPo }}">
+                      <input class="govuk-input govuk-input--width-4" id="defaultContractedHoursPo" name="defaultContractedHoursPo" type="number" value="{{ wp.defaultContractedHoursPo }}">
                     </td>                       
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['defaultContractedHoursPso'][0] %}
-                        <span class="error-message">{{ errors['defaultContractedHoursPso'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['defaultContractedHoursPso'][0] }}</span>
                       {% endif %} 
                       <label class="form-label-bold" for="defaultContractedHoursPso">PSO</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="defaultContractedHoursPso" name="defaultContractedHoursPso" type="number" value="{{ wp.defaultContractedHoursPso }}">
+                      <input class="govuk-input govuk-input--width-4" id="defaultContractedHoursPso" name="defaultContractedHoursPso" type="number" value="{{ wp.defaultContractedHoursPso }}">
                     </td>   
                   </tr>
                   <tr>
                     <th scope="row">
                       {% if errors['defaultContractedHoursSpo'][0] %}
-                        <span class="error-message">{{ errors['defaultContractedHoursSpo'][0] }}</span>
+                        <span class="govuk-error-message">{{ errors['defaultContractedHoursSpo'][0] }}</span>
                       {% endif %} 
                       <label class="form-label-bold" for="defaultContractedHoursSpo">SPO</label>
                     </th>
                     <td class="numeric">
-                      <input class="form-control" id="defaultContractedHoursSpo" name="defaultContractedHoursSpo" type="number" value="{{ wp.defaultContractedHoursSpo }}">
+                      <input class="govuk-input govuk-input--width-4" id="defaultContractedHoursSpo" name="defaultContractedHoursSpo" type="number" value="{{ wp.defaultContractedHoursSpo }}">
                     </td>   
                   </tr>                 
                 </tbody>
@@ -657,16 +672,18 @@
     </div>
   </div>
 
-  <a onclick="edit()" class="button" id="edit-button">Edit</a>
+  <a class="govuk-button" data-module="govuk-button"  id="edit-button">Edit</a>
 
   <div class="notice" id="save-notice">
       <i class="icon icon-important"></i>
-      <strong class="bold-small">
-        Saving changes made here will cause reports to be updated. The report update process can take 30 minutes to complete, in which time no further changes can be saved.
-      </strong>
+      <p class="govuk-body">
+        <strong class="govuk-!-font-size-19 govuk-!-font-weight-bold">
+          Saving changes made here will cause reports to be updated. The report update process can take 30 minutes to complete, in which time no further changes can be saved.
+        </strong>
+      </p>
   </div>
   <br>
-  <input class="button" type="submit" id="save-button" value="Save">
+  <input class="govuk-button" data-module="govuk-button"  type="submit" id="save-button" value="Save">
 
   {% include "includes/csrf-hidden-input.html" %}
 
@@ -676,7 +693,7 @@
 
 {% endblock %}
 
-{% block body_end %}
+{% block bodyEnd %}
 <script src="/public/javascripts/vendor/jquery.min.js"></script>
 <script src="/public/javascripts/jquery.tabs.js"></script>
 <script src="/public/javascripts/workload-points.js"></script>

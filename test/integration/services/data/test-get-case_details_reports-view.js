@@ -2,8 +2,8 @@ const expect = require('chai').expect
 const getCaseDetailsReportsView = require('../../../../app/services/data/get-case-details-reports-view')
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 
-var inserts = []
-var CASE_DETAILS_TO_INSERT = [
+let inserts = []
+const CASE_DETAILS_TO_INSERT = [
   {
     workload_id: 0,
     row_type: 'U', // U = Unpaid work

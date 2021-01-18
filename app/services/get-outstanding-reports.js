@@ -3,7 +3,7 @@ const getOrganisationUnit = require('./helpers/org-unit-finder')
 const organisationConstant = require('../constants/organisation-unit')
 
 module.exports = function (id, organisationLevel) {
-  var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
+  const organisationalUnitType = getOrganisationUnit('name', organisationLevel)
   if (organisationalUnitType === undefined) {
     throw new Error(organisationLevel + ' should be region, team, ldu or hmpps')
   }
@@ -14,9 +14,9 @@ module.exports = function (id, organisationLevel) {
 
   return getOutstandingReports(id, organisationLevel)
     .then(function (outstandingReports) {
-      var result = []
+      let result = []
       if (organisationLevel === organisationConstant.TEAM.name) {
-        var totals = {name: 'Total', totalOW: 0, totalOT: 0, totalUPW: 0, totalSL: 0, totalSSO: 0}
+        const totals = { name: 'Total', totalOW: 0, totalOT: 0, totalUPW: 0, totalSL: 0, totalSSO: 0 }
         outstandingReports.forEach((report) => {
           result.push(addT2aCases(report))
           addTotals(totals, addT2aCases(report))
@@ -25,7 +25,7 @@ module.exports = function (id, organisationLevel) {
       } else if (organisationalUnitType !== organisationConstant.OFFENDER_MANAGER) {
         result = groupReportsByOrgName(outstandingReports)
       }
-      var temp = Object.assign({}, result[result.length - 1])
+      const temp = Object.assign({}, result[result.length - 1])
       result.pop()
       result.sort(function (a, b) { return a.name.localeCompare(b.name) })
       result.push(temp)
@@ -33,7 +33,7 @@ module.exports = function (id, organisationLevel) {
     })
 }
 
-var addT2aCases = function (report) {
+const addT2aCases = function (report) {
   return {
     name: report.name,
     linkId: report.linkId,
@@ -46,13 +46,13 @@ var addT2aCases = function (report) {
   }
 }
 
-var groupReportsByOrgName = function (outstandingReports) {
-  var result = []
-  var totals = {name: 'Total', totalOW: 0, totalOT: 0, totalUPW: 0, totalSL: 0, totalSSO: 0}
-  var organisationMap = new Map()
+const groupReportsByOrgName = function (outstandingReports) {
+  const result = []
+  const totals = { name: 'Total', totalOW: 0, totalOT: 0, totalUPW: 0, totalSL: 0, totalSSO: 0 }
+  const organisationMap = new Map()
   outstandingReports.forEach(function (outstandingReport) {
-    var report = addT2aCases(outstandingReport)
-    var valueToAdd
+    const report = addT2aCases(outstandingReport)
+    let valueToAdd
     if (organisationMap.has(report.name)) {
       valueToAdd = organisationMap.get(report.name)
       valueToAdd.push(report)
@@ -62,7 +62,7 @@ var groupReportsByOrgName = function (outstandingReports) {
     organisationMap.set(report.name, valueToAdd)
   })
   organisationMap.forEach(function (outstandingReport, orgName) {
-    var newEntry = {
+    const newEntry = {
       name: orgName,
       linkId: outstandingReport[0].linkId,
       grades: []
@@ -77,7 +77,7 @@ var groupReportsByOrgName = function (outstandingReports) {
   return result
 }
 
-var addTotals = function (totals, outstandingReports) {
+const addTotals = function (totals, outstandingReports) {
   totals.totalOW += outstandingReports.ow
   totals.totalOT += outstandingReports.ot
   totals.totalUPW += outstandingReports.upw

@@ -2,7 +2,6 @@ const moment = require('moment')
 const expect = require('chai').expect
 const assert = require('chai').assert
 const sinon = require('sinon')
-require('sinon-bluebird')
 
 const proxyquire = require('proxyquire')
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
@@ -11,38 +10,38 @@ const Reduction = require('../../../app/services/domain/reduction')
 const reductionStatusType = require('../../../app/constants/reduction-status-type')
 const workloadTypes = require('../../../app/constants/workload-type')
 
-var breadcrumbs = breadcrumbHelper.OFFENDER_MANAGER_BREADCRUMBS
+const breadcrumbs = breadcrumbHelper.OFFENDER_MANAGER_BREADCRUMBS
 
-var addReductionStub
-var updateReductionStub
-var updateReductionStatusStub
-var getReferenceDataStub
-var getContractedHoursForWorkloadOwnerStub
-var getBreadcrumbsStub
-var createCalculateWorkloadTaskStub
-var reductionService
-var getReductionById
-var getReductions
-var reductionHelper
-var getLatestIdsForWpRecalc
-var createCourtReportsCalculationTask
-var getLatestIdsForCourtReportsCalc
+let addReductionStub
+let updateReductionStub
+let updateReductionStatusStub
+let getReferenceDataStub
+let getContractedHoursForWorkloadOwnerStub
+let getBreadcrumbsStub
+let createCalculateWorkloadTaskStub
+let reductionService
+let getReductionById
+let getReductions
+let reductionHelper
+let getLatestIdsForWpRecalc
+let createCourtReportsCalculationTask
+let getLatestIdsForCourtReportsCalc
 
-var newReductionId = 9
-var existingReductionId = 10
-var workloadOwnerId = 11
-var activeStartDate = moment('10-30-2017', 'MM-DD-YYYY').toDate() // 2017-10-31T11:25:05.805Z
-var activeEndDate = moment('12-30-2017', 'MM-DD-YYYY').toDate() // 2017-12-30T11:25:05.807Z
+const newReductionId = 9
+const existingReductionId = 10
+const workloadOwnerId = 11
+const activeStartDate = moment('10-30-2017', 'MM-DD-YYYY').toDate() // 2017-10-31T11:25:05.805Z
+const activeEndDate = moment('12-30-2017', 'MM-DD-YYYY').toDate() // 2017-12-30T11:25:05.807Z
 
-var reductionReason = {
+const reductionReason = {
   maxAllowanceHours: 0
 }
 
-var reduction = new Reduction('1', '10',
+const reduction = new Reduction('1', '10',
   [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
   [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
 
-var referenceData = [
+const referenceData = [
   {
     reason: 'Test Reason',
     reason_short_name: 'T',
@@ -61,8 +60,9 @@ var referenceData = [
   }
 ]
 
-var baseReduction =
-  { id: 1,
+const baseReduction =
+  {
+    id: 1,
     workloadOwnerId: 507,
     hours: 5,
     reductionReasonId: 1,
@@ -75,24 +75,24 @@ var baseReduction =
     status: 'ACTIVE'
   }
 
-var activeReductions = [ baseReduction ]
+const activeReductions = [baseReduction]
 
-var archivedReductions = [
+const archivedReductions = [
   Object.assign({}, baseReduction, { id: 2, status: 'ARCHIVED' }),
   Object.assign({}, baseReduction, { id: 3, status: 'ARCHIVED' })
 ]
 
-var reductionsByStatus = {
+const reductionsByStatus = {
   activeReductions: activeReductions,
   scheduledReductions: [],
   archivedReductions: archivedReductions
 }
 
-var latestWorkloadStagingId = 3
-var latestCourtReportsStagingId = 1
-var latestWorkloadReportId = 2
-var recalcIds = { workloadStagingId: latestWorkloadStagingId, workloadReportId: latestWorkloadReportId }
-var crRecalcIds = { courtReportsStagingId: latestCourtReportsStagingId, workloadReportId: latestWorkloadReportId }
+const latestWorkloadStagingId = 3
+const latestCourtReportsStagingId = 1
+const latestWorkloadReportId = 2
+const recalcIds = { workloadStagingId: latestWorkloadStagingId, workloadReportId: latestWorkloadReportId }
+const crRecalcIds = { courtReportsStagingId: latestCourtReportsStagingId, workloadReportId: latestWorkloadReportId }
 
 beforeEach(function () {
   addReductionStub = sinon.stub()
@@ -134,55 +134,55 @@ describe('services/reductions-service', function () {
     it('should create the result object with the right information for standard OM', function () {
       getReductions.resolves([])
       return reductionService.getReductions(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.PROBATION)
-      .then(function (result) {
-        expect(getReductions.calledWith(1)).to.be.eql(true)
-        expect(getBreadcrumbsStub.calledWith(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.PROBATION)).to.be.eql(true)
-        expect(result.title).to.equal('John Doe')
-        expect(result.subTitle).to.equal('Offender Manager')
-        expect(result.activeReductions).to.eql(activeReductions)
-        expect(result.scheduledReductions).to.eql([])
-        expect(result.archivedReductions).to.eql(archivedReductions)
-      })
+        .then(function (result) {
+          expect(getReductions.calledWith(1)).to.be.eql(true)
+          expect(getBreadcrumbsStub.calledWith(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.PROBATION)).to.be.eql(true)
+          expect(result.title).to.equal('John Doe')
+          expect(result.subTitle).to.equal('Offender Manager')
+          expect(result.activeReductions).to.eql(activeReductions)
+          expect(result.scheduledReductions).to.eql([])
+          expect(result.archivedReductions).to.eql(archivedReductions)
+        })
     })
 
     it('should create the result object with the right information for court-reporter', function () {
       getReductions.resolves([])
       return reductionService.getReductions(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS)
-      .then(function (result) {
-        expect(getReductions.calledWith(1)).to.be.eql(true)
-        expect(getBreadcrumbsStub.calledWith(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS)).to.be.eql(true)
-        expect(result.title).to.equal('John Doe')
-        expect(result.subTitle).to.equal('Offender Manager')
-        expect(result.activeReductions).to.eql(activeReductions)
-        expect(result.scheduledReductions).to.eql([])
-        expect(result.archivedReductions).to.eql(archivedReductions)
-      })
+        .then(function (result) {
+          expect(getReductions.calledWith(1)).to.be.eql(true)
+          expect(getBreadcrumbsStub.calledWith(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS)).to.be.eql(true)
+          expect(result.title).to.equal('John Doe')
+          expect(result.subTitle).to.equal('Offender Manager')
+          expect(result.activeReductions).to.eql(activeReductions)
+          expect(result.scheduledReductions).to.eql([])
+          expect(result.archivedReductions).to.eql(archivedReductions)
+        })
     })
   })
 
   describe('Get reductions reference data', function () {
     it('should get the reference data with the hours already worked out for each reduction reason for standard OM', function () {
       return reductionService.getAddReductionsRefData(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.PROBATION)
-      .then(function (result) {
-        expect(result.referenceData).to.be.an('array')
-        expect(result.title).to.equal('John Doe')
-        expect(result.subTitle).to.equal('Offender Manager')
+        .then(function (result) {
+          expect(result.referenceData).to.be.an('array')
+          expect(result.title).to.equal('John Doe')
+          expect(result.subTitle).to.equal('Offender Manager')
         expect(getContractedHoursForWorkloadOwnerStub.calledWith(1)).to.be.true //eslint-disable-line
-        expect(getBreadcrumbsStub.calledWith(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.PROBATION)).to.be.eql(true)
-        assert(getReferenceDataStub.called)
-      })
+          expect(getBreadcrumbsStub.calledWith(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.PROBATION)).to.be.eql(true)
+          assert(getReferenceDataStub.called)
+        })
     })
 
     it('should get the reference data with the hours already worked out for each reduction reason for court-reporter', function () {
       return reductionService.getAddReductionsRefData(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS)
-      .then(function (result) {
-        expect(result.referenceData).to.be.an('array')
-        expect(result.title).to.equal('John Doe')
-        expect(result.subTitle).to.equal('Offender Manager')
+        .then(function (result) {
+          expect(result.referenceData).to.be.an('array')
+          expect(result.title).to.equal('John Doe')
+          expect(result.subTitle).to.equal('Offender Manager')
         expect(getContractedHoursForWorkloadOwnerStub.calledWith(1)).to.be.true //eslint-disable-line
-        expect(getBreadcrumbsStub.calledWith(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS)).to.be.eql(true)
-        assert(getReferenceDataStub.called)
-      })
+          expect(getBreadcrumbsStub.calledWith(1, orgUnitConstant.OFFENDER_MANAGER.name, workloadTypes.COURT_REPORTS)).to.be.eql(true)
+          assert(getReferenceDataStub.called)
+        })
     })
   })
 
@@ -191,24 +191,24 @@ describe('services/reductions-service', function () {
       createCalculateWorkloadTaskStub.resolves(1)
       addReductionStub.withArgs(workloadOwnerId, reduction).resolves(newReductionId)
       return reductionService.addReduction(workloadOwnerId, reduction, workloadTypes.PROBATION)
-      .then(function (result) {
+        .then(function (result) {
         expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
         expect(createCalculateWorkloadTaskStub.calledWith(latestWorkloadStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
         expect(addReductionStub.calledWith(workloadOwnerId, reduction)).to.be.true //eslint-disable-line
-        expect(result).to.equal(1)
-      })
+          expect(result).to.equal(1)
+        })
     })
 
     it('should add a new reduction when no valid reduction Id given and call create wpc task for court-reporter OM', function () {
       createCourtReportsCalculationTask.resolves(1)
       addReductionStub.withArgs(workloadOwnerId, reduction).resolves(newReductionId)
       return reductionService.addReduction(workloadOwnerId, reduction, workloadTypes.COURT_REPORTS)
-      .then(function (result) {
+        .then(function (result) {
         expect(getLatestIdsForCourtReportsCalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
         expect(createCourtReportsCalculationTask.calledWith(latestCourtReportsStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
         expect(addReductionStub.calledWith(workloadOwnerId, reduction)).to.be.true //eslint-disable-line
-        expect(result).to.equal(1)
-      })
+          expect(result).to.equal(1)
+        })
     })
   })
 
@@ -240,29 +240,29 @@ describe('services/reductions-service', function () {
 
   describe('Update reduction status', function () {
     it('should update reduction status and create worker task when reduction Id given for standard OM', function () {
-      var newReductonStatus = reductionStatusType.ARCHIVED
+      const newReductonStatus = reductionStatusType.ARCHIVED
       createCalculateWorkloadTaskStub.resolves(1)
       updateReductionStatusStub.withArgs(existingReductionId, newReductonStatus).resolves(existingReductionId)
       return reductionService.updateReductionStatus(workloadOwnerId, existingReductionId, newReductonStatus, workloadTypes.PROBATION)
-      .then(function (result) {
+        .then(function (result) {
         expect(getLatestIdsForWpRecalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
         expect(createCalculateWorkloadTaskStub.calledWith(latestWorkloadStagingId, latestWorkloadReportId, 1)).to.be.true //eslint-disable-line
         expect(updateReductionStatusStub.calledWith(existingReductionId, newReductonStatus)).to.be.true //eslint-disable-line
-        expect(result).to.equal(1)
-      })
+          expect(result).to.equal(1)
+        })
     })
 
     it('should update reduction status and create worker task when reduction Id given for court-reporter', function () {
-      var newReductonStatus = reductionStatusType.ARCHIVED
+      const newReductonStatus = reductionStatusType.ARCHIVED
       createCourtReportsCalculationTask.resolves(1)
       updateReductionStatusStub.withArgs(existingReductionId, newReductonStatus).resolves(existingReductionId)
       return reductionService.updateReductionStatus(workloadOwnerId, existingReductionId, newReductonStatus, workloadTypes.COURT_REPORTS)
-      .then(function (result) {
+        .then(function (result) {
         expect(getLatestIdsForCourtReportsCalc.calledWith(workloadOwnerId)).to.be.true //eslint-disable-line
         expect(createCourtReportsCalculationTask.calledWith(latestCourtReportsStagingId, latestWorkloadReportId)).to.be.true //eslint-disable-line
         expect(updateReductionStatusStub.calledWith(existingReductionId, newReductonStatus)).to.be.true //eslint-disable-line
-        expect(result).to.equal(1)
-      })
+          expect(result).to.equal(1)
+        })
     })
   })
 
@@ -270,18 +270,18 @@ describe('services/reductions-service', function () {
     it('should call on to data service with correct reduction id and return reduction', function () {
       getReductionById.resolves(reduction)
       return reductionService.getReductionByReductionId(existingReductionId)
-      .then(function (result) {
+        .then(function (result) {
         expect(getReductionById.calledWith(existingReductionId)).to.be.true //eslint-disable-line
-        expect(result).to.eql(reduction)
-      })
+          expect(result).to.eql(reduction)
+        })
     })
 
     it('should not call on to service for undefined id and return undefined', function () {
       return reductionService.getReductionByReductionId(undefined)
-      .then(function (result) {
+        .then(function (result) {
         expect(getReductionById.called).to.be.false //eslint-disable-line        
-        expect(result).to.equal(undefined)
-      })
+          expect(result).to.equal(undefined)
+        })
     })
   })
 })

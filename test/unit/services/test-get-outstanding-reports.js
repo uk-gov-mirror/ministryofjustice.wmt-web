@@ -1,6 +1,5 @@
 const expect = require('chai').expect
 const sinon = require('sinon')
-require('sinon-bluebird')
 
 const proxyquire = require('proxyquire')
 
@@ -88,7 +87,7 @@ const EXPECTED_LDU_RESULT = [
     name: 'Test ldu 1'
   },
   {
-    'grades': [
+    grades: [
       {
         grade: 'Test grade 2',
         linkId: 2,
@@ -160,7 +159,7 @@ const EXPECTED_REGION_RESULT = [
     name: 'Test region 1'
   },
   {
-    'grades': [
+    grades: [
       {
         grade: 'Test grade 2',
         linkId: 2,
@@ -187,8 +186,8 @@ const EXPECTED_REGION_RESULT = [
 
 const callingId = 5
 
-var getOutstandingReports
-var getOutstandingReportsView
+let getOutstandingReports
+let getOutstandingReportsView
 
 beforeEach(function () {
   getOutstandingReportsView = sinon.stub()

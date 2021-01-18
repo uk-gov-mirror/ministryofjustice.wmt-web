@@ -26,9 +26,9 @@ module.exports = function (router) {
         })
       }
     }
-    var success = req.query.success
-    var successText = success ? 'You have successfully updated the workload points!' : null
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const success = req.query.success
+    const successText = success ? 'You have successfully updated the workload points!' : null
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return workloadPointsService.getWorkloadPoints(false)
       .then(function (result) {
         return getAdjustmentPointsConfig(adjustmentTypes.CMS)
@@ -45,7 +45,7 @@ module.exports = function (router) {
                   updatedBy: result.updatedBy,
                   successText: successText,
                   userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-                  authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+                  authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
                 })
               })
           })
@@ -66,9 +66,9 @@ module.exports = function (router) {
         })
       }
     }
-    var success = req.query.success
-    var successText = success ? 'You have successfully updated the workload points for transition to adulthood cases!' : null
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const success = req.query.success
+    const successText = success ? 'You have successfully updated the workload points for transition to adulthood cases!' : null
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return workloadPointsService.getWorkloadPoints(true)
       .then(function (result) {
         return res.render('workload-points', {
@@ -79,7 +79,7 @@ module.exports = function (router) {
           updatedBy: result.updatedBy,
           successText: successText,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
         })
       })
   })
@@ -98,21 +98,22 @@ module.exports = function (router) {
         })
       }
     }
+    let adjustmentsFromInput, updatedWorkloadPoints
     try {
       if (req.user) {
         req.body.userId = req.user.userId.toString()
       }
-      var adjustmentsFromInput = filterAdjustments('adjustment', req)
-      var updatedWorkloadPoints = new WorkloadPoints(req.body, adjustmentsFromInput)
+      adjustmentsFromInput = filterAdjustments('adjustment', req)
+      updatedWorkloadPoints = new WorkloadPoints(req.body, adjustmentsFromInput)
       return workloadPointsService.updateWorkloadPoints(updatedWorkloadPoints, false)
         .then(function () {
           return getAdjustmentPointsConfig(adjustmentTypes.CMS)
             .then(function (cms) {
               return getAdjustmentPointsConfig(adjustmentTypes.GS)
                 .then(function (gs) {
-                  var cmsUpdated = updateAdjustmentObjects(cms, adjustmentsFromInput)
-                  var gsUpdated = updateAdjustmentObjects(gs, adjustmentsFromInput)
-                  var adjustmentUpdatePromises = []
+                  const cmsUpdated = updateAdjustmentObjects(cms, adjustmentsFromInput)
+                  const gsUpdated = updateAdjustmentObjects(gs, adjustmentsFromInput)
+                  const adjustmentUpdatePromises = []
                   cmsUpdated.forEach(function (cmsAdjustment) {
                     adjustmentUpdatePromises.push(updateAdjustmentPointsConfig(cmsAdjustment))
                   })
@@ -129,15 +130,15 @@ module.exports = function (router) {
     } catch (error) {
       logger.error(error)
       if (error instanceof ValidationError) {
-        var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+        const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
         return workloadPointsService.getWorkloadPoints(false)
           .then(function (result) {
             return getAdjustmentPointsConfig(adjustmentTypes.CMS)
               .then(function (cms) {
                 return getAdjustmentPointsConfig(adjustmentTypes.GS)
                   .then(function (gs) {
-                    var cmsUpdated = updateAdjustmentObjects(cms, adjustmentsFromInput)
-                    var gsUpdated = updateAdjustmentObjects(gs, adjustmentsFromInput)
+                    const cmsUpdated = updateAdjustmentObjects(cms, adjustmentsFromInput)
+                    const gsUpdated = updateAdjustmentObjects(gs, adjustmentsFromInput)
                     return res.status(400).render('workload-points', {
                       title: result.title,
                       subTitle: result.subTitle,
@@ -148,7 +149,7 @@ module.exports = function (router) {
                       updatedBy: result.updatedBy,
                       errors: error.validationErrors,
                       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-                      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+                      authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
                     })
                   })
               })
@@ -176,7 +177,7 @@ module.exports = function (router) {
       if (req.user) {
         req.body.userId = req.user.userId.toString()
       }
-      var updatedT2aWorkloadPoints = new WorkloadPoints(req.body)
+      const updatedT2aWorkloadPoints = new WorkloadPoints(req.body)
       return workloadPointsService.updateWorkloadPoints(updatedT2aWorkloadPoints, true)
         .then(function () {
           return res.redirect(302, '/admin/workload-points/t2a?success=true')
@@ -184,7 +185,7 @@ module.exports = function (router) {
     } catch (error) {
       logger.error(error)
       if (error instanceof ValidationError) {
-        var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+        const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
         return workloadPointsService.getWorkloadPoints(true)
           .then(function (result) {
             return res.status(400).render('workload-points', {
@@ -195,7 +196,7 @@ module.exports = function (router) {
               updatedBy: result.updatedBy,
               errors: error.validationErrors,
               userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-              authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+              authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
             })
           })
       }
@@ -204,8 +205,8 @@ module.exports = function (router) {
   })
 }
 
-var filterAdjustments = function (prefix, req) {
-  var object = {}
+const filterAdjustments = function (prefix, req) {
+  const object = {}
   Object.keys(req.body).forEach(function (key) {
     if (key.startsWith(prefix)) {
       object[key] = req.body[key]
@@ -215,7 +216,7 @@ var filterAdjustments = function (prefix, req) {
   return object
 }
 
-var updateAdjustmentObjects = function (adjDBObjects, adjUserInput) {
+const updateAdjustmentObjects = function (adjDBObjects, adjUserInput) {
   adjDBObjects.forEach(function (adj) {
     adj.points = adjUserInput['adjustment' + adj.adjustmentId]
   })

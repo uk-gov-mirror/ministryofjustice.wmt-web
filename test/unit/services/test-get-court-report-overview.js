@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 const sinon = require('sinon')
-require('sinon-bluebird')
+
 const proxyquire = require('proxyquire')
 const workloadTypes = require('../../../app/constants/workload-type')
 const orgUnitConstant = require('../../../app/constants/organisation-unit.js')
@@ -24,51 +24,53 @@ const ORGANISATION_OVERVIEW = [
   OVERVIEW
 ]
 
-var id = 1
+const id = 1
 
-var getCourtReportOverview
-var getCourtReportOverviewData
-var getBreadcrumbs
+let getCourtReportOverview
+let getCourtReportOverviewData
+let getBreadcrumbs
 
 beforeEach(function () {
   getCourtReportOverviewData = sinon.stub()
   getBreadcrumbs = sinon.stub()
   getCourtReportOverview =
       proxyquire('../../../app/services/get-court-report-overview',
-        {'./data/get-court-report-overview': getCourtReportOverviewData,
-          './get-breadcrumbs': getBreadcrumbs})
+        {
+          './data/get-court-report-overview': getCourtReportOverviewData,
+          './get-breadcrumbs': getBreadcrumbs
+        })
 })
 
 describe('services/get-court-report-overview', function () {
   it('should return a results object with breadcrumbs, title and subtitle for an court-reporter offender manager', function () {
-    var omName = orgUnitConstant.OFFENDER_MANAGER.name
-    var breadcrumbs = breadcrumbHelper.COURT_REPORTER_OFFENDER_MANAGER_BREADCRUMBS
-    var expectedTitle = breadcrumbs[0].title
+    const omName = orgUnitConstant.OFFENDER_MANAGER.name
+    const breadcrumbs = breadcrumbHelper.COURT_REPORTER_OFFENDER_MANAGER_BREADCRUMBS
+    const expectedTitle = breadcrumbs[0].title
 
     getCourtReportOverviewData.withArgs(id, omName).resolves(OVERVIEW)
     getBreadcrumbs.returns(breadcrumbs)
 
     return getCourtReportOverview(id, omName)
-    .then(function (result) {
-      var omSubtitle = orgUnitFinder('name', omName).displayText
+      .then(function (result) {
+        const omSubtitle = orgUnitFinder('name', omName).displayText
       expect(getBreadcrumbs.calledWith(id, omName, workloadTypes.COURT_REPORTS)).to.be.true //eslint-disable-line
-      expect(result.breadcrumbs).to.eql(breadcrumbs)
-      expect(result.subTitle).to.eql(omSubtitle)
-      expect(result.title).to.eql(expectedTitle)
-      expect(result.overviewDetails).to.eql(OVERVIEW)
-    })
+        expect(result.breadcrumbs).to.eql(breadcrumbs)
+        expect(result.subTitle).to.eql(omSubtitle)
+        expect(result.title).to.eql(expectedTitle)
+        expect(result.overviewDetails).to.eql(OVERVIEW)
+      })
   })
 
   it('should return a results object with the correct overview details for a court-reporter team', function () {
-    var orgName = orgUnitConstant.TEAM.name
-    var breadcrumbs = breadcrumbHelper.COURT_REPORTER_TEAM_BREADCRUMBS
-    var expectedTitle = breadcrumbs[0].title
+    const orgName = orgUnitConstant.TEAM.name
+    const breadcrumbs = breadcrumbHelper.COURT_REPORTER_TEAM_BREADCRUMBS
+    const expectedTitle = breadcrumbs[0].title
 
     getCourtReportOverviewData.withArgs(id, orgName).resolves(ORGANISATION_OVERVIEW)
     getBreadcrumbs.returns(breadcrumbs)
 
     return getCourtReportOverview(id, orgName).then(function (result) {
-      var teamSubtitle = orgUnitFinder('name', orgName).displayText
+      const teamSubtitle = orgUnitFinder('name', orgName).displayText
       expect(getBreadcrumbs.calledWith(id, orgName, workloadTypes.COURT_REPORTS)).to.be.true //eslint-disable-line
       expect(result.breadcrumbs).to.eql(breadcrumbs)
       expect(result.subTitle).to.eql(teamSubtitle)
@@ -78,15 +80,15 @@ describe('services/get-court-report-overview', function () {
   })
 
   it('should return a results object with the correct overview details for a court-reporter ldu', function () {
-    var orgName = orgUnitConstant.LDU.name
-    var breadcrumbs = breadcrumbHelper.COURT_REPORTER_LDU_BREADCRUMBS
-    var expectedTitle = breadcrumbs[0].title
+    const orgName = orgUnitConstant.LDU.name
+    const breadcrumbs = breadcrumbHelper.COURT_REPORTER_LDU_BREADCRUMBS
+    const expectedTitle = breadcrumbs[0].title
 
     getCourtReportOverviewData.withArgs(id, orgName).resolves(ORGANISATION_OVERVIEW)
     getBreadcrumbs.returns(breadcrumbs)
 
     return getCourtReportOverview(id, orgName).then(function (result) {
-      var orgSubtitle = orgUnitFinder('name', orgName).displayText
+      const orgSubtitle = orgUnitFinder('name', orgName).displayText
       expect(getBreadcrumbs.calledWith(id, orgName, workloadTypes.COURT_REPORTS)).to.be.true //eslint-disable-line
       expect(result.breadcrumbs).to.eql(breadcrumbs)
       expect(result.subTitle).to.eql(orgSubtitle)
@@ -96,15 +98,15 @@ describe('services/get-court-report-overview', function () {
   })
 
   it('should return a results object with the correct overview details for a court-reporter region', function () {
-    var orgName = orgUnitConstant.LDU.name
-    var breadcrumbs = breadcrumbHelper.COURT_REPORTER_REGION_BREADCRUMBS
-    var expectedTitle = breadcrumbs[0].title
+    const orgName = orgUnitConstant.LDU.name
+    const breadcrumbs = breadcrumbHelper.COURT_REPORTER_REGION_BREADCRUMBS
+    const expectedTitle = breadcrumbs[0].title
 
     getCourtReportOverviewData.withArgs(id, orgName).resolves(ORGANISATION_OVERVIEW)
     getBreadcrumbs.returns(breadcrumbs)
 
     return getCourtReportOverview(id, orgName).then(function (result) {
-      var orgSubtitle = orgUnitFinder('name', orgName).displayText
+      const orgSubtitle = orgUnitFinder('name', orgName).displayText
       expect(getBreadcrumbs.calledWith(id, orgName, workloadTypes.COURT_REPORTS)).to.be.true //eslint-disable-line
       expect(result.breadcrumbs).to.eql(breadcrumbs)
       expect(result.subTitle).to.eql(orgSubtitle)
@@ -114,15 +116,15 @@ describe('services/get-court-report-overview', function () {
   })
 
   it('should return a results object with the correct overview details for a court-reporter national', function () {
-    var orgName = orgUnitConstant.NATIONAL.name
-    var breadcrumbs = breadcrumbHelper.COURT_REPORTER_NATIONAL_BREADCRUMBS
-    var expectedTitle = breadcrumbs[0].title
+    const orgName = orgUnitConstant.NATIONAL.name
+    const breadcrumbs = breadcrumbHelper.COURT_REPORTER_NATIONAL_BREADCRUMBS
+    const expectedTitle = breadcrumbs[0].title
 
     getCourtReportOverviewData.withArgs(id, orgName).resolves(ORGANISATION_OVERVIEW)
     getBreadcrumbs.returns(breadcrumbs)
 
     return getCourtReportOverview(id, orgName).then(function (result) {
-      var orgSubtitle = orgUnitFinder('name', orgName).displayText
+      const orgSubtitle = orgUnitFinder('name', orgName).displayText
       expect(getBreadcrumbs.calledWith(id, orgName, workloadTypes.COURT_REPORTS)).to.be.true //eslint-disable-line
       expect(result.breadcrumbs).to.eql(breadcrumbs)
       expect(result.subTitle).to.eql(orgSubtitle)

@@ -1,6 +1,6 @@
     {% if organisationLevel === "offender-manager" %}
     <div class="grid-row">
-        <div class="column-two-thirds">
+        <div class="govuk-grid-column-two-thirds">
             <table>
                 <tbody>
                     <tr>
@@ -9,7 +9,7 @@
                     </tr>
                     <tr>
                         <th scope="row">Team</th>
-                        <td class="numeric"><a href="/{{ workloadType }}/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
+                        <td class="numeric"><a class="govuk-link" href="/{{ workloadType }}/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
                     </tr>
                     <tr>
                         <th scope="row">Capacity</th>
@@ -37,7 +37,7 @@
     </div>
     {% else %}
     
-    <table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+    <table id="example" class="govuk-table js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
         <thead>
             <tr>
                 <th class="sln-table-org-level" id="name">{{ childOrganisationLevelDisplayText }}</th>
@@ -50,13 +50,13 @@
             {% for member in overviewDetails %}
             {% if member.name !== 'Total / Average' %}
             <tr>
-              <td headers="name">{% if childOrganisationLevelDisplayText !== 'Team' and childOrganisationLevelDisplayText !== 'Offender Manager' %} <a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a> {% else %} {{ member.name }} {% endif %}</td>
+              <td headers="name">{% if childOrganisationLevelDisplayText !== 'Team' and childOrganisationLevelDisplayText !== 'Offender Manager' %} <a class="govuk-link" href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a> {% else %} {{ member.name }} {% endif %}</td>
               <td headers="cases total">{{ member.totalCases }}</td>
               <td headers="custody total">{{ member.custodyPoints }}</td>
               <td headers="licence total">{{ member.licencePoints }}</td>
           </tr>
           {% endif %}
-          {% endfor%}
+          {% endfor %}
         </tbody>
         <tfoot>
         {% for member in overviewDetails %}
@@ -75,9 +75,9 @@
     
     {% block page_specific_scripts %}
     
-        <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
-        <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
-        <script src="{{ asset_path }}javascripts/fixed-overview-header.js"></script>
-        <script src="{{ asset_path }}javascripts/case-overview.js"></script>
+        <script src="{{ assetPath }}javascripts/vendor/jquery.min.js"></script>
+        <script src="{{ assetPath }}javascripts/datatables.min.js"></script>
+        <script src="{{ assetPath }}javascripts/fixed-overview-header.js"></script>
+        <script src="{{ assetPath }}javascripts/case-overview.js"></script>
        
     {% endblock %}

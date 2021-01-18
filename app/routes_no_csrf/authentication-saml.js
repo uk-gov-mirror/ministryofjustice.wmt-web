@@ -24,7 +24,7 @@ module.exports = function (router) {
   })
 }
 
-var setRedirectTo = function (session, redirectTo) {
+const setRedirectTo = function (session, redirectTo) {
   if (session && redirectTo) {
     session.redirectTo = redirectTo
   }

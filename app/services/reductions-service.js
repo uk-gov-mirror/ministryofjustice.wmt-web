@@ -19,15 +19,15 @@ const insertOldReductionToHistory = require('./data/insert-old-reduction-to-hist
 const getReductionsHistory = require('./data/get-reductions-history')
 
 module.exports.getReductions = function (id, organisationLevel, workloadType) {
-  var result = {}
-  var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
+  const result = {}
+  const organisationalUnitType = getOrganisationUnit('name', organisationLevel)
 
   result.breadcrumbs = getBreadcrumbs(id, organisationLevel, workloadType)
   result.title = result.breadcrumbs[0].title
   result.subTitle = organisationalUnitType.displayText
 
   return getReductions(id).then(function (results) {
-    var reductionsByStatus = reductionHelper.getReductionsByStatus(results)
+    const reductionsByStatus = reductionHelper.getReductionsByStatus(results)
     result.activeReductions = reductionsByStatus.activeReductions
     result.scheduledReductions = reductionsByStatus.scheduledReductions
     result.archivedReductions = reductionsByStatus.archivedReductions
@@ -36,10 +36,10 @@ module.exports.getReductions = function (id, organisationLevel, workloadType) {
 }
 
 module.exports.getAddReductionsRefData = function (id, organisationLevel, workloadType) {
-  var result = {}
-  var getReductionReasonsPromise = getReductionReasons()
-  var getContractedHoursPromise = getContractedHoursForWorkloadOwner(id)
-  var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
+  const result = {}
+  const getReductionReasonsPromise = getReductionReasons()
+  const getContractedHoursPromise = getContractedHoursForWorkloadOwner(id)
+  const organisationalUnitType = getOrganisationUnit('name', organisationLevel)
 
   result.breadcrumbs = getBreadcrumbs(id, organisationLevel, workloadType)
   result.title = result.breadcrumbs[0].title
@@ -56,57 +56,57 @@ module.exports.getAddReductionsRefData = function (id, organisationLevel, worklo
 
 module.exports.addReduction = function (id, reduction, workloadType) {
   return addReduction(id, reduction)
-  .then(function () {
-    if (workloadType === workloadTypes.PROBATION) {
-      return getLatestIdsForWorkloadPointsRecalc(id)
-      .then(function (ids) {
-        return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
-      })
-    } else {
-      return getLatestIdsForCourtReportsCalc(id)
-      .then(function (ids) {
-        return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
-      })
-    }
-  })
+    .then(function () {
+      if (workloadType === workloadTypes.PROBATION) {
+        return getLatestIdsForWorkloadPointsRecalc(id)
+          .then(function (ids) {
+            return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
+          })
+      } else {
+        return getLatestIdsForCourtReportsCalc(id)
+          .then(function (ids) {
+            return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
+          })
+      }
+    })
 }
 
 module.exports.updateReduction = function (id, reductionId, reduction, workloadType) {
   return updateReduction(reductionId, id, reduction)
-  .then(function (result) {
-    if (workloadType === workloadTypes.PROBATION) {
-      return getLatestIdsForWorkloadPointsRecalc(id)
-      .then(function (ids) {
-        return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
-      })
-    } else {
-      return getLatestIdsForCourtReportsCalc(id)
-      .then(function (ids) {
-        return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
-      })
-    }
-  })
+    .then(function (result) {
+      if (workloadType === workloadTypes.PROBATION) {
+        return getLatestIdsForWorkloadPointsRecalc(id)
+          .then(function (ids) {
+            return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
+          })
+      } else {
+        return getLatestIdsForCourtReportsCalc(id)
+          .then(function (ids) {
+            return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
+          })
+      }
+    })
 }
 
 module.exports.updateReductionStatus = function (id, reductionId, reductionStatus, workloadType) {
   return updateReductionStatus(reductionId, reductionStatus)
-  .then(function (result) {
-    if (workloadType === workloadTypes.PROBATION) {
-      return getLatestIdsForWorkloadPointsRecalc(id)
-      .then(function (ids) {
-        return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
-      })
-    } else {
-      return getLatestIdsForCourtReportsCalc(id)
-      .then(function (ids) {
-        return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
-      })
-    }
-  })
+    .then(function (result) {
+      if (workloadType === workloadTypes.PROBATION) {
+        return getLatestIdsForWorkloadPointsRecalc(id)
+          .then(function (ids) {
+            return createWorkloadPointsRecalculationTask(ids.workloadStagingId, ids.workloadReportId, 1)
+          })
+      } else {
+        return getLatestIdsForCourtReportsCalc(id)
+          .then(function (ids) {
+            return createCourtReportsCalculationTask(ids.courtReportsStagingId, ids.workloadReportId, 1)
+          })
+      }
+    })
 }
 
 module.exports.getReductionByReductionId = function (reductionId) {
-  var reduction = Promise.resolve(undefined)
+  let reduction = Promise.resolve(undefined)
   if (reductionId) {
     reduction = getReductionById(reductionId)
   }

@@ -1,5 +1,5 @@
 @mixin iconHelper($icon-name, $icon-width: 27px, $icon-height: 27px) {
-    @include device-pixel-ratio() {
+    @include govuk-device-pixel-ratio {
         background-image: file-url('icon-#{$icon-name}-2x.png');
         background-size: 100%;
     }
@@ -16,6 +16,6 @@
     display: inline-block;
     position: absolute;
     content: '';
-    // $gutter-half + width (-42px std)
-    margin-left: (-$gutter-half) + (-$icon-width);
+    // $govuk-gutter-half + width (-42px std)
+    margin-left: (-$govuk-gutter-half) + (-$icon-width);
 }

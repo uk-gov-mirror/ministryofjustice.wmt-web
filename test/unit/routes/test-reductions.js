@@ -4,7 +4,7 @@ const proxyquire = require('proxyquire').noPreserveCache()
 const roles = require('../../..//app/constants/user-roles')
 const hasRoleFunction = require('../../../app/authorisation').hasRole
 const sinon = require('sinon')
-require('sinon-bluebird')
+
 const workloadTypes = require('../../../app/constants/workload-type')
 
 const GET_REDUCTIONS_URL = '/' + workloadTypes.PROBATION + '/offender-manager/1/reductions'
@@ -59,15 +59,15 @@ const failureDataToPost = {
 
 const returnedId = 1
 
-var app
-var route
-var reductionsService
-var getLastUpdated
-var getSubNavStub
-var authorisationService
-var validRole = roles.MANAGER
+let app
+let route
+let reductionsService
+let getLastUpdated
+let getSubNavStub
+let authorisationService
+const validRole = roles.MANAGER
 
-var createMiddleWare = function () {
+const createMiddleWare = function () {
   return function (req, res, next) {
     req.user = {
       user_role: validRole
@@ -76,7 +76,7 @@ var createMiddleWare = function () {
   }
 }
 
-var initaliseApp = function (middleware) {
+const initaliseApp = function (middleware) {
   authorisationService = {
     assertUserAuthenticated: sinon.stub(),
     hasRole: hasRoleFunction
@@ -211,7 +211,7 @@ describe('reductions route', function () {
       reductionsService.getReductionsHistory.resolves()
       return superTest(app)
         .post(UPDATE_REDUCTION_STATUS_POST_URL)
-        .send(Object.assign({}, successDataToPost, {status: 'ARCHIVED'}))
+        .send(Object.assign({}, successDataToPost, { status: 'ARCHIVED' }))
         .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions?archived=true')
     })
 
@@ -223,7 +223,7 @@ describe('reductions route', function () {
       reductionsService.getReductionsHistory.resolves()
       return superTest(app)
         .post(UPDATE_REDUCTION_STATUS_POST_URL)
-        .send(Object.assign({}, successDataToPost, {status: 'DELETED'}))
+        .send(Object.assign({}, successDataToPost, { status: 'DELETED' }))
         .expect(302, 'Found. Redirecting to /' + workloadTypes.PROBATION + '/offender-manager/1/reductions?deleted=true')
     })
 

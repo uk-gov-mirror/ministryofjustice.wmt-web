@@ -5,7 +5,7 @@ const getTeam = require('../../../../app/services/data/get-team-by-name')
 const getLDU = require('../../../../app/services/data/get-ldu-by-name')
 const getRegion = require('../../../../app/services/data/get-region-by-name')
 
-var scenarioData
+let scenarioData
 
 describe('services/data/get-scenario team', function () {
   before(function () {

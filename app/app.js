@@ -16,18 +16,31 @@ const cookieSession = require('cookie-session')
 const getOrganisationalHierarchyTree = require('./services/organisational-hierarchy-tree')
 const logger = require('./logger')
 
-var app = express()
+const app = express()
 
 // Set security headers.
 app.use(helmet())
 app.use(helmet.hsts({ maxAge: 31536000 }))
 
-var developmentMode = app.get('env') === 'development'
+// Configure Content Security Policy
+// Hashes for inline Gov Template script entries
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'",
+      "'unsafe-inline'", "'unsafe-eval'"],
+    styleSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+    fontSrc: ["'self'", 'data:'],
+    imgSrc: ["'self'", 'data:']
+  }
+}))
+
+const developmentMode = app.get('env') === 'development'
 
 app.set('view engine', 'html')
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', [path.join(__dirname, 'views'), 'node_modules/govuk-frontend/'])
 
-var nunjucksObj = nunjucks(app, {
+const nunjucksObj = nunjucks(app, {
   watch: developmentMode,
   noCache: developmentMode
 })
@@ -56,7 +69,7 @@ app.use(expressSanitized())
 
 // Send assetPath to all views.
 app.use(function (req, res, next) {
-  res.locals.asset_path = '/public/'
+  res.locals.assetPath = '/public/'
   next()
 })
 
@@ -74,7 +87,7 @@ authentication(app)
 
 // Add routes that are allowed to be accessed from outside the application
 // i.e. authentication-saml
-var routerNoCsrf = new express.Router()
+const routerNoCsrf = new express.Router()
 routesNoCsrf(routerNoCsrf)
 app.use('/', routerNoCsrf)
 
@@ -83,20 +96,20 @@ app.use(csurf({ cookie: { httpOnly: true, secure: config.SECURE_COOKIE === 'true
 
 // Generate CSRF tokens to be sent in POST requests
 app.use(function (req, res, next) {
-  if (req.hasOwnProperty('csrfToken')) {
+  if (Object.prototype.hasOwnProperty.call(req, 'csrfToken')) {
     res.locals.csrfToken = req.csrfToken()
   }
   next()
 })
 
 // Build the router to route all HTTP requests and pass to the routes file for route configuration.
-var router = express.Router()
+const router = express.Router()
 routes(router)
 app.use('/', router)
 
 // catch 404 and forward to error handler.
 app.use(function (req, res, next) {
-  var err = new Error('Not Found')
+  const err = new Error('Not Found')
   err.status = 404
   res.status(404)
   next(err)
@@ -114,7 +127,7 @@ app.use(function (err, req, res, next) {
 
 // Development error handler.
 app.use(function (err, req, res, next) {
-  logger.error({error: err})
+  logger.error({ error: err })
   res.status(err.status || 500)
   if (err.status === 404) {
     res.render('includes/error-404')

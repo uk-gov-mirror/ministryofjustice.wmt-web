@@ -7,7 +7,7 @@ const workloadTypes = require('../constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 
-var lastUpdated
+let lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/case-progress', function (req, res, next) {
@@ -18,16 +18,16 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var id
+    const organisationLevel = req.params.organisationLevel
+    let id
 
     if (organisationLevel !== organisationUnit.NATIONAL.name) {
       id = req.params.id
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    var caseProgressPromise = getCaseProgress(id, organisationLevel)
+    const caseProgressPromise = getCaseProgress(id, organisationLevel)
 
     return getLastUpdated().then(function (result) {
       lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
@@ -41,7 +41,7 @@ module.exports = function (router) {
           caseProgressList: result.caseProgressList,
           date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
           workloadType: workloadTypes.OMIC
         })
       })

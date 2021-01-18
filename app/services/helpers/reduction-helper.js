@@ -1,11 +1,11 @@
 
-var dateFormatter = require('../date-formatter')
-var reductionStatusType = require('../../constants/reduction-status-type')
+const dateFormatter = require('../date-formatter')
+const reductionStatusType = require('../../constants/reduction-status-type')
 
 module.exports.getReductionsByStatus = function (reductions) {
-  var active = []
-  var scheduled = []
-  var archived = []
+  const active = []
+  const scheduled = []
+  const archived = []
 
   if (reductions instanceof Array) {
     reductions.filter(function (reduction) {
@@ -16,11 +16,11 @@ module.exports.getReductionsByStatus = function (reductions) {
       } else if (reduction.status === reductionStatusType.ARCHIVED) {
         archived.push(reduction)
       }
-      formatReductionDates(reduction)
+      return formatReductionDates(reduction)
     })
   }
 
-  var reductionsByStatus = {
+  const reductionsByStatus = {
     activeReductions: active,
     scheduledReductions: scheduled,
     archivedReductions: archived
@@ -28,7 +28,7 @@ module.exports.getReductionsByStatus = function (reductions) {
   return reductionsByStatus
 }
 
-var formatReductionDates = function (reduction) {
+const formatReductionDates = function (reduction) {
   reduction.reductionStartDate = dateFormatter.formatDate(reduction.reductionStartDate, 'DD MMM YY')
   reduction.reductionEndDate = dateFormatter.formatDate(reduction.reductionEndDate, 'DD MMM YY')
 }

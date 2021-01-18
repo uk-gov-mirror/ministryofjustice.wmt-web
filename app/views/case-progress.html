@@ -12,6 +12,8 @@
 
 {% include "includes/sub-nav.html" %}
 
+<input id="caseProgressList" type="hidden" name="caseProgressList" value="{{ stringifiedCaseProgressList }}">
+
 <table class="non-javascript">
     <thead>
         <tr>
@@ -43,17 +45,11 @@
 
 </main>
 
-<div class="lastUpdated">
-        <p>Last updated on  <span class="bold">{{date}}</span></p>
-        </div>
+{% include "includes/last-updated.html" %}
 
 {% endblock %}
 
-{% block body_end %}
-    <script type="text/javascript">
-        var rowTitle = {{ title | dump | safe }}
-        var caseProgress = {{ caseProgressList | dump | safe }}
-    </script>
+{% block bodyEnd %}
     <script src="/public/javascripts/plotly-latest.min.js"></script>
     <script src="/public/javascripts/case-progress.js"></script>
 {% endblock %}

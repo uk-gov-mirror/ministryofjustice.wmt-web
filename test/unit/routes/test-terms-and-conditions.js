@@ -2,13 +2,12 @@ const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
 const sinon = require('sinon')
-require('sinon-bluebird')
 
 const TERMS_CONDITIONS_URL = '/terms-and-conditions'
 
-var app
-var route
-var authorisationService
+let app
+let route
+let authorisationService
 
 before(function () {
   authorisationService = {

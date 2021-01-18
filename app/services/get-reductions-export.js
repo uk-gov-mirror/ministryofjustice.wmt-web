@@ -4,8 +4,8 @@ const getReductionsData = require('./data/get-reduction-notes-export')
 const dateFormatter = require('../services/date-formatter')
 
 module.exports = function (id, organisationLevel) {
-  var result = {}
-  var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
+  const result = {}
+  const organisationalUnitType = getOrganisationUnit('name', organisationLevel)
 
   result.breadcrumbs = getBreadcrumbs(id, organisationLevel)
   return getReductionsData(id, organisationLevel).then(function (results) {

@@ -1,10 +1,10 @@
 const knex = require('../../knex').integrationTests
-var Promise = require('bluebird').Promise
+const Promise = require('bluebird').Promise
 
 module.exports.addUserRoleData = function (userId, roleId) {
-  var insertedData = []
+  const insertedData = []
 
-  var userRole = {
+  const userRole = {
     user_id: userId,
     role_id: roleId,
     last_updated: new Date(),
@@ -21,9 +21,9 @@ module.exports.addUserRoleData = function (userId, roleId) {
 }
 
 module.exports.addUsers = function () {
-  var inserts = []
+  const inserts = []
 
-  var users = [
+  const users = [
     { username: 'testusername', name: 'Test User' }
   ]
 
@@ -37,9 +37,9 @@ module.exports.addUsers = function () {
 }
 
 module.exports.addRoles = function () {
-  var inserts = []
+  const inserts = []
 
-  var roles = [
+  const roles = [
     { role: 'Test_Role1' },
     { role: 'Test_Role2' }
   ]
@@ -55,8 +55,8 @@ module.exports.addRoles = function () {
 
 module.exports.getAnyExistingUsernameWithExistingRole = function () {
   return knex('users')
-  .join('user_role', 'user_role.user_id', 'users.id')
-  .first('users.username')
+    .join('user_role', 'user_role.user_id', 'users.id')
+    .first('users.username')
 }
 
 module.exports.removeInsertedData = function (inserts) {

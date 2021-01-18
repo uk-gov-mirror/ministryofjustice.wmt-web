@@ -3,7 +3,7 @@ const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
 const sinon = require('sinon')
-require('sinon-bluebird')
+
 const orgUnit = require('../../../app/constants/organisation-unit')
 const tabs = require('../../../app/constants/wmt-tabs')
 const workloadTypes = require('../../../app/constants/workload-type')
@@ -51,18 +51,18 @@ const EXPORT_CSV = '"TeamName","Grade","Overall","Untiered","D2","D1","C2","C1",
       '"Test Team 1","PO",50,0,50,25,10,0,50,50,50\n' +
       '"Test Team 1","PSO",50,0,50,75,90,100,50,50,50'
 
-var app
-var route
-var getOverview
-var getLastUpdated
+let app
+let route
+let getOverview
+let getLastUpdated
 
-var getReductionsExport
-var reductionApp
-var reductionsRoute
+let getReductionsExport
+let reductionApp
+let reductionsRoute
 
-var getSubNavStub
-var getExportCsv
-var authorisationService
+let getSubNavStub
+let getExportCsv
+let authorisationService
 
 before(function () {
   authorisationService = {
@@ -120,11 +120,11 @@ describe('overview route', function () {
   it('should call the getSubNav with the correct parameters', function () {
     getOverview.resolves(OVERVIEW)
     return supertest(app)
-        .get(OM_OVERVIEW_URL)
-        .expect(200)
-        .then(function () {
+      .get(OM_OVERVIEW_URL)
+      .expect(200)
+      .then(function () {
           expect(getSubNavStub.calledWith('1', orgUnit.OFFENDER_MANAGER.name, OM_OVERVIEW_URL)).to.be.true //eslint-disable-line
-        })
+      })
   })
 })
 

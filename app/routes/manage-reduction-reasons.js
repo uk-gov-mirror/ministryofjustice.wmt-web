@@ -28,17 +28,17 @@ module.exports = function (router) {
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    var breadcrumbs = getBreadcrumbs('/manage-reduction-reasons')
+    const breadcrumbs = getBreadcrumbs('/manage-reduction-reasons')
 
-    var success = req.query.success
-    var successText = success ? 'The Reduction Reason was saved successfully!' : null
+    const success = req.query.success
+    const successText = success ? 'The Reduction Reason was saved successfully!' : null
 
     return getReductionReasons(false).then(function (reasons) {
-      var reductionReasons = formatReductionReasons(reasons)
-      var enabledReductionReasons = reductionReasons.filter(enabledReduction => enabledReduction.isEnabled === true)
-      var disabledReductionReasons = reductionReasons.filter(disabledReduction => disabledReduction.isEnabled === false)
+      const reductionReasons = formatReductionReasons(reasons)
+      const enabledReductionReasons = reductionReasons.filter(enabledReduction => enabledReduction.isEnabled === true)
+      const disabledReductionReasons = reductionReasons.filter(disabledReduction => disabledReduction.isEnabled === false)
       return res.render('manage-reduction-reasons', {
         enabledReductionReasons: enabledReductionReasons,
         disabledReductionReasons: disabledReductionReasons,
@@ -47,7 +47,7 @@ module.exports = function (router) {
         successText: successText,
         subTitle: getSubtitle(true),
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
       })
     })
   })
@@ -67,9 +67,9 @@ module.exports = function (router) {
       }
     }
 
-    var breadcrumbs = getBreadcrumbs('/add-reduction-reason')
+    const breadcrumbs = getBreadcrumbs('/add-reduction-reason')
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return getReductionCategories().then(function (categories) {
       return res.render('add-reduction-reason', {
@@ -78,7 +78,7 @@ module.exports = function (router) {
         title: 'Add Reduction Reason',
         subTitle: getSubtitle(false),
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
       })
     })
   })
@@ -98,10 +98,10 @@ module.exports = function (router) {
       }
     }
 
-    var breadcrumbs = getBreadcrumbs('/edit-reduction-reason')
+    const breadcrumbs = getBreadcrumbs('/edit-reduction-reason')
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var id = req.query.id
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const id = req.query.id
     if (!id) {
       return res.redirect('/manage-reduction-reasons')
     }
@@ -115,7 +115,7 @@ module.exports = function (router) {
           title: 'Edit Reduction Reason',
           subTitle: getSubtitle(false),
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
         })
       })
     })
@@ -136,9 +136,9 @@ module.exports = function (router) {
       }
     }
 
-    var breadcrumbs = getBreadcrumbs('/add-reduction-reason')
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var reductionReason
+    const breadcrumbs = getBreadcrumbs('/add-reduction-reason')
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    let reductionReason
 
     return getReductionCategories().then(function (categories) {
       try {
@@ -169,7 +169,7 @@ module.exports = function (router) {
             errors: error.validationErrors,
             categories: categories,
             userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-            authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
           })
         } else {
           next(error)
@@ -197,10 +197,10 @@ module.exports = function (router) {
       }
     }
 
-    var breadcrumbs = getBreadcrumbs('/edit-reduction-reason')
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const breadcrumbs = getBreadcrumbs('/edit-reduction-reason')
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     // var id = req.query.id
-    var reductionReason
+    let reductionReason
 
     return getReductionCategories().then(function (categories) {
       try {
@@ -232,7 +232,7 @@ module.exports = function (router) {
             errors: error.validationErrors,
             categories: categories,
             userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-            authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
           })
         } else {
           next(error)
@@ -246,7 +246,7 @@ module.exports = function (router) {
   })
 }
 
-var formatReductionReasons = function (reasons) {
+const formatReductionReasons = function (reasons) {
   if (reasons) {
     if (reasons.length > 0) {
       reasons.forEach(function (reason) {
@@ -259,15 +259,15 @@ var formatReductionReasons = function (reasons) {
   return reasons
 }
 
-var findCategoryById = function (categories, id) {
-  var categoryName = null
+const findCategoryById = function (categories, id) {
+  let categoryName = null
   if (id) {
     categoryName = categories.filter(category => category.id === parseInt(id))[0].category
   }
   return categoryName
 }
 
-var getIsEnabled = function (isEnabled) {
+const getIsEnabled = function (isEnabled) {
   if (isEnabled === null || isEnabled === undefined || isEnabled === '') {
     return isEnabled
   } else {
@@ -275,8 +275,8 @@ var getIsEnabled = function (isEnabled) {
   }
 }
 
-var getBreadcrumbs = function (currentRoute) {
-  var breadcrumbs
+const getBreadcrumbs = function (currentRoute) {
+  let breadcrumbs
   switch (currentRoute) {
     case '/manage-reduction-reasons':
       breadcrumbs = [
@@ -302,7 +302,7 @@ var getBreadcrumbs = function (currentRoute) {
   return breadcrumbs
 }
 
-var getSubtitle = function (isListPage) {
+const getSubtitle = function (isListPage) {
   if (isListPage) {
     return 'Admin'
   } else {

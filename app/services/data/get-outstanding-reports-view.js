@@ -3,10 +3,10 @@ const orgUnitFinder = require('../helpers/org-unit-finder')
 const ORGANISATION_UNIT = require('../../constants/organisation-unit')
 
 module.exports = function (id, type) {
-  var orgUnit = orgUnitFinder('name', type)
-  var table = orgUnit.outstandingReportsView
+  const orgUnit = orgUnitFinder('name', type)
+  const table = orgUnit.outstandingReportsView
 
-  var selectList = [
+  const selectList = [
     'link_id AS linkId',
     'grade_code AS grade',
     'ow',
@@ -19,7 +19,7 @@ module.exports = function (id, type) {
     'sso'
   ]
 
-  var requiresWorkloadOwnerName = (type === ORGANISATION_UNIT.TEAM.name)
+  const requiresWorkloadOwnerName = (type === ORGANISATION_UNIT.TEAM.name)
 
   if (requiresWorkloadOwnerName) {
     selectList.push('CONCAT(forename, \' \', surname) AS name')
@@ -27,19 +27,19 @@ module.exports = function (id, type) {
     selectList.push('name')
   }
 
-  var whereString = ''
+  let whereString = ''
 
   if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
     whereString = ' WHERE id = ' + id
   }
 
-  var noExpandHint = ' WITH (NOEXPAND)'
+  const noExpandHint = ' WITH (NOEXPAND)'
 
   return knex.schema.raw('SELECT ' + selectList.join(', ') +
         ' FROM ' + table +
         noExpandHint +
         whereString)
-        .then(function (results) {
-          return results
-        })
+    .then(function (results) {
+      return results
+    })
 }

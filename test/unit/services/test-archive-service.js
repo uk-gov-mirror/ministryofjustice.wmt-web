@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 const sinon = require('sinon')
-require('sinon-bluebird')
+
 const proxyquire = require('proxyquire')
 const archiveOptions = require('../../../app/constants/archive-options')
 
@@ -59,9 +59,9 @@ const expectedArchiveRecord = {
   capacity: '55.2%'
 }
 
-var archiveService
-var getArchive
-var getArchiveNewDB
+let archiveService
+let getArchive
+let getArchiveNewDB
 
 before(function () {
   getArchive = sinon.stub()

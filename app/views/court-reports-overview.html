@@ -13,24 +13,24 @@
 {% include "includes/sub-nav.html" %}
 
 {% if organisationLevel === "offender-manager" %}
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <table>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <table class="govuk-table" id="override-govuk-table">
     <tbody>
       <tr>
-        <th scope="row">Grade</th>
+        <th class="bold" scope="row">Grade</th>
         <td class="sln-grade numeric">{{ overviewDetails[0].grade }}</td>
       </tr>
       <tr>
-        <th scope="row">Team</th>
-        <td class="numeric"><a href="/court-reports/team/{{ overviewDetails[0].linkId }}">{{ overviewDetails[0].name }}</a></td>
+        <th class="bold" scope="row">Team</th>
+        <td class="numeric"><a class="govuk-link" href="/court-reports/team/{{ overviewDetails[0].linkId }}">{{ overviewDetails[0].name }}</a></td>
       </tr>
       <tr>
-        <th scope="row">Contracted hours</th>
+        <th class="bold" scope="row">Contracted hours</th>
         <td class="numeric">{{ overviewDetails[0].contractedHours }}</td>
       </tr>
       <tr>
-        <th scope="row">Reduction</th>
+        <th class="bold" scope="row">Reduction</th>
         <td class="numeric">{{ overviewDetails[0].reduction }}</td>
       </tr>
     </tbody>
@@ -40,7 +40,7 @@
 {% else %}
 <div>
   <div id="{{ organisationLevel }}">
-    <table class="sln-table-overview data-table">
+    <table class="govuk-table sln-table-overview data-table">
       <thead>
         <tr>
           <th class="sln-table-org-level" id="name">{{ childOrganisationLevelDisplayText }}</th>
@@ -57,7 +57,7 @@
       <tbody>
         {% for member in overviewDetails %}
         <tr>
-          <td headers="name"><a href="/court-reports/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
+          <td headers="name"><a class="govuk-link" href="/court-reports/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</a></td>
           {% if organisationLevel === "team" %}
             <td headers="grade">{{ member.grade }}</td>
           {% endif %}
@@ -75,14 +75,14 @@
 
 {% endif %}
 </main>
-<div class="lastUpdated">
-        <p>Last updated on  <span class="bold">{{date}}</span></p>
- </div>
+
+{% include "includes/last-updated.html" %}
+
 {% endblock %}
 
 {% block page_specific_scripts %}
 
-    <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
+    <script src="{{ assetPath }}javascripts/vendor/jquery.min.js"></script>
     <script src="/public/javascripts/floatThead.js"></script>
     <script src="/public/javascripts/jquery.floatThead.js"></script>
    

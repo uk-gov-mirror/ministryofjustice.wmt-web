@@ -15,27 +15,31 @@
     <form method="post">
 
         {% include "includes/csrf-hidden-input.html"%}
-        <h2 class="heading-medium">
-                Please select the type of export to download:
-            </h2>
-        <div class="grid-row form-group">
-            <fieldset class="inline-block">
-                <div class="column-one-third">
-                    <div class="multiple-choice">
-                        <input id="radio-inline-1" type="radio" name="radioInlineGroup" value="1" checked="checked">
-                        <label class="inline-block" for="radio-inline-1">Scenario</label>
-                    </div>
+        <h2 class="govuk-heading-m">
+            Please select the type of export to download:
+        </h2>
+            <div class="govuk-grid-row">
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <div class="govuk-grid-column-one-third">
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="radio-inline-1" type="radio" name="radioInlineGroup" value="1" checked="checked">
+                                <label class="govuk-label govuk-radios__label" for="radio-inline-1">Scenario</label>
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
-            </fieldset>
-        </div>
-        
-        <input type="submit" class="button sln-export" style="float: left; margin-left:10px; margin-bottom: 10px" value="Export" formaction="/omic/{{ organisationLevel }}/{{ linkId }}/export">
+            </div>
+
+            <div class="govuk-grid-row">
+                <div class="govuk-form-group">
+                    <input type="submit" class="govuk-button sln-export floatLeftBottom10 marginLeft10" style="float: left; margin-left:10px; margin-bottom: 10px" value="Export" formaction="/omic/{{ organisationLevel }}/{{ linkId }}/export" data-module="govuk-button">
+                </div>
+            </div>
 
     </form>
 </main>
 
-<div class="lastUpdated">
-    <p>Last updated on  <span class="bold">{{date}}</span></p>
-</div>
+{% include "includes/last-updated.html" %}
 
 {% endblock %}

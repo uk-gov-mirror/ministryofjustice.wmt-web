@@ -1,9 +1,8 @@
 /* eslint-disable no-new */
 const expect = require('chai').expect
 const WorkloadPoints = require('../../../../app/services/domain/workload-points')
-const ValidationError = require('../../../../app/services/errors/validation-error')
 
-var VALID_WORKLOAD_POINTS = {
+const VALID_WORKLOAD_POINTS = {
   previousWpId: '2',
   commA: '111',
   commB1: '101',
@@ -54,7 +53,7 @@ var VALID_WORKLOAD_POINTS = {
 
 describe('services/domain/workload-points', function () {
   it('should create a valid workload points object', function () {
-    var workloadPoints = new WorkloadPoints(VALID_WORKLOAD_POINTS)
+    const workloadPoints = new WorkloadPoints(VALID_WORKLOAD_POINTS)
     expect(workloadPoints.commA).to.equal('111')
     expect(workloadPoints.commB1).to.equal('101')
     expect(workloadPoints.commB2).to.equal('99')
@@ -93,245 +92,245 @@ describe('services/domain/workload-points', function () {
   })
 
   it('should raise a ValidationError if a Community Weighting field is out of range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.commA = '1000'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if a Community Weighting field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.commD2 = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if a Custody Weighting field is out of range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.cusB1 = '1000'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if a Custody Weighting field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.cusC2 = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if a License Weighting field is out of range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.licC1 = '1000'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if a License Weighting field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.licC2 = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Default Contracted Hours PO field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.defaultContractedHoursPo = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Default Contracted Hours PSO field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.defaultContractedHoursPso = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Default Contracted Hours SPO field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.defaultContractedHoursSpo = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Default Contracted Hours PO field is outside valid range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.defaultContractedHoursPo = '-1'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Default Contracted Hours PSO field is outside valid range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.defaultContractedHoursPso = '50'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Default Contracted Hours SPO field is outside valid range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.defaultContractedHoursSpo = '38'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if SDR field is outside valid range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.sdr = '9000'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if SDR field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.sdr = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if SDR Conversion field is outside valid range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.sdrConversion = '-4'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if SDR Conversion field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.sdrConversion = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if PAROM field is outside valid range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.parom = '-1'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if PAROM field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.parom = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Nominal Target PO field is outside valid range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.nominalTargetPo = '10000'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Nominal Target PSO field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.nominalTargetPo = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Weighting Overdue field is outside valid range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.weightingOverdue = '101'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Weighting Overdue field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.weightingOverdue = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Weighting Upw field is outside valid range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.weightingUpw = '-1'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Weighting Upw field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.weightingUpw = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Weighting Warrants field is outside valid range', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.weightingWarrants = '-1'
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if Weighting Warrants field is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.weightingWarrants = ''
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 
   it('should raise a ValidationError if T2A flag is not set', function () {
-    var invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
+    const invalidWorkloadPoints = Object.assign({}, VALID_WORKLOAD_POINTS)
     invalidWorkloadPoints.isT2A = null
 
     expect(function () {
       new WorkloadPoints(invalidWorkloadPoints)
-    }).to.throw(ValidationError)
+    }).to.throw()
   })
 })

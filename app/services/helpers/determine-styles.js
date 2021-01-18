@@ -1,5 +1,5 @@
 module.exports.determineCaseStyle = function (header, styles) {
-  var styleToApply
+  let styleToApply
   switch (header) {
     case 'Com Untiered':
     case 'Com G':
@@ -87,14 +87,14 @@ module.exports.determineCaseStyle = function (header, styles) {
 }
 
 module.exports.determineWeightingStyle = function (columnNo, styles) {
-  var styleToApply
-  var commRange = { start: 26, end: 69 }
-  var licRange = { start: 70, end: 113 }
-  var cusRange = { start: 114, end: 157 }
-  var t2aCommRage = { start: 158, end: 201 }
-  var t2aLicRange = { start: 202, end: 245 }
-  var t2aCusRange = { start: 246, end: 289 }
-  var reportsRange = { start: 290, end: 294 }
+  let styleToApply
+  const commRange = { start: 26, end: 69 }
+  const licRange = { start: 70, end: 113 }
+  const cusRange = { start: 114, end: 157 }
+  const t2aCommRage = { start: 158, end: 201 }
+  const t2aLicRange = { start: 202, end: 245 }
+  const t2aCusRange = { start: 246, end: 289 }
+  const reportsRange = { start: 290, end: 294 }
 
   if (columnNo >= commRange.start && columnNo <= commRange.end) {
     styleToApply = styles.commStyle

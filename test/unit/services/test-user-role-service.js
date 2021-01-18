@@ -1,6 +1,5 @@
 const expect = require('chai').expect
 const sinon = require('sinon')
-require('sinon-bluebird')
 
 const proxyquire = require('proxyquire')
 const config = require('../../../config')
@@ -8,21 +7,21 @@ const userRole = require('../../../app/constants/user-roles.js')
 const UserRole = require('../../../app/services/domain/user-role')
 const removeDomainFromUsername = require('../../../app/services/user-role-service').removeDomainFromUsername
 
-var DOMAIN_USERNAME = 'Staff.Test@' + config.ACTIVE_DIRECTORY_DOMAIN
-var STAFF_USER = { id: 0, username: 'Staff.Test', name: 'Staff Test' }
+const DOMAIN_USERNAME = 'Staff.Test@' + config.ACTIVE_DIRECTORY_DOMAIN
+const STAFF_USER = { id: 0, username: 'Staff.Test', name: 'Staff Test' }
 
-var STAFF_ROLE = { roleId: 0, role: userRole.STAFF }
+const STAFF_ROLE = { roleId: 0, role: userRole.STAFF }
 
-var userRoleService
-var getRoleByUsername
-var updateUserRole
-var addUserRole
-var getRole
-var getUserById
-var getUserByUsername
-var addUser
-var removeUserRoleByUserId
-var removeUserByUsername
+let userRoleService
+let getRoleByUsername
+let updateUserRole
+let addUserRole
+let getRole
+let getUserById
+let getUserByUsername
+let addUser
+let removeUserRoleByUserId
+let removeUserByUsername
 
 beforeEach(function () {
   getRoleByUsername = sinon.stub()
@@ -123,7 +122,7 @@ describe('services/user-role-service', function () {
   })
 
   it('should return the username without the domain name', function () {
-    var result = removeDomainFromUsername(DOMAIN_USERNAME)
+    const result = removeDomainFromUsername(DOMAIN_USERNAME)
     expect(result).to.equal(STAFF_USER.username)
   })
 })

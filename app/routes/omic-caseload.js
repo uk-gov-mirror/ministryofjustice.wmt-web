@@ -10,7 +10,7 @@ const workloadTypes = require('../constants/workload-type')
 const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 
-var lastUpdated
+let lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/caseload', function (req, res, next) {
@@ -22,44 +22,44 @@ module.exports = function (router) {
       }
     }
 
-    var organisationLevel = req.params.organisationLevel
-    var id = req.params.id
+    const organisationLevel = req.params.organisationLevel
+    const id = req.params.id
 
     if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Not available for offender-manager')
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    var orgUnit = getOrganisationUnit('name', organisationLevel)
-    var childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)
+    const orgUnit = getOrganisationUnit('name', organisationLevel)
+    const childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)
 
     return getLastUpdated().then(function (result) {
       lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
       return getCaseload(id, organisationLevel)
-      .then(function (result) {
-        result.date = lastUpdated
-        var childOrganisationLevelDisplayText = childOrgUnit.displayText.repeat(1)
-        if (childOrgUnit.displayText === 'LDU Cluster' && result.title === 'NPS Kent Surrey Sussex Region') {
-          childOrganisationLevelDisplayText = 'Probation Delivery Unit'
-        }
-        return res.render('caseload', {
-          screen: 'caseload',
-          linkId: req.params.id,
-          title: result.title,
-          subTitle: result.subTitle,
-          breadcrumbs: result.breadcrumbs,
-          subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole),
-          organisationLevel: organisationLevel,
-          childOrganisationLevel: orgUnit.childOrganisationLevel,
-          childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
-          caseloadDetails: caseloadDetails(organisationLevel, result),
-          date: result.date,
-          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
-          workloadType: workloadTypes.OMIC
+        .then(function (result) {
+          result.date = lastUpdated
+          let childOrganisationLevelDisplayText = childOrgUnit.displayText.repeat(1)
+          if (childOrgUnit.displayText === 'LDU Cluster' && result.title === 'NPS Kent Surrey Sussex Region') {
+            childOrganisationLevelDisplayText = 'Probation Delivery Unit'
+          }
+          return res.render('caseload', {
+            screen: 'caseload',
+            linkId: req.params.id,
+            title: result.title,
+            subTitle: result.subTitle,
+            breadcrumbs: result.breadcrumbs,
+            subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole),
+            organisationLevel: organisationLevel,
+            childOrganisationLevel: orgUnit.childOrganisationLevel,
+            childOrganisationLevelDisplayText: childOrganisationLevelDisplayText,
+            caseloadDetails: caseloadDetails(organisationLevel, result),
+            date: result.date,
+            userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
+            workloadType: workloadTypes.OMIC
+          })
         })
-      })
     }).catch(function (error) {
       next(error)
     })
@@ -73,16 +73,16 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var id = req.params.id
+    const organisationLevel = req.params.organisationLevel
+    const id = req.params.id
 
     if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Not available for offender-manager')
     }
 
-    var isCSV = true
+    const isCSV = true
     return getCaseload(id, organisationLevel, isCSV).then(function (result) {
-      var exportCsv = getExportCsv(organisationLevel, result, tabs.CASELOAD)
+      const exportCsv = getExportCsv(organisationLevel, result, tabs.CASELOAD)
       res.attachment(exportCsv.filename)
       return res.send(exportCsv.csv)
     }).catch(function (error) {
@@ -90,8 +90,8 @@ module.exports = function (router) {
     })
   })
 
-  var caseloadDetails = function (organisationLevel, result) {
-    var details
+  const caseloadDetails = function (organisationLevel, result) {
+    let details
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       details = [

@@ -7,26 +7,26 @@
 // in the body of these loops the totals for that particular type and tier will be dealt with
 // for example
 
-var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
-  var rowStart = 5
-  var columnStart = 26
+const inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
+  let rowStart = 5
+  let columnStart = 26
 
-  for (var c of cases) {
+  for (const c of cases) {
     inputMainBodyFormulas(ws, rowStart)
     inputOffenderManagerData(ws, c, rowStart)
     // WMT0160: Change tiersPerType for community cases
-    var casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === 0)
+    let casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === 0)
     casesForThisTier = casesForThisTier[0]
     setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
     columnStart = columnStart + typeTierGroupLength
 
-    for (var i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
+    for (let i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
       casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
       columnStart = columnStart + typeTierGroupLength
     }
-    for (i = 1; i < tiersPerType - 3; i++) {
+    for (let i = 1; i < tiersPerType - 3; i++) {
       casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
@@ -38,13 +38,13 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
     columnStart = columnStart + typeTierGroupLength
 
-    for (i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
+    for (let i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
       casesForThisTier = c.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
       columnStart = columnStart + typeTierGroupLength
     }
-    for (i = 1; i < tiersPerType - 3; i++) {
+    for (let i = 1; i < tiersPerType - 3; i++) {
       casesForThisTier = c.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
@@ -56,13 +56,13 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
     columnStart = columnStart + typeTierGroupLength
 
-    for (i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
+    for (let i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
       casesForThisTier = c.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
       columnStart = columnStart + typeTierGroupLength
     }
-    for (i = 1; i < tiersPerType - 3; i++) {
+    for (let i = 1; i < tiersPerType - 3; i++) {
       casesForThisTier = c.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
@@ -75,13 +75,13 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
     columnStart = columnStart + typeTierGroupLength
 
-    for (i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
+    for (let i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
       casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
       columnStart = columnStart + typeTierGroupLength
     }
-    for (i = 1; i < tiersPerType - 3; i++) {
+    for (let i = 1; i < tiersPerType - 3; i++) {
       casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
@@ -93,13 +93,13 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
     columnStart = columnStart + typeTierGroupLength
 
-    for (i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
+    for (let i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
       casesForThisTier = c.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
       columnStart = columnStart + typeTierGroupLength
     }
-    for (i = 1; i < tiersPerType - 3; i++) {
+    for (let i = 1; i < tiersPerType - 3; i++) {
       casesForThisTier = c.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
@@ -111,13 +111,13 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
     columnStart = columnStart + typeTierGroupLength
 
-    for (i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
+    for (let i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
       casesForThisTier = c.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
       columnStart = columnStart + typeTierGroupLength
     }
-    for (i = 1; i < tiersPerType - 3; i++) {
+    for (let i = 1; i < tiersPerType - 3; i++) {
       casesForThisTier = c.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
@@ -157,7 +157,7 @@ var inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
 }
 
 // Input Offender Manager Name, Grade to the left side of the produced spreadsheet
-var inputOffenderManagerData = function (ws, offenderManager, row) {
+const inputOffenderManagerData = function (ws, offenderManager, row) {
   ws.cell(row, 1).string(offenderManager.division).style(this.styles.editableStyle)
   ws.cell(row, 2).string(offenderManager.ldu).style(this.styles.editableStyle)
   ws.cell(row, 3).string(offenderManager.team).style(this.styles.editableStyle)
@@ -168,15 +168,15 @@ var inputOffenderManagerData = function (ws, offenderManager, row) {
   ws.cell(row, 9).number(offenderManager.defaultContractedHours).style(this.styles.editableStyle)
 }
 
-var totalPointsFormulaPart1 = function (row) {
+const totalPointsFormulaPart1 = function (row) {
   // WMT0160: Update this
   // return '=SUM(V4*V' + row + ',W4*W' + row + ',X4*X' + row + ',Y4*Y' + row + ',Z4*Z' + row + ',AA4*AA' + row + ',AB4*AB' + row + ',AC4*AC' + row + ',AD4*AD' + row + ',AE4*AE' + row + ',AF4*AF' + row + ',AG4*AG' + row + ',AH4*AH' + row + ',AI4*AI' + row + ',AJ4*AJ' + row + ',AK4*AK' + row + ',AL4*AL' + row + ',AM4*AM' + row + ',AN4*AN' + row + ',AO4*AO' + row + ',AP4*AP' + row + ',AQ4*AQ' + row + ',AR4*AR' + row + ',AS4*AS' + row + ',AT4*AT' + row + ',AU4*AU' + row + ',AV4*AV' + row + ',AW4*AW' + row + ',AX4*AX' + row + ',AY4*AY' + row + ',AZ4*AZ' + row + ',BA4*BA' + row + ',BB4*BB' + row + ',BC4*BC' + row + ',BD4*BD' + row + ',BE4*BE' + row + ',BF4*BF' + row + ',BG4*BG' + row + ',BH4*BH' + row + ',BI4*BI' + row + ',BJ4*BJ' + row + ',BK4*BK' + row + ',BL4*BL' + row + ',BM4*BM' + row + ',BN4*BN' + row + ',BO4*BO' + row + ',BP4*BP' + row + ',BQ4*BQ' + row + ',BR4*BR' + row + ',BS4*BS' + row + ',BT4*BT' + row + ',BU4*BU' + row + ',BV4*BV' + row + ',BW4*BW' + row + ',BX4*BX' + ',BY4*BY' + row + ',BZ4*BZ' + row + ',CA4*CA' + row + ',CB4*CB' + row + ',CC4*CC' + row + ',CD4*CD' + row + ',CE4*CE' + row + ',CF4*CF' + row + ',CG4*CG' + row + ',CH4*CH' + row + ',CI4*CI' + row + ',CJ4*CJ' + row + ',CK4*CK' + row + ',CL4*CL' + row + ',CM4*CM' + row + ',CN4*CN' + row + ',CO4*CO' + row + ',CP4*CP' + row + ',CQ4*CQ' + row + ',CR4*CR' + row + ',CS4*CS' + row + ',CT4*CT' + row + ',CU4*CU' + row + ',CV4*CV' + row + ',CW4*CW' + row + ',CX4*CX' + row + ',CY4*CY' + row + ',CZ4*CZ' + row + ',DA4*DA' + row + ',DB4*DB' + row + ',DC4*DC' + row + ',DD4*DD' + row + ',DE4*DE' + row + ',DF4*DF' + row + ',DG4*DG' + row + ',DH4*DH' + row + ',DI4*DI' + row + ',DJ4*DJ' + row + ',DK4*DK' + row + ',DL4*DL' + row + ',DM4*DM' + row + ',DN4*DN' + row + ',DO4*DO' + row + ',DP4*DP' + row + ',DQ4*DQ' + row + ',DR4*DR' + row + ',DS4*DS' + row + ',DT4*DT' + row + ',DU4*DU' + row + ',DV4*DV' + row + ',DW4*DW' + row + ',DX4*DX' + row + ',DY4*DY' + row + ',DZ4*DZ' + row + ',EA4*EA' + row + ',EB4*EB' + row + ',EC4*EC' + row + ',ED4*ED' + row + ',EE4*EE' + row + ',EF4*EF' + row + ',EG4*EG' + row + ',EH4*EH' + row + ',EI4*EI' + row + ',EJ4*EJ' + row + ',EK4*EK' + row + ',EL4*EL' + row + ',EM4*EM' + row + ',EN4*EN' + row + ',EO4*EO' + row + ',EP4*EP' + row + ',EQ4*EQ' + row + ',ER4*ER' + row + ',ES4*ES' + row + ',ET4*ET' + row + ',EU4*EU' + row + ',EV4*EV' + row + ',EW4*EW' + row + ',EX4*EX' + row + ',EY4*EY' + row + ',EZ4*EZ' + row + ', FA4*FA' + row + ',FB4*FB' + row + ',FC4*FC' + row + ',FD4*FD' + row + ',FE4*FE' + row + ',FF4*FF' + row + ',FG4*FG' + row + ',FH4*FH' + row + ',FI4*FI' + row + ',FJ4*FJ' + row + ',FK4*FK' + row + ',FL4*FL' + row + ',FM4*FM' + row + ',FN4*FN' + row + ',FO4*FO' + row + ',FP4*FP' + row + ',FQ4*FQ' + row + ',FR4*FR' + row + ',FS4*FS' + row + ',FT4*FT' + row + ',FU4*FU' + row + ',FV4*FV' + row + ',FW4*FW' + row + ',FX4*FX' + row + ',FY4*FY' + row + ',FZ4*FZ' + row + ',GA4*GA' + row + ',GB4*GB' + row + ',GC4*GC' + row + ',GD4*GD' + row + ',GE4*GE' + row + ',GF4*GF' + row + ',GG4*GG' + row + ',GH4*GH' + row + ',GI4*GI' + row + ',GJ4*GJ' + row + ',GK4*GK' + row + ',GL4*GL' + row + ',GM4*GM' + row + ',GN4*GN' + row + ',GO4*GO' + row + ',GP4*GP' + row + ',GQ4*GQ' + row + ',GR4*GR' + row + ',GS4*GS' + row + ',GT4*GT' + row + ',GU4*GU' + row + ',GV4*GV' + row + ',GW4*GW' + row + ',GX4*GX' + row + ',GY4*GY' + row + ',GZ4*GZ' + row + ',HA4*HA' + row + ',HB4*HB' + row + ',HC4*HC' + row + ',HD4*HD' + row + ',HE4*HE' + row + ')'
   // Deal with first 5 Columns separately
-  var formula = '=SUM($Z$4*Z' + row
-  var firstLetter = 1
-  var secondLetter
-  var char1
-  var char2
+  let formula = '=SUM($Z$4*Z' + row
+  let firstLetter = 1
+  let secondLetter
+  let char1
+  let char2
   // Deal with AA..AZ columns to GA..GZ columns next in a nested loop
   // 0123456789 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
   // ABCDEFGHIJ K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z
@@ -206,15 +206,15 @@ var totalPointsFormulaPart1 = function (row) {
   return formula
 }
 
-var totalPointsFormulaPart2 = function (row) {
+const totalPointsFormulaPart2 = function (row) {
   // WMT0160: Update this
   // return '=SUM(V4*V' + row + ',W4*W' + row + ',X4*X' + row + ',Y4*Y' + row + ',Z4*Z' + row + ',AA4*AA' + row + ',AB4*AB' + row + ',AC4*AC' + row + ',AD4*AD' + row + ',AE4*AE' + row + ',AF4*AF' + row + ',AG4*AG' + row + ',AH4*AH' + row + ',AI4*AI' + row + ',AJ4*AJ' + row + ',AK4*AK' + row + ',AL4*AL' + row + ',AM4*AM' + row + ',AN4*AN' + row + ',AO4*AO' + row + ',AP4*AP' + row + ',AQ4*AQ' + row + ',AR4*AR' + row + ',AS4*AS' + row + ',AT4*AT' + row + ',AU4*AU' + row + ',AV4*AV' + row + ',AW4*AW' + row + ',AX4*AX' + row + ',AY4*AY' + row + ',AZ4*AZ' + row + ',BA4*BA' + row + ',BB4*BB' + row + ',BC4*BC' + row + ',BD4*BD' + row + ',BE4*BE' + row + ',BF4*BF' + row + ',BG4*BG' + row + ',BH4*BH' + row + ',BI4*BI' + row + ',BJ4*BJ' + row + ',BK4*BK' + row + ',BL4*BL' + row + ',BM4*BM' + row + ',BN4*BN' + row + ',BO4*BO' + row + ',BP4*BP' + row + ',BQ4*BQ' + row + ',BR4*BR' + row + ',BS4*BS' + row + ',BT4*BT' + row + ',BU4*BU' + row + ',BV4*BV' + row + ',BW4*BW' + row + ',BX4*BX' + ',BY4*BY' + row + ',BZ4*BZ' + row + ',CA4*CA' + row + ',CB4*CB' + row + ',CC4*CC' + row + ',CD4*CD' + row + ',CE4*CE' + row + ',CF4*CF' + row + ',CG4*CG' + row + ',CH4*CH' + row + ',CI4*CI' + row + ',CJ4*CJ' + row + ',CK4*CK' + row + ',CL4*CL' + row + ',CM4*CM' + row + ',CN4*CN' + row + ',CO4*CO' + row + ',CP4*CP' + row + ',CQ4*CQ' + row + ',CR4*CR' + row + ',CS4*CS' + row + ',CT4*CT' + row + ',CU4*CU' + row + ',CV4*CV' + row + ',CW4*CW' + row + ',CX4*CX' + row + ',CY4*CY' + row + ',CZ4*CZ' + row + ',DA4*DA' + row + ',DB4*DB' + row + ',DC4*DC' + row + ',DD4*DD' + row + ',DE4*DE' + row + ',DF4*DF' + row + ',DG4*DG' + row + ',DH4*DH' + row + ',DI4*DI' + row + ',DJ4*DJ' + row + ',DK4*DK' + row + ',DL4*DL' + row + ',DM4*DM' + row + ',DN4*DN' + row + ',DO4*DO' + row + ',DP4*DP' + row + ',DQ4*DQ' + row + ',DR4*DR' + row + ',DS4*DS' + row + ',DT4*DT' + row + ',DU4*DU' + row + ',DV4*DV' + row + ',DW4*DW' + row + ',DX4*DX' + row + ',DY4*DY' + row + ',DZ4*DZ' + row + ',EA4*EA' + row + ',EB4*EB' + row + ',EC4*EC' + row + ',ED4*ED' + row + ',EE4*EE' + row + ',EF4*EF' + row + ',EG4*EG' + row + ',EH4*EH' + row + ',EI4*EI' + row + ',EJ4*EJ' + row + ',EK4*EK' + row + ',EL4*EL' + row + ',EM4*EM' + row + ',EN4*EN' + row + ',EO4*EO' + row + ',EP4*EP' + row + ',EQ4*EQ' + row + ',ER4*ER' + row + ',ES4*ES' + row + ',ET4*ET' + row + ',EU4*EU' + row + ',EV4*EV' + row + ',EW4*EW' + row + ',EX4*EX' + row + ',EY4*EY' + row + ',EZ4*EZ' + row + ', FA4*FA' + row + ',FB4*FB' + row + ',FC4*FC' + row + ',FD4*FD' + row + ',FE4*FE' + row + ',FF4*FF' + row + ',FG4*FG' + row + ',FH4*FH' + row + ',FI4*FI' + row + ',FJ4*FJ' + row + ',FK4*FK' + row + ',FL4*FL' + row + ',FM4*FM' + row + ',FN4*FN' + row + ',FO4*FO' + row + ',FP4*FP' + row + ',FQ4*FQ' + row + ',FR4*FR' + row + ',FS4*FS' + row + ',FT4*FT' + row + ',FU4*FU' + row + ',FV4*FV' + row + ',FW4*FW' + row + ',FX4*FX' + row + ',FY4*FY' + row + ',FZ4*FZ' + row + ',GA4*GA' + row + ',GB4*GB' + row + ',GC4*GC' + row + ',GD4*GD' + row + ',GE4*GE' + row + ',GF4*GF' + row + ',GG4*GG' + row + ',GH4*GH' + row + ',GI4*GI' + row + ',GJ4*GJ' + row + ',GK4*GK' + row + ',GL4*GL' + row + ',GM4*GM' + row + ',GN4*GN' + row + ',GO4*GO' + row + ',GP4*GP' + row + ',GQ4*GQ' + row + ',GR4*GR' + row + ',GS4*GS' + row + ',GT4*GT' + row + ',GU4*GU' + row + ',GV4*GV' + row + ',GW4*GW' + row + ',GX4*GX' + row + ',GY4*GY' + row + ',GZ4*GZ' + row + ',HA4*HA' + row + ',HB4*HB' + row + ',HC4*HC' + row + ',HD4*HD' + row + ',HE4*HE' + row + ')'
   // Deal with first 5 Columns separately
-  var formula = '=SUM('
-  var firstLetter
-  var secondLetter
-  var char1
-  var char2
+  let formula = '=SUM('
+  let firstLetter
+  let secondLetter
+  let char1
+  let char2
   firstLetter = 3
 
   // 0123456789 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
@@ -244,19 +244,19 @@ var totalPointsFormulaPart2 = function (row) {
   return formula
 }
 
-var totalCasesFormula = function (row) {
+const totalCasesFormula = function (row) {
   return '=SUM(DJ' + row + ',DN' + row + ',DR' + row + ',DV' + row + ',DZ' + row + ',ED' + row + ',EH' + row + ',EL' + row + ',EP' + row + ',ET' + row + ',EX' + row + ')'
 }
 
 // Add formulas to Cells C to U (Data below "Total Cases" Column to "Current % Capacity" Column in produced spreadsheet)
-var inputMainBodyFormulas = function (ws, row) {
+const inputMainBodyFormulas = function (ws, row) {
   ws.cell(row, 6).formula(totalCasesFormula(row)).style(this.styles.nonEditableCaseStyle) // Total Cases
   ws.cell(row, 20).formula(totalPointsFormulaPart2(row)).style(this.styles.nonEditableCaseStyle) // Total Caseload Points - Custody
   ws.cell(row, 21).formula(totalPointsFormulaPart1(row)).style(this.styles.nonEditableCaseStyle) // Total Caseload Points - Licence
 }
 
-var inputBottomTotals = function (ws, row) {
-  var dataEndRow = row - 1
+const inputBottomTotals = function (ws, row) {
+  const dataEndRow = row - 1
   ws.cell(row, 1).string('Total / Average').style(this.styles.totalAverageStyle)
   ws.cell(row, 2).style(this.styles.totalAverageStyle)
   ws.cell(row, 3).style(this.styles.totalAverageStyle)
@@ -284,11 +284,11 @@ var inputBottomTotals = function (ws, row) {
   ws.cell(row, 25).formula('=IFERROR(V' + row + '/W' + row + ',0)').style(this.styles.averagePercentageStyle)
   ws.cell(row, 26).formula('=SUM($Z$' + 5 + ':Z' + dataEndRow + ')').style(this.styles.sumStyle)
 
-  var columnNo = 27
-  var firstLetter
-  var secondLetter
-  var char1
-  var char2
+  let columnNo = 27
+  let firstLetter
+  let secondLetter
+  let char1
+  let char2
   // WMT0160: Update this too
   for (firstLetter = 0; firstLetter < 10; firstLetter++) {
     for (secondLetter = 0; secondLetter < 26; secondLetter++) {
@@ -306,7 +306,7 @@ var inputBottomTotals = function (ws, row) {
   }
 }
 
-var setTierTotals = function (ws, rowStart, columnStart, casesForThisTier, t2a) {
+const setTierTotals = function (ws, rowStart, columnStart, casesForThisTier, t2a) {
   if (t2a) {
     ws.cell(rowStart, columnStart).number(casesForThisTier.t2aTotalCases).style(this.styles.editableStyle)
     ws.cell(rowStart, columnStart + 1).number(casesForThisTier.t2aWarrantsTotal).style(this.styles.editableStyle)

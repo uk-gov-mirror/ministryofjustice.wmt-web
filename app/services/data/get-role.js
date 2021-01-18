@@ -8,7 +8,7 @@ module.exports = function (roleName) {
   return knex('roles')
     .where('role', roleName)
     .select('id',
-            'role')
+      'role')
     .then(function (role) {
       return role[0]
     })

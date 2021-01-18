@@ -3,16 +3,16 @@ const orgUnitFinder = require('../helpers/org-unit-finder')
 const ORGANISATION_UNIT = require('../../constants/organisation-unit')
 
 module.exports = function (id, type) {
-  var orgUnit = orgUnitFinder('name', type)
-  var table = orgUnit.courtReporterOverview
+  const orgUnit = orgUnitFinder('name', type)
+  const table = orgUnit.courtReporterOverview
 
-  var whereString = ''
+  let whereString = ''
 
   if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
     whereString += ' WHERE id = ' + id
   }
 
-  var selectList = [
+  const selectList = [
     'link_id AS linkId',
     'contracted_hours AS contractedHours',
     'reduction_hours AS reduction',
@@ -35,7 +35,7 @@ module.exports = function (id, type) {
     selectList.push('name')
   }
 
-  var noExpandHint = ' WITH (NOEXPAND)'
+  const noExpandHint = ' WITH (NOEXPAND)'
 
   return knex.schema.raw('SELECT ' + selectList.join(', ') +
       ' FROM ' + table +

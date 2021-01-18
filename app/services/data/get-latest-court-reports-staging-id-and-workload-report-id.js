@@ -7,7 +7,7 @@ module.exports = function (id) {
     .join('workload_report', 'court_reports_calculations.workload_report_id', 'workload_report.id')
     .where('workload_owner.id', id)
     .select('workload_report.id AS workloadReportId',
-            'court_reports.staging_id AS courtReportsStagingId')
+      'court_reports.staging_id AS courtReportsStagingId')
     .whereNotNull('workload_report.effective_from')
     .whereNull('workload_report.effective_to')
     .then(function (result) {

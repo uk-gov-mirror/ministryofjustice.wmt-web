@@ -5,35 +5,35 @@
   {% include "includes/breadcrumbs.html" %}
    
   {% include "includes/title-subtitle.html" %}
-  <div>
-    <div class="column-one-half">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
     {% if authorisation===false or userRole==='Data Admin'%}
-      <h2 class="heading-medium">
-        <a class="blue-link" href="/admin/workload-points">Workload points</a>
+      <h2 class="govuk-heading-m">
+        <a class="blue-link govuk-link" href="/admin/workload-points">Workload points</a>
       </h2>
-      <p>Set workload points for standard cases</p>
-      <h2 class="heading-medium">
-          <a class="blue-link" href="/admin/workload-points/t2a">Workload points (T2A)</a>
+      <p class="govuk-body">Set workload points for standard cases</p>
+      <h2 class="govuk-heading-m">
+          <a class="blue-link govuk-link" href="/admin/workload-points/t2a">Workload points (T2A)</a>
       </h2>
-      <p>Set workload points for Transition to Adulthood cases</p>
-      <h2 class="heading-medium">
-        <a class="blue-link" href="/archive-options">Archive Data</a>
+      <p class="govuk-body">Set workload points for Transition to Adulthood cases</p>
+      <h2 class="govuk-heading-m">
+        <a class="blue-link govuk-link" href="/archive-options">Archive Data</a>
       </h2>
-      <p>View Archive Data</p>
+      <p class="govuk-body">View Archive Data</p>
     {% endif %}
     </div>
-    <div class="column-one-half">
-      {% if authorisation===false or userRole==='System Admin' %}
-      <h2 class="heading-medium">
-        <a class="blue-link" href="/admin/user">User rights</a>
+    <div class="govuk-grid-column-one-half">
+      {% if authorisation===false or userRole==='System Admin' or userRole==='Data Admin'%}
+      <h2 class="govuk-heading-m">
+        <a class="blue-link govuk-link" href="/admin/user">User rights</a>
       </h2>
-      <p>Manage user rights</p>
+      <p class="govuk-body">Manage user rights</p>
       {% endif %}
       {% if authorisation===false or userRole==='Data Admin'%}
-      <h2 class="heading-medium">
-        <a class="blue-link" href="/manage-reduction-reasons">Manage Reduction Reasons</a>
+      <h2 class="govuk-heading-m">
+        <a class="blue-link govuk-link" href="/manage-reduction-reasons">Manage Reduction Reasons</a>
       </h2>
-      <p>Add, Edit and Remove Reduction Reasons</p>
+      <p class="govuk-body">Add, Edit and Remove Reduction Reasons</p>
       {% endif %}
     </div>
   </div>

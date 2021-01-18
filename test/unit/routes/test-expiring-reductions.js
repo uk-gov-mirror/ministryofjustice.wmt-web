@@ -2,8 +2,6 @@ const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
 const sinon = require('sinon')
-const log = require('../../../app/logger')
-require('sinon-bluebird')
 
 const PAGE_URL = '/expiring-reductions'
 
@@ -29,14 +27,14 @@ const result = {
   ]
 }
 
-var app
-var route
-var userRoleService
-var authorisationService
-var hasRoleStub = sinon.stub()
-var expiringReductionsStub
+let app
+let route
+let userRoleService
+let authorisationService
+const hasRoleStub = sinon.stub()
+let expiringReductionsStub
 
-var initaliseApp = function () {
+const initaliseApp = function () {
   userRoleService = sinon.stub()
   authorisationService = {
     assertUserAuthenticated: sinon.stub(),
@@ -60,7 +58,6 @@ before(function () {
 
 describe('expiring reductions route', function () {
   it('should respond with 200 when the route is called as an admin', function () {
-    log.info(result)
     return supertest(app).get(PAGE_URL).expect(200)
   })
 })

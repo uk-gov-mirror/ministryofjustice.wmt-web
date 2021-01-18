@@ -1,6 +1,7 @@
-{% extends "govuk_template.html" %}
+{# {% extends "govuk_template.html" %} #}
+{% extends "govuk/template.njk" %}
 
-{% block page_title %}
+{% block pageTitle %}
   {% include "includes/page-title.html" %}
 {% endblock %}
 
@@ -12,30 +13,17 @@
 <p>{{'GOV.UK uses cookies to make the site simpler.'}} </p>
 {% endblock %}
 
-{% block proposition_header %}
-<div class="header-proposition">
-  <div class="content">
-    <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
-    <nav id="proposition-menu">
-      <a href="/" id="proposition-name">Workload Measurement Tool</a>
-
-      {% include "includes/proposition-links.html" %}
-
-    </nav>
-  </div>
-</div>
+{% block header %}
+  {% include "includes/header.html" %}
 {% endblock %}
 
-{% block header_class %}
-  with-proposition
+{% block bodyStart %}
+  {% include "includes/scripts.html" %}
 {% endblock %}
 
-{% block footer_support_links %}
-<ul>
-  <li><a target="_blank" href="/cookies">Cookies</a></il>
-  <li><a target="_blank" href="/terms-and-conditions">Terms and Conditions</a></il>
-</ul>
+{% block footer %}
+  {% include "includes/footer.html" %}
 {% endblock %}
 
-{% block body_end %}
+{% block bodyEnd %}
 {% endblock %}

@@ -3,9 +3,9 @@ const expect = require('chai').expect
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 const getCapacityBreakdown = require('../../../../app/services/data/get-capacity-breakdown')
 
-var inserts = []
+let inserts = []
 
-var capacityBreakdown = {
+const capacityBreakdown = {
   totalPoints: 50,
   availablePoints: 25,
   reductionHours: 3,
@@ -33,7 +33,7 @@ describe('services/data/get-capacity-breakdown', function () {
   it('should retrieve all workload owners\' active workloads for a given team', function () {
     return getCapacityBreakdown(inserts.filter((item) => item.table === 'team')[0].id, 'team')
       .then(function (results) {
-        var expectedEntry = Object.assign(capacityBreakdown, { linkId: inserts.filter((item) => item.table === 'workload_owner')[0].id })
+        const expectedEntry = Object.assign(capacityBreakdown, { linkId: inserts.filter((item) => item.table === 'workload_owner')[0].id })
         expect(results.length).to.be.eql(1)
         expect(results[0]).to.eql(expectedEntry)
       })
@@ -41,40 +41,40 @@ describe('services/data/get-capacity-breakdown', function () {
 
   it('should retrieve summed capacity breakdown data for teams within ldu', function () {
     return getCapacityBreakdown(inserts.filter((item) => item.table === 'ldu')[0].id, 'ldu')
-    .then(function (results) {
-      var expectedEntry = Object.assign(capacityBreakdown,
-        {
-          linkId: inserts.filter((item) => item.table === 'team')[0].id,
-          name: 'Test Team'
-        })
-      expect(results.length).to.be.eql(1)
-      expect(results).to.contain(expectedEntry)
-    })
+      .then(function (results) {
+        const expectedEntry = Object.assign(capacityBreakdown,
+          {
+            linkId: inserts.filter((item) => item.table === 'team')[0].id,
+            name: 'Test Team'
+          })
+        expect(results.length).to.be.eql(1)
+        expect(results).to.deep.contain(expectedEntry)
+      })
   })
 
   it('should retrieve summed capacity breakdown data for ldus within region', function () {
     return getCapacityBreakdown(inserts.filter((item) => item.table === 'region')[0].id, 'region')
-    .then(function (results) {
-      var expectedEntry = Object.assign(capacityBreakdown,
-        {
-          linkId: inserts.filter((item) => item.table === 'ldu')[0].id,
-          name: 'Test LDU'
-        })
-      expect(results.length).to.be.eql(1)
-      expect(results).to.contain(expectedEntry)
-    })
+      .then(function (results) {
+        const expectedEntry = Object.assign(capacityBreakdown,
+          {
+            linkId: inserts.filter((item) => item.table === 'ldu')[0].id,
+            name: 'Test LDU'
+          })
+        expect(results.length).to.be.eql(1)
+        expect(results).to.deep.contain(expectedEntry)
+      })
   })
 
   it('should retrieve summed capacity breakdown data for regions within national', function () {
     return getCapacityBreakdown(undefined, 'hmpps')
-    .then(function (results) {
-      var expectedEntry = Object.assign(capacityBreakdown,
-        {
-          linkId: inserts.filter((item) => item.table === 'region')[0].id,
-          name: 'Test Region'
-        })
-      expect(results).to.contain(expectedEntry)
-    })
+      .then(function (results) {
+        const expectedEntry = Object.assign(capacityBreakdown,
+          {
+            linkId: inserts.filter((item) => item.table === 'region')[0].id,
+            name: 'Test Region'
+          })
+        expect(results).to.deep.contain(expectedEntry)
+      })
   })
 
   after(function () {

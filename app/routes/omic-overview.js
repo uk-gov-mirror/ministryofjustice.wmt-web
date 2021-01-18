@@ -9,7 +9,7 @@ const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
 
-var lastUpdated
+let lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/overview', function (req, res, next) {
@@ -35,12 +35,12 @@ module.exports = function (router) {
   })
 }
 
-var renderOverview = function (req, res, next) {
-  var organisationLevel = req.params.organisationLevel
-  var organisationUnit = getOrganisationUnit('name', organisationLevel)
-  var id
-  var childOrganisationLevel
-  var childOrganisationLevelDisplayText
+const renderOverview = function (req, res, next) {
+  const organisationLevel = req.params.organisationLevel
+  const organisationUnit = getOrganisationUnit('name', organisationLevel)
+  let id
+  let childOrganisationLevel
+  let childOrganisationLevelDisplayText
 
   if (organisationLevel !== organisationUnitConstants.NATIONAL.name) {
     if (req.params.id !== undefined && !isNaN(parseInt(req.params.id, 10))) {
@@ -59,9 +59,9 @@ var renderOverview = function (req, res, next) {
     throw new Error('Only available at National, Divisional and LDU Cluster level')
   }
 
-  var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+  const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-  var overviewPromise = getOverview(id, organisationLevel, false, workloadTypes.OMIC)
+  const overviewPromise = getOverview(id, organisationLevel, false, workloadTypes.OMIC)
   return getLastUpdated().then(function (result) {
     lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return overviewPromise.then(function (result) {
@@ -82,13 +82,13 @@ var renderOverview = function (req, res, next) {
         overviewDetails: result.overviewDetails,
         date: result.date,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
         workloadType: workloadTypes.OMIC
       })
     })
   }).catch(function (error) {
     if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
-      var subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+      const subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole)
       return renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
     } else {
       next(error)

@@ -14,34 +14,38 @@
 
 <form action="{{ formAction }}" method=POST id="workloadPointsForm">
 
-    <table class="sln-table-reductions">
-        <colgroup>
-            <col span="1" style="width:35%;">
-        </colgroup>
-        <thead>
-            <tr>
-                <th id="reduction_om_name">Offender Manager</th>
-                <th id="reduction_type">Type</th>
-                <th id="reduction_hours">Hours</th>
-                <th id="reduction_start_date">Start Date</th>
-                <th id="reduction_end_date">End Date</th>
-                <th></th>
-            </tr>
-        </thead>
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+            <table class="govuk-table" id="override-govuk-table">
+                <colgroup>
+                    <col class="width35Percent" span="1">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th id="reduction_om_name">Offender Manager</th>
+                        <th id="reduction_type">Type</th>
+                        <th id="reduction_hours">Hours</th>
+                        <th id="reduction_start_date">Start Date</th>
+                        <th id="reduction_end_date">End Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
 
-        <tbody class="">
-            {% for reduction in reductions %}
-            <tr>
-                <td headers="reduction_om_name">{{ reduction.omName }}</td>
-                <td headers="reduction_type">{{ reduction.reductionReason }}</td>
-                <td headers="reduction_hours">{{ reduction.hours }}</td>
-                <td headers="reduction_start_date">{{ reduction.startDate }}</td>
-                <td headers="reduction_end_date">{{ reduction.endDate }}</td>
-                <td><a href="/{{ reduction.workloadType }}/offender-manager/{{ reduction.workloadOwnerId }}/edit-reduction?reductionId={{ reduction.reductionId }}">View</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                <tbody class="">
+                    {% for reduction in reductions %}
+                    <tr>
+                        <td headers="reduction_om_name">{{ reduction.omName }}</td>
+                        <td headers="reduction_type">{{ reduction.reductionReason }}</td>
+                        <td headers="reduction_hours">{{ reduction.hours }}</td>
+                        <td headers="reduction_start_date">{{ reduction.startDate }}</td>
+                        <td headers="reduction_end_date">{{ reduction.endDate }}</td>
+                        <td><a href="/{{ reduction.workloadType }}/offender-manager/{{ reduction.workloadOwnerId }}/edit-reduction?reductionId={{ reduction.reductionId }}">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </form>
 
 </main>

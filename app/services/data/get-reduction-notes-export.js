@@ -2,15 +2,15 @@ const knex = require('../../../knex').web
 const orgUnitFinder = require('../helpers/org-unit-finder')
 
 module.exports = function (id, type) {
-  var orgUnit = orgUnitFinder('name', type)
-  var table = 'reductions_notes_export_view'
-  var whereClause = ''
+  const orgUnit = orgUnitFinder('name', type)
+  const table = 'reductions_notes_export_view'
+  let whereClause = ''
 
   if (id !== undefined) {
     whereClause = ' WHERE ' + orgUnit.name + '_id = ' + id
   }
 
-  var selectColumns = [
+  const selectColumns = [
     'region_name AS regionName',
     'ldu_name AS lduName',
     'team_name AS teamName',
@@ -26,7 +26,7 @@ module.exports = function (id, type) {
   ]
 
   return knex.raw(
-        'SELECT ' + selectColumns.join(', ') +
+    'SELECT ' + selectColumns.join(', ') +
         ' FROM ' + table +
         whereClause)
 }

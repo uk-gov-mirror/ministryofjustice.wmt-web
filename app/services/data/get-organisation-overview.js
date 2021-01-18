@@ -4,10 +4,10 @@ const orgUnitConstants = require('../../constants/organisation-unit')
 const workloadTypes = require('../../constants/workload-type')
 
 module.exports = function (id, type, workloadType = workloadTypes.PROBATION) {
-  var orgUnit = orgUnitFinder('name', type)
-  var table = orgUnit.overviewView
-  var whereClause = ''
-  var selectColumns = []
+  const orgUnit = orgUnitFinder('name', type)
+  let table = orgUnit.overviewView
+  let whereClause = ''
+  let selectColumns = []
 
   if (workloadType === workloadTypes.OMIC) {
     table = 'omic_' + table
@@ -40,7 +40,7 @@ module.exports = function (id, type, workloadType = workloadTypes.PROBATION) {
   }
 
   return knex.raw(
-      'SELECT ' + selectColumns.join(', ') +
+    'SELECT ' + selectColumns.join(', ') +
       ' FROM ' + table + ' WITH (NOEXPAND)' +
       whereClause)
     .then(function (results) {

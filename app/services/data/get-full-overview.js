@@ -3,20 +3,16 @@ const orgUnitFinder = require('../helpers/org-unit-finder')
 const orgUnitConstants = require('../../constants/organisation-unit')
 
 module.exports = function (id, type, workloadType) {
-  var orgUnit = orgUnitFinder('name', type)
-  var table = 'individual_case_overview'
-  var whereClause = ''
-  var orderBy = 'lduCluster, teamName'
+  const orgUnit = orgUnitFinder('name', type)
+  const table = 'individual_case_overview'
+  let whereClause = ''
+  let orderBy = 'lduCluster, teamName'
 
   if (id !== undefined) {
     whereClause = 'WHERE ' + orgUnit.name + '_id = ' + id
   }
 
-  // if (workloadType === 'omic') {
-  //   table = 'omic_' + table
-  // }
-
-  var selectColumns = [
+  const selectColumns = [
     'ldu_name AS lduCluster',
     'team_name AS teamName',
     'of_name AS offenderManager',
@@ -35,7 +31,7 @@ module.exports = function (id, type, workloadType) {
   }
 
   return knex.raw(
-        'SELECT ' + selectColumns.join(', ') +
+    'SELECT ' + selectColumns.join(', ') +
         ' FROM ' + table + ' WITH (NOEXPAND)' +
         whereClause + ' ORDER BY ' + orderBy)
     .then(function (results) {

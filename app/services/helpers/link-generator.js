@@ -2,7 +2,7 @@ const orgUnitFinder = require('./org-unit-finder')
 const workloadTypeValidator = require('../../services/validators/workload-type-validator')
 
 module.exports.fromReferenceAndWorkloadType = function (reference, workloadType) {
-  var referenceRegex = /^[A-Z]{1}[0-9]*$/
+  const referenceRegex = /^[A-Z]{1}[0-9]*$/
 
   if (reference === undefined) {
     throw new TypeError('Organisation reference is undefined')
@@ -13,9 +13,9 @@ module.exports.fromReferenceAndWorkloadType = function (reference, workloadType)
     throw new Error('Organisation reference ' + reference + ' is of an incorrect format')
   }
 
-  var organisationRef = reference.substring(0, 1)
-  var organisationId = reference.substring(1)
-  var organisationUnit = orgUnitFinder('ref', organisationRef)
+  const organisationRef = reference.substring(0, 1)
+  const organisationId = reference.substring(1)
+  const organisationUnit = orgUnitFinder('ref', organisationRef)
 
   if (organisationUnit === undefined) {
     throw new Error('Organisation ref ' + organisationRef + ' is not valid')
@@ -30,8 +30,8 @@ module.exports.fromIdAndNameAndWorkloadType = function (id, name, workloadType) 
   }
   workloadTypeValidator.validate(workloadType)
 
-  var link
-  var numberRegex = /^[0-9]+$/
+  let link
+  const numberRegex = /^[0-9]+$/
 
   if (id === undefined || id === '') {
     link = '/' + name + '/0'

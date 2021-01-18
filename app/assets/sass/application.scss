@@ -1,8 +1,15 @@
 // Path to assets for use with the file-url function
 // in the govuk frontend toolkit's url-helpers partial
 $path: "/public/images/";
+$govuk-assets-path: "/public";
+$govuk-images-path: "/public/images/";
+$govuk-fonts-path: "/public/fonts/";
 // This includes entire govuk-elements from _govuk-elements.scss
-@import 'govuk-elements';
+// @import 'govuk-elements';
+// $govuk-compatibility-govukelements: true;
+// $govuk-compatibility-govuktemplate: true;
+// $govuk-compatibility-govukfrontendtoolkit: true;
+@import 'node_modules/govuk-frontend/govuk/all';
 @import 'select2.scss';
 // Take a look at in app/assets/sass/patterns/ to see which files are imported.
 // Autocomplete styles from https://github.com/ministryofjustice/prison-visits-public
@@ -29,10 +36,11 @@ a.button:visited{
     color:white !important;
 }
 
-div.lastUpdated{
-  position: relative;
-  left: 70%;
-  width: fit-content;
+p.lastUpdated{
+  // position: relative;
+  // left: 80%;
+  // width: fit-content;
+  float: right;
 }
 
 td.details-control {
@@ -41,6 +49,76 @@ td.details-control {
 }
 tr.shown td.details-control {
   background: url('../images/details_close.png') no-repeat center center;
+}
+
+.width800 {
+  width: 800px;
+}
+
+.width100 {
+  width: 100px;
+}
+
+.width100Percent {
+  width: 100%;
+}
+
+.width35Percent {
+  width: 35%;
+}
+
+.reductionHeader {
+  margin-top:0;
+  margin-bottom:0;
+}
+
+.floatRightBottom10 {
+  float: right;
+  margin-bottom: 10px;
+}
+
+.floatLeftBottom10 {
+  float: left;
+  margin-bottom: 10px;
+}
+
+.marginLeft10 {
+  margin-left: 10px;
+}
+
+.officerSearchButton {
+  width: 96px;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.officerSearchHeader {
+  margin-top:0;
+  margin-bottom:32px;
+}
+
+.workloadPointsNoBorder {
+  border:none;
+  width: 70px;
+  outline:none;
+  text-align:right;
+}
+
+.workloadPointsTextboxEdit {
+  width: 70px;
+  text-align:right;
+}
+
+.displayNone {
+  display: none;
+}
+
+.displayBlock {
+  display: block;
+}
+
+.displayInlineBlock {
+  display: inline-block;
 }
 
 @mixin respond-to($media) {
@@ -76,6 +154,54 @@ tr.shown td.details-control {
 @import '_vendor/dataTable';
 @import '_vendor/button';
 
-#content, #global-header-bar, #global-cookie-message p, #footer .footer-wrapper {
+.govuk-width-container {
   max-width: 1100px;
+}
+
+.govuk-table {
+  max-width: 1100px;
+}
+
+.data-item {
+  display: block;
+  line-height: 1;
+}
+
+.data {
+  margin-top: 0.3125em;
+  margin-bottom: 1.25em;
+}
+
+.bold-xlarge {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  font-size: 48px;
+  line-height: 1.09375;
+}
+
+.bold-xsmall {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  font-size: 16px;
+  line-height: 1.14286;
+}
+
+#override-govuk-table {
+  text-align: left;
+  font-size: 19px; 
+  line-height: 1.31579;
+}
+
+#override-govuk-table tr{
+  line-height: 40px;
+}
+
+.wmt-option {
+  font-family: "nta", Arial, sans-serif;
+}
+
+.dataTables_info, .dataTables_length, .dataTables_paginate, .dataTables_processing, .dataTables_filter, .select2-selection__choice, .select2-results__option {
+  font-family: "nta", Arial, sans-serif;
 }
