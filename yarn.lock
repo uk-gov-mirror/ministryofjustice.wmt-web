@@ -83,8 +83,8 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-4.0.0.tgz#2ff674e9611b45b528896d820d3d7a812de2f0e4"
 
 "@sinonjs/commons@^1.6.0", "@sinonjs/commons@^1.7.0", "@sinonjs/commons@^1.8.1":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.1.tgz#e7df00f98a203324f6dc7cc606cad9d4a8ab2217"
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.2.tgz#858f5c4b48d80778fde4b9d541f27edc0d56488b"
   dependencies:
     type-detect "4.0.8"
 
@@ -95,8 +95,8 @@
     "@sinonjs/commons" "^1.7.0"
 
 "@sinonjs/samsam@^5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-5.3.0.tgz#1d2f0743dc54bf13fe9d508baefacdffa25d4329"
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-5.3.1.tgz#375a45fe6ed4e92fca2fb920e007c48232a6507f"
   dependencies:
     "@sinonjs/commons" "^1.6.0"
     lodash.get "^4.4.2"
@@ -193,20 +193,20 @@
     "@types/lodash" "*"
 
 "@types/lodash@*":
-  version "4.14.167"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.167.tgz#ce7d78553e3c886d4ea643c37ec7edc20f16765e"
+  version "4.14.168"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.168.tgz#fe24632e79b7ade3f132891afff86caa5e5ce008"
 
 "@types/mocha@^8.0.0":
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-8.2.0.tgz#3eb56d13a1de1d347ecb1957c6860c911704bc44"
 
 "@types/node@*":
-  version "14.14.20"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.20.tgz#f7974863edd21d1f8a494a73e8e2b3658615c340"
+  version "14.14.21"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.21.tgz#d934aacc22424fe9622ebf6857370c052eae464e"
 
 "@types/node@^12.12.17":
-  version "12.19.12"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.19.12.tgz#04793c2afa4ce833a9972e4c476432e30f9df47b"
+  version "12.19.14"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.19.14.tgz#59e5029a3c2aea34f68b717955381692fd47cafb"
 
 "@types/node@^8.0.47":
   version "8.10.66"
@@ -1111,7 +1111,7 @@ cacheable-request@^7.0.1:
     normalize-url "^4.1.0"
     responselike "^2.0.0"
 
-call-bind@^1.0.0:
+call-bind@^1.0.0, call-bind@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/call-bind/-/call-bind-1.0.2.tgz#b1d4e89e688119c3c9a903ad30abb2f6a919be3c"
   dependencies:
@@ -1307,8 +1307,8 @@ chokidar@3.4.3:
     fsevents "~2.1.2"
 
 "chokidar@>=2.0.0 <4.0.0", chokidar@^3.0.0, chokidar@^3.2.2, chokidar@^3.3.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.0.tgz#458a4816a415e9d3b3caa4faec2b96a6935a9e65"
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.1.tgz#ee9ce7bbebd2b79f49f304799d5468e31e14e68a"
   dependencies:
     anymatch "~3.1.1"
     braces "~3.0.2"
@@ -2201,21 +2201,23 @@ es-abstract@^1.17.0-next.1:
     string.prototype.trimstart "^1.0.1"
 
 es-abstract@^1.18.0-next.1:
-  version "1.18.0-next.1"
-  resolved "https://registry.yarnpkg.com/es-abstract/-/es-abstract-1.18.0-next.1.tgz#6e3a0a4bda717e5023ab3b8e90bec36108d22c68"
+  version "1.18.0-next.2"
+  resolved "https://registry.yarnpkg.com/es-abstract/-/es-abstract-1.18.0-next.2.tgz#088101a55f0541f595e7e057199e27ddc8f3a5c2"
   dependencies:
+    call-bind "^1.0.2"
     es-to-primitive "^1.2.1"
     function-bind "^1.1.1"
+    get-intrinsic "^1.0.2"
     has "^1.0.3"
     has-symbols "^1.0.1"
     is-callable "^1.2.2"
-    is-negative-zero "^2.0.0"
+    is-negative-zero "^2.0.1"
     is-regex "^1.1.1"
-    object-inspect "^1.8.0"
+    object-inspect "^1.9.0"
     object-keys "^1.1.1"
-    object.assign "^4.1.1"
-    string.prototype.trimend "^1.0.1"
-    string.prototype.trimstart "^1.0.1"
+    object.assign "^4.1.2"
+    string.prototype.trimend "^1.0.3"
+    string.prototype.trimstart "^1.0.3"
 
 es-to-primitive@^1.2.1:
   version "1.2.1"
@@ -3723,9 +3725,9 @@ header-case@^2.0.4:
     capital-case "^1.0.4"
     tslib "^2.0.3"
 
-helmet@^4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/helmet/-/helmet-4.3.1.tgz#e374e2fb3f8da045d0233f13299b1fde6e59e4e1"
+helmet@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/helmet/-/helmet-4.4.0.tgz#84532525b29bf32288c6c9cb3e3038af9a8aa958"
 
 hoek@4.x.x:
   version "4.2.1"
@@ -4131,7 +4133,7 @@ is-negated-glob@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-negated-glob/-/is-negated-glob-1.0.0.tgz#6910bca5da8c95e784b5751b976cf5a10fee36d2"
 
-is-negative-zero@^2.0.0:
+is-negative-zero@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/is-negative-zero/-/is-negative-zero-2.0.1.tgz#3de746c18dda2319241a53675908d8f766f11c24"
 
@@ -4531,9 +4533,9 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
 
-knex@^0.21.15:
-  version "0.21.15"
-  resolved "https://registry.yarnpkg.com/knex/-/knex-0.21.15.tgz#4f5cb5c147ee354c93d3edbf3643ef248360e77f"
+knex@^0.21.16:
+  version "0.21.16"
+  resolved "https://registry.yarnpkg.com/knex/-/knex-0.21.16.tgz#5431efe66d7194cdcf34ba3a874c6c66d7229c1a"
   dependencies:
     colorette "1.2.1"
     commander "^6.2.0"
@@ -4908,7 +4910,7 @@ merge-stream@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
 
-methods@1.1.2, methods@^1.1.2, methods@~1.1.2:
+methods@^1.1.2, methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
 
@@ -4956,8 +4958,8 @@ mime@2.4.0:
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.0.tgz#e051fd881358585f3279df333fe694da0bcffdd6"
 
 mime@^2.4.6:
-  version "2.4.7"
-  resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.7.tgz#962aed9be0ed19c91fd7dc2ece5d7f4e89a90d74"
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-2.5.0.tgz#2b4af934401779806ee98026bb42e8c1ae1876b1"
 
 mimic-fn@^1.0.0:
   version "1.2.0"
@@ -6087,8 +6089,8 @@ qs@6.7.0:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
 
 qs@^6.9.4:
-  version "6.9.4"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.4.tgz#9090b290d1f91728d3c22e54843ca44aea5ab687"
+  version "6.9.6"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.6.tgz#26ed3c8243a431b2924aca84cc90471f35d5a0ee"
 
 qs@~6.5.2:
   version "6.5.2"
@@ -6249,11 +6251,11 @@ regex-not@^1.0.0, regex-not@^1.0.2:
     safe-regex "^1.1.0"
 
 regexp.prototype.flags@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/regexp.prototype.flags/-/regexp.prototype.flags-1.3.0.tgz#7aba89b3c13a64509dabcf3ca8d9fbb9bdf5cb75"
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/regexp.prototype.flags/-/regexp.prototype.flags-1.3.1.tgz#7ef352ae8d159e758c0eadca6f8fcb4eef07be26"
   dependencies:
+    call-bind "^1.0.2"
     define-properties "^1.1.3"
-    es-abstract "^1.17.0-next.1"
 
 regexpp@^2.0.1:
   version "2.0.1"
@@ -7010,14 +7012,14 @@ string.prototype.matchall@^4.0.2:
     regexp.prototype.flags "^1.3.0"
     side-channel "^1.0.3"
 
-string.prototype.trimend@^1.0.1:
+string.prototype.trimend@^1.0.1, string.prototype.trimend@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/string.prototype.trimend/-/string.prototype.trimend-1.0.3.tgz#a22bd53cca5c7cf44d7c9d5c732118873d6cd18b"
   dependencies:
     call-bind "^1.0.0"
     define-properties "^1.1.3"
 
-string.prototype.trimstart@^1.0.1:
+string.prototype.trimstart@^1.0.1, string.prototype.trimstart@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/string.prototype.trimstart/-/string.prototype.trimstart-1.0.3.tgz#9b4cb590e123bb36564401d59824298de50fd5aa"
   dependencies:
@@ -7108,7 +7110,7 @@ suffix@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/suffix/-/suffix-0.1.1.tgz#cc58231646a0ef1102f79478ef3a9248fd9c842f"
 
-superagent@6.1.0:
+superagent@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/superagent/-/superagent-6.1.0.tgz#09f08807bc41108ef164cfb4be293cebd480f4a6"
   dependencies:
@@ -7124,12 +7126,12 @@ superagent@6.1.0:
     readable-stream "^3.6.0"
     semver "^7.3.2"
 
-supertest@6.0.x:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/supertest/-/supertest-6.0.1.tgz#f6b54370de85c45d6557192c8d7df604ca2c9e18"
+supertest@6.1.x:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/supertest/-/supertest-6.1.1.tgz#4fe6ddfdad4ef3eb72926046c6c625217771d9ae"
   dependencies:
-    methods "1.1.2"
-    superagent "6.1.0"
+    methods "^1.1.2"
+    superagent "^6.1.0"
 
 supports-color@6.0.0:
   version "6.0.0"
