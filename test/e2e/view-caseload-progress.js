@@ -26,11 +26,11 @@ describe('View caseload progress flow', () => {
   it('should navigate to the workload owner caseload progress screen', async () => {
     await browser.url(workloadOwnerDefaultUrl + '/caseload-capacity')
 
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     let exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -42,7 +42,7 @@ describe('View caseload progress flow', () => {
     exists = await plotlyPlot.isExisting()
     expect(exists).to.be.equal(true)
 
-    const pageTitle = await $('.sln-page-subtitle')
+    const pageTitle = await $('.govuk-caption-xl')
     const text = await pageTitle.getText()
     expect(text).to.equal('Offender Manager')
   })
@@ -50,11 +50,11 @@ describe('View caseload progress flow', () => {
   it('should navigate to the team caseload progress screen', async () => {
     await browser.url(teamDefaultUrl + '/case-progress')
 
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     let exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -70,7 +70,7 @@ describe('View caseload progress flow', () => {
     exists = await plotlyPlot.isExisting()
     expect(exists).to.be.equal(true)
 
-    const pageTitle = await $('.sln-page-subtitle')
+    const pageTitle = await $('.govuk-caption-xl')
     const text = await pageTitle.getText()
     expect(text).to.equal('Team')
   })
@@ -78,11 +78,11 @@ describe('View caseload progress flow', () => {
   it('should navigate to the ldu caseload progress screen', async () => {
     await browser.url(lduDefaultUrl + '/case-progress')
 
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     let exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -98,7 +98,7 @@ describe('View caseload progress flow', () => {
     exists = await plotlyPlot.isExisting()
     expect(exists).to.be.equal(true)
 
-    const pageTitle = await $('.sln-page-subtitle')
+    const pageTitle = await $('.govuk-caption-xl')
     const text = await pageTitle.getText()
     expect(text).to.equal('LDU Cluster')
   })
@@ -106,11 +106,11 @@ describe('View caseload progress flow', () => {
   it('should navigate to the region caseload progress screen', async () => {
     await browser.url(regionDefaultUrl + '/case-progress')
 
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     let exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -126,7 +126,7 @@ describe('View caseload progress flow', () => {
     exists = await plotlyPlot.isExisting()
     expect(exists).to.be.equal(true)
 
-    const pageTitle = await $('.sln-page-subtitle')
+    const pageTitle = await $('.govuk-caption-xl')
     const text = await pageTitle.getText()
     expect(text).to.equal('Division')
   })
@@ -134,11 +134,11 @@ describe('View caseload progress flow', () => {
   it('should navigate to the national caseload progress screen', async () => {
     await browser.url(nationalDefaultUrl + '/case-progress')
 
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     let exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -154,7 +154,7 @@ describe('View caseload progress flow', () => {
     exists = await plotlyPlot.isExisting()
     expect(exists).to.be.equal(true)
 
-    const pageTitle = await $('.sln-page-subtitle')
+    const pageTitle = await $('.govuk-caption-xl')
     const text = await pageTitle.getText()
     expect(text).to.equal('National')
   })

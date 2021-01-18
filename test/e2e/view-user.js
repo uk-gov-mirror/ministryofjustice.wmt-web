@@ -14,12 +14,12 @@ describe('View adding a new user role', () => {
     it('with the correct breadcrumbs and heading title', async () => {
       await browser.url(adminUserURL)
 
-      const breadcrumbs = await $('.breadcrumbs')
+      const breadcrumbs = await $('.govuk-breadcrumbs')
       const exists = await breadcrumbs.isExisting()
       expect(exists).to.be.equal(true)
 
-      const pageTitle = await $('.sln-page-title')
-      const text = await pageTitle.getText('.sln-page-title')
+      const pageTitle = await $('.govuk-heading-xl')
+      const text = await pageTitle.getText('.govuk-heading-xl')
       expect(text).to.equal('User rights')
     })
 
@@ -27,7 +27,7 @@ describe('View adding a new user role', () => {
       const username = await $('#username')
       await username.setValue('John.Doe')
 
-      const submit = await $('.button')
+      const submit = await $('.govuk-button')
       await submit.click()
     })
   })

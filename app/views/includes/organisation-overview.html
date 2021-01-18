@@ -1,7 +1,7 @@
 
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column">
+    <div class="govuk-grid-column-full">
 
             {% ifAsync ((organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
                 {% if authorisation===false or userRole==='System Admin' or userRole==='Data Admin' or userRole==='Manager'%}

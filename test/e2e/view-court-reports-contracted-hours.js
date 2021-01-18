@@ -19,11 +19,11 @@ describe('View contracted hours for court reporter', async function () {
 
   it('should navigate to the court reporter contracted-hours page', async function () {
     await browser.url(workloadOwnerDefaultUrl + '/contracted-hours')
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     let exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -35,7 +35,7 @@ describe('View contracted hours for court reporter', async function () {
     exists = await link.isExisting()
     expect(exists).to.be.equal(true)
 
-    const pageTitle = await $('.sln-page-subtitle')
+    const pageTitle = await $('.govuk-caption-xl')
     const text = await pageTitle.getText()
     expect(text).to.equal('Offender Manager')
   })
@@ -43,7 +43,7 @@ describe('View contracted hours for court reporter', async function () {
   it('should be accessible via the Contracted Hours tab when on any other tab', async () => {
     await browser.url(workloadOwnerDefaultUrl + '/overview')
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     let exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 

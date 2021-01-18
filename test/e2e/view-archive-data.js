@@ -12,9 +12,9 @@ describe('View archive data', () => {
   describe('should navigate to the archive page', () => {
     it('with the correct breadcrumbs and heading title', async () => {
       await browser.url(adminArchiveURL)
-      pageTitle = await $('.sln-page-title')
+      pageTitle = await $('.govuk-heading-xl')
       pageTitle = await pageTitle.getText()
-      pageSubtitle = await $('.sln-page-subtitle')
+      pageSubtitle = await $('.govuk-caption-xl')
       pageSubtitle = await pageSubtitle.getText()
 
       expect(pageTitle).to.equal('Archived Daily Caseload Data')

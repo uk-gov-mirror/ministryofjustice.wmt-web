@@ -184,14 +184,15 @@
     <input type="hidden" name="reductionId" value="{{ reduction.id }}">
     <input type="hidden" name="status" value="DELETED">
   </form>
-  <div>
-  <ul>
+ 
     {% if reduction.status !== 'ARCHIVED' %}
-    <li><a  class="govuk-link" href="javascript:document.archiveReduction.submit()">Archive reduction</a></li>
+      <div>
+       <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="javascript:document.archiveReduction.submit()">Archive reduction</a>
+      </div>
     {% endif %}
-    <li><a  class="govuk-link" href="javascript:document.deleteReduction.submit()">Delete reduction</a></li>
-  </ul>
-  </div>
+    <div>
+      <a class="govuk-button govuk-button--warning" href="javascript:document.deleteReduction.submit()">Delete reduction</a>
+    </div>
   {% endif %}
   <br>
   <details class="govuk-details" data-module="govuk-details">
@@ -201,7 +202,7 @@
         </span>
       </summary>
       <div class="govuk-details__text">
-        <table class="">
+        <table class="govuk-table" id="override-govuk-table">
             <thead>
                 <tr>
                     <th id="type">Reason</th>

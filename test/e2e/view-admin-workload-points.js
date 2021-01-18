@@ -19,9 +19,9 @@ describe('View / edit Workload Points', () => {
   describe('should navigate to the admin workload points screen', () => {
     it('with the correct breadcrumbs and headings', async () => {
       await browser.url(workloadPointsUrl)
-      pageTitle = await $('.sln-page-title')
+      pageTitle = await $('.govuk-heading-xl')
       pageTitle = await pageTitle.getText()
-      pageSubtitle = await $('.sln-page-subtitle')
+      pageSubtitle = await $('.govuk-caption-xl')
       pageSubtitle = await pageSubtitle.getText()
       expect(pageTitle, 'Workload Points page title should be "Workload Points"').to.equal('Workload Points')
       expect(pageSubtitle, 'Workload Points page subtitle should be "Admin"').to.equal('Admin')
@@ -208,7 +208,7 @@ describe('View / edit Workload Points', () => {
       saveButton = await $('#save-button')
       await saveButton.click()
 
-      successMessage = await $('.message--success')
+      successMessage = await $('.govuk-notification-banner__heading')
       successMessage = await successMessage.getText()
 
       expect(successMessage, 'Success message should equal "You have successfully updated the workload points!"').to.equal('You have successfully updated the workload points!')

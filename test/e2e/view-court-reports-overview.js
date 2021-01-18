@@ -28,11 +28,11 @@ describe('View court-reports overview', function () {
   it('should navigate to the court-reporter overview page', async function () {
     await browser.url(workloadOwnerDefaultUrl + '/overview')
 
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     let exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -44,11 +44,11 @@ describe('View court-reports overview', function () {
   it('should navigate to the team court-reports overview page', async function () {
     await browser.url(teamDefaultUrl + '/overview')
 
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     let exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -68,11 +68,11 @@ describe('View court-reports overview', function () {
   it('should naviagte to the ldu court-reports overview page', async function () {
     await browser.url(lduDefaultUrl + '/overview')
 
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     let exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -92,11 +92,11 @@ describe('View court-reports overview', function () {
   it('should naviagte to the region court-reports overview page', async function () {
     await browser.url(regionDefaultUrl + '/overview')
 
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     let exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -116,11 +116,11 @@ describe('View court-reports overview', function () {
   it('should navigate to the national court-reports overview page', async function () {
     await browser.url(nationalDefaultUrl + '/overview')
 
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     let exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -140,7 +140,7 @@ describe('View court-reports overview', function () {
   it('should navigate to overview page from any other tab', async function () {
     await browser.url(workloadOwnerDefaultUrl + '/contracted-hours')
 
-    let subnav = await $('.sln-subnav')
+    let subnav = await $('.wmt-sub-nav')
     let exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -151,14 +151,14 @@ describe('View court-reports overview', function () {
     exists = await grade.isExisting()
     expect(exists).to.be.equal(true)
 
-    subnav = await $('.sln-subnav')
+    subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
     link = await $('[href="' + workloadOwnerDefaultUrl + '/reductions"]')
     await link.click()
 
-    subnav = await $('.sln-subnav')
+    subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -173,42 +173,42 @@ describe('View court-reports overview', function () {
   it('should allow the user to navigate down the org hierarchy from the national page', async function () {
     await browser.url(nationalDefaultUrl + '/overview')
 
-    let pageTitle = await $('.sln-page-subtitle')
+    let pageTitle = await $('.govuk-caption-xl')
     let text = await pageTitle.getText()
     expect(text).to.equal('National')
 
     let link = await $('[href="' + regionDefaultUrl + '"]')
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('Division')
 
     link = await $('[href="' + lduDefaultUrl + '"]')
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('LDU Cluster')
 
     link = await $('[href="' + teamDefaultUrl + '"]')
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('Team')
 
     link = await $('[href="' + workloadOwnerDefaultUrl + '"]')
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('Offender Manager')
   })
 
   it('should contain breadcrumbs which allow the user to navigate up the org hierarchy', async function () {
     await browser.url(workloadOwnerDefaultUrl)
-    let pageTitle = await $('.sln-page-subtitle')
+    let pageTitle = await $('.govuk-caption-xl')
     let text = await pageTitle.getText()
     expect(text).to.equal('Offender Manager')
 
@@ -227,28 +227,28 @@ describe('View court-reports overview', function () {
     link = await $('[href="' + teamDefaultUrl + '"]')
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('Team')
 
     link = await $('[href="' + lduDefaultUrl + '"]')
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('LDU Cluster')
 
     link = await $('[href="' + regionDefaultUrl + '"]')
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('Division')
 
     link = await $('[href="' + nationalDefaultUrl + '"]')
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('National')
   })

@@ -18,15 +18,15 @@ describe('View reductions page for court-reporter', () => {
     it('with the correct breadcrumbs and heading title', async () => {
       await browser.url(offenderManagerUrl)
 
-      const breadcrumbs = await $('.breadcrumbs')
+      const breadcrumbs = await $('.govuk-breadcrumbs')
       let exists = await breadcrumbs.isExisting()
       expect(exists).to.be.equal(true)
 
-      const subnav = await $('.sln-subnav')
+      const subnav = await $('.wmt-sub-nav')
       exists = await subnav.isExisting()
       expect(exists).to.be.equal(true)
 
-      const pageTitle = await $('.sln-page-subtitle')
+      const pageTitle = await $('.govuk-caption-xl')
       const text = await pageTitle.getText()
       expect(text).to.equal('Offender Manager')
     })
@@ -102,18 +102,18 @@ describe('View reductions page for court-reporter', () => {
 
     // it('should be able to navigate to existing reduction screen', async () => {
     //   await browser.url(offenderManagerUrl)
-    //   let breadcrumbs = await $('.breadcrumbs')
+    //   let breadcrumbs = await $('.govuk-breadcrumbs')
     //   let exists = await breadcrumbs.isExisting()
     //   expect(exists).to.be.equal(true)
 
-    //   let subnav = await $('.sln-subnav')
+    //   let subnav = await $('.wmt-sub-nav')
     //   exists = await subnav.isExisting()
     //   expect(exists).to.be.equal(true)
 
     //   let reductionLink = await $('[href="' + reductionUrl + '"]')
     //   await reductionLink.click()
 
-    //   let pageTitle = await $('.heading-xlarge')
+    //   let pageTitle = await $('.govuk-heading-xl')
     //   let text = await pageTitle.getText()
     //   expect(text).to.equal('Reduction')
     // })

@@ -20,11 +20,11 @@ describe('View contracted hours', function () {
   it('should navigate to the workload owner contracted-hours page', async function () {
     await browser.url(workloadOwnerDefaultUrl + '/contracted-hours')
 
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     let exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const subnav = await $('.sln-subnav')
+    const subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -35,14 +35,14 @@ describe('View contracted hours', function () {
     const link = await $('[href="' + workloadOwnerDefaultUrl + '/overview"]')
     await link.click()
 
-    const pageTitle = await $('.sln-page-subtitle')
+    const pageTitle = await $('.govuk-caption-xl')
     const text = await pageTitle.getText()
     expect(text).to.equal('Offender Manager')
   })
 
   it('should be accessible via the Contracted Hours tab when on any other tab', async () => {
     await browser.url(workloadOwnerDefaultUrl + '/overview')
-    let subnav = await $('.sln-subnav')
+    let subnav = await $('.wmt-sub-nav')
     let exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -54,7 +54,7 @@ describe('View contracted hours', function () {
 
     const caseloadCapacityLink = await $('[href="' + workloadOwnerDefaultUrl + '/caseload-capacity"]')
     await caseloadCapacityLink.click()
-    subnav = await $('.sln-subnav')
+    subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 
@@ -66,7 +66,7 @@ describe('View contracted hours', function () {
 
     const caseProgressLink = await $('[href="' + workloadOwnerDefaultUrl + '/case-progress"]')
     await caseProgressLink.click()
-    subnav = await $('.sln-subnav')
+    subnav = await $('.wmt-sub-nav')
     exists = await subnav.isExisting()
     expect(exists).to.be.equal(true)
 

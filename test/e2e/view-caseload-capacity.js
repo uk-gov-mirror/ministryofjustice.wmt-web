@@ -26,35 +26,35 @@ describe('View your caseload capacity flow', () => {
 
   it('should navigate to the workload owner caseload capacity screen', async () => {
     await browser.url(workloadOwnerDefaultUrl + '/caseload-capacity')
-    pageSubtitle = await $('.sln-page-subtitle')
+    pageSubtitle = await $('.govuk-caption-xl')
     pageSubtitle = await pageSubtitle.getText()
     expect(pageSubtitle).to.equal('Offender Manager')
   })
 
   it('should navigate to the team caseload capacity screen', async () => {
     await browser.url(teamDefaultUrl + '/caseload-capacity')
-    pageSubtitle = await $('.sln-page-subtitle')
+    pageSubtitle = await $('.govuk-caption-xl')
     pageSubtitle = await pageSubtitle.getText()
     expect(pageSubtitle).to.equal('Team')
   })
 
   it('should navigate to the ldu caseload capacity screen', async () => {
     await browser.url(lduDefaultUrl + '/caseload-capacity')
-    pageSubtitle = await $('.sln-page-subtitle')
+    pageSubtitle = await $('.govuk-caption-xl')
     pageSubtitle = await pageSubtitle.getText()
     expect(pageSubtitle).to.equal('LDU Cluster')
   })
 
   it('should navigate to the region caseload capacity screen', async () => {
     await browser.url(regionDefaultUrl + '/caseload-capacity')
-    pageSubtitle = await $('.sln-page-subtitle')
+    pageSubtitle = await $('.govuk-caption-xl')
     pageSubtitle = await pageSubtitle.getText()
     expect(pageSubtitle).to.equal('Division')
   })
 
   it('should navigate to the national caseload capacity screen', async () => {
     await browser.url(nationalDefaultUrl + '/caseload-capacity')
-    pageSubtitle = await $('.sln-page-subtitle')
+    pageSubtitle = await $('.govuk-caption-xl')
     pageSubtitle = await pageSubtitle.getText()
     expect(pageSubtitle).to.equal('National')
   })

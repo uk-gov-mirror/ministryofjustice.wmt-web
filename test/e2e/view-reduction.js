@@ -19,15 +19,15 @@ describe('View adding a new reduction', () => {
     it('with the correct breadcrumbs and heading title', async () => {
       await browser.url(offenderManagerUrl)
 
-      const breadcrumbs = await $('.breadcrumbs')
+      const breadcrumbs = await $('.govuk-breadcrumbs')
       let exists = await breadcrumbs.isExisting()
       expect(exists).to.be.equal(true)
 
-      const subnav = await $('.sln-subnav')
+      const subnav = await $('.wmt-sub-nav')
       exists = await subnav.isExisting()
       expect(exists).to.be.equal(true)
 
-      const pageTitle = await $('.sln-page-subtitle')
+      const pageTitle = await $('.govuk-caption-xl')
       const text = await pageTitle.getText()
       expect(text).to.equal('Offender Manager')
     })

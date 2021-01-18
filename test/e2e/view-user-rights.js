@@ -16,18 +16,18 @@ describe('View adding a new user role', () => {
     it('with the correct breadcrumbs, heading title and roles to select from', async () => {
       await browser.url(adminUserURL)
 
-      const breadcrumbs = await $('.breadcrumbs')
+      const breadcrumbs = await $('.govuk-breadcrumbs')
       const exists = await breadcrumbs.isExisting()
       expect(exists).to.be.equal(true)
 
       const usernameField = await $('#username')
       await usernameField.setValue(username)
 
-      let submit = await $('.button')
+      let submit = await $('.govuk-button')
       await submit.click()
 
-      const pageTitle = await $('.sln-page-title')
-      const text = await pageTitle.getText('.sln-page-title')
+      const pageTitle = await $('.govuk-heading-xl')
+      const text = await pageTitle.getText('.govuk-heading-xl')
       expect(text).to.equal('User rights')
 
       let radioButton = await $('#dataAdminRadio')
@@ -53,7 +53,7 @@ describe('View adding a new user role', () => {
       const fullname = await $('#fullname')
       await fullname.setValue('John Doe')
 
-      submit = await $('.button')
+      submit = await $('.govuk-button')
       await submit.click()
     })
   })

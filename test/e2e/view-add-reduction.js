@@ -24,7 +24,7 @@ describe('View adding a new reduction', () => {
   describe('should navigate to the add reduction screen and submit a new reduction form', () => {
     it('with the correct breadcrumbs and heading title', async () => {
       await browser.url(offenderManagerUrl)
-      pageTitle = await $('.heading-xlarge')
+      pageTitle = await $('.govuk-heading-xl')
       pageTitle = await pageTitle.getText()
       expect(pageTitle, 'New reduction Page title should be "New reduction"').to.equal('New reduction')
     })

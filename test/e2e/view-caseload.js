@@ -28,7 +28,7 @@ describe('View your caseload flow', () => {
   describe('should navigate to the team caseload screen', () => {
     it('with the correct breadcrumbs, subnav, title and export button', async () => {
       await browser.url(teamDefaultUrl + '/caseload')
-      pageSubtitle = await $('.sln-page-subtitle')
+      pageSubtitle = await $('.govuk-caption-xl')
       pageSubtitle = await pageSubtitle.getText()
       expect(pageSubtitle).to.equal('Team')
     })
@@ -80,7 +80,7 @@ describe('View your caseload flow', () => {
   describe('should navigate to the LDU caseload screen', () => {
     it('with the correct table, breadcrumbs and export button', async () => {
       await browser.url(lduDefaultUrl + '/caseload')
-      pageSubtitle = await $('.sln-page-subtitle')
+      pageSubtitle = await $('.govuk-caption-xl')
       pageSubtitle = await pageSubtitle.getText()
       expect(pageSubtitle).to.equal('LDU Cluster')
 
@@ -170,7 +170,7 @@ describe('View your caseload flow', () => {
   describe('should navigate to the Region caseload screen', () => {
     it('with the correct table, breadcrumbs and export button', async () => {
       await browser.url(regionDefaultUrl + '/caseload')
-      pageSubtitle = await $('.sln-page-subtitle')
+      pageSubtitle = await $('.govuk-caption-xl')
       pageSubtitle = await pageSubtitle.getText()
       expect(pageSubtitle).to.equal('Division')
     })
@@ -221,7 +221,7 @@ describe('View your caseload flow', () => {
   describe('should navigate to the National caseload screen', () => {
     it('with the correct table, breadcrumbs and export button', async () => {
       await browser.url(nationalDefaultUrl + '/caseload')
-      pageSubtitle = await $('.sln-page-subtitle')
+      pageSubtitle = await $('.govuk-caption-xl')
       pageSubtitle = await pageSubtitle.getText()
       expect(pageSubtitle).to.equal('National')
     })

@@ -131,38 +131,38 @@ describe('View overview', function () {
 
   it('should allow the user to navigate down the org hierarchy from the national page', async function () {
     await browser.url(nationalDefaultUrl + '/overview')
-    let pageTitle = await $('.sln-page-subtitle')
+    let pageTitle = await $('.govuk-caption-xl')
     let text = await pageTitle.getText()
     expect(text).to.equal('National')
     let link = await $('[href="' + regionDefaultUrl + '"]')
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('Division')
     link = await $('[href="' + lduDefaultUrl + '"]')
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('LDU Cluster')
     link = await $('[href="' + teamDefaultUrl + '"]')
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('Team')
     link = await $('[href="' + workloadOwnerDefaultUrl + '"]')
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('Offender Manager')
   })
 
   it('should contain breadcrumbs which allow the user to navigate up the org hierarchy', async function () {
     await browser.url(workloadOwnerDefaultUrl)
-    let pageTitle = await $('.sln-page-subtitle')
+    let pageTitle = await $('.govuk-caption-xl')
     let text = await pageTitle.getText()
     expect(text).to.equal('Offender Manager')
 
@@ -184,7 +184,7 @@ describe('View overview', function () {
 
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('Team')
 
@@ -194,7 +194,7 @@ describe('View overview', function () {
 
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('LDU Cluster')
 
@@ -204,7 +204,7 @@ describe('View overview', function () {
 
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('Division')
 
@@ -214,7 +214,7 @@ describe('View overview', function () {
 
     await link.click()
 
-    pageTitle = await $('.sln-page-subtitle')
+    pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
     expect(text).to.equal('National')
   })

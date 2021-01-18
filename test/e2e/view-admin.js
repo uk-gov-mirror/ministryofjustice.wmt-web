@@ -16,7 +16,7 @@ describe('View admin role', () => {
   describe('should navigate to the admin page', () => {
     it('with the correct breadcrumbs and heading title', async () => {
       await browser.url(adminURL)
-      pageTitle = await $('.sln-page-title')
+      pageTitle = await $('.govuk-heading-xl')
       pageTitle = await pageTitle.getText()
       expect(pageTitle, 'Admin Page title should be "Admin"').to.equal('Admin')
     })
@@ -25,7 +25,7 @@ describe('View admin role', () => {
       await browser.url(adminURL)
       const link = await $('[href="' + workloadPointsURL + '"')
       await link.click()
-      pageTitle = await $('.sln-page-title')
+      pageTitle = await $('.govuk-heading-xl')
       pageTitle = await pageTitle.getText()
       expect(pageTitle, 'Workload Points Page title should be "Workload Points"').to.equal('Workload Points')
     })

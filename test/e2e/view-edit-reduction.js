@@ -20,11 +20,11 @@ describe('View editing a new reduction', () => {
 
   it('with the correct breadcrumbs and heading title', async () => {
     await browser.url(offenderManagerUrl)
-    const breadcrumbs = await $('.breadcrumbs')
+    const breadcrumbs = await $('.govuk-breadcrumbs')
     const exists = await breadcrumbs.isExisting()
     expect(exists).to.be.equal(true)
 
-    const pageTitle = await $('.heading-xlarge')
+    const pageTitle = await $('.govuk-heading-xl')
     const text = await pageTitle.getText()
     expect(text).to.equal('New reduction')
   })
@@ -63,11 +63,11 @@ describe('View editing a new reduction', () => {
     it('with the archive and delete links', async () => {
       await browser.url(reductionUrl)
 
-      const breadcrumbs = await $('.breadcrumbs')
+      const breadcrumbs = await $('.govuk-breadcrumbs')
       const exists = await breadcrumbs.isExisting()
       expect(exists).to.be.equal(true)
 
-      const pageTitle = await $('.heading-xlarge')
+      const pageTitle = await $('.govuk-heading-xl')
       let text = await pageTitle.getText()
       expect(text).to.equal('Reduction')
 
