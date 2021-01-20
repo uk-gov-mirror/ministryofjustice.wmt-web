@@ -30,7 +30,7 @@ module.exports = function (router) {
 
     let userId = null
     if (req.user !== undefined && req.user !== null) {
-      userId = req.user.userId
+      userId = [req.user.userId]
     }
     const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return expiringReductionsService(userId)

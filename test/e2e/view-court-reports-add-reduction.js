@@ -10,7 +10,7 @@ let offenderManagerUrl
 describe('View adding a new reduction for court-reporter', () => {
   before(async function () {
     await authenticationHelper.login(authenticationHelper.users.Manager)
-    const results = await dataHelper.getAnyExistingWorkloadOwnerId()
+    const results = await dataHelper.getAnyExistingCourtReporterId()
     offenderManagerId = results
     offenderManagerUrl = '/' + workloadTypes.COURT_REPORTS + '/offender-manager/' + offenderManagerId + '/add-reduction'
     await browser.url(offenderManagerUrl)

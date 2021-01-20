@@ -90,6 +90,15 @@ module.exports.getAnyExistingWorkloadOwnerId = function () {
     })
 }
 
+module.exports.getAnyExistingCourtReporterId = function () {
+  return knex('individual_court_reporter_overview')
+    .where('contracted_hours', '>', 0)
+    .first()
+    .then(function (result) {
+      return result.id
+    })
+}
+
 module.exports.getLastRecordFromTable = function (table) {
   return knex(table)
     .orderBy('id', 'desc')
