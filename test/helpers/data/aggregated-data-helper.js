@@ -399,8 +399,9 @@ module.exports.getAnyExistingWorkloadId = function () {
 }
 
 module.exports.getAnyExistingWorkloadOwnerId = function () {
-  const promise = knex('workload_owner')
-    .first()
+  const promise = knex('individual_case_overview')
+    .where('contracted_hours', '>', 0)
+    .first('workload_owner_id AS id')
     .then(function (result) {
       return result.id
     })
