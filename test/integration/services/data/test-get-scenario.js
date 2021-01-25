@@ -22,7 +22,7 @@ describe('services/data/get-scenario team', function () {
 
 describe('services/data/get-scenario ldu', function () {
   before(function () {
-    return getLDU('Probation Delivery Unit 1').then(function (id) {
+    return getLDU('LDU Cluster 1').then(function (id) {
       return getScenario(id, 'ldu').then(function (results) {
         scenarioData = results
       })
