@@ -22,7 +22,7 @@ module.exports = {
   LDU: {
     name: 'ldu',
     ref: 'L',
-    displayText: 'LDU Cluster',
+    displayText: 'Probation Delivery Unit',
     capacityView: 'ldu_capacity_view',
     capacityBreakdownView: 'ldu_capacity_breakdown_view',
     caseProgressView: 'ldu_case_progress_view',

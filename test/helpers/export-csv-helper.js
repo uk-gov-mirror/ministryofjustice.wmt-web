@@ -32,7 +32,7 @@ module.exports.TEAM_CASELOAD_CSV = {
 
 module.exports.ARMS_EXPORT_CSV = {
   filename: ('Test_Arms_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region Name","LDU Cluster","Team Name","Assessment Date","CRN","Offender Manager Name","Offender Manager Grade","Sentence Type","Sentence or Release Date","Completion Date"\n' +
+  csv: '"Region Name","Probation Delivery Unit","Team Name","Assessment Date","CRN","Offender Manager Name","Offender Manager Grade","Sentence Type","Sentence or Release Date","Completion Date"\n' +
     '"NPS North West","Cumbria","NPS - Carlisle 1","4-10-2018","CASEREF30134","A.N. Offender Manager CMBY478NPSM","PO","Licence","14-9-2018","21-9-2018"\n' +
     '"NPS North West","Cumbria","NPS - Carlisle 1","9-10-2018","CASEREF30154","A.N. Offender Manager CMBY478NPSM","PO","Community","22-2-2017","22-8-2017"\n' +
     '"NPS North West","Cumbria","NPS - Carlisle 1","28-9-2018","CASEREF30098","A.N. Offender Manager CMBE297NPSM","PO","Community","1-1-1800","1-10-1800"\n' +
@@ -197,7 +197,7 @@ module.exports.PERCENTAGE_WORKLOAD_EXPORT_RESULT = {
 
 module.exports.PERCENTAGE_WORKLOAD_EXPORT_CSV = {
   filename: ('Test_Percentage_Workload_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region Name","LDU Cluster","Team Name","Offender Manager Name","Offender Manager Grade","Contracted Hours","Reduction Hours","Capacity","Case Contribution","CMS Contribution","GS Contribution","ARMS Contribution","PAROMS Contribution","SDR Contribution","FDR Contribution"\n' +
+  csv: '"Region Name","Probation Delivery Unit","Team Name","Offender Manager Name","Offender Manager Grade","Contracted Hours","Reduction Hours","Capacity","Case Contribution","CMS Contribution","GS Contribution","ARMS Contribution","PAROMS Contribution","SDR Contribution","FDR Contribution"\n' +
     '"NPS North West","Cumbria","NPS - Carlisle 1","A.N. Offender Manager CMBY478NPSM","PO",37,10,"100%","99%","98%","97%","96%","95%","94%","93%"\n' +
     '"NPS North West","Cumbria","NPS - Carlisle 1","A.N. Offender Manager CMBY478NPSM","PO",36,9,"99%","98%","97%","96%","95%","94%","93%","92%"\n' +
     '"NPS North West","Cumbria","NPS - Carlisle 1","A.N. Offender Manager CMBE297NPSM","PO",35,8,"98%","97%","96%","95%","94%","93%","92%","91%"\n' +
@@ -207,7 +207,7 @@ module.exports.PERCENTAGE_WORKLOAD_EXPORT_CSV = {
 
 module.exports.CASE_DETAILS_EXPORT_CSV = {
   filename: ('Test_Case_Details_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region Name","LDU Cluster","Team Name","Tier Code","Row Type","CRN","Case Type","Offender Manager Name","Grade Code"\n' +
+  csv: '"Region Name","Probation Delivery Unit","Team Name","Tier Code","Row Type","CRN","Case Type","Offender Manager Name","Grade Code"\n' +
   '"NPS North West","Cheshire","Crewe NPS OMU","D2","N","CASEREF5448","COMMUNITY","A.N. Offender Manager N01CA1U","DMY"\n' +
   '"NPS North West","Cheshire","Warrington NPS OMU","B1","N","CASEREF67","COMMUNITY","A.N. Offender Manager CHSZ943NPSM","PO"\n' +
     '"NPS North West","Cheshire","Warrington NPS OMU","C1","N","CASEREF2413","COMMUNITY","A.N. Offender Manager CHSZ943NPSM","PO"\n' +
@@ -277,7 +277,7 @@ module.exports.CASE_DETAILS_EXPORT_RESULT = {
 
 module.exports.CMS_EXPORT_CSV = {
   filename: ('Test_CMS_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Contact Region Name","Contact LDU Cluster","Contact Team Name","Contact Date","Contact Name","Contact Grade","OM Region Name","OM LDU Cluster","OM Team Name","CRN","OM Name","OM Grade","Contact Type Description","Contact Code","Contact Points","OM Points"\n' +
+  csv: '"Contact Region Name","Contact Probation Delivery Unit","Contact Team Name","Contact Date","Contact Name","Contact Grade","OM Region Name","OM Probation Delivery Unit","OM Team Name","CRN","OM Name","OM Grade","Contact Type Description","Contact Code","Contact Points","OM Points"\n' +
   '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-9-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1000","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High","CMS30",18,-18\n' +
     '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-9-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1001","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High","CMS30",18,-18\n' +
     '"NPS North West","Lancashire NW","Blackpool OMU C - NPS","24-9-2018","A.N. Offender Manager N01D068NPSQ","PSO","NPS North West","Lancashire NW","Blackpool OMU C - NPS","CASEREF1002","A.N. Offender Manager LCSE771NPSM","PO","CMS - Case Related Communication - High","CMS30",18,-18\n' +
@@ -387,7 +387,7 @@ module.exports.CMS_EXPORT_RESULT = {
 
 module.exports.GS_EXPORT_CSV = {
   filename: ('Test_Group_Supervision_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region Name","LDU Cluster","Team Name","Contact Date","CRN","Offender Manager Name","Offender Manager Grade","Contact Type Description","Contact Code","Points"\n' +
+  csv: '"Region Name","Probation Delivery Unit","Team Name","Contact Date","CRN","Offender Manager Name","Offender Manager Grade","Contact Type Description","Contact Code","Points"\n' +
   '"NPS North West","Lancashire SE","NPS - Burnley 1","10-10-2018","GS2000","A.N. Offender Manager N01B320NPSM","PO","GS Employment session NS","NGS006",-15\n' +
     '"NPS North West","Lancashire SE","NPS - Burnley 1","10-10-2018","GS2001","A.N. Offender Manager N01B320NPSM","PO","GS Employment session NS","NGS006",-15\n' +
     '"NPS North West","Lancashire SE","NPS - Burnley 2","10-10-2018","GS2002","A.N. Offender Manager N01C411NPSN","PO","GS Employment session NS","NGS006",-15\n' +
@@ -467,7 +467,7 @@ module.exports.GS_EXPORT_RESULT = {
 
 module.exports.SUSPENDED_LIFER_CSV = {
   filename: ('Test_Suspended_Lifer_Export ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region Name","LDU Cluster","Team Name","Tier Code","Row Type","CRN","Case Type","Offender Manager Name","Grade Code","In Custody?","Register Level","Register Category","Register Category Description","Registration Date"\n' +
+  csv: '"Region Name","Probation Delivery Unit","Team Name","Tier Code","Row Type","CRN","Case Type","Offender Manager Name","Grade Code","In Custody?","Register Level","Register Category","Register Category Description","Registration Date"\n' +
   '"NPS North West","Lancashire SE","NPS - Blackburn 2","D2","Suspended Lifer","N144966","LICENSE","Test Forename 511 Test Surname 511","PSO","No","L2","LF01","Lifer - IPP","28/02/2019"\n' +
   '"NPS North West","Lancashire SE","NPS - Blackburn 2","D2","Suspended Lifer","N145304","LICENSE","Test Forename 511 Test Surname 511","PSO","No","L2","LF03","Lifer - Life Imprisonment","19/12/1990"\n' +
   '"NPS North West","Lancashire SE","NPS - Blackburn 2","D2","Suspended Lifer","N146588","LICENSE","Test Forename 511 Test Surname 511","PSO","No","L2","LF03","Lifer - Life Imprisonment","28/05/1999"\n' +
@@ -560,8 +560,8 @@ module.exports.SUSPENDED_LIFER_EXPORT_RESULT = {
 }
 
 module.exports.LDU_CASELOAD_RESULT = {
-  title: 'LDU Cluster 2',
-  subTitle: 'LDU Cluster',
+  title: 'Probation Delivery Unit 2',
+  subTitle: 'Probation Delivery Unit',
   caseloadDetails:
   { overallCaseloadDetails:
   { details:
@@ -1097,7 +1097,7 @@ module.exports.REGION_CASELOAD_RESULT = {
   { overallCaseloadDetails:
   { details:
   [ { linkId: 70,
-    name: 'LDU Cluster 2',
+    name: 'Probation Delivery Unit 2',
     grades:
     [ { grade: 'PO',
       a: 33,
@@ -1158,7 +1158,7 @@ module.exports.REGION_CASELOAD_RESULT = {
         numberOfType: 1 } },
     detailsPercentages:
     [ { linkId: 70,
-      name: 'LDU Cluster 2',
+      name: 'Probation Delivery Unit 2',
       grades:
       [ { grade: 'PO',
         a: 60,
@@ -1220,7 +1220,7 @@ module.exports.REGION_CASELOAD_RESULT = {
     communityCaseloadDetails:
     { details:
     [ { linkId: 70,
-      name: 'LDU Cluster 2',
+      name: 'Probation Delivery Unit 2',
       grades:
       [ { grade: 'PO',
         a: 9,
@@ -1281,7 +1281,7 @@ module.exports.REGION_CASELOAD_RESULT = {
           numberOfType: 1 } },
       detailsPercentages:
       [ { linkId: 70,
-        name: 'LDU Cluster 2',
+        name: 'Probation Delivery Unit 2',
         grades:
         [ { grade: 'PO',
           a: 60,
@@ -1343,7 +1343,7 @@ module.exports.REGION_CASELOAD_RESULT = {
     custodyCaseloadDetails:
     { details:
     [ { linkId: 70,
-      name: 'LDU Cluster 2',
+      name: 'Probation Delivery Unit 2',
       grades:
       [ { grade: 'PO',
         a: 18,
@@ -1404,7 +1404,7 @@ module.exports.REGION_CASELOAD_RESULT = {
           numberOfType: 1 } },
       detailsPercentages:
       [ { linkId: 70,
-        name: 'LDU Cluster 2',
+        name: 'Probation Delivery Unit 2',
         grades:
         [ { grade: 'PO',
           a: 60,
@@ -1466,7 +1466,7 @@ module.exports.REGION_CASELOAD_RESULT = {
     licenseCaseloadDetails:
     { details:
     [ { linkId: 70,
-      name: 'LDU Cluster 2',
+      name: 'Probation Delivery Unit 2',
       grades:
       [ { grade: 'PO',
         a: 6,
@@ -1527,7 +1527,7 @@ module.exports.REGION_CASELOAD_RESULT = {
           numberOfType: 1 } },
       detailsPercentages:
       [ { linkId: 70,
-        name: 'LDU Cluster 2',
+        name: 'Probation Delivery Unit 2',
         grades:
         [ { grade: 'PO',
           a: 60,
@@ -1587,7 +1587,7 @@ module.exports.REGION_CASELOAD_RESULT = {
           totalCases: 40,
           numberOfType: 1 } } },
     overallTotalSummary:
-    [ { name: 'LDU Cluster 2',
+    [ { name: 'Probation Delivery Unit 2',
       linkId: 70,
       totalCases: 345,
       custodyTotalCases: 115,
@@ -1602,23 +1602,23 @@ module.exports.REGION_CASELOAD_CSV = {
   filename: ('Test_Region_Caseload ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: 'OVERALL\n' +
   '"name","custodyCases","communityCases","licenseCases","totalCases"\n' +
-  '"LDU Cluster 2",115,105,125,345\n\n\n' +
+  '"Probation Delivery Unit 2",115,105,125,345\n\n\n' +
   'CUSTODY\n' +
-  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
-  '"LDU Cluster 2","PO",18,12,6,12,6,9,3,2,1,0,3,69\n' +
-  '"LDU Cluster 2","PSO",12,8,4,8,4,6,2,2,1,0,2,46\n\n\n' +
+  '"Probation Delivery Unit Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Probation Delivery Unit 2","PO",18,12,6,12,6,9,3,2,1,0,3,69\n' +
+  '"Probation Delivery Unit 2","PSO",12,8,4,8,4,6,2,2,1,0,2,46\n\n\n' +
   'COMMUNITY\n' +
-  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
-  '"LDU Cluster 2","PO",9,18,12,6,9,6,3,2,1,0,0,63\n' +
-  '"LDU Cluster 2","PSO",6,12,8,4,6,4,2,2,1,0,0,42\n\n\n' +
+  '"Probation Delivery Unit Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Probation Delivery Unit 2","PO",9,18,12,6,9,6,3,2,1,0,0,63\n' +
+  '"Probation Delivery Unit 2","PSO",6,12,8,4,6,4,2,2,1,0,0,42\n\n\n' +
   'LICENSE\n' +
-  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
-  '"LDU Cluster 2","PO",6,3,6,9,6,12,18,2,1,0,15,75\n' +
-  '"LDU Cluster 2","PSO",4,2,4,6,4,8,12,2,1,0,10,50\n\n\n' +
+  '"Probation Delivery Unit Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Probation Delivery Unit 2","PO",6,3,6,9,6,12,18,2,1,0,15,75\n' +
+  '"Probation Delivery Unit 2","PSO",4,2,4,6,4,8,12,2,1,0,10,50\n\n\n' +
   'OVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' +
-  '"LDU Cluster Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
-  '"LDU Cluster 2","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
-  '"LDU Cluster 2","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"'
+  '"Probation Delivery Unit Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Probation Delivery Unit 2","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
+  '"Probation Delivery Unit 2","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"'
 }
 
 module.exports.NATIONAL_CASELOAD_RESULT = {
@@ -2674,7 +2674,7 @@ module.exports.OM_OVERVIEW_RESULT = {
 
 module.exports.OM_OVERVIEW_CSV = {
   filename: ('John_Smith_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region","LDU Cluster","Team Name","Grade Code","Capacity Percentage","Total Cases","Contracted Hours","Reduction Hours","CMS Points","CMS Percentage"' +
+  csv: '"Region","Probation Delivery Unit","Team Name","Grade Code","Capacity Percentage","Total Cases","Contracted Hours","Reduction Hours","CMS Points","CMS Percentage"' +
   '\n"Test Region","Test Cluster","Team 1","PO","105.3%",60,37,4,-121,"-3.9%"'
 }
 
@@ -2684,7 +2684,7 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     link: '/probation/team/95',
     active: undefined },
   {
-    title: 'LDU Cluster 1',
+    title: 'Probation Delivery Unit 1',
     link: '/probation/ldu/85',
     active: undefined },
   {
@@ -2693,7 +2693,7 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     active: undefined },
     { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   overviewDetails:
-  [ { lduCluster: 'LDU Cluster 1',
+  [ { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -2706,7 +2706,7 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     remainingPoints: -29,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -2719,7 +2719,7 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     remainingPoints: -26,
     cmsAdjustmentPoints: -176,
     cmsPercentage: -6.379122870605292 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -2732,7 +2732,7 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     remainingPoints: -32,
     cmsAdjustmentPoints: 121,
     cmsPercentage: 19.803600654664486 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -2745,7 +2745,7 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     remainingPoints: -14,
     cmsAdjustmentPoints: 167,
     cmsPercentage: 29.246935201401055 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -2764,17 +2764,17 @@ module.exports.TEAM_OVERVIEW_RESULT = {
 
 module.exports.TEAM_OVERVIEW_CSV = {
   filename: ('Team_1_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
-  '\n"LDU Cluster 1","Team 1","John Smith","PO","115.3%",190,219,-29,37.5,6,69,0,"0.0%"' +
-  '\n"LDU Cluster 1","Team 1","Tony Test","PSO","113.7%",190,216,-26,37.5,3,69,-176,"-6.4%"' +
-  '\n"LDU Cluster 1","Team 1","Jane Doe","PO","116.8%",190,222,-32,37.5,1,69,121,"19.8%"' +
-  '\n"LDU Cluster 1","Team 1","Marcin Martin","PSO","107.4%",190,204,-14,37.5,6,69,167,"29.2%"' +
-  '\n"LDU Cluster 1","Team 1","Courtney Larry","PO","117.4%",190,223,-33,37.5,3,69,-9,"-0.5%"'
+  csv: '"Probation Delivery Unit","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
+  '\n"Probation Delivery Unit 1","Team 1","John Smith","PO","115.3%",190,219,-29,37.5,6,69,0,"0.0%"' +
+  '\n"Probation Delivery Unit 1","Team 1","Tony Test","PSO","113.7%",190,216,-26,37.5,3,69,-176,"-6.4%"' +
+  '\n"Probation Delivery Unit 1","Team 1","Jane Doe","PO","116.8%",190,222,-32,37.5,1,69,121,"19.8%"' +
+  '\n"Probation Delivery Unit 1","Team 1","Marcin Martin","PSO","107.4%",190,204,-14,37.5,6,69,167,"29.2%"' +
+  '\n"Probation Delivery Unit 1","Team 1","Courtney Larry","PO","117.4%",190,223,-33,37.5,3,69,-9,"-0.5%"'
 }
 
 module.exports.LDU_OVERVIEW_RESULT = {
   breadcrumbs: [{
-    title: 'LDU Cluster 1',
+    title: 'Probation Delivery Unit 1',
     link: '/probation/ldu/85',
     active: undefined },
   {
@@ -2783,7 +2783,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
     active: undefined },
   { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   overviewDetails:
-  [ { lduCluster: 'LDU Cluster 1',
+  [ { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -2796,7 +2796,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
     remainingPoints: -29,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -2809,7 +2809,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
     remainingPoints: -26,
     cmsAdjustmentPoints: -176,
     cmsPercentage: -6.379122870605292 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -2822,7 +2822,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
     remainingPoints: -32,
     cmsAdjustmentPoints: 121,
     cmsPercentage: 19.803600654664486 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -2835,7 +2835,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
     remainingPoints: -14,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -2848,7 +2848,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -2861,7 +2861,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
     remainingPoints: -34,
     cmsAdjustmentPoints: -9,
     cmsPercentage: -0.5096262740656852 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -2874,7 +2874,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
     remainingPoints: -25,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -2887,7 +2887,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
     remainingPoints: -12,
     cmsAdjustmentPoints: -9,
     cmsPercentage: -0.5096262740656852 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -2900,7 +2900,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
     remainingPoints: -11,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { lduCluster: 'LDU Cluster 1',
+  { lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -2913,23 +2913,23 @@ module.exports.LDU_OVERVIEW_RESULT = {
     remainingPoints: -33,
     cmsAdjustmentPoints: -9,
     cmsPercentage: -0.5096262740656852 } ],
-  title: 'LDU Cluster 1',
-  subTitle: 'LDU Cluster'
+  title: 'Probation Delivery Unit 1',
+  subTitle: 'Probation Delivery Unit'
 }
 
 module.exports.LDU_OVERVIEW_CSV = {
   filename: ('LDU_Cluster_1_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
-  '\n"LDU Cluster 1","Team 1","John Smith","PO","115.3%",190,219,-29,37.5,6,69,0,"0.0%"' +
-  '\n"LDU Cluster 1","Team 1","Tony Test","PSO","113.7%",190,216,-26,37.5,3,69,-176,"-6.4%"' +
-  '\n"LDU Cluster 1","Team 1","Jane Doe","PO","116.8%",190,222,-32,37.5,1,69,121,"19.8%"' +
-  '\n"LDU Cluster 1","Team 1","Marcin Martin","PSO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
-  '\n"LDU Cluster 1","Team 1","Courtney Larry","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
-  '\n"LDU Cluster 1","Team 4","Courtney Larry","PO","117.9%",190,224,-34,37.5,6,69,-9,"-0.5%"' +
-  '\n"LDU Cluster 1","Team 4","Marcin Martin","PSO","113.2%",190,215,-25,37.5,6,69,0,"0.0%"' +
-  '\n"LDU Cluster 1","Team 4","Jane Doe","PO","106.3%",190,202,-12,37.5,4,69,-9,"-0.5%"' +
-  '\n"LDU Cluster 1","Team 4","Tony Test","PSO","105.8%",190,201,-11,37.5,3,69,0,"0.0%"' +
-  '\n"LDU Cluster 1","Team 4","John Smith","PO","117.4%",190,223,-33,37.5,3,69,-9,"-0.5%"'
+  csv: '"Probation Delivery Unit","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
+  '\n"Probation Delivery Unit 1","Team 1","John Smith","PO","115.3%",190,219,-29,37.5,6,69,0,"0.0%"' +
+  '\n"Probation Delivery Unit 1","Team 1","Tony Test","PSO","113.7%",190,216,-26,37.5,3,69,-176,"-6.4%"' +
+  '\n"Probation Delivery Unit 1","Team 1","Jane Doe","PO","116.8%",190,222,-32,37.5,1,69,121,"19.8%"' +
+  '\n"Probation Delivery Unit 1","Team 1","Marcin Martin","PSO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
+  '\n"Probation Delivery Unit 1","Team 1","Courtney Larry","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Probation Delivery Unit 1","Team 4","Courtney Larry","PO","117.9%",190,224,-34,37.5,6,69,-9,"-0.5%"' +
+  '\n"Probation Delivery Unit 1","Team 4","Marcin Martin","PSO","113.2%",190,215,-25,37.5,6,69,0,"0.0%"' +
+  '\n"Probation Delivery Unit 1","Team 4","Jane Doe","PO","106.3%",190,202,-12,37.5,4,69,-9,"-0.5%"' +
+  '\n"Probation Delivery Unit 1","Team 4","Tony Test","PSO","105.8%",190,201,-11,37.5,3,69,0,"0.0%"' +
+  '\n"Probation Delivery Unit 1","Team 4","John Smith","PO","117.4%",190,223,-33,37.5,3,69,-9,"-0.5%"'
 }
 
 module.exports.REGION_OVERVIEW_RESULT = {
@@ -2941,7 +2941,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
   { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   overviewDetails: [{
     regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -2955,7 +2955,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -2969,7 +2969,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -2983,7 +2983,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0},
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -2997,7 +2997,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -3011,7 +3011,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -3025,7 +3025,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -3039,7 +3039,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -3053,7 +3053,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -3067,7 +3067,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -3086,17 +3086,17 @@ module.exports.REGION_OVERVIEW_RESULT = {
 
 module.exports.REGION_OVERVIEW_CSV = {
   filename: ('Division_1_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region","LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","John Smith","PO","115.3%",190,219,-29,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Tony Test","PSO","113.7%",190,216,-26,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Jane Doe","PO","116.8%",190,222,-32,37.5,1,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Marcin Martin","PSO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Courtney Larry","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Courtney Larry","PO","117.9%",190,224,-34,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Marcin Martin","PSO","113.2%",190,215,-25,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Jane Doe","PO","106.3%",190,202,-12,37.5,4,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Tony Test","PSO","105.8%",190,201,-11,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","John Smith","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"'
+  csv: '"Region","Probation Delivery Unit","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO","115.3%",190,219,-29,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 1","Tony Test","PSO","113.7%",190,216,-26,37.5,3,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 1","Jane Doe","PO","116.8%",190,222,-32,37.5,1,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 1","Marcin Martin","PSO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 1","Courtney Larry","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 4","Courtney Larry","PO","117.9%",190,224,-34,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 4","Marcin Martin","PSO","113.2%",190,215,-25,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 4","Jane Doe","PO","106.3%",190,202,-12,37.5,4,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 4","Tony Test","PSO","105.8%",190,201,-11,37.5,3,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 4","John Smith","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"'
 }
 
 module.exports.NATIONAL_OVERVIEW_RESULT = {
@@ -3104,7 +3104,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   overviewDetails: [{
     regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -3118,7 +3118,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -3132,7 +3132,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -3146,7 +3146,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -3160,7 +3160,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -3174,7 +3174,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -3188,7 +3188,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -3202,7 +3202,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -3216,7 +3216,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -3230,7 +3230,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -3244,7 +3244,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 2',
-    lduCluster: 'LDU Cluster 2',
+    lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -3258,7 +3258,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 2',
-    lduCluster: 'LDU Cluster 2',
+    lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -3272,7 +3272,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 2',
-    lduCluster: 'LDU Cluster 2',
+    lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -3286,7 +3286,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 2',
-    lduCluster: 'LDU Cluster 2',
+    lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -3300,7 +3300,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 2',
-    lduCluster: 'LDU Cluster 2',
+    lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -3314,7 +3314,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 3',
-    lduCluster: 'LDU Cluster 3',
+    lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -3328,7 +3328,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 3',
-    lduCluster: 'LDU Cluster 3',
+    lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -3342,7 +3342,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 3',
-    lduCluster: 'LDU Cluster 3',
+    lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -3356,7 +3356,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 3',
-    lduCluster: 'LDU Cluster 3',
+    lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -3370,7 +3370,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
   { regionName: 'Division 3',
-    lduCluster: 'LDU Cluster 3',
+    lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -3389,27 +3389,27 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
 
 module.exports.NATIONAL_OVERVIEW_CSV = {
   filename: ('HMPPS_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region","LDU Cluster","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","John Smith","PO","115.3%",190,219,-29,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Tony Test","PSO","113.7%",190,216,-26,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Jane Doe","PO","116.8%",190,222,-32,37.5,1,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Marcin Martin","PSO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 1","Courtney Larry","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Courtney Larry","PO","117.9%",190,224,-34,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Jane Doe","PO","106.3%",190,202,-12,37.5,4,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Marcin Martin","PSO","113.2%",190,215,-25,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","John Smith","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","LDU Cluster 1","Team 4","Tony Test","PSO","105.8%",190,201,-11,37.5,3,69,0,"0.0%"' +
-  '\n"Division 2","LDU Cluster 2","Team 2","Jane Doe","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
-  '\n"Division 2","LDU Cluster 2","Team 2","Tony Test","PSO","117.4%",190,223,-33,37.5,4,69,0,"0.0%"' +
-  '\n"Division 2","LDU Cluster 2","Team 2","John Smith","PO","110.0%",190,209,-19,37.5,4,69,0,"0.0%"' +
-  '\n"Division 2","LDU Cluster 2","Team 2","Marcin Martin","PSO","105.3%",190,200,-10,37.5,2,69,0,"0.0%"' +
-  '\n"Division 2","LDU Cluster 2","Team 2","Courtney Larry","PO","114.2%",190,217,-27,37.5,3,69,0,"0.0%"' +
-  '\n"Division 3","LDU Cluster 3","Team 3","Courtney Larry","PO","112.6%",190,214,-24,37.5,2,69,0,"0.0%"' +
-  '\n"Division 3","LDU Cluster 3","Team 3","Marcin Martin","PSO","117.4%",190,223,-33,37.5,1,69,0,"0.0%"' +
-  '\n"Division 3","LDU Cluster 3","Team 3","John Smith","PO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
-  '\n"Division 3","LDU Cluster 3","Team 3","Tony Test","PSO","109.5%",190,208,-18,37.5,1,69,0,"0.0%"' +
-  '\n"Division 3","LDU Cluster 3","Team 3","Jane Doe","PO","105.8%",190,201,-11,37.5,2,69,0,"0.0%"'
+  csv: '"Region","Probation Delivery Unit","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO","115.3%",190,219,-29,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 1","Tony Test","PSO","113.7%",190,216,-26,37.5,3,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 1","Jane Doe","PO","116.8%",190,222,-32,37.5,1,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 1","Marcin Martin","PSO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 1","Courtney Larry","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 4","Courtney Larry","PO","117.9%",190,224,-34,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 4","Jane Doe","PO","106.3%",190,202,-12,37.5,4,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 4","Marcin Martin","PSO","113.2%",190,215,-25,37.5,6,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 4","John Smith","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Division 1","Probation Delivery Unit 1","Team 4","Tony Test","PSO","105.8%",190,201,-11,37.5,3,69,0,"0.0%"' +
+  '\n"Division 2","Probation Delivery Unit 2","Team 2","Jane Doe","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Division 2","Probation Delivery Unit 2","Team 2","Tony Test","PSO","117.4%",190,223,-33,37.5,4,69,0,"0.0%"' +
+  '\n"Division 2","Probation Delivery Unit 2","Team 2","John Smith","PO","110.0%",190,209,-19,37.5,4,69,0,"0.0%"' +
+  '\n"Division 2","Probation Delivery Unit 2","Team 2","Marcin Martin","PSO","105.3%",190,200,-10,37.5,2,69,0,"0.0%"' +
+  '\n"Division 2","Probation Delivery Unit 2","Team 2","Courtney Larry","PO","114.2%",190,217,-27,37.5,3,69,0,"0.0%"' +
+  '\n"Division 3","Probation Delivery Unit 3","Team 3","Courtney Larry","PO","112.6%",190,214,-24,37.5,2,69,0,"0.0%"' +
+  '\n"Division 3","Probation Delivery Unit 3","Team 3","Marcin Martin","PSO","117.4%",190,223,-33,37.5,1,69,0,"0.0%"' +
+  '\n"Division 3","Probation Delivery Unit 3","Team 3","John Smith","PO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
+  '\n"Division 3","Probation Delivery Unit 3","Team 3","Tony Test","PSO","109.5%",190,208,-18,37.5,1,69,0,"0.0%"' +
+  '\n"Division 3","Probation Delivery Unit 3","Team 3","Jane Doe","PO","105.8%",190,201,-11,37.5,2,69,0,"0.0%"'
 }
 
 module.exports.PERCENTAGE_FORMAT_TEST = {
@@ -3417,7 +3417,7 @@ module.exports.PERCENTAGE_FORMAT_TEST = {
     title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   overviewDetails: [{
     regionName: 'Division 1',
-    lduCluster: 'LDU Cluster 1',
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -3439,7 +3439,7 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     link: '/probation/team/240',
     active: undefined },
   {
-    title: 'LDU Cluster 1',
+    title: 'Probation Delivery Unit 1',
     link: '/probation/ldu/218',
     active: undefined },
   {
@@ -3449,7 +3449,7 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   reductionNotes:
   [ { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3461,7 +3461,7 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     additionalNotes: null,
     gradeCode: 'PO' },
   { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3473,7 +3473,7 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     additionalNotes: null,
     gradeCode: 'SPO' },
   { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3485,7 +3485,7 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     additionalNotes: null,
     gradeCode: 'PSO' },
   { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3501,17 +3501,17 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
 
 module.exports.TEAM_REDUCTIONS_CSV = {
   filename: ('Team_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region","LDU Cluster","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
+  csv: '"Region","Probation Delivery Unit","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
 }
 
 module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
   reductionNotes:
   [ { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3524,7 +3524,7 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     gradeCode: 'PO',
     managerResponsible: 'Joe Bloggs' },
   { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3537,7 +3537,7 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     gradeCode: 'SPO',
     managerResponsible: 'Frank Jones' },
   { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3550,7 +3550,7 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     gradeCode: 'PSO',
     managerResponsible: 'Mary Brown' },
   { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3566,17 +3566,17 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
 
 module.exports.TEAM_EXPIRING_REDUCTIONS_CSV = {
   filename: ('Team_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region","LDU Cluster","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes","Manager Responsible"\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",,"Joe Bloggs"\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",,"Frank Jones"\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",,"Mary Brown"\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",,"Jane Green"'
+  csv: '"Region","Probation Delivery Unit","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes","Manager Responsible"\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",,"Joe Bloggs"\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",,"Frank Jones"\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",,"Mary Brown"\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",,"Jane Green"'
 }
 
 module.exports.LDU_REDUCTIONS_RESULT = {
   breadcrumbs:
   [{
-    title: 'LDU Cluster 1',
+    title: 'Probation Delivery Unit 1',
     link: '/probation/ldu/218',
     active: undefined },
   {
@@ -3586,7 +3586,7 @@ module.exports.LDU_REDUCTIONS_RESULT = {
       { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   reductionNotes:
   [ { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3598,7 +3598,7 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     additionalNotes: null,
     gradeCode: 'PO' },
   { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3610,7 +3610,7 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     additionalNotes: null,
     gradeCode: 'SPO' },
   { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3622,7 +3622,7 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     additionalNotes: null,
     gradeCode: 'PSO' },
   { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3633,16 +3633,16 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     status: 'DELETED',
     additionalNotes: null,
     gradeCode: 'PO' } ],
-  title: 'LDU Cluster 1',
-  subTitle: 'LDU Cluster' }
+  title: 'Probation Delivery Unit 1',
+  subTitle: 'Probation Delivery Unit' }
 
 module.exports.LDU_REDUCTIONS_CSV = {
   filename: ('LDU_Cluster_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region","LDU Cluster","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
+  csv: '"Region","Probation Delivery Unit","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
 }
 
 module.exports.REGION_REDUCTIONS_RESULT = {
@@ -3654,7 +3654,7 @@ module.exports.REGION_REDUCTIONS_RESULT = {
   { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   reductionNotes:
   [ { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3666,7 +3666,7 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     additionalNotes: null,
     gradeCode: 'PO' },
   { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3678,7 +3678,7 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     additionalNotes: null,
     gradeCode: 'SPO' },
   { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3690,7 +3690,7 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     additionalNotes: null,
     gradeCode: 'PSO' },
   { regionName: 'Division 1',
-    lduName: 'LDU Cluster 1',
+    lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     contractedHours: 37,
@@ -3706,9 +3706,9 @@ module.exports.REGION_REDUCTIONS_RESULT = {
 
 module.exports.REGION_REDUCTIONS_CSV = {
   filename: ('Division_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
-  csv: '"Region","LDU Cluster","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
-  '"Division 1","LDU Cluster 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
+  csv: '"Region","Probation Delivery Unit","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
+  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
 }

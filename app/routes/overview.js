@@ -140,9 +140,6 @@ var renderOverview = function (req, res, next) {
     lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return overviewPromise.then(function (result) {
       result.date = lastUpdated
-      if (childOrganisationLevelDisplayText === 'LDU Cluster' && result.title === 'NPS Kent Surrey Sussex Region') {
-        childOrganisationLevelDisplayText = 'Probation Delivery Unit'
-      }
       return res.render('overview', {
         title: result.title,
         subTitle: result.subTitle,

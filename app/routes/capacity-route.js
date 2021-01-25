@@ -69,9 +69,6 @@ module.exports = function (router) {
           return getLastUpdated().then(function (result) {
             lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
             result.date = lastUpdated
-            if (childOrgUnitDisplayText === 'LDU Cluster' && capacityBreakdown.title === 'NPS Kent Surrey Sussex Region') {
-              childOrgUnitDisplayText = 'Probation Delivery Unit'
-            }
             return res.render('capacity', {
               screen: 'capacity',
               linkId: id,

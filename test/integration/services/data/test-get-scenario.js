@@ -15,20 +15,20 @@ describe('services/data/get-scenario team', function () {
       })
     })
   })
-  it('should retrieve all 120 raw scenario records for HMPPS > Division 1 > LDU Cluster 1 > Team 1', function () {
+  it('should retrieve all 120 raw scenario records for HMPPS > Division 1 > Probation Delivery Unit 1 > Team 1', function () {
     expect(scenarioData.length).to.eql(120)
   })
 })
 
 describe('services/data/get-scenario ldu', function () {
   before(function () {
-    return getLDU('LDU Cluster 1').then(function (id) {
+    return getLDU('Probation Delivery Unit 1').then(function (id) {
       return getScenario(id, 'ldu').then(function (results) {
         scenarioData = results
       })
     })
   })
-  it('should retrieve all 240 raw scenario records for HMPPS > Division 1 > LDU Cluster 1', function () {
+  it('should retrieve all 240 raw scenario records for HMPPS > Division 1 > Probation Delivery Unit 1', function () {
     expect(scenarioData.length).to.eql(240)
   })
 })
