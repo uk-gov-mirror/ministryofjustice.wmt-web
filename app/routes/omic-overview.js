@@ -56,7 +56,7 @@ var renderOverview = function (req, res, next) {
   }
 
   if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name || organisationLevel === organisationUnitConstants.TEAM.name) {
-    throw new Error('Only available at National, Divisional and Probation Delivery Unit level')
+    throw new Error('Only available at National, Regional and Probation Delivery Unit level')
   }
 
   var authorisedUserRole = authorisation.getAuthorisedUserRole(req)

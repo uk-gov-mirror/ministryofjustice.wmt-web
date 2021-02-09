@@ -1091,8 +1091,8 @@ module.exports.LDU_CASELOAD_CSV = {
 }
 
 module.exports.REGION_CASELOAD_RESULT = {
-  title: 'Division 2',
-  subTitle: 'Division',
+  title: 'Region 2',
+  subTitle: 'Region',
   caseloadDetails:
   { overallCaseloadDetails:
   { details:
@@ -1628,7 +1628,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
   { overallCaseloadDetails:
   { details:
   [ { linkId: 63,
-    name: 'Division 1',
+    name: 'Region 1',
     grades:
     [ { grade: 'PO',
       a: 66,
@@ -1657,7 +1657,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       untiered: 24,
       totalCases: 276 } ] },
   { linkId: 64,
-    name: 'Division 2',
+    name: 'Region 2',
     grades:
     [ { grade: 'PO',
       a: 33,
@@ -1686,7 +1686,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       untiered: 12,
       totalCases: 138 } ] },
   { linkId: 65,
-    name: 'Division 3',
+    name: 'Region 3',
     grades:
     [ { grade: 'PO',
       a: 33,
@@ -1747,7 +1747,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         numberOfType: 3 } },
     detailsPercentages:
     [ { linkId: 63,
-      name: 'Division 1',
+      name: 'Region 1',
       grades:
       [ { grade: 'PO',
         a: 60,
@@ -1776,7 +1776,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         untiered: 40,
         totalCases: 40 } ] },
     { linkId: 64,
-      name: 'Division 2',
+      name: 'Region 2',
       grades:
       [ { grade: 'PO',
         a: 60,
@@ -1805,7 +1805,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         untiered: 40,
         totalCases: 40 } ] },
     { linkId: 65,
-      name: 'Division 3',
+      name: 'Region 3',
       grades:
       [ { grade: 'PO',
         a: 60,
@@ -1867,7 +1867,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
     communityCaseloadDetails:
     { details:
     [ { linkId: 63,
-      name: 'Division 1',
+      name: 'Region 1',
       grades:
       [ { grade: 'PO',
         a: 18,
@@ -1896,7 +1896,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         untiered: 0,
         totalCases: 84 } ] },
     { linkId: 64,
-      name: 'Division 2',
+      name: 'Region 2',
       grades:
       [ { grade: 'PO',
         a: 9,
@@ -1925,7 +1925,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         untiered: 0,
         totalCases: 42 } ] },
     { linkId: 65,
-      name: 'Division 3',
+      name: 'Region 3',
       grades:
       [ { grade: 'PO',
         a: 9,
@@ -1986,7 +1986,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           numberOfType: 3 } },
       detailsPercentages:
       [ { linkId: 63,
-        name: 'Division 1',
+        name: 'Region 1',
         grades:
         [ { grade: 'PO',
           a: 60,
@@ -2015,7 +2015,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           untiered: 0,
           totalCases: 40 } ] },
       { linkId: 64,
-        name: 'Division 2',
+        name: 'Region 2',
         grades:
         [ { grade: 'PO',
           a: 60,
@@ -2044,7 +2044,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           untiered: 0,
           totalCases: 40 } ] },
       { linkId: 65,
-        name: 'Division 3',
+        name: 'Region 3',
         grades:
         [ { grade: 'PO',
           a: 60,
@@ -2106,7 +2106,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
     custodyCaseloadDetails:
     { details:
     [ { linkId: 63,
-      name: 'Division 1',
+      name: 'Region 1',
       grades:
       [ { grade: 'PO',
         a: 36,
@@ -2135,7 +2135,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         untiered: 4,
         totalCases: 92 } ] },
     { linkId: 64,
-      name: 'Division 2',
+      name: 'Region 2',
       grades:
       [ { grade: 'PO',
         a: 18,
@@ -2164,7 +2164,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         untiered: 2,
         totalCases: 46 } ] },
     { linkId: 65,
-      name: 'Division 3',
+      name: 'Region 3',
       grades:
       [ { grade: 'PO',
         a: 18,
@@ -2225,7 +2225,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           numberOfType: 3 } },
       detailsPercentages:
       [ { linkId: 63,
-        name: 'Division 1',
+        name: 'Region 1',
         grades:
         [ { grade: 'PO',
           a: 60,
@@ -2254,7 +2254,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           untiered: 40,
           totalCases: 40 } ] },
       { linkId: 64,
-        name: 'Division 2',
+        name: 'Region 2',
         grades:
         [ { grade: 'PO',
           a: 60,
@@ -2283,7 +2283,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           untiered: 40,
           totalCases: 40 } ] },
       { linkId: 65,
-        name: 'Division 3',
+        name: 'Region 3',
         grades:
         [ { grade: 'PO',
           a: 60,
@@ -2345,7 +2345,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
     licenseCaseloadDetails:
     { details:
     [ { linkId: 63,
-      name: 'Division 1',
+      name: 'Region 1',
       grades:
       [ { grade: 'PO',
         a: 12,
@@ -2374,7 +2374,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         untiered: 20,
         totalCases: 100 } ] },
     { linkId: 64,
-      name: 'Division 2',
+      name: 'Region 2',
       grades:
       [ { grade: 'PO',
         a: 6,
@@ -2403,7 +2403,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         untiered: 10,
         totalCases: 50 } ] },
     { linkId: 65,
-      name: 'Division 3',
+      name: 'Region 3',
       grades:
       [ { grade: 'PO',
         a: 6,
@@ -2464,7 +2464,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           numberOfType: 3 } },
       detailsPercentages:
       [ { linkId: 63,
-        name: 'Division 1',
+        name: 'Region 1',
         grades:
         [ { grade: 'PO',
           a: 60,
@@ -2493,7 +2493,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           untiered: 40,
           totalCases: 40 } ] },
       { linkId: 64,
-        name: 'Division 2',
+        name: 'Region 2',
         grades:
         [ { grade: 'PO',
           a: 60,
@@ -2522,7 +2522,7 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           untiered: 40,
           totalCases: 40 } ] },
       { linkId: 65,
-        name: 'Division 3',
+        name: 'Region 3',
         grades:
         [ { grade: 'PO',
           a: 60,
@@ -2582,19 +2582,19 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           totalCases: 40,
           numberOfType: 3 } } },
     overallTotalSummary:
-    [ { name: 'Division 1',
+    [ { name: 'Region 1',
       linkId: 63,
       totalCases: 690,
       custodyTotalCases: 230,
       communityTotalCases: 210,
       licenseTotalCases: 250 },
-    { name: 'Division 2',
+    { name: 'Region 2',
       linkId: 64,
       totalCases: 345,
       custodyTotalCases: 115,
       communityTotalCases: 105,
       licenseTotalCases: 125 },
-    { name: 'Division 3',
+    { name: 'Region 3',
       linkId: 65,
       totalCases: 345,
       custodyTotalCases: 115,
@@ -2609,41 +2609,41 @@ module.exports.NATIONAL_CASELOAD_CSV = {
   filename: ('Test_National_Caseload ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: 'OVERALL\n' +
   '"name","custodyCases","communityCases","licenseCases","totalCases"\n' +
-  '"Division 1",230,210,250,690\n' +
-  '"Division 2",115,105,125,345\n' +
-  '"Division 3",115,105,125,345\n\n\n' +
+  '"Region 1",230,210,250,690\n' +
+  '"Region 2",115,105,125,345\n' +
+  '"Region 3",115,105,125,345\n\n\n' +
   'CUSTODY\n' +
-  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
-  '"Division 1","PO",36,24,12,24,12,18,6,2,1,0,6,138\n' +
-  '"Division 1","PSO",24,16,8,16,8,12,4,2,1,0,4,92\n' +
-  '"Division 2","PO",18,12,6,12,6,9,3,2,1,0,3,69\n' +
-  '"Division 2","PSO",12,8,4,8,4,6,2,2,1,0,2,46\n' +
-  '"Division 3","PO",18,12,6,12,6,9,3,2,1,0,3,69\n' +
-  '"Division 3","PSO",12,8,4,8,4,6,2,2,1,0,2,46\n\n\n' +
+  '"Region Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Region 1","PO",36,24,12,24,12,18,6,2,1,0,6,138\n' +
+  '"Region 1","PSO",24,16,8,16,8,12,4,2,1,0,4,92\n' +
+  '"Region 2","PO",18,12,6,12,6,9,3,2,1,0,3,69\n' +
+  '"Region 2","PSO",12,8,4,8,4,6,2,2,1,0,2,46\n' +
+  '"Region 3","PO",18,12,6,12,6,9,3,2,1,0,3,69\n' +
+  '"Region 3","PSO",12,8,4,8,4,6,2,2,1,0,2,46\n\n\n' +
   'COMMUNITY\n' +
-  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
-  '"Division 1","PO",18,36,24,12,18,12,6,2,1,0,0,126\n' +
-  '"Division 1","PSO",12,24,16,8,12,8,4,2,1,0,0,84\n' +
-  '"Division 2","PO",9,18,12,6,9,6,3,2,1,0,0,63\n' +
-  '"Division 2","PSO",6,12,8,4,6,4,2,2,1,0,0,42\n' +
-  '"Division 3","PO",9,18,12,6,9,6,3,2,1,0,0,63\n' +
-  '"Division 3","PSO",6,12,8,4,6,4,2,2,1,0,0,42\n\n\n' +
+  '"Region Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Region 1","PO",18,36,24,12,18,12,6,2,1,0,0,126\n' +
+  '"Region 1","PSO",12,24,16,8,12,8,4,2,1,0,0,84\n' +
+  '"Region 2","PO",9,18,12,6,9,6,3,2,1,0,0,63\n' +
+  '"Region 2","PSO",6,12,8,4,6,4,2,2,1,0,0,42\n' +
+  '"Region 3","PO",9,18,12,6,9,6,3,2,1,0,0,63\n' +
+  '"Region 3","PSO",6,12,8,4,6,4,2,2,1,0,0,42\n\n\n' +
   'LICENSE\n' +
-  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
-  '"Division 1","PO",12,6,12,18,12,24,36,2,1,0,30,150\n' +
-  '"Division 1","PSO",8,4,8,12,8,16,24,2,1,0,20,100\n' +
-  '"Division 2","PO",6,3,6,9,6,12,18,2,1,0,15,75\n' +
-  '"Division 2","PSO",4,2,4,6,4,8,12,2,1,0,10,50\n' +
-  '"Division 3","PO",6,3,6,9,6,12,18,2,1,0,15,75\n' +
-  '"Division 3","PSO",4,2,4,6,4,8,12,2,1,0,10,50\n\n\n' +
+  '"Region Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Region 1","PO",12,6,12,18,12,24,36,2,1,0,30,150\n' +
+  '"Region 1","PSO",8,4,8,12,8,16,24,2,1,0,20,100\n' +
+  '"Region 2","PO",6,3,6,9,6,12,18,2,1,0,15,75\n' +
+  '"Region 2","PSO",4,2,4,6,4,8,12,2,1,0,10,50\n' +
+  '"Region 3","PO",6,3,6,9,6,12,18,2,1,0,15,75\n' +
+  '"Region 3","PSO",4,2,4,6,4,8,12,2,1,0,10,50\n\n\n' +
   'OVERALL: PERCENTAGE SPLIT OF CASES BY GRADE\n' +
-  '"Division Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
-  '"Division 1","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
-  '"Division 1","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"\n' +
-  '"Division 2","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
-  '"Division 2","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"\n' +
-  '"Division 3","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
-  '"Division 3","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"'
+  '"Region Name","Grade","A","B1","B2","C1","C2","D1","D2","E","F","G","Untiered","Overall"\n' +
+  '"Region 1","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
+  '"Region 1","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"\n' +
+  '"Region 2","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
+  '"Region 2","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"\n' +
+  '"Region 3","PO","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","60.00%","0.00%","0.00%","0.00%","60.00%","60.00%"\n' +
+  '"Region 3","PSO","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","40.00%","0.00%","0.00%","0.00%","40.00%","40.00%"'
 }
 
 module.exports.OM_OVERVIEW_RESULT = {
@@ -2688,7 +2688,7 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     link: '/probation/ldu/85',
     active: undefined },
   {
-    title: 'Division 1',
+    title: 'Region 1',
     link: '/probation/region/43',
     active: undefined },
     { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
@@ -2778,7 +2778,7 @@ module.exports.LDU_OVERVIEW_RESULT = {
     link: '/probation/ldu/85',
     active: undefined },
   {
-    title: 'Division 1',
+    title: 'Region 1',
     link: '/probation/region/43',
     active: undefined },
   { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
@@ -2935,12 +2935,12 @@ module.exports.LDU_OVERVIEW_CSV = {
 module.exports.REGION_OVERVIEW_RESULT = {
   breadcrumbs:
   [{
-    title: 'Division 1',
+    title: 'Region 1',
     link: '/probation/region/43',
     active: undefined },
   { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   overviewDetails: [{
-    regionName: 'Division 1',
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -2954,7 +2954,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     remainingPoints: -29,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
@@ -2968,7 +2968,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     remainingPoints: -26,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
@@ -2982,7 +2982,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     remainingPoints: -32,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0},
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
@@ -2996,7 +2996,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     remainingPoints: -14,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
@@ -3010,7 +3010,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Courtney Larry',
@@ -3024,7 +3024,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     remainingPoints: -34,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Marcin Martin',
@@ -3038,7 +3038,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     remainingPoints: -25,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Jane Doe',
@@ -3052,7 +3052,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     remainingPoints: -12,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Tony Test',
@@ -3066,7 +3066,7 @@ module.exports.REGION_OVERVIEW_RESULT = {
     remainingPoints: -11,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'John Smith',
@@ -3080,30 +3080,30 @@ module.exports.REGION_OVERVIEW_RESULT = {
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 } ],
-  title: 'Division 1',
-  subTitle: 'Division'
+  title: 'Region 1',
+  subTitle: 'Region'
 }
 
 module.exports.REGION_OVERVIEW_CSV = {
-  filename: ('Division_1_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
+  filename: ('Region_1_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Region","Probation Delivery Unit","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO","115.3%",190,219,-29,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 1","Tony Test","PSO","113.7%",190,216,-26,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 1","Jane Doe","PO","116.8%",190,222,-32,37.5,1,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 1","Marcin Martin","PSO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 1","Courtney Larry","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 4","Courtney Larry","PO","117.9%",190,224,-34,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 4","Marcin Martin","PSO","113.2%",190,215,-25,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 4","Jane Doe","PO","106.3%",190,202,-12,37.5,4,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 4","Tony Test","PSO","105.8%",190,201,-11,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 4","John Smith","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"'
+  '\n"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PO","115.3%",190,219,-29,37.5,6,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 1","Tony Test","PSO","113.7%",190,216,-26,37.5,3,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 1","Jane Doe","PO","116.8%",190,222,-32,37.5,1,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 1","Marcin Martin","PSO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 1","Courtney Larry","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 4","Courtney Larry","PO","117.9%",190,224,-34,37.5,6,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 4","Marcin Martin","PSO","113.2%",190,215,-25,37.5,6,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 4","Jane Doe","PO","106.3%",190,202,-12,37.5,4,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 4","Tony Test","PSO","105.8%",190,201,-11,37.5,3,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 4","John Smith","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"'
 }
 
 module.exports.NATIONAL_OVERVIEW_RESULT = {
   breadcrumbs: [{
     title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   overviewDetails: [{
-    regionName: 'Division 1',
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3117,7 +3117,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -29,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
@@ -3131,7 +3131,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -26,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
@@ -3145,7 +3145,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -32,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
@@ -3159,7 +3159,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -14,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
@@ -3173,7 +3173,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Courtney Larry',
@@ -3187,7 +3187,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -34,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Jane Doe',
@@ -3201,7 +3201,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -12,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Marcin Martin',
@@ -3215,7 +3215,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -25,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'John Smith',
@@ -3229,7 +3229,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Tony Test',
@@ -3243,7 +3243,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -11,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 2',
+  { regionName: 'Region 2',
     lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'Jane Doe',
@@ -3257,7 +3257,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 2',
+  { regionName: 'Region 2',
     lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'Tony Test',
@@ -3271,7 +3271,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 2',
+  { regionName: 'Region 2',
     lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'John Smith',
@@ -3285,7 +3285,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -19,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 2',
+  { regionName: 'Region 2',
     lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'Marcin Martin',
@@ -3299,7 +3299,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -10,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 2',
+  { regionName: 'Region 2',
     lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'Courtney Larry',
@@ -3313,7 +3313,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -27,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 3',
+  { regionName: 'Region 3',
     lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'Courtney Larry',
@@ -3327,7 +3327,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -24,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 3',
+  { regionName: 'Region 3',
     lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'Marcin Martin',
@@ -3341,7 +3341,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 3',
+  { regionName: 'Region 3',
     lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'John Smith',
@@ -3355,7 +3355,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -14,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 3',
+  { regionName: 'Region 3',
     lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'Tony Test',
@@ -3369,7 +3369,7 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     remainingPoints: -18,
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0 },
-  { regionName: 'Division 3',
+  { regionName: 'Region 3',
     lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'Jane Doe',
@@ -3390,33 +3390,33 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
 module.exports.NATIONAL_OVERVIEW_CSV = {
   filename: ('HMPPS_Overview ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Region","Probation Delivery Unit","Team Name","Offender Manager","Grade Code","Capacity Percentage","Capacity Points","Total Points Used","Remaining Points","Contracted Hours","Reduction Hours","Total Cases","CMS Points","CMS Percentage"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO","115.3%",190,219,-29,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 1","Tony Test","PSO","113.7%",190,216,-26,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 1","Jane Doe","PO","116.8%",190,222,-32,37.5,1,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 1","Marcin Martin","PSO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 1","Courtney Larry","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 4","Courtney Larry","PO","117.9%",190,224,-34,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 4","Jane Doe","PO","106.3%",190,202,-12,37.5,4,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 4","Marcin Martin","PSO","113.2%",190,215,-25,37.5,6,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 4","John Smith","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
-  '\n"Division 1","Probation Delivery Unit 1","Team 4","Tony Test","PSO","105.8%",190,201,-11,37.5,3,69,0,"0.0%"' +
-  '\n"Division 2","Probation Delivery Unit 2","Team 2","Jane Doe","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
-  '\n"Division 2","Probation Delivery Unit 2","Team 2","Tony Test","PSO","117.4%",190,223,-33,37.5,4,69,0,"0.0%"' +
-  '\n"Division 2","Probation Delivery Unit 2","Team 2","John Smith","PO","110.0%",190,209,-19,37.5,4,69,0,"0.0%"' +
-  '\n"Division 2","Probation Delivery Unit 2","Team 2","Marcin Martin","PSO","105.3%",190,200,-10,37.5,2,69,0,"0.0%"' +
-  '\n"Division 2","Probation Delivery Unit 2","Team 2","Courtney Larry","PO","114.2%",190,217,-27,37.5,3,69,0,"0.0%"' +
-  '\n"Division 3","Probation Delivery Unit 3","Team 3","Courtney Larry","PO","112.6%",190,214,-24,37.5,2,69,0,"0.0%"' +
-  '\n"Division 3","Probation Delivery Unit 3","Team 3","Marcin Martin","PSO","117.4%",190,223,-33,37.5,1,69,0,"0.0%"' +
-  '\n"Division 3","Probation Delivery Unit 3","Team 3","John Smith","PO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
-  '\n"Division 3","Probation Delivery Unit 3","Team 3","Tony Test","PSO","109.5%",190,208,-18,37.5,1,69,0,"0.0%"' +
-  '\n"Division 3","Probation Delivery Unit 3","Team 3","Jane Doe","PO","105.8%",190,201,-11,37.5,2,69,0,"0.0%"'
+  '\n"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PO","115.3%",190,219,-29,37.5,6,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 1","Tony Test","PSO","113.7%",190,216,-26,37.5,3,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 1","Jane Doe","PO","116.8%",190,222,-32,37.5,1,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 1","Marcin Martin","PSO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 1","Courtney Larry","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 4","Courtney Larry","PO","117.9%",190,224,-34,37.5,6,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 4","Jane Doe","PO","106.3%",190,202,-12,37.5,4,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 4","Marcin Martin","PSO","113.2%",190,215,-25,37.5,6,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 4","John Smith","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Region 1","Probation Delivery Unit 1","Team 4","Tony Test","PSO","105.8%",190,201,-11,37.5,3,69,0,"0.0%"' +
+  '\n"Region 2","Probation Delivery Unit 2","Team 2","Jane Doe","PO","117.4%",190,223,-33,37.5,3,69,0,"0.0%"' +
+  '\n"Region 2","Probation Delivery Unit 2","Team 2","Tony Test","PSO","117.4%",190,223,-33,37.5,4,69,0,"0.0%"' +
+  '\n"Region 2","Probation Delivery Unit 2","Team 2","John Smith","PO","110.0%",190,209,-19,37.5,4,69,0,"0.0%"' +
+  '\n"Region 2","Probation Delivery Unit 2","Team 2","Marcin Martin","PSO","105.3%",190,200,-10,37.5,2,69,0,"0.0%"' +
+  '\n"Region 2","Probation Delivery Unit 2","Team 2","Courtney Larry","PO","114.2%",190,217,-27,37.5,3,69,0,"0.0%"' +
+  '\n"Region 3","Probation Delivery Unit 3","Team 3","Courtney Larry","PO","112.6%",190,214,-24,37.5,2,69,0,"0.0%"' +
+  '\n"Region 3","Probation Delivery Unit 3","Team 3","Marcin Martin","PSO","117.4%",190,223,-33,37.5,1,69,0,"0.0%"' +
+  '\n"Region 3","Probation Delivery Unit 3","Team 3","John Smith","PO","107.4%",190,204,-14,37.5,6,69,0,"0.0%"' +
+  '\n"Region 3","Probation Delivery Unit 3","Team 3","Tony Test","PSO","109.5%",190,208,-18,37.5,1,69,0,"0.0%"' +
+  '\n"Region 3","Probation Delivery Unit 3","Team 3","Jane Doe","PO","105.8%",190,201,-11,37.5,2,69,0,"0.0%"'
 }
 
 module.exports.PERCENTAGE_FORMAT_TEST = {
   breadcrumbs: [{
     title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   overviewDetails: [{
-    regionName: 'Division 1',
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3443,12 +3443,12 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     link: '/probation/ldu/218',
     active: undefined },
   {
-    title: 'Division 1',
+    title: 'Region 1',
     link: '/probation/region/146',
     active: undefined },
     { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   reductionNotes:
-  [ { regionName: 'Division 1',
+  [ { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3460,7 +3460,7 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     status: 'ACTIVE',
     additionalNotes: null,
     gradeCode: 'PO' },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3472,7 +3472,7 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     status: 'SCHEDULED',
     additionalNotes: null,
     gradeCode: 'SPO' },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3484,7 +3484,7 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     status: 'ARCHIVED',
     additionalNotes: null,
     gradeCode: 'PSO' },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3502,15 +3502,15 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
 module.exports.TEAM_REDUCTIONS_CSV = {
   filename: ('Team_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Region","Probation Delivery Unit","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
 }
 
 module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
   reductionNotes:
-  [ { regionName: 'Division 1',
+  [ { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3523,7 +3523,7 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     additionalNotes: null,
     gradeCode: 'PO',
     managerResponsible: 'Joe Bloggs' },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3536,7 +3536,7 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     additionalNotes: null,
     gradeCode: 'SPO',
     managerResponsible: 'Frank Jones' },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3549,7 +3549,7 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     additionalNotes: null,
     gradeCode: 'PSO',
     managerResponsible: 'Mary Brown' },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3567,10 +3567,10 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
 module.exports.TEAM_EXPIRING_REDUCTIONS_CSV = {
   filename: ('Team_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Region","Probation Delivery Unit","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes","Manager Responsible"\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",,"Joe Bloggs"\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",,"Frank Jones"\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",,"Mary Brown"\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",,"Jane Green"'
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",,"Joe Bloggs"\n' +
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",,"Frank Jones"\n' +
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",,"Mary Brown"\n' +
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",,"Jane Green"'
 }
 
 module.exports.LDU_REDUCTIONS_RESULT = {
@@ -3580,12 +3580,12 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     link: '/probation/ldu/218',
     active: undefined },
   {
-    title: 'Division 1',
+    title: 'Region 1',
     link: '/probation/region/146',
     active: undefined },
       { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   reductionNotes:
-  [ { regionName: 'Division 1',
+  [ { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3597,7 +3597,7 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     status: 'ACTIVE',
     additionalNotes: null,
     gradeCode: 'PO' },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3609,7 +3609,7 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     status: 'SCHEDULED',
     additionalNotes: null,
     gradeCode: 'SPO' },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3621,7 +3621,7 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     status: 'ARCHIVED',
     additionalNotes: null,
     gradeCode: 'PSO' },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3639,21 +3639,21 @@ module.exports.LDU_REDUCTIONS_RESULT = {
 module.exports.LDU_REDUCTIONS_CSV = {
   filename: ('LDU_Cluster_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Region","Probation Delivery Unit","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
 }
 
 module.exports.REGION_REDUCTIONS_RESULT = {
   breadcrumbs:
   [{
-    title: 'Division 1',
+    title: 'Region 1',
     link: '/probation/region/146',
     active: undefined },
   { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined } ],
   reductionNotes:
-  [ { regionName: 'Division 1',
+  [ { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3665,7 +3665,7 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     status: 'ACTIVE',
     additionalNotes: null,
     gradeCode: 'PO' },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3677,7 +3677,7 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     status: 'SCHEDULED',
     additionalNotes: null,
     gradeCode: 'SPO' },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3689,7 +3689,7 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     status: 'ARCHIVED',
     additionalNotes: null,
     gradeCode: 'PSO' },
-  { regionName: 'Division 1',
+  { regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3701,14 +3701,14 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     status: 'DELETED',
     additionalNotes: null,
     gradeCode: 'PO' } ],
-  title: 'Division 1',
-  subTitle: 'Division' }
+  title: 'Region 1',
+  subTitle: 'Region' }
 
 module.exports.REGION_REDUCTIONS_CSV = {
-  filename: ('Division_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
+  filename: ('Region_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
   csv: '"Region","Probation Delivery Unit","Team","Offender Manager","Grade Code","Contracted Hours","Reason","Hours","Start Date","End Date","Status","Additional Notes"\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
-  '"Division 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Disability",5,"28 11 2016, 16:15","26 11 2027, 16:15","ACTIVE",\n' +
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","SPO",37,"Long Term Sickness Absence",2,"26 02 2018, 16:15","26 11 2027, 16:15","SCHEDULED",\n' +
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PSO",37,"Phased Return to Work",1,"03 12 2016, 16:15","28 11 2016, 16:15","ARCHIVED",\n' +
+  '"Region 1","Probation Delivery Unit 1","Team 1","John Smith","PO",37,"Phased Return to Work",2,"28 11 2016, 16:15","26 11 2027, 16:15","DELETED",'
 }

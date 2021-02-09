@@ -15,7 +15,7 @@ describe('services/data/get-scenario team', function () {
       })
     })
   })
-  it('should retrieve all 120 raw scenario records for HMPPS > Division 1 > Probation Delivery Unit 1 > Team 1', function () {
+  it('should retrieve all 120 raw scenario records for HMPPS > Region 1 > Probation Delivery Unit 1 > Team 1', function () {
     expect(scenarioData.length).to.eql(120)
   })
 })
@@ -28,7 +28,7 @@ describe('services/data/get-scenario ldu', function () {
       })
     })
   })
-  it('should retrieve all 240 raw scenario records for HMPPS > Division 1 > Probation Delivery Unit 1', function () {
+  it('should retrieve all 240 raw scenario records for HMPPS > Region 1 > Probation Delivery Unit 1', function () {
     expect(scenarioData.length).to.eql(240)
   })
 })
@@ -41,7 +41,7 @@ describe('services/data/get-scenario division', function () {
       })
     })
   })
-  it('should retrieve all 240 raw scenario records for HMPPS > Division 1', function () {
+  it('should retrieve all 240 raw scenario records for HMPPS > Region 1', function () {
     expect(scenarioData.length).to.eql(240)
   })
 })

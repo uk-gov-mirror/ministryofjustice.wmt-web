@@ -34,7 +34,7 @@ module.exports = {
   REGION: {
     name: 'region',
     ref: 'R',
-    displayText: 'Division',
+    displayText: 'Region',
     capacityView: 'region_capacity_view',
     capacityBreakdownView: 'region_capacity_breakdown_view',
     caseProgressView: 'region_case_progress_view',
