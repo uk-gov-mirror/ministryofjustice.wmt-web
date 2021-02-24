@@ -2,18 +2,17 @@
 const moment = require('moment')
 const expect = require('chai').expect
 const Reduction = require('../../../../app/services/domain/reduction')
-const ValidationError = require('../../../../app/services/errors/validation-error')
 const reductionStatusType = require('../../../../app/constants/reduction-status-type')
 
-var activeStartDate = moment().subtract(30, 'days').toDate()
-var activeEndDate = moment().add(30, 'days').toDate()
-var reductionReason = {
+let activeStartDate = moment().subtract(30, 'days').toDate()
+let activeEndDate = moment().add(30, 'days').toDate()
+const reductionReason = {
   maxAllowanceHours: 11
 }
 
 describe('services/domain/reduction', function () {
   it('should construct a new-reduction object with the correct values', function () {
-    var reduction = new Reduction('1', '10',
+    const reduction = new Reduction('1', '10',
       [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
       [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason, 150)
     expect(reduction.hours).to.equal(10)
@@ -30,7 +29,7 @@ describe('services/domain/reduction', function () {
       new Reduction('1', '',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
         [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.has.a.property('validationErrors')
       .that.has.a.property('reductionHours')
   })
@@ -40,7 +39,7 @@ describe('services/domain/reduction', function () {
       new Reduction('', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
         [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.has.a.property('validationErrors')
       .that.has.a.property('reasonForReductionId')
       .that.contains('Reason for reduction is required')
@@ -53,7 +52,7 @@ describe('services/domain/reduction', function () {
       new Reduction('1', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
         [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.has.a.property('validationErrors')
       .that.has.a.property('reductionStartDate')
       .that.contains('Reduction start date was invalid')
@@ -66,7 +65,7 @@ describe('services/domain/reduction', function () {
       new Reduction('1', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
         [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.has.a.property('validationErrors')
       .that.has.a.property('reductionEndDate')
       .that.contains('Reduction end date must be after Reduction start date')
@@ -74,22 +73,22 @@ describe('services/domain/reduction', function () {
 
   it('should raise a ValidationError if Notes exceed max length', function () {
     expect(function () {
-      var longNote = getLongString()
+      const longNote = getLongString()
       new Reduction('1', '10',
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
         [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], longNote, reductionReason)
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.has.a.property('validationErrors')
       .that.has.a.property('notes')
   })
 
   it('should raise a ValidationError if the hours are outside the range permitted for the reduction reason', function () {
-    var hours = '20'
+    const hours = '20'
     expect(function () {
       new Reduction('1', hours,
         [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
         [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', reductionReason)
-    }).to.throw(ValidationError)
+    }).to.throw()
       .that.has.a.property('validationErrors')
       .that.has.a.property('reductionHours')
       .that.contains('Reduction hours must be a number between 0 and ' + reductionReason.maxAllowanceHours)

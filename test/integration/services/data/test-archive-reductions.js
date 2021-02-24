@@ -3,7 +3,7 @@ const expect = require('chai').expect
 const getArchivedReductions = require('../../../../app/services/data/get-reduction-archive')
 const ArchiveDateRange = require('../../../../app/services/domain/archive-date-range')
 
-var expectedResult = {
+const expectedResult = {
   omName: 'A.N. Offender Manager KNTK042PSO',
   hoursReduced: 18.8,
   comments: '67A1623',
@@ -11,9 +11,9 @@ var expectedResult = {
   reductionAddedBy: 'Reduction Submitter 5'
 }
 
-var archiveReductionData
+let archiveReductionData
 
-var archiveDateRange = new ArchiveDateRange(24, 10, 2014, 20, 1, 2017)
+const archiveDateRange = new ArchiveDateRange(24, 10, 2014, 20, 1, 2017)
 
 describe('services/data/get-archived-reductions', function () {
   before(function () {

@@ -35,17 +35,23 @@
 
   {% include "includes/validation-error-messages.html" %}
 
-  <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">{{ headerText }}</header>
-  <p class="lede">{{ reductionText }}<span class="bold">{{ title }}</span></p>
+  <header class="govuk-heading-xl reductionHeader">{{ headerText }}</header>
+  <p class="govuk-body-l">{{ reductionText }}<strong class="bold">{{title}}</strong></p>
   {% set first = true %}
   <form action="{{ formAction }}" method="{{formMethod}}" id="reductionForm">
     <input type="hidden" name="reductionId" value="{{reduction.id}}"/>
-    <div class="form-group" id="reduction_reason_selection">
-      <label class="form-label-bold" for="select-box">Reason for reduction</label>
+    <input type="hidden" id="refData" name="refData" value="{{stringifiedReferenceData}}"/>
+    <input type="hidden" id="reductionToPopulate" name="reductionToPopulate" value="{{reductionToPopulate}}"/>
+    <input type="hidden" id="reductionEnabled" name="reductionEnabled" value="{{reductionEnabled}}"/>
+    <input type="hidden" id="reductionStatus" name="reductionStatus" value="{{reductionStatus}}"/>
+    <div class="govuk-form-group  {% if errors['reasonForReductionId'][0] %} govuk-form-group--error {% endif %}" id="reduction_reason_selection">
+      <label class="govuk-label govuk-label--s" for="select-box">Reason for reduction</label>
       {% if errors['reasonForReductionId'][0] %}
-        <span class="error-message">{{ errors['reasonForReductionId'][0] }}</span>
+        <span id="reduction-reason-selection-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ errors['reasonForReductionId'][0] }}
+        </span>
       {% endif %}
-      <select class="form-control" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}" onChange="populateHours(), calculateExpiry(), enableAddReduction()"> 
+      <select class="govuk-select" id="select-box" name="reasonForReductionId" selected="{{ reduction.reasonId }}"> 
         <option value="select" disabled selected>Please select a reason...</option>
         {% for reason in referenceData %}
         <option value="{{ reason.id }}" {% if reason.id == reduction.reasonId %} selected {% endif %}>{{ reason.reasonShortName }}</option>
@@ -53,78 +59,118 @@
       </select>
     </div>
 
-    <div class="form-group" id="reduction_hours">
+    <div class="govuk-form-group  {% if errors['reductionHours'][0] %} govuk-form-group--error {% endif %}" id="reduction_hours">
       {% if errors['reductionHours'][0] %}
-        <span class="error-message">{{ errors['reductionHours'][0] }}</span>
+        <span id="reduction-hours-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ errors['reductionHours'][0] }}
+        </span>
       {% endif %}
-      <label class="form-label-bold" for="hours">Hours</label>
-      <input class="form-control" id="hours" name="reductionHours" style="width: 100px" value="{{reduction.hours}}">
+      <h6 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--s" for="hours">Hours</label>
+      </h6>
+      <input class="govuk-input govuk-input--width-5 {% if errors['reductionHours'][0] %} govuk-input--error {% endif %}" id="hours" name="reductionHours" value="{{reduction.hours}}">
     </div>
 
-    <div class="form-group" id="reductionStartDate">
-      <fieldset>
-        <legend>
-          <span class="form-label-bold">Reduction start date</span>
-          <span class="form-hint">For example, 31 3 1980</span>
+    <div class="govuk-form-group  {% if errors['reductionStartDate'][0] %} govuk-form-group--error {% endif %}" id="reductionStartDate">
+      <fieldset class="govuk-fieldset" role="group" aria-describedby="reduction-start-date-hint  {% if errors['reductionStartDate'][0] %} reduction-start-date-error {% endif %}">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          <h6 class="govuk-fieldset__heading">
+            Reduction start date
+          </h6>
         </legend>
+        <div id="reduction-start-date-hint" class="govuk-hint">
+          For example, 12 11 2007
+        </div>
         {% if errors['reductionStartDate'][0] %}
-          <span class="error-message">{{ errors['reductionStartDate'][0] }}</span>
+          <span id="reduction-start-date-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ errors['reductionStartDate'][0] }}
+          </span>
         {% endif %}
-        <div class="form-date" id="reduction_start_day">
-          <div class="form-group form-group-day">
-            <label class="form-label" for="start-day">Day</label>
-            <input class="form-control" id="start-day" name="redStartDay" value="{{ reduction.start_day }}" type="number" onchange="calculateExpiry()">
+        <div class="govuk-date-input" id="reduction-start-date">
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="start-day">
+                Day
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['reductionStartDate'][0] %} govuk-input--error {% endif %}" id="start-day" name="redStartDay" value="{{ reduction.start_day }}" type="text" pattern="[0-9]*" inputmode="numeric"></div>
           </div>
-          <div class="form-group form-group-month" id="reduction_start_month">
-            <label class="form-label" for="start-month">Month</label>
-            <input class="form-control" id="start-month" name="redStartMonth" value="{{ reduction.start_month }}" type="number" onchange="calculateExpiry()">
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="start-month">
+                Month
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['reductionStartDate'][0] %} govuk-input--error {% endif %}"  id="start-month" name="redStartMonth" value="{{ reduction.start_month }}" type="text" pattern="[0-9]*" inputmode="numeric"></div>
           </div>
-          <div class="form-group form-group-year" id="reduction_start_year">
-            <label class="form-label" for="start-year">Year</label>
-            <input class="form-control" id="start-year" name="redStartYear" value="{{ reduction.start_year }}" type="number" onchange="calculateExpiry()">
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="start-year">
+                Year
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-4 {% if errors['reductionStartDate'][0] %} govuk-input--error {% endif %}" id="start-year" name="redStartYear" value="{{ reduction.start_year }}" type="text" pattern="[0-9]*" inputmode="numeric"></div>
           </div>
         </div>
+    
       </fieldset>
     </div>
 
-    <div class="form-group" id="reductionEndDate">
-      <fieldset>
-        <legend>
-          <span class="form-label-bold">Reduction end date</span>
-          <span class="form-hint">For example, 31 3 1980</span>
+    <div class="govuk-form-group  {% if errors['reductionEndDate'][0] %} govuk-form-group--error {% endif %}" id="reductionEndDate">
+      <fieldset class="govuk-fieldset" role="group" aria-describedby="reduction-end-date-hint  {% if errors['reductionEndDate'][0] %} reduction-end-date-error {% endif %}">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          <h6 class="govuk-fieldset__heading">
+            Reduction end date
+          </h6>
         </legend>
+        <div id="reduction-end-date-hint" class="govuk-hint">
+          For example, 12 11 2007
+        </div>
         {% if errors['reductionEndDate'][0] %}
-          <span class="error-message">{{ errors['reductionEndDate'][0] }}</span>
+          <span id="reduction-end-date-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ errors['reductionEndDate'][0] }}
+          </span>
         {% endif %}
-        <div class="form-date" id="reduction_end_day">
-          <div class="form-group form-group-day">
-            <label class="form-label" for="end-day">Day</label>
-            <input class="form-control" id="end-day" name="redEndDay" value="{{ reduction.end_day }}" type="number">
+        <div class="govuk-date-input" id="reduction-end-date">
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="end-day">
+                Day
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['reductionEndDate'][0] %} govuk-input--error {% endif %}" id="end-day" name="redEndDay" value="{{ reduction.end_day }}" type="text" pattern="[0-9]*" inputmode="numeric"></div>
           </div>
-          <div class="form-group form-group-month" id="reduction_end_month">
-            <label class="form-label" for="end-month">Month</label>
-            <input class="form-control" id="end-month" name="redEndMonth" value="{{ reduction.end_month }}" type="number">
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="end-month">
+                Month
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['reductionEndDate'][0] %} govuk-input--error {% endif %}"  id="end-month" name="redEndMonth" value="{{ reduction.end_month }}" type="text" pattern="[0-9]*" inputmode="numeric"></div>
           </div>
-          <div class="form-group form-group-year" id="reduction_end_year">
-            <label class="form-label" for="end-year">Year</label>
-            <input class="form-control" id="end-year" name="redEndYear" value="{{ reduction.end_year }}" type="number">
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="end-year">
+                Year
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-4 {% if errors['reductionEndDate'][0] %} govuk-input--error {% endif %}" id="end-year" name="redEndYear" value="{{ reduction.end_year }}" type="text" pattern="[0-9]*" inputmode="numeric"></div>
           </div>
         </div>
+    
       </fieldset>
     </div>
 
-    <div class="form-group">
+    <div class="govuk-form-group {% if errors['notes'][0] %} govuk-form-group--error {% endif %}">
       {% if errors['notes'][0] %}
-        <span class="error-message">{{ errors['notes'][0] }}</span>
+        <span id="reduction-notes-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ errors['notes'][0] }}
+        </span>
       {% endif %}
-      <label class="form-label-bold" for="textarea">Additional notes</label>
-      <textarea class="form-control form-control-3-4" name="notes" id="textarea" rows="5">{{ reduction.notes }}</textarea>
+      <h6 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--s" for="textarea">Additional notes</label>
+      </h6>
+      <textarea class="govuk-textarea {% if errors['notes'][0] %} govuk-textarea--error {% endif %}" name="notes" id="textarea" rows="5">{{ reduction.notes }}</textarea>
     </div> 
     {% include "includes/csrf-hidden-input.html"%}
-    <input id="submit-button" class="button" type="submit" value="{{ submitButtonText }}">
+    <input id="submit-button" class="govuk-button" data-module="govuk-button" type="submit" value="{{ submitButtonText }}">
   </form>
   {% if reduction %}
-  <h2 class="heading-small">Other options</h2>
+  <h2 class="govuk-heading-s">Other options</h2>
   <form name="archiveReduction" method="POST" action="/{{ workloadType }}/offender-manager/{{ linkId }}/update-reduction-status">
     <!-- Including the csrf-hidden-input.html hides the links -->
     <input type="hidden"  name="_csrf"  value="{{ csrfToken }}">
@@ -138,83 +184,56 @@
     <input type="hidden" name="reductionId" value="{{ reduction.id }}">
     <input type="hidden" name="status" value="DELETED">
   </form>
-  <div>
-  <ul>
+ 
     {% if reduction.status !== 'ARCHIVED' %}
-    <li><a  href="javascript:document.archiveReduction.submit()">Archive reduction</a></li>
+      <div>
+       <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="javascript:document.archiveReduction.submit()">Archive reduction</a>
+      </div>
     {% endif %}
-    <li><a  href="javascript:document.deleteReduction.submit()">Delete reduction</a></li>
-  </ul>
-  </div>
+    <div>
+      <a class="govuk-button govuk-button--warning" href="javascript:document.deleteReduction.submit()">Delete reduction</a>
+    </div>
   {% endif %}
   <br>
-  <details>
-
-      <summary><span class="summary">Audit Log</span></summary>
-
-      <table class="">
-          <thead>
-              <tr>
-                  <th id="type">Reason</th>
-                  <th id="hours">Hours</th>
-                  <th id="comments">Comments</th>
-                  <th id="start_date">Start Date</th>
-                  <th id="end_date">End Date</th>
-                  <th id="status">Status</th>
-                  <th id="action_date">Date</th>
-                  <th id="user">User</th>
-              </tr>
-          </thead>
-          <tbody class="">
-              {% for reduction in reductionsHistory %}
-              <tr>
-                  <td headers="type">{{ reduction.reasonShortName }}</td>
-                  <td headers="hours">{{ reduction.hours }}</td>
-                  <td headers="comments">{{ reduction.notes }}</td>
-                  <td headers="start_date">{{ reduction.reductionStartDate }}</td>
-                  <td headers="end_date">{{ reduction.reductionEndDate }}</td>     
-                  <td headers="status">{{ reduction.status }}</td>                
-                  <td headers="action_date">{{ reduction.updatedDate }}</td>    
-                  <td headers="user">{{ reduction.name }}</td>    
-              </tr>
-              {% endfor %}
-          </tbody>
-      </table>
+  <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          Audit Log
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <table class="govuk-table" id="override-govuk-table">
+            <thead>
+                <tr>
+                    <th id="type">Reason</th>
+                    <th id="hours">Hours</th>
+                    <th id="comments">Comments</th>
+                    <th id="start_date">Start Date</th>
+                    <th id="end_date">End Date</th>
+                    <th id="status">Status</th>
+                    <th id="action_date">Date</th>
+                    <th id="user">User</th>
+                </tr>
+            </thead>
+            <tbody class="">
+                {% for reduction in reductionsHistory %}
+                <tr>
+                    <td headers="type">{{ reduction.reasonShortName }}</td>
+                    <td headers="hours">{{ reduction.hours }}</td>
+                    <td headers="comments">{{ reduction.notes }}</td>
+                    <td headers="start_date">{{ reduction.reductionStartDate }}</td>
+                    <td headers="end_date">{{ reduction.reductionEndDate }}</td>     
+                    <td headers="status">{{ reduction.status }}</td>                
+                    <td headers="action_date">{{ reduction.updatedDate }}</td>    
+                    <td headers="user">{{ reduction.name }}</td>    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      </div>
     </details>
 </main>
-{% endblock %} {% block body_end %}
+{% endblock %} {% block bodyEnd %}
 <script src="/public/javascripts/vendor/jquery.min.js"></script>
-<script type="text/javascript">
-  var refData = {{ referenceData | dump | safe }}
-</script>
 <script src="/public/javascripts/add-reduction.js"></script>
-{% if not reduction %}
-<script>
-  $(function(){
-    $('#submit-button').prop('disabled', true);
-  });
-</script>
-{% endif %}
-{% if not reduction.isEnabled %}
-<script>
-  $(function(){
-    $('#submit-button').prop('disabled', true);
-  });
-</script>
-{% endif %}
-{% if reduction.status === 'ARCHIVED' %}
-<script>
-    $(function(){
-      $('#select-box').prop('disabled', true);
-      $('#end-year').prop('readonly', true);
-      $('#end-month').prop('readonly', true);
-      $('#end-day').prop('readonly', true);
-      $('#start-year').prop('readonly', true);
-      $('#start-month').prop('readonly', true);
-      $('#start-day').prop('readonly', true);
-      $('#hours').prop('readonly', true);
-      $('#textarea').prop('readonly', true);
-    });
-</script>
-{% endif %}
 {% endblock %}

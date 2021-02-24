@@ -1,7 +1,7 @@
 const knex = require('../../../knex').web
 
 module.exports = function (courtReportStagingId, workloadReportId, batchSize) {
-  var newTask = {
+  const newTask = {
     submitting_agent: 'WEB',
     type: 'COURT-REPORTS-CALCULATION',
     additional_data: JSON.stringify(

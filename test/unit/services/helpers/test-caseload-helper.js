@@ -6,14 +6,14 @@ const helper = require('../../../helpers/caseload-helper')
 describe('services/helpers/caseload-helper', function () {
   describe('getCaseloadTierTotalsByTeamByGrade', function () {
     it('should calculate the tier totals across locations for each individual(linkId) in team', function () {
-      var result = caseloadHelper.getCaseloadTierTotalsByTeamByGrade(helper.TEAM_CASELOAD)
+      const result = caseloadHelper.getCaseloadTierTotalsByTeamByGrade(helper.TEAM_CASELOAD)
       expect(result[0]).to.eql(helper.OVERALL_CASELOAD_PO_0)
       expect(result[1]).to.eql(helper.OVERALL_CASELOAD_PO_1)
       expect(result[2]).to.eql(helper.OVERALL_CASELOAD_PO_2)
     })
 
     it('should calculate the tier totals across locations for each team(linkId)-grade combination', function () {
-      var result = caseloadHelper.getCaseloadTierTotalsByTeamByGrade(helper.LDU_CASELOAD)
+      const result = caseloadHelper.getCaseloadTierTotalsByTeamByGrade(helper.LDU_CASELOAD)
       expect(result[0]).to.eql(helper.OVERALL_CASELOAD_PO_0)
       expect(result[1]).to.eql(helper.OVERALL_CASELOAD_PO_1)
       expect(result[2]).to.eql(helper.OVERALL_CASELOAD_PO_2)
@@ -26,7 +26,7 @@ describe('services/helpers/caseload-helper', function () {
   describe('getCaseloadSummaryTotalsByTeam', function () {
     it('should calculate the total number of custody, community, license and total per grade per team', function () {
       // pass in grouped people in team => ?
-      var result = caseloadHelper.getCaseloadSummaryTotalsByTeam(helper.LDU_CASELOAD)
+      const result = caseloadHelper.getCaseloadSummaryTotalsByTeam(helper.LDU_CASELOAD)
       expect(result.length).to.eql(3)
       expect(result[0]).to.eql(helper.LDU_OVERALL_SUMMARY_LINKID_2)
       expect(result[1]).to.eql(helper.LDU_OVERALL_SUMMARY_LINKID_3)
@@ -36,14 +36,14 @@ describe('services/helpers/caseload-helper', function () {
 
   describe('aggregateTeamTierTotals', function () {
     it('should sum the tiers totals for each team and for each location within a team', function () {
-      var result = caseloadHelper.aggregateTeamTierTotals(helper.LDU_CUSTODY_RESULTS)
+      const result = caseloadHelper.aggregateTeamTierTotals(helper.LDU_CUSTODY_RESULTS)
       expect(result).to.eql(helper.LDU_CUSTODY_AGGREGATED_RESULTS)
     })
   })
 
   describe('calculateTeamTierPercentages', function () {
     it('should calculate each grades tier totals as percentage of the team totals', function () {
-      var result = caseloadHelper.calculateTeamTierPercentages(helper.LDU_CUSTODY_RESULTS)
+      const result = caseloadHelper.calculateTeamTierPercentages(helper.LDU_CUSTODY_RESULTS)
       expect(result).to.eql(helper.LDU_CUSTODY_AGGREGATED_RESULTS)
     })
   })

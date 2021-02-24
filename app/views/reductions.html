@@ -12,7 +12,18 @@
     {% include "includes/sub-nav.html" %} 
     
     {% if successText %}
-    <div class="message message--success">{{ successText }}</div>
+    <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+        <div class="govuk-notification-banner__header">
+          <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+            Success
+          </h2>
+        </div>
+        <div class="govuk-notification-banner__content">
+          <p class="govuk-notification-banner__heading">
+            {{successText}}
+          </p>
+        </div>
+      </div>
     {% endif %}
 
     {% set columnNameType='Type' %}
@@ -20,13 +31,13 @@
     {% set columnNameStartDate='Start date' %}
     {% set columnNameEndDate='End date' %}
 
-    <a href="/{{ workloadType }}/offender-manager/{{ linkId }}/add-reduction" class="button">Add a reduction</a>
+    <a href="/{{ workloadType }}/offender-manager/{{ linkId }}/add-reduction" class="govuk-button" data-module="govuk-button" >Add a reduction</a>
     
-    <h2 id="headingActive" class="heading-large">Active<span class="visuallyhidden"> reductions</span></h2>
+    <h2 id="headingActive" class="govuk-heading-l">Active<span class="visuallyhidden"> reductions</span></h2>
     
-    <table class="sln-table-reductions">
+    <table class="govuk-table sln-table-reductions" id= "override-govuk-table">
         <colgroup>
-            <col span="1" style="width:35%;">
+            <col class="width35Percent" span="1">
         </colgroup>
         <thead>
             <tr>
@@ -45,7 +56,7 @@
                 <td headers="active_hours">{{ newReduction.hours }}</td>
                 <td headers="active_start_date">{{ newReduction.reductionStartDate }}</td>
                 <td headers="active_end_date">{{ newReduction.reductionEndDate }}</td>
-                <td><a href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ newReduction.id }}">View</a></td>
+                <td><a class="govuk-link" href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ newReduction.id }}">View</a></td>
             </tr>
             {% endif %}
             {% for active in activeReductions %}
@@ -54,17 +65,17 @@
                 <td headers="active_hours">{{ active.hours }}</td>
                 <td headers="active_start_date">{{ active.reductionStartDate }}</td>
                 <td headers="active_end_date">{{ active.reductionEndDate }}</td>
-                <td><a href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ active.id }}">View</a></td>
+                <td><a class="govuk-link" href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ active.id }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <h2 id="headingScheduled" class="heading-large">Scheduled<span class="visuallyhidden"> reductions</span></h2>
+    <h2 id="headingScheduled" class="govuk-heading-l">Scheduled<span class="visuallyhidden"> reductions</span></h2>
 
-    <table class="sln-table-reductions">
+    <table class="govuk-table sln-table-reductions" id= "override-govuk-table">
         <colgroup>
-            <col span="1" style="width:35%;">
+            <col class="width35Percent" span="1">
         </colgroup>
         <thead>
             <tr>
@@ -82,17 +93,17 @@
                 <td headers="scheduled_hours">{{ scheduled.hours }}</td>
                 <td headers="scheduled_start_date">{{ scheduled.reductionStartDate }}</td>
                 <td headers="scheduled_end_date">{{ scheduled.reductionEndDate }}</td>                
-                <td><a href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ scheduled.id }}">View</a></td>
+                <td><a class="govuk-link" href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ scheduled.id }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <h2 id="headingArchived" class="heading-large">Archived<span class="visuallyhidden"> reductions</span></h2>
+    <h2 id="headingArchived" class="govuk-heading-l">Archived<span class="visuallyhidden"> reductions</span></h2>
 
-    <table class="sln-table-reductions">
+    <table class="govuk-table sln-table-reductions" id= "override-govuk-table">
         <colgroup>
-            <col span="1" style="width:35%;">
+            <col class="width35Percent" span="1">
         </colgroup>
         <thead>
             <tr>
@@ -110,7 +121,7 @@
                 <td headers="archived_hours">{{ archived.hours }}</td>
                 <td headers="archived_start_date">{{ archived.reductionStartDate }}</td>
                 <td headers="archived_end_date">{{ archived.reductionEndDate }}</td>
-                <td><a href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ archived.id }}">View</a></td>
+                <td><a class="govuk-link" href="/{{ workloadType }}/offender-manager/{{ linkId }}/edit-reduction?reductionId={{ archived.id }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -118,8 +129,6 @@
 
 </main>
 
-<div class="lastUpdated">
-        <p>Last updated on  <span class="bold">{{date}}</span></p>
-        </div>
+{% include "includes/last-updated.html" %}
 
 {% endblock %}

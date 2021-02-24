@@ -8,9 +8,9 @@ const calculateOverviewValues = require('./helpers/calculate-overview-values')
 const workloadTypes = require('../constants/workload-type')
 
 module.exports = function (id, organisationLevel, isCSV = false, workloadType = workloadTypes.PROBATION) {
-  var result = {}
-  var overviewPromise = {}
-  var organisationalUnitType = getOrganisationUnit('name', organisationLevel)
+  const result = {}
+  let overviewPromise = {}
+  const organisationalUnitType = getOrganisationUnit('name', organisationLevel)
 
   if (organisationLevel === orgUnit.OFFENDER_MANAGER.name) {
     overviewPromise = getIndividualOverview(id, organisationLevel)

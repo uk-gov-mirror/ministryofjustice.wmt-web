@@ -1,7 +1,7 @@
 const workloadTypes = require('../../../app/constants/workload-type')
 
 module.exports.validate = function (workloadType) {
-  var validWorkloadTypes = [
+  const validWorkloadTypes = [
     workloadTypes.COURT_REPORTS,
     workloadTypes.PROBATION,
     workloadTypes.OMIC

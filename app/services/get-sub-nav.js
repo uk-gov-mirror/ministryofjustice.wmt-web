@@ -4,10 +4,10 @@ const organisationUnitConstants = require('../constants/organisation-unit')
 const workloadConstants = require('../constants/workload-type')
 
 module.exports = function (id, organisationalUnitName, currentPath, workloadType = workloadConstants.PROBATION, authorisation, userRole) {
-  var baseLink = linkGenerator.fromIdAndNameAndWorkloadType(id, organisationalUnitName, workloadType)
-  var navigation = []
+  const baseLink = linkGenerator.fromIdAndNameAndWorkloadType(id, organisationalUnitName, workloadType)
+  const navigation = []
 
-  var isOffenderManager = organisationalUnitName === organisationUnitConstants.OFFENDER_MANAGER.name
+  const isOffenderManager = organisationalUnitName === organisationUnitConstants.OFFENDER_MANAGER.name
   switch (workloadType) {
     case workloadConstants.COURT_REPORTS:
       if (isOffenderManager) {

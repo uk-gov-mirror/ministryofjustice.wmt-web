@@ -9,9 +9,9 @@ module.exports = function (id, organisationLevel, workloadType = workloadTypeCon
     throw new TypeError('Organisation level is undefined')
   }
 
-  var breadcrumbs = []
-  var tree = organisationalHierarchyTree.get()
-  var reference = getReference(id, organisationLevel)
+  const breadcrumbs = []
+  const tree = organisationalHierarchyTree.get()
+  let reference = getReference(id, organisationLevel)
 
   if (tree[reference] === undefined) {
     throw new Error(organisationLevel + ' with ID ' + id + ' does not exist in the organisational tree')
@@ -25,9 +25,10 @@ module.exports = function (id, organisationLevel, workloadType = workloadTypeCon
   return breadcrumbs
 }
 
-var getReference = function (id, organisationLevel) {
-  var reference
-  var organisationUnit = orgUnitFinder('name', organisationLevel)
+const getReference = function (id, organisationLevel) {
+  let reference
+  const organisationUnit = orgUnitFinder('name', organisationLevel)
+  const idRegex = /^[0-9]+$/
   if (organisationUnit === undefined) {
     throw new Error('Organisation level ' + organisationLevel + ' does not exist')
   }
@@ -37,7 +38,6 @@ var getReference = function (id, organisationLevel) {
       reference = organisationUnit.ref
       break
     default:
-      var idRegex = /^[0-9]+$/
       if (!idRegex.test(id) || id === undefined) {
         throw new Error('ID ' + reference + ' is not valid')
       }

@@ -1,8 +1,52 @@
+$(document).ready(function() {
 // Set current year dynamically
   var daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31]
   var currentYear = new Date().getFullYear()
 
+  var refData = document.getElementById('refData').value
+  if (refData) {
+    refData = JSON.parse(refData)
+  }
+
   var chosenReduction
+
+  $('#select-box').change(function() {
+    populateHours()
+    calculateExpiry()
+    enableAddReduction()
+  })
+
+  $('#start-day').change(function() {
+    calculateExpiry()
+  })
+  $('#start-month').change(function() {
+    calculateExpiry()
+  })
+  $('#start-year').change(function() {
+    calculateExpiry()
+  })
+
+  console.log(typeof document.getElementById("reductionToPopulate").value)
+  console.log(typeof document.getElementById("reductionEnabled").value)
+  if (document.getElementById("reductionToPopulate").value !== 'true') {
+    $('#submit-button').prop('disabled', true);
+  }
+
+  if (document.getElementById("reductionEnabled").value !== 'true') {
+    $('#submit-button').prop('disabled', true);
+  }
+
+  if (document.getElementById("reductionStatus").value === 'ARCHIVED') {
+    $('#select-box').prop('disabled', true);
+    $('#end-year').prop('readonly', true);
+    $('#end-month').prop('readonly', true);
+    $('#end-day').prop('readonly', true);
+    $('#start-year').prop('readonly', true);
+    $('#start-month').prop('readonly', true);
+    $('#start-day').prop('readonly', true);
+    $('#hours').prop('readonly', true);
+    $('#textarea').prop('readonly', true);
+  }
 
   var setHoursAndEndDateToReadOnly = function () {
     var chosenReductionIndex = document.getElementById("select-box").selectedIndex
@@ -124,3 +168,4 @@
   window.onload = function () {
     setHoursAndEndDateToReadOnly()
   }
+})

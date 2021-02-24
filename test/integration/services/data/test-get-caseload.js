@@ -3,7 +3,7 @@ const expect = require('chai').expect
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 const getCaseload = require('../../../../app/services/data/get-caseload')
 
-var inserts = []
+let inserts = []
 
 describe('services/data/get-caseload', function () {
   before(function () {
@@ -40,7 +40,7 @@ describe('services/data/get-caseload', function () {
   })
 
   it('should retrieve 6 rows per team in an ldu - one each for PO and PSO totals per location', function () {
-    var insertedLdus = inserts.filter((item) => item.table === 'ldu')
+    const insertedLdus = inserts.filter((item) => item.table === 'ldu')
     return getCaseload(insertedLdus[insertedLdus.length - 1].id, 'ldu')
       .then(function (results) {
         // Sort by team id
@@ -54,7 +54,7 @@ describe('services/data/get-caseload', function () {
   })
 
   it('should retrieve correct caseload breakdown totals for each team/grade combination in an ldu', function () {
-    var insertedLdus = inserts.filter((item) => item.table === 'ldu')
+    const insertedLdus = inserts.filter((item) => item.table === 'ldu')
     return getCaseload(insertedLdus[insertedLdus.length - 1].id, 'ldu')
       .then(function (results) {
         expect(results[0].untiered).to.eql(0)

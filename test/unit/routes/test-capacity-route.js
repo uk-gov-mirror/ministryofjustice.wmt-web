@@ -3,7 +3,6 @@ const supertest = require('supertest')
 const proxyquire = require('proxyquire')
 const expect = require('chai').expect
 const sinon = require('sinon')
-require('sinon-bluebird')
 
 const workloadTypes = require('../../../app/constants/workload-type')
 
@@ -23,15 +22,14 @@ const CAPACITY_TO_MONTH = 'capacity-to-month='
 const CAPACITY_TO_YEAR = 'capacity-to-year='
 
 describe('/caseload-capacity', function () {
-  var app
-  var getCapacityStub
-  var getOutstandingReportsStub
-  var getSubNavStub
-  var getLastUpdated
-  var capacityStubResult = {title: 'Test', capacityTable: {}, subNav: [{}]}
-  var authorisationService
-  var getCaseDetailsStub
-  authorisationService = {
+  let app
+  let getCapacityStub
+  let getOutstandingReportsStub
+  let getSubNavStub
+  let getLastUpdated
+  const capacityStubResult = { title: 'Test', capacityTable: {}, subNav: [{}] }
+  let getCaseDetailsStub
+  const authorisationService = {
     assertUserAuthenticated: sinon.stub()
   }
   beforeEach(function () {
@@ -40,7 +38,7 @@ describe('/caseload-capacity', function () {
     getOutstandingReportsStub = sinon.stub().resolves()
     getSubNavStub = sinon.stub()
     getLastUpdated = sinon.stub().resolves(new Date(2017, 11, 1))
-    var route = proxyquire(
+    const route = proxyquire(
       '../../../app/routes/capacity-route', {
         '../services/get-capacity-view': getCapacityStub,
         '../services/get-outstanding-reports': getOutstandingReportsStub,

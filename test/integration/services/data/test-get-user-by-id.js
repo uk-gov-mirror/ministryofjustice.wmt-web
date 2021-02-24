@@ -3,10 +3,10 @@ const expect = require('chai').expect
 const getUserById = require('../../../../app/services/data/get-user-by-id')
 const userRoleHelper = require('../../../helpers/data/user-role-helper')
 
-var insertedData = []
-var username
-var userId
-var name
+let insertedData = []
+let username
+let userId
+let name
 
 describe('/services/data/get-user-by-id', function () {
   before(function () {

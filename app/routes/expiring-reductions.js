@@ -28,11 +28,11 @@ module.exports = function (router) {
       }
     }
 
-    var userId = null
+    let userId = null
     if (req.user !== undefined && req.user !== null) {
-      userId = req.user.userId
+      userId = [req.user.userId]
     }
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return expiringReductionsService(userId)
       .then(function (reductions) {
         return res.render('expiring-reductions', {
@@ -41,7 +41,7 @@ module.exports = function (router) {
           breadcrumbs: breadcrumbs,
           reductions: reductions,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
           subNav: getSubNav(req.path)
         })
       })

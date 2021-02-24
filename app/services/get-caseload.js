@@ -6,15 +6,15 @@ const organistaionUnit = require('../constants/organisation-unit')
 const caseType = require('../constants/case-type')
 
 module.exports = function (id, organisationLevel, isCSV = false) {
-  var organisationUnitType = getOrganisationUnit('name', organisationLevel)
+  const organisationUnitType = getOrganisationUnit('name', organisationLevel)
 
   return getCaseload(id, organisationLevel)
     .then(function (results) {
-      var breadcrumbs = getBreadcrumbs(id, organisationLevel)
-      var title = breadcrumbs[0].title
-      var subTitle = organisationUnitType.displayText
+      const breadcrumbs = getBreadcrumbs(id, organisationLevel)
+      const title = breadcrumbs[0].title
+      const subTitle = organisationUnitType.displayText
 
-      var caseloadResults = parseCaseloadResults(organisationLevel, results, isCSV)
+      const caseloadResults = parseCaseloadResults(organisationLevel, results, isCSV)
       return {
         breadcrumbs: breadcrumbs,
         title: title,
@@ -24,36 +24,36 @@ module.exports = function (id, organisationLevel, isCSV = false) {
     })
 }
 
-var parseCaseloadResults = function (organisationLevel, results, isCSV) {
+const parseCaseloadResults = function (organisationLevel, results, isCSV) {
   if (results.length > 0) {
     // Overall cases
-    var allTotals = caseloadHelper.totalAllCases(results)
-    var caseloadGroupedByGrade = caseloadHelper.groupCaseloadByGrade(results)
-    var overallPercentages = caseloadHelper.calculateOverallPercentages(allTotals, caseloadGroupedByGrade)
+    const allTotals = caseloadHelper.totalAllCases(results)
+    const caseloadGroupedByGrade = caseloadHelper.groupCaseloadByGrade(results)
+    const overallPercentages = caseloadHelper.calculateOverallPercentages(allTotals, caseloadGroupedByGrade)
 
-    var overallResults = caseloadHelper.getCaseloadTierTotalsByTeamByGrade(results)
-    var overallSummary = caseloadHelper.getCaseloadSummaryTotalsByTeam(results)
+    let overallResults = caseloadHelper.getCaseloadTierTotalsByTeamByGrade(results)
+    const overallSummary = caseloadHelper.getCaseloadSummaryTotalsByTeam(results)
     // Custody cases
-    var custodyResults = caseloadHelper.getCaseloadByType(results, caseType.CUSTODY)
-    var custodySummary = caseloadHelper.getCaseloadTotalSummary(custodyResults)
+    let custodyResults = caseloadHelper.getCaseloadByType(results, caseType.CUSTODY)
+    const custodySummary = caseloadHelper.getCaseloadTotalSummary(custodyResults)
     // Community cases
-    var communityResults = caseloadHelper.getCaseloadByType(results, caseType.COMMUNITY)
-    var communitySummary = caseloadHelper.getCaseloadTotalSummary(communityResults)
+    let communityResults = caseloadHelper.getCaseloadByType(results, caseType.COMMUNITY)
+    const communitySummary = caseloadHelper.getCaseloadTotalSummary(communityResults)
     // License cases
-    var licenseResults = caseloadHelper.getCaseloadByType(results, caseType.LICENSE)
-    var licenseSummary = caseloadHelper.getCaseloadTotalSummary(licenseResults)
+    let licenseResults = caseloadHelper.getCaseloadByType(results, caseType.LICENSE)
+    const licenseSummary = caseloadHelper.getCaseloadTotalSummary(licenseResults)
 
-    var custodyTotals = caseloadHelper.totalAllCases(custodyResults)
-    var custodyGroupedByGrade = caseloadHelper.groupCaseloadByGrade(custodyResults)
-    var custodyPercentages = caseloadHelper.calculateOverallPercentages(custodyTotals, custodyGroupedByGrade)
+    const custodyTotals = caseloadHelper.totalAllCases(custodyResults)
+    const custodyGroupedByGrade = caseloadHelper.groupCaseloadByGrade(custodyResults)
+    const custodyPercentages = caseloadHelper.calculateOverallPercentages(custodyTotals, custodyGroupedByGrade)
 
-    var communityTotals = caseloadHelper.totalAllCases(communityResults)
-    var communityGroupedByGrade = caseloadHelper.groupCaseloadByGrade(communityResults)
-    var communityPercentages = caseloadHelper.calculateOverallPercentages(communityTotals, communityGroupedByGrade)
+    const communityTotals = caseloadHelper.totalAllCases(communityResults)
+    const communityGroupedByGrade = caseloadHelper.groupCaseloadByGrade(communityResults)
+    const communityPercentages = caseloadHelper.calculateOverallPercentages(communityTotals, communityGroupedByGrade)
 
-    var licenseTotals = caseloadHelper.totalAllCases(licenseResults)
-    var licenseGroupedByGrade = caseloadHelper.groupCaseloadByGrade(licenseResults)
-    var licensePercentages = caseloadHelper.calculateOverallPercentages(licenseTotals, licenseGroupedByGrade)
+    const licenseTotals = caseloadHelper.totalAllCases(licenseResults)
+    const licenseGroupedByGrade = caseloadHelper.groupCaseloadByGrade(licenseResults)
+    const licensePercentages = caseloadHelper.calculateOverallPercentages(licenseTotals, licenseGroupedByGrade)
 
     if (organisationLevel !== organistaionUnit.TEAM.name) {
       overallResults = caseloadHelper.calculateTeamTierPercentages(overallResults)
@@ -77,7 +77,7 @@ var parseCaseloadResults = function (organisationLevel, results, isCSV) {
       overallSummary[0].totals = caseloadHelper.calculateTotalTiersRow(overallSummary)
     }
 
-    var caseloadResults = {
+    const caseloadResults = {
       overallCaseloadDetails: overallResults,
       communityCaseloadDetails: communityResults,
       custodyCaseloadDetails: custodyResults,
@@ -93,9 +93,9 @@ var parseCaseloadResults = function (organisationLevel, results, isCSV) {
   }
 }
 
-var replaceIncorrectPercentageAverages = function (originalPercentageTotals, correctPercentages) {
+const replaceIncorrectPercentageAverages = function (originalPercentageTotals, correctPercentages) {
   // WMT0160: add new tiers
-  var keys = Object.keys(originalPercentageTotals)
+  const keys = Object.keys(originalPercentageTotals)
   keys.forEach(function (key) {
     originalPercentageTotals[key].a = correctPercentages[key].a
     originalPercentageTotals[key].b1 = correctPercentages[key].b1

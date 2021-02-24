@@ -4,13 +4,13 @@ const insertUser = require('../../../../app/services/data/insert-user')
 const getUserByUsername = require('../../../..//app/services/data/get-user-by-username')
 const userRoleHelper = require('../../../helpers/data/user-role-helper')
 
-var insertedData = {
+const insertedData = {
   table: 'users',
   id: 0
 }
 
-var username
-var name
+let username
+let name
 
 describe('/services/data/insert-user', function () {
   before(function () {

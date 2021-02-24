@@ -3,15 +3,15 @@ const orgUnitFinder = require('../helpers/org-unit-finder')
 const ORGANISATION_UNIT = require('../../constants/organisation-unit')
 
 module.exports = function (id, type) {
-  var orgUnit = orgUnitFinder('name', type)
-  var table = orgUnit.caseProgressView
-  var whereString = ''
+  const orgUnit = orgUnitFinder('name', type)
+  const table = orgUnit.caseProgressView
+  let whereString = ''
 
   if (id !== undefined && (!isNaN(parseInt(id, 10)))) {
     whereString = ' WHERE id = ' + id
   }
 
-  var selectList = [
+  const selectList = [
     'community_last_16_weeks AS communityLast16Weeks',
     'license_last_16_weeks AS licenseLast16Weeks',
     'total_cases AS totalCases',
@@ -20,11 +20,11 @@ module.exports = function (id, type) {
     'unpaid_work_total AS unpaidWorkTotal'
   ]
 
-  var isIndexed =
+  const isIndexed =
     (type === ORGANISATION_UNIT.OFFENDER_MANAGER.name ||
     type === ORGANISATION_UNIT.TEAM.name)
 
-  var noExpandHint = ''
+  let noExpandHint = ''
 
   if (isIndexed) {
     selectList.push('CONCAT(forename, \' \', surname) AS name')

@@ -20,45 +20,53 @@
   {% include "includes/validation-error-messages.html" %}
 
   <form action="/admin/user-rights/{{username}}" method="post" id="userRightForm">
-    <div class="form-group">
-      <fieldset>
-        <legend>
-          <p class="lede">Which user rights would you like to give <span class="bold">{{username}}</span>?</p>
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <p class="govuk-body-l">Which user rights would you like to give <span class="govuk-!-font-weight-bold">{{username}}</span>?</p>
         </legend>
 
-        <div class="multiple-choice">
-          <input id="dataAdminRadio" type="radio" name="rights" value="Data Admin" {% if DataAdmin %} checked {% endif %}>
-          <label for="dataAdminRadio">Data admin</label>
-        </div>
-        <div class="multiple-choice">
-          <input id="systemAdminRadio" type="radio" name="rights" value="System Admin" {% if SystemAdmin %} checked {% endif %}>
-          <label for="systemAdminRadio">System admin</label>
-        </div>
-        <div class="multiple-choice">
-          <input id="managerRadio" type="radio" name="rights" value="Manager" {% if Manager %} checked {% endif %}>
-          <label for="managerRadio">Manager</label>
-        </div>
-        <p class="form-block">or</p>
-        <div class="multiple-choice">
-          <input id="staffRadio" type="radio" name="rights" value="Staff" {% if Staff %} checked {% endif %}>
-          <label for="staffRadio">Staff</label>
+        <div class="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="dataAdminRadio" type="radio" name="rights" value="Data Admin" {% if DataAdmin %} checked {% endif %}>
+            <label class="govuk-label govuk-radios__label" for="dataAdminRadio">Data admin</label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="systemAdminRadio" type="radio" name="rights" value="System Admin" {% if SystemAdmin %} checked {% endif %}>
+            <label class="govuk-label govuk-radios__label" for="systemAdminRadio">System admin</label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="managerRadio" type="radio" name="rights" value="Manager" {% if Manager %} checked {% endif %}>
+            <label class="govuk-label govuk-radios__label" for="managerRadio">Manager</label>
+          </div>
+          <div class="govuk-radios__divider">or</div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="staffRadio" type="radio" name="rights" value="Staff" {% if Staff %} checked {% endif %}>
+              <label class="govuk-label govuk-radios__label" for="staffRadio">Staff</label>
+            </div>
         </div>
       </fieldset>
+    </div>
       <br>
-      <fieldset>
-          <legend>
-            <p class="lede">What is this user's name?</p>
-            <span class="form-hint" id="expiring-reductions-search-field-hint">For Example, John Smith</span>
-          </legend>
-          {% if errors['fullname'][0] %}
-            <span class="error-message">{{ errors['fullname'][0] }}</span>
-          {% endif %}
-          <input type="text" class="form-control" name="fullname" id="fullname" value="{{ fullname }}">
-      </fieldset>
+
+    <div class="govuk-form-group {% if errors['fullname'][0] %} govuk-form-group--error {% endif %}">
+      <h1 class="govuk-label-wrapper"><label class="govuk-label govuk-label--l" for="fullname">
+        What is this user's name?
+        </label>
+      </h1>
+      <div id="fullname-hint" class="govuk-hint">
+        For Example, John Smith
+      </div>
+      {% if errors['fullname'][0] %}
+        <span id="event-name-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span>{{ errors['fullname'][0] }}
+        </span>
+      {% endif %}
+      <input class="govuk-input  {% if errors['fullname'][0] %} govuk-input--error {% endif %}" name="fullname" id="fullname" type="text" aria-describedby="fullname-hint" value="{{ fullname }}">
     </div>
 
     <div class="form-group">
-      <input class="button" type="submit" value="Submit">
+      <input class="govuk-button" data-module="govuk-button"  type="submit" value="Submit">
     </div>
     {% include "includes/csrf-hidden-input.html"%}
   </form>

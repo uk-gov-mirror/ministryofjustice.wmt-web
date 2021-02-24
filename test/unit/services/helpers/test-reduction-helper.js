@@ -4,36 +4,36 @@ const Reduction = require('../../../../app/services/domain/reduction')
 const reductionHelper = require('../../../../app/services/helpers/reduction-helper')
 const reductionStatusType = require('../../../../app/constants/reduction-status-type')
 
-var activeStartDate = moment().subtract(30, 'days').toDate()
-var activeEndDate = moment().add(30, 'days').toDate()
-var scheduledStartDate = moment().add(30, 'days').toDate()
-var scheduledEndDate = moment().add(60, 'days').toDate()
-var archivedStartDate = moment().subtract(30, 'days').toDate()
-var archivedEndDate = moment().subtract(15, 'days').toDate()
+const activeStartDate = moment().subtract(30, 'days').toDate()
+const activeEndDate = moment().add(30, 'days').toDate()
+const scheduledStartDate = moment().add(30, 'days').toDate()
+const scheduledEndDate = moment().add(60, 'days').toDate()
+const archivedStartDate = moment().subtract(30, 'days').toDate()
+const archivedEndDate = moment().subtract(15, 'days').toDate()
 
-var REDUCTION_REASON = {
+const REDUCTION_REASON = {
   maxAllowanceHours: 0
 }
 
-var ACTIVE_REDUCTION = new Reduction('1', '11',
+const ACTIVE_REDUCTION = new Reduction('1', '11',
   [activeStartDate.getDate(), activeStartDate.getMonth() + 1, activeStartDate.getFullYear()],
   [activeEndDate.getDate(), activeEndDate.getMonth() + 1, activeEndDate.getFullYear()], 'active note', REDUCTION_REASON)
-var SCHEDULED_REDUCTION = new Reduction('2', '12',
+const SCHEDULED_REDUCTION = new Reduction('2', '12',
   [scheduledStartDate.getDate(), scheduledStartDate.getMonth() + 1, scheduledStartDate.getFullYear()],
   [scheduledEndDate.getDate(), scheduledEndDate.getMonth() + 1, scheduledEndDate.getFullYear()], 'scheduled note', REDUCTION_REASON)
-var ARCHIVE_REDUCTION = new Reduction('3', '13',
+const ARCHIVE_REDUCTION = new Reduction('3', '13',
   [archivedStartDate.getDate(), archivedStartDate.getMonth() + 1, archivedStartDate.getFullYear()],
   [archivedEndDate.getDate(), archivedEndDate.getMonth() + 1, archivedEndDate.getFullYear()], 'archive note', REDUCTION_REASON)
-var DELETED_REDUCTION = new Reduction('4', '10',
+const DELETED_REDUCTION = new Reduction('4', '10',
   [archivedStartDate.getDate(), archivedStartDate.getMonth() + 1, archivedStartDate.getFullYear()],
   [archivedEndDate.getDate(), archivedEndDate.getMonth() + 1, archivedEndDate.getFullYear()], 'deleted note', REDUCTION_REASON)
 DELETED_REDUCTION.status = reductionStatusType.DELETED
-var REDUCTIONS = [ACTIVE_REDUCTION, SCHEDULED_REDUCTION, ARCHIVE_REDUCTION, DELETED_REDUCTION]
+const REDUCTIONS = [ACTIVE_REDUCTION, SCHEDULED_REDUCTION, ARCHIVE_REDUCTION, DELETED_REDUCTION]
 
 describe('services/helpers/reduction-helper', function () {
   describe('getReductionsByStatus', function () {
     it('should return reductions by status of active, scheduled, archived', function () {
-      var result = reductionHelper.getReductionsByStatus(REDUCTIONS)
+      const result = reductionHelper.getReductionsByStatus(REDUCTIONS)
       expect(result.activeReductions.length).to.eql(1)
       expect(result.activeReductions[0]).to.eql(ACTIVE_REDUCTION)
       expect(result.scheduledReductions.length).to.eql(1)

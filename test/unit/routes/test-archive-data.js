@@ -2,19 +2,19 @@ const routeHelper = require('../../helpers/routes/route-helper')
 const supertest = require('supertest')
 const proxyquire = require('proxyquire')
 const sinon = require('sinon')
-require('sinon-bluebird')
 
 const ARCHIVE_DATA_URL = '/archive-data/daily-caseload-data'
 const INVALID_URL = '/fake-url'
 
-var app
-var route
-var userRoleService
-var authorisationService
-var hasRoleStub = sinon.stub()
-var getArchive
+let app
+let route
+let userRoleService
+let authorisationService
+const hasRoleStub = sinon.stub()
+let getArchive
 
-var getArchiveResult = [{ workloadID: 2844,
+const getArchiveResult = [{
+  workloadID: 2844,
   workloadDate: '2014-06-18T14:18:46.000Z',
   lduName: '*Greater Manchester All LDU',
   teamName: 'Bolton Youth to Adult',
@@ -27,7 +27,8 @@ var getArchiveResult = [{ workloadID: 2844,
   nominalTarget: 2171,
   contractedHours: 37,
   hoursReduction: 0,
-  capacity: '64.4%' }]
+  capacity: '64.4%'
+}]
 
 before(function () {
   userRoleService = sinon.stub()

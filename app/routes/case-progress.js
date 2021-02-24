@@ -8,7 +8,7 @@ const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
 
-var lastUpdated
+let lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/case-progress', function (req, res, next) {
@@ -19,36 +19,39 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var id
+    const organisationLevel = req.params.organisationLevel
+    let id
 
     if (organisationLevel !== organisationUnit.NATIONAL.name) {
       id = req.params.id
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    var caseProgressPromise = getCaseProgress(id, organisationLevel)
+    const caseProgressPromise = getCaseProgress(id, organisationLevel)
 
     return getLastUpdated().then(function (result) {
       lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
       return caseProgressPromise.then(function (result) {
         result.date = lastUpdated
+        let stringifiedCaseProgressList = Object.assign([], result.caseProgressList)
+        stringifiedCaseProgressList = JSON.stringify(stringifiedCaseProgressList)
         return res.render('case-progress', {
           title: result.title,
           subTitle: result.subTitle,
           breadcrumbs: result.breadcrumbs,
           subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
           caseProgressList: result.caseProgressList,
+          stringifiedCaseProgressList: stringifiedCaseProgressList,
           date: result.date,
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
+          authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
           workloadType: workloadTypes.PROBATION
         })
       })
     }).catch(function (error) {
       if ((error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) || (error.message.includes('Could not use view or function') && error.message.includes('because of binding errors'))) {
-        var subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+        const subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
         renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
       } else {
         next(error)

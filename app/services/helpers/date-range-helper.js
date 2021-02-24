@@ -3,11 +3,11 @@ const CapacityDateRange = require('../domain/capacity-date-range')
 const ArchiveDateRange = require('../domain/archive-date-range')
 
 module.exports.createCapacityDateRange = function (dateParameters) {
-  var capacityDateRange
+  let capacityDateRange
 
   if (Object.keys(dateParameters).length === 0) {
-    var fromDate = dateFormatter.now().subtract(1, 'years')
-    var toDate = dateFormatter.now()
+    const fromDate = dateFormatter.now().subtract(1, 'years')
+    const toDate = dateFormatter.now()
 
     capacityDateRange = new CapacityDateRange(
       fromDate.date(),
@@ -31,7 +31,7 @@ module.exports.createCapacityDateRange = function (dateParameters) {
 }
 
 module.exports.createDailyArchiveDateRange = function (dateParameters) {
-  var archiveDateRange
+  let archiveDateRange
   if (Object.keys(dateParameters).length === 0) {
     archiveDateRange = null
   } else {
@@ -48,7 +48,7 @@ module.exports.createDailyArchiveDateRange = function (dateParameters) {
 }
 
 module.exports.createFortnightlyArchiveDateRange = function (dateParameters) {
-  var archiveDateRange
+  let archiveDateRange
   if (Object.keys(dateParameters).length === 0) {
     archiveDateRange = null
   } else {
@@ -65,7 +65,7 @@ module.exports.createFortnightlyArchiveDateRange = function (dateParameters) {
 }
 
 module.exports.createReductionArchiveDateRange = function (dateParameters) {
-  var archiveDateRange
+  let archiveDateRange
   if (Object.keys(dateParameters).length === 0) {
     archiveDateRange = null
   } else {

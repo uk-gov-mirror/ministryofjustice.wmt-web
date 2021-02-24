@@ -3,9 +3,9 @@ const expect = require('chai').expect
 const insertWorkloadPoints = require('../../../../app/services/data/insert-workload-points')
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 
-var workloadPointsResult = []
+const workloadPointsResult = []
 
-var defaultWorkloadPoints = {
+const defaultWorkloadPoints = {
   commA: 11,
   commB1: 12,
   commB2: 13,
@@ -43,17 +43,17 @@ var defaultWorkloadPoints = {
   defaultContractedHoursSpo: 0
 }
 
-var defaultWorkloadPointsT2A = Object.assign({}, defaultWorkloadPoints, { isT2A: true })
+const defaultWorkloadPointsT2A = Object.assign({}, defaultWorkloadPoints, { isT2A: true })
 
 describe('services/data/insert-new-workload-points', function () {
   it('should return an id when a valid workload points object has been added, and the row should exist in the DB', function () {
     return insertWorkloadPoints(defaultWorkloadPoints)
       .then(function (id) {
-        workloadPointsResult.push({table: 'workload_points', id: id[0]})
+        workloadPointsResult.push({ table: 'workload_points', id: id[0] })
         expect(id[0]).to.be.a('number')
         return dataHelper.getAllWorkloadPointsForTest()
           .then(function (workloadPoints) {
-            expect(workloadPoints).to.contain(defaultWorkloadPoints)
+            expect(workloadPoints).to.deep.contain(defaultWorkloadPoints)
           })
       })
   })
@@ -61,11 +61,11 @@ describe('services/data/insert-new-workload-points', function () {
   it('should return an id when a valid t2a workload points object has been added, and the row should exist in the DB', function () {
     return insertWorkloadPoints(defaultWorkloadPointsT2A)
       .then(function (id) {
-        workloadPointsResult.push({table: 'workload_points', id: id[0]})
+        workloadPointsResult.push({ table: 'workload_points', id: id[0] })
         expect(id[0]).to.be.a('number')
         return dataHelper.getAllWorkloadPointsForTest()
           .then(function (workloadPoints) {
-            expect(workloadPoints).to.contain(defaultWorkloadPointsT2A)
+            expect(workloadPoints).to.deep.contain(defaultWorkloadPointsT2A)
           })
       })
   })

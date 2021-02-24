@@ -16,32 +16,32 @@ describe('services/date-formatter', function () {
 
   describe('build', function () {
     it('should return string in expected format', function () {
-      var result = dateFormatter.build(VALID_DAY, VALID_MONTH, VALID_YEAR)
+      const result = dateFormatter.build(VALID_DAY, VALID_MONTH, VALID_YEAR)
       expect(result.format(DATE_FORMAT)).to.equal(EXPECTED_DATE.format(DATE_FORMAT))
     })
 
     it('should return error if passed null', function () {
-      var result = dateFormatter.build(null, null, null)
+      const result = dateFormatter.build(null, null, null)
       expect(result.toString()).to.equal(INVALID_DATE_ERROR)
     })
 
     it('should return error if passed undefined', function () {
-      var result = dateFormatter.build(undefined, undefined, undefined)
+      const result = dateFormatter.build(undefined, undefined, undefined)
       expect(result.toString()).to.equal(INVALID_DATE_ERROR)
     })
 
     it('should return error if passed a non valid day value (1 - 31)', function () {
-      var result = dateFormatter.build(INVALID_DAY, VALID_MONTH, VALID_YEAR)
+      const result = dateFormatter.build(INVALID_DAY, VALID_MONTH, VALID_YEAR)
       expect(result.toString()).to.equal(INVALID_DATE_ERROR)
     })
 
     it('should return error if passed a non valid month value (1 - 12)', function () {
-      var result = dateFormatter.build(VALID_DAY, INVALID_MONTH, VALID_YEAR)
+      const result = dateFormatter.build(VALID_DAY, INVALID_MONTH, VALID_YEAR)
       expect(result.toString()).to.equal(INVALID_DATE_ERROR)
     })
 
     it('should return error if passed a non valid year value (not a number)', function () {
-      var result = dateFormatter.build(VALID_DAY, VALID_MONTH, INVALID_YEAR)
+      const result = dateFormatter.build(VALID_DAY, VALID_MONTH, INVALID_YEAR)
       expect(result.toString()).to.equal(INVALID_DATE_ERROR)
     })
   })

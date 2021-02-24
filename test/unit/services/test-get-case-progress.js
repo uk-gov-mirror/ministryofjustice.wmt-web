@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 const sinon = require('sinon')
-require('sinon-bluebird')
+
 const proxyquire = require('proxyquire')
 
 const breadcrumbHelper = require('../../helpers/breadcrumb-helper')
@@ -16,21 +16,23 @@ const CASE_PROGRESS = [
   }
 ]
 
-var id = 1
-var breadcrumbs = breadcrumbHelper.OFFENDER_MANAGER_BREADCRUMBS
-var expectedTitle = breadcrumbs[0].title
+const id = 1
+const breadcrumbs = breadcrumbHelper.OFFENDER_MANAGER_BREADCRUMBS
+const expectedTitle = breadcrumbs[0].title
 
-var getCaseProgress
-var getCaseProgressList
-var getBreadcrumbs
+let getCaseProgress
+let getCaseProgressList
+let getBreadcrumbs
 
 before(function () {
   getCaseProgressList = sinon.stub()
   getBreadcrumbs = sinon.stub().returns(breadcrumbs)
   getCaseProgress =
       proxyquire('../../../app/services/get-case-progress',
-        {'./data/get-caseload-progress': getCaseProgressList,
-          './get-breadcrumbs': getBreadcrumbs})
+        {
+          './data/get-caseload-progress': getCaseProgressList,
+          './get-breadcrumbs': getBreadcrumbs
+        })
   getCaseProgressList.resolves(CASE_PROGRESS)
 })
 

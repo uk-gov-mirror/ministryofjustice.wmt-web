@@ -4,40 +4,40 @@ const Link = require('../../../app/services/domain/link')
 const workloadTypes = require('../../../app/constants/workload-type')
 
 describe('services/get-sub-nav', function () {
-  var id = 1
-  var organisationalUnitName = 'name'
-  var omOrganisationalUnitName = 'offender-manager'
-  var currentLink = '/' + workloadTypes.PROBATION + '/' + omOrganisationalUnitName + '/' + id + '/' + 'overview'
+  const id = 1
+  const organisationalUnitName = 'name'
+  const omOrganisationalUnitName = 'offender-manager'
+  const currentLink = '/' + workloadTypes.PROBATION + '/' + omOrganisationalUnitName + '/' + id + '/' + 'overview'
 
   it('returns a list which has five elements for offender-manager', function () {
-    var subNav = getSubNav(id, omOrganisationalUnitName, currentLink)
+    const subNav = getSubNav(id, omOrganisationalUnitName, currentLink)
     expect(subNav.length).to.eql(5)
   })
 
   it('returns a list which has 3 elements for a court-reporter', function () {
-    var subNav = getSubNav(id, omOrganisationalUnitName, currentLink, workloadTypes.COURT_REPORTS)
+    const subNav = getSubNav(id, omOrganisationalUnitName, currentLink, workloadTypes.COURT_REPORTS)
     expect(subNav.length).to.eql(3)
   })
 
   it('returns a list which has four elements for non offender manager', function () {
-    var subNav = getSubNav(id, organisationalUnitName, currentLink)
+    const subNav = getSubNav(id, organisationalUnitName, currentLink)
     expect(subNav.length).to.eql(5)
   })
 
   it('returns a list which has one elements for non offender manager court-report org', function () {
-    var subNav = getSubNav(id, organisationalUnitName, currentLink, workloadTypes.COURT_REPORTS)
+    const subNav = getSubNav(id, organisationalUnitName, currentLink, workloadTypes.COURT_REPORTS)
     expect(subNav.length).to.eql(1)
   })
 
   it('returns a list of Link objects', function () {
-    var subNav = getSubNav(id, organisationalUnitName, currentLink)
+    const subNav = getSubNav(id, organisationalUnitName, currentLink)
     subNav.forEach(function (element) {
       expect(element).instanceof(Link)
     })
   })
 
   it('returns the correct titles for offender-manager', function () {
-    var subNav = getSubNav(id, omOrganisationalUnitName, currentLink)
+    const subNav = getSubNav(id, omOrganisationalUnitName, currentLink)
     expect(subNav[0].title).to.eql('Overview')
     expect(subNav[1].title).to.eql('Capacity')
     expect(subNav[2].title).to.eql('Contracted Hours')
@@ -46,14 +46,14 @@ describe('services/get-sub-nav', function () {
   })
 
   it('returns the correct titles for court-reporter', function () {
-    var subNav = getSubNav(id, omOrganisationalUnitName, currentLink, workloadTypes.COURT_REPORTS)
+    const subNav = getSubNav(id, omOrganisationalUnitName, currentLink, workloadTypes.COURT_REPORTS)
     expect(subNav[0].title).to.eql('Overview')
     expect(subNav[1].title).to.eql('Contracted Hours')
     expect(subNav[2].title).to.eql('Reductions')
   })
 
   it('returns the correct titles for non offender-manager', function () {
-    var subNav = getSubNav(id, organisationalUnitName, currentLink)
+    const subNav = getSubNav(id, organisationalUnitName, currentLink)
     expect(subNav[0].title).to.eql('Overview')
     expect(subNav[1].title).to.eql('Capacity')
     expect(subNav[2].title).to.eql('Caseload')
@@ -61,12 +61,12 @@ describe('services/get-sub-nav', function () {
   })
 
   it('returns the correct titles for non offender-manager court-report org', function () {
-    var subNav = getSubNav(id, organisationalUnitName, currentLink, workloadTypes.COURT_REPORTS)
+    const subNav = getSubNav(id, organisationalUnitName, currentLink, workloadTypes.COURT_REPORTS)
     expect(subNav[0].title).to.eql('Court Reports Overview')
   })
 
   it('returns the correct links for offender-manager', function () {
-    var subNav = getSubNav(id, omOrganisationalUnitName, currentLink)
+    const subNav = getSubNav(id, omOrganisationalUnitName, currentLink)
     expect(subNav[0].link).to.eql('/' + workloadTypes.PROBATION + '/' + omOrganisationalUnitName + '/' + id + '/' + 'overview')
     expect(subNav[1].link).to.eql('/' + workloadTypes.PROBATION + '/' + omOrganisationalUnitName + '/' + id + '/' + 'caseload-capacity')
     expect(subNav[2].link).to.eql('/' + workloadTypes.PROBATION + '/' + omOrganisationalUnitName + '/' + id + '/' + 'contracted-hours')
@@ -75,14 +75,14 @@ describe('services/get-sub-nav', function () {
   })
 
   it('returns the correct links for court-reporter', function () {
-    var subNav = getSubNav(id, omOrganisationalUnitName, currentLink, workloadTypes.COURT_REPORTS)
+    const subNav = getSubNav(id, omOrganisationalUnitName, currentLink, workloadTypes.COURT_REPORTS)
     expect(subNav[0].link).to.eql('/' + workloadTypes.COURT_REPORTS + '/' + omOrganisationalUnitName + '/' + id + '/' + 'overview')
     expect(subNav[1].link).to.eql('/' + workloadTypes.COURT_REPORTS + '/' + omOrganisationalUnitName + '/' + id + '/' + 'contracted-hours')
     expect(subNav[2].link).to.eql('/' + workloadTypes.COURT_REPORTS + '/' + omOrganisationalUnitName + '/' + id + '/' + 'reductions')
   })
 
   it('marks the current link as active', function () {
-    var subNav = getSubNav(id, omOrganisationalUnitName, currentLink)
+    const subNav = getSubNav(id, omOrganisationalUnitName, currentLink)
     expect(subNav[0].active).to.be.true //eslint-disable-line
     expect(subNav[1].active).to.be.undefined //eslint-disable-line
     expect(subNav[2].active).to.be.undefined //eslint-disable-line

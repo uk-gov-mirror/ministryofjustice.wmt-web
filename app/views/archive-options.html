@@ -5,22 +5,24 @@
   {% include "includes/breadcrumbs.html" %}
    
   {% include "includes/title-subtitle.html" %}
-    <div class="column-one-half">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
     {% if authorisation===false or userRole==='Data Admin'%}
-      <h2 class="heading-medium">
-        <a class="blue-link" href="/archive-data/reductions">Archived Reductions</a>
+      <h2 class="govuk-heading-m">
+        <a class="blue-link govuk-link" href="/archive-data/reductions">Archived Reductions</a>
       </h2>
-      <p>View Legacy Reductions</p>
-      <h2 class="heading-medium">
-          <a class="blue-link" href="/archive-data/fortnightly-caseload-data">Fortnightly Caseload Data</a>
+     <p class="govuk-body">View Legacy Reductions</p>
+      <h2 class="govuk-heading-m">
+          <a class="blue-link govuk-link" href="/archive-data/fortnightly-caseload-data">Fortnightly Caseload Data</a>
       </h2>
-      <p>View Average Caseload Data Fortnightly</p>
-      <h2 class="heading-medium">
-        <a class="blue-link" href="/archive-data/daily-caseload-data">Daily Caseload Data</a>
+     <p class="govuk-body">View Average Caseload Data Fortnightly</p>
+      <h2 class="govuk-heading-m">
+        <a class="blue-link govuk-link" href="/archive-data/daily-caseload-data">Daily Caseload Data</a>
       </h2>
-      <p>View Daily Caseload Data</p>
+     <p class="govuk-body">View Daily Caseload Data</p>
     {% endif %}
     </div>
+  </div>
 
 </main>
 {% endblock %}

@@ -4,11 +4,11 @@ const removeUserRoleByUserId = require('../../../../app/services/data/remove-use
 const getUserRoleByUsername = require('../../../../app/services/data/get-user-role-by-username')
 const userRoleHelper = require('../../../helpers/data/user-role-helper')
 
-var insertedData = []
+let insertedData = []
 
-var userId = 1
-var roleId = 1
-var username
+let userId = 1
+let roleId = 1
+let username
 
 describe('/services/data/remove-user-role-by-user-id', function () {
   before(function () {
@@ -34,12 +34,12 @@ describe('/services/data/remove-user-role-by-user-id', function () {
       .then(function (count) {
         expect(count).to.be.greaterThan(0)
         return getUserRoleByUsername(username)
-        .then(function (results) {
+          .then(function (results) {
           // The default role, Staff, role should be returned.
-          expect(results.roleId).to.be.a('number')
-          expect(results.roleId).to.equal(0)
-          expect(results.role).to.equal('Staff')
-        })
+            expect(results.roleId).to.be.a('number')
+            expect(results.roleId).to.equal(0)
+            expect(results.role).to.equal('Staff')
+          })
       })
   })
 

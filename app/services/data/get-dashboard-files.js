@@ -7,13 +7,13 @@ module.exports = function (fileId) {
   const NUMBER_OF_DASHBOARD_FILES = parseInt(config.NUMBER_OF_DASHBOARD_FILES)
   const DASHBOARD = 'DASHBOARD'
 
-  var whereString = {
-    'file_type': DASHBOARD,
-    'is_enabled': true
+  const whereString = {
+    file_type: DASHBOARD,
+    is_enabled: true
   }
 
   if (fileId) {
-    whereString['id'] = fileId
+    whereString.id = fileId
   }
 
   const columns = [

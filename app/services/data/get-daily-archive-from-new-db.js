@@ -5,7 +5,7 @@ module.exports = function (archiveDateRange, extraCriteria, archiveDataLimit) {
     extraCriteria = extraCriteria.trim()
   }
 
-  var selectColumns = [
+  const selectColumns = [
     'workload_id AS workloadID',
     'workload_date AS workloadDate',
     'region_name AS regionName',
@@ -29,22 +29,22 @@ module.exports = function (archiveDateRange, extraCriteria, archiveDataLimit) {
 
   if (extraCriteria !== null && extraCriteria !== undefined && extraCriteria !== '') {
     return knex('team_archive_data')
-    .limit(parseInt(archiveDataLimit))
-    .select(selectColumns)
-    .whereBetween('workload_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
-      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
-    .andWhere(function () {
-      this.where('team_name', 'like', '%' + extraCriteria + '%')
-      .orWhere('ldu_name', 'like', '%' + extraCriteria + '%')
-      .orWhere('om_name', 'like', '%' + extraCriteria + '%')
-    })
-    .orderBy('workload_id', 'ASC')
+      .limit(parseInt(archiveDataLimit))
+      .select(selectColumns)
+      .whereBetween('workload_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+        archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+      .andWhere(function () {
+        this.where('team_name', 'like', '%' + extraCriteria + '%')
+          .orWhere('ldu_name', 'like', '%' + extraCriteria + '%')
+          .orWhere('om_name', 'like', '%' + extraCriteria + '%')
+      })
+      .orderBy('workload_id', 'ASC')
   } else {
     return knex('team_archive_data')
-    .limit(parseInt(archiveDataLimit))
-    .select(selectColumns)
-    .whereBetween('workload_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
-      archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
-    .orderBy('workload_id', 'ASC')
+      .limit(parseInt(archiveDataLimit))
+      .select(selectColumns)
+      .whereBetween('workload_date', [archiveDateRange.archiveFromDate.toISOString().substring(0, 10),
+        archiveDateRange.archiveToDate.toISOString().substring(0, 10)])
+      .orderBy('workload_id', 'ASC')
   }
 }

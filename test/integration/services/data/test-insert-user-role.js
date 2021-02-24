@@ -5,9 +5,9 @@ const userRoleHelper = require('../../../helpers/data/user-role-helper')
 const UserRole = require('../../../../app/services/domain/user-role')
 const getUserRoleByUsername = require('../../../..//app/services/data/get-user-role-by-username')
 
-var insertedData = []
-var newUserRole = new UserRole(1, 2, new Date(), 1)
-var username
+let insertedData = []
+const newUserRole = new UserRole(1, 2, new Date(), 1)
+let username
 
 describe('/services/data/insert-user-role', function () {
   before(function () {

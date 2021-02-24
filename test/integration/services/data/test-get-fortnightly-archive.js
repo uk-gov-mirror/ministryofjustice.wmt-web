@@ -3,7 +3,7 @@ const expect = require('chai').expect
 const getArchive = require('../../../../app/services/data/get-fortnightly-archive')
 const ArchiveDateRange = require('../../../../app/services/domain/archive-date-range')
 
-var expectedResult = {
+const expectedResult = {
   startDate: new Date('2014-06-05T00:00:00.000Z'),
   endDate: new Date('2014-06-19T00:00:00.000Z'),
   lduName: 'NPS Team',
@@ -19,10 +19,10 @@ var expectedResult = {
   hoursReduction: 0
 }
 
-var archiveData
+let archiveData
 
-var archiveDateRange = new ArchiveDateRange(5, 6, 2014, 25, 8, 2016)
-var extraCriteria = 'A.N. Offender Manager 1511'
+const archiveDateRange = new ArchiveDateRange(5, 6, 2014, 25, 8, 2016)
+const extraCriteria = 'A.N. Offender Manager 1511'
 
 describe('services/data/get-fortnightly-archive', function () {
   before(function () {

@@ -8,7 +8,7 @@ const csurf = require('csurf')
 const VIEWS_DIRECTORY = '../../../app/views'
 
 module.exports.buildApp = function (route, middleware) {
-  var app = express()
+  const app = express()
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -30,7 +30,7 @@ module.exports.buildApp = function (route, middleware) {
   mockViewEngine(app, VIEWS_DIRECTORY)
 
   // Check for valid CSRF tokens on state-changing methods.
-  var csrfProtection = csurf({ cookie: { httpOnly: true, secure: false } })
+  const csrfProtection = csurf({ cookie: { httpOnly: true, secure: false } })
 
   app.use(function (req, res, next) {
     csrfProtection(req, res, next)
@@ -38,7 +38,7 @@ module.exports.buildApp = function (route, middleware) {
 
   // Generate CSRF tokens to be sent in POST requests
   app.use(function (req, res, next) {
-    if (req.hasOwnProperty('csrfToken')) {
+    if (Object.prototype.hasOwnProperty.call(req, 'csrfToken')) {
       res.locals.csrfToken = req.csrfToken()
     }
     next()

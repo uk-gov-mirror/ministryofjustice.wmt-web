@@ -3,7 +3,7 @@ const knex = require('../../../knex').web
 module.exports = function (adjustment) {
   return knex('adjustment_reason')
     .update({
-      'points': adjustment.points
+      points: adjustment.points
     })
     .where('id', adjustment.adjustmentId)
 }

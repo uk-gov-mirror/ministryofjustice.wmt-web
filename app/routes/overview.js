@@ -15,7 +15,7 @@ const dateFormatter = require('../services/date-formatter')
 const messages = require('../constants/messages')
 const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
 
-var lastUpdated
+let lastUpdated
 
 module.exports = function (router) {
   router.get('/', function (req, res, next) {
@@ -64,15 +64,15 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var id
+    const organisationLevel = req.params.organisationLevel
+    let id
     if (organisationLevel !== organisationUnitConstants.NATIONAL.name) {
       id = req.params.id
     }
 
-    var isCSV = true
+    const isCSV = true
     return getOverview(id, organisationLevel, isCSV).then(function (result) {
-      var exportCsv = getExportCsv(organisationLevel, result, tabs.OVERVIEW)
+      const exportCsv = getExportCsv(organisationLevel, result, tabs.OVERVIEW)
       res.attachment(exportCsv.filename)
       res.send(exportCsv.csv)
     }).catch(function (error) {
@@ -94,8 +94,8 @@ module.exports = function (router) {
         })
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var id = req.params.id
+    const organisationLevel = req.params.organisationLevel
+    const id = req.params.id
 
     if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Not available for offender-manager')
@@ -104,7 +104,7 @@ module.exports = function (router) {
     }
 
     return getReductionsExport(id, organisationLevel).then(function (result) {
-      var reductionsExportCsv = getExportCsv(organisationLevel, result, tabs.REDUCTIONS_EXPORT)
+      const reductionsExportCsv = getExportCsv(organisationLevel, result, tabs.REDUCTIONS_EXPORT)
       res.attachment(reductionsExportCsv.filename)
       res.send(reductionsExportCsv.csv)
     }).catch(function (error) {
@@ -113,12 +113,12 @@ module.exports = function (router) {
   })
 }
 
-var renderOverview = function (req, res, next) {
-  var organisationLevel = req.params.organisationLevel
-  var organisationUnit = getOrganisationUnit('name', organisationLevel)
-  var id
-  var childOrganisationLevel
-  var childOrganisationLevelDisplayText
+const renderOverview = function (req, res, next) {
+  const organisationLevel = req.params.organisationLevel
+  const organisationUnit = getOrganisationUnit('name', organisationLevel)
+  let id
+  let childOrganisationLevel
+  let childOrganisationLevelDisplayText
 
   if (organisationLevel !== organisationUnitConstants.NATIONAL.name) {
     if (req.params.id !== undefined && !isNaN(parseInt(req.params.id, 10))) {
@@ -133,9 +133,9 @@ var renderOverview = function (req, res, next) {
     childOrganisationLevelDisplayText = getOrganisationUnit('name', childOrganisationLevel).displayText
   }
 
-  var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+  const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-  var overviewPromise = getOverview(id, organisationLevel)
+  const overviewPromise = getOverview(id, organisationLevel)
   return getLastUpdated().then(function (result) {
     lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return overviewPromise.then(function (result) {
@@ -153,13 +153,13 @@ var renderOverview = function (req, res, next) {
         overviewDetails: result.overviewDetails,
         date: result.date,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
         workloadType: workloadTypes.PROBATION
       })
     })
   }).catch(function (error) {
     if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
-      var subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+      const subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
       return renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
     } else {
       next(error)

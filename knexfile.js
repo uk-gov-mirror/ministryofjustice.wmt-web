@@ -10,13 +10,15 @@ module.exports = {
       database: config.DATABASE,
       options: {
         encrypt: true,
-        requestTimeout: 120000
+        requestTimeout: 120000,
+        enableArithAbort: true
       }
     },
     debug: false,
     pool: {
       max: 500
-    }
+    },
+    acquireConnectionTimeout: 120000
   },
   archive: {
     client: 'mssql',
@@ -27,10 +29,15 @@ module.exports = {
       database: config.ARCHIVE_DATABASE,
       options: {
         encrypt: true,
-        requestTimeout: 120000
+        requestTimeout: 120000,
+        enableArithAbort: true
       }
     },
-    debug: false
+    debug: false,
+    pool: {
+      max: 500
+    },
+    acquireConnectionTimeout: 120000
   },
   integrationTests: {
     client: 'mssql',
@@ -41,9 +48,14 @@ module.exports = {
       database: config.DATABASE,
       options: {
         encrypt: true,
-        requestTimeout: 60000
+        requestTimeout: 120000,
+        enableArithAbort: true
       }
     },
-    debug: false
+    debug: false,
+    pool: {
+      max: 500
+    },
+    acquireConnectionTimeout: 120000
   }
 }

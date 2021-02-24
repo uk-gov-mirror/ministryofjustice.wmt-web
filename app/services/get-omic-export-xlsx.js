@@ -16,17 +16,17 @@ const numberOfReportColumns = 5
 const reportColumnStart = t2aCasesColumnStart + (tiersPerType * typeTierGroupLength * 3)
 
 module.exports = function (caseData, t2aCaseData, scenarioData) {
-  var wb = new excel.Workbook()
-  var ws = wb.addWorksheet('Sheet 1', {
-    'sheetFormat': {
-      'defaultColWidth': 8
+  const wb = new excel.Workbook()
+  const ws = wb.addWorksheet('Sheet 1', {
+    sheetFormat: {
+      defaultColWidth: 8
     }
   })
-  var styles = createStyles(wb)
+  const styles = createStyles(wb)
 
   mergeCells(ws, styles.caseStyle)
-  var start = casesColumnStart
-  var additionalHeading = ''
+  let start = casesColumnStart
+  let additionalHeading = ''
   setCaseHeaders(ws, start, styles, additionalHeading)
   start = t2aCasesColumnStart
   additionalHeading = 'T2A '
@@ -60,11 +60,11 @@ module.exports = function (caseData, t2aCaseData, scenarioData) {
   return wb
 }
 
-var setReportHeaders = function (ws, styles) {
-  var start = reportColumnStart
-  var count = 0
+const setReportHeaders = function (ws, styles) {
+  let start = reportColumnStart
+  let count = 0
   while (count < reportHeaders.length) {
-    var styleToApply = determineStyles.determineWeightingStyle(start, styles)
+    const styleToApply = determineStyles.determineWeightingStyle(start, styles)
     ws.cell(2, start).style(styleToApply)
     ws.cell(3, start).string(reportHeaders[count]).style(styleToApply)
     count = count + 1
@@ -72,43 +72,43 @@ var setReportHeaders = function (ws, styles) {
   }
 }
 
-var mergeCells = function (ws, caseStyle) {
+const mergeCells = function (ws, caseStyle) {
   ws.cell(1, casesColumnStart, 1, t2aCasesColumnStart - 1, true).string('Cases').style(caseStyle)
   ws.cell(1, t2aCasesColumnStart, 1, reportColumnStart - 1, true).string('T2A Cases').style(caseStyle)
   ws.cell(1, reportColumnStart, 1, reportColumnStart + numberOfReportColumns - 1, true).string('Reports').style(caseStyle)
 }
 
-var setCaseHeaders = function (ws, start, styles, additionalHeading) {
-  var count = 0
+const setCaseHeaders = function (ws, start, styles, additionalHeading) {
+  let count = 0
   while (count < caseHeaders.length) {
-    var completeHeader = additionalHeading + caseHeaders[count]
-    var styleToApply = determineStyles.determineCaseStyle(completeHeader, styles)
+    const completeHeader = additionalHeading + caseHeaders[count]
+    const styleToApply = determineStyles.determineCaseStyle(completeHeader, styles)
     ws.cell(2, start, 2, start + 3, true).string(completeHeader).style(styleToApply)
     count = count + 1
     start = start + typeTierGroupLength
   }
 }
 
-var setHeaders = function (ws, nameHeadersStyle) {
-  var i
+const setHeaders = function (ws, nameHeadersStyle) {
+  let i
   for (i = 0; i < nameHeaders.length; i++) {
     ws.cell(2, i + 1)
-    .style(nameHeadersStyle)
+      .style(nameHeadersStyle)
     ws.cell(4, i + 1)
-    .style(nameHeadersStyle)
+      .style(nameHeadersStyle)
   }
   for (i = 0; i < nameHeaders.length; i++) {
     ws.cell(3, i + 1)
-    .string(nameHeaders[i])
-    .style(nameHeadersStyle)
+      .string(nameHeaders[i])
+      .style(nameHeadersStyle)
   }
 }
 
-var setCaseTypeHeaders = function (ws, styles) {
-  var count = 0
-  var i
+const setCaseTypeHeaders = function (ws, styles) {
+  const count = 0
+  let i
   for (i = casesColumnStart; i < reportColumnStart; i = i + typeTierGroupLength) {
-    var styleToApply = determineStyles.determineWeightingStyle(i, styles)
+    const styleToApply = determineStyles.determineWeightingStyle(i, styles)
     ws.cell(3, i).string(caseTypeHeaders[count]).style(styleToApply)
     ws.cell(3, i + 1).string(caseTypeHeaders[count + 1]).style(styleToApply)
     ws.cell(3, i + 2).string(caseTypeHeaders[count + 2]).style(styleToApply)
@@ -116,18 +116,18 @@ var setCaseTypeHeaders = function (ws, styles) {
   }
 }
 
-var setTierWeightings = function (ws, styles, points) {
-  var keys = Object.keys(points)
-  var start
-  if (points['isT2A']) {
+const setTierWeightings = function (ws, styles, points) {
+  const keys = Object.keys(points)
+  let start
+  if (points.isT2A) {
     start = t2aCasesColumnStart
   } else {
     start = casesColumnStart
   }
-  var count = 0
-  var i
+  let count = 0
+  let i
   for (i = 0; i < 33; i++) {
-    var styleToApply = determineStyles.determineWeightingStyle(start, styles)
+    const styleToApply = determineStyles.determineWeightingStyle(start, styles)
     switch (i % 11) {
       case 0:
         ws.cell(4, start).number(0).style(styleToApply)
@@ -147,15 +147,15 @@ var setTierWeightings = function (ws, styles, points) {
   }
 }
 
-var setReportWeightings = function (ws, styles, points) {
-  var styleToApply = determineStyles.determineWeightingStyle(reportColumnStart, styles)
-  ws.cell(4, reportColumnStart).number(points['sdr']).style(styleToApply)
-  ws.cell(4, reportColumnStart + 1).number(points['sdrConversion']).style(styleToApply)
-  ws.cell(4, reportColumnStart + 2).number(points['parom']).style(styleToApply)
-  ws.cell(4, reportColumnStart + 3).number(points['weightingArmsCommunity'] * armsCommMultiplier).style(styleToApply)
-  ws.cell(4, reportColumnStart + 4).number(points['weightingArmsLicense'] * armsLicMultiplier).style(styleToApply)
+const setReportWeightings = function (ws, styles, points) {
+  const styleToApply = determineStyles.determineWeightingStyle(reportColumnStart, styles)
+  ws.cell(4, reportColumnStart).number(points.sdr).style(styleToApply)
+  ws.cell(4, reportColumnStart + 1).number(points.sdrConversion).style(styleToApply)
+  ws.cell(4, reportColumnStart + 2).number(points.parom).style(styleToApply)
+  ws.cell(4, reportColumnStart + 3).number(points.weightingArmsCommunity * armsCommMultiplier).style(styleToApply)
+  ws.cell(4, reportColumnStart + 4).number(points.weightingArmsLicense * armsLicMultiplier).style(styleToApply)
 }
 
-var setRowHeights = function (ws) {
+const setRowHeights = function (ws) {
   ws.row(3).setHeight(75)
 }

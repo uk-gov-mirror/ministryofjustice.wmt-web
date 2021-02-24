@@ -8,7 +8,7 @@ const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const getScenarioExport = require('../services/get-omic-scenario')
 
-var lastUpdated
+let lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.OMIC + '/:organisationLevel/:id/export', function (req, res, next) {
@@ -19,18 +19,18 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var id
+    const organisationLevel = req.params.organisationLevel
+    let id
 
     if (organisationLevel !== organisationUnit.NATIONAL.name) {
       id = req.params.id
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return getLastUpdated().then(function (lastUpdatedDate) {
       lastUpdated = dateFormatter.formatDate(lastUpdatedDate.date_processed, 'DD-MM-YYYY HH:mm')
-      var result = getExport(id, organisationLevel)
+      const result = getExport(id, organisationLevel)
       result.date = lastUpdated
       return res.render('omic-export', {
         organisationLevel: organisationLevel,
@@ -41,7 +41,7 @@ module.exports = function (router) {
         subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole),
         date: result.date,
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-        authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+        authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
       })
     }).catch(function (error) {
       next(error)
@@ -56,16 +56,16 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var id
-    var exportPromise
+    const organisationLevel = req.params.organisationLevel
+    let id
+    let exportPromise
 
     if (organisationLevel !== organisationUnit.NATIONAL.name) {
       id = req.params.id
     }
 
-    var radioButton = req.body.radioInlineGroup
-    var scenarioPromise = getScenarioExport(id, organisationLevel)
+    const radioButton = req.body.radioInlineGroup
+    const scenarioPromise = getScenarioExport(id, organisationLevel)
 
     switch (radioButton) {
       case '1':
@@ -79,7 +79,7 @@ module.exports = function (router) {
       lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
       return exportPromise.then(function (results) {
         if (radioButton === '1') {
-          var scenarioFileName = organisationLevel + '_Scenario_' + dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY') + '.xlsx'
+          const scenarioFileName = organisationLevel + '_Scenario_' + dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY') + '.xlsx'
           results.write(scenarioFileName, res)
         }
       })

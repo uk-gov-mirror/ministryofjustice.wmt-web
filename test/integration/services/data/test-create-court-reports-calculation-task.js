@@ -4,36 +4,36 @@ const createCalculateWorkloadPointsTask = require('../../../../app/services/data
 const crDataHelper = require('../../../helpers/data/court-reports-aggregated-data-helper')
 const dataHelper = require('../../../helpers/data/aggregated-data-helper')
 
-var inserts = []
+let inserts = []
 
-var insertedTask = {
+const insertedTask = {
   table: 'tasks',
   id: 0
 }
 
-var workloadId = 1
-var workloadReportId
-var batchSize = 3
-var task
+const workloadId = 1
+let workloadReportId
+const batchSize = 3
+let task
 
 describe('/services/data/test-court-reports-calculation-task', function () {
   before(function () {
     return crDataHelper.addCourtReportWorkloadsForOffenderManager()
-    .then(function (result) {
-      inserts = result
-      workloadReportId = inserts.filter((item) => item.table === 'workload_report')[0].id
+      .then(function (result) {
+        inserts = result
+        workloadReportId = inserts.filter((item) => item.table === 'workload_report')[0].id
 
-      task = {
-        submitting_agent: 'WEB',
-        type: 'COURT-REPORTS-CALCULATION',
-        additional_data: JSON.stringify({
-          workloadBatch: { startingId: workloadId, batchSize: batchSize },
-          operationType: 'UPDATE'
-        }),
-        workload_report_id: workloadReportId,
-        status: 'PENDING'
-      }
-    })
+        task = {
+          submitting_agent: 'WEB',
+          type: 'COURT-REPORTS-CALCULATION',
+          additional_data: JSON.stringify({
+            workloadBatch: { startingId: workloadId, batchSize: batchSize },
+            operationType: 'UPDATE'
+          }),
+          workload_report_id: workloadReportId,
+          status: 'PENDING'
+        }
+      })
   })
 
   it('should create a task and insert it in the task table', function () {
@@ -42,7 +42,7 @@ describe('/services/data/test-court-reports-calculation-task', function () {
         insertedTask.id = result
         expect(result[0]).to.be.a('number')
         return dataHelper.getAllTasks().then(function (allTasks) {
-          expect(allTasks).to.contain(task)
+          expect(allTasks).to.deep.contain(task)
         })
       })
   })

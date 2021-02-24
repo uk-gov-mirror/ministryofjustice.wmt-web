@@ -1,29 +1,34 @@
 const expect = require('chai').expect
 const authenticationHerlp = require('../helpers/routes/authentication-helper')
 
-var adminUserURL
+let adminUserURL
 
 describe('View adding a new user role', () => {
-  before(function () {
-    authenticationHerlp.login(authenticationHerlp.users.SystemAdmin)
+  before(async function () {
+    await authenticationHerlp.login(authenticationHerlp.users.SystemAdmin)
     adminUserURL = '/admin/user'
-    return browser.url(adminUserURL).waitForExist('.breadcrumbs')
+    await browser.url(adminUserURL)
   })
 
   describe('should navigate to the user page', () => {
-    it('with the correct breadcrumbs and heading title', () => {
-      return browser.url(adminUserURL)
-        .waitForExist('.breadcrumbs')
-        .waitForExist('.sln-page-title')
-        .getText('.sln-page-title')
-        .then(function (text) {
-          expect(text).to.equal('User rights')
-        })
+    it('with the correct breadcrumbs and heading title', async () => {
+      await browser.url(adminUserURL)
+
+      const breadcrumbs = await $('.govuk-breadcrumbs')
+      const exists = await breadcrumbs.isExisting()
+      expect(exists).to.be.equal(true)
+
+      const pageTitle = await $('.govuk-heading-xl')
+      const text = await pageTitle.getText('.govuk-heading-xl')
+      expect(text).to.equal('User rights')
     })
 
-    it('and submit a form with a valid username', () => {
-      browser.setValue('#username', 'John.Doe')
-      browser.submitForm('#userForm')
+    it('and submit a form with a valid username', async () => {
+      const username = await $('#username')
+      await username.setValue('John.Doe')
+
+      const submit = await $('.govuk-button')
+      await submit.click()
     })
   })
 

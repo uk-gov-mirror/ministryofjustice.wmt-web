@@ -16,7 +16,7 @@ const title = 'Archived Reductions'
 const heDecode = require('he')
 const getReductionsHistory = require('../services/data/get-reductions-history')
 
-var archiveDateRange
+let archiveDateRange
 
 module.exports = function (router) {
   router.get('/archive-data/reductions', function (req, res, next) {
@@ -34,7 +34,7 @@ module.exports = function (router) {
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return renderResults(viewTemplate, title, res, null, null, authorisedUserRole)
   })
@@ -54,7 +54,7 @@ module.exports = function (router) {
       }
     }
 
-    var errors
+    let errors
 
     try {
       archiveDateRange = dateRangeHelper.createReductionArchiveDateRange(req.body)
@@ -67,8 +67,8 @@ module.exports = function (router) {
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var extraCriteria = heDecode.decode(req.body['reductions-multi-search-field-entry'])
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const extraCriteria = heDecode.decode(req.body['reductions-multi-search-field-entry'])
 
     // If date range has errors don't search database
     if (errors) {
@@ -85,10 +85,10 @@ module.exports = function (router) {
         })
       }
 
-      var offset = parseInt(req.body.start)
-      var limit = parseInt(req.body.length)
+      const offset = parseInt(req.body.start)
+      const limit = parseInt(req.body.length)
 
-      var reductions = results.slice(offset, Math.min(offset + limit, results.length))
+      const reductions = results.slice(offset, Math.min(offset + limit, results.length))
       return res.json({
         draw: req.body.draw,
         recordsTotal: results.length,
@@ -133,7 +133,7 @@ module.exports = function (router) {
       }
     }
 
-    var errors
+    let errors
 
     try {
       archiveDateRange = dateRangeHelper.createReductionArchiveDateRange(req.body)
@@ -146,14 +146,14 @@ module.exports = function (router) {
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var extraCriteria = heDecode.decode(req.body['reductions-multi-search-field-entry'])
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const extraCriteria = heDecode.decode(req.body['reductions-multi-search-field-entry'])
 
     // If date range has errors don't search database
     if (errors) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
     }
-    var stringifiedBody = Object.assign({}, req.body)
+    let stringifiedBody = Object.assign({}, req.body)
     stringifiedBody['reductions-multi-search-field-entry'] = heDecode.decode(stringifiedBody['reductions-multi-search-field-entry'])
     stringifiedBody = JSON.stringify(stringifiedBody)
     return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria, true, stringifiedBody)
@@ -174,7 +174,7 @@ module.exports = function (router) {
       }
     }
 
-    var errors
+    let errors
 
     try {
       archiveDateRange = dateRangeHelper.createReductionArchiveDateRange(req.body)
@@ -187,8 +187,8 @@ module.exports = function (router) {
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var extraCriteria = heDecode.decode(req.body['reductions-multi-search-field-entry'])
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const extraCriteria = heDecode.decode(req.body['reductions-multi-search-field-entry'])
 
     // If date range has errors don't search database
     if (errors) {
@@ -200,7 +200,7 @@ module.exports = function (router) {
       if (archiveDateRange !== null) {
         dateFileName = archiveDateRange.archiveFromDate.toISOString().substring(0, 10) + ' ' + archiveDateRange.archiveToDate.toISOString().substring(0, 10)
       }
-      var exportCsv = getExportCsv(dateFileName, results, tabs.ADMIN.REDUCTION_ARCHIVE)
+      const exportCsv = getExportCsv(dateFileName, results, tabs.ADMIN.REDUCTION_ARCHIVE)
       res.attachment(exportCsv.filename)
       res.send(exportCsv.csv)
     }).catch(function (error) {
@@ -223,7 +223,7 @@ module.exports = function (router) {
       }
     }
 
-    var reductionId = heDecode.decode(req.body['reductionId'])
+    const reductionId = heDecode.decode(req.body.reductionId)
 
     return getReductionsHistory(reductionId).then(function (reductionsHistory) {
       return res.json({
@@ -233,7 +233,7 @@ module.exports = function (router) {
   })
 }
 
-var formatResults = function (results) {
+const formatResults = function (results) {
   results.forEach(function (result) {
     if (result.omName === null || result.omName === ' ') {
       result.omName = 'NO NAME FOR THIS REDUCTION'

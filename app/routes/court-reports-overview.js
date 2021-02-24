@@ -10,7 +10,7 @@ const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
 
-var lastUpdated
+let lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.COURT_REPORTS + '/:organisationLevel/:id/overview', function (req, res, next) {
@@ -36,24 +36,24 @@ module.exports = function (router) {
   })
 }
 
-var renderOverview = function (req, res, next) {
-  var organisationLevel = req.params.organisationLevel
-  var organisationUnit = getOrganisationUnit('name', organisationLevel)
-  var id
+const renderOverview = function (req, res, next) {
+  const organisationLevel = req.params.organisationLevel
+  const organisationUnit = getOrganisationUnit('name', organisationLevel)
+  let id
   if (organisationLevel !== organisationUnitConstants.NATIONAL.name) {
     if (req.params.id !== undefined && !isNaN(parseInt(req.params.id, 10))) {
       id = req.params.id
     }
   }
 
-  var childOrganisationLevel
-  var childOrganisationLevelDisplayText
+  let childOrganisationLevel
+  let childOrganisationLevelDisplayText
   if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
     childOrganisationLevel = organisationUnit.childOrganisationLevel
     childOrganisationLevelDisplayText = getOrganisationUnit('name', childOrganisationLevel).displayText
   }
 
-  var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+  const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
   return getLastUpdated().then(function (result) {
     lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
@@ -74,10 +74,9 @@ var renderOverview = function (req, res, next) {
         userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
         authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
       })
-    })
   }).catch(function (error) {
     if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
-      var subNav = getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+      const subNav = getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS, authorisedUserRole.authorisation, authorisedUserRole.userRole)
       renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
     } else {
       next(error)

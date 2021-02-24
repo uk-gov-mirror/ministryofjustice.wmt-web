@@ -13,32 +13,31 @@
     {% include "includes/sub-nav.html" %}
     
 
-    <table class="sln-table-reductions">
-        <colgroup>
-            <col span="1" style="width:35%;">
-        </colgroup>
-        <thead>
-            <tr>
-                <th id="filetype">File Type</th>
-                <th id="time_generated">Date Generated</th>
-                <th></th>
-            </tr>
-        </thead>
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+            <table class="govuk-table sln-table-reductions" id="override-govuk-table">
+                <thead>
+                    <tr>
+                        <th id="filetype">File Type</th>
+                        <th id="time_generated">Date Generated</th>
+                        <th id="link"></th>
+                    </tr>
+                </thead>
 
-        <tbody class="">
-            {% for dashboardFile in dashboardFiles %}
-            <tr>
-                <td headers="time_generated">{{ dashboardFile.file_type | capitalize}}</td>
-                <td headers="time_generated">{{ dashboardFile.date_created }}</td>
-                <td><a href="/probation/{{ organisationLevel }}/{{ linkId }}/dashboard/download?id={{ dashboardFile.id }}">Download a copy</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                <tbody>
+                    {% for dashboardFile in dashboardFiles %}
+                    <tr>
+                        <td headers="filetype">{{ dashboardFile.file_type | capitalize}}</td>
+                        <td headers="time_generated">{{ dashboardFile.date_created }}</td>
+                        <td headers="link"><a class="govuk-link" href="/probation/{{ organisationLevel }}/{{ linkId }}/dashboard/download?id={{ dashboardFile.id }}">Download a copy</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </main>
 
-<div class="lastUpdated">
-    <p>Last updated on  <span class="bold">{{date}}</span></p>
-</div>
+{% include "includes/last-updated.html" %}
 
 {% endblock %}

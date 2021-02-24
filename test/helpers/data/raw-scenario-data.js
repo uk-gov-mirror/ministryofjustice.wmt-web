@@ -1,5 +1,6 @@
 module.exports =
-[ { region_name: 'NPS London',
+[{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -28,8 +29,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -58,8 +61,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -88,8 +93,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -118,8 +125,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -148,8 +157,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -178,8 +189,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -208,8 +221,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -238,8 +253,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -268,8 +285,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -298,8 +317,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -328,8 +349,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -358,8 +381,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -388,8 +413,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -418,8 +445,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -448,8 +477,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -478,8 +509,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -508,8 +541,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -538,8 +573,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -568,8 +605,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -598,8 +637,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -628,8 +669,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -658,8 +701,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -688,8 +733,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -718,8 +765,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -748,8 +797,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -778,8 +829,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -808,8 +861,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -838,8 +893,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -868,8 +925,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -898,8 +957,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -928,8 +989,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -958,8 +1021,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'All NPS London',
   team_name: 'Div HUB LDN',
   om_name: 'John Smith',
@@ -988,8 +1053,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1018,8 +1085,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1048,8 +1117,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1078,8 +1149,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1108,8 +1181,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1138,8 +1213,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1168,8 +1245,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1198,8 +1277,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1228,8 +1309,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1258,8 +1341,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1288,8 +1373,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1318,8 +1405,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1348,8 +1437,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1378,8 +1469,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1408,8 +1501,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1438,8 +1533,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1468,8 +1565,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1498,8 +1597,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1528,8 +1629,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1558,8 +1661,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1588,8 +1693,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1618,8 +1725,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1648,8 +1757,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1678,8 +1789,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1708,8 +1821,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1738,8 +1853,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1768,8 +1885,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1798,8 +1917,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1828,8 +1949,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1858,8 +1981,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1888,8 +2013,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1918,8 +2045,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1948,8 +2077,10 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 },
-{ region_name: 'NPS London',
+  paroms_total: 0
+},
+{
+  region_name: 'NPS London',
   ldu_name: 'Stakeholder Engagement London',
   team_name: 'Other Third Party EM Supervision',
   om_name: 'Fred Jones',
@@ -1978,4 +2109,5 @@ module.exports =
   gs_points: 0,
   sdr_total: 0,
   sdr_conversions_total: 0,
-  paroms_total: 0 }]
+  paroms_total: 0
+}]

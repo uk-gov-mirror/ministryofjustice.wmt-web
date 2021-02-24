@@ -16,7 +16,7 @@ const title = 'Archived Fortnightly Caseload Data'
 const log = require('../logger')
 const heDecode = require('he')
 
-var archiveDateRange
+let archiveDateRange
 
 module.exports = function (router) {
   router.get('/archive-data/fortnightly-caseload-data', function (req, res, next) {
@@ -34,7 +34,7 @@ module.exports = function (router) {
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
     return renderResults(viewTemplate, title, res, null, null, authorisedUserRole)
   })
 
@@ -53,7 +53,7 @@ module.exports = function (router) {
       }
     }
 
-    var errors
+    let errors
 
     try {
       archiveDateRange = dateRangeHelper.createFortnightlyArchiveDateRange(req.body)
@@ -66,9 +66,9 @@ module.exports = function (router) {
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    var extraCriteria = heDecode.decode(req.body['fortnightly-multi-search-field-entry'])
+    const extraCriteria = heDecode.decode(req.body['fortnightly-multi-search-field-entry'])
     // If date range has errors don't search database
     if (errors) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
@@ -98,7 +98,7 @@ module.exports = function (router) {
       }
     }
 
-    var errors
+    let errors
 
     try {
       archiveDateRange = dateRangeHelper.createFortnightlyArchiveDateRange(req.body)
@@ -111,9 +111,9 @@ module.exports = function (router) {
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    var extraCriteria = heDecode.decode(req.body['fortnightly-multi-search-field-entry'])
+    const extraCriteria = heDecode.decode(req.body['fortnightly-multi-search-field-entry'])
     if (errors) {
       return renderResults(viewTemplate, title, res, errors, null, authorisedUserRole, archiveDateRange, extraCriteria)
     }
@@ -124,7 +124,7 @@ module.exports = function (router) {
       if (archiveDateRange !== null) {
         dateFileName = archiveDateRange.archiveFromDate.toISOString().substring(0, 10) + ' ' + archiveDateRange.archiveToDate.toISOString().substring(0, 10)
       }
-      var exportCsv = getExportCsv(dateFileName, results, tabs.ADMIN.FORTNIGHTLY_ARCHIVE)
+      const exportCsv = getExportCsv(dateFileName, results, tabs.ADMIN.FORTNIGHTLY_ARCHIVE)
       res.attachment(exportCsv.filename)
       res.send(exportCsv.csv)
     }).catch(function (error) {
@@ -133,7 +133,7 @@ module.exports = function (router) {
   })
 }
 
-var formatResults = function (results) {
+const formatResults = function (results) {
   results.forEach(function (result) {
     if (result.startDate !== null) {
       result.startDate = dateFormatter.formatDate(result.startDate, 'DD-MM-YYYY')

@@ -3,7 +3,7 @@ const dateFormatter = require('../date-formatter')
 // const log = require('../../logger')
 
 module.exports = function (id, organisationLevel) {
-  var columns = [
+  const columns = [
     'region_name AS regionName',
     'ldu_name AS lduName',
     'team_name AS teamName',

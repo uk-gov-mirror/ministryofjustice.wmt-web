@@ -3,7 +3,7 @@ const expect = require('chai').expect
 const organisationalHierarchyHelper = require('../../../helpers/data/organisational-hierarchy-db-helper')
 const getOrgansationalHierarchyData = require('../../../../app/services/data/get-organisational-hierarchy-data')
 
-var inserts = []
+let inserts = []
 
 describe('services/data/get-organisational-hierarchy-data', function () {
   before(function () {
@@ -15,7 +15,7 @@ describe('services/data/get-organisational-hierarchy-data', function () {
 
   it('should retrieve the organisational hierarchy', function () {
     return getOrgansationalHierarchyData().then(function (results) {
-      var expectedResults = {
+      const expectedResults = {
         region_id: inserts[inserts.findIndex(element => element.table === 'region')].id,
         region_description: 'OH Region',
         ldu_id: inserts[inserts.findIndex(element => element.table === 'ldu')].id,
@@ -26,7 +26,7 @@ describe('services/data/get-organisational-hierarchy-data', function () {
         offender_manager_forename: 'OH Forename',
         offender_manager_surname: 'OH Surname'
       }
-      expect(results).to.include(expectedResults)
+      expect(results).to.deep.include(expectedResults)
     })
   })
 

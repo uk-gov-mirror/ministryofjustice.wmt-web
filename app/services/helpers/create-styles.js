@@ -1,21 +1,21 @@
 module.exports = function (wb) {
-  var defaultFontSize = 10
-  var defaultHorizontalAlignment = 'center'
-  var patternType = 'solid'
-  var lavender = '#EE82EE'
-  var gold = '#FFCC99'
-  var blueGray = '#6699CC'
-  var sageGreen = '#9dc183'
-  var azureBlue = '#0080FF'
-  var magentaPink = '#FF0090'
-  var persianGreen = '#00A572'
-  var aquaBlue = '#00FFFF'
-  var black = '#000000'
-  var goldenYellow = '#FAFAD2'
-  var lightGray = '#D3D3D3'
+  const defaultFontSize = 10
+  const defaultHorizontalAlignment = 'center'
+  const patternType = 'solid'
+  const lavender = '#EE82EE'
+  const gold = '#FFCC99'
+  const blueGray = '#6699CC'
+  const sageGreen = '#9dc183'
+  const azureBlue = '#0080FF'
+  const magentaPink = '#FF0090'
+  const persianGreen = '#00A572'
+  const aquaBlue = '#00FFFF'
+  const black = '#000000'
+  const goldenYellow = '#FAFAD2'
+  const lightGray = '#D3D3D3'
 
-  var baseFontStyle = { size: defaultFontSize }
-  var baseMediumBorderStyle = {
+  const baseFontStyle = { size: defaultFontSize }
+  const baseMediumBorderStyle = {
     left: {
       style: 'medium',
       color: black
@@ -41,7 +41,7 @@ module.exports = function (wb) {
     outline: true
   }
 
-  var baseLightBorderStyle = {
+  const baseLightBorderStyle = {
     left: {
       style: 'thin',
       color: black
@@ -67,7 +67,7 @@ module.exports = function (wb) {
     outline: true
   }
 
-  var caseStyle = wb.createStyle({
+  const caseStyle = wb.createStyle({
     alignment: {
       wrapText: true
     },
@@ -75,7 +75,7 @@ module.exports = function (wb) {
     border: baseLightBorderStyle
   })
 
-  var nonEditableCaseStyle = wb.createStyle({
+  const nonEditableCaseStyle = wb.createStyle({
     alignment: {
       wrapText: true
     },
@@ -88,7 +88,7 @@ module.exports = function (wb) {
     }
   })
 
-  var editableStyle = wb.createStyle({
+  const editableStyle = wb.createStyle({
     alignment: {
       wrapText: true
     },
@@ -101,7 +101,7 @@ module.exports = function (wb) {
     }
   })
 
-  var totalAverageStyle = wb.createStyle({
+  const totalAverageStyle = wb.createStyle({
     alignment: {
       wrapText: true
     },
@@ -114,7 +114,7 @@ module.exports = function (wb) {
     }
   })
 
-  var nameHeadersStyle = wb.createStyle({
+  const nameHeadersStyle = wb.createStyle({
     font: baseFontStyle,
     alignment: {
       horizontal: defaultHorizontalAlignment,
@@ -128,7 +128,7 @@ module.exports = function (wb) {
     border: baseMediumBorderStyle
   })
 
-  var commStyle = wb.createStyle({
+  const commStyle = wb.createStyle({
     font: baseFontStyle,
     alignment: {
       horizontal: defaultHorizontalAlignment,
@@ -142,7 +142,7 @@ module.exports = function (wb) {
     border: baseMediumBorderStyle
   })
 
-  var licStyle = wb.createStyle({
+  const licStyle = wb.createStyle({
     font: baseFontStyle,
     alignment: {
       horizontal: defaultHorizontalAlignment,
@@ -156,7 +156,7 @@ module.exports = function (wb) {
     border: baseMediumBorderStyle
   })
 
-  var cusStyle = wb.createStyle({
+  const cusStyle = wb.createStyle({
     font: baseFontStyle,
     alignment: {
       horizontal: defaultHorizontalAlignment,
@@ -170,7 +170,7 @@ module.exports = function (wb) {
     border: baseMediumBorderStyle
   })
 
-  var t2aCommStyle = wb.createStyle({
+  const t2aCommStyle = wb.createStyle({
     font: baseFontStyle,
     alignment: {
       horizontal: defaultHorizontalAlignment,
@@ -184,7 +184,7 @@ module.exports = function (wb) {
     border: baseMediumBorderStyle
   })
 
-  var t2aLicStyle = wb.createStyle({
+  const t2aLicStyle = wb.createStyle({
     font: baseFontStyle,
     alignment: {
       horizontal: defaultHorizontalAlignment,
@@ -198,7 +198,7 @@ module.exports = function (wb) {
     border: baseMediumBorderStyle
   })
 
-  var t2aCusStyle = wb.createStyle({
+  const t2aCusStyle = wb.createStyle({
     font: baseFontStyle,
     alignment: {
       horizontal: defaultHorizontalAlignment,
@@ -212,7 +212,7 @@ module.exports = function (wb) {
     border: baseMediumBorderStyle
   })
 
-  var reportsStyle = wb.createStyle({
+  const reportsStyle = wb.createStyle({
     font: baseFontStyle,
     alignment: {
       horizontal: defaultHorizontalAlignment,
@@ -226,7 +226,7 @@ module.exports = function (wb) {
     border: baseMediumBorderStyle
   })
 
-  var sumStyle = wb.createStyle({
+  const sumStyle = wb.createStyle({
     font: {
       size: defaultFontSize,
       color: '#FFFFFF'
@@ -239,7 +239,7 @@ module.exports = function (wb) {
     border: baseMediumBorderStyle
   })
 
-  var roundedSumStyle = wb.createStyle({
+  const roundedSumStyle = wb.createStyle({
     font: {
       size: defaultFontSize,
       color: '#FFFFFF'
@@ -253,7 +253,7 @@ module.exports = function (wb) {
     border: baseMediumBorderStyle
   })
 
-  var averageStyle = wb.createStyle({
+  const averageStyle = wb.createStyle({
     font: baseFontStyle,
     fill: {
       type: 'pattern',
@@ -263,18 +263,7 @@ module.exports = function (wb) {
     border: baseMediumBorderStyle
   })
 
-  var averagePercentageStyle = wb.createStyle({
-    font: baseFontStyle,
-    numberFormat: '0.0%; -0.0%; 0%',
-    fill: {
-      type: 'pattern',
-      patternType: patternType,
-      fgColor: '#FFFF00'
-    },
-    border: baseMediumBorderStyle
-  })
-
-  var cmsGsPercentageStyle = wb.createStyle({
+  const averagePercentageStyle = wb.createStyle({
     font: baseFontStyle,
     numberFormat: '0.0%; -0.0%; 0%',
     fill: {
@@ -285,7 +274,18 @@ module.exports = function (wb) {
     border: baseMediumBorderStyle
   })
 
-  var percentageStyle = wb.createStyle({
+  const cmsGsPercentageStyle = wb.createStyle({
+    font: baseFontStyle,
+    numberFormat: '0.0%; -0.0%; 0%',
+    fill: {
+      type: 'pattern',
+      patternType: patternType,
+      fgColor: '#FFFF00'
+    },
+    border: baseMediumBorderStyle
+  })
+
+  const percentageStyle = wb.createStyle({
     font: baseFontStyle,
     numberFormat: '0.0%; -0.0%; 0%',
     border: baseLightBorderStyle,
@@ -296,7 +296,7 @@ module.exports = function (wb) {
     }
   })
 
-  var roundedStyle = wb.createStyle({
+  const roundedStyle = wb.createStyle({
     font: baseFontStyle,
     numberFormat: '#; -#; 0',
     border: baseLightBorderStyle,

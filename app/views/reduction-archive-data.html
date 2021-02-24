@@ -15,89 +15,108 @@
         <input id="rawQuery" type="hidden" name="rawQuery" value="{{ stringifiedBody }}">
         <input id="startSearching" type="hidden" name="startSearching" value="{{ startSearching }}">
 
-         <div class="form-group {% if errors[archiveFromDate][0] %} form-group-error {% endif %}" id="from">
+         <div class="govuk-form-group {% if errors['archiveFromDate'][0] %} govuk-form-group--error {% endif %}" id="from">
             {% if errors %}
-                <span class="error-message">{{ errors[archiveFromDate][0] }}</span>
+                <span id="archive-from-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> {{ errors['archiveFromDate'][0] }}
+                </span>
             {% endif %}
-            <fieldset id="archiveFromDate">
-                <legend>
-                    <span class="form-label-bold">
+            <fieldset class="govuk-fieldset" role="group" aria-describedby="reduction-archive-from-hint" id="archiveFromDate">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                    <h1 class="govuk-fieldset__heading">
                         Show archive data from:
-                    </span>
-                    <span class="form-hint" id="reduction-archive-from-hint">For example, 30 1 2015 - This date must be on or after 24/10/2014</span>
+                    </h1>
                 </legend>
-                <div class="form-date" aria-describedby="reduction-archive-from-hint">
-                    <div class="form-group form-group-day">
-                        <label class="form-label" for="reduction-archive-from-day">Day</label>
-                        <input class="form-control" id="reduction-archive-from-day" name="reduction-archive-from-day" 
-                            value={{dateRange.fromFields[0] | int}}>
+                <div class="govuk-hint" id="reduction-archive-from-hint">For example, 30 1 2015 - This date must be on or after 24/10/2014</div>
+                <div class="govuk-date-input">
+                    <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                            <label class="govuk-label govuk-date-input__label" for="reduction-archive-from-day">Day</label>
+                            <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['archiveFromDate'][0] %} govuk-input--error {% endif %}" id="reduction-archive-from-day" name="reduction-archive-from-day" 
+                                value={{dateRange.fromFields[0] | int}}>
+                        </div>
+                        
                      </div>
-                    <div class="form-group form-group-month">
-                        <label class="form-label" for="reduction-archive-from-month">Month</label>
-                        <input class="form-control" id="reduction-archive-from-month" name="reduction-archive-from-month" 
-                            value={{dateRange.fromFields[1] | int}}>
+                     <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                            <label class="govuk-label govuk-date-input__label" for="reduction-archive-from-month">Month</label>
+                            <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['archiveFromDate'][0] %} govuk-input--error {% endif %}" id="reduction-archive-from-month" name="reduction-archive-from-month" 
+                                value={{dateRange.fromFields[1] | int}}>
+                        </div>
                     </div>
-                    <div class="form-group form-group-year">
-                        <label class="form-label" for="reduction-archive-from-year">Year</label>
-                        <input class="form-control" id="reduction-archive-from-year" name="reduction-archive-from-year" 
-                        value={{dateRange.fromFields[2] | int}}>           
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div class="form-group {% if errors[archiveToDate][0] %} form-group-error {% endif %}" id="to">
-            {% if errors %}
-                 <span class="error-message">{{ errors[archiveToDate][0] }}</span> 
-            {% endif %}
-            <fieldset id="archiveToDate">
-                <legend>
-                    <span class="form-label-bold">
-                        Show archive data to:
-                    </span>
-                    <span class="form-hint" id="reduction-archive-to-hint">For example, 31 3 2015 - This date must be on or after 25/10/2014</span>
-                </legend>
-                <div class="form-date" aria-describedby="reduction-archive-to-hint">
-                    <div class="form-group form-group-day">
-                        <label class="form-label" for="reduction-archive-to-day">Day</label>
-                        <input class="form-control" id="reduction-archive-to-day" name="reduction-archive-to-day" 
-                            value={{dateRange.toFields[0] | int}}>
-                    </div>
-                    <div class="form-group form-group-month">
-                        <label class="form-label" for="reduction-archive-to-month">Month</label>
-                        <input class="form-control" id="reduction-archive-to-month" name="reduction-archive-to-month"
-                            value={{dateRange.toFields[1] | int}}>
-                    </div>
-                    <div class="form-group form-group-year">
-                        <label class="form-label" for="reduction-archive-to-year">Year</label>
-                        <input class="form-control" id="reduction-archive-to-year" name="reduction-archive-to-year"
-                            value={{dateRange.toFields[2] | int}}>
+                    <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                            <label class="govuk-label govuk-date-input__label" for="reduction-archive-from-year">Year</label>
+                            <input class="govuk-input govuk-date-input__input govuk-input--width-4 {% if errors['archiveFromDate'][0] %} govuk-input--error {% endif %}" id="reduction-archive-from-year" name="reduction-archive-from-year" 
+                            value={{dateRange.fromFields[2] | int}}>
+                        </div>        
                     </div>
                 </div>
             </fieldset>
         </div>
 
-        <div class="form-group" id="reductions-multi-search-field">
-            <fieldset id="multiSearchDate">
-                <legend>
-                    <span class="form-label-bold">
-                        Search by Offender Manager or Reduction Updater
-                    </span>
-                    <span class="form-hint" id="reductions-multi-search-field-hint">For Example, John Smith</span>
+        <div class="govuk-form-group {% if errors['archiveToDate'][0] %} govuk-form-group--error {% endif %}" id="to">
+            {% if errors %}
+                <span id="archive-to-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> {{ errors['archiveToDate'][0] }}
+                </span>
+            {% endif %}
+            <fieldset class="govuk-fieldset" role="group" aria-describedby="reduction-archive-to-hint" id="archiveToDate">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                    <h1 class="govuk-fieldset__heading">
+                        Show archive data to:
+                    </h1>
                 </legend>
+                <div class="govuk-hint" id="reduction-archive-to-hint">For example, 30 1 2015 - This date must be on or after 24/10/2014</div>
+                <div class="govuk-date-input">
+                    <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                            <label class="govuk-label govuk-date-input__label" for="reduction-archive-to-day">Day</label>
+                            <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['archiveToDate'][0] %} govuk-input--error {% endif %}" id="reduction-archive-to-day" name="reduction-archive-to-day" 
+                                value={{dateRange.toFields[0] | int}}>
+                        </div>
+                        
+                     </div>
+                     <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                            <label class="govuk-label govuk-date-input__label" for="reduction-archive-to-month">Month</label>
+                            <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['archiveToDate'][0] %} govuk-input--error {% endif %}" id="reduction-archive-to-month" name="reduction-archive-to-month" 
+                                value={{dateRange.toFields[1] | int}}>
+                        </div>
+                    </div>
+                    <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                            <label class="govuk-label govuk-date-input__label" for="reduction-archive-to-year">Year</label>
+                            <input class="govuk-input govuk-date-input__input govuk-input--width-4 {% if errors['archiveToDate'][0] %} govuk-input--error {% endif %}" id="reduction-archive-to-year" name="reduction-archive-to-year" 
+                            value={{dateRange.toFields[2] | int}}>
+                        </div>        
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="govuk-form-group" id="reductions-multi-search-field">
+            <fieldset class="govuk-fieldset" role="group" aria-describedby="reductions-multi-search-field-hint" id="multiSearchDate">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                    <h1 class="govuk-fieldset__heading">
+                        Search by Offender Manager or Reduction Updater
+                    </h1>
+                </legend>
+                <div class="govuk-hint" id="reductions-multi-search-field-hint">For Example, John Smith</div>
                 <div aria-describedby="reductions-multi-search-field-hint">
                     <div class="form-group">
-                        <label class="form-label" for="reductions-multi-search-field-entry">Extra Search Criteria</label>
-                        <input class="form-control" id="reductions-multi-search-field-entry" name="reductions-multi-search-field-entry" value="{{ extraSearchCriteria | safe }}">
-                        </div>
+                        <label class="govuk-label govuk-date-input__label" for="reductions-multi-search-field-entry">Extra Search Criteria</label>
+                        <input class="govuk-input" id="reductions-multi-search-field-entry" name="reductions-multi-search-field-entry" value="{{ extraSearchCriteria | safe }}">
+                    </div>
                 </div>
             </fieldset>
         </div>
 
-        <input id="archive-reductions-filter-submit" type="submit" value="Search" class="button" formaction="/archive-data/reductions-search">
-        <input id="archive-reductions-csv-submit" type="submit" class="button sln-export" style="float: right; margin-left:10px; margin-bottom: 10px" value="Export Archived Reductions" formaction="/archive-data/reductions/archive-csv">
+        <input id="archive-reductions-filter-submit" type="submit" value="Search" class="govuk-button" data-module="govuk-button"  formaction="/archive-data/reductions-search">
+        <input id="archive-reductions-csv-submit" type="submit" class="govuk-button sln-export floatRightBottom10 marginLeft10" value="Export Archived Reductions" formaction="/archive-data/reductions/archive-csv" data-module="govuk-button">
 </form>
 <br/>
-<table id="reduction-archive-table" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" style="width: 100%;" hidden>
+<table id="reduction-archive-table" class="govuk-table js-data-table data-table dataTable width100Percent" cellspacing="0" width="100%" role="grid" hidden>
     <thead>
         <tr class="headers">
             <th></th>
@@ -112,11 +131,12 @@
         </tr>
     </thead>
 </table>
+<br/>
 </main>
 
-<script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
-<script src="{{ asset_path }}javascripts/moment.min.js"></script>
-<script src="{{ asset_path }}javascripts/datatables2.min.js"></script>
-<script src="{{ asset_path }}javascripts/archive-reductions-new.js"></script>
+<script src="{{ assetPath }}javascripts/vendor/jquery.min.js"></script>
+<script src="{{ assetPath }}javascripts/moment.min.js"></script>
+<script src="{{ assetPath }}javascripts/datatables.min.js"></script>
+<script src="{{ assetPath }}javascripts/archive-reductions-new.js"></script>
 
 {% endblock %}

@@ -16,7 +16,7 @@ module.exports = function (router) {
     return getScenario().then(function (scenarioData) {
       return workloadPointsService(false).then(function (result) {
         return workloadPointsService(true).then(function (t2aResult) {
-          var wb = getExportXlsx(result, t2aResult, scenarioData)
+          const wb = getExportXlsx(result, t2aResult, scenarioData)
           wb.write('ExcelFile.xlsx', res)
         })
       })

@@ -20,12 +20,12 @@ module.exports = function (router) {
       }
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return res.render('admin', {
       title: 'Admin',
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+      authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
     })
   })
 }

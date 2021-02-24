@@ -1,7 +1,7 @@
 const Link = require('./domain/link')
 
 module.exports = function (currentPath) {
-  var navigation = []
+  const navigation = []
 
   navigation.push(new Link('My Expiring Reductions', '/expiring-reductions'))
   navigation.push(new Link('Other Managers\' Expiring Reductions', '/expiring-reductions-other'))

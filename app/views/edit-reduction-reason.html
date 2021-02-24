@@ -9,84 +9,106 @@
 
   {% include "includes/title-subtitle.html"%}
 
-  {# <header class="heading-xlarge" style="margin-top:0; margin-bottom:0">{{ headerText }}</header> #}
-  {# <p class="lede">{{ reductionText }}<span class="bold">{{ title }}</span></p> #}
   {% set first = true %}
   <form action="/edit-reduction-reason?id={{ reduction.id }}" method="POST" id="reductionForm">
     <input type="hidden" name="reasonId" id="reasonId" value="{{ reduction.id }}"/>
       
-    <div class="form-group" id="reduction_name">
+    <div class="govuk-form-group  {% if errors['reductionName'][0] %} govuk-form-group--error {% endif %}" id="reduction_name">
       {% if errors['reductionName'][0] %}
-        <span class="error-message">{{ errors['reductionName'][0] }}</span>
+        <span id="reduction-name-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ errors['reductionName'][0] }}
+        </span>
       {% endif %}
-      <label class="form-label-bold" for="reductionName">Reduction Name</label>
-      <input class="form-control" id="reductionName" name="reductionName" style="width: 800px" value="{{reduction.reason}}" maxlength="255">
+      <h6 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--s" for="reductionName">Reduction Name</label>
+      </h6>
+      <input class="govuk-input {% if errors['reductionName'][0] %} govuk-input--error {% endif %}" id="reductionName" name="reductionName" value="{{reduction.reason}}" maxlength="255">
     </div>
 
-    <div class="form-group" id="reduction_short_name">
+    <div class="govuk-form-group  {% if errors['reductionShortName'][0] %} govuk-form-group--error {% endif %}" id="reduction_short_name">
       {% if errors['reductionShortName'][0] %}
-        <span class="error-message">{{ errors['reductionShortName'][0] }}</span>
+        <span id="reduction-short-name-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ errors['reductionShortName'][0] }}
+        </span>
       {% endif %}
-      <label class="form-label-bold" for="reductionShortName">Abbreviated Reduction Name</label>
-      <input class="form-control" id="reductionShortName" name="reductionShortName" style="width: 800px" value="{{reduction.reasonShortName}}" maxlength="255">
+      <h6 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--s" for="reductionShortName">Abbreviated Reduction Name</label>
+      </h6>
+      <input class="govuk-input {% if errors['reductionShortName'][0] %} govuk-input--error {% endif %}" id="reductionShortName" name="reductionShortName" value="{{reduction.reasonShortName}}" maxlength="255">
     </div>
 
-    <div class="form-group" id="category">
-        {% if errors['category'][0] %}
-          <span class="error-message">{{ errors['category'][0] }}</span>
-        {% endif %}
-        <label class="form-label-bold" for="category">Category</label>
-        <select class="form-control" id="category" name="category" selected="{{ reduction.category }}"> 
+    <div class="govuk-form-group  {% if errors['category'][0] %} govuk-form-group--error {% endif %}" id="reduction_category">
+      <label class="govuk-label govuk-label--s" for="category">Category</label>
+      {% if errors['category'][0] %}
+        <span id="reduction-category-selection-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ errors['category'][0] }}
+        </span>
+      {% endif %}
+      <select class="govuk-select" id="category" name="category" selected="{{ reduction.category }}"> 
         <option value="select" disabled selected>Please select a category...</option>
         {% for category in categories %}
           <option value="{{ category.id }}" {% if category.category === reduction.category %} selected {% endif %}>{{ category.category }}</option>
         {% endfor %}
       </select>
-      </div>
+    </div>
 
-    <div class="form-group" id="allowance_percentage">
+    <div class="govuk-form-group  {% if errors['allowancePercentage'][0] %} govuk-form-group--error {% endif %}" id="allowance_percentage">
       {% if errors['allowancePercentage'][0] %}
-        <span class="error-message">{{ errors['allowancePercentage'][0] }}</span>
+        <span id="reduction-allowance-percentage-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ errors['allowancePercentage'][0] }}
+        </span>
       {% endif %}
-      <label class="form-label-bold" for="allowancePercentage">Allowance Percentage (Optional)</label>
-      <input class="form-control" id="allowancePercentage" name="allowancePercentage" style="width: 100px" value="{{reduction.allowancePercentage}}">
+      <h6 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--s" for="allowancePercentage">Allowance Percentage (Optional)</label>
+      </h6>
+      <input class="govuk-input govuk-input--width-5 {% if errors['allowancePercentage'][0] %} govuk-input--error {% endif %}" id="allowancePercentage" name="allowancePercentage" value="{{reduction.allowancePercentage}}">
     </div>
 
-    <div class="form-group" id="max_allowance_percentage">
+    <div class="govuk-form-group  {% if errors['maxAllowancePercentage'][0] %} govuk-form-group--error {% endif %}" id="max_allowance_percentage">
       {% if errors['maxAllowancePercentage'][0] %}
-        <span class="error-message">{{ errors['maxAllowancePercentage'][0] }}</span>
+        <span id="reduction-max-allowance-percentage-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ errors['maxAllowancePercentage'][0] }}
+        </span>
       {% endif %}
-      <label class="form-label-bold" for="maxAllowancePercentage">Maximum Allowance Percentage (Optional)</label>
-      <input class="form-control" id="maxAllowancePercentage" name="maxAllowancePercentage" style="width: 100px" value="{{reduction.maxAllowancePercentage}}">
+      <h6 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--s" for="maxAllowancePercentage">Maximum Allowance Percentage (Optional)</label>
+      </h6>
+      <input class="govuk-input govuk-input--width-5 {% if errors['maxAllowancePercentage'][0] %} govuk-input--error {% endif %}" id="maxAllowancePercentage" name="maxAllowancePercentage" value="{{reduction.maxAllowancePercentage}}">
     </div>
 
-    <div class="form-group" id="months_to_expiry">
-        {% if errors['monthsToExpiry'][0] %}
-          <span class="error-message">{{ errors['monthsToExpiry'][0] }}</span>
-        {% endif %}
-        <label class="form-label-bold" for="monthsToExpiry">Months to Expiry (Optional)</label>
-        <input class="form-control" id="monthsToExpiry" name="monthsToExpiry" style="width: 100px" value="{{reduction.monthsToExpiry}}">
+    <div class="govuk-form-group  {% if errors['monthsToExpiry'][0] %} govuk-form-group--error {% endif %}" id="months_to_expiry">
+      {% if errors['monthsToExpiry'][0] %}
+        <span id="reduction-months-to-expiry-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ errors['monthsToExpiry'][0] }}
+        </span>
+      {% endif %}
+      <h6 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--s" for="monthsToExpiry">Months to Expiry (Optional)</label>
+      </h6>
+      <input class="govuk-input govuk-input--width-5 {% if errors['monthsToExpiry'][0] %} govuk-input--error {% endif %}" id="monthsToExpiry" name="monthsToExpiry" value="{{reduction.monthsToExpiry}}">
     </div>
 
-    <div class="form-group" id="is_enabled">
+    <div class="govuk-form-group  {% if errors['isEnabled'][0] %} govuk-form-group--error {% endif %}" id="is_enabled">
+      <label class="govuk-label govuk-label--s" for="isEnabled">Reduction Reason Status</label>
       {% if errors['isEnabled'][0] %}
-        <span class="error-message">{{ errors['isEnabled'][0] }}</span>
+        <span id="reduction-is-enabled-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ errors['isEnabled'][0] }}
+        </span>
       {% endif %}
-      <label class="form-label-bold" for="isEnabled">Reduction Reason Status</label>
-      <select class="form-control" id="isEnabled" name="isEnabled" selected="{{ reduction.isEnabled }}">
-          <option value="" disabled selected>Please select a status...</option>
-          <option value="true" {% if reduction.isEnabled === true %} selected {% endif %}>Enabled</option>
-          <option value="false" {% if reduction.isEnabled === false %} selected {% endif %}>Disabled</option>
+      <select class="govuk-select" id="isEnabled" name="isEnabled" selected="{{ reduction.isEnabled }}"> 
+        <option value="" disabled selected>Please select a status...</option>
+        <option value="true" {% if reduction.isEnabled === true %} selected {% endif %}>Enabled</option>
+        <option value="false" {% if reduction.isEnabled === false %} selected {% endif %}>Disabled</option>
       </select>
     </div>
 
 
     {% include "includes/csrf-hidden-input.html"%}
     
-    <input id="submit-button" class="button" type="submit" value="Save Changes">
+    <input id="submit-button" class="govuk-button" data-module="govuk-button"  type="submit" value="Save Changes">
   </form>
 
 </main>
 {% endblock %} 
-{% block body_end %}
+{% block bodyEnd %}
 {% endblock %}

@@ -11,7 +11,7 @@ const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const caseloadTotaller = require('../helpers/caseload-totaller')
 const renderWMTUpdatingPage = require('../helpers/render-wmt-updating-page')
-var lastUpdated
+let lastUpdated
 
 module.exports = function (router) {
   router.get('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload', function (req, res, next) {
@@ -23,56 +23,56 @@ module.exports = function (router) {
       }
     }
 
-    var organisationLevel = req.params.organisationLevel
-    var id = req.params.id
+    const organisationLevel = req.params.organisationLevel
+    const id = req.params.id
 
     if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Not available for offender-manager')
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
-    var orgUnit = getOrganisationUnit('name', organisationLevel)
-    var childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)
+    const orgUnit = getOrganisationUnit('name', organisationLevel)
+    const childOrgUnit = getOrganisationUnit('name', orgUnit.childOrganisationLevel)
 
     return getLastUpdated().then(function (result) {
       lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
       return getCaseload(id, organisationLevel)
-      .then(function (result) {
-        var caseloadDetailsData
-        if (result.caseloadDetails) {
-          caseloadDetailsData = caseloadDetails(organisationLevel, result)
-        } else {
-          if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name && organisationLevel !== organisationUnitConstants.TEAM.name) {
-            caseloadDetailsData = defaultCaseload
+        .then(function (result) {
+          let caseloadDetailsData
+          if (result.caseloadDetails) {
+            caseloadDetailsData = caseloadDetails(organisationLevel, result)
           } else {
-            caseloadDetailsData = defaultTeamCaseload
-            caseloadDetailsData[0].array.totals = defaultTotals
-            caseloadDetailsData[1].array.totals = defaultTotals
-            caseloadDetailsData[2].array.totals = defaultTotals
-            caseloadDetailsData[3].array.totals = defaultTotals
+            if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name && organisationLevel !== organisationUnitConstants.TEAM.name) {
+              caseloadDetailsData = defaultCaseload
+            } else {
+              caseloadDetailsData = defaultTeamCaseload
+              caseloadDetailsData[0].array.totals = defaultTotals
+              caseloadDetailsData[1].array.totals = defaultTotals
+              caseloadDetailsData[2].array.totals = defaultTotals
+              caseloadDetailsData[3].array.totals = defaultTotals
+            }
           }
-        }
-        return res.render('caseload', {
-          screen: 'caseload',
-          linkId: req.params.id,
-          title: result.title,
-          subTitle: result.subTitle,
-          breadcrumbs: result.breadcrumbs,
-          subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
-          organisationLevel: organisationLevel,
-          childOrganisationLevel: orgUnit.childOrganisationLevel,
-          childOrganisationLevelDisplayText: childOrgUnit.displayText,
-          caseloadDetails: caseloadDetailsData,
-          date: lastUpdated,
-          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
-          workloadType: workloadTypes.PROBATION
+          return res.render('caseload', {
+            screen: 'caseload',
+            linkId: req.params.id,
+            title: result.title,
+            subTitle: result.subTitle,
+            breadcrumbs: result.breadcrumbs,
+            subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
+            organisationLevel: organisationLevel,
+            childOrganisationLevel: orgUnit.childOrganisationLevel,
+            childOrganisationLevelDisplayText: childOrgUnit.displayText,
+            caseloadDetails: caseloadDetailsData,
+            date: lastUpdated,
+            userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
+            workloadType: workloadTypes.PROBATION
+          })
         })
-      })
     }).catch(function (error) {
       if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
-        var subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+        const subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
         renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
       } else {
         next(error)
@@ -88,16 +88,16 @@ module.exports = function (router) {
         return res.status(error.statusCode).redirect(error.redirect)
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var id = req.params.id
+    const organisationLevel = req.params.organisationLevel
+    const id = req.params.id
 
     if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Not available for offender-manager')
     }
 
-    var isCSV = true
+    const isCSV = true
     return getCaseload(id, organisationLevel, isCSV).then(function (result) {
-      var exportCsv = getExportCsv(organisationLevel, result, tabs.CASELOAD)
+      const exportCsv = getExportCsv(organisationLevel, result, tabs.CASELOAD)
       res.attachment(exportCsv.filename)
       return res.send(exportCsv.csv)
     }).catch(function (error) {
@@ -105,8 +105,8 @@ module.exports = function (router) {
     })
   })
 
-  var caseloadDetails = function (organisationLevel, result) {
-    var details
+  const caseloadDetails = function (organisationLevel, result) {
+    let details
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       details = [
@@ -160,30 +160,30 @@ module.exports = function (router) {
   }
 }
 
-var defaultTeamCaseload = [
-  {displayName: 'Overall', array: [], totalSummary: [], totalsRow: { totalCommunity: 0, totalLicense: 0, totalCustody: 0, totalTotalCases: 0 }},
-  {displayName: 'Community', totalSummary: 0, array: []},
-  {displayName: 'License', totalSummary: 0, array: []},
-  {displayName: 'Custody', totalSummary: 0, array: []}
+const defaultTeamCaseload = [
+  { displayName: 'Overall', array: [], totalSummary: [], totalsRow: { totalCommunity: 0, totalLicense: 0, totalCustody: 0, totalTotalCases: 0 } },
+  { displayName: 'Community', totalSummary: 0, array: [] },
+  { displayName: 'License', totalSummary: 0, array: [] },
+  { displayName: 'Custody', totalSummary: 0, array: [] }
 ]
 
-var defaultTotals = { a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, overall: 0 }
+const defaultTotals = { a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, overall: 0 }
 
-var defaultCaseload = [
+const defaultCaseload = [
   {
     displayName: 'Overall',
-    array: {details: [], totals: {}, detailsPercentages: [], percentageTotals: {'': {grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0}}},
+    array: { details: [], totals: {}, detailsPercentages: [], percentageTotals: { '': { grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 } } },
     totalSummary: [],
-    totalsRow: {totalCommunity: 0, totalLicense: 0, totalCustody: 0, totalTotalCases: 0}
+    totalsRow: { totalCommunity: 0, totalLicense: 0, totalCustody: 0, totalTotalCases: 0 }
   },
   {
     displayName: 'Community',
     totalSummary: 0,
     array: {
       details: [],
-      totals: {'': { grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 }},
+      totals: { '': { grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 } },
       detailsPercentages: [],
-      percentageTotals: {'': {grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0}}
+      percentageTotals: { '': { grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 } }
     }
   },
   {
@@ -191,9 +191,9 @@ var defaultCaseload = [
     totalSummary: 0,
     array: {
       details: [],
-      totals: {'': { grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 }},
+      totals: { '': { grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 } },
       detailsPercentages: [],
-      percentageTotals: {'': {grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0}}
+      percentageTotals: { '': { grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 } }
     }
   },
   {
@@ -201,9 +201,9 @@ var defaultCaseload = [
     totalSummary: 0,
     array: {
       details: [],
-      totals: {'': { grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 }},
+      totals: { '': { grade: 'Total', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 } },
       detailsPercentages: [],
-      percentageTotals: {'': {grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0}}
+      percentageTotals: { '': { grade: '', a: 0, b1: 0, b2: 0, c1: 0, c2: 0, d1: 0, d2: 0, e: 0, f: 0, g: 0, untiered: 0, totalCases: 0, numberOfType: 0 } }
     }
   }
 ]

@@ -1,21 +1,24 @@
-$(function(){
-  $('.js-tabs').tabs();
-});
-
-$('.form-control').each(function(i, textbox) {
-  textbox.setAttribute('readonly', true)
-  textbox.setAttribute('style', 'border:none; width: 70px; outline:none; text-align:right;')
-});
-document.getElementById('save-button').setAttribute('style', 'display: none;')
-document.getElementById('save-notice').setAttribute('style', 'display: none;')
-
-var edit = function () {
-  $('.form-control').each(function(i, textbox) {
-   textbox.removeAttribute('readonly')
-   textbox.setAttribute('style', 'width: 70px; text-align:right;')
+$(document).ready(function() {
+  $(function(){
+    $('.js-tabs').tabs();
   });
 
-  document.getElementById('edit-button').setAttribute('style', 'display: none;')
-  document.getElementById('save-button').setAttribute('style', 'display: inline-block;')
-  document.getElementById('save-notice').setAttribute('style', 'display: block;')
-}
+  $('.govuk-input').each(function(i, textbox) {
+    textbox.setAttribute('class', 'govuk-input govuk-input--width-4 workloadPointsNoBorder')
+    textbox.setAttribute('readonly', true)
+  });
+
+  document.getElementById('save-button').setAttribute('class', 'govuk-button displayNone')
+  document.getElementById('save-notice').setAttribute('class', 'notice displayNone')
+
+  $('#edit-button').click(function() {
+    $('.govuk-input').each(function(i, textbox) {
+      textbox.removeAttribute('readonly')
+      textbox.setAttribute('class', 'govuk-input govuk-input--width-4 workloadPointsTextboxEdit')
+    });
+
+    document.getElementById('edit-button').setAttribute('class', 'govuk-button displayNone')
+    document.getElementById('save-button').setAttribute('class', 'govuk-button displayInlineBlock')
+    document.getElementById('save-notice').setAttribute('class', 'notice displayBlock')
+  })
+})

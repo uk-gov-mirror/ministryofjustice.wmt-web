@@ -1,33 +1,35 @@
-<table>
-        <tr>
-            <td>
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
             {% ifAsync ((organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
                 {% if authorisation===false or userRole==='System Admin' or userRole==='Data Admin' or userRole==='Manager'%}
-                    <a href="/{{ workloadType }}/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/reductions-csv" class="button reduction-export" style="float: right; margin-left:10px; margin-bottom: 10px">Export Reductions</a>
+                    <a href="/{{ workloadType }}/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/reductions-csv" class="govuk-button reduction-export floatRightBottom10 marginLeft10" data-module="govuk-button">Export Reductions</a>
                 {% endif %}
             {% endif %}
             {% ifAsync ((organisationLevel === 'hmpps') or (organisationLevel === 'region') or (organisationLevel === 'ldu') or (organisationLevel === 'team')) %}
-                <a href="/{{ workloadType }}/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="button sln-export" style="float: right; margin-bottom: 10px; ">Export Overview</a>
+                <a href="/{{ workloadType }}/{{ organisationLevel }}/{{ linkId }}/{{ screen }}/caseload-csv" class="govuk-button sln-export floatRightBottom10" data-module="govuk-button">Export Overview</a>
             {% endif %}
-            </td>
-        </tr>
-    </table>
+        </div>
+</div>
+        
     
     {% if organisationLevel === "offender-manager" %}
-    <div class="grid-row">
-        <div class="column-two-thirds">
-            <table>
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <table class="govuk-table" id="override-govuk-table">
                 <tbody>
                     <tr>
-                        <th scope="row">Grade</th>
+                        <th class="bold" scope="row">Grade</th>
                         <td class="sln-grade numeric">{{ overviewDetails.grade }}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Team</th>
+                        <th class="bold" scope="row">Team</th>
                         <td class="numeric"><a href="/{{ workloadType }}/team/{{ overviewDetails.teamId }}">{{ overviewDetails.teamName }}</a></td>
                     </tr>
                     <tr>
-                        <th scope="row">Capacity</th>
+                        <th class="bold" scope="row">Capacity</th>
                         {% if overviewDetails.capacity > 110 %}
                         <td class="numeric capacity-red"> {{ overviewDetails.capacity | round }}%</td>
                         {% else %}
@@ -35,15 +37,15 @@
                         {% endif %}
                     </tr>
                     <tr>
-                        <th scope="row">Cases</th>
+                        <th class="bold" scope="row">Cases</th>
                         <td class="numeric">{{ overviewDetails.cases }}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Contracted hours</th>
+                        <th class="bold" scope="row">Contracted hours</th>
                         <td class="numeric">{{ overviewDetails.contractedHours }}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Reduction</th>
+                        <th class="bold" scope="row">Reduction</th>
                         <td class="numeric">{{ overviewDetails.reduction }}</td>
                     </tr>
                 </tbody>
@@ -52,7 +54,7 @@
     </div>
     {% else %}
     
-    <table id="example" class="js-data-table data-table dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+    <table id="example" class="govuk-table js-data-table data-table dataTable width100Percent" cellspacing="0" width="100%" role="grid" aria-describedby="example_info">
         <thead>
             <tr>
                 {% if organisationLevel === 'team' %}
@@ -83,7 +85,7 @@
             {% for member in overviewDetails %}
             {% if member.name !== 'Total / Average' %}
             <tr>
-              <td headers="name om"><a href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
+              <td headers="name om"><a class="govuk-link" href="/{{ workloadType }}/{{ childOrganisationLevel }}/{{ member.linkId }}">{{ member.name }}</td>
             {% if organisationLevel === 'team' %}  
               <td headers="grade om">{{ member.gradeCode }}</td>
             {% endif %}
@@ -123,16 +125,17 @@
             <td headers="cases total">{{ member.totalTotalCases }}</td>  
             </tr>
             {% endif %}
-            {% endfor%}
+            {% endfor %}
         </tfoot>
       </table>
     {% endif %}
+
     
     {% block page_specific_scripts %}
     
-        <script src="{{ asset_path }}javascripts/vendor/jquery.min.js"></script>
-        <script src="{{ asset_path }}javascripts/datatables.min.js"></script>
-        <script src="{{ asset_path }}javascripts/fixed-overview-header.js"></script>
-        <script src="{{ asset_path }}javascripts/case-overview.js"></script>
+        <script src="{{ assetPath }}javascripts/vendor/jquery.min.js"></script>
+        <script src="{{ assetPath }}javascripts/datatables.min.js"></script>
+        <script src="{{ assetPath }}javascripts/fixed-overview-header.js"></script>
+        <script src="{{ assetPath }}javascripts/case-overview.js"></script>
        
     {% endblock %}

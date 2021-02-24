@@ -1,7 +1,7 @@
 const knex = require('../../../knex').web
 
 module.exports = function (name) {
-  var columns = [
+  const columns = [
     'id',
     'username',
     'name'

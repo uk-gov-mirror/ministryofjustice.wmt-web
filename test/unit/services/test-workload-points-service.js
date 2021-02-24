@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 const assert = require('chai').assert
 const sinon = require('sinon')
-require('sinon-bluebird')
+
 const proxyquire = require('proxyquire')
 
 const Link = require('../../../app/services/domain/link')
@@ -9,28 +9,28 @@ const dataHelper = require('../../helpers/data/aggregated-data-helper')
 
 const WORKLOAD_POINTS_DETAILS = dataHelper.defaultWorkloadPoints
 
-var WORKLOAD_POINTS_BREADCRUMBS = [
+const WORKLOAD_POINTS_BREADCRUMBS = [
   new Link('Workload Points', '/admin/workload-points'),
   new Link('Admin', '/admin')
 ]
 
-var recalcIds = {
+const recalcIds = {
   minWorkloadStagingId: 1,
   maxWorkloadStagingId: 10,
   workloadReportId: 99
 }
 
-var mockUserObject = {
+const mockUserObject = {
   name: 'name'
 }
 
-var workloadPointsService
-var getWorkloadPointsData
-var updatePreviousWorkloadPointsEffectiveTo
-var insertNewWorkloadPoints
-var getWorkloadIdsForWpRecalc
-var createCalculateWorkloadPointsTask
-var mockUserRoleService = {
+let workloadPointsService
+let getWorkloadPointsData
+let updatePreviousWorkloadPointsEffectiveTo
+let insertNewWorkloadPoints
+let getWorkloadIdsForWpRecalc
+let createCalculateWorkloadPointsTask
+const mockUserRoleService = {
   getUserById: sinon.stub().resolves(mockUserObject)
 }
 
@@ -78,7 +78,7 @@ describe('services/workload-points-service', function () {
 
   describe('updateWorkloadPoints', function () {
     it('should call the necesssary functions with the correct parameters', function () {
-      var returnedWorkloadPoints = Object.assign({}, WORKLOAD_POINTS_DETAILS, { previousWpId: 123 })
+      const returnedWorkloadPoints = Object.assign({}, WORKLOAD_POINTS_DETAILS, { previousWpId: 123 })
       return workloadPointsService.updateWorkloadPoints(returnedWorkloadPoints, false).then(function (results) {
         expect(updatePreviousWorkloadPointsEffectiveTo.calledWith(123)).to.be.true //eslint-disable-line  
         expect(insertNewWorkloadPoints.calledWith(returnedWorkloadPoints)).to.be.true //eslint-disable-line  
@@ -87,7 +87,7 @@ describe('services/workload-points-service', function () {
       })
     })
     it('should call the necesssary functions for t2a updated with the correct parameters', function () {
-      var returnedT2aWorkloadPoints = Object.assign({}, WORKLOAD_POINTS_DETAILS, { previousWpId: 124, is_t2a: true })
+      const returnedT2aWorkloadPoints = Object.assign({}, WORKLOAD_POINTS_DETAILS, { previousWpId: 124, is_t2a: true })
       return workloadPointsService.updateWorkloadPoints(returnedT2aWorkloadPoints, true).then(function (results) {
         expect(updatePreviousWorkloadPointsEffectiveTo.calledWith(124)).to.be.true //eslint-disable-line  
         expect(insertNewWorkloadPoints.calledWith(returnedT2aWorkloadPoints)).to.be.true //eslint-disable-line  

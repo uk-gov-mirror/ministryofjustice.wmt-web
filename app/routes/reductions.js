@@ -14,7 +14,7 @@ const getLastUpdated = require('../services/data/get-last-updated')
 const dateFormatter = require('../services/date-formatter')
 const ErrorHandler = require('../services/validators/error-handler')
 const ERROR_MESSAGES = require('../services/validators/validation-error-messages')
-var lastUpdated
+let lastUpdated
 
 module.exports = function (router) {
   router.get('/:workloadType/:organisationLevel/:id/reductions', function (req, res, next) {
@@ -32,20 +32,20 @@ module.exports = function (router) {
       }
     }
 
-    var organisationLevel = req.params.organisationLevel
-    var id = req.params.id
-    var workloadType = req.params.workloadType
+    const organisationLevel = req.params.organisationLevel
+    const id = req.params.id
+    const workloadType = req.params.workloadType
 
     workloadTypeValidator.validate(workloadType)
 
-    var successText = getStatusText(req)
+    const successText = getStatusText(req)
 
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-    var reductionsResultData
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    let reductionsResultData
 
     return getLastUpdated().then(function (result) {
       lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
@@ -55,7 +55,7 @@ module.exports = function (router) {
 
         if (req.session.ContractedHoursIsZero === true) {
           delete req.session.ContractedHoursIsZero
-          var errors = ErrorHandler()
+          const errors = ErrorHandler()
           errors.add('headingActive', ERROR_MESSAGES.getContractedHoursAreZero)
           throw new ValidationError(errors.get())
         } else {
@@ -86,9 +86,9 @@ module.exports = function (router) {
       }
     }
 
-    var organisationLevel = req.params.organisationLevel
-    var id = parseInt(req.params.id)
-    var workloadType = req.params.workloadType
+    const organisationLevel = req.params.organisationLevel
+    const id = parseInt(req.params.id)
+    const workloadType = req.params.workloadType
 
     workloadTypeValidator.validate(workloadType)
 
@@ -96,16 +96,16 @@ module.exports = function (router) {
       throw new Error('Only available for offender manager')
     }
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
       .then(function (result) {
-        var errors = req.session.addReductionErrors
+        const errors = req.session.addReductionErrors
         delete req.session.addReductionErrors
 
         if (result.contractedHours === 0) {
           req.session.ContractedHoursIsZero = true
-          var routeToReductionPage = '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions'
+          const routeToReductionPage = '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions'
           res.redirect(routeToReductionPage)
         } else {
           return res.render('add-reduction', {
@@ -115,10 +115,13 @@ module.exports = function (router) {
             subTitle: result.subTitle,
             subNav: getSubNav(id, organisationLevel, req.path, workloadType, authorisedUserRole.authorisation, authorisedUserRole.userRole),
             referenceData: result.referenceData,
+            stringifiedReferenceData: stringifyReductionsData(result.referenceData),
             errors: errors,
             workloadType: workloadType,
+            reductionToPopulate: false,
+            reductionEnabled: false,
             userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-            authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
           })
         }
       }).catch(function (error) {
@@ -141,18 +144,18 @@ module.exports = function (router) {
       }
     }
 
-    var organisationLevel = req.params.organisationLevel
+    const organisationLevel = req.params.organisationLevel
     if (organisationLevel !== organisationUnitConstants.OFFENDER_MANAGER.name) {
       throw new Error('Only available for offender manager')
     }
 
-    var id = parseInt(req.params.id)
-    var reductionId = parseInt(req.query.reductionId)
-    var workloadType = req.params.workloadType
+    const id = parseInt(req.params.id)
+    const reductionId = parseInt(req.query.reductionId)
+    const workloadType = req.params.workloadType
 
     workloadTypeValidator.validate(workloadType)
 
-    var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
 
     reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
       .then(function (result) {
@@ -162,6 +165,14 @@ module.exports = function (router) {
               if (reduction !== undefined && reduction.workloadOwnerId !== id) {
                 reduction = undefined
               }
+              let reductionEnabled, reductionStatus
+              if (!reduction) {
+                reductionEnabled = false
+                reductionStatus = ''
+              } else {
+                reductionEnabled = reduction.isEnabled
+                reductionStatus = reduction.status
+              }
               return res.render('add-reduction', {
                 breadcrumbs: result.breadcrumbs,
                 linkId: id,
@@ -169,10 +180,14 @@ module.exports = function (router) {
                 subTitle: result.subTitle,
                 subNav: getSubNav(id, organisationLevel, req.path, workloadType),
                 referenceData: result.referenceData,
+                stringifiedReferenceData: stringifyReductionsData(result.referenceData),
                 reduction: mapReductionToViewModel(reduction),
+                reductionToPopulate: true,
+                reductionEnabled: reductionEnabled,
+                reductionStatus: reductionStatus,
                 workloadType: workloadType,
                 userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-                authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
+                authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
                 reductionsHistory: reductionsHistory
               })
             })
@@ -197,8 +212,8 @@ module.exports = function (router) {
       }
     }
 
-    var organisationLevel = req.params.organisationLevel
-    var workloadType = req.params.workloadType
+    const organisationLevel = req.params.organisationLevel
+    const workloadType = req.params.workloadType
 
     workloadTypeValidator.validate(workloadType)
 
@@ -206,63 +221,66 @@ module.exports = function (router) {
       throw new Error('Only available for offender manager')
     }
 
-    var id = req.params.id
-    var reduction
-    var reductionReason
+    const id = req.params.id
+    let reduction
+    let reductionReason
 
     return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
-    .then(function (result) {
-      try {
+      .then(function (result) {
+        try {
         // Find the index in the array of reasons where this reason occurs
-        var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
-        reductionReason = result.referenceData[index]
-        var userId = null
-        if (req.user !== undefined && req.user !== null) {
-          userId = req.user.userId
+          const index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
+          reductionReason = result.referenceData[index]
+          let userId = null
+          if (req.user !== undefined && req.user !== null) {
+            userId = req.user.userId
+          }
+          reduction = generateNewReductionFromRequest(req.body, reductionReason, userId)
+        } catch (error) {
+          if (error instanceof ValidationError) {
+            const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+            return res.status(400).render('add-reduction', {
+              breadcrumbs: result.breadcrumbs,
+              linkId: id,
+              title: result.title,
+              subTitle: result.subTitle,
+              subNav: getSubNav(id, organisationLevel, req.path, workloadType),
+              referenceData: result.referenceData,
+              stringifiedReferenceData: stringifyReductionsData(result.referenceData),
+              reduction: {
+                id: req.body.reductionId,
+                reasonId: req.body.reasonForReductionId,
+                hours: req.body.reductionHours,
+                start_day: req.body.redStartDay,
+                start_month: req.body.redStartMonth,
+                start_year: req.body.redStartYear,
+                end_day: req.body.redEndDay,
+                end_month: req.body.redEndMonth,
+                end_year: req.body.redEndYear,
+                notes: req.body.notes,
+                isEnabled: reductionReason.isEnabled
+              },
+              reductionToPopulate: true,
+              reductionEnabled: reductionReason.isEnabled,
+              errors: error.validationErrors,
+              workloadType: workloadType,
+              userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+              authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
+            })
+          } else {
+            next(error)
+          }
         }
-        reduction = generateNewReductionFromRequest(req.body, reductionReason, userId)
-      } catch (error) {
-        if (error instanceof ValidationError) {
-          var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-          return res.status(400).render('add-reduction', {
-            breadcrumbs: result.breadcrumbs,
-            linkId: id,
-            title: result.title,
-            subTitle: result.subTitle,
-            subNav: getSubNav(id, organisationLevel, req.path, workloadType),
-            referenceData: result.referenceData,
-            reduction: {
-              id: req.body.reductionId,
-              reasonId: req.body.reasonForReductionId,
-              hours: req.body.reductionHours,
-              start_day: req.body.redStartDay,
-              start_month: req.body.redStartMonth,
-              start_year: req.body.redStartYear,
-              end_day: req.body.redEndDay,
-              end_month: req.body.redEndMonth,
-              end_year: req.body.redEndYear,
-              notes: req.body.notes,
-              isEnabled: reductionReason.isEnabled
-            },
-            errors: error.validationErrors,
-            workloadType: workloadType,
-            userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-            authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
-          })
-        } else {
-          next(error)
-        }
-      }
 
-      return reductionsService.addReduction(id, reduction, workloadType).then(function () {
-        return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions')
-      }).catch(function (error) {
+        return reductionsService.addReduction(id, reduction, workloadType).then(function () {
+          return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions')
+        }).catch(function (error) {
+          next(error)
+        })
+      })
+      .catch(function (error) {
         next(error)
       })
-    })
-    .catch(function (error) {
-      next(error)
-    })
   })
 
   router.post('/:workloadType/:organisationLevel/:id/edit-reduction', function (req, res, next) {
@@ -279,8 +297,8 @@ module.exports = function (router) {
         })
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var workloadType = req.params.workloadType
+    const organisationLevel = req.params.organisationLevel
+    const workloadType = req.params.workloadType
 
     workloadTypeValidator.validate(workloadType)
 
@@ -288,72 +306,75 @@ module.exports = function (router) {
       throw new Error('Only available for offender manager')
     }
 
-    var id = req.params.id
-    var reductionId = req.body.reductionId
-    var reduction
-    var reductionReason
+    const id = req.params.id
+    const reductionId = req.body.reductionId
+    let reduction
+    let reductionReason
 
     return reductionsService.getReductionsHistory(reductionId).then(function (reductionsHistory) {
       return reductionsService.getAddReductionsRefData(id, organisationLevel, workloadType)
-      .then(function (result) {
-        try {
+        .then(function (result) {
+          try {
           // Find the index in the array of reasons where this reason occurs
-          var index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
-          reductionReason = result.referenceData[index]
-          var userId = null
-          if (req.user !== undefined && req.user !== null) {
-            userId = req.user.userId
-          }
-          reduction = generateNewReductionFromRequest(req.body, reductionReason, userId)
-        } catch (error) {
-          if (error instanceof ValidationError) {
-            var authorisedUserRole = authorisation.getAuthorisedUserRole(req)
-            return res.status(400).render('add-reduction', {
-              breadcrumbs: result.breadcrumbs,
-              linkId: id,
-              title: result.title,
-              subTitle: result.subTitle,
-              subNav: getSubNav(id, organisationLevel, req.path, workloadType),
-              referenceData: result.referenceData,
-              reduction: {
-                id: req.body.reductionId,
-                reasonId: req.body.reasonForReductionId,
-                hours: req.body.reductionHours,
-                start_day: req.body.redStartDay,
-                start_month: req.body.redStartMonth,
-                start_year: req.body.redStartYear,
-                end_day: req.body.redEndDay,
-                end_month: req.body.redEndMonth,
-                end_year: req.body.redEndYear,
-                notes: req.body.notes,
-                isEnabled: reductionReason.isEnabled
-              },
-              errors: error.validationErrors,
-              workloadType: workloadType,
-              userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-              authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
-              reductionsHistory: reductionsHistory
-            })
-          } else {
-            next(error)
-          }
-        }
-
-        return reductionsService.getOldReductionForHistory(reductionId).then(function (oldReduction) {
-          return reductionsService.addOldReductionToHistory(oldReduction).then(function () {
-            return reductionsService.updateReduction(id, reductionId, reduction, workloadType)
-            .then(function () {
-              return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions')
-            }).catch(function (error) {
+            const index = result.referenceData.findIndex(reason => reason.id === parseInt(req.body.reasonForReductionId))
+            reductionReason = result.referenceData[index]
+            let userId = null
+            if (req.user !== undefined && req.user !== null) {
+              userId = req.user.userId
+            }
+            reduction = generateNewReductionFromRequest(req.body, reductionReason, userId)
+          } catch (error) {
+            if (error instanceof ValidationError) {
+              const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+              return res.status(400).render('add-reduction', {
+                breadcrumbs: result.breadcrumbs,
+                linkId: id,
+                title: result.title,
+                subTitle: result.subTitle,
+                subNav: getSubNav(id, organisationLevel, req.path, workloadType),
+                referenceData: result.referenceData,
+                stringifiedReferenceData: stringifyReductionsData(result.referenceData),
+                reduction: {
+                  id: req.body.reductionId,
+                  reasonId: req.body.reasonForReductionId,
+                  hours: req.body.reductionHours,
+                  start_day: req.body.redStartDay,
+                  start_month: req.body.redStartMonth,
+                  start_year: req.body.redStartYear,
+                  end_day: req.body.redEndDay,
+                  end_month: req.body.redEndMonth,
+                  end_year: req.body.redEndYear,
+                  notes: req.body.notes,
+                  isEnabled: reductionReason.isEnabled
+                },
+                reductionToPopulate: true,
+                reductionEnabled: reductionReason.isEnabled,
+                errors: error.validationErrors,
+                workloadType: workloadType,
+                userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+                authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
+                reductionsHistory: reductionsHistory
+              })
+            } else {
               next(error)
+            }
+          }
+
+          return reductionsService.getOldReductionForHistory(reductionId).then(function (oldReduction) {
+            return reductionsService.addOldReductionToHistory(oldReduction).then(function () {
+              return reductionsService.updateReduction(id, reductionId, reduction, workloadType)
+                .then(function () {
+                  return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions')
+                }).catch(function (error) {
+                  next(error)
+                })
             })
           })
         })
+    })
+      .catch(function (error) {
+        next(error)
       })
-    })
-    .catch(function (error) {
-      next(error)
-    })
   })
 
   router.post('/:workloadType/:organisationLevel/:id/update-reduction-status', function (req, res, next) {
@@ -370,8 +391,8 @@ module.exports = function (router) {
         })
       }
     }
-    var organisationLevel = req.params.organisationLevel
-    var workloadType = req.params.workloadType
+    const organisationLevel = req.params.organisationLevel
+    const workloadType = req.params.workloadType
 
     workloadTypeValidator.validate(workloadType)
 
@@ -379,15 +400,15 @@ module.exports = function (router) {
       throw new Error('Only available for offender manager')
     }
 
-    var reductionStatus = req.body.status
-    var id = req.params.id
-    var reductionId = req.body.reductionId
+    const reductionStatus = req.body.status
+    const id = req.params.id
+    const reductionId = req.body.reductionId
 
     if (!requestStatusVerified(reductionStatus)) {
       return res.redirect(302, '/' + organisationLevel + '/' + id + '/reductions')
     }
 
-    var successType
+    let successType
     if (reductionStatus === reductionStatusType.ARCHIVED) {
       successType = '?archived=true'
     } else if (reductionStatus === reductionStatusType.DELETED) {
@@ -397,17 +418,17 @@ module.exports = function (router) {
     return reductionsService.getOldReductionForHistory(reductionId).then(function (oldReduction) {
       return reductionsService.addOldReductionToHistory(oldReduction).then(function () {
         return reductionsService.updateReductionStatus(id, reductionId, reductionStatus, workloadType)
-        .then(function () {
-          return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions' + successType)
-        }).catch(function (error) {
-          next(error)
-        })
+          .then(function () {
+            return res.redirect(302, '/' + workloadType + '/' + organisationLevel + '/' + id + '/reductions' + successType)
+          }).catch(function (error) {
+            next(error)
+          })
       })
     })
   })
 
-  var getStatusText = function (request) {
-    var successText = null
+  const getStatusText = function (request) {
+    let successText = null
     if (request.query.success) {
       successText = 'You have successfully added a new reduction!'
     } else if (request.query.edited) {
@@ -420,17 +441,17 @@ module.exports = function (router) {
     return successText
   }
 
-  var generateNewReductionFromRequest = function (requestBody, reductionReason, submitterId) {
-    var reductionStartDate = [requestBody.redStartDay, requestBody.redStartMonth, requestBody.redStartYear]
-    var reductionEndDate = [requestBody.redEndDay, requestBody.redEndMonth, requestBody.redEndYear]
-    var reasonId = requestBody.reasonForReductionId
+  const generateNewReductionFromRequest = function (requestBody, reductionReason, submitterId) {
+    const reductionStartDate = [requestBody.redStartDay, requestBody.redStartMonth, requestBody.redStartYear]
+    const reductionEndDate = [requestBody.redEndDay, requestBody.redEndMonth, requestBody.redEndYear]
+    const reasonId = requestBody.reasonForReductionId
     return new Reduction(reasonId, requestBody.reductionHours, reductionStartDate, reductionEndDate, requestBody.notes, reductionReason, submitterId)
   }
 
-  var requestStatusVerified = function (reductionStatus) {
-    var result = true
+  const requestStatusVerified = function (reductionStatus) {
+    let result = true
 
-    var status = [
+    const status = [
       reductionStatusType.ACTIVE,
       reductionStatusType.SCHEDULED,
       reductionStatusType.ARCHIVED,
@@ -444,8 +465,8 @@ module.exports = function (router) {
     return result
   }
 
-  var mapReductionToViewModel = function (reduction) {
-    var viewModel
+  const mapReductionToViewModel = function (reduction) {
+    let viewModel
     if (reduction !== undefined) {
       viewModel = {
         id: reduction.id,
@@ -465,8 +486,8 @@ module.exports = function (router) {
     return viewModel
   }
 
-  var renderReductionsMainPage = function (req, res, results, successText, workloadType, id, organisationLevel, authorisedUserRole, error = null) {
-    var displayJson = {
+  const renderReductionsMainPage = function (req, res, results, successText, workloadType, id, organisationLevel, authorisedUserRole, error = null) {
+    const displayJson = {
       breadcrumbs: results.breadcrumbs,
       linkId: id,
       title: results.title,
@@ -479,11 +500,16 @@ module.exports = function (router) {
       workloadType: workloadType,
       date: results.date,
       userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-      authorisation: authorisedUserRole.authorisation  // used by proposition-link for the admin role
+      authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
     }
     if (error) {
       displayJson.errors = error.validationErrors
     }
     return res.render('reductions', displayJson)
+  }
+
+  const stringifyReductionsData = function (reductionsRefData) {
+    const reductionsData = Object.assign([], reductionsRefData)
+    return JSON.stringify(reductionsData)
   }
 }

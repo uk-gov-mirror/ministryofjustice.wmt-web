@@ -32,7 +32,7 @@ describe('services/validators/fieldset-validator', function () {
     INVALID_DATA_ITEM_1
   ]
   const FIELD_NAME = 'field name'
-  var errorHandler = ErrorHandler()
+  let errorHandler = ErrorHandler()
 
   beforeEach(function () {
     errorHandler = ErrorHandler()
@@ -42,14 +42,14 @@ describe('services/validators/fieldset-validator', function () {
     it('should return false if data is a 3 item array', function () {
       FieldsetValidator([1, 2, 3], FIELD_NAME, errorHandler)
         .isRequired()
-      var errors = errorHandler.get()
+      const errors = errorHandler.get()
       expect(errors).to.eql(false)
     })
 
     it('should return an error object if data is null', function () {
       FieldsetValidator(null, FIELD_NAME, errorHandler)
         .isRequired()
-      var errors = errorHandler.get()
+      const errors = errorHandler.get()
       expect(errors)
         .to.have.a.property(FIELD_NAME)
         .that.contains(ERROR_MESSAGES.getIsRequiredMessage())
@@ -58,7 +58,7 @@ describe('services/validators/fieldset-validator', function () {
     it('should return an error object if data is undefined', function () {
       FieldsetValidator(undefined, FIELD_NAME, errorHandler)
         .isRequired()
-      var errors = errorHandler.get()
+      const errors = errorHandler.get()
       expect(errors)
         .to.have.a.property(FIELD_NAME)
         .that.contains(ERROR_MESSAGES.getIsRequiredMessage())
@@ -67,7 +67,7 @@ describe('services/validators/fieldset-validator', function () {
     it('should return an error object if data is an object', function () {
       FieldsetValidator({}, FIELD_NAME, errorHandler)
         .isRequired()
-      var errors = errorHandler.get()
+      const errors = errorHandler.get()
       expect(errors)
         .to.have.a.property(FIELD_NAME)
         .that.contains(ERROR_MESSAGES.getIsRequiredMessage())
@@ -76,21 +76,21 @@ describe('services/validators/fieldset-validator', function () {
     it('should return an error object if passed an array containing invalid data', function () {
       FieldsetValidator(DATA, FIELD_NAME, errorHandler)
         .isRequired()
-      var errors = errorHandler.get()
+      const errors = errorHandler.get()
       expect(errors).to.have.property(FIELD_NAME)
     })
 
     it('should return an error object with specific message if passed an array containing invalid data', function () {
       FieldsetValidator(DATA, FIELD_NAME, errorHandler)
         .isRequired(ERROR_MESSAGES.getIsRequiredMessage)
-      var errors = errorHandler.get()
+      const errors = errorHandler.get()
       expect(errors).to.have.property(FIELD_NAME)
       expect(errors[FIELD_NAME]).to.include(ERROR_MESSAGES.getIsRequiredMessage())
     })
 
     it('should return the fieldsetValidator after being called to allow function chaining.', function () {
-      var fieldsetValidator = FieldsetValidator(DATA, FIELD_NAME, errorHandler)
-      var result = fieldsetValidator.isRequired()
+      const fieldsetValidator = FieldsetValidator(DATA, FIELD_NAME, errorHandler)
+      const result = fieldsetValidator.isRequired()
       expect(result).to.be.equal(fieldsetValidator)
     })
   })
@@ -98,97 +98,97 @@ describe('services/validators/fieldset-validator', function () {
   describe('isFutureDate', function () {
     it('should return error object if data is null', function () {
       FieldsetValidator(null, FIELD_NAME, errorHandler)
-          .isFutureDate()
-      var errors = errorHandler.get()
+        .isFutureDate()
+      const errors = errorHandler.get()
       expect(errors).to.have.property(FIELD_NAME)
     })
 
     it('should return error object if data is undefined', function () {
       FieldsetValidator(undefined, FIELD_NAME, errorHandler)
-          .isFutureDate()
-      var errors = errorHandler.get()
+        .isFutureDate()
+      const errors = errorHandler.get()
       expect(errors).to.have.property(FIELD_NAME)
     })
 
     it('should return error object if data is not a valid date object', function () {
       FieldsetValidator([31, 2, 3000], FIELD_NAME, errorHandler)
-          .isFutureDate()
-      var errors = errorHandler.get()
+        .isFutureDate()
+      const errors = errorHandler.get()
       expect(errors).to.have.property(FIELD_NAME)
     })
 
     it('should return error object if the date given is in the past', function () {
       FieldsetValidator(PAST_DATE_ARRAY, FIELD_NAME, errorHandler)
-          .isFutureDate()
-      var errors = errorHandler.get()
+        .isFutureDate()
+      const errors = errorHandler.get()
       expect(errors).to.have.property(FIELD_NAME)
     })
 
     it('should return false if the date given is in the future', function () {
       FieldsetValidator(FUTURE_DATE_ARRAY, FIELD_NAME, errorHandler)
-          .isFutureDate()
-      var errors = errorHandler.get()
+        .isFutureDate()
+      const errors = errorHandler.get()
       expect(errors).to.equal(false)
     })
 
     it('should return the fieldsetValidator after being called to allow function chaining.', function () {
-      var fieldsetValidator = FieldsetValidator(FUTURE_DATE_ARRAY, FIELD_NAME, errorHandler)
-      var result = fieldsetValidator
-          .isFutureDate()
+      const fieldsetValidator = FieldsetValidator(FUTURE_DATE_ARRAY, FIELD_NAME, errorHandler)
+      const result = fieldsetValidator
+        .isFutureDate()
       expect(result).to.be.equal(fieldsetValidator)
     })
   })
 
   describe('isValidDate', function () {
     it('should return false if passed a valid date', function () {
-      var dateNow = dateFormatter.now().toDate()
-      var dateNowArray = [dateNow.getDate(), dateNow.getMonth() + 1, dateNow.getFullYear()]
+      const dateNow = dateFormatter.now().toDate()
+      const dateNowArray = [dateNow.getDate(), dateNow.getMonth() + 1, dateNow.getFullYear()]
       FieldsetValidator(dateNowArray, FIELD_NAME, errorHandler)
-          .isValidDate()
-      var errors = errorHandler.get()
+        .isValidDate()
+      const errors = errorHandler.get()
       expect(errors).to.equal(false)
     })
 
     it('should return error object if data is not a valid date object', function () {
       FieldsetValidator({}, FIELD_NAME, errorHandler)
-          .isValidDate()
-      var errors = errorHandler.get()
+        .isValidDate()
+      const errors = errorHandler.get()
       expect(errors).to.have.property(FIELD_NAME)
       expect(errors[FIELD_NAME][0]).to.include('was invalid')
     })
 
     it('should return error object if data is null', function () {
       FieldsetValidator(null, FIELD_NAME, errorHandler)
-          .isValidDate()
-      var errors = errorHandler.get()
+        .isValidDate()
+      const errors = errorHandler.get()
       expect(errors).to.have.property(FIELD_NAME)
       expect(errors[FIELD_NAME][0]).to.include('was invalid')
     })
 
     it('should return error object if data is undefined', function () {
       FieldsetValidator(undefined, FIELD_NAME, errorHandler)
-          .isValidDate()
-      var errors = errorHandler.get()
+        .isValidDate()
+      const errors = errorHandler.get()
       expect(errors).to.have.property(FIELD_NAME)
       expect(errors[FIELD_NAME][0]).to.include('was invalid')
     })
 
     it('should return error object if date is outside the valid range', function () {
-      var invalidDate = dateFormatter.now().add(82, 'years').toDate()
-      var invalidDateArray = [invalidDate.getDate(), invalidDate.getMonth() + 1, invalidDate.getFullYear()]
+      const invalidDate = dateFormatter.now().add(82, 'years').toDate()
+      const invalidDateArray = [invalidDate.getDate(), invalidDate.getMonth() + 1, invalidDate.getFullYear()]
       FieldsetValidator(invalidDateArray, FIELD_NAME, errorHandler)
-          .isValidDate()
-      var errors = errorHandler.get()
+        .isValidDate()
+      const errors = errorHandler.get()
       expect(errors).to.have.property(FIELD_NAME)
       expect(errors[FIELD_NAME][0]).to.include('was invalid')
     })
 
     it('should return false if date is within the valid range', function () {
-      var validDate = dateFormatter.now().add(50, 'years').toDate()
-      var validDateArray = [validDate.getDate(), validDate.getMonth() + 1, validDate.getFullYear()]
+      const validDate = dateFormatter.now().add(50, 'years').toDate()
+      const validDateArray = [validDate.getDate(), validDate.getMonth() + 1, validDate.getFullYear()]
       FieldsetValidator(validDateArray, FIELD_NAME, errorHandler)
-          .isValidDate()
-      var errors = errorHandler.get()
+        .isValidDate()
+      const errors = errorHandler.get()
       expect(errors).to.equal(false)
     })
   })
@@ -196,30 +196,30 @@ describe('services/validators/fieldset-validator', function () {
   describe('isPastOrPresentDate', function () {
     it('should return error object if the date given is in the future', function () {
       FieldsetValidator(FUTURE_DATE_ARRAY, FIELD_NAME, errorHandler)
-          .isPastOrPresentDate()
-      var errors = errorHandler.get()
+        .isPastOrPresentDate()
+      const errors = errorHandler.get()
       expect(errors).to.have.property(FIELD_NAME)
-      .that.contains(ERROR_MESSAGES.getPastOrPresentDateMessage())
+        .that.contains(ERROR_MESSAGES.getPastOrPresentDateMessage())
     })
 
     it('should return false if the date given is in the past', function () {
       FieldsetValidator(PAST_DATE_ARRAY, FIELD_NAME, errorHandler)
-          .isPastOrPresentDate()
-      var errors = errorHandler.get()
+        .isPastOrPresentDate()
+      const errors = errorHandler.get()
       expect(errors).to.equal(false)
     })
 
     it('should return false if the date given is in the past', function () {
       FieldsetValidator(PRESENT_DATE_ARRAY, FIELD_NAME, errorHandler)
-          .isPastOrPresentDate()
-      var errors = errorHandler.get()
+        .isPastOrPresentDate()
+      const errors = errorHandler.get()
       expect(errors).to.equal(false)
     })
 
     it('should return the fieldsetValidator after being called to allow function chaining.', function () {
-      var fieldsetValidator = FieldsetValidator(FUTURE_DATE_ARRAY, FIELD_NAME, errorHandler)
-      var result = fieldsetValidator
-          .isPastOrPresentDate()
+      const fieldsetValidator = FieldsetValidator(FUTURE_DATE_ARRAY, FIELD_NAME, errorHandler)
+      const result = fieldsetValidator
+        .isPastOrPresentDate()
       expect(result).to.be.equal(fieldsetValidator)
     })
   })
@@ -228,14 +228,14 @@ describe('services/validators/fieldset-validator', function () {
     it('should return false if end date is greater than start date', function () {
       FieldsetValidator(FUTURE_DATE_ARRAY, FIELD_NAME, errorHandler)
         .isLaterThan(PAST_DATE)
-      var errors = errorHandler.get()
+      const errors = errorHandler.get()
       expect(errors).to.equal(false)
     })
 
     it('should return false if end date is greater than start date', function () {
       FieldsetValidator(PAST_DATE_ARRAY, FIELD_NAME, errorHandler)
         .isLaterThan(FUTURE_DATE, FIELD_NAME)
-      var errors = errorHandler.get()
+      const errors = errorHandler.get()
       expect(errors).to.have.property(FIELD_NAME)
       expect(errors[FIELD_NAME][0]).to.include('must be after')
     })

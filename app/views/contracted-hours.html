@@ -13,29 +13,43 @@
 {% include "includes/sub-nav.html" %}
 
 {% if hoursUpdatedSuccess %}
-  <div class="message message--success">You have successfully updated the contracted hours for {{title}}</div>
+  <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+    <div class="govuk-notification-banner__header">
+      <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+        Success
+      </h2>
+    </div>
+    <div class="govuk-notification-banner__content">
+      <p class="govuk-notification-banner__heading">
+        You have successfully updated the contracted hours for {{title}}
+      </p>
+    </div>
+  </div>
 {% endif %}
 
-<h2 class="heading-large">Contracted hours</h2>
+<h2 class="govuk-heading-l">Contracted hours</h2>
 
-<p class="lede">Change the contracted hours for <span class="bold">{{title}}</span></p>
-
-{% if errors['hours'][0] %}
-  <span class="error-message">{{ errors['hours'][0] }}</span>
-{% endif %}
+<p class="govuk-body-l">Change the contracted hours for <strong class="bold">{{title}}</strong></p>
 
 <form action="/{{ workloadType }}/offender-manager/{{woId}}/contracted-hours" method="post" class="sln-form-action">
-  <input type="hidden" name="sub_page" value="true">
-  <div class="form-group">
-    <label class="form-label-bold" for="contracted-hours">Contracted hours</label>
-    <input class="form-control" id="contracted-hours" name="hours" type="text" style="width: 100px" value="{{contractedHours}}">
+
+  <div class="govuk-form-group  {% if errors['hours'][0] %} govuk-form-group--error {% endif %}">
+    {% if errors['hours'][0] %}
+      <span id="contracted-hours-error" class="govuk-error-message">
+        <span class="govuk-visually-hidden">Error:</span> {{ errors['hours'][0] }}
+      </span>
+    {% endif %}
+    <h6 class="govuk-label-wrapper">
+      <label class="govuk-label govuk-label--s" for="contracted-hours">Contracted hours</label>
+    </h6>
+    <input class="govuk-input govuk-input--width-5 {% if errors['hours'][0] %} govuk-input--error {% endif %}" id="contracted-hours" name="hours" value="{{contractedHours}}">
   </div>
 
   <br>
-  <div class="form-group">
-    <input class="button" type="submit" value="Save changes">
+  <div class="govuk-form-group">
+    <input class="govuk-button" data-module="govuk-button"  type="submit" value="Save changes">
     <div class="u-space-t10">
-      or <a href="/{{ workloadType }}/offender-manager/{{woId}}/overview">cancel and return to overview</a>
+      <p class='govuk-body'>or <a class="govuk-link" href="/{{ workloadType }}/offender-manager/{{woId}}/overview">cancel and return to overview</a>
     </div>
   </div>
 
