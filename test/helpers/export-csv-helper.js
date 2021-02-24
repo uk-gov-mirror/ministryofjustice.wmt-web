@@ -1203,9 +1203,12 @@ module.exports.REGION_CASELOAD_RESULT = {
   title: 'Region 2',
   subTitle: 'Region',
   caseloadDetails:
-  { overallCaseloadDetails:
-  { details:
-  [ { linkId: 70,
+  {
+    overallCaseloadDetails:
+  {
+    details:
+  [{
+    linkId: 70,
     name: 'Probation Delivery Unit 2',
     grades:
     [{
@@ -1277,7 +1280,8 @@ module.exports.REGION_CASELOAD_RESULT = {
       }
     },
     detailsPercentages:
-    [ { linkId: 70,
+    [{
+      linkId: 70,
       name: 'Probation Delivery Unit 2',
       grades:
       [{
@@ -1350,8 +1354,10 @@ module.exports.REGION_CASELOAD_RESULT = {
     }
   },
     communityCaseloadDetails:
-    { details:
-    [ { linkId: 70,
+    {
+      details:
+    [{
+      linkId: 70,
       name: 'Probation Delivery Unit 2',
       grades:
       [{
@@ -1423,7 +1429,8 @@ module.exports.REGION_CASELOAD_RESULT = {
         }
       },
       detailsPercentages:
-      [ { linkId: 70,
+      [{
+        linkId: 70,
         name: 'Probation Delivery Unit 2',
         grades:
         [{
@@ -1496,8 +1503,10 @@ module.exports.REGION_CASELOAD_RESULT = {
       }
     },
     custodyCaseloadDetails:
-    { details:
-    [ { linkId: 70,
+    {
+      details:
+    [{
+      linkId: 70,
       name: 'Probation Delivery Unit 2',
       grades:
       [{
@@ -1569,7 +1578,8 @@ module.exports.REGION_CASELOAD_RESULT = {
         }
       },
       detailsPercentages:
-      [ { linkId: 70,
+      [{
+        linkId: 70,
         name: 'Probation Delivery Unit 2',
         grades:
         [{
@@ -1642,8 +1652,10 @@ module.exports.REGION_CASELOAD_RESULT = {
       }
     },
     licenseCaseloadDetails:
-    { details:
-    [ { linkId: 70,
+    {
+      details:
+    [{
+      linkId: 70,
       name: 'Probation Delivery Unit 2',
       grades:
       [{
@@ -1715,7 +1727,8 @@ module.exports.REGION_CASELOAD_RESULT = {
         }
       },
       detailsPercentages:
-      [ { linkId: 70,
+      [{
+        linkId: 70,
         name: 'Probation Delivery Unit 2',
         grades:
         [{
@@ -1788,7 +1801,8 @@ module.exports.REGION_CASELOAD_RESULT = {
       }
     },
     overallTotalSummary:
-    [ { name: 'Probation Delivery Unit 2',
+    [{
+      name: 'Probation Delivery Unit 2',
       linkId: 70,
       totalCases: 345,
       custodyTotalCases: 115,
@@ -1828,9 +1842,12 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
   title: 'HMPPS',
   subTitle: 'National',
   caseloadDetails:
-  { overallCaseloadDetails:
-  { details:
-  [ { linkId: 63,
+  {
+    overallCaseloadDetails:
+  {
+    details:
+  [{
+    linkId: 63,
     name: 'Region 1',
     grades:
     [{
@@ -1861,8 +1878,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       f: 1,
       g: 0,
       untiered: 24,
-      totalCases: 276 } ] },
-  { linkId: 64,
+      totalCases: 276
+    }]
+  },
+  {
+    linkId: 64,
     name: 'Region 2',
     grades:
     [{
@@ -1893,8 +1913,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       f: 1,
       g: 0,
       untiered: 12,
-      totalCases: 138 } ] },
-  { linkId: 65,
+      totalCases: 138
+    }]
+  },
+  {
+    linkId: 65,
     name: 'Region 3',
     grades:
     [{
@@ -1966,7 +1989,8 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       }
     },
     detailsPercentages:
-    [ { linkId: 63,
+    [{
+      linkId: 63,
       name: 'Region 1',
       grades:
       [{
@@ -1997,8 +2021,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 0,
         g: 0,
         untiered: 40,
-        totalCases: 40 } ] },
-    { linkId: 64,
+        totalCases: 40
+      }]
+    },
+    {
+      linkId: 64,
       name: 'Region 2',
       grades:
       [{
@@ -2029,8 +2056,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 0,
         g: 0,
         untiered: 40,
-        totalCases: 40 } ] },
-    { linkId: 65,
+        totalCases: 40
+      }]
+    },
+    {
+      linkId: 65,
       name: 'Region 3',
       grades:
       [{
@@ -2103,8 +2133,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
     }
   },
     communityCaseloadDetails:
-    { details:
-    [ { linkId: 63,
+    {
+      details:
+    [{
+      linkId: 63,
       name: 'Region 1',
       grades:
       [{
@@ -2135,8 +2167,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 0,
-        totalCases: 84 } ] },
-    { linkId: 64,
+        totalCases: 84
+      }]
+    },
+    {
+      linkId: 64,
       name: 'Region 2',
       grades:
       [{
@@ -2167,8 +2202,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 0,
-        totalCases: 42 } ] },
-    { linkId: 65,
+        totalCases: 42
+      }]
+    },
+    {
+      linkId: 65,
       name: 'Region 3',
       grades:
       [{
@@ -2240,7 +2278,8 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         }
       },
       detailsPercentages:
-      [ { linkId: 63,
+      [{
+        linkId: 63,
         name: 'Region 1',
         grades:
         [{
@@ -2271,8 +2310,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 0,
-          totalCases: 40 } ] },
-      { linkId: 64,
+          totalCases: 40
+        }]
+      },
+      {
+        linkId: 64,
         name: 'Region 2',
         grades:
         [{
@@ -2303,8 +2345,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 0,
-          totalCases: 40 } ] },
-      { linkId: 65,
+          totalCases: 40
+        }]
+      },
+      {
+        linkId: 65,
         name: 'Region 3',
         grades:
         [{
@@ -2377,8 +2422,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       }
     },
     custodyCaseloadDetails:
-    { details:
-    [ { linkId: 63,
+    {
+      details:
+    [{
+      linkId: 63,
       name: 'Region 1',
       grades:
       [{
@@ -2409,8 +2456,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 4,
-        totalCases: 92 } ] },
-    { linkId: 64,
+        totalCases: 92
+      }]
+    },
+    {
+      linkId: 64,
       name: 'Region 2',
       grades:
       [{
@@ -2441,8 +2491,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 2,
-        totalCases: 46 } ] },
-    { linkId: 65,
+        totalCases: 46
+      }]
+    },
+    {
+      linkId: 65,
       name: 'Region 3',
       grades:
       [{
@@ -2514,7 +2567,8 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         }
       },
       detailsPercentages:
-      [ { linkId: 63,
+      [{
+        linkId: 63,
         name: 'Region 1',
         grades:
         [{
@@ -2545,8 +2599,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] },
-      { linkId: 64,
+          totalCases: 40
+        }]
+      },
+      {
+        linkId: 64,
         name: 'Region 2',
         grades:
         [{
@@ -2577,8 +2634,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] },
-      { linkId: 65,
+          totalCases: 40
+        }]
+      },
+      {
+        linkId: 65,
         name: 'Region 3',
         grades:
         [{
@@ -2651,8 +2711,10 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       }
     },
     licenseCaseloadDetails:
-    { details:
-    [ { linkId: 63,
+    {
+      details:
+    [{
+      linkId: 63,
       name: 'Region 1',
       grades:
       [{
@@ -2683,8 +2745,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 20,
-        totalCases: 100 } ] },
-    { linkId: 64,
+        totalCases: 100
+      }]
+    },
+    {
+      linkId: 64,
       name: 'Region 2',
       grades:
       [{
@@ -2715,8 +2780,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         f: 1,
         g: 0,
         untiered: 10,
-        totalCases: 50 } ] },
-    { linkId: 65,
+        totalCases: 50
+      }]
+    },
+    {
+      linkId: 65,
       name: 'Region 3',
       grades:
       [{
@@ -2788,7 +2856,8 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
         }
       },
       detailsPercentages:
-      [ { linkId: 63,
+      [{
+        linkId: 63,
         name: 'Region 1',
         grades:
         [{
@@ -2819,8 +2888,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] },
-      { linkId: 64,
+          totalCases: 40
+        }]
+      },
+      {
+        linkId: 64,
         name: 'Region 2',
         grades:
         [{
@@ -2851,8 +2923,11 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
           f: 0,
           g: 0,
           untiered: 40,
-          totalCases: 40 } ] },
-      { linkId: 65,
+          totalCases: 40
+        }]
+      },
+      {
+        linkId: 65,
         name: 'Region 3',
         grades:
         [{
@@ -2925,19 +3000,24 @@ module.exports.NATIONAL_CASELOAD_RESULT = {
       }
     },
     overallTotalSummary:
-    [ { name: 'Region 1',
+    [{
+      name: 'Region 1',
       linkId: 63,
       totalCases: 690,
       custodyTotalCases: 230,
       communityTotalCases: 210,
-      licenseTotalCases: 250 },
-    { name: 'Region 2',
+      licenseTotalCases: 250
+    },
+    {
+      name: 'Region 2',
       linkId: 64,
       totalCases: 345,
       custodyTotalCases: 115,
       communityTotalCases: 105,
-      licenseTotalCases: 125 },
-    { name: 'Region 3',
+      licenseTotalCases: 125
+    },
+    {
+      name: 'Region 3',
       linkId: 65,
       totalCases: 345,
       custodyTotalCases: 115,
@@ -3041,7 +3121,8 @@ module.exports.TEAM_OVERVIEW_RESULT = {
   },
   { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   overviewDetails:
-  [ { lduCluster: 'Probation Delivery Unit 1',
+  [{
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -3053,8 +3134,10 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     capacityPercentage: 115.26315789473685,
     remainingPoints: -29,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: 0
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -3066,8 +3149,10 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     capacityPercentage: 113.68421052631578,
     remainingPoints: -26,
     cmsAdjustmentPoints: -176,
-    cmsPercentage: -6.379122870605292 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: -6.379122870605292
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -3079,8 +3164,10 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     capacityPercentage: 116.8421052631579,
     remainingPoints: -32,
     cmsAdjustmentPoints: 121,
-    cmsPercentage: 19.803600654664486 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: 19.803600654664486
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -3092,8 +3179,10 @@ module.exports.TEAM_OVERVIEW_RESULT = {
     capacityPercentage: 107.36842105263158,
     remainingPoints: -14,
     cmsAdjustmentPoints: 167,
-    cmsPercentage: 29.246935201401055 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: 29.246935201401055
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -3134,7 +3223,8 @@ module.exports.LDU_OVERVIEW_RESULT = {
   },
   { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   overviewDetails:
-  [ { lduCluster: 'Probation Delivery Unit 1',
+  [{
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -3146,8 +3236,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 115.26315789473685,
     remainingPoints: -29,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: 0
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -3159,8 +3251,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 113.68421052631578,
     remainingPoints: -26,
     cmsAdjustmentPoints: -176,
-    cmsPercentage: -6.379122870605292 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: -6.379122870605292
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -3172,8 +3266,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 116.8421052631579,
     remainingPoints: -32,
     cmsAdjustmentPoints: 121,
-    cmsPercentage: 19.803600654664486 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: 19.803600654664486
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -3185,8 +3281,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 107.36842105263158,
     remainingPoints: -14,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: 0
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -3198,8 +3296,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: 0
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Courtney Larry',
     totalCases: 69,
@@ -3211,8 +3311,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 117.89473684210525,
     remainingPoints: -34,
     cmsAdjustmentPoints: -9,
-    cmsPercentage: -0.5096262740656852 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: -0.5096262740656852
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Marcin Martin',
     totalCases: 69,
@@ -3224,8 +3326,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 113.1578947368421,
     remainingPoints: -25,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: 0
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Jane Doe',
     totalCases: 69,
@@ -3237,8 +3341,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 106.3157894736842,
     remainingPoints: -12,
     cmsAdjustmentPoints: -9,
-    cmsPercentage: -0.5096262740656852 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: -0.5096262740656852
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Tony Test',
     totalCases: 69,
@@ -3250,8 +3356,10 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 105.78947368421052,
     remainingPoints: -11,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { lduCluster: 'Probation Delivery Unit 1',
+    cmsPercentage: 0
+  },
+  {
+    lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'John Smith',
     totalCases: 69,
@@ -3263,7 +3371,8 @@ module.exports.LDU_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: -9,
-    cmsPercentage: -0.5096262740656852 } ],
+    cmsPercentage: -0.5096262740656852
+  }],
   title: 'Probation Delivery Unit 1',
   subTitle: 'Probation Delivery Unit'
 }
@@ -3307,7 +3416,8 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0
   },
-  { regionName: 'Region 1',
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
@@ -3322,7 +3432,8 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0
   },
-  { regionName: 'Region 1',
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
@@ -3337,7 +3448,8 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0
   },
-  { regionName: 'Region 1',
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
@@ -3352,7 +3464,8 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0
   },
-  { regionName: 'Region 1',
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
@@ -3367,7 +3480,8 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0
   },
-  { regionName: 'Region 1',
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Courtney Larry',
@@ -3382,7 +3496,8 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0
   },
-  { regionName: 'Region 1',
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Marcin Martin',
@@ -3397,7 +3512,8 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0
   },
-  { regionName: 'Region 1',
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Jane Doe',
@@ -3412,7 +3528,8 @@ module.exports.REGION_OVERVIEW_RESULT = {
     cmsAdjustmentPoints: 0,
     cmsPercentage: 0
   },
-  { regionName: 'Region 1',
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Tony Test',
@@ -3425,8 +3542,10 @@ module.exports.REGION_OVERVIEW_RESULT = {
     capacityPercentage: 105.78947368421052,
     remainingPoints: -11,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'John Smith',
@@ -3439,7 +3558,8 @@ module.exports.REGION_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 } ],
+    cmsPercentage: 0
+  }],
   title: 'Region 1',
   subTitle: 'Region'
 }
@@ -3475,8 +3595,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 115.26315789473685,
     remainingPoints: -29,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Tony Test',
@@ -3489,8 +3611,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 113.68421052631578,
     remainingPoints: -26,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Jane Doe',
@@ -3503,8 +3627,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 116.8421052631579,
     remainingPoints: -32,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Marcin Martin',
@@ -3517,8 +3643,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 107.36842105263158,
     remainingPoints: -14,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'Courtney Larry',
@@ -3531,8 +3659,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Courtney Larry',
@@ -3545,8 +3675,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 117.89473684210525,
     remainingPoints: -34,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Jane Doe',
@@ -3559,8 +3691,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 106.3157894736842,
     remainingPoints: -12,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Marcin Martin',
@@ -3573,8 +3707,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 113.1578947368421,
     remainingPoints: -25,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'John Smith',
@@ -3587,8 +3723,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 1',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 1',
     lduCluster: 'Probation Delivery Unit 1',
     teamName: 'Team 4',
     offenderManager: 'Tony Test',
@@ -3601,8 +3739,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 105.78947368421052,
     remainingPoints: -11,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 2',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 2',
     lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'Jane Doe',
@@ -3615,8 +3755,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 2',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 2',
     lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'Tony Test',
@@ -3629,8 +3771,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 2',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 2',
     lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'John Smith',
@@ -3643,8 +3787,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 110.00000000000001,
     remainingPoints: -19,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 2',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 2',
     lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'Marcin Martin',
@@ -3657,8 +3803,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 105.26315789473684,
     remainingPoints: -10,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 2',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 2',
     lduCluster: 'Probation Delivery Unit 2',
     teamName: 'Team 2',
     offenderManager: 'Courtney Larry',
@@ -3671,8 +3819,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 114.21052631578948,
     remainingPoints: -27,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 3',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 3',
     lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'Courtney Larry',
@@ -3685,8 +3835,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 112.63157894736841,
     remainingPoints: -24,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 3',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 3',
     lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'Marcin Martin',
@@ -3699,8 +3851,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 117.36842105263159,
     remainingPoints: -33,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 3',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 3',
     lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'John Smith',
@@ -3713,8 +3867,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 107.36842105263158,
     remainingPoints: -14,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 3',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 3',
     lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'Tony Test',
@@ -3727,8 +3883,10 @@ module.exports.NATIONAL_OVERVIEW_RESULT = {
     capacityPercentage: 109.47368421052633,
     remainingPoints: -18,
     cmsAdjustmentPoints: 0,
-    cmsPercentage: 0 },
-  { regionName: 'Region 3',
+    cmsPercentage: 0
+  },
+  {
+    regionName: 'Region 3',
     lduCluster: 'Probation Delivery Unit 3',
     teamName: 'Team 3',
     offenderManager: 'Jane Doe',
@@ -3811,7 +3969,8 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
   },
   { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   reductionNotes:
-  [ { regionName: 'Region 1',
+  [{
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3822,8 +3981,10 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'ACTIVE',
     additionalNotes: null,
-    gradeCode: 'PO' },
-  { regionName: 'Region 1',
+    gradeCode: 'PO'
+  },
+  {
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3834,8 +3995,10 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'SCHEDULED',
     additionalNotes: null,
-    gradeCode: 'SPO' },
-  { regionName: 'Region 1',
+    gradeCode: 'SPO'
+  },
+  {
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3846,8 +4009,10 @@ module.exports.TEAM_REDUCTIONS_RESULT = {
     endDate: '28 11 2016, 16:15',
     status: 'ARCHIVED',
     additionalNotes: null,
-    gradeCode: 'PSO' },
-  { regionName: 'Region 1',
+    gradeCode: 'PSO'
+  },
+  {
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3875,7 +4040,8 @@ module.exports.TEAM_REDUCTIONS_CSV = {
 
 module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
   reductionNotes:
-  [ { regionName: 'Region 1',
+  [{
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3887,8 +4053,10 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     status: 'ACTIVE',
     additionalNotes: null,
     gradeCode: 'PO',
-    managerResponsible: 'Joe Bloggs' },
-  { regionName: 'Region 1',
+    managerResponsible: 'Joe Bloggs'
+  },
+  {
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3900,8 +4068,10 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     status: 'SCHEDULED',
     additionalNotes: null,
     gradeCode: 'SPO',
-    managerResponsible: 'Frank Jones' },
-  { regionName: 'Region 1',
+    managerResponsible: 'Frank Jones'
+  },
+  {
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3913,8 +4083,10 @@ module.exports.TEAM_EXPIRING_REDUCTIONS_RESULT = {
     status: 'ARCHIVED',
     additionalNotes: null,
     gradeCode: 'PSO',
-    managerResponsible: 'Mary Brown' },
-  { regionName: 'Region 1',
+    managerResponsible: 'Mary Brown'
+  },
+  {
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3953,7 +4125,8 @@ module.exports.LDU_REDUCTIONS_RESULT = {
   },
   { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   reductionNotes:
-  [ { regionName: 'Region 1',
+  [{
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3964,8 +4137,10 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'ACTIVE',
     additionalNotes: null,
-    gradeCode: 'PO' },
-  { regionName: 'Region 1',
+    gradeCode: 'PO'
+  },
+  {
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3976,8 +4151,10 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'SCHEDULED',
     additionalNotes: null,
-    gradeCode: 'SPO' },
-  { regionName: 'Region 1',
+    gradeCode: 'SPO'
+  },
+  {
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -3988,8 +4165,10 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     endDate: '28 11 2016, 16:15',
     status: 'ARCHIVED',
     additionalNotes: null,
-    gradeCode: 'PSO' },
-  { regionName: 'Region 1',
+    gradeCode: 'PSO'
+  },
+  {
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -4000,9 +4179,11 @@ module.exports.LDU_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'DELETED',
     additionalNotes: null,
-    gradeCode: 'PO' } ],
+    gradeCode: 'PO'
+  }],
   title: 'Probation Delivery Unit 1',
-  subTitle: 'Probation Delivery Unit' }
+  subTitle: 'Probation Delivery Unit'
+}
 
 module.exports.LDU_REDUCTIONS_CSV = {
   filename: ('LDU_Cluster_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),
@@ -4022,7 +4203,8 @@ module.exports.REGION_REDUCTIONS_RESULT = {
   },
   { title: 'HMPPS', link: '/probation/hmpps/0', active: undefined }],
   reductionNotes:
-  [ { regionName: 'Region 1',
+  [{
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -4033,8 +4215,10 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'ACTIVE',
     additionalNotes: null,
-    gradeCode: 'PO' },
-  { regionName: 'Region 1',
+    gradeCode: 'PO'
+  },
+  {
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -4045,8 +4229,10 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'SCHEDULED',
     additionalNotes: null,
-    gradeCode: 'SPO' },
-  { regionName: 'Region 1',
+    gradeCode: 'SPO'
+  },
+  {
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -4057,8 +4243,10 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     endDate: '28 11 2016, 16:15',
     status: 'ARCHIVED',
     additionalNotes: null,
-    gradeCode: 'PSO' },
-  { regionName: 'Region 1',
+    gradeCode: 'PSO'
+  },
+  {
+    regionName: 'Region 1',
     lduName: 'Probation Delivery Unit 1',
     teamName: 'Team 1',
     offenderManager: 'John Smith',
@@ -4069,9 +4257,11 @@ module.exports.REGION_REDUCTIONS_RESULT = {
     endDate: '26 11 2027, 16:15',
     status: 'DELETED',
     additionalNotes: null,
-    gradeCode: 'PO' } ],
+    gradeCode: 'PO'
+  }],
   title: 'Region 1',
-  subTitle: 'Region' }
+  subTitle: 'Region'
+}
 
 module.exports.REGION_REDUCTIONS_CSV = {
   filename: ('Region_1_Reductions_Notes ' + timestamp + '.csv').replace(replaceSpaces, '_'),

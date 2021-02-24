@@ -66,7 +66,7 @@ module.exports = function (router) {
             caseloadDetails: caseloadDetailsData,
             date: lastUpdated,
             userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-            authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
             workloadType: workloadTypes.PROBATION
           })
         })

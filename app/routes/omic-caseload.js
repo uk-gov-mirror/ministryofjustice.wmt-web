@@ -37,25 +37,25 @@ module.exports = function (router) {
     return getLastUpdated().then(function (result) {
       lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
       return getCaseload(id, organisationLevel)
-      .then(function (result) {
-        result.date = lastUpdated
-        return res.render('caseload', {
-          screen: 'caseload',
-          linkId: req.params.id,
-          title: result.title,
-          subTitle: result.subTitle,
-          breadcrumbs: result.breadcrumbs,
-          subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole),
-          organisationLevel: organisationLevel,
-          childOrganisationLevel: orgUnit.childOrganisationLevel,
-          childOrganisationLevelDisplayText: childOrgUnit.displayText,
-          caseloadDetails: caseloadDetails(organisationLevel, result),
-          date: result.date,
-          userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
-          authorisation: authorisedUserRole.authorisation,  // used by proposition-link for the admin role
-          workloadType: workloadTypes.OMIC
+        .then(function (result) {
+          result.date = lastUpdated
+          return res.render('caseload', {
+            screen: 'caseload',
+            linkId: req.params.id,
+            title: result.title,
+            subTitle: result.subTitle,
+            breadcrumbs: result.breadcrumbs,
+            subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.OMIC, authorisedUserRole.authorisation, authorisedUserRole.userRole),
+            organisationLevel: organisationLevel,
+            childOrganisationLevel: orgUnit.childOrganisationLevel,
+            childOrganisationLevelDisplayText: childOrgUnit.displayText,
+            caseloadDetails: caseloadDetails(organisationLevel, result),
+            date: result.date,
+            userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+            authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
+            workloadType: workloadTypes.OMIC
+          })
         })
-      })
     }).catch(function (error) {
       next(error)
     })
