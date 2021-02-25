@@ -56,7 +56,7 @@ const renderOverview = function (req, res, next) {
   }
 
   if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name || organisationLevel === organisationUnitConstants.TEAM.name) {
-    throw new Error('Only available at National, Divisional and LDU Cluster level')
+    throw new Error('Only available at National, Regional and Probation Delivery Unit level')
   }
 
   const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
@@ -66,9 +66,6 @@ const renderOverview = function (req, res, next) {
     lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
     return overviewPromise.then(function (result) {
       result.date = lastUpdated
-      if (childOrganisationLevelDisplayText === 'LDU Cluster' && result.title === 'NPS Kent Surrey Sussex Region') {
-        childOrganisationLevelDisplayText = 'Probation Delivery Unit'
-      }
       return res.render('omic-overview', {
         title: result.title,
         subTitle: result.subTitle,

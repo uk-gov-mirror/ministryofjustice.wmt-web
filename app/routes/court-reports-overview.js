@@ -60,9 +60,6 @@ const renderOverview = function (req, res, next) {
     return getCourtReportOverview(id, organisationLevel)
       .then(function (result) {
         result.date = lastUpdated
-        if (childOrganisationLevelDisplayText === 'LDU Cluster' && result.title === 'NPS Kent Surrey Sussex Region') {
-          childOrganisationLevelDisplayText = 'Probation Delivery Unit'
-        }
         result.overviewDetails.sort(function (a, b) { return a.name.localeCompare(b.name) })
         return res.render('court-reports-overview', {
           title: result.title,
@@ -77,13 +74,13 @@ const renderOverview = function (req, res, next) {
           userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
           authorisation: authorisedUserRole.authorisation // used by proposition-link for the admin role
         })
+      }).catch(function (error) {
+        if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
+          const subNav = getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+          renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
+        } else {
+          next(error)
+        }
       })
-  }).catch(function (error) {
-    if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
-      const subNav = getSubNav(id, organisationLevel, req.path, workloadTypeConstants.COURT_REPORTS, authorisedUserRole.authorisation, authorisedUserRole.userRole)
-      renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
-    } else {
-      next(error)
-    }
   })
 }

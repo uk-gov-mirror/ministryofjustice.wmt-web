@@ -43,7 +43,7 @@ describe('services/data/get-full-overview', function () {
       })
   })
 
-  it('should return all offender manager caseload data for a LDU Cluster', function () {
+  it('should return all offender manager caseload data for a Probation Delivery Unit', function () {
     return getOrganisationOverview(inserts.filter((item) => item.table === 'ldu')[0].id, orgUnitConstants.LDU.name)
       .then(function (results) {
         expect(results[0].lduCluster).to.eql(expectedResult[0].lduCluster)

@@ -53,10 +53,6 @@ module.exports = function (router) {
               caseloadDetailsData[3].array.totals = defaultTotals
             }
           }
-          let childOrgUnitDisplayText = childOrgUnit.displayText.repeat(1)
-          if (childOrgUnit.displayText === 'LDU Cluster' && result.title === 'NPS Kent Surrey Sussex Region') {
-            childOrgUnitDisplayText = 'Probation Delivery Unit'
-          }
           return res.render('caseload', {
             screen: 'caseload',
             linkId: req.params.id,
@@ -66,7 +62,7 @@ module.exports = function (router) {
             subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
             organisationLevel: organisationLevel,
             childOrganisationLevel: orgUnit.childOrganisationLevel,
-            childOrganisationLevelDisplayText: childOrgUnitDisplayText,
+            childOrganisationLevelDisplayText: childOrgUnit.displayText,
             caseloadDetails: caseloadDetailsData,
             date: lastUpdated,
             userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role

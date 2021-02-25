@@ -92,7 +92,7 @@ const BASE_CASELOAD_DETAILS = {
 
 const LDU_CASELOAD = {
   title: 'Bexley, Bromley, Greenwich',
-  subTitle: 'LDU Cluster',
+  subTitle: 'Probation Delivery Unit',
   breadcrumbs: [{ title: 'Bexley, Bromley, Greenwich', link: '/probation/ldu/645' }, { title: 'NPS London', link: '/probation/region/1' }, { title: 'HMPPS', link: '/probation/hmpps/0' }],
   caseloadDetails: {
     overallCaseloadDetails: Object.assign({}, BASE_CASELOAD_DETAILS),
