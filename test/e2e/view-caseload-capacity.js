@@ -42,14 +42,14 @@ describe('View your caseload capacity flow', () => {
     await browser.url(lduDefaultUrl + '/caseload-capacity')
     pageSubtitle = await $('.govuk-caption-xl')
     pageSubtitle = await pageSubtitle.getText()
-    expect(pageSubtitle).to.equal('LDU Cluster')
+    expect(pageSubtitle).to.equal('Probation Delivery Unit')
   })
 
   it('should navigate to the region caseload capacity screen', async () => {
     await browser.url(regionDefaultUrl + '/caseload-capacity')
     pageSubtitle = await $('.govuk-caption-xl')
     pageSubtitle = await pageSubtitle.getText()
-    expect(pageSubtitle).to.equal('Division')
+    expect(pageSubtitle).to.equal('Region')
   })
 
   it('should navigate to the national caseload capacity screen', async () => {

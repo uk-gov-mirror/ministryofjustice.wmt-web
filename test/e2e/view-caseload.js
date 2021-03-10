@@ -82,7 +82,7 @@ describe('View your caseload flow', () => {
       await browser.url(lduDefaultUrl + '/caseload')
       pageSubtitle = await $('.govuk-caption-xl')
       pageSubtitle = await pageSubtitle.getText()
-      expect(pageSubtitle).to.equal('LDU Cluster')
+      expect(pageSubtitle).to.equal('Probation Delivery Unit')
 
       const grade = await $('.sln-table-caseload-by-grade')
       let exists = await grade.isExisting()
@@ -172,7 +172,7 @@ describe('View your caseload flow', () => {
       await browser.url(regionDefaultUrl + '/caseload')
       pageSubtitle = await $('.govuk-caption-xl')
       pageSubtitle = await pageSubtitle.getText()
-      expect(pageSubtitle).to.equal('Division')
+      expect(pageSubtitle).to.equal('Region')
     })
 
     it('should be accessible via the Caseload tab on regions default view', async () => {
