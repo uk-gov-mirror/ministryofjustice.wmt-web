@@ -110,7 +110,7 @@ describe('View court-reports overview', function () {
 
     const orgLevelTable = await $('.sln-table-org-level')
     const text = await orgLevelTable.getText()
-    expect(text).to.equal('LDU Cluster')
+    expect(text).to.equal('Probation Delivery Unit')
   })
 
   it('should navigate to the national court-reports overview page', async function () {
@@ -134,7 +134,7 @@ describe('View court-reports overview', function () {
 
     const orgLevelTable = await $('.sln-table-org-level')
     const text = await orgLevelTable.getText()
-    expect(text).to.equal('Division')
+    expect(text).to.equal('Region')
   })
 
   it('should navigate to overview page from any other tab', async function () {
@@ -182,14 +182,14 @@ describe('View court-reports overview', function () {
 
     pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
-    expect(text).to.equal('Division')
+    expect(text).to.equal('Region')
 
     link = await $('[href="' + lduDefaultUrl + '"]')
     await link.click()
 
     pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
-    expect(text).to.equal('LDU Cluster')
+    expect(text).to.equal('Probation Delivery Unit')
 
     link = await $('[href="' + teamDefaultUrl + '"]')
     await link.click()
@@ -236,14 +236,14 @@ describe('View court-reports overview', function () {
 
     pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
-    expect(text).to.equal('LDU Cluster')
+    expect(text).to.equal('Probation Delivery Unit')
 
     link = await $('[href="' + regionDefaultUrl + '"]')
     await link.click()
 
     pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
-    expect(text).to.equal('Division')
+    expect(text).to.equal('Region')
 
     link = await $('[href="' + nationalDefaultUrl + '"]')
     await link.click()

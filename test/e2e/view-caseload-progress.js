@@ -100,7 +100,7 @@ describe('View caseload progress flow', () => {
 
     const pageTitle = await $('.govuk-caption-xl')
     const text = await pageTitle.getText()
-    expect(text).to.equal('LDU Cluster')
+    expect(text).to.equal('Probation Delivery Unit')
   })
 
   it('should navigate to the region caseload progress screen', async () => {
@@ -128,7 +128,7 @@ describe('View caseload progress flow', () => {
 
     const pageTitle = await $('.govuk-caption-xl')
     const text = await pageTitle.getText()
-    expect(text).to.equal('Division')
+    expect(text).to.equal('Region')
   })
 
   it('should navigate to the national caseload progress screen', async () => {

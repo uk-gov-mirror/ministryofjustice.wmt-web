@@ -64,14 +64,14 @@ describe('View overview', function () {
     await browser.url(regionDefaultUrl + '/overview')
     const element = await $('.sln-table-org-level')
     const text = await element.getText()
-    expect(text).to.equal('LDU Cluster')
+    expect(text).to.equal('Probation Delivery Unit')
   })
 
   it('should navigate to the national overview page', async function () {
     await browser.url(nationalDefaultUrl + '/overview')
     const element = await $('.sln-table-org-level')
     const text = await element.getText()
-    expect(text).to.equal('Division')
+    expect(text).to.equal('Region')
   })
 
   it('should not include the reductions export for staff at team level', async function () {
@@ -139,13 +139,13 @@ describe('View overview', function () {
 
     pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
-    expect(text).to.equal('Division')
+    expect(text).to.equal('Region')
     link = await $('[href="' + lduDefaultUrl + '"]')
     await link.click()
 
     pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
-    expect(text).to.equal('LDU Cluster')
+    expect(text).to.equal('Probation Delivery Unit')
     link = await $('[href="' + teamDefaultUrl + '"]')
     await link.click()
 
@@ -196,7 +196,7 @@ describe('View overview', function () {
 
     pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
-    expect(text).to.equal('LDU Cluster')
+    expect(text).to.equal('Probation Delivery Unit')
 
     link = await $('[href="' + regionDefaultUrl + '"]')
     exists = await link.isExisting()
@@ -206,7 +206,7 @@ describe('View overview', function () {
 
     pageTitle = await $('.govuk-caption-xl')
     text = await pageTitle.getText()
-    expect(text).to.equal('Division')
+    expect(text).to.equal('Region')
 
     link = await $('[href="' + nationalDefaultUrl + '"]')
     exists = await link.isExisting()
