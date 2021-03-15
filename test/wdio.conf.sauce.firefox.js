@@ -10,6 +10,6 @@ exports.config = wdioConfHelper({
     maxInstances: 1,
     browserName: 'firefox',
     platformName: 'Windows 7',
-    browserVersion: '17.0'
+    browserVersion: '55'
   }]
 })
