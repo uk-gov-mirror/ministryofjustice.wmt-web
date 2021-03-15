@@ -1,7 +1,6 @@
 const authentication = require('./authentication')
 const config = require('../config')
 const express = require('express')
-const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
 const expressSanitized = require('express-sanitized')
 const helmet = require('helmet')
@@ -51,9 +50,6 @@ nunjucksObj.env.addFilter('isObject', function (obj) {
 })
 
 app.use('/public', express.static(path.join(__dirname, 'public')))
-app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_template')))
-app.use('/public', express.static(path.join(__dirname, 'govuk_modules', 'govuk_frontend_toolkit')))
-app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images', 'favicon.ico')))
 
 // Cookie session
 app.set('trust proxy', 1) // trust first proxy
@@ -126,7 +122,7 @@ app.use(function (err, req, res, next) {
 })
 
 // Development error handler.
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   logger.error({ error: err })
   res.status(err.status || 500)
   if (err.status === 404) {
