@@ -28,6 +28,18 @@ class ReductionReason {
     FieldValidator(this.category, 'category', errors)
       .isRequired()
 
+    if (this.isBlank(this.maxAllowancePercentage)) {
+      this.maxAllowancePercentage = null
+    }
+
+    if (this.isBlank(this.allowancePercentage)) {
+      this.allowancePercentage = null
+    }
+
+    if (this.isBlank(this.monthsToExpiry)) {
+      this.monthsToExpiry = null
+    }
+
     if (this.maxAllowancePercentage) {
       FieldValidator(this.maxAllowancePercentage, 'maxAllowancePercentage', errors)
         .isFloat(0.01, 100)
@@ -58,6 +70,10 @@ class ReductionReason {
     if (validationErrors) {
       throw new ValidationError(validationErrors)
     }
+  }
+
+  isBlank (field) {
+    return field === ''
   }
 }
 
