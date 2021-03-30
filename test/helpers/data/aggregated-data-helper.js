@@ -587,6 +587,12 @@ module.exports.deleteLastRecordFromTables = function (tables) {
   })
 }
 
+module.exports.deleteRecordsFromTableForIds = function (table, ids) {
+  return knex(table)
+    .whereIn('id', ids)
+    .del()
+}
+
 module.exports.getLastRecordFromTable = function (table) {
   return knex(table)
     .orderBy('id', 'desc')
