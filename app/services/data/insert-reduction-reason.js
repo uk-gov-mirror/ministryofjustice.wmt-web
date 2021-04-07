@@ -1,15 +1,9 @@
 const knex = require('../../../knex').web
+const createReductionReasonDBObject = require('../helpers/create-reduction-reason-db-object')
 
-module.exports = function (updatedReductionReason) {
+module.exports = function (reductionReason) {
+  const insertObject = createReductionReasonDBObject(reductionReason)
   return knex('reduction_reason')
-    .insert({
-      reason: updatedReductionReason.reason,
-      reason_short_name: updatedReductionReason.reasonShortName,
-      category_id: updatedReductionReason.category,
-      allowance_percentage: updatedReductionReason.allowancePercentage,
-      max_allowance_percentage: updatedReductionReason.maxAllowancePercentage,
-      months_to_expiry: updatedReductionReason.monthsToExpiry,
-      is_enabled: updatedReductionReason.isEnabled
-    })
+    .insert(insertObject)
     .returning('id')
 }
