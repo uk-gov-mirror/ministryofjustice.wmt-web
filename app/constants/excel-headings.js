@@ -1,4 +1,4 @@
-// WMT0160: add new tiers
+// WMT0229: add new tiers
 const caseHeaders = [
   'Com Untiered',
   'Com G',

@@ -4,8 +4,8 @@ const { Parser } = require('json2csv')
 const tabs = require('../constants/wmt-tabs')
 
 // WMT0160 - Change next 2 lines
-const CASELOAD_FIELDS = ['name', 'gradeCode', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'e', 'f', 'g', 'untiered', 'totalCases']
-const CASELOAD_TEAM_FIELDS = ['name', 'grade', 'a', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'e', 'f', 'g', 'untiered', 'totalCases']
+const CASELOAD_FIELDS = ['name', 'gradeCode', 'a3', 'a2', 'a1', 'a0', 'b3', 'b2', 'b1', 'b0', 'c3', 'c2', 'c1', 'c0', 'd3', 'd2', 'd1', 'd0', 'untiered', 'totalCases']
+const CASELOAD_TEAM_FIELDS = ['name', 'grade', 'a3', 'a2', 'a1', 'a0', 'b3', 'b2', 'b1', 'b0', 'c3', 'c2', 'c1', 'c0', 'd3', 'd2', 'd1', 'd0', 'untiered', 'totalCases']
 const OM_OVERVIEW_FIELDS = ['regionName', 'lduCluster', 'teamName', 'grade', 'capacity', 'cases', 'contractedHours', 'reduction', 'cmsAdjustmentPoints', 'cmsPercentage']
 const OM_OVERVIEW_FIELD_NAMES = ['Region', 'Probation Delivery Unit', 'Team Name', 'Grade Code', 'Capacity Percentage', 'Total Cases', 'Contracted Hours', 'Reduction Hours', 'CMS Points', 'CMS Percentage']
 const ORG_OVERVIEW_FIELDS = ['lduCluster', 'teamName', 'offenderManager', 'gradeCode', 'capacityPercentage', 'availablePoints', 'totalPoints', 'remainingPoints', 'contractedHours', 'reductionHours', 'totalCases', 'cmsAdjustmentPoints', 'cmsPercentage']
@@ -133,7 +133,7 @@ const getFields = function (organisationLevel, tab) {
         fields = CASELOAD_FIELDS
       }
       // WMT0160 - Change this
-      fieldNames = [childOrgForFieldName + ' Name', 'Grade', 'A', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'E', 'F', 'G', 'Untiered', 'Overall']
+      fieldNames = [childOrgForFieldName + ' Name', 'Grade', 'A3', 'A2', 'A1', 'A0', 'B3', 'B2', 'B1', 'B0', 'C3', 'C2', 'C1', 'C0', 'D3', 'D2', 'D1', 'D0', 'Untiered', 'Overall']
       break
     case tabs.OVERVIEW:
       if (organisationLevel === organisationUnitConstants.OFFENDER_MANAGER.name) {
@@ -231,16 +231,25 @@ const getCsv = function (organisationLevel, result, tab, fields, fieldNames) {
         overallByGradeTable.forEach(function (row) {
           row.totalCases = row.totalCases.toFixed(2) + '%'
           row.untiered = row.untiered.toFixed(2) + '%'
-          row.g = row.g.toFixed(2) + '%'
-          row.f = row.f.toFixed(2) + '%'
-          row.e = row.e.toFixed(2) + '%'
-          row.d2 = row.d2.toFixed(2) + '%'
+          row.d0 = row.d0.toFixed(2) + '%'
           row.d1 = row.d1.toFixed(2) + '%'
-          row.c2 = row.c2.toFixed(2) + '%'
+          row.d2 = row.d2.toFixed(2) + '%'
+          row.d3 = row.d3.toFixed(2) + '%'
+
+          row.c0 = row.c0.toFixed(2) + '%'
           row.c1 = row.c1.toFixed(2) + '%'
-          row.b2 = row.b2.toFixed(2) + '%'
+          row.c2 = row.c2.toFixed(2) + '%'
+          row.c3 = row.c3.toFixed(2) + '%'
+
+          row.b0 = row.b0.toFixed(2) + '%'
           row.b1 = row.b1.toFixed(2) + '%'
-          row.a = row.a.toFixed(2) + '%'
+          row.b2 = row.b2.toFixed(2) + '%'
+          row.b3 = row.b3.toFixed(2) + '%'
+
+          row.a0 = row.a0.toFixed(2) + '%'
+          row.a1 = row.a1.toFixed(2) + '%'
+          row.a2 = row.a2.toFixed(2) + '%'
+          row.a3 = row.a3.toFixed(2) + '%'
         })
         const overallByGradeCsv = generateCsv(overallByGradeTable, fields, fieldNames)
 
@@ -317,16 +326,22 @@ const parseCaseloadDetailsTable = function (caseloadDetails) {
         gradeCode: teamGrade.grade,
         totalCases: teamGrade.totalCases,
         untiered: teamGrade.untiered,
-        g: teamGrade.g,
-        f: teamGrade.f,
-        e: teamGrade.e,
-        d2: teamGrade.d2,
+        d0: teamGrade.d0,
         d1: teamGrade.d1,
-        c2: teamGrade.c2,
+        d2: teamGrade.d2,
+        d3: teamGrade.d3,
+        c0: teamGrade.c0,
         c1: teamGrade.c1,
-        b2: teamGrade.b2,
+        c2: teamGrade.c2,
+        c3: teamGrade.c3,
+        b0: teamGrade.b0,
         b1: teamGrade.b1,
-        a: teamGrade.a
+        b2: teamGrade.b2,
+        b3: teamGrade.b3,
+        a0: teamGrade.a0,
+        a1: teamGrade.a1,
+        a2: teamGrade.a2,
+        a3: teamGrade.a3
       })
     }
   }

@@ -13,16 +13,22 @@ module.exports = function (id, type) {
     'total_cases AS totalCases',
     'location AS caseType',
     'untiered',
-    'g',
-    'f',
-    'e',
-    'd2',
+    'd0',
     'd1',
-    'c2',
+    'd2',
+    'd3',
+    'c0',
     'c1',
-    'b2',
+    'c2',
+    'c3',
+    'b0',
     'b1',
-    'a'
+    'b2',
+    'b3',
+    'a0',
+    'a1',
+    'a2',
+    'a3'
   ]
 
   const requiresWorkloadOwnerName = (type === ORGANISATION_UNIT.TEAM.name)

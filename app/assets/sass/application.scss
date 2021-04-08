@@ -150,11 +150,11 @@ tr.shown td.details-control {
 @import '_vendor/button';
 
 .govuk-width-container {
-  max-width: 1100px;
+  max-width: 1400px;
 }
 
 .govuk-table {
-  max-width: 1100px;
+  max-width: 1400px;
 }
 
 .data-item {
@@ -199,4 +199,12 @@ tr.shown td.details-control {
 
 .dataTables_info, .dataTables_length, .dataTables_paginate, .dataTables_processing, .dataTables_filter, .select2-selection__choice, .select2-results__option {
   font-family: "nta", Arial, sans-serif;
+}
+
+#caseload-data-table td{
+  font-size: 13px;
+}
+
+#caseload-data-table th{
+  font-size: 13px;
 }
