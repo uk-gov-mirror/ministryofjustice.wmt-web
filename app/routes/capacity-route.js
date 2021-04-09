@@ -78,7 +78,87 @@ module.exports = function (router) {
               capacity: capacityBreakdown.capacityTable,
               stringifiedCapacity: stringifyCapacityData(capacityBreakdown.capacityTable),
               errors: errors,
-              query: req.query,
+              capacityBreakdown: capacityBreakdown.capacityBreakdown,
+              outstandingReports: outstandingReports,
+              caseDetails: caseDetails,
+              childOrganisationLevel: orgUnit.childOrganisationLevel,
+              childOrganisationLevelDisplayText: childOrgUnitDisplayText,
+              organisationLevel: organisationLevel,
+              date: result.date,
+              userRole: authorisedUserRole.userRole, // used by proposition-link for the admin role
+              authorisation: authorisedUserRole.authorisation, // used by proposition-link for the admin role
+              workloadType: workloadTypes.PROBATION
+            })
+          })
+        })
+      })
+    }).catch(function (error) {
+      if (error.message.includes("Hint 'noexpand'") && error.message.includes('is invalid')) {
+        const subNav = getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole)
+        renderWMTUpdatingPage(res, authorisedUserRole.userRole, authorisedUserRole.authorisation, subNav)
+      } else {
+        next(error)
+      }
+    })
+  })
+
+  router.post('/' + workloadTypes.PROBATION + '/:organisationLevel/:id/caseload-capacity', function (req, res, next) {
+    try {
+      authorisation.assertUserAuthenticated(req)
+    } catch (error) {
+      if (error instanceof Unauthorized) {
+        return res.status(error.statusCode).redirect(error.redirect)
+      }
+    }
+
+    let capacityDateRange
+    let errors
+
+    try {
+      capacityDateRange = dateRangeHelper.createCapacityDateRange(req.body)
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        errors = error.validationErrors
+        capacityDateRange = dateRangeHelper.createCapacityDateRange({})
+      } else {
+        throw error
+      }
+    }
+
+    const organisationLevel = req.params.organisationLevel
+    let id
+
+    if (organisationLevel !== organisationUnit.NATIONAL.name) {
+      id = req.params.id
+    }
+
+    const orgUnit = getOrganisationUnit('name', organisationLevel)
+    let childOrgUnitDisplayText
+    if (organisationLevel !== organisationUnit.OFFENDER_MANAGER.name) {
+      childOrgUnitDisplayText = getOrganisationUnit('name', orgUnit.childOrganisationLevel).displayText
+    }
+
+    const authorisedUserRole = authorisation.getAuthorisedUserRole(req)
+
+    return getCapacityView(id, capacityDateRange, organisationLevel).then(function (result) {
+      const capacityBreakdown = result
+      return getOutstandingReports(id, organisationLevel).then(function (result) {
+        const outstandingReports = result
+        return getCaseDetailsView(id, organisationLevel).then(function (result) {
+          const caseDetails = result
+          return getLastUpdated().then(function (result) {
+            lastUpdated = dateFormatter.formatDate(result.date_processed, 'DD-MM-YYYY HH:mm')
+            result.date = lastUpdated
+            return res.render('capacity', {
+              screen: 'capacity',
+              linkId: id,
+              title: capacityBreakdown.title,
+              subTitle: capacityBreakdown.subTitle,
+              subNav: getSubNav(id, organisationLevel, req.path, workloadTypes.PROBATION, authorisedUserRole.authorisation, authorisedUserRole.userRole),
+              breadcrumbs: capacityBreakdown.breadcrumbs,
+              capacity: capacityBreakdown.capacityTable,
+              stringifiedCapacity: stringifyCapacityData(capacityBreakdown.capacityTable),
+              errors: errors,
               capacityBreakdown: capacityBreakdown.capacityBreakdown,
               outstandingReports: outstandingReports,
               caseDetails: caseDetails,
