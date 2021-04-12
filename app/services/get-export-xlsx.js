@@ -126,9 +126,9 @@ const setTierWeightings = function (ws, styles, points) {
   }
   let count = 0
   let i
-  for (i = 0; i < 33; i++) {
+  for (i = 0; i < (tiersPerType * 3); i++) {
     const styleToApply = determineStyles.determineWeightingStyle(start, styles)
-    switch (i % 11) {
+    switch (i % tiersPerType) {
       case 0:
         ws.cell(4, start).number(0).style(styleToApply)
         ws.cell(4, start + 1).number(0).style(styleToApply)

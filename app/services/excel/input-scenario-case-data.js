@@ -20,13 +20,7 @@ const inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
     columnStart = columnStart + typeTierGroupLength
 
-    for (let i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
-      casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
-      casesForThisTier = casesForThisTier[0]
-      setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
-      columnStart = columnStart + typeTierGroupLength
-    }
-    for (let i = 1; i < tiersPerType - 3; i++) {
+    for (let i = tiersPerType - 1; i >= 1; i--) {
       casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
@@ -38,13 +32,7 @@ const inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
     columnStart = columnStart + typeTierGroupLength
 
-    for (let i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
-      casesForThisTier = c.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
-      casesForThisTier = casesForThisTier[0]
-      setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
-      columnStart = columnStart + typeTierGroupLength
-    }
-    for (let i = 1; i < tiersPerType - 3; i++) {
+    for (let i = tiersPerType - 1; i >= 1; i--) {
       casesForThisTier = c.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
@@ -56,13 +44,7 @@ const inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
     columnStart = columnStart + typeTierGroupLength
 
-    for (let i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
-      casesForThisTier = c.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
-      casesForThisTier = casesForThisTier[0]
-      setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
-      columnStart = columnStart + typeTierGroupLength
-    }
-    for (let i = 1; i < tiersPerType - 3; i++) {
+    for (let i = tiersPerType - 1; i >= 1; i--) {
       casesForThisTier = c.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, false)
@@ -75,13 +57,7 @@ const inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
     columnStart = columnStart + typeTierGroupLength
 
-    for (let i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
-      casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
-      casesForThisTier = casesForThisTier[0]
-      setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
-      columnStart = columnStart + typeTierGroupLength
-    }
-    for (let i = 1; i < tiersPerType - 3; i++) {
+    for (let i = tiersPerType - 1; i >= 1; i--) {
       casesForThisTier = c.communityCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
@@ -93,13 +69,7 @@ const inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
     columnStart = columnStart + typeTierGroupLength
 
-    for (let i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
-      casesForThisTier = c.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
-      casesForThisTier = casesForThisTier[0]
-      setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
-      columnStart = columnStart + typeTierGroupLength
-    }
-    for (let i = 1; i < tiersPerType - 3; i++) {
+    for (let i = tiersPerType - 1; i >= 1; i--) {
       casesForThisTier = c.licenceCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
@@ -111,13 +81,7 @@ const inputCaseData = function (ws, cases, typeTierGroupLength, tiersPerType) {
     setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
     columnStart = columnStart + typeTierGroupLength
 
-    for (let i = tiersPerType - 1; i >= tiersPerType - 3; i--) {
-      casesForThisTier = c.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
-      casesForThisTier = casesForThisTier[0]
-      setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
-      columnStart = columnStart + typeTierGroupLength
-    }
-    for (let i = 1; i < tiersPerType - 3; i++) {
+    for (let i = tiersPerType - 1; i >= 1; i--) {
       casesForThisTier = c.custodyCaseNumbers.filter(thisCase => thisCase.tier === i)
       casesForThisTier = casesForThisTier[0]
       setTierTotals(ws, rowStart, columnStart, casesForThisTier, true)
@@ -180,8 +144,10 @@ const totalPointsFormulaPart1 = function (row) {
   let secondLetter
   let char1
   let char2
+  // A,B,C,D,E,F,G,H
+  // 0,1,2,3,4,5,6,7
   // Deal with AA..AZ columns to GA..GZ columns next in a nested loop
-  for (firstLetter = 0; firstLetter < 5; firstLetter++) {
+  for (firstLetter = 0; firstLetter < 7; firstLetter++) {
     for (secondLetter = 0; secondLetter < 26; secondLetter++) {
       char1 = String.fromCharCode(firstLetter + 65)
       char2 = String.fromCharCode(secondLetter + 65)
@@ -189,8 +155,14 @@ const totalPointsFormulaPart1 = function (row) {
     }
   }
 
+  firstLetter = 7
+  for (secondLetter = 0; secondLetter < 21; secondLetter++) {
+    char1 = String.fromCharCode(firstLetter + 65)
+    char2 = String.fromCharCode(secondLetter + 65)
+    formula = formula + ',$' + char1 + char2 + '$' + 4 + '*' + char1 + char2 + row
+  }
   // Close Formula
-  formula = formula + ',$FA$4*FA' + row + ')'
+  formula = formula + ')'
   return formula
 }
 
@@ -203,14 +175,16 @@ const totalPointsFormulaPart2 = function (row) {
   let secondLetter
   let char1
   let char2
-  firstLetter = 5
-  for (secondLetter = 1; secondLetter < 26; secondLetter++) {
+  // A,B,C,D,E,F,G,H,I,J,K, L, M, N, O, P
+  // 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+  firstLetter = 7
+  for (secondLetter = 21; secondLetter < 26; secondLetter++) {
     char1 = String.fromCharCode(firstLetter + 65)
     char2 = String.fromCharCode(secondLetter + 65)
     formula = formula + '$' + char1 + char2 + '$' + 4 + '*' + char1 + char2 + row + ','
   }
   // Deal with AA..AZ columns to GA..GZ columns next in a nested loop
-  for (firstLetter = 6; firstLetter < 10; firstLetter++) {
+  for (firstLetter = 8; firstLetter < 15; firstLetter++) {
     for (secondLetter = 0; secondLetter < 26; secondLetter++) {
       char1 = String.fromCharCode(firstLetter + 65)
       char2 = String.fromCharCode(secondLetter + 65)
@@ -218,12 +192,38 @@ const totalPointsFormulaPart2 = function (row) {
     }
   }
 
-  formula = formula + '$KA$4*KA' + row + ',$KB$4*KB' + row + ',$KC$4*KC' + row + ')'
+  firstLetter = 15
+  for (secondLetter = 0; secondLetter < 17; secondLetter++) {
+    char1 = String.fromCharCode(firstLetter + 65)
+    char2 = String.fromCharCode(secondLetter + 65)
+    formula = formula + ',$' + char1 + char2 + '$' + 4 + '*' + char1 + char2 + row
+  }
+
+  formula = formula + ')'
   return formula
 }
 
 const totalCasesFormula = function (row) {
-  return '=SUM(Z' + row + ',AD' + row + ',AH' + row + ',AL' + row + ',AP' + row + ',AT' + row + ',AX' + row + ',BB' + row + ',BF' + row + ',BJ' + row + ',BN' + row + ',BR' + row + ',BV' + row + ',BZ' + row + ',CD' + row + ',CH' + row + ',CL' + row + ',CP' + row + ',CT' + row + ',CX' + row + ',DB' + row + ',DF' + row + ',DJ' + row + ',DN' + row + ',DR' + row + ',DV' + row + ',DZ' + row + ',ED' + row + ',EH' + row + ',EL' + row + ',EP' + row + ',ET' + row + ',EX' + row + ',FB' + row + ',FF' + row + ',FJ' + row + ',FN' + row + ',FR' + row + ',FV' + row + ',FZ' + row + ',GD' + row + ',GH' + row + ',GL' + row + ',GP' + row + ',GT' + row + ',GX' + row + ',HB' + row + ',HF' + row + ',HJ' + row + ',HN' + row + ',HR' + row + ',HV' + row + ',HZ' + row + ',ID' + row + ',IH' + row + ',IL' + row + ',IP' + row + ',IT' + row + ',IX' + row + ',JB' + row + ',JF' + row + ',JJ' + row + ',JN' + row + ',JR' + row + ',JV' + row + ',JZ' + row + ')'
+  let formula = '=SUM(Z' + row
+  let firstLetter = 0
+  let lastChar2 = 68
+  let secondLetter = 3
+  let char1
+  let char2
+  const lastCasesCellNumber = 403
+  while (secondLetter <= lastCasesCellNumber) {
+    if (lastChar2 > ((secondLetter % 26) + 65)) {
+      firstLetter++
+    }
+    lastChar2 = (secondLetter % 26) + 65
+    char1 = String.fromCharCode(firstLetter + 65)
+    char2 = String.fromCharCode((secondLetter % 26) + 65)
+    formula = formula + ',' + char1 + char2 + row
+    secondLetter += 4
+  }
+  formula = formula + ')'
+  return formula
+  // return '=SUM(Z' + row + ',AD' + row + ',AH' + row + ',AL' + row + ',AP' + row + ',AT' + row + ',AX' + row + ',BB' + row + ',BF' + row + ',BJ' + row + ',BN' + row + ',BR' + row + ',BV' + row + ',BZ' + row + ',CD' + row + ',CH' + row + ',CL' + row + ',CP' + row + ',CT' + row + ',CX' + row + ',DB' + row + ',DF' + row + ',DJ' + row + ',DN' + row + ',DR' + row + ',DV' + row + ',DZ' + row + ',ED' + row + ',EH' + row + ',EL' + row + ',EP' + row + ',ET' + row + ',EX' + row + ',FB' + row + ',FF' + row + ',FJ' + row + ',FN' + row + ',FR' + row + ',FV' + row + ',FZ' + row + ',GD' + row + ',GH' + row + ',GL' + row + ',GP' + row + ',GT' + row + ',GX' + row + ',HB' + row + ',HF' + row + ',HJ' + row + ',HN' + row + ',HR' + row + ',HV' + row + ',HZ' + row + ',ID' + row + ',IH' + row + ',IL' + row + ',IP' + row + ',IT' + row + ',IX' + row + ',JB' + row + ',JF' + row + ',JJ' + row + ',JN' + row + ',JR' + row + ',JV' + row + ',JZ' + row + ')'
 }
 
 // Add formulas to Cells C to U (Data below "Total Cases" Column to "Current % Capacity" Column in produced spreadsheet)
@@ -279,7 +279,7 @@ const inputBottomTotals = function (ws, row) {
   let char1
   let char2
   // WMT0160: Update this too
-  for (firstLetter = 0; firstLetter < 10; firstLetter++) {
+  for (firstLetter = 0; firstLetter < 15; firstLetter++) {
     for (secondLetter = 0; secondLetter < 26; secondLetter++) {
       char1 = String.fromCharCode(firstLetter + 65)
       char2 = String.fromCharCode(secondLetter + 65)
@@ -287,8 +287,8 @@ const inputBottomTotals = function (ws, row) {
       columnNo = columnNo + 1
     }
   }
-  for (secondLetter = 0; secondLetter < 8; secondLetter++) {
-    char1 = 'K'
+  for (secondLetter = 0; secondLetter < 22; secondLetter++) {
+    char1 = 'P'
     char2 = String.fromCharCode(secondLetter + 65)
     ws.cell(row, columnNo).formula('=SUM(' + char1 + char2 + 5 + ':' + char1 + char2 + dataEndRow + ')').style(this.styles.sumStyle)
     columnNo = columnNo + 1
