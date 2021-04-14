@@ -58,7 +58,6 @@ describe('View your caseload capacity flow', () => {
         throw error
       }
     }
-
   })
 
   it('should navigate to the team caseload capacity screen', async () => {
