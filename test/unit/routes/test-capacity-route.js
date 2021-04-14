@@ -13,13 +13,14 @@ const REGION_CAPACITY_URI_MISSING_ID = '/' + workloadTypes.PROBATION + '/region/
 const TEAM_CAPACITY_URI = '/' + workloadTypes.PROBATION + '/team/1/caseload-capacity'
 const LDU_CAPACITY_URI = '/' + workloadTypes.PROBATION + '/ldu/1/caseload-capacity'
 
-const CAPACITY_FROM_DAY = 'capacity-from-day='
-const CAPACITY_FROM_MONTH = 'capacity-from-month='
-const CAPACITY_FROM_YEAR = 'capacity-from-year='
-
-const CAPACITY_TO_DAY = 'capacity-to-day='
-const CAPACITY_TO_MONTH = 'capacity-to-month='
-const CAPACITY_TO_YEAR = 'capacity-to-year='
+const dateToPost = {
+  'capacity-from-day': '01',
+  'capacity-from-month': '01',
+  'capacity-from-year': '2017',
+  'capacity-to-day': '03',
+  'capacity-to-month': '03',
+  'capacity-to-year': '2017'
+}
 
 describe('/caseload-capacity', function () {
   let app
@@ -51,16 +52,11 @@ describe('/caseload-capacity', function () {
   })
 
   describe('/probation/ldu/{id}/caseload-capacity', function () {
-    it('should respond with 200 when ldu and id is used with date parameters', function () {
+    it('should post the correct data and respond with 200 when ldu and id is used with date parameters', function () {
       getCapacityStub.resolves(capacityStubResult)
       return supertest(app)
-        .get(LDU_CAPACITY_URI + '?' +
-        CAPACITY_FROM_DAY + '01&' +
-        CAPACITY_FROM_MONTH + '01&' +
-        CAPACITY_FROM_YEAR + '2017&' +
-        CAPACITY_TO_DAY + '31&' +
-        CAPACITY_TO_MONTH + '03&' +
-        CAPACITY_TO_YEAR + '2017')
+        .post(LDU_CAPACITY_URI)
+        .send(dateToPost)
         .expect(200)
     })
 

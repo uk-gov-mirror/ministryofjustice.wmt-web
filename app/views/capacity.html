@@ -11,7 +11,8 @@
 
 {% include "includes/validation-error-messages.html" %}
 
-<form method="get">
+<form method="post">
+  {% include "includes/csrf-hidden-input.html"%}
     <input id="capacityTable" type="hidden" name="capacityTable" value="{{ stringifiedCapacity }}">
 
     <div class="govuk-form-group  {% if errors['capacityFromDate'][0] %} govuk-form-group--error {% endif %}">
