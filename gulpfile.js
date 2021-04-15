@@ -1,6 +1,7 @@
 const gulp = require('gulp')
 const path = require('path')
 const gulpNSP = require('gulp-nsp')
+const sass = require('gulp-sass')
 const spawn = require('child_process').spawn
 const rename = require('gulp-rename')
 
@@ -35,6 +36,11 @@ gulp.task('sync', function (done) {
 
 gulp.task('sass', function (done) {
   gulp.src('app/assets/sass/**/*.scss')
+    .pipe(sass({
+      style: 'expanded',
+      sourcemap: true,
+      outputStyle: 'expanded'
+    }).on('error', sass.logError))
     .pipe(gulp.dest('app/public/stylesheets'))
   done()
 })
