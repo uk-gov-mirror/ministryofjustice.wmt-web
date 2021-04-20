@@ -231,11 +231,11 @@ const inputMainBodyFormulas = function (ws, row) {
   ws.cell(row, 6).formula(totalCasesFormula(row)).style(this.styles.nonEditableCaseStyle) // Total Cases
   ws.cell(row, 12).formula('=IFERROR((K' + row + '/W' + row + '),0)').style(this.styles.percentageStyle) // CMS %
   ws.cell(row, 14).formula('=IFERROR((M' + row + '/V' + row + '),0)').style(this.styles.percentageStyle) // GS %
-  ws.cell(row, 15).formula('=KD' + row + '*$KD$4').style(this.styles.nonEditableCaseStyle) // SDR Points
-  ws.cell(row, 16).formula('=KE' + row + '*$KE$4').style(this.styles.nonEditableCaseStyle) // FDR Points
-  ws.cell(row, 17).formula('=KF' + row + '*$KF$4').style(this.styles.nonEditableCaseStyle) // Parom Points
-  ws.cell(row, 18).formula('=KG' + row + '*$KG$4').style(this.styles.nonEditableCaseStyle) // ARMS Comm Points
-  ws.cell(row, 19).formula('=KH' + row + '*$KH$4').style(this.styles.nonEditableCaseStyle) // ARMS Licence Points
+  ws.cell(row, 15).formula('=PR' + row + '*$PR$4').style(this.styles.nonEditableCaseStyle) // SDR Points
+  ws.cell(row, 16).formula('=PS' + row + '*$PS$4').style(this.styles.nonEditableCaseStyle) // FDR Points
+  ws.cell(row, 17).formula('=PT' + row + '*$PT$4').style(this.styles.nonEditableCaseStyle) // Parom Points
+  ws.cell(row, 18).formula('=PU' + row + '*$PU$4').style(this.styles.nonEditableCaseStyle) // ARMS Comm Points
+  ws.cell(row, 19).formula('=PV' + row + '*$PV$4').style(this.styles.nonEditableCaseStyle) // ARMS Licence Points
   ws.cell(row, 20).formula(totalPointsFormulaPart1(row)).style(this.styles.nonEditableCaseStyle) // Total Caseload Points - Non T2A
   ws.cell(row, 21).formula(totalPointsFormulaPart2(row)).style(this.styles.nonEditableCaseStyle) // Total Caseload Points - T2A
   ws.cell(row, 22).formula('=SUM(K' + row + ',M' + row + ',O' + row + ':U' + row + ')').style(this.styles.nonEditableCaseStyle) // Overall Total Points
