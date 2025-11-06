@@ -85,7 +85,7 @@
     "@ministryofjustice/frontend": "3.7.2",
     "@ministryofjustice/hmpps-probation-frontend-components": "^1.0.0",
     "agentkeepalive": "4.2.1",
-    "applicationinsights": "2.9.7",
+    "applicationinsights": "3.12.0",
     "axios": "^1.12.0",
     "axios-retry": "3.3.1",
     "bunyan": "1.8.15",
