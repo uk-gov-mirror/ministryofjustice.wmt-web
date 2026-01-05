@@ -10,7 +10,7 @@ services:
     ports:
       - '6379:6379'
   hmpps-auth:
-    image: quay.io/hmpps/hmpps-auth:latest
+    image: ghcr.io/ministryofjustice/hmpps-auth:latest
     networks:
       - hmpps
     container_name: hmpps-auth
@@ -38,7 +38,7 @@ services:
     ports:
       - "9096:8080"
   hmpps-manage-users-api:
-    image: quay.io/hmpps/hmpps-manage-users-api:2024-10-14.5975.1d02d86
+    image: ghcr.io/ministryofjustice/hmpps-manage-users-api:2024-10-14.5975.1d02d86
     networks:
       - hmpps
     container_name: hmpps-manage-users-api
@@ -59,7 +59,7 @@ services:
       - "postgres"
 
   hmpps-external-users-api:
-    image: quay.io/hmpps/hmpps-external-users-api:latest
+    image: ghcr.io/ministryofjustice/hmpps-external-users-api:latest
     container_name: hmpps-external-users-api
     depends_on:
       - hmpps-auth
