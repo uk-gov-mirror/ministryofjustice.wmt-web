@@ -60,7 +60,7 @@ jobs:
       - name: Install deps
         if: steps.restore-cache.outputs.cache-hit != 'true'
         working-directory: ${{ env.PROJECT_DIR }}
-        run: npm ci --no-audit
+        run: npm run setup
 
       - name: Build
         working-directory: ${{ env.PROJECT_DIR }}

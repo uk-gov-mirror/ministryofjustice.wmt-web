@@ -35,7 +35,8 @@
     "watch-sass": "npm run compile-sass -- --watch",
     "njk-dev": "npm run njk-view && concurrently -k -p \"[{name}]\" -n \"Views,TypeScript,Node,Sass\" -c \"yellow.bold,cyan.bold,green.bold,blue.bold\" \"npm run watch-views\" \"npm run watch-sass\" \"npm run watch-njk-dev\"",
     "compare-exports": "node ./exportCompare/compareExports.js",
-    "post-wiremock-mappings": "for file in test/e2e/resources/wiremock/mappings/*.json; do curl --request POST --url http://localhost:8099/__admin/mappings --header 'content-type: application/json' --data-binary @$file; done"
+    "post-wiremock-mappings": "for file in test/e2e/resources/wiremock/mappings/*.json; do curl --request POST --url http://localhost:8099/__admin/mappings --header 'content-type: application/json' --data-binary @$file; done",
+    "setup": "npm ci && hmpps-npm-script-run-allowlist"
   },
   "standard": {
     "ignore": [
@@ -57,6 +58,7 @@
     ]
   },
   "devDependencies": {
+    "@ministryofjustice/hmpps-npm-script-allowlist": "0.0.3",
     "@wdio/cli": "9.15.0",
     "@wdio/local-runner": "9.15.0",
     "@wdio/mocha-framework": "9.15.0",
