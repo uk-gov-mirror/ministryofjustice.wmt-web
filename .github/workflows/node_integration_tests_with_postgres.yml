@@ -28,7 +28,7 @@ jobs:
           --health-cmd="pg_isready -U postgres -d postgres"
           --health-interval=5s --health-timeout=5s --health-retries=20
       localstack:
-        image: localstack/localstack:latest
+        image: localstack/localstack:4.14
         ports: [ "4566:4566" ]
         env:
           SERVICES: s3,sqs,sns
@@ -167,7 +167,7 @@ jobs:
           --health-interval=5s --health-timeout=5s --health-retries=20
 
       localstack:
-        image: localstack/localstack:latest
+        image: localstack/localstack:4.14
         ports: [ "4566:4566" ]
         env:
           SERVICES: s3,sqs,sns

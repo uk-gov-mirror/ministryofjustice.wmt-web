@@ -130,7 +130,7 @@ services:
       - "8099:8099"
     command: ["--port","8099","--global-response-templating"]
   localstack:
-    image: localstack/localstack:4.5.0
+    image: localstack/localstack:4.14
     networks:
       - hmpps
     container_name: wmt-web-localstack
