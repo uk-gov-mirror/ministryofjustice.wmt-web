@@ -43,7 +43,7 @@ jobs:
       LS: http://127.0.0.1:4566
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Start WireMock (global response templating)
         run: |
@@ -133,7 +133,7 @@ jobs:
           echo "Schema not ready in time"; docker logs hmpps_workload || true; exit 1
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: ${{ inputs.node_version_file }}
 
@@ -189,7 +189,7 @@ jobs:
       WDIO_LOG_LEVEL: debug
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       # WireMock (single instance @ 8099) — clean start with response-templating
       - name: Start WireMock (global response templating)
@@ -245,7 +245,7 @@ jobs:
           done
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: .nvmrc
 
@@ -539,7 +539,7 @@ jobs:
 
       - name: Upload E2E artifacts (on failure)
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: e2e-artifacts-failure
           path: |
