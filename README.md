@@ -1,3 +1,4 @@
+docker-compose up -d
 # Workload Measurement Tool - Web application
 
 [![CircleCI](https://circleci.com/gh/ministryofjustice/wmt-web/tree/main.svg?style=svg)](https://circleci.com/gh/ministryofjustice/wmt-web/tree/main)
@@ -17,13 +18,18 @@ On OSX (using [homebrew](https://brew.sh/)):
 
 - Go to [Docker get started](https://www.docker.com/get-started) to install Docker
 
-Install Node version 20
-- `nvm install 20`
+Install Node version 22.14.0
+- `nvm install 22.14.0`
+- `nvm use 22.14.0`
+
+This project enforces npm 10 via `engines` and `.npmrc` (`engine-strict=true`).
+If your global npm is newer, run project commands with npm 10 via `npx`:
+- `npx -y npm@10 install`
 
 ## Run application locally against Dev environment
 - It is possible to get the web application running locally to:
   - authenticate against the dev environment
-  - make networks calls to the dev environment APIs
+  - make network calls to the dev environment APIs
   - integrate with the dev databases
 - The below sections describe how to achieve all of the above...
 
@@ -32,7 +38,7 @@ Install Node version 20
 - You will notice that in your new `.env` file you have the properties that the application requires
 - You will also notice that the secret values (that are intentionally left out of `values.dev.yml` for deployments) are also intentionally not included `.env.template`
 - The placeholder values of the properties in `.env.template` will need to be swapped out for the real secrets
-- these secrets are stored in `Kubenetes` and can be accessed in the `hmpps-workload-dev` namespace in the following secrets: 
+- these secrets are stored in `Kubernetes` and can be accessed in the `hmpps-workload-dev` namespace in the following secrets:
   - `hmpps-workload`
   - `rds-history-instance-output`
   - `rds-live-instance-output`
@@ -41,9 +47,9 @@ Install Node version 20
 #### Connect to DEV DBs
 * If you have just done the previous section, you may have noticed that in your resulting `.env` file you have secrets for two databases
 * To connect to the DEV databases, we will need to port forward to both of them
-* Here is the wiki on how to port forward to dbs in general [Access the DEV RDS Database](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/other-topics/rds-external-access.html#accessing-your-rds-database)
+* Here is the wiki on how to port forward to DBs in general [Access the DEV RDS Database](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/other-topics/rds-external-access.html#accessing-your-rds-database)
 * This wiki explains how to do a single port forward to a single DB, in our case we will need to do it twice (once for each database):
-* So re this command in the wiki:
+* Use this command from the wiki:
 ```
 kubectl \
   -n [your namespace] \
@@ -75,7 +81,7 @@ port-forward-history-pod 5433:5432
 ```
 WMT_HISTORY_DB_PORT=5433
 ```
-- So, in the locally deployed application, based on this prop we will forward traffic for the history DB o 5433 (hence the second port forward being setup on that port)
+- So, in the locally deployed application, this property we forward traffic for the history DB to 5433 (hence the second port forward being set up on that port)
 
 #### Run localstack, manage-users-api and redis docker services locally
 - we can run `redis` locally as a docker container so that we do not need to integrate with the dev environment's redis datasource
@@ -113,25 +119,25 @@ exit
 - To run Unit Tests run the following command:
 ```
 npm test
+npm test
 ```
 - if you want to generate an html report so that you can view any failures vid=sually run this command:
 ```
 npm run test-generate-report
-```
 
 ### Integration Tests
-To run Integration Tests 
+To run Integration Tests
 - run docker containers
+```bash
+docker compose up -d
 ```
-docker-compose up -d
-```
+
 - jump into localstack container and run shell script (to create the localstack AWS infra)
 ```
 docker exec -it wmt-web-localstack bash
 cd /docker-entrypoint-initaws.d
 ./setup-s3.sh
 exit
-```
   - run the following command:
 ```
 npm run integration-test
@@ -139,7 +145,6 @@ npm run integration-test
 - if you want to generate an html report so that you can view any failures visually run this command instead:
 ```
 npm run integration-test-generate-report
-```
 
 ## E2E Tests
 
@@ -161,10 +166,7 @@ exit
 - post mappings to wiremock
 ```
 npm run post-wiremock-mappings
-```
 - run the following command to start the application and run the e2e tests:
 ```
 npm run start-dev
 npm run test-e2e
-
-```
