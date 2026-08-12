@@ -33,7 +33,7 @@ jobs:
         env:
           SERVICES: s3,sqs,sns
       redis:
-        image: redis:7-alpine
+        image: redis:8-alpine
         ports: [ "6379:6379" ]
 
     env:
@@ -173,7 +173,7 @@ jobs:
           SERVICES: s3,sqs,sns
 
       redis:
-        image: redis:7-alpine
+        image: redis:8-alpine
         ports: [ "6379:6379" ]
 
     env:
