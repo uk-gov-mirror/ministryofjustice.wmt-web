@@ -43,7 +43,7 @@ jobs:
       LS: http://127.0.0.1:4566
 
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Start WireMock (global response templating)
         run: |
@@ -189,7 +189,7 @@ jobs:
       WDIO_LOG_LEVEL: debug
 
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       # WireMock (single instance @ 8099) — clean start with response-templating
       - name: Start WireMock (global response templating)
